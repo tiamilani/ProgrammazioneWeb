@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Lug 14, 2017 alle 16:22
+-- Generation Time: Lug 15, 2017 alle 15:18
 -- Versione del server: 5.5.55-0+deb8u1
 -- PHP Version: 5.6.30-0+deb8u1
 
@@ -64,7 +64,15 @@ CREATE TABLE IF NOT EXISTS `Categoria` (
   `nome` varchar(50) NOT NULL,
   `descrizione` varchar(500) NOT NULL,
   `oggettiPresenti` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `Categoria`
+--
+
+INSERT INTO `Categoria` (`id`, `nome`, `descrizione`, `oggettiPresenti`) VALUES
+(1, 'Elettronica', 'Materiale Elettronico', 3),
+(2, 'Casa', 'Materiale per Casa e Cucina', 1);
 
 -- --------------------------------------------------------
 
@@ -141,10 +149,36 @@ CREATE TABLE IF NOT EXISTS `Indirizzo` (
   `citta` varchar(255) NOT NULL,
   `via` varchar(255) NOT NULL,
   `nCivico` int(11) NOT NULL,
-  `interno` int(11) NOT NULL,
+  `interno` int(11) DEFAULT NULL,
   `latitudine` double DEFAULT NULL,
   `longitudine` double DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `Indirizzo`
+--
+
+INSERT INTO `Indirizzo` (`idI`, `stato`, `regione`, `provincia`, `citta`, `via`, `nCivico`, `interno`, `latitudine`, `longitudine`) VALUES
+(1, 'Italia', 'Veneto', 'Treviso', 'Paese', 'Via Paese', 4, NULL, NULL, NULL),
+(2, 'Italia', 'Veneto', 'Vicenza', 'Bassano del Grappa', 'Via roma', 4, NULL, NULL, NULL),
+(3, 'Italia', 'Veneto', 'Padova', 'Cittadella', 'Via einaudi', 4, NULL, NULL, NULL),
+(4, 'Italia', 'Lombardia', 'Milano', 'Milano', 'Via vittorio emanuele', 4, NULL, NULL, NULL),
+(5, 'Italia', 'Lombardia', 'Brescia', 'Brescia', 'Via cristo', 4, NULL, NULL, NULL),
+(6, 'Italia', 'Lazio', 'Roma', 'Roma', 'Via garibaldi', 4, NULL, NULL, NULL),
+(7, 'Italia', 'Piemonte', 'Torino', 'Torino', 'Via Matteo', 4, NULL, NULL, NULL),
+(8, 'Italia', 'Trentino Alto Adige', 'Trento', 'Trento', 'Via Roma', 4, NULL, NULL, NULL),
+(9, 'Italia', 'Trentino Alto Adige', 'Trento', 'Povo', 'Via Sommarive', 4, NULL, NULL, NULL),
+(10, 'Italia', 'Lombardia', 'Bergamo', 'Bergamo', 'Via Rose', 4, NULL, NULL, NULL),
+(11, 'Italia', 'Veneto', 'Treviso', 'Paese', 'Via Paese', 5, NULL, NULL, NULL),
+(12, 'Italia', 'Veneto', 'Vicenza', 'Bassano del Grappa', 'Via roma', 5, NULL, NULL, NULL),
+(13, 'Italia', 'Veneto', 'Padova', 'Cittadella', 'Via einaudi', 5, NULL, NULL, NULL),
+(14, 'Italia', 'Lombardia', 'Milano', 'Milano', 'Via vittorio emanuele', 5, NULL, NULL, NULL),
+(15, 'Italia', 'Lombardia', 'Brescia', 'Brescia', 'Via cristo', 5, NULL, NULL, NULL),
+(16, 'Italia', 'Lazio', 'Roma', 'Roma', 'Via garibaldi', 5, NULL, NULL, NULL),
+(17, 'Italia', 'Piemonte', 'Torino', 'Torino', 'Via Matteo', 5, NULL, NULL, NULL),
+(18, 'Italia', 'Trentino Alto Adige', 'Trento', 'Trento', 'Via Roma', 5, NULL, NULL, NULL),
+(19, 'Italia', 'Trentino Alto Adige', 'Trento', 'Povo', 'Via Sommarive', 5, NULL, NULL, NULL),
+(20, 'Italia', 'Lombardia', 'Bergamo', 'Bergamo', 'Via Rose', 5, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -157,6 +191,21 @@ CREATE TABLE IF NOT EXISTS `IndirizzoUtente` (
   `idI` int(11) NOT NULL,
   `idU` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `IndirizzoUtente`
+--
+
+INSERT INTO `IndirizzoUtente` (`idI`, `idU`) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 6),
+(7, 7),
+(8, 8),
+(9, 9);
 
 -- --------------------------------------------------------
 
@@ -173,7 +222,17 @@ CREATE TABLE IF NOT EXISTS `Negozio` (
   `valutazione` double DEFAULT NULL,
   `attivo` tinyint(1) NOT NULL DEFAULT '1',
   `idI` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `Negozio`
+--
+
+INSERT INTO `Negozio` (`id`, `idVenditore`, `nomeNegozio`, `foto`, `valutazione`, `attivo`, `idI`) VALUES
+(1, 6, 'Mediaworld', NULL, NULL, 1, 11),
+(2, 7, 'Trony', NULL, NULL, 1, 11),
+(3, 8, 'Unieuro', NULL, NULL, 1, 12),
+(4, 9, 'Kasanova', NULL, NULL, 1, 13);
 
 -- --------------------------------------------------------
 
@@ -197,6 +256,16 @@ CREATE TABLE IF NOT EXISTS `Oggetto` (
   `categoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dump dei dati per la tabella `Oggetto`
+--
+
+INSERT INTO `Oggetto` (`id`, `idNegozio`, `nome`, `prezzo`, `foto`, `descrizione`, `ritiroInNegozio`, `disponibilita`, `sconto`, `variazione`, `dataFineSconto`, `categoria`) VALUES
+(1, 1, 'iPhone SE', 500, NULL, 'iPhone SE 16GB Bianco', 0, 5, 0, 100, NULL, 1),
+(2, 2, 'HTC U11', 450, NULL, 'HTC U11 32GB Bianco', 0, 6, 0, 100, NULL, 1),
+(3, 3, 'UAUEI XYZ', 100, NULL, 'UAUEI XYZ Telefono inutile', 0, 1, 0, 100, NULL, 1),
+(4, 4, 'Pentola Acciaio Inossidabile', 50, NULL, 'Pentola Acciaio Inossidabile, insdistrutibile!', 1, 45, 10, 100, NULL, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -211,7 +280,14 @@ CREATE TABLE IF NOT EXISTS `Ordine` (
   `idUtente` int(11) NOT NULL,
   `stato` int(11) NOT NULL DEFAULT '0',
   `quantita` int(11) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `Ordine`
+--
+
+INSERT INTO `Ordine` (`idOrdine`, `idOggetto`, `idNegozio`, `idUtente`, `stato`, `quantita`) VALUES
+(1, 1, 1, 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -230,6 +306,14 @@ CREATE TABLE IF NOT EXISTS `RecensioneNegozio` (
   `utilita` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dump dei dati per la tabella `RecensioneNegozio`
+--
+
+INSERT INTO `RecensioneNegozio` (`id`, `idNegozio`, `idUtente`, `testo`, `valutazione`, `data`, `utilita`) VALUES
+(1, 1, 1, 'Bel negozio, personale qualificato', 5, '2017-07-14 00:00:00', NULL),
+(2, 4, 2, 'Bel negozio, alla moda, consigliato!', 5, '2017-07-11 00:00:00', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -245,7 +329,14 @@ CREATE TABLE IF NOT EXISTS `RecensioneOggetto` (
   `valutazione` int(11) NOT NULL,
   `data` datetime NOT NULL,
   `utilita` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `RecensioneOggetto`
+--
+
+INSERT INTO `RecensioneOggetto` (`id`, `idOggetto`, `idUtente`, `testo`, `valutazione`, `data`, `utilita`) VALUES
+(1, 1, 1, 'Bene ma non benissimo, si vede che è una cinesata', 2, '2017-07-14 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -263,6 +354,13 @@ CREATE TABLE IF NOT EXISTS `RecensioneVenditore` (
   `data` datetime NOT NULL,
   `utilita` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `RecensioneVenditore`
+--
+
+INSERT INTO `RecensioneVenditore` (`id`, `idVenditore`, `idUtente`, `testo`, `valutazione`, `data`, `utilita`) VALUES
+(1, 6, 1, 'Spedizione troppo lenta', 1, '2017-07-14 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -319,7 +417,23 @@ CREATE TABLE IF NOT EXISTS `Utente` (
   `avatar` varchar(255) DEFAULT NULL,
   `valutazione` double DEFAULT NULL,
   `UtenteType` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `Utente`
+--
+
+INSERT INTO `Utente` (`id`, `nome`, `cognome`, `mail`, `password`, `avatar`, `valutazione`, `UtenteType`) VALUES
+(1, 'Andrea', 'Fadi', 'abc@def.ghi', 'ciao', NULL, NULL, 0),
+(2, 'Federico', 'Brugiolo', 'def@def.ghi', 'ciao', NULL, NULL, 0),
+(3, 'Mattia', 'Milani', 'ghi@def.ghi', 'ciao', NULL, NULL, 0),
+(4, 'Damiano', 'Sartori', 'lmn@def.ghi', 'ciao', NULL, NULL, 0),
+(5, 'Ciuffo', 'Rosso', 'opq@def.ghi', 'ciao', NULL, NULL, 0),
+(6, 'Carlo', 'Cracco', 'a@def.ghi', 'ciao', NULL, NULL, 1),
+(7, 'Coso', 'Canavacciulo', 'b@def.ghi', 'ciao', NULL, NULL, 1),
+(8, 'Bill', 'Gate', 'c@def.ghi', 'ciao', NULL, NULL, 1),
+(9, 'Open', 'Close', 'd@def.ghi', 'ciao', NULL, NULL, 1),
+(10, 'Admin', 'Supremo', 'root@root.com', 'ciao', NULL, NULL, 2);
 
 --
 -- Indexes for dumped tables
@@ -458,7 +572,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `Categoria`
 --
 ALTER TABLE `Categoria`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `image`
 --
@@ -468,27 +582,27 @@ MODIFY `idI` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `Indirizzo`
 --
 ALTER TABLE `Indirizzo`
-MODIFY `idI` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `idI` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `Negozio`
 --
 ALTER TABLE `Negozio`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `Ordine`
 --
 ALTER TABLE `Ordine`
-MODIFY `idOrdine` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `idOrdine` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `RecensioneOggetto`
 --
 ALTER TABLE `RecensioneOggetto`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `Utente`
 --
 ALTER TABLE `Utente`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- Limiti per le tabelle scaricate
 --
