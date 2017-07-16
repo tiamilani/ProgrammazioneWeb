@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Lug 15, 2017 alle 15:18
+-- Generation Time: Lug 16, 2017 alle 13:42
 -- Versione del server: 5.5.55-0+deb8u1
 -- PHP Version: 5.6.30-0+deb8u1
 
@@ -35,9 +35,22 @@ CREATE TABLE IF NOT EXISTS `Assistenza` (
   `idVenditore` int(11) DEFAULT NULL,
   `idAmministratore` int(11) NOT NULL,
   `idOrdine` int(11) DEFAULT NULL,
+  `idOggetto` varchar(32) DEFAULT NULL,
   `stato` int(11) DEFAULT '0',
   `soluzione` varchar(2500) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Svuota la tabella prima dell'inserimento `Assistenza`
+--
+
+TRUNCATE TABLE `Assistenza`;
+--
+-- Dump dei dati per la tabella `Assistenza`
+--
+
+INSERT INTO `Assistenza` (`id`, `idUtente`, `idVenditore`, `idAmministratore`, `idOrdine`, `idOggetto`, `stato`, `soluzione`) VALUES
+(1, 1, NULL, 10, 1, NULL, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -51,6 +64,19 @@ CREATE TABLE IF NOT EXISTS `Carrello` (
   `idOrdine` int(11) NOT NULL,
   `subTotal` double NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Svuota la tabella prima dell'inserimento `Carrello`
+--
+
+TRUNCATE TABLE `Carrello`;
+--
+-- Dump dei dati per la tabella `Carrello`
+--
+
+INSERT INTO `Carrello` (`idUtente`, `idOrdine`, `subTotal`) VALUES
+(1, 1, 0),
+(2, 3, 250);
 
 -- --------------------------------------------------------
 
@@ -66,6 +92,11 @@ CREATE TABLE IF NOT EXISTS `Categoria` (
   `oggettiPresenti` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
+--
+-- Svuota la tabella prima dell'inserimento `Categoria`
+--
+
+TRUNCATE TABLE `Categoria`;
 --
 -- Dump dei dati per la tabella `Categoria`
 --
@@ -84,7 +115,28 @@ DROP TABLE IF EXISTS `image`;
 CREATE TABLE IF NOT EXISTS `image` (
 `idI` int(11) NOT NULL,
   `src` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+--
+-- Svuota la tabella prima dell'inserimento `image`
+--
+
+TRUNCATE TABLE `image`;
+--
+-- Dump dei dati per la tabella `image`
+--
+
+INSERT INTO `image` (`idI`, `src`) VALUES
+(1, 'img1'),
+(2, 'img2'),
+(3, 'img3'),
+(4, 'img4'),
+(5, 'img5'),
+(6, 'img6'),
+(7, 'img7'),
+(8, 'img8'),
+(9, 'img9'),
+(10, 'img10');
 
 -- --------------------------------------------------------
 
@@ -94,9 +146,22 @@ CREATE TABLE IF NOT EXISTS `image` (
 
 DROP TABLE IF EXISTS `imageNegozio`;
 CREATE TABLE IF NOT EXISTS `imageNegozio` (
-  `idI` int(11) DEFAULT NULL,
-  `idN` int(11) DEFAULT NULL
+  `idI` int(11) NOT NULL DEFAULT '0',
+  `idN` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Svuota la tabella prima dell'inserimento `imageNegozio`
+--
+
+TRUNCATE TABLE `imageNegozio`;
+--
+-- Dump dei dati per la tabella `imageNegozio`
+--
+
+INSERT INTO `imageNegozio` (`idI`, `idN`) VALUES
+(1, 1),
+(2, 2);
 
 -- --------------------------------------------------------
 
@@ -106,9 +171,22 @@ CREATE TABLE IF NOT EXISTS `imageNegozio` (
 
 DROP TABLE IF EXISTS `imageOggetto`;
 CREATE TABLE IF NOT EXISTS `imageOggetto` (
-  `idI` int(11) DEFAULT NULL,
-  `idO` int(11) DEFAULT NULL
+  `idI` int(11) NOT NULL,
+  `idO` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Svuota la tabella prima dell'inserimento `imageOggetto`
+--
+
+TRUNCATE TABLE `imageOggetto`;
+--
+-- Dump dei dati per la tabella `imageOggetto`
+--
+
+INSERT INTO `imageOggetto` (`idI`, `idO`) VALUES
+(3, 1),
+(4, 2);
 
 -- --------------------------------------------------------
 
@@ -118,9 +196,21 @@ CREATE TABLE IF NOT EXISTS `imageOggetto` (
 
 DROP TABLE IF EXISTS `imageRecensione`;
 CREATE TABLE IF NOT EXISTS `imageRecensione` (
-  `idI` int(11) DEFAULT NULL,
-  `idR` int(11) DEFAULT NULL
+  `idI` int(11) NOT NULL DEFAULT '0',
+  `idR` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Svuota la tabella prima dell'inserimento `imageRecensione`
+--
+
+TRUNCATE TABLE `imageRecensione`;
+--
+-- Dump dei dati per la tabella `imageRecensione`
+--
+
+INSERT INTO `imageRecensione` (`idI`, `idR`) VALUES
+(5, 1);
 
 -- --------------------------------------------------------
 
@@ -133,6 +223,22 @@ CREATE TABLE IF NOT EXISTS `imageUtente` (
   `idI` int(11) DEFAULT NULL,
   `idU` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Svuota la tabella prima dell'inserimento `imageUtente`
+--
+
+TRUNCATE TABLE `imageUtente`;
+--
+-- Dump dei dati per la tabella `imageUtente`
+--
+
+INSERT INTO `imageUtente` (`idI`, `idU`) VALUES
+(6, 1),
+(7, 2),
+(8, 3),
+(9, 10),
+(10, 7);
 
 -- --------------------------------------------------------
 
@@ -154,6 +260,11 @@ CREATE TABLE IF NOT EXISTS `Indirizzo` (
   `longitudine` double DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
+--
+-- Svuota la tabella prima dell'inserimento `Indirizzo`
+--
+
+TRUNCATE TABLE `Indirizzo`;
 --
 -- Dump dei dati per la tabella `Indirizzo`
 --
@@ -193,6 +304,11 @@ CREATE TABLE IF NOT EXISTS `IndirizzoUtente` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Svuota la tabella prima dell'inserimento `IndirizzoUtente`
+--
+
+TRUNCATE TABLE `IndirizzoUtente`;
+--
 -- Dump dei dati per la tabella `IndirizzoUtente`
 --
 
@@ -225,6 +341,11 @@ CREATE TABLE IF NOT EXISTS `Negozio` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
+-- Svuota la tabella prima dell'inserimento `Negozio`
+--
+
+TRUNCATE TABLE `Negozio`;
+--
 -- Dump dei dati per la tabella `Negozio`
 --
 
@@ -242,11 +363,10 @@ INSERT INTO `Negozio` (`id`, `idVenditore`, `nomeNegozio`, `foto`, `valutazione`
 
 DROP TABLE IF EXISTS `Oggetto`;
 CREATE TABLE IF NOT EXISTS `Oggetto` (
-  `id` int(11) NOT NULL,
+  `id` varchar(32) NOT NULL,
   `idNegozio` int(11) NOT NULL,
   `nome` varchar(500) NOT NULL,
   `prezzo` double NOT NULL,
-  `foto` varchar(500) DEFAULT NULL,
   `descrizione` varchar(2500) NOT NULL,
   `ritiroInNegozio` tinyint(1) DEFAULT '0',
   `disponibilita` int(11) NOT NULL,
@@ -257,14 +377,19 @@ CREATE TABLE IF NOT EXISTS `Oggetto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Svuota la tabella prima dell'inserimento `Oggetto`
+--
+
+TRUNCATE TABLE `Oggetto`;
+--
 -- Dump dei dati per la tabella `Oggetto`
 --
 
-INSERT INTO `Oggetto` (`id`, `idNegozio`, `nome`, `prezzo`, `foto`, `descrizione`, `ritiroInNegozio`, `disponibilita`, `sconto`, `variazione`, `dataFineSconto`, `categoria`) VALUES
-(1, 1, 'iPhone SE', 500, NULL, 'iPhone SE 16GB Bianco', 0, 5, 0, 100, NULL, 1),
-(2, 2, 'HTC U11', 450, NULL, 'HTC U11 32GB Bianco', 0, 6, 0, 100, NULL, 1),
-(3, 3, 'UAUEI XYZ', 100, NULL, 'UAUEI XYZ Telefono inutile', 0, 1, 0, 100, NULL, 1),
-(4, 4, 'Pentola Acciaio Inossidabile', 50, NULL, 'Pentola Acciaio Inossidabile, insdistrutibile!', 1, 45, 10, 100, NULL, 2);
+INSERT INTO `Oggetto` (`id`, `idNegozio`, `nome`, `prezzo`, `descrizione`, `ritiroInNegozio`, `disponibilita`, `sconto`, `variazione`, `dataFineSconto`, `categoria`) VALUES
+(1, 1, 'iPhone SE', 500, 'iPhone SE 16GB Bianco', 0, 5, 0, 100, NULL, 1),
+(2, 2, 'HTC U11', 450, 'HTC U11 32GB Bianco', 0, 6, 0, 100, NULL, 1),
+(3, 3, 'UAUEI XYZ', 100, 'UAUEI XYZ Telefono inutile', 0, 1, 0, 100, NULL, 1),
+(4, 4, 'Pentola Acciaio Inossidabile', 50, 'Pentola Acciaio Inossidabile, insdistrutibile!', 1, 45, 10, 100, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -275,19 +400,26 @@ INSERT INTO `Oggetto` (`id`, `idNegozio`, `nome`, `prezzo`, `foto`, `descrizione
 DROP TABLE IF EXISTS `Ordine`;
 CREATE TABLE IF NOT EXISTS `Ordine` (
 `idOrdine` int(11) NOT NULL,
-  `idOggetto` int(11) NOT NULL,
+  `idOggetto` varchar(32) NOT NULL,
   `idNegozio` int(11) NOT NULL,
   `idUtente` int(11) NOT NULL,
   `stato` int(11) NOT NULL DEFAULT '0',
   `quantita` int(11) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
+--
+-- Svuota la tabella prima dell'inserimento `Ordine`
+--
+
+TRUNCATE TABLE `Ordine`;
 --
 -- Dump dei dati per la tabella `Ordine`
 --
 
 INSERT INTO `Ordine` (`idOrdine`, `idOggetto`, `idNegozio`, `idUtente`, `stato`, `quantita`) VALUES
-(1, 1, 1, 1, 0, 1);
+(1, 1, 1, 1, 0, 1),
+(2, 2, 2, 1, 0, 1),
+(3, 3, 3, 2, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -307,6 +439,11 @@ CREATE TABLE IF NOT EXISTS `RecensioneNegozio` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Svuota la tabella prima dell'inserimento `RecensioneNegozio`
+--
+
+TRUNCATE TABLE `RecensioneNegozio`;
+--
 -- Dump dei dati per la tabella `RecensioneNegozio`
 --
 
@@ -323,7 +460,7 @@ INSERT INTO `RecensioneNegozio` (`id`, `idNegozio`, `idUtente`, `testo`, `valuta
 DROP TABLE IF EXISTS `RecensioneOggetto`;
 CREATE TABLE IF NOT EXISTS `RecensioneOggetto` (
 `id` int(11) NOT NULL,
-  `idOggetto` int(11) NOT NULL,
+  `idOggetto` varchar(32) NOT NULL,
   `idUtente` int(11) NOT NULL,
   `testo` varchar(2500) DEFAULT NULL,
   `valutazione` int(11) NOT NULL,
@@ -331,6 +468,11 @@ CREATE TABLE IF NOT EXISTS `RecensioneOggetto` (
   `utilita` int(11) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
+--
+-- Svuota la tabella prima dell'inserimento `RecensioneOggetto`
+--
+
+TRUNCATE TABLE `RecensioneOggetto`;
 --
 -- Dump dei dati per la tabella `RecensioneOggetto`
 --
@@ -356,6 +498,11 @@ CREATE TABLE IF NOT EXISTS `RecensioneVenditore` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Svuota la tabella prima dell'inserimento `RecensioneVenditore`
+--
+
+TRUNCATE TABLE `RecensioneVenditore`;
+--
 -- Dump dei dati per la tabella `RecensioneVenditore`
 --
 
@@ -375,6 +522,11 @@ CREATE TABLE IF NOT EXISTS `RispostaNegozio` (
   `data` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Svuota la tabella prima dell'inserimento `RispostaNegozio`
+--
+
+TRUNCATE TABLE `RispostaNegozio`;
 -- --------------------------------------------------------
 
 --
@@ -388,6 +540,11 @@ CREATE TABLE IF NOT EXISTS `RispostaOggetto` (
   `data` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Svuota la tabella prima dell'inserimento `RispostaOggetto`
+--
+
+TRUNCATE TABLE `RispostaOggetto`;
 -- --------------------------------------------------------
 
 --
@@ -401,6 +558,11 @@ CREATE TABLE IF NOT EXISTS `RispostaVenditore` (
   `data` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Svuota la tabella prima dell'inserimento `RispostaVenditore`
+--
+
+TRUNCATE TABLE `RispostaVenditore`;
 -- --------------------------------------------------------
 
 --
@@ -419,6 +581,11 @@ CREATE TABLE IF NOT EXISTS `Utente` (
   `UtenteType` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
+--
+-- Svuota la tabella prima dell'inserimento `Utente`
+--
+
+TRUNCATE TABLE `Utente`;
 --
 -- Dump dei dati per la tabella `Utente`
 --
@@ -443,13 +610,13 @@ INSERT INTO `Utente` (`id`, `nome`, `cognome`, `mail`, `password`, `avatar`, `va
 -- Indexes for table `Assistenza`
 --
 ALTER TABLE `Assistenza`
- ADD PRIMARY KEY (`id`), ADD KEY `idUtente` (`idUtente`), ADD KEY `idVenditore` (`idVenditore`), ADD KEY `idAmministratore` (`idAmministratore`), ADD KEY `idOrdine` (`idOrdine`);
+ ADD PRIMARY KEY (`id`), ADD KEY `idUtente` (`idUtente`), ADD KEY `idVenditore` (`idVenditore`), ADD KEY `idAmministratore` (`idAmministratore`), ADD KEY `idOrdine` (`idOrdine`), ADD KEY `idOggetto` (`idOggetto`);
 
 --
 -- Indexes for table `Carrello`
 --
 ALTER TABLE `Carrello`
- ADD PRIMARY KEY (`idUtente`,`idOrdine`);
+ ADD PRIMARY KEY (`idUtente`), ADD KEY `idOrdine` (`idOrdine`);
 
 --
 -- Indexes for table `Categoria`
@@ -467,19 +634,19 @@ ALTER TABLE `image`
 -- Indexes for table `imageNegozio`
 --
 ALTER TABLE `imageNegozio`
- ADD KEY `idI` (`idI`), ADD KEY `idN` (`idN`);
+ ADD PRIMARY KEY (`idI`,`idN`), ADD KEY `idN` (`idN`);
 
 --
 -- Indexes for table `imageOggetto`
 --
 ALTER TABLE `imageOggetto`
- ADD KEY `idI` (`idI`), ADD KEY `idO` (`idO`);
+ ADD PRIMARY KEY (`idI`,`idO`), ADD KEY `idO` (`idO`);
 
 --
 -- Indexes for table `imageRecensione`
 --
 ALTER TABLE `imageRecensione`
- ADD KEY `idI` (`idI`), ADD KEY `idR` (`idR`);
+ ADD PRIMARY KEY (`idI`,`idR`), ADD KEY `idR` (`idR`);
 
 --
 -- Indexes for table `imageUtente`
@@ -509,13 +676,13 @@ ALTER TABLE `Negozio`
 -- Indexes for table `Oggetto`
 --
 ALTER TABLE `Oggetto`
- ADD PRIMARY KEY (`id`,`idNegozio`), ADD KEY `idNegozio` (`idNegozio`), ADD KEY `idOggettoIndex` (`categoria`) USING HASH;
+ ADD PRIMARY KEY (`id`), ADD KEY `idNegozio` (`idNegozio`), ADD KEY `idOggettoIndex` (`categoria`) USING HASH;
 
 --
 -- Indexes for table `Ordine`
 --
 ALTER TABLE `Ordine`
- ADD PRIMARY KEY (`idOrdine`), ADD KEY `idOggetto` (`idOggetto`), ADD KEY `idNegozio` (`idNegozio`), ADD KEY `idUtente` (`idUtente`);
+ ADD PRIMARY KEY (`idOrdine`,`idOggetto`,`idUtente`), ADD KEY `idOggetto` (`idOggetto`), ADD KEY `idNegozio` (`idNegozio`), ADD KEY `idUtente` (`idUtente`);
 
 --
 -- Indexes for table `RecensioneNegozio`
@@ -567,7 +734,7 @@ ALTER TABLE `Utente`
 -- AUTO_INCREMENT for table `Assistenza`
 --
 ALTER TABLE `Assistenza`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `Categoria`
 --
@@ -577,7 +744,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT for table `image`
 --
 ALTER TABLE `image`
-MODIFY `idI` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `idI` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `Indirizzo`
 --
@@ -592,7 +759,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT for table `Ordine`
 --
 ALTER TABLE `Ordine`
-MODIFY `idOrdine` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `idOrdine` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `RecensioneOggetto`
 --
@@ -611,10 +778,18 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 -- Limiti per la tabella `Assistenza`
 --
 ALTER TABLE `Assistenza`
+ADD CONSTRAINT `Assistenza_ibfk_5` FOREIGN KEY (`idOggetto`) REFERENCES `Oggetto` (`id`) ON DELETE NO ACTION,
 ADD CONSTRAINT `Assistenza_ibfk_1` FOREIGN KEY (`idUtente`) REFERENCES `Utente` (`id`) ON DELETE NO ACTION,
 ADD CONSTRAINT `Assistenza_ibfk_2` FOREIGN KEY (`idVenditore`) REFERENCES `Utente` (`id`) ON DELETE NO ACTION,
 ADD CONSTRAINT `Assistenza_ibfk_3` FOREIGN KEY (`idAmministratore`) REFERENCES `Utente` (`id`) ON DELETE NO ACTION,
 ADD CONSTRAINT `Assistenza_ibfk_4` FOREIGN KEY (`idOrdine`) REFERENCES `Ordine` (`idOrdine`) ON DELETE NO ACTION;
+
+--
+-- Limiti per la tabella `Carrello`
+--
+ALTER TABLE `Carrello`
+ADD CONSTRAINT `Carrello_ibfk_1` FOREIGN KEY (`idUtente`) REFERENCES `Utente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `Carrello_ibfk_2` FOREIGN KEY (`idOrdine`) REFERENCES `Ordine` (`idOrdine`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `imageNegozio`
