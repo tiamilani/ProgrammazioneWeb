@@ -172,7 +172,7 @@ INSERT INTO `imageNegozio` (`idI`, `idN`) VALUES
 DROP TABLE IF EXISTS `imageOggetto`;
 CREATE TABLE IF NOT EXISTS `imageOggetto` (
   `idI` int(11) NOT NULL,
-  `idO` int(11) NOT NULL DEFAULT '0'
+  `idO` varchar(32) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

@@ -1,0 +1,173 @@
+-- piccola guida sui valori utilizzati:
+-- tipo di utenti: 	0 -> utenti normali
+-- 					1 -> utenti venditori
+-- 					2 -> utenti amministratori
+-- 					3 -> utenti che non hanno ancora confermato l'account
+-- 					4 -> super administrator (Utente di test che può modificare qualsiasi valore)
+
+-- tipo di ordini:	0 -> ordine nel carrello
+-- 					1 -> ordine pagato
+-- 					2 -> ordine in lavorazione
+-- 					3 -> ordine spedito
+-- 					4 -> ordine spedito
+--					5 -> ordine nella lista dei desideri		
+
+-- query generali:
+-- selezionare tutti gli utenti normali
+-- selezionare tutti gli utenti venditori
+-- selezionare tutti gli utenti amministratori
+-- selezionare un utente specificando email e password
+-- ottenere tutti gli utenti con un certo nome
+-- ottenere tutti gli utenti con un certo nome e cognome
+-- ottenere i dati un utente specificando l'id
+-- ottenere l'indirizzo di un utente
+-- ottenere i dati di un utente e l'indirizzo avendo email e password
+-- ottenere i dati di un utente e l'indirizzo avendo l'id
+-- ottenere l'immagine di un utente
+-- ottenere gli utenti amministratori ordinati per numero di richieste
+-- modificare l'immagine del profilo di un utente con un determinato id
+-- modificare la propria mail
+-- modificare la propria password
+-- modificare il proprio indirizzo
+-- rimuovere l'immagine del profilo di un determinato utente
+
+
+-- per gli utenti normali:
+-- ottenere la lista dei negozi di un venditore specificando l'id del venditore
+-- ottenere la lista dei negozi di un venditore avendo nome e cognome del venditore
+-- ottenere la lista degli ordini effettuati
+-- ottenere la lista degli ordini effettuati e portati a termine
+-- ottenere la lista degli ordini effettuati ed in lavorazione
+-- ottenere la lista degli ordini effettuati ma non ancora in lavorazione
+-- ottenere la lsita dei prodotti all'interno dell'ordine della lista dei desideri
+-- ottenere la lista dei negozi da cui ho acquistato
+-- ottenere il carrello
+-- ottenere le proprie recensioni
+-- ottenere le proprie recensioni di oggetti
+-- ottenere le proprie recensioni di negozi
+-- ottenere le proprie recensioni di venditori
+-- ottenere le risposte alle proprie recensioni
+-- ottenere le risposte alle proprie recensioni di oggetti
+-- ottenere le risposte alle proprie recensioni di negozi
+-- ottenere le risposte alle proprie recensioni di venditori
+-- ottenere tutte le recensioni di un oggetto 
+-- ottenere tutte le recensioni di un negozio
+-- ottenere tutte le recensioni di un venditore
+-- ottenere la lista di oggetti che contengono una stringa nel nome
+-- ottenere la lista di oggetti di una categoria
+-- ottenere la lista di oggetti di una categoria con ritiro a mano
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome con ritiro a mano
+-- ottenere la lista di oggetti in una certa fascia di prezzo
+-- ottenere la lista di oggetti in una certa fascia di prezzo con ritiro a mano
+-- ottenere la lista di oggetti in una certa fascia di prezzo con una certa stringa nel nome
+-- ottenere la lista di oggetti in una certa fascia di prezzo con una certa stringa nel nome con ritiro a mano
+-- ottenere la lista di oggetti in una certa fascia di prezzo di una categoria 
+-- ottenere la lista di oggetti in una certa fascia di prezzo di una categoria con ritiro a mano 
+-- ottenere la lista di oggetti in una certa fascia di prezzo di una categoria con una certa stringa nel nome
+-- ottenere la lista di oggetti in una certa fascia di prezzo di una categoria con una certa stringa nel nome con ritiro a mano
+-- ottenere la lista di oggetti di un determinato negozio
+-- ottenere la lista di oggetti di un determinato negozio con ritiro a mano 
+-- ottenere la lista di oggetti di un determinato negozio in una certa fascia di prezzo
+-- ottenere la lista di oggetti di un determinato negozio in una certa fascia di prezzo con ritiro a mano
+-- ottenere la lista di oggetti di un determinato negozio in una certa fascia di prezzo di una categoria con ritiro a mano
+-- ottenere la lista di oggetti di un determinato negozio in una certa fascia di prezzo di una categoria
+-- ottenere la lista di oggetti di un determinato negozio in una certa fascia di prezzo di una categoria con una certa stringa nel nome
+-- ottenere la lista di oggetti di un determinato negozio in una certa fascia di prezzo di una categoria con una certa stringa nel nome con ritiro a mano
+-- ottenere la lista di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di negozi data una determinata longitudine, latitudine ed un raggio di ricerca con ritiro a mano
+-- ottenere la lista di negozi con prodotti in una determinata categoria data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di negozi con prodotti in una determinata categoria data una determinata longitudine, latitudine ed un raggio di ricerca con ritiro a mano
+-- ottenere la lista dei prodotti scontati
+-- ottenere la lista dei prodotti scontati con ritiro a mano
+-- ottenere la lista dei prodotti scontati in una determinata categoria
+-- ottenere la lista dei prodotti scontati in una determinata categoria con ritiro a mano
+-- ottenere la lista di prodotti di un determinato venditore
+-- ottenere la lista di prodotti di un determinato venditore con ritiro a mano
+-- ottenere la lista di prodotti di un determinato venditore in una determinata categoria
+-- ottenere la lista di prodotti di un determinato venditore in una determinata categoria con ritiro a mano
+-- ottenere la lista di prodotti di un determinato venditore in una determinata categoria in una fascia di prezzo
+-- ottenere la lista di prodotti di un determinato venditore in una determinata categoria in una fascia di prezzo con ritiro a mano
+-- ottenere la lista di prodotti di un determinato venditore in una determinata categoria in una fascia di prezzo con una certa stringa nel nome
+-- ottenere la lista di prodotti di un determinato venditore in una determinata categoria in una fascia di prezzo con una certa stringa nel nome con ritiro a mano
+-- ottenere la lista delle richieste di assistenza
+-- ottenere i dettagli di una determinata richiesta di assistenza
+-- ottenere i dati di un venditore
+-- ottenere la lista dei prodotti nella stessa fascia di prezzo e categoria di quelli già acquistati
+-- ottenere la lista di assistenze che hanno a che fare con un ordine
+-- ottenere la lista delle proprie recensioni dalla più utile
+-- ottenere la lista delle immagini di un oggetto
+-- ottenere solo la prima immagine di un oggetto
+-- ottenre il totale dagli ordini nel carrello
+-- aggiungere un valore al subtotale del carrello
+-- diminuire un valore dal subtotale del carrello
+-- aggiungi un oggetto algli ordini nel carrello
+-- rimuovere un ordine (oggetto) dal carrello
+-- cambia lo stato degli ordini da nel carrello a pagati
+-- aggiungi un oggetto agli ordini nella lista dei desideri
+-- cambia lo stato di un ordine da nel carrello a lista dei desideri
+-- cambia lo stato di un ordine da nella lista dei desideri al carrello (Se c'è già lo stesso oggetto anche nel carrello semplicmente ne aumento la quantità)
+-- aggiungi una recensione ad un determinato venditore
+-- aggiungi una recensione ad un determinato negozio
+-- aggiungi una recensione ad un determinato oggetto
+-- ottenere un boolean se si ha recensito oppure no un venditore
+-- ottenere un boolean se si ha recensito oppure no un negozio
+-- ottenere un boolean se si ha recensito oppure no un oggetto
+-- aggiungere un proprio indirizzo
+-- eliminaree un proprio indirizzo
+
+
+-- per i venditori:
+-- ottenere la lista dei propri negozi
+-- ottenere la lista degli ordini ricevuti
+-- ottenere la lista degli ordini ricevuti dal più nuovo al più vecchio
+-- ottenere la lista degli ordini non ancora in carico
+-- ottenere la lista degli ordini in lavorazione
+-- ottenere la lista degli ordini già spediti
+-- ottenere la lista degli ordini conclusi
+-- ottenere la lista degli ordini ricevuti in un determinato giorno
+-- ottenere la lista degli ordini ricevuti nella settimana corrente
+-- ottenere la lista degli ordini ricevuti nel mese corrente
+-- ottenere la lista degli ordini ricevuti nell'anno corrente
+-- ottenere la lista dei propri negozi con anche il numero di vendite
+-- ottenere la lista dei propri negozi ordinati per vendite maggiori
+-- ottenere la lista dei propri negozi per vendite minori
+-- ottenere la lista dei propri negozi con vendite inferiori ad un certo valore
+-- ottenere la lista dei propri negozi con vendite superiori ad un certo valore
+-- ottenere la lista dei negozi che vendono prodotti di una certa categoria
+-- ottenere la lista dei negozi che vendono prodotti di una certa categoria ordinate da quello con più vendite
+-- ottenere la lista dei negozi che vendono prodotti di una certa categoria ordinate da quello con meno vendite
+-- ottenere la lista dei propri negozi ordinati per data di apertura
+-- ottenere la lista dei propri negozi ordinati per fatturato
+-- ottenere i dati di un negozio
+-- ottenere i dati delle vendite di un determinato negozio
+-- ottenere i dati di vendita di un determinato negozio in una determinata categoria
+-- ottenere le richieste di assistenza in cui si è stati citati
+-- ottenere la lista dei prodotti venduti raggruppati per categoria e negozio
+-- ottenere la lista dei prodotti venduti in una determinata categoria raggruppati per negozio
+-- ottenere la lista dei prodotti venduti ordinati per valutazioni
+-- ottenere la lsita dei propri negozi ordinati per recensioni
+-- ottenere la lista dei proprio prodotti in sconto raggruppati per categoria e negozio
+-- ottenere la lista dei proprio prodotti in sconto raggruppati per categoria e negozio ordinati per scadenza più vicina dello sconto
+-- ottenere la lista delle recensioni ricevute
+-- aggiungere un proprio negozio
+-- chiudere un proprio negozio (rimuoverlo)
+-- modificare lo stato di un ordine da pagato a in lavorazione
+-- modificare lo stato di un ordine da lavorazione a spedito
+-- aggiungere ad un ordine spedito il codice di tracking
+-- aggiungere un prodotto ad un proprio negozio
+-- rimuovere un oggetto da un proprio negozio
+-- modificare il prezzo di un oggetto di un proprio negozio
+-- aggiungere uno sconto ad un proprio oggetto
+-- rimuovere uno sconto dagli oggetti in sconto
+-- aggiungere una foto ad un prodotto
+-- aggiungere una foto ad un negozio
+-- rimuovere una foto di un prodotto
+-- rimuovere una foto di un negozio
+
+-- per gli amministratori:
+-- ottenere il numero di richieste di assistenza
+-- ottenere il numero di richieste di assistenza in sospeso
+-- ottenere il numero di richieste di assistenza risolte
+-- aggiungere una soluzione ad una richiesta di assistenze
+-- modificare lo stato di una richiesta di assistenza
