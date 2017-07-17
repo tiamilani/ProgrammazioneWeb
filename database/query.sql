@@ -14,17 +14,75 @@
 
 -- query generali:
 -- selezionare tutti gli utenti normali
+
+SELECT *
+FROM Utente
+WHERE UtenteType = 0
+
 -- selezionare tutti gli utenti venditori
+
+SELECT *
+FROM Utente
+WHERE UtenteType = 1
+
 -- selezionare tutti gli utenti amministratori
+
+SELECT *
+FROM Utente
+WHERE UtenteType = 2
+
 -- selezionare un utente specificando email e password
+
+SELECT *
+FROM Utente
+WHERE mail = 'mail' AND password = 'password'
+
 -- ottenere tutti gli utenti con un certo nome
+
+SELECT *
+FROM Utente
+WHERE nome = 'nome'
+
 -- ottenere tutti gli utenti con un certo nome e cognome
+
+SELECT *
+FROM Utente
+WHERE nome = 'nome' AND cognome = 'cognome'
+
 -- ottenere i dati un utente specificando l'id
--- ottenere l'indirizzo di un utente
+
+SELECT *
+FROM Utente
+WHERE id = id
+
+-- ottenere indirizzi di un utente avendo l'id
+
+select Indirizzo.* 
+from Indirizzo INNER JOIN IndirizzoUtente ON (Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = 1) 
+
 -- ottenere i dati di un utente e l'indirizzo avendo email e password
+
+select Utente.*, Indirizzo.* 
+from Utente INNER JOIN IndirizzoUtente INNER JOIN Indirizzo ON (Utente.mail = 'abc@def.ghi' AND Utente.password = 'ciao' AND Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = Utente.id)
+
 -- ottenere i dati di un utente e l'indirizzo avendo l'id
+
+SELECT
+FROM
+WHERE
+
 -- ottenere l'immagine di un utente
+
+SELECT
+FROM
+WHERE
+
 -- ottenere gli utenti amministratori ordinati per numero di richieste
+
+SELECT
+FROM
+WHERE
+
 -- modificare l'immagine del profilo di un utente con un determinato id
 -- modificare la propria mail
 -- modificare la propria password
@@ -34,62 +92,461 @@
 
 -- per gli utenti normali:
 -- ottenere la lista dei negozi di un venditore specificando l'id del venditore
+
+SELECT
+FROM
+WHERE
+
 -- ottenere la lista dei negozi di un venditore avendo nome e cognome del venditore
+
+SELECT
+FROM
+WHERE
+
 -- ottenere la lista degli ordini effettuati
+
+SELECT
+FROM
+WHERE
+
 -- ottenere la lista degli ordini effettuati e portati a termine
+
+SELECT
+FROM
+WHERE
+
 -- ottenere la lista degli ordini effettuati ed in lavorazione
+
+SELECT
+FROM
+WHERE
+
 -- ottenere la lista degli ordini effettuati ma non ancora in lavorazione
+
+SELECT
+FROM
+WHERE
+
 -- ottenere la lsita dei prodotti all'interno dell'ordine della lista dei desideri
+
+SELECT
+FROM
+WHERE
+
 -- ottenere la lista dei negozi da cui ho acquistato
+
+SELECT
+FROM
+WHERE
+
 -- ottenere il carrello
+
+SELECT
+FROM
+WHERE
+
 -- ottenere le proprie recensioni
+
+SELECT
+FROM
+WHERE
+
 -- ottenere le proprie recensioni di oggetti
+
+SELECT
+FROM
+WHERE
+
 -- ottenere le proprie recensioni di negozi
+
+SELECT
+FROM
+WHERE
+
 -- ottenere le proprie recensioni di venditori
+
+SELECT
+FROM
+WHERE
+
 -- ottenere le risposte alle proprie recensioni
+
+SELECT
+FROM
+WHERE
+
 -- ottenere le risposte alle proprie recensioni di oggetti
+
+SELECT
+FROM
+WHERE
+
 -- ottenere le risposte alle proprie recensioni di negozi
+
+SELECT
+FROM
+WHERE
+
 -- ottenere le risposte alle proprie recensioni di venditori
+
+SELECT
+FROM
+WHERE
+
 -- ottenere tutte le recensioni di un oggetto 
+
+SELECT
+FROM
+WHERE
+
 -- ottenere tutte le recensioni di un negozio
+
+SELECT
+FROM
+WHERE
+
 -- ottenere tutte le recensioni di un venditore
+
+SELECT
+FROM
+WHERE
+
+-- non specificato se con ritiro a mano o scontati:
 -- ottenere la lista di oggetti che contengono una stringa nel nome
 -- ottenere la lista di oggetti di una categoria
--- ottenere la lista di oggetti di una categoria con ritiro a mano
 -- ottenere la lista di oggetti di una categoria con una certa stringa nel nome
--- ottenere la lista di oggetti di una categoria con una certa stringa nel nome con ritiro a mano
--- ottenere la lista di oggetti in una certa fascia di prezzo
--- ottenere la lista di oggetti in una certa fascia di prezzo con ritiro a mano
--- ottenere la lista di oggetti in una certa fascia di prezzo con una certa stringa nel nome
--- ottenere la lista di oggetti in una certa fascia di prezzo con una certa stringa nel nome con ritiro a mano
--- ottenere la lista di oggetti in una certa fascia di prezzo di una categoria 
--- ottenere la lista di oggetti in una certa fascia di prezzo di una categoria con ritiro a mano 
--- ottenere la lista di oggetti in una certa fascia di prezzo di una categoria con una certa stringa nel nome
--- ottenere la lista di oggetti in una certa fascia di prezzo di una categoria con una certa stringa nel nome con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo
+-- ottenere la lista di oggetti con un certo prezzo massimo
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria
+-- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome
+-- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome
 -- ottenere la lista di oggetti di un determinato negozio
--- ottenere la lista di oggetti di un determinato negozio con ritiro a mano 
--- ottenere la lista di oggetti di un determinato negozio in una certa fascia di prezzo
--- ottenere la lista di oggetti di un determinato negozio in una certa fascia di prezzo con ritiro a mano
--- ottenere la lista di oggetti di un determinato negozio in una certa fascia di prezzo di una categoria con ritiro a mano
--- ottenere la lista di oggetti di un determinato negozio in una certa fascia di prezzo di una categoria
--- ottenere la lista di oggetti di un determinato negozio in una certa fascia di prezzo di una categoria con una certa stringa nel nome
--- ottenere la lista di oggetti di un determinato negozio in una certa fascia di prezzo di una categoria con una certa stringa nel nome con ritiro a mano
--- ottenere la lista di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
--- ottenere la lista di negozi data una determinata longitudine, latitudine ed un raggio di ricerca con ritiro a mano
--- ottenere la lista di negozi con prodotti in una determinata categoria data una determinata longitudine, latitudine ed un raggio di ricerca
--- ottenere la lista di negozi con prodotti in una determinata categoria data una determinata longitudine, latitudine ed un raggio di ricerca con ritiro a mano
--- ottenere la lista dei prodotti scontati
--- ottenere la lista dei prodotti scontati con ritiro a mano
--- ottenere la lista dei prodotti scontati in una determinata categoria
--- ottenere la lista dei prodotti scontati in una determinata categoria con ritiro a mano
--- ottenere la lista di prodotti di un determinato venditore
--- ottenere la lista di prodotti di un determinato venditore con ritiro a mano
--- ottenere la lista di prodotti di un determinato venditore in una determinata categoria
--- ottenere la lista di prodotti di un determinato venditore in una determinata categoria con ritiro a mano
--- ottenere la lista di prodotti di un determinato venditore in una determinata categoria in una fascia di prezzo
--- ottenere la lista di prodotti di un determinato venditore in una determinata categoria in una fascia di prezzo con ritiro a mano
--- ottenere la lista di prodotti di un determinato venditore in una determinata categoria in una fascia di prezzo con una certa stringa nel nome
--- ottenere la lista di prodotti di un determinato venditore in una determinata categoria in una fascia di prezzo con una certa stringa nel nome con ritiro a mano
+-- ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio
+-- ottenere la lista di oggetti di una categoria di un determinato negozio
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di un determinato negozio
+-- ottenere la lista di oggetti con un certo prezzo minimo di un determinato negozio
+-- ottenere la lista di oggetti con un certo prezzo massimo di un determinato negozio
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di un determinato negozio
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di un determinato negozio
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di un determinato negozio
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di un determinato negozio
+-- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di un determinato negozio
+-- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di un determinato negozio
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di un determinato negozio
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di un determinato negozio
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio
+-- ottenere la lista di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
+-- ottenere la lista di oggetti in negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti che contengono una stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
+-- ottenere la lista di oggetti di una categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
+-- ottenere la lista di oggetti con un certo prezzo minimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
+-- ottenere la lista di oggetti con un certo prezzo massimo vdi negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
+-- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
+-- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
+-- ottenere la lista di negozi di un determinato venditore
+-- ottenere la lista di oggetti di negozi di un determinato venditore
+-- ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio di un determinato venditore
+-- ottenere la lista di oggetti di una categoria di un determinato negozio di un determinato venditore
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore
+-- ottenere la lista di oggetti con un certo prezzo minimo di un determinato negozio di un determinato venditore
+-- ottenere la lista di oggetti con un certo prezzo massimo di un determinato negozio di un determinato venditore
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di un determinato negozio di un determinato venditore
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di un determinato negozio di un determinato venditore
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di un determinato negozio di un determinato venditore
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di un determinato negozio di un determinato venditore
+-- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di un determinato negozio di un determinato venditore
+-- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di un determinato negozio di un determinato venditore
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di un determinato negozio di un determinato venditore
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore
+-- ottenere la lista di negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti di negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti di una categoria di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo minimo di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo massimo di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+
+-- specificato ritiro a mano ma non se scontati
+-- ottenere la lista di oggetti che contengono una stringa nel nome e con ritiro a mano
+-- ottenere la lista di oggetti di una categoria e con ritiro a mano
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo massimo e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome e con ritiro a mano
+-- ottenere la lista di oggetti di un determinato negozio e con ritiro a mano
+-- ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio e con ritiro a mano
+-- ottenere la lista di oggetti di una categoria di un determinato negozio e con ritiro a mano
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di un determinato negozio e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo di un determinato negozio e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo massimo di un determinato negozio e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di un determinato negozio e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di un determinato negozio e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di un determinato negozio e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di un determinato negozio e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di un determinato negozio e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di un determinato negozio e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di un determinato negozio e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di un determinato negozio e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio e con ritiro a mano
+-- ottenere la lista di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano
+-- ottenere la lista di oggetti in negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+-- ottenere la lista di oggetti che contengono una stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano 
+-- ottenere la lista di oggetti di una categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano 
+-- ottenere la lista di oggetti con un certo prezzo minimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo massimo vdi negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano 
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano 
+-- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano 
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano 
+-- ottenere la lista di negozi di un determinato venditore e con ritiro a mano
+-- ottenere la lista di oggetti di negozi di un determinato venditore e con ritiro a mano
+-- ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio di un determinato venditore e con ritiro a mano
+-- ottenere la lista di oggetti di una categoria di un determinato negozio di un determinato venditore e con ritiro a mano
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo di un determinato negozio di un determinato venditore e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo massimo di un determinato negozio di un determinato venditore e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di un determinato negozio di un determinato venditore e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di un determinato negozio di un determinato venditore e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di un determinato negozio di un determinato venditore e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di un determinato negozio di un determinato venditore e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di un determinato negozio di un determinato venditore e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di un determinato negozio di un determinato venditore e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di un determinato negozio di un determinato venditore e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore e con ritiro a mano
+-- ottenere la lista di negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+-- ottenere la lista di oggetti di negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+-- ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+-- ottenere la lista di oggetti di una categoria di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo massimo di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
+
+-- specificato scontati ma non ritiro a mano
+-- ottenere la lista di oggetti che contengono una stringa nel nome e scontato
+-- ottenere la lista di oggetti di una categoria e scontato
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome e scontato
+-- ottenere la lista di oggetti di un determinato negozio e scontato
+-- ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio e scontato
+-- ottenere la lista di oggetti di una categoria di un determinato negozio e scontato
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di un determinato negozio e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo di un determinato negozio e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo di un determinato negozio e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di un determinato negozio e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di un determinato negozio e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di un determinato negozio e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di un determinato negozio e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di un determinato negozio e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di un determinato negozio e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di un determinato negozio e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di un determinato negozio e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio e scontato
+-- ottenere la lista di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e scontato
+-- ottenere la lista di oggetti in negozi data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
+-- ottenere la lista di oggetti che contengono una stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e scontato 
+-- ottenere la lista di oggetti di una categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e scontato
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e scontato 
+-- ottenere la lista di oggetti con un certo prezzo minimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo vdi negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e scontato 
+-- ottenere la lista di negozi di un determinato venditore  e scontato
+-- ottenere la lista di oggetti di negozi di un determinato venditore e scontato
+-- ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio di un determinato venditore e scontato
+-- ottenere la lista di oggetti di una categoria di un determinato negozio di un determinato venditore e scontato
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo di un determinato negozio di un determinato venditore e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo di un determinato negozio di un determinato venditore e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di un determinato negozio di un determinato venditore e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di un determinato negozio di un determinato venditore e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di un determinato negozio di un determinato venditore e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di un determinato negozio di un determinato venditore e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di un determinato negozio di un determinato venditore e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di un determinato negozio di un determinato venditore e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di un determinato negozio di un determinato venditore e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore e scontato
+-- ottenere la lista di negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
+-- ottenere la lista di oggetti di negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
+-- ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
+-- ottenere la lista di oggetti di una categoria di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
+
+-- specificato ritiro a mano e scontati
+-- ottenere la lista di oggetti che contengono una stringa nel nome e con ritiro a mano e scontato
+-- ottenere la lista di oggetti di una categoria e con ritiro a mano e scontato
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome e con ritiro a mano e scontato
+-- ottenere la lista di oggetti di un determinato negozio e con ritiro a mano e scontato
+-- ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio e con ritiro a mano e scontato
+-- ottenere la lista di oggetti di una categoria di un determinato negozio e con ritiro a mano e scontato
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di un determinato negozio e con ritiro a mano  e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo di un determinato negozio e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo di un determinato negozio e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di un determinato negozio e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di un determinato negozio e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di un determinato negozio e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di un determinato negozio e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di un determinato negozio e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di un determinato negozio e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di un determinato negozio e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di un determinato negozio e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio e con ritiro a mano e scontato
+-- ottenere la lista di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano e scontato
+-- ottenere la lista di oggetti in negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+-- ottenere la lista di oggetti che contengono una stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato 
+-- ottenere la lista di oggetti di una categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano e scontato
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato 
+-- ottenere la lista di oggetti con un certo prezzo minimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo vdi negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato 
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato 
+-- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato 
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato 
+-- ottenere la lista di negozi di un determinato venditore e con ritiro a mano e scontato
+-- ottenere la lista di oggetti di negozi di un determinato venditore e con ritiro a mano e scontato
+-- ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio di un determinato venditore e con ritiro a mano e scontato
+-- ottenere la lista di oggetti di una categoria di un determinato negozio di un determinato venditore e con ritiro a mano e scontato
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo di un determinato negozio di un determinato venditore e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo di un determinato negozio di un determinato venditore e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di un determinato negozio di un determinato venditore e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di un determinato negozio di un determinato venditore e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di un determinato negozio di un determinato venditore e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di un determinato negozio di un determinato venditore e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di un determinato negozio di un determinato venditore e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di un determinato negozio di un determinato venditore e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di un determinato negozio di un determinato venditore e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore e con ritiro a mano e scontato
+-- ottenere la lista di negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+-- ottenere la lista di oggetti di negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+-- ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+-- ottenere la lista di oggetti di una categoria di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
+
 -- ottenere la lista delle richieste di assistenza
 -- ottenere i dettagli di una determinata richiesta di assistenza
 -- ottenere i dati di un venditore
