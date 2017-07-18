@@ -10,7 +10,7 @@
 -- 					2 -> ordine in lavorazione
 -- 					3 -> ordine spedito
 -- 					4 -> ordine arrivato
---					5 -> ordine nella lista dei desideri		
+--					5 -> ordine nella lista dei desideri
 
 -- query generali:
 -- selezionare tutti gli utenti normali
@@ -57,25 +57,25 @@ WHERE id = id;
 
 -- ottenere indirizzi di un utente avendo l'id
 
-select Indirizzo.* 
+select Indirizzo.*
 from Indirizzo INNER JOIN IndirizzoUtente ON (Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = 1);
 
 -- ottenere i dati di un utente e l'indirizzo avendo email e password
 
-select Utente.*, Indirizzo.* 
-from Utente INNER JOIN IndirizzoUtente INNER JOIN Indirizzo 
+select Utente.*, Indirizzo.*
+from Utente INNER JOIN IndirizzoUtente INNER JOIN Indirizzo
 	ON (Utente.mail = 'abc@def.ghi' AND Utente.password = 'ciao' AND Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = Utente.id);
 
 -- ottenere i dati di un utente e l'indirizzo avendo l'id
 
-select Utente.*, Indirizzo.* 
-from Utente INNER JOIN IndirizzoUtente INNER JOIN Indirizzo 
+select Utente.*, Indirizzo.*
+from Utente INNER JOIN IndirizzoUtente INNER JOIN Indirizzo
 	ON (Utente.id = id AND Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = Utente.id);
 
 -- ottenere l'immagine di un utente
 
 SELECT src
-FROM imageUtente 
+FROM imageUtente
 WHERE idU = 'idU';
 
 -- ottener i dati di un utente, l'indirizzo ed l'immagine a cui fa riferimento
@@ -98,7 +98,7 @@ ORDER BY contatore DESC;
 UPDATE imageUtente
 	SET imageUtente.src = 'NewSrc'
 	WHERE imageUtente.idU = 'idU'
-					
+
 -- modificare la propria mail
 
 UPDATE Utente
@@ -134,7 +134,7 @@ INSERT INTO image
 	(src,idU)
 SELECT 'newSrc', Utente.id
 FROM Utente
-WHERE Utente.id = 'id';	
+WHERE Utente.id = 'id';
 
 -- per gli utenti normali:
 -- ottenere la lista dei negozi di un venditore specificando l'id del venditore
@@ -150,13 +150,13 @@ FROM Negozio INNER JOIN Utente ON (Utente.nome = 'nome' AND Utente.cognome = 'co
 
 -- ottenre la lista dei negozi di un venditore avendo l'id e l'immagine del negozio
 
-SELECT Negozio.*, imageNegozio.src 
+SELECT Negozio.*, imageNegozio.src
 FROM Negozio INNER JOIN imageNegozio ON (Negozio.idVenditore = 'idV' AND Negozio.id = imageNegozio.idN);
 
 -- ottenere la lista dei negozi di un venditore avendo nome e cognome e la prima immagine del negozio
 
-SELECT Negozio.*, imageNegozio.src 
-FROM Negozio INNER JOIN Utente ON (Utente.nome = 'Carlo' AND Utente.cognome = 'Cracco' AND Utente.UtenteType = 1 AND Negozio.idVenditore = Utente.id) 
+SELECT Negozio.*, imageNegozio.src
+FROM Negozio INNER JOIN Utente ON (Utente.nome = 'Carlo' AND Utente.cognome = 'Cracco' AND Utente.UtenteType = 1 AND Negozio.idVenditore = Utente.id)
 	LEFT JOIN imageNegozio ON (Negozio.id = imageNegozio.idN);
 
 -- ottenere la lista degli ordini effettuati
@@ -166,7 +166,7 @@ FROM Ordine INNER JOIN Utente ON (Utente.id = 'idU' AND Ordine.idUtente = Utente
 
 -- ottenre la lista dei negozi di un venditore avendo l'id e SOLO la prima immagine del negozio
 
-SELECT Negozio.*, imageNegozio.src 
+SELECT Negozio.*, imageNegozio.src
 FROM Negozio INNER JOIN imageNegozio ON (Negozio.idVenditore = 'idV' AND Negozio.id = imageNegozio.idN);
 GROUP BY Negozio.id -- da errore qui
 
@@ -254,7 +254,7 @@ SELECT
 FROM
 WHERE
 
--- ottenere tutte le recensioni di un oggetto 
+-- ottenere tutte le recensioni di un oggetto
 
 SELECT
 FROM
@@ -304,23 +304,23 @@ WHERE
 -- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di un determinato negozio
 -- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio
 -- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio
--- ottenere la lista di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
+-- ottenere la lista di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 -- ottenere la lista di oggetti in negozi data una determinata longitudine, latitudine ed un raggio di ricerca
--- ottenere la lista di oggetti che contengono una stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
--- ottenere la lista di oggetti di una categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
--- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
--- ottenere la lista di oggetti con un certo prezzo minimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
--- ottenere la lista di oggetti con un certo prezzo massimo vdi negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
--- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
--- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
--- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
--- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
--- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
--- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
--- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
--- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
--- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
--- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca 
+-- ottenere la lista di oggetti che contengono una stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti di una categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo minimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo massimo vdi negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 -- ottenere la lista di negozi di un determinato venditore
 -- ottenere la lista di oggetti di negozi di un determinato venditore
 -- ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio di un determinato venditore
@@ -390,21 +390,21 @@ WHERE
 -- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio e con ritiro a mano
 -- ottenere la lista di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano
 -- ottenere la lista di oggetti in negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
--- ottenere la lista di oggetti che contengono una stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano 
+-- ottenere la lista di oggetti che contengono una stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
 -- ottenere la lista di oggetti di una categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano
--- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano 
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
 -- ottenere la lista di oggetti con un certo prezzo minimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano
 -- ottenere la lista di oggetti con un certo prezzo massimo vdi negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano
--- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano 
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
 -- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
 -- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
--- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano 
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
 -- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
 -- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
--- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano 
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
 -- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano
 -- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano
--- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano 
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano
 -- ottenere la lista di negozi di un determinato venditore e con ritiro a mano
 -- ottenere la lista di oggetti di negozi di un determinato venditore e con ritiro a mano
 -- ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio di un determinato venditore e con ritiro a mano
@@ -474,9 +474,9 @@ WHERE
 -- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio e scontato
 -- ottenere la lista di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e scontato
 -- ottenere la lista di oggetti in negozi data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
--- ottenere la lista di oggetti che contengono una stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e scontato 
+-- ottenere la lista di oggetti che contengono una stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
 -- ottenere la lista di oggetti di una categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e scontato
--- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e scontato 
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
 -- ottenere la lista di oggetti con un certo prezzo minimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e scontato
 -- ottenere la lista di oggetti con un certo prezzo massimo vdi negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e scontato
 -- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e scontato
@@ -488,7 +488,7 @@ WHERE
 -- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e scontato
 -- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e scontato
 -- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e scontato
--- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e scontato 
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e scontato
 -- ottenere la lista di negozi di un determinato venditore  e scontato
 -- ottenere la lista di oggetti di negozi di un determinato venditore e scontato
 -- ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio di un determinato venditore e scontato
@@ -558,21 +558,21 @@ WHERE
 -- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio e con ritiro a mano e scontato
 -- ottenere la lista di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano e scontato
 -- ottenere la lista di oggetti in negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
--- ottenere la lista di oggetti che contengono una stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato 
+-- ottenere la lista di oggetti che contengono una stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
 -- ottenere la lista di oggetti di una categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano e scontato
--- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato 
+-- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
 -- ottenere la lista di oggetti con un certo prezzo minimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano e scontato
 -- ottenere la lista di oggetti con un certo prezzo massimo vdi negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano e scontato
--- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato 
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
 -- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
 -- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
--- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato 
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
 -- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
 -- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
--- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato 
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
 -- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano e scontato
 -- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca  e con ritiro a mano e scontato
--- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato 
+-- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca e con ritiro a mano e scontato
 -- ottenere la lista di negozi di un determinato venditore e con ritiro a mano e scontato
 -- ottenere la lista di oggetti di negozi di un determinato venditore e con ritiro a mano e scontato
 -- ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio di un determinato venditore e con ritiro a mano e scontato
@@ -635,32 +635,153 @@ WHERE
 -- eliminaree un proprio indirizzo
 
 
--- per i venditori:
+-- per i venditori: Se Usertype=1 (venditore)
 -- ottenere la lista dei propri negozi
+SELECT Negozio.id
+FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+WHERE Utente.id=ID
+
 -- ottenere la lista degli ordini ricevuti
+SELECT idOrdine
+FROM Ordine
+WHERE idNegozio IN (SELECT Negozio.id
+					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+					WHERE Utente.id=ID)
+
 -- ottenere la lista degli ordini ricevuti dal più nuovo al più vecchio
+SELECT idOrdine
+FROM Ordine
+WHERE idNegozio IN (SELECT Negozio.id
+					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+					WHERE Utente.id=ID)
+ORDER BY dataOrdine DESC
+
 -- ottenere la lista degli ordini non ancora in carico
+SELECT idOrdine
+FROM Ordine
+WHERE idNegozio IN (SELECT Negozio.id
+					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+					WHERE Utente.id=ID) AND stato=0
+
 -- ottenere la lista degli ordini in lavorazione
+SELECT idOrdine
+FROM Ordine
+WHERE idNegozio IN (SELECT Negozio.id
+					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+					WHERE Utente.id=ID) AND stato=1
+
 -- ottenere la lista degli ordini già spediti
+SELECT idOrdine
+FROM Ordine
+WHERE idNegozio IN (SELECT Negozio.id
+					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+					WHERE Utente.id=ID) AND stato=2
+
 -- ottenere la lista degli ordini conclusi
+SELECT idOrdine
+FROM Ordine
+WHERE idNegozio IN (SELECT Negozio.id
+					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+					WHERE Utente.id=ID) AND stato=3
+
 -- ottenere la lista degli ordini ricevuti in un determinato giorno
+SELECT idOrdine
+FROM Ordine
+WHERE idNegozio IN (SELECT Negozio.id
+					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+					WHERE Utente.id=ID) AND dataOrdine=DATA
+
 -- ottenere la lista degli ordini ricevuti nella settimana corrente
+SELECT idOrdine
+FROM Ordine
+WHERE idNegozio IN (SELECT Negozio.id
+					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+					WHERE Utente.id=ID) AND WEEK(dataOrdine)=WEEK(DATA)
+
 -- ottenere la lista degli ordini ricevuti nel mese corrente
+SELECT idOrdine
+FROM Ordine
+WHERE idNegozio IN (SELECT Negozio.id
+					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+					WHERE Utente.id=ID) AND MONTH(dataOrdine)=MONTH(DATA)
+
 -- ottenere la lista degli ordini ricevuti nell'anno corrente
+SELECT idOrdine
+FROM Ordine
+WHERE idNegozio IN (SELECT Negozio.id
+					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+					WHERE Utente.id=ID) AND YEAR(dataOrdine)=YEAR(DATA)
+
 -- ottenere la lista dei propri negozi con anche il numero di vendite
+SELECT idNegozio, SUM(idOrdine)
+FROM Ordine
+WHERE idNegozio IN (SELECT Negozio.id
+					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+					WHERE Utente.id=ID)
+GROUP BY idNegozio
+
 -- ottenere la lista dei propri negozi ordinati per vendite maggiori
+SELECT idNegozio, SUM(idOrdine)
+FROM Ordine
+WHERE idNegozio IN (SELECT Negozio.id
+					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+					WHERE Utente.id=ID)
+GROUP BY idNegozio
+ORDER BY SUM(idOrdine) DESC
+
 -- ottenere la lista dei propri negozi per vendite minori
+SELECT idNegozio, SUM(idOrdine)
+FROM Ordine
+WHERE idNegozio IN (SELECT Negozio.id
+					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+					WHERE Utente.id=ID)
+GROUP BY idNegozio
+ORDER BY SUM(idOrdine) ASC
+
 -- ottenere la lista dei propri negozi con vendite inferiori ad un certo valore
+SELECT idNegozio, SUM(idOrdine)
+FROM Ordine
+WHERE idNegozio IN (SELECT Negozio.id
+					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+					WHERE Utente.id=ID)
+GROUP BY idNegozio
+HAVING SUM(idOrdine)<VALORE
+
 -- ottenere la lista dei propri negozi con vendite superiori ad un certo valore
+SELECT idNegozio, SUM(idOrdine)
+FROM Ordine
+WHERE idNegozio IN (SELECT Negozio.id
+					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+					WHERE Utente.id=ID)
+GROUP BY idNegozio
+HAVING SUM(idOrdine)>VALORE
+
 -- ottenere la lista dei negozi che vendono prodotti di una certa categoria
+SELECT idNegozio
+FROM ((Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) AS A1 JOIN Negozio ON Negozio.id=A1.idNegozio) AS A2 JOIN Utente ON Utente.id=A2.idVenditore
+WHERE nome=Categoria AND idVenditore=ID AND attivo=1
+
 -- ottenere la lista dei negozi che vendono prodotti di una certa categoria ordinate da quello con più vendite
 -- ottenere la lista dei negozi che vendono prodotti di una certa categoria ordinate da quello con meno vendite
 -- ottenere la lista dei propri negozi ordinati per data di apertura
+SELECT Negozio.id
+FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+WHERE Utente.id=ID
+ORDER BY dataApertura DESC
+
 -- ottenere la lista dei propri negozi ordinati per fatturato
 -- ottenere i dati di un negozio
+SELECT *
+FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+WHERE Utente.id=ID AND Negozio.id=ID
+
 -- ottenere i dati delle vendite di un determinato negozio
 -- ottenere i dati di vendita di un determinato negozio in una determinata categoria
 -- ottenere le richieste di assistenza in cui si è stati citati
+SELECT *
+FROM Utente JOIN Assistenza ON Utente.id=Assistenza.idVenditore AS A1
+WHERE A1.idVenditore=ID
+
 -- ottenere la lista dei prodotti venduti raggruppati per categoria e negozio
 -- ottenere la lista dei prodotti venduti in una determinata categoria raggruppati per negozio
 -- ottenere la lista dei prodotti venduti ordinati per valutazioni
