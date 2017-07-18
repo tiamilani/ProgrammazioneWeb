@@ -9,7 +9,7 @@
 -- 					1 -> ordine pagato
 -- 					2 -> ordine in lavorazione
 -- 					3 -> ordine spedito
--- 					4 -> ordine spedito
+-- 					4 -> ordine arrivato
 --					5 -> ordine nella lista dei desideri		
 
 -- query generali:
@@ -17,97 +17,154 @@
 
 SELECT *
 FROM Utente
-WHERE UtenteType = 0
+WHERE UtenteType = 0;
 
 -- selezionare tutti gli utenti venditori
 
 SELECT *
 FROM Utente
-WHERE UtenteType = 1
+WHERE UtenteType = 1;
 
 -- selezionare tutti gli utenti amministratori
 
 SELECT *
 FROM Utente
-WHERE UtenteType = 2
+WHERE UtenteType = 2;
 
 -- selezionare un utente specificando email e password
 
 SELECT *
 FROM Utente
-WHERE mail = 'mail' AND password = 'password'
+WHERE mail = 'mail' AND password = 'password';
 
 -- ottenere tutti gli utenti con un certo nome
 
 SELECT *
 FROM Utente
-WHERE nome = 'nome'
+WHERE nome = 'nome';
 
 -- ottenere tutti gli utenti con un certo nome e cognome
 
 SELECT *
 FROM Utente
-WHERE nome = 'nome' AND cognome = 'cognome'
+WHERE nome = 'nome' AND cognome = 'cognome';
 
 -- ottenere i dati un utente specificando l'id
 
 SELECT *
 FROM Utente
-WHERE id = id
+WHERE id = id;
 
 -- ottenere indirizzi di un utente avendo l'id
 
 select Indirizzo.* 
-from Indirizzo INNER JOIN IndirizzoUtente ON (Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = 1) 
+from Indirizzo INNER JOIN IndirizzoUtente ON (Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = 1);
 
 -- ottenere i dati di un utente e l'indirizzo avendo email e password
 
 select Utente.*, Indirizzo.* 
-from Utente INNER JOIN IndirizzoUtente INNER JOIN Indirizzo ON (Utente.mail = 'abc@def.ghi' AND Utente.password = 'ciao' AND Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = Utente.id)
+from Utente INNER JOIN IndirizzoUtente INNER JOIN Indirizzo 
+	ON (Utente.mail = 'abc@def.ghi' AND Utente.password = 'ciao' AND Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = Utente.id);
 
 -- ottenere i dati di un utente e l'indirizzo avendo l'id
 
-SELECT
-FROM
-WHERE
+select Utente.*, Indirizzo.* 
+from Utente INNER JOIN IndirizzoUtente INNER JOIN Indirizzo 
+	ON (Utente.id = id AND Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = Utente.id);
 
 -- ottenere l'immagine di un utente
 
-SELECT
-FROM
-WHERE
+SELECT src
+FROM imageUtente 
+WHERE idU = 'idU';
+
+-- ottener i dati di un utente, l'indirizzo ed l'immagine a cui fa riferimento
+
+select Utente.*, Indirizzo.*, imageUtente.src
+from Utente INNER JOIN IndirizzoUtente INNER JOIN Indirizzo ON (Utente.mail = 'abc@def.ghi' AND Utente.password = 'ciao' AND Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = Utente.id)
+	LEFT JOIN imageUtente ON (imageUtente.idU = Utente.id);
+
 
 -- ottenere gli utenti amministratori ordinati per numero di richieste
 
-SELECT
-FROM
-WHERE
+SELECT DISTINCT COUNT(A2.idAmministratore) as contatore, A1.idAmministratore as id
+FROM Assistenza A1
+LEFT JOIN Assistenza A2 ON (A1.idAmministratore = A2.idAmministratore)
+GROUP BY A1.id
+ORDER BY contatore DESC;
 
 -- modificare l'immagine del profilo di un utente con un determinato id
--- modificare la propria mail
--- modificare la propria password
--- modificare il proprio indirizzo
--- rimuovere l'immagine del profilo di un determinato utente
 
+UPDATE imageUtente
+	SET imageUtente.src = 'NewSrc'
+	WHERE imageUtente.idU = 'idU'
+					
+-- modificare la propria mail
+
+UPDATE Utente
+	SET Utente.mail = 'NewMail'
+	WHERE Utente.id = 'id';
+
+-- modificare la propria password
+
+UPDATE Utente
+	SET Utente.password = 'newPassword'
+	WHERE Utente.id = 'id';
+
+-- modificare uno dei propri indirizzo, suppongo l'utente abbia scelto un indirizzo dalla lista dei propri indirizzi quindi avrò l'id dell'indirizzo
+
+UPDATE Indirizzo
+	SET Indirizzo.citta = 'NewCitta'
+		Indirizzo.interno = 'NewCitta'
+		Indirizzo.latitudine = 'NewCitta'
+		Indirizzo.longitudine = 'NewCitta'
+		Indirizzo.nCivico = 'NewCitta'
+		Indirizzo.provincia = 'NewCitta'
+		Indirizzo.regione = 'NewCitta'
+		Indirizzo.stato = 'NewCitta'
+		Indirizzo.via = 'NewCitta'
+	WHERE Indirizzo.idI = 'idI';
+
+-- rimuovere l'immagine del profilo di un determinato utente
+DELETE FROM imageUtente
+	WHERE imageUtente.idU = 'idU';
+
+-- aggiungere una immagine del profilo di un utente
+INSERT INTO image
+	(src,idU)
+SELECT 'newSrc', Utente.id
+FROM Utente
+WHERE Utente.id = 'id';	
 
 -- per gli utenti normali:
 -- ottenere la lista dei negozi di un venditore specificando l'id del venditore
 
-SELECT
-FROM
-WHERE
+SELECT *
+FROM Negozio
+WHERE idVenditore = 'idV';
 
 -- ottenere la lista dei negozi di un venditore avendo nome e cognome del venditore
 
-SELECT
-FROM
-WHERE
+SELECT Negozio.*
+FROM Negozio INNER JOIN Utente ON (Utente.nome = 'nome' AND Utente.cognome = 'cognome' AND Utente.UtenteType = 1 AND Negozio.idVenditore = Utente.id);
+
+-- ottenre la lista dei negozi di un venditore avendo l'id e l'immagine del negozio
+
+SELECT Negozio.*, imageNegozio.src 
+FROM Negozio INNER JOIN imageNegozio ON (Negozio.idVenditore = 'idV' AND Negozio.id = imageNegozio.idN);
+
+-- ottenere la lista dei negozi di un venditore avendo nome e cognome e la prima immagine del negozio
+
+SELECT Negozio.*, imageNegozio.src 
+FROM Negozio INNER JOIN Utente ON (Utente.nome = 'Carlo' AND Utente.cognome = 'Cracco' AND Utente.UtenteType = 1 AND Negozio.idVenditore = Utente.id) 
+	LEFT JOIN imageNegozio ON (Negozio.id = imageNegozio.idN);
 
 -- ottenere la lista degli ordini effettuati
 
-SELECT
-FROM
-WHERE
+SELECT Ordine.*
+FROM Ordine INNER JOIN Utente ON (Utente.id = 'idU' AND Ordine.idUtente = Utente.id AND Ordine.stato <> 0);
+
+-- ottenre la lista dei negozi di un venditore avendo l'id e SOLO la prima immagine del negozio
 
 -- ottenere la lista degli ordini effettuati e portati a termine
 
