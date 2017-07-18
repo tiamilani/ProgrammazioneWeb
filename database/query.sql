@@ -166,6 +166,10 @@ FROM Ordine INNER JOIN Utente ON (Utente.id = 'idU' AND Ordine.idUtente = Utente
 
 -- ottenre la lista dei negozi di un venditore avendo l'id e SOLO la prima immagine del negozio
 
+SELECT Negozio.*, imageNegozio.src 
+FROM Negozio INNER JOIN imageNegozio ON (Negozio.idVenditore = 'idV' AND Negozio.id = imageNegozio.idN);
+GROUP BY Negozio.id -- da errore qui
+
 -- ottenere la lista degli ordini effettuati e portati a termine
 
 SELECT
