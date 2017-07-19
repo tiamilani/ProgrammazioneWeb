@@ -167,38 +167,74 @@ FROM Ordine INNER JOIN Utente ON (Utente.id = 'idU' AND Ordine.idUtente = Utente
 -- ottenre la lista dei negozi di un venditore avendo l'id e SOLO la prima immagine del negozio
 
 SELECT Negozio.*, imageNegozio.src
-FROM Negozio INNER JOIN imageNegozio ON (Negozio.idVenditore = 'idV' AND Negozio.id = imageNegozio.idN);
-GROUP BY Negozio.id -- da errore qui
+FROM Negozio INNER JOIN imageNegozio ON (Negozio.idVenditore = 6 AND Negozio.id = imageNegozio.idN)
+GROUP BY Negozio.id;
+
+-- ottenere la lista degli ordini
+
+SELECT *
+FROM Ordine
+WHERE Ordine.idUtente = 1
+ORDER BY Ordine.dataOrdine DESC;
 
 -- ottenere la lista degli ordini effettuati e portati a termine
 
-SELECT
-FROM
-WHERE
+SELECT *
+FROM Ordine
+WHERE Ordine.idUtente = 1 AND Ordine.stato = 4
+ORDER BY Ordine.dataOrdine DESC;
+
+-- ottenere la lista degli ordini spediti
+
+SELECT *
+FROM Ordine
+WHERE Ordine.idUtente = 1 AND Ordine.stato = 3
+ORDER BY Ordine.dataOrdine DESC;
 
 -- ottenere la lista degli ordini effettuati ed in lavorazione
 
-SELECT
-FROM
-WHERE
+SELECT *
+FROM Ordine
+WHERE Ordine.idUtente = 1 AND Ordine.stato = 2
+ORDER BY Ordine.dataOrdine DESC;
 
 -- ottenere la lista degli ordini effettuati ma non ancora in lavorazione
 
-SELECT
-FROM
-WHERE
+SELECT *
+FROM Ordine
+WHERE Ordine.idUtente = 1 AND Ordine.stato = 1
+ORDER BY Ordine.dataOrdine DESC;
 
 -- ottenere la lsita dei prodotti all'interno dell'ordine della lista dei desideri
 
-SELECT
-FROM
-WHERE
+SELECT *
+FROM Ordine
+WHERE Ordine.idUtente = 1 AND Ordine.stato = 5
+ORDER BY Ordine.dataOrdine DESC;
 
 -- ottenere la lista dei negozi da cui ho acquistato
 
-SELECT
-FROM
-WHERE
+SELECT Negozio.*
+FROM Negozio INNER JOIN Ordine ON (Ordine.idUtente = 1 AND Negozio.id = Ordine.idNegozio AND Ordine.stato <> 0)
+GROUP BY Negozio.id
+
+-- ottenere la lsita dei negozi da cui ho acquistato e la loro prima foto
+
+SELECT Negozio.*, imageNegozio.src
+FROM Negozio INNER JOIN Ordine ON (Ordine.idUtente = 1 AND Negozio.id = Ordine.idNegozio AND Ordine.stato <> 0) LEFT JOIN imageNegozio ON (Negozio.id = imageNegozio.idN)
+GROUP BY Negozio.id
+
+-- ottenere la lista dei negozi da cui ho acquistato con i dati dell'oggetto acquistato, la prima foto del negozio e la prima dell'oggetto
+
+SELECT Negozio.*, imageNegozio.src AS imgNeg, Oggetto.id AS idOgg, Oggetto.nome AS nomeOgg, Oggetto.descrizione ,imageOggetto.src AS imgOgg
+FROM Negozio INNER JOIN Ordine ON 
+	(Ordine.idUtente = 1 AND Negozio.id = Ordine.idNegozio AND Ordine.stato <> 0) 
+	LEFT JOIN imageNegozio ON (Negozio.id = imageNegozio.idN)
+	LEFT JOIN Oggetto ON (Ordine.idOggetto = Oggetto.id)
+    LEFT JOIN imageOggetto ON (Oggetto.id = imageOggetto.idO)
+GROUP BY Oggetto.id
+
+-- per ottenere i filtri sullo stato dell'ordine modificare la ricerca sullo stato per porlo = 1/2/3/4/5
 
 -- ottenere il carrello
 
