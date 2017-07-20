@@ -227,8 +227,8 @@ GROUP BY Negozio.id
 -- ottenere la lista dei negozi da cui ho acquistato con i dati dell'oggetto acquistato, la prima foto del negozio e la prima dell'oggetto
 
 SELECT Negozio.*, imageNegozio.src AS imgNeg, Oggetto.id AS idOgg, Oggetto.nome AS nomeOgg, Oggetto.descrizione ,imageOggetto.src AS imgOgg
-FROM Negozio INNER JOIN Ordine ON 
-	(Ordine.idUtente = 1 AND Negozio.id = Ordine.idNegozio AND Ordine.stato <> 0) 
+FROM Negozio INNER JOIN Ordine ON
+	(Ordine.idUtente = 1 AND Negozio.id = Ordine.idNegozio AND Ordine.stato <> 0)
 	LEFT JOIN imageNegozio ON (Negozio.id = imageNegozio.idN)
 	LEFT JOIN Oggetto ON (Ordine.idOggetto = Oggetto.id)
     LEFT JOIN imageOggetto ON (Oggetto.id = imageOggetto.idO)
@@ -819,22 +819,87 @@ FROM Utente JOIN Assistenza ON Utente.id=Assistenza.idVenditore AS A1
 WHERE A1.idVenditore=ID
 
 -- ottenere la lista dei prodotti venduti raggruppati per categoria e negozio
+SELECT *
+FROM Ordine
+WHERE idNegozio IN (SELECT Negozio.id
+					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+					WHERE Utente.id=ID) AND stato=3
+GROUP BY idNegozio ASC categoria ASC
+
 -- ottenere la lista dei prodotti venduti in una determinata categoria raggruppati per negozio
+SELECT *
+FROM Ordine
+WHERE idNegozio IN (SELECT Negozio.id
+					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+					WHERE Utente.id=ID) AND stato=3 AND categoria=CATEGORIA
+GROUP BY idNegozio ASC
+
 -- ottenere la lista dei prodotti venduti ordinati per valutazioni
+SELECT *
+FROM (Ordine JOIN Oggetto ON Ordine.idOggetto=Oggetto.id) AS A1 JOIN RecensioneOggetto ON A1.idOggetto=RecensioneOggetto.idOggetto AS A2
+WHERE A2.idNegozio IN (SELECT Negozio.id
+					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+					WHERE Utente.id=ID) AND stato=3
+ORDER BY A2.valutazione DESC
+
 -- ottenere la lsita dei propri negozi ordinati per recensioni
+SELECT *
+FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+WHERE Utente.id=ID
+ORDER BY valutazione DESC
+
 -- ottenere la lista dei proprio prodotti in sconto raggruppati per categoria e negozio
+SELECT *
+FROM Oggetto
+WHERE idNegozio IN (SELECT Negozio.id
+					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+					WHERE Utente.id=ID) AND sconto>0
+GROUP BY idNegozio ASC categoria ASC
+
 -- ottenere la lista dei proprio prodotti in sconto raggruppati per categoria e negozio ordinati per scadenza più vicina dello sconto
+SELECT *
+FROM Oggetto
+WHERE idNegozio IN (SELECT Negozio.id
+					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
+					WHERE Utente.id=ID) AND sconto>0
+GROUP BY idNegozio ASC categoria ASC
+ORDER BY dataFineSconto ASC
+
 -- ottenere la lista delle recensioni ricevute
+SELECT *
+FROM RecensioneVenditore
+WHERE idVenditore=ID
+
 -- aggiungere un proprio negozio
+INSERT INTO Negozio (idVenditore, nomeNegozio, valutazione, attivo, idI, dataApertura) VALUES (ID, NOME, VALUTAZIONE, '1', IDINDIRIZZO, CURRENT_TIMESTAMP);
+
 -- chiudere un proprio negozio (rimuoverlo)
+UPDATE Negozio SET attivo=0 WHERE id=ID;
+
 -- modificare lo stato di un ordine da pagato a in lavorazione
+UPDATE Ordine SET stato=1 WHERE idOrdine=ID;
+
 -- modificare lo stato di un ordine da lavorazione a spedito
+UPDATE Ordine SET stato=2 WHERE idOrdine=ID;
+
 -- aggiungere ad un ordine spedito il codice di tracking
+UPDATE Ordine SET codiceTracking=TRACKING WHERE idOrdine=ID;
+
 -- aggiungere un prodotto ad un proprio negozio
+INSERT INTO Oggetto (idNegozio, nome, prezzo, descrizione, ritiroInNegozio, disponibilita, statoDisponibilita, sconto, variazione, dataFineSconto, categoria) VALUES (IDNEGOZIO, NOME, PREZZO, DESCRIZIONE, RITIRONEGOZIO, DISPONIBILITA, STATODISPO, SCONTO, VARIAZIONE, FINESCONTO, CATEGORIA);
+
 -- rimuovere un oggetto da un proprio negozio
+DELETE FROM Oggetto WHERE id=ID;
+
 -- modificare il prezzo di un oggetto di un proprio negozio
+UPDATE Oggetto SET prezzo=PREZZO WHERE id=ID;
+
 -- aggiungere uno sconto ad un proprio oggetto
+UPDATE Oggetto SET sconto=SCONTO WHERE id=ID;
+
 -- rimuovere uno sconto dagli oggetti in sconto
+UPDATE Oggetto SET prezzo=0 WHERE id=ID;
+
 -- aggiungere una foto ad un prodotto
 -- aggiungere una foto ad un negozio
 -- rimuovere una foto di un prodotto
@@ -842,7 +907,18 @@ WHERE A1.idVenditore=ID
 
 -- per gli amministratori:
 -- ottenere il numero di richieste di assistenza
+SELECT SUM(id)
+FROM Assistenza
+
 -- ottenere il numero di richieste di assistenza in sospeso
+SELECT SUM(id)
+FROM Assistenza
+WHERE stato=0
+
 -- ottenere il numero di richieste di assistenza risolte
+SELECT SUM(id)
+FROM Assistenza
+WHERE stato=1
+
 -- aggiungere una soluzione ad una richiesta di assistenze
 -- modificare lo stato di una richiesta di assistenza
