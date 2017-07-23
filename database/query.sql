@@ -236,80 +236,73 @@ GROUP BY Oggetto.id
 
 -- per ottenere i filtri sullo stato dell'ordine modificare la ricerca sullo stato per porlo = 1/2/3/4/5
 
--- ottenere il carrello
+-- ottenere il carrello (La lista degli ordini che sono nel carrello)
 
-SELECT
-FROM
-WHERE
-
--- ottenere le proprie recensioni
-
-SELECT
-FROM
-WHERE
+SELECT Ordine.*, Carrello.subtotale
+FROM Carrello, Ordine
+WHERE Carrello.idUtente = 'idU' AND Ordine.idOrdine = Carrello.idOrdine
 
 -- ottenere le proprie recensioni di oggetti
 
-SELECT
-FROM
-WHERE
+SELECT *
+FROM RecensioneOggetto
+WHERE idUtente = 'idU'
 
 -- ottenere le proprie recensioni di negozi
 
-SELECT
-FROM
-WHERE
+SELECT *
+FROM RecensioneNegozio
+WHERE idUtente = 'idU'
 
 -- ottenere le proprie recensioni di venditori
 
-SELECT
-FROM
-WHERE
-
--- ottenere le risposte alle proprie recensioni
-
-SELECT
-FROM
-WHERE
+SELECT *
+FROM RecensioneVenditore
+WHERE idUtente = 'idU'
 
 -- ottenere le risposte alle proprie recensioni di oggetti
 
-SELECT
-FROM
-WHERE
+SELECT RispostaOggetto.*
+FROM RispostaOggetto, RecensioneOggetto
+WHERE RecensioneOggetto.idUtente = 'idU' AND RispostaOggetto.idRecensione = RecensioneOggetto.id
 
 -- ottenere le risposte alle proprie recensioni di negozi
 
-SELECT
-FROM
-WHERE
+SELECT RispostaNegozio.*
+FROM RispostaNegozio, RecensioneNegozio
+WHERE RecensioneNegozio.idUtente = 'idU' AND RispostaNegozio.idRecensione = RecensioneNegozio.id
 
 -- ottenere le risposte alle proprie recensioni di venditori
 
-SELECT
-FROM
-WHERE
+SELECT RispostaVenditore.*
+FROM RispostaVenditore, RecensioneVenditore
+WHERE RecensioneVenditore.idUtente = 'idU' AND RispostaVenditore.idRecensione = RecensioneVenditore.id
 
 -- ottenere tutte le recensioni di un oggetto
 
-SELECT
-FROM
-WHERE
+SELECT *
+FROM RecensioneOggetto
+WHERE idOggetto = 'idO'
 
 -- ottenere tutte le recensioni di un negozio
 
-SELECT
-FROM
-WHERE
+SELECT *
+FROM RecensioneNegozio
+WHERE idNegozio = 'idN'
 
 -- ottenere tutte le recensioni di un venditore
 
-SELECT
-FROM
-WHERE
+SELECT *
+FROM RecensioneVenditore
+WHERE idVenditore = 'idV'
 
 -- non specificato se con ritiro a mano o scontati:
 -- ottenere la lista di oggetti che contengono una stringa nel nome
+
+SELECT *
+FROM Oggetto
+WHERE Oggetto.nome
+
 -- ottenere la lista di oggetti di una categoria
 -- ottenere la lista di oggetti di una categoria con una certa stringa nel nome
 -- ottenere la lista di oggetti con un certo prezzo minimo
