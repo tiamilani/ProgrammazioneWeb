@@ -301,7 +301,7 @@ WHERE idVenditore = 'idV'
 
 SELECT *
 FROM Oggetto
-WHERE nome LIKE '%STRINGA%'
+WHERE nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti di una categoria
 SELECT *
@@ -311,7 +311,7 @@ WHERE categoria=CATEGORIA
 -- ottenere la lista di oggetti di una categoria con una certa stringa nel nome
 SELECT *
 FROM Oggetto
-WHERE categoria=CATEGORIA AND nome LIKE '%STRINGA%'
+WHERE categoria=CATEGORIA AND nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti con un certo prezzo minimo
 SELECT *
@@ -346,32 +346,32 @@ WHERE categoria=CATEGORIA AND prezzo BETWEEN MINIMO AND MASSIMO
 -- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome
 SELECT *
 FROM Oggetto
-WHERE prezzo >= MINIMO AND nome LIKE '%STRINGA%'
+WHERE prezzo >= MINIMO AND nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome
 SELECT *
 FROM Oggetto
-WHERE prezzo <= MASSIMO AND nome LIKE '%STRINGA%'
+WHERE prezzo <= MASSIMO AND nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome
 SELECT *
 FROM Oggetto
-WHERE prezzo BETWEEN MINIMO AND MASSIMO AND nome LIKE '%STRINGA%'
+WHERE prezzo BETWEEN MINIMO AND MASSIMO AND nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome
 SELECT *
 FROM Oggetto
-WHERE categoria=CATEGORIA AND prezzo >= MINIMO AND nome LIKE '%STRINGA%'
+WHERE categoria=CATEGORIA AND prezzo >= MINIMO AND nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome
 SELECT *
 FROM Oggetto
-WHERE categoria=CATEGORIA AND prezzo <= MASSIMO AND nome LIKE '%STRINGA%'
+WHERE categoria=CATEGORIA AND prezzo <= MASSIMO AND nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome
 SELECT *
 FROM Oggetto
-WHERE categoria=CATEGORIA AND prezzo BETWEEN MINIMO AND MASSIMO AND nome LIKE '%STRINGA%'
+WHERE categoria=CATEGORIA AND prezzo BETWEEN MINIMO AND MASSIMO AND nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti di un determinato negozio
 SELECT *
@@ -381,7 +381,7 @@ WHERE Negozio.id=ID
 -- ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio
 SELECT *
 FROM Oggetto JOIN Negozio ON Oggetto.idNegozio=Negozio.id
-WHERE Negozio.id=ID AND Oggetto.nome LIKE '%STRINGA%'
+WHERE Negozio.id=ID AND Oggetto.nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti di una categoria di un determinato negozio
 SELECT *
@@ -391,7 +391,7 @@ WHERE Negozio.id=ID AND Oggetto.categoria=CATEGORIA
 -- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di un determinato negozio
 SELECT *
 FROM Oggetto JOIN Negozio ON Oggetto.idNegozio=Negozio.id
-WHERE Negozio.id=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.nome LIKE '%STRINGA%'
+WHERE Negozio.id=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti con un certo prezzo minimo di un determinato negozio
 SELECT *
@@ -426,32 +426,32 @@ WHERE Negozio.id=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo BETWEEN M
 -- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di un determinato negozio
 SELECT *
 FROM Oggetto JOIN Negozio ON Oggetto.idNegozio=Negozio.id
-WHERE Negozio.id=ID AND Oggetto.prezzo >= MINIMO AND Oggetto.nome LIKE '%STRINGA%'
+WHERE Negozio.id=ID AND Oggetto.prezzo >= MINIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di un determinato negozio
 SELECT *
 FROM Oggetto JOIN Negozio ON Oggetto.idNegozio=Negozio.id
-WHERE Negozio.id=ID AND Oggetto.prezzo <= MASSIMO AND Oggetto.nome LIKE '%STRINGA%'
+WHERE Negozio.id=ID AND Oggetto.prezzo <= MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di un determinato negozio
 SELECT *
 FROM Oggetto JOIN Negozio ON Oggetto.idNegozio=Negozio.id
-WHERE Negozio.id=ID AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.nome LIKE '%STRINGA%'
+WHERE Negozio.id=ID AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di un determinato negozio
 SELECT *
 FROM Oggetto JOIN Negozio ON Oggetto.idNegozio=Negozio.id
-WHERE Negozio.id=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo >= MINIMO AND Oggetto.nome LIKE '%STRINGA%'
+WHERE Negozio.id=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo >= MINIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio
 SELECT *
 FROM Oggetto JOIN Negozio ON Oggetto.idNegozio=Negozio.id
-WHERE Negozio.id=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo <= MASSIMO AND Oggetto.nome LIKE '%STRINGA%'
+WHERE Negozio.id=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo <= MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio
 SELECT *
 FROM Oggetto JOIN Negozio ON Oggetto.idNegozio=Negozio.id
-WHERE Negozio.id=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.nome LIKE '%STRINGA%'
+WHERE Negozio.id=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 -- ottenere la lista di oggetti in negozi data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -484,7 +484,7 @@ WHERE Utente.UtenteType=1 AND Utente.id=ID
 -- ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio di un determinato venditore
 SELECT *
 FROM (Negozio JOIN Utente ON Utente.id=Negozio.idVenditore) JOIN Oggetto ON Negozio.id=Oggetto.idNegozio
-WHERE Utente.UtenteType=1 AND Utente.id=ID AND Oggetto.nome LIKE '%STRINGA%'
+WHERE Utente.UtenteType=1 AND Utente.id=ID AND Oggetto.nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti di una categoria di un determinato negozio di un determinato venditore
 SELECT *
@@ -494,7 +494,7 @@ WHERE Utente.UtenteType=1 AND Utente.id=ID AND categoria=CATEGORIA
 -- ottenere la lista di oggetti di una categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore
 SELECT *
 FROM (Negozio JOIN Utente ON Utente.id=Negozio.idVenditore) JOIN Oggetto ON Negozio.id=Oggetto.idNegozio
-WHERE Utente.UtenteType=1 AND Utente.id=ID AND categoria=CATEGORIA AND Oggetto.nome LIKE '%STRINGA%'
+WHERE Utente.UtenteType=1 AND Utente.id=ID AND categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti con un certo prezzo minimo di un determinato negozio di un determinato venditore
 SELECT *
@@ -529,32 +529,32 @@ WHERE Utente.UtenteType=1 AND Utente.id=ID AND categoria=CATEGORIA AND Oggetto.p
 -- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di un determinato negozio di un determinato venditore
 SELECT *
 FROM (Negozio JOIN Utente ON Utente.id=Negozio.idVenditore) JOIN Oggetto ON Negozio.id=Oggetto.idNegozio
-WHERE Utente.UtenteType=1 AND Utente.id=ID AND Oggetto.prezzo >= MINIMO AND Oggetto.nome LIKE '%STRINGA%'
+WHERE Utente.UtenteType=1 AND Utente.id=ID AND Oggetto.prezzo >= MINIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di un determinato negozio di un determinato venditore
 SELECT *
 FROM (Negozio JOIN Utente ON Utente.id=Negozio.idVenditore) JOIN Oggetto ON Negozio.id=Oggetto.idNegozio
-WHERE Utente.UtenteType=1 AND Utente.id=ID AND Oggetto.prezzo <= MASSIMO AND Oggetto.nome LIKE '%STRINGA%'
+WHERE Utente.UtenteType=1 AND Utente.id=ID AND Oggetto.prezzo <= MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di un determinato negozio di un determinato venditore
 SELECT *
 FROM (Negozio JOIN Utente ON Utente.id=Negozio.idVenditore) JOIN Oggetto ON Negozio.id=Oggetto.idNegozio
-WHERE Utente.UtenteType=1 AND Utente.id=ID AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.nome LIKE '%STRINGA%'
+WHERE Utente.UtenteType=1 AND Utente.id=ID AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore
 SELECT *
 FROM (Negozio JOIN Utente ON Utente.id=Negozio.idVenditore) JOIN Oggetto ON Negozio.id=Oggetto.idNegozio
-WHERE Utente.UtenteType=1 AND Utente.id=ID AND categoria=CATEGORIA AND Oggetto.prezzo >= MINIMO AND Oggetto.nome LIKE '%STRINGA%'
+WHERE Utente.UtenteType=1 AND Utente.id=ID AND categoria=CATEGORIA AND Oggetto.prezzo >= MINIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore
 SELECT *
 FROM (Negozio JOIN Utente ON Utente.id=Negozio.idVenditore) JOIN Oggetto ON Negozio.id=Oggetto.idNegozio
-WHERE Utente.UtenteType=1 AND Utente.id=ID AND categoria=CATEGORIA AND Oggetto.prezzo <= MASSIMO AND Oggetto.nome LIKE '%STRINGA%'
+WHERE Utente.UtenteType=1 AND Utente.id=ID AND categoria=CATEGORIA AND Oggetto.prezzo <= MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio di un determinato venditore
 SELECT *
 FROM (Negozio JOIN Utente ON Utente.id=Negozio.idVenditore) JOIN Oggetto ON Negozio.id=Oggetto.idNegozio
-WHERE Utente.UtenteType=1 AND Utente.id=ID AND categoria=CATEGORIA AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.nome LIKE '%STRINGA%'
+WHERE Utente.UtenteType=1 AND Utente.id=ID AND categoria=CATEGORIA AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
 -- ottenere la lista di oggetti di negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
