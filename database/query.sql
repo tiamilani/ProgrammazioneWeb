@@ -472,6 +472,11 @@ FROM Oggetto
 WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%'
 
 -- ottenere la lista di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+
+SELECT Negozio.*
+FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.id = Negozio.idI)
+WHERE 'raggio' >= (SQRT(POWER(Indirizzo.latitudine - 'latitudine',2) + POWER(Indirizzo.longitudine - 'longitudine'),2)*0.9996) / 1000
+
 -- ottenere la lista di oggetti in negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 -- ottenere la lista di oggetti che contengono una stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 -- ottenere la lista di oggetti di una categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
