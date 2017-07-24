@@ -877,198 +877,158 @@ WHERE Negozio.idVenditore=ID AND categoria=CATEGORIA AND Oggetto.prezzo BETWEEN 
 -- eliminaree un proprio indirizzo
 
 
--- per i venditori: Se Usertype=1 (venditore)
+-- per i venditori:
 -- ottenere la lista dei propri negozi
-SELECT Negozio.id
-FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-WHERE Utente.id=ID
+SELECT *
+FROM Negozio
+WHERE idVenditore=ID
 
 -- ottenere la lista degli ordini ricevuti
-SELECT idOrdine
-FROM Ordine
-WHERE idNegozio IN (SELECT Negozio.id
-					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-					WHERE Utente.id=ID)
+SELECT *
+FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id
+WHERE idVenditore=ID
 
 -- ottenere la lista degli ordini ricevuti dal più nuovo al più vecchio
-SELECT idOrdine
-FROM Ordine
-WHERE idNegozio IN (SELECT Negozio.id
-					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-					WHERE Utente.id=ID)
+SELECT *
+FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id
+WHERE idVenditore=ID
 ORDER BY dataOrdine DESC
 
 -- ottenere la lista degli ordini non ancora in carico
-SELECT idOrdine
-FROM Ordine
-WHERE idNegozio IN (SELECT Negozio.id
-					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-					WHERE Utente.id=ID) AND stato=0
+SELECT *
+FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id
+WHERE idVenditore=ID AND stato=1
 
 -- ottenere la lista degli ordini in lavorazione
-SELECT idOrdine
-FROM Ordine
-WHERE idNegozio IN (SELECT Negozio.id
-					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-					WHERE Utente.id=ID) AND stato=1
+SELECT *
+FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id
+WHERE idVenditore=ID AND stato=2
 
 -- ottenere la lista degli ordini già spediti
-SELECT idOrdine
-FROM Ordine
-WHERE idNegozio IN (SELECT Negozio.id
-					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-					WHERE Utente.id=ID) AND stato=2
+SELECT *
+FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id
+WHERE idVenditore=ID AND stato=3
 
 -- ottenere la lista degli ordini conclusi
-SELECT idOrdine
-FROM Ordine
-WHERE idNegozio IN (SELECT Negozio.id
-					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-					WHERE Utente.id=ID) AND stato=3
+SELECT *
+FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id
+WHERE idVenditore=ID AND stato=4
 
 -- ottenere la lista degli ordini ricevuti in un determinato giorno
-SELECT idOrdine
-FROM Ordine
-WHERE idNegozio IN (SELECT Negozio.id
-					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-					WHERE Utente.id=ID) AND dataOrdine=DATA
+SELECT *
+FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id
+WHERE idVenditore=ID AND dataOrdine=DATA
 
 -- ottenere la lista degli ordini ricevuti nella settimana corrente
-SELECT idOrdine
-FROM Ordine
-WHERE idNegozio IN (SELECT Negozio.id
-					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-					WHERE Utente.id=ID) AND WEEK(dataOrdine)=WEEK(DATA)
+SELECT *
+FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id
+WHERE idVenditore=ID AND WEEK(dataOrdine)=WEEK(DATA)
 
 -- ottenere la lista degli ordini ricevuti nel mese corrente
-SELECT idOrdine
-FROM Ordine
-WHERE idNegozio IN (SELECT Negozio.id
-					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-					WHERE Utente.id=ID) AND MONTH(dataOrdine)=MONTH(DATA)
+SELECT *
+FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id
+WHERE idVenditore=ID AND MONTH(dataOrdine)=MONTH(DATA)
 
 -- ottenere la lista degli ordini ricevuti nell'anno corrente
-SELECT idOrdine
-FROM Ordine
-WHERE idNegozio IN (SELECT Negozio.id
-					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-					WHERE Utente.id=ID) AND YEAR(dataOrdine)=YEAR(DATA)
+SELECT *
+FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id
+WHERE idVenditore=ID AND YEAR(dataOrdine)=YEAR(DATA)
 
 -- ottenere la lista dei propri negozi con anche il numero di vendite
-SELECT idNegozio, SUM(idOrdine)
-FROM Ordine
-WHERE idNegozio IN (SELECT Negozio.id
-					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-					WHERE Utente.id=ID)
+SELECT idNegozio, SUM(idOrdine) AS numeroVendite
+FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id
+WHERE idVenditore=ID
 GROUP BY idNegozio
 
 -- ottenere la lista dei propri negozi ordinati per vendite maggiori
-SELECT idNegozio, SUM(idOrdine)
-FROM Ordine
-WHERE idNegozio IN (SELECT Negozio.id
-					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-					WHERE Utente.id=ID)
+SELECT idNegozio, SUM(idOrdine) AS numeroVendite
+FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id
+WHERE idVenditore=ID
 GROUP BY idNegozio
 ORDER BY SUM(idOrdine) DESC
 
 -- ottenere la lista dei propri negozi per vendite minori
-SELECT idNegozio, SUM(idOrdine)
-FROM Ordine
-WHERE idNegozio IN (SELECT Negozio.id
-					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-					WHERE Utente.id=ID)
+SELECT idNegozio, SUM(idOrdine) AS numeroVendite
+FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id
+WHERE idVenditore=ID
 GROUP BY idNegozio
 ORDER BY SUM(idOrdine) ASC
 
 -- ottenere la lista dei propri negozi con vendite inferiori ad un certo valore
-SELECT idNegozio, SUM(idOrdine)
-FROM Ordine
-WHERE idNegozio IN (SELECT Negozio.id
-					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-					WHERE Utente.id=ID)
+SELECT idNegozio, SUM(idOrdine) AS numeroVendite
+FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id
+WHERE idVenditore=ID
 GROUP BY idNegozio
 HAVING SUM(idOrdine)<VALORE
 
 -- ottenere la lista dei propri negozi con vendite superiori ad un certo valore
-SELECT idNegozio, SUM(idOrdine)
-FROM Ordine
-WHERE idNegozio IN (SELECT Negozio.id
-					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-					WHERE Utente.id=ID)
+SELECT idNegozio, SUM(idOrdine) AS numeroVendite
+FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id
+WHERE idVenditore=ID
 GROUP BY idNegozio
 HAVING SUM(idOrdine)>VALORE
 
 -- ottenere la lista dei negozi che vendono prodotti di una certa categoria
-SELECT idNegozio
-FROM ((Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) AS A1 JOIN Negozio ON Negozio.id=A1.idNegozio) AS A2 JOIN Utente ON Utente.id=A2.idVenditore
-WHERE nome=Categoria AND idVenditore=ID AND attivo=1
+SELECT *
+FROM ((Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) JOIN Negozio ON Negozio.id=Oggetto.idNegozio) JOIN Utente ON Utente.id=Negozio.idVenditore
+WHERE idVenditore=ID AND attivo=1 AND Categoria.nome="Elettronica"
 
 -- ottenere la lista dei negozi che vendono prodotti di una certa categoria ordinate da quello con più vendite
 -- ottenere la lista dei negozi che vendono prodotti di una certa categoria ordinate da quello con meno vendite
 -- ottenere la lista dei propri negozi ordinati per data di apertura
-SELECT Negozio.id
-FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-WHERE Utente.id=ID
+SELECT *
+FROM Negozio
+WHERE idVenditore=ID
 ORDER BY dataApertura DESC
 
 -- ottenere la lista dei propri negozi ordinati per fatturato
 -- ottenere i dati di un negozio
 SELECT *
-FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-WHERE Utente.id=ID AND Negozio.id=ID
+FROM Negozio
+WHERE idVenditore=ID AND id=ID
 
 -- ottenere i dati delle vendite di un determinato negozio
 -- ottenere i dati di vendita di un determinato negozio in una determinata categoria
 -- ottenere le richieste di assistenza in cui si è stati citati
 SELECT *
-FROM Utente JOIN Assistenza ON Utente.id=Assistenza.idVenditore AS A1
-WHERE A1.idVenditore=ID
+FROM Utente JOIN Assistenza ON Utente.id=Assistenza.idVenditore
+WHERE idVenditore=ID
 
 -- ottenere la lista dei prodotti venduti raggruppati per categoria e negozio
 SELECT *
-FROM Ordine
-WHERE idNegozio IN (SELECT Negozio.id
-					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-					WHERE Utente.id=ID) AND stato=3
-GROUP BY idNegozio ASC categoria ASC
+FROM (Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) JOIN Negozio ON Negozio.id=Oggetto.idNegozio
+WHERE idVenditore=ID AND stato=4
+GROUP BY idNegozio ASC, Categoria.nome ASC
 
 -- ottenere la lista dei prodotti venduti in una determinata categoria raggruppati per negozio
 SELECT *
-FROM Ordine
-WHERE idNegozio IN (SELECT Negozio.id
-					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-					WHERE Utente.id=ID) AND stato=3 AND categoria=CATEGORIA
+FROM (Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) JOIN Negozio ON Negozio.id=Oggetto.idNegozio
+WHERE idVenditore=ID AND stato=4 AND Categoria.nome=CATEGORIA
 GROUP BY idNegozio ASC
 
 -- ottenere la lista dei prodotti venduti ordinati per valutazioni
 SELECT *
-FROM (Ordine JOIN Oggetto ON Ordine.idOggetto=Oggetto.id) AS A1 JOIN RecensioneOggetto ON A1.idOggetto=RecensioneOggetto.idOggetto AS A2
-WHERE A2.idNegozio IN (SELECT Negozio.id
-					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-					WHERE Utente.id=ID) AND stato=3
-ORDER BY A2.valutazione DESC
+FROM (Ordine JOIN RecensioneOggetto ON Ordine.idOggetto=RecensioneOggetto.idOggetto) JOIN Negozio ON Ordine.idNegozio=Negozio.id
+WHERE idVenditore=ID AND stato=4
+ORDER BY AVG(RecensioneOggetto.valutazione) DESC
 
 -- ottenere la lsita dei propri negozi ordinati per recensioni
 SELECT *
-FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-WHERE Utente.id=ID
+FROM Negozio
+WHERE idVenditore=ID
 ORDER BY valutazione DESC
 
 -- ottenere la lista dei proprio prodotti in sconto raggruppati per categoria e negozio
 SELECT *
-FROM Oggetto
-WHERE idNegozio IN (SELECT Negozio.id
-					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-					WHERE Utente.id=ID) AND sconto>0
-GROUP BY idNegozio ASC categoria ASC
+FROM (Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) JOIN Negozio ON Negozio.id=Oggetto.idNegozio
+WHERE idVenditore=ID AND sconto>0
+GROUP BY Categoria.nome ASC, idNegozio ASC
 
 -- ottenere la lista dei proprio prodotti in sconto raggruppati per categoria e negozio ordinati per scadenza più vicina dello sconto
 SELECT *
-FROM Oggetto
-WHERE idNegozio IN (SELECT Negozio.id
-					FROM Utente JOIN Negozio ON Utente.id=Negozio.idVenditore
-					WHERE Utente.id=ID) AND sconto>0
-GROUP BY idNegozio ASC categoria ASC
+FROM (Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) JOIN Negozio ON Negozio.id=Oggetto.idNegozio
+WHERE idVenditore=ID AND sconto>0
+GROUP BY Categoria.nome ASC, idNegozio ASC
 ORDER BY dataFineSconto ASC
 
 -- ottenere la lista delle recensioni ricevute
