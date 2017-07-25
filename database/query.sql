@@ -3704,24 +3704,135 @@ SELECT Oggetto.*
 FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id)
 WHERE Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;
 
--- ottenere la lista delle richieste di assistenza
+-- ottenere la lista delle richieste di assistenza fatte da uno specifico utente
+
+SELECT *
+FROM Assistenza
+WHERE Assistenza.idUtente = 'IDU';
+
 -- ottenere i dettagli di una determinata richiesta di assistenza
+
+SELECT *
+FROM Assistenza
+WHERE Assistenza.id = 'ID';
+
 -- ottenere i dati di un venditore
+
+SELECT *
+FROM Utente
+WHERE Utente.id = 'IDV';
+
 -- ottenere la lista dei prodotti nella stessa fascia di prezzo e categoria di quelli già acquistati
+
+Create OR REPLACE View IDUInteressi as
+	SELECT Oggetto.categoria, MAX(Oggetto.prezzo) AS prezzoMassimo, MIN(Oggetto.prezzo) AS prezzoMinimo 
+	FROM Oggetto INNER JOIN Ordine ON (Ordine.idOggetto = Oggetto.id) 
+	WHERE Ordine.idUtente = 1 AND Ordine.stato != 0 
+	GROUP BY Oggetto.categoria;
+	
+SELECT Oggetto.* 
+FROM Oggetto, IDUInteressi
+WHERE Oggetto.categoria = IDUInteressi.categoria AND (Oggetto.prezzo - (Oggetto.prezzo*Oggetto.sconto)/100) BETWEEN IDUInteressi.prezzoMassimo AND IDUInteressi.prezzoMinimo;
+
 -- ottenere la lista di assistenze che hanno a che fare con un ordine
--- ottenere la lista delle proprie recensioni dalla più utile
+
+SELECT *
+FROM Assistenza
+WHERE Assistenza.idOrdine = IDORDINE;
+
+-- ottenere la lista delle proprie recensioni Oggetti dalla più utile
+
+SELECT *
+FROM RecensioneOggetto
+WHERE RecensioneOggetto.idUtente = IDU
+ORDER BY RecensioneOggetto.utilita DESC;
+
 -- ottenere la lista delle immagini di un oggetto
+
+SELECT *
+FROM imageOggetto
+WHERE imageOggetto.idO = IDO;
+
 -- ottenere solo la prima immagine di un oggetto
--- ottenre il totale dagli ordini nel carrello
--- aggiungere un valore al subtotale del carrello
--- diminuire un valore dal subtotale del carrello
+
+SELECT *
+FROM imageOggetto
+WHERE imageOggetto.idO = IDO
+LIMIT 1;
+
 -- aggiungi un oggetto algli ordini nel carrello
+
+INSERT INTO `progettoweb`.`Ordine`
+	(`idOrdine`, `idOggetto`, `idNegozio`, `idUtente`, `stato`, `quantita`, `codiceTracking`, `dataArrivoPresunta`, `dataOrdine`, `prezzoDiAcquisto`) 
+SELECT '3', Oggetto.id , Oggetto.idNegozio , 'IDU', '0', '1', NULL, NULL, CURRENT_TIMESTAMP, (Oggetto.prezzo - (Oggetto.prezzo*Oggetto.sconto)/100)
+FROM Oggetto
+WHERE Oggetto.id = IDO
+
 -- rimuovere un ordine (oggetto) dal carrello
+
+DELETE FROM Ordine
+WHERE idOrdine = 'IDORDINE' AND idOggetto = 'IDOGGETTO' AND IDUTENTE = 'IDUTENTE'
+
 -- cambia lo stato degli ordini da nel carrello a pagati
+
+UPDATE `progettoweb`.`Ordine` 
+SET `stato` = '1' 
+WHERE `Ordine`.`stato` = 0 AND `Ordine`.`idUtente` = 'IDUTENTE';
+
 -- aggiungi un oggetto agli ordini nella lista dei desideri
+
+INSERT INTO `progettoweb`.`Ordine`
+	(`idOrdine`, `idOggetto`, `idNegozio`, `idUtente`, `stato`, `quantita`, `codiceTracking`, `dataArrivoPresunta`, `dataOrdine`, `prezzoDiAcquisto`) 
+SELECT '3', Oggetto.id , Oggetto.idNegozio , 'IDU', '5', '1', NULL, NULL, CURRENT_TIMESTAMP, (Oggetto.prezzo - (Oggetto.prezzo*Oggetto.sconto)/100)
+FROM Oggetto
+WHERE Oggetto.id = IDO
+
 -- cambia lo stato di un ordine da nel carrello a lista dei desideri
+
+UPDATE `progettoweb`.`Ordine` 
+SET `stato` = '5' 
+WHERE `Ordine`.`idOrdine` = 'IDORDINE' AND `Ordine`.`idOggetto` = 'IDOGGETTO' AND `Ordine`.`idUtente` = 'IDUTENTE';
+
 -- cambia lo stato di un ordine da nella lista dei desideri al carrello (Se c'è già lo stesso oggetto anche nel carrello semplicmente ne aumento la quantità)
+
+SET @oggettoPresente = 0;
+SET @idOrdine = 0;
+SET @IDU = 4;
+SET @IDO = 4;
+SET @idOrdineDesideri = 3;
+
+SELECT @oggettoPresente:=COUNT(Ordine.idOggetto),@idOrdine := Ordine.idOrdine
+FROM Ordine 
+WHERE Ordine.stato = 0 AND Ordine.idUtente = @IDU AND Ordine.idOggetto = @IDO;
+
+SELECT @oggettoPresente AS Oggetto;
+-- questo if deve essere fatto in jsp, controllo la query precedente e poi eseguo le seguenti
+-- continua a darmi errore in sql dopo una select e non capisco perchè
+IF @oggettoPresente = 1
+THEN
+	UPDATE Ordine
+	SET quantita = quantita + 1
+	WHERE idOrdine = @idOrdine AND idOggetto = @IDO AND idUtente = @IDU;
+	
+	DELETE FROM Ordine
+	WHERE idOrdine = @idOrdineDesideri AND idOggetto = @IDO AND IDUTENTE = @IDU;
+	
+ELSE
+	UPDATE `progettoweb`.`Ordine` 
+	SET `stato` = 0
+	WHERE `Ordine`.`idOrdine` = @idOrdineDesideri AND `Ordine`.`idOggetto` = @IDO AND `Ordine`.`idUtente` = @IDU;
+END IF;
+
 -- aggiungi una recensione ad un determinato venditore
+
+SET @idVenditore = 6;
+SET @idUtente = 1;
+SET @txt = "tutto molto bello";
+
+INSERT INTO `progettoweb`.`RecensioneVenditore` 
+	(`id`, `idVenditore`, `idUtente`, `testo`, `valutazione`, `data`, `utilita`) 
+VALUES (NULL, @idVenditore, @idUtente, @txt, '4', '2017-07-19 00:00:00', '0');
+
 -- aggiungi una recensione ad un determinato negozio
 -- aggiungi una recensione ad un determinato oggetto
 -- ottenere un boolean se si ha recensito oppure no un venditore
