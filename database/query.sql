@@ -3834,13 +3834,64 @@ INSERT INTO `progettoweb`.`RecensioneVenditore`
 VALUES (NULL, @idVenditore, @idUtente, @txt, '4', '2017-07-19 00:00:00', '0');
 
 -- aggiungi una recensione ad un determinato negozio
--- aggiungi una recensione ad un determinato oggetto
--- ottenere un boolean se si ha recensito oppure no un venditore
--- ottenere un boolean se si ha recensito oppure no un negozio
--- ottenere un boolean se si ha recensito oppure no un oggetto
--- aggiungere un proprio indirizzo
--- eliminaree un proprio indirizzo
 
+SET @idNegozio = 3;
+SET @idUtente = 1;
+SET @txt = "tutto molto bello";
+
+INSERT INTO `progettoweb`.`RecensioneNegozio` 
+	(`id`, `idNegozio`, `idUtente`, `testo`, `valutazione`, `data`, `utilita`) 
+VALUES (NULL, @idVenditore, @idUtente, @txt, '4', '2017-07-19 00:00:00', '0');
+
+
+-- aggiungi una recensione ad un determinato oggetto
+
+SET @idOggetto = 3;
+SET @idUtente = 2;
+SET @txt = "tutto molto bello";
+
+INSERT INTO `progettoweb`.`RecensioneOggetto` 
+	(`id`, `idOggetto`, `idUtente`, `testo`, `valutazione`, `data`, `utilita`) 
+VALUES (NULL, @idOggetto, @idUtente, @txt, '1', '2017-07-25 11:18:35', '3');
+
+-- ottenere un boolean se si ha recensito oppure no un venditore (se il count è 1 vuol dire di si)
+
+SELECT COUNT(idVenditore) AS counter
+FROM RecensioneVenditore
+WHERE RecensioneVenditore.idVenditore = 'idv' AND RecensioneVenditore.idUtente = 'idu';
+
+-- ottenere un boolean se si ha recensito oppure no un negozio
+
+SELECT COUNT(idNegozio) AS counter
+FROM RecensioneNegozio
+WHERE RecensioneNegozio.idVenditore = 'idv' AND RecensioneNegozio.idUtente = 'idu';
+
+-- ottenere un boolean se si ha recensito oppure no un oggetto
+
+SELECT COUNT(idOggetto) AS counter
+FROM RecensioneVenditore
+WHERE RecensioneVenditore.idVenditore = 'idv' AND RecensioneVenditore.idUtente = 'idu';
+
+-- aggiungere un proprio indirizzo
+
+INSERT INTO `progettoweb`.`Indirizzo` 
+	(`idI`, `stato`, `regione`, `provincia`, `citta`, `via`, `nCivico`, `interno`, `latitudine`, `longitudine`) 
+VALUES (NULL, 'italia', 'friuli', 'bho', 'doppio bho', 'via roma', '26', '2', NULL, NULL);
+
+SET @IDI = 1;
+
+SELECT @IDI:=idI
+FROM Indirizzo
+WHERE stato = 'italia' AND regione = 'friuli' AND provincia = 'bho' AND citta = 'doppio bho' AND via = 'via roma' AND nCivico = '26' AND interno = '2';
+
+INSERT INTO `progettoweb`.`IndirizzoUtente` 
+	(`idI`, `idU`) 
+VALUES (@IDI, '1');
+
+-- eliminaree un proprio indirizzo
+-- verrà eliminato automaticamente anche dalla tabella IndirizzoUtente
+DELETE FROM Indirizzo
+WHERE idI = 'idI'
 
 -- per i venditori:
 -- ottenere la lista dei propri negozi
