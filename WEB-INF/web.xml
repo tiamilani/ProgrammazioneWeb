@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+    <description>
+      Servlet and JSP Examples.
+    </description>
+    <display-name>Servlet and JSP Examples</display-name>
+
+    <request-character-encoding>UTF-8</request-character-encoding>
+
+	<taglib>
+		<uri>functions</uri>
+		<tag>
+			<name>inverti</name>
+			<tag-class>
+				lib.functions.java
+			</tag-class>
+		</tag>
+		<tag>
+			<name>contaVocali</name>
+			<tag-class>
+				lib.functions.java
+			</tag-class>
+		</tag>
+		<tag>
+			<name>maiuscolo</name>
+			<tag-class>
+				lib.functions.java
+			</tag-class>
+		</tag>
+	</taglib>

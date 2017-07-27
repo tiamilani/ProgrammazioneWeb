@@ -1,6 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="my" uri="http://tomcat.apache.org/jsp2-example-taglib"%>
+<%@ taglib prefix="my" uri="functions"%>
 
 <html>
   <head>
@@ -32,16 +32,20 @@
             <td>${fn:escapeXml(param["foo"])}&nbsp;</td>
           </tr>
           <tr>
-            <td>\${my:reverse(param["foo"])}</td>
-            <td>${my:reverse(fn:escapeXml(param["foo"]))}&nbsp;</td>
+            <td>\${my:inverti(param["foo"])}</td>
+            <td>${my:inverti(fn:escapeXml(param["foo"]))}&nbsp;</td>
           </tr>
           <tr>
-            <td>\${my:reverse(my:reverse(param["foo"]))}</td>
-            <td>${my:reverse(my:reverse(fn:escapeXml(param["foo"])))}&nbsp;</td>
+            <td>\${my:inverti(my:inverti(param["foo"]))}</td>
+            <td>${my:inverti(my:inverti(fn:escapeXml(param["foo"])))}&nbsp;</td>
           </tr>
           <tr>
-            <td>\${my:countVowels(param["foo"])}</td>
-            <td>${my:countVowels(fn:escapeXml(param["foo"]))}&nbsp;</td>
+            <td>\${my:contaVocali(param["foo"])}</td>
+            <td>${my:contaVocali(fn:escapeXml(param["foo"]))}&nbsp;</td>
+          </tr>
+          <tr>
+            <td>\${my:maiuscolo(param["foo"])}</td>
+            <td>${my:maiuscolo(fn:escapeXml(param["foo"]))}&nbsp;</td>
           </tr>
         </table>
       </code>

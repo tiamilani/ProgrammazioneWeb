@@ -7,12 +7,12 @@ import java.util.Locale;
  *
  * <p>Each function is defined as a static method.</p>
  */
-public class Functions {
+public class functions {
     public static String inverti( String text ) {
         return new StringBuilder( text ).reverse().toString();
     }
 
-    public static int numeroVocali( String text ) {
+    public static int contaVocali( String text ) {
         String vowels = "aeiouAEIOU";
         int result = 0;
         for( int i = 0; i < text.length(); i++ ) {
