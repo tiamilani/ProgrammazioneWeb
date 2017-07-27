@@ -1,0 +1,21 @@
+<Context>
+
+<Resource name="jdbc/progettoweb"
+
+auth="Container"
+
+type="javax.sql.DataSource"
+
+username="progettoweb"
+
+password="ginoPerna"
+
+driverClassName="com.mysql.jdbc.Driver"
+
+url="jdbc:mysql:/127.0.0.1:3306/progettoWeb"
+
+maxActive="15"
+
+maxIdle="3"/>
+
+</Context>
