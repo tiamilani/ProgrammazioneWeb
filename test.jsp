@@ -22,7 +22,7 @@ select * from Utente
 
   <h2>Results</h2>
 
-	<table id="TabellaUtente" class="table">
+	<table id="TabellaUtente" class="display" cellspacing="0" width="100%">
 		<thead>
 			<tr>
 				<th>Id</th>
@@ -46,10 +46,7 @@ select * from Utente
 	</table>
 	<script>
 		$(document).ready(function() {
-			$("#usersTable").dataTable({
-				"paging":   true,
-				"ordering": true,
-				"info":     true
+			$("#TabellaUtente").dataTable({
 			});
 		});
 	</script>
