@@ -532,8 +532,8 @@ select * from Utente
 	
 	<script>
 		$(document).ready(function() {
-			$("#TabellaUtente").dataTable({
-			});
+			$("#TabellaUtente").dataTable();
+			$("#example").dataTable();
 		});
 	</script>
 </html>
