@@ -44,7 +44,11 @@ select * from Utente
 	</table>
 	<script>
 		$(document).ready(function() {
-			$("#usersTable").dataTable();
+			$("#usersTable").dataTable({
+				"paging":   true,
+				"ordering": true,
+				"info":     true
+			});
 		});
 	</script>
 
