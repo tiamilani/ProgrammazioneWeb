@@ -6,7 +6,7 @@
     <description>A tag library exercising SimpleTag handlers.</description>
     <tlib-version>1.0</tlib-version>
     <short-name>SimpleTagLibrary</short-name>
-    <uri>http://tomcat.apache.org/jsp2-example-taglib</uri>
+    <uri>/tags/mytaglib.tld</uri>
     
     
     <function>
