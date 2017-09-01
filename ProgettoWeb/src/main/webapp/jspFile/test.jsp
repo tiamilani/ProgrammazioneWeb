@@ -20,7 +20,7 @@ select * from Utente
 	<script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.js"></script>
   </head>
   <body>
-
+      
   <h2>Results</h2>
 
 	<table id="TabellaUtente" class="table" cellspacing="0" width="100%">
