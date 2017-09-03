@@ -6,7 +6,7 @@
     <description>A tag library exercising SimpleTag handlers.</description>
     <tlib-version>1.0</tlib-version>
     <short-name>SimpleTagLibrary</short-name>
-    <uri>/tags/objectsMarketsTagLib.tld</uri>
+    <uri>/tags/objectsMarketsQueryTagLib.tld</uri>
     
     <function>
         <description>Saluta</description>
