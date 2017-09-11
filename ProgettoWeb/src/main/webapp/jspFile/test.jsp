@@ -3,12 +3,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<sql:query var="rs" dataSource="jdbc/TestDB">
-select * from Utente
-</sql:query>
+<%@ page import = "java.io.*,java.util.*,java.sql.*"%>
+<%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix = "c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
 
 <html>
   <head>
@@ -21,7 +19,11 @@ select * from Utente
   </head>
   <body>
       
-  <h2>Results</h2>
+      <sql:query dataSource = "jdbc/Access" var = "result">
+         select * from Utente
+      </sql:query>
+         
+    <h2>Results</h2>
 
 	<table id="TabellaUtente" class="table" cellspacing="0" width="100%">
 		<thead>
@@ -34,7 +36,7 @@ select * from Utente
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="row" items="${rs.rows}">
+			<c:forEach var="row" items="${result.rows}">
 				<tr>
 					<td>${row.id}</td>
 					<td>${row.nome}</td>
