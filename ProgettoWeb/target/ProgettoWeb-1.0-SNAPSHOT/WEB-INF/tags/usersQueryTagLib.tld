@@ -15,4 +15,32 @@
         <function-signature>java.lang.String hello()</function-signature>
     </function>
     
+    <function>
+        <description>ottenere la lista dei negozi di un venditore specificando l'id del venditore</description>
+        <name>listaNegoziVenditoreId</name>
+        <function-class>it.progettoWeb.java.database.query.users.usersQuery</function-class>
+        <function-signature>java.lang.String listaNegoziVenditore(java.lang.String)</function-signature>
+    </function>
+    
+    <function>
+        <description>ottenere la lista dei negozi di un venditore avendo nome e cognome del venditore</description>
+        <name>listaNegoziVenditoreNomeCognome</name>
+        <function-class>it.progettoWeb.java.database.query.users.usersQuery</function-class>
+        <function-signature>java.lang.String listaNegoziVenditore(java.lang.String,java.lang.String)</function-signature>
+    </function>
+    
+    <function>
+        <description>ottenre la lista dei negozi di un venditore avendo l'id e l'immagine del negozio</description>
+        <name>listaNegoziVenditorePlusImageId</name>
+        <function-class>it.progettoWeb.java.database.query.users.usersQuery</function-class>
+        <function-signature>java.lang.String listaNegoziVenditorePlusImage(java.lang.String)</function-signature>
+    </function>
+    
+    <function>
+        <description>ottenere la lista dei negozi di un venditore avendo nome e cognome e la prima immagine del negozio</description>
+        <name>listaNegoziVenditorePlusImageNomeCognome</name>
+        <function-class>it.progettoWeb.java.database.query.users.usersQuery</function-class>
+        <function-signature>java.lang.String listaNegoziVenditorePlusImage(java.lang.String,java.lang.String)</function-signature>
+    </function>
+    
 </taglib>

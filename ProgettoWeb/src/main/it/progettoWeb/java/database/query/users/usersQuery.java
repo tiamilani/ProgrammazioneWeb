@@ -22,25 +22,22 @@ public class usersQuery {
     // ottenere la lista dei negozi di un venditore avendo nome e cognome del venditore
 
     public static String listaNegoziVenditore(String nome,String cognome) {
-        return "SELECT Negozio.*
-    FROM Negozio INNER JOIN Utente ON (Utente.nome = 'nome' AND Utente.cognome = 'cognome' AND Utente.UtenteType = 1 AND Negozio.idVenditore = Utente.id);";
+        return "SELECT Negozio.* FROM Negozio INNER JOIN Utente ON (Utente.nome = '"+nome+"' AND Utente.cognome = '"+cognome+"' AND Utente.UtenteType = 1 AND Negozio.idVenditore = Utente.id);";
     }
 
     // ottenre la lista dei negozi di un venditore avendo l'id e l'immagine del negozio
 
-    public static String hello() {
-        return "SELECT Negozio.*, imageNegozio.src
-    FROM Negozio INNER JOIN imageNegozio ON (Negozio.idVenditore = 'idV' AND Negozio.id = imageNegozio.idN);";
+    public static String listaNegoziVenditorePlusImage(String idV) {
+        return "SELECT Negozio.*, imageNegozio.src FROM Negozio INNER JOIN imageNegozio ON (Negozio.idVenditore = '"+idV+"' AND Negozio.id = imageNegozio.idN);";
     }
 
     // ottenere la lista dei negozi di un venditore avendo nome e cognome e la prima immagine del negozio
 
-    public static String hello() {
-        return "SELECT Negozio.*, imageNegozio.src
-    FROM Negozio INNER JOIN Utente ON (Utente.nome = 'Carlo' AND Utente.cognome = 'Cracco' AND Utente.UtenteType = 1 AND Negozio.idVenditore = Utente.id)
-            LEFT JOIN imageNegozio ON (Negozio.id = imageNegozio.idN);";
+    public static String listaNegoziVenditorePlusImage(String nome,String cognome) {
+        return "SELECT Negozio.*, imageNegozio.src FROM Negozio INNER JOIN Utente ON (Utente.nome = '"+nome+"' AND Utente.cognome = '"+cognome+"' AND Utente.UtenteType = 1 AND Negozio.idVenditore = Utente.id)LEFT JOIN imageNegozio ON (Negozio.id = imageNegozio.idN);";
     }
 
+/*
     // ottenere la lista degli ordini effettuati
 
     public static String hello() {
@@ -336,7 +333,7 @@ public class usersQuery {
     }
 
     // cambia lo stato di un ordine da nella lista dei desideri al carrello (Se c'è già lo stesso oggetto anche nel carrello semplicmente ne aumento la quantità)
-    /*
+
     SET @oggettoPresente = 0;
     SET @idOrdine = 0;
     SET @IDU = 4;
@@ -364,7 +361,7 @@ public class usersQuery {
             SET `stato` = 0
             WHERE `Ordine`.`idOrdine` = @idOrdineDesideri AND `Ordine`.`idOggetto` = @IDO AND `Ordine`.`idUtente` = @IDU;
     END IF;
-    */
+
     // aggiungi una recensione ad un determinato venditore
 
     public static String hello() {
@@ -450,4 +447,5 @@ public class usersQuery {
         return "DELETE FROM Indirizzo
     WHERE idI = 'idI'";
     }
+*/
 }

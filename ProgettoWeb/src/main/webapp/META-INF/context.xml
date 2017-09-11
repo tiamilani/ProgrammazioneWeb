@@ -32,6 +32,6 @@
 -->
     <Resource name="jdbc/Access" auth="Container" type="javax.sql.DataSource"
             maxTotal="100" maxIdle="30" maxWait="10000"
-            username = "progettoweb"  password = "ginoPerna" driver = "com.mysql.jdbc.Driver"
-            url="jdbc:mysql://localhost/progettoweb" />
+            username = "root"  password = "M1.ilani" driver = "com.mysql.jdbc.Driver"
+            url="jdbc:mysql://localhost/progettoweb?zeroDateTimeBehavior=convertToNull" />
 </Context>
