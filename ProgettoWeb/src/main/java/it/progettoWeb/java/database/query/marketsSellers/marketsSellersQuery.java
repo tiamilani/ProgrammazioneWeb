@@ -15,7 +15,7 @@ public class marketsSellersQuery {
      * @return La stringa corrispondente al path della classe
      */
     public static String hello() {
-        return "Hello from" + marketsSellersQuery.class.toString();
+        return "Hello from " + marketsSellersQuery.class.toString();
     }
     
     /**
@@ -49,7 +49,7 @@ public class marketsSellersQuery {
      */
     public static String ItemsWithStringInShopBySeller(int id, String pattern){
         return "SELECT Oggetto.*"
-                + "FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id)"
+                + "FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id) "
                 + "WHERE Negozio.idVenditore = " + id + " AND Oggetto.nomeDownCase LIKE '%" + pattern + "%';";
     }
     
@@ -64,8 +64,8 @@ public class marketsSellersQuery {
      */
     public static String ItemsWithStringInShopBySellerSpecific(int id, String pattern, int ritiro){
         return "SELECT Oggetto.*"
-                + "FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id)"
-                + "WHERE Negozio.idVenditore = " + id + " AND Oggetto.nomeDownCase LIKE '%" + pattern + "%'"
+                + "FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id) "
+                + "WHERE Negozio.idVenditore = " + id + " AND Oggetto.nomeDownCase LIKE '%" + pattern + "%' "
                 + "AND Oggetto.ritiroInNegozio = " + ritiro + ";";
     }
     
@@ -78,7 +78,7 @@ public class marketsSellersQuery {
      */
     public static String ItemsInCategoryInShopBySeller(int id, int categoria){
         return "SELECT Oggetto.*"
-                + "FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id)"
+                + "FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id) "
                 + "WHERE Negozio.idVenditore = " + id + " AND Oggetto.categoria = " + categoria + ";";
     }
     
@@ -94,42 +94,175 @@ public class marketsSellersQuery {
     public static String ItemsInCategoryInShopBySellerSpecific(int id, int categoria, int ritiro){
         return "SELECT Oggetto.*"
                 + "FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id)"
-                + "WHERE Negozio.idVenditore = " + id + " AND Oggetto.categoria = " + categoria + ""
+                + "WHERE Negozio.idVenditore = " + id + " AND Oggetto.categoria = " + categoria + " "
                 + "AND Oggetto.ritiroInNegozio = " + ritiro + ";";
     }
     
-    /*
-    public static String ItemsInCategoryWithStringInShopBySeller(){
-        
+    /**
+     * @author Damiano
+     * Metodo che permette di ottenere la lista di oggetti presenti in una deterinata categoria
+     * che contengono una determinata stringa nel nome
+     * @param id Un intero che rappresenta il venditore di cui si stanno cercando gli oggetti
+     * @param categoria Un intero che rappresenta la categoria a cui gli oggetti cercati appartengono
+     * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
+     * @return La stringa corrispondente alla query
+     */
+    public static String ItemsInCategoryWithStringInShopBySeller(int id, int categoria, String pattern){
+        return "SELECT Oggetto.*"
+                + "FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id)"
+                + "WHERE Negozio.idVenditore = " + id + "  AND Oggetto.categoria = " + categoria + " "
+                + "AND Oggetto.nomeDownCase LIKE '%" + pattern + "%';";
     }
-    */
     
+    /**
+     * @author Damiano
+     * Metodo che permette di ottenere la lista di oggetti presenti in una deterinata categoria
+     * che contengono una determinata stringa nel nome e con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta il venditore di cui si stanno cercando gli oggetti
+     * @param categoria Un intero che rappresenta la categoria a cui gli oggetti cercati appartengono
+     * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return La stringa corrispondente alla query
+     */
+    public static String ItemsInCategoryWithStringInShopBySellerSpecific(int id, int categoria, String pattern, int ritiro){
+        return "SELECT Oggetto.*"
+                + "FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id)"
+                + "WHERE Negozio.idVenditore = " + id + " AND Oggetto.categoria = " + categoria + " "
+                + "AND Oggetto.nomeDownCase LIKE '%" + pattern + "%' AND Oggetto.ritiroInNegozio = " + ritiro + ";";
+    }
+    
+    /**
+     * @author Damiano
+     * Metodo che permette di ottenere la lista degli oggetti di un determinato venditore con un prezzo
+     * maggiore di una soglia minima fornita in input
+     * @param id In intero che rappresenta il venditore di cui si stanno cercando gli oggetti
+     * @param minimo La soglia minima di prezzo
+     * @return La stringa corrispondete alla query
+     */
+    public static String ItemsWithPriceHigherThanBySeller(int id, double minimo){
+        return "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id) "
+                + "WHERE Negozio.idVenditore = " + id + " AND Oggetto.prezzo >= " + minimo + ";";
+    }
+    
+    /**
+     * @author Damiano
+     * Metodo che permette di ottenere la lista degli oggetti di un determinato venditore con un prezzo
+     * maggiore di una soglia minima fornita in input con una determinata modalità di ritiro
+     * @param id In intero che rappresenta il venditore di cui si stanno cercando gli oggetti
+     * @param minimo La soglia minima di prezzo
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return La stringa corrispondete alla query
+     */
+    public static String ItemsWithPriceHigherThanBySellerSpecific(int id, double minimo, int ritiro){
+        return "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id) "
+                + "WHERE Negozio.idVenditore = " + id + " AND Oggetto.prezzo >= " + minimo + " "
+                + "AND Oggetto.ritiroInNegozio = " + ritiro + ";";
+    }
+    
+    /**
+     * @author Damiano
+     * Metodo che permette di ottenere la lista degli oggetti di un determinato venditore con un prezzo
+     * minore di una soglia massima fornita in input
+     * @param id In intero che rappresenta il venditore di cui si stanno cercando gli oggetti
+     * @param massimo La soglia massima di prezzo
+     * @return La stringa corrispondete alla query 
+     */
+    public static String ItemsWithPriceLowerThanBySeller(int id, double massimo){
+        return "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id) "
+                + "WHERE Negozio.idVenditore = " + id + " AND Oggetto.prezzo <= " + massimo + ";";
+    }
+    
+    /**
+     * @author Damiano
+     * Metodo che permette di ottenere la lista degli oggetti di un determinato venditore con un prezzo
+     * minore di una soglia massima fornita in input con una determinata modalità di ritiro
+     * @param id In intero che rappresenta il venditore di cui si stanno cercando gli oggetti
+     * @param massimo La soglia massima di prezzo
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return La stringa corrispondete alla query 
+     */
+    public static String ItemsWithPriceLowerThanBySellerSpecific(int id, double massimo, int ritiro){
+        return "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id) "
+                + "WHERE Negozio.idVenditore = " + id + " AND Oggetto.prezzo <= " + massimo + " "
+                + "AND Oggetto.ritiroInNegozio = " + ritiro + ";";
+    }
+    
+    /**
+     * @author Damiano
+     * Metodo che permette di ottenere la lista degli oggetti di un determinato venditore con un prezzo
+     * compreso tra due valori
+     * @param id In intero che rappresenta il venditore di cui si stanno cercando gli oggetti
+     * @param minimo La soglia minima di prezzo
+     * @param massimo La soglia massima di prezzo
+     * @return La stringa corrispondete alla query 
+     */
+    public static String ItemsWithPriceBetweenRangeBySeller(int id, double minimo, double massimo){
+        return "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id) "
+                + "WHERE Negozio.idVenditore = " + id + " "
+                + "AND Oggetto.prezzo BETWEEN " + minimo + " AND " + massimo + ";";
+    }
+    
+    /**
+     * @author Damiano
+     * Metodo che permette di ottenere la lista degli oggetti di un determinato venditore con un prezzo
+     * compreso tra due valori con una determinata modalità di ritiro
+     * @param id In intero che rappresenta il venditore di cui si stanno cercando gli oggetti
+     * @param minimo La soglia minima di prezzo
+     * @param massimo La soglia massima di prezzo
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return La stringa corrispondete alla query 
+     */
+    public static String ItemsWithPriceBetweenRangeBySellerSpecific(int id, double minimo, double massimo, int ritiro){
+        return "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id) "
+                + "WHERE Negozio.idVenditore = " + id + " "
+                + "AND Oggetto.prezzo BETWEEN " + minimo + " AND " + massimo + " "
+                + "AND Oggetto.ritiroInNegozio = " + ritiro + ";";
+    }
+    
+    /**
+     * @author Damiano
+     * Metodo che permette di ottenere la lista degli oggetti di un determinato venditore con un prezzo
+     * maggiore di una soglia minima fornita in input
+     * @param id In intero che rappresenta il venditore di cui si stanno cercando gli oggetti
+     * @param minimo La soglia minima di prezzo
+     * @param categoria Un intero che rappresenta la categoria a cui gli oggetti cercati appartengono
+     * @return La stringa corrispondete alla query
+     */
+    public static String ItemsInCategoryWithPriceHigherThanBySeller(int id, double minimo, int categoria){
+        return "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id) "
+                + "WHERE Negozio.idVenditore = " + id + "  AND categoria = " + categoria + " "
+                + "AND Oggetto.prezzo >= " + minimo + ";";
+    }
+    
+    /**
+     * @author Damiano
+     * Metodo che permette di ottenere la lista degli oggetti di un determinato venditore con un prezzo
+     * maggiore di una soglia minima fornita in input
+     * @param id In intero che rappresenta il venditore di cui si stanno cercando gli oggetti
+     * @param minimo La soglia minima di prezzo
+     * @param categoria Un intero che rappresenta la categoria a cui gli oggetti cercati appartengono
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return La stringa corrispondete alla query
+     */
+    public static String ItemsInCategoryWithPriceHigherThanBySeller(int id, double minimo, int categoria, int ritiro){
+        return "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id) "
+                + "WHERE Negozio.idVenditore = " + id + "  AND categoria = " + categoria + " "
+                + "AND Oggetto.prezzo >= " + minimo + "AND Oggetto.ritiroInNegozio = " + ritiro + ";";
+    }
 }
 /*
--- ottenere la lista di oggetti di una categoria con una certa stringa nel nome,nei negozi di un determinato venditore
-SELECT Oggetto.*
-FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id)
-WHERE Negozio.idVenditore = ID AND Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;
-
--- ottenere la lista di oggetti con un certo prezzo minimo dei negozi di un determinato venditore
+ -- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria nei negozi di un determinato venditore
 SELECT Oggetto.*
 FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id)
 WHERE Negozio.idVenditore = ID AND Oggetto.prezzo >= MINIMO AND Oggetto.ritiroInNegozio = 1;
-
--- ottenere la lista di oggetti con un certo prezzo massimo nei negozi di un determinato venditore
-SELECT Oggetto.*
-FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id)
-WHERE Negozio.idVenditore = ID AND Oggetto.prezzo <= MASSIMO AND Oggetto.ritiroInNegozio = 1;
-
--- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo nei negozi di un determinato venditore
-SELECT Oggetto.*
-FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id)
-WHERE Negozio.idVenditore = ID AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.ritiroInNegozio = 1;
-
--- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria nei negozi di un determinato venditore
-SELECT Oggetto.*
-FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id)
-WHERE Negozio.idVenditore = ID AND categoria=CATEGORIA AND Oggetto.prezzo >= MINIMO AND Oggetto.ritiroInNegozio = 1;
 
 -- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore
 SELECT Oggetto.*
