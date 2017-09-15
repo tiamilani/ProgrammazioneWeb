@@ -10,7 +10,7 @@ package it.progettoWeb.java.database.Model.Negozio;
  * @author mattia
  */
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class ModelloNegozio {
     
@@ -41,7 +41,7 @@ public class ModelloNegozio {
     /**
      * Variabile che rappresenta la data in cui è stato aperto il negozio
      */
-    private Date dataApertura;
+    private Timestamp dataApertura;
     /**
      * Variabile che identifica tramite una stringa il link al sito del negozio
      */
@@ -151,7 +151,7 @@ public class ModelloNegozio {
      * Funzione utilizzata per ottenere la data di apertura del negozio
      * @return Date dataApertura
      */
-    public Date getDataApertura() {
+    public Timestamp getDataApertura() {
         return dataApertura;
     }
 
@@ -159,7 +159,7 @@ public class ModelloNegozio {
      * Funzione utilizzata per settare la data di apertura del negozio
      * @param dataApertura 
      */
-    public void setDataApertura(Date dataApertura) {
+    public void setDataApertura(Timestamp dataApertura) {
         this.dataApertura = dataApertura;
     }
 
