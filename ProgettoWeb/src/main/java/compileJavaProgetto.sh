@@ -61,30 +61,41 @@ function spostaFileClass
 
 function rimuoviClass
 {
-    read -p "Dove vuoi scannerizzare? [directory]" DELETE
+    read -p "Quale directory vuoi scannerizzare? " DELETE
     find "$DELETE" -type f -name *.class -exec rm '{}' +
 }
 
 function selezionaUtente
 {
-    read -p "Chi sei? [A/D/F/M]: " UTENTE
-    case $UTENTE in
-    	A|a)
-    		SERVLET=/Applications/Tomcat/lib/servlet-api.jar
-    	;;
-    	D|d)
-    		SERVLET=/mnt/c/Program Files/Apache Software Foundation/Tomcat 8.5/lib/servlet-api.jar
-    	;;
-    	F|f)
-    		SERVLET=/mnt/c/Program Files/Apache Software Foundation/Tomcat 8.5/lib/servlet-api.jar
-    	;;
-        M|m)
-            SERVLET=/home/mattia/Netbeans/apache-tomcat-8.0.27/lib/servlet-api.jar
-        ;;
-    	*)
-    		echo "Utente: A|D|F|M"
-            exit 1
-    esac
+    if [ -f "/Applications/Tomcat/lib/servlet-api.jar" ]
+    then
+        SERVLET=/Applications/Tomcat/lib/servlet-api.jar
+    elif [ -f "/mnt/c/Program Files/Apache Software Foundation/Tomcat 8.5/lib/servlet-api.jar" ]
+    then
+        SERVLET=/mnt/c/Program Files/Apache Software Foundation/Tomcat 8.5/lib/servlet-api.jar
+    elif [ -f "/home/mattia/Netbeans/apache-tomcat-8.0.27/lib/servlet-api.jar" ]
+    then
+        SERVLET=/home/mattia/Netbeans/apache-tomcat-8.0.27/lib/servlet-api.jar
+    fi
+
+#    read -p "Chi sei? [A/D/F/M]: " UTENTE
+#    case $UTENTE in
+#    	A|a)
+#    		SERVLET=/Applications/Tomcat/lib/servlet-api.jar
+#    	;;
+#    	D|d)
+#    		SERVLET=/mnt/c/Program Files/Apache Software Foundation/Tomcat 8.5/lib/servlet-api.jar
+#    	;;
+#    	F|f)
+#    		SERVLET=/mnt/c/Program Files/Apache Software Foundation/Tomcat 8.5/lib/servlet-api.jar
+#    	;;
+#        M|m)
+#            SERVLET=/home/mattia/Netbeans/apache-tomcat-8.0.27/lib/servlet-api.jar
+#        ;;
+#    	*)
+#    		echo "Utente: A|D|F|M"
+#            exit 1
+#    esac
 }
 
 function creaClassi
