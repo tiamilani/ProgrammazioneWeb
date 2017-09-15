@@ -16,6 +16,7 @@ public class ModelloAssistenza {
     
     //Nel caso vi siano problemi con le date
     //https://danielniko.wordpress.com/2012/04/17/simple-crud-using-jsp-servlet-and-mysql/
+    
     /**
      * Variabile intera utilizzata per identificare la richiesta di assitenza
      */
