@@ -218,95 +218,134 @@ public class sellersQuery {
           
     
     /*--- DA QUI cominciano le query modificate ---*/
+    
+    
+    public static String selectShopByCategory(int sellerId, int active, int catId)
+    {
+        return "SELECT * "
+                + "FROM ((Oggetto JOIN Categoria ON oggetto.categoria=Categoria.id) "
+                + "JOIN Negozio ON Negozio.id=Oggetto.idNegozio) "
+                + "JOIN Utente ON Utente.id=Negozio.idVenditore "
+                + "WHERE idVenditore=" + sellerId + " AND attivo=" + active + " AND Categoria.id=" + catId + ";";
+    }
+          
+    
+    public static String selectShopWithHigherSalesByCategory(int sellerId, int active, int catId, int objCatId)
+    {
+        return "SELECT Negozio.*, COUNT(Ordine.idOrdine) "
+                + "FROM ((Oggetto JOIN Negozio ON Negozio.id = Oggetto.idNegozio) "
+                + "JOIN Utente ON Utente.id = Negozio.idVenditore) "
+                + "JOIN Ordine ON Ordine.idNegozio = Negozio.id "
+                + "WHERE idVenditore = " + sellerId + " AND attivo = " + active 
+                + " AND Categoria.id = " + catId + " AND Oggetto.categoria = " + objCatId
+                + " AND Ordine.stato BETWEEN 1 AND 4 GROUP BY Negozio.id "
+                + "ORDER BY COUNT(Ordine.idOrdine) DESC;";
+    }
+          
+    
+    public static String selectShopWithLowerSalesByCategory(int sellerId, int active, int catId, int objCatId)
+    {
+        return "SELECT Negozio.*, COUNT(Ordine.idOrdine) "
+                + "FROM ((Oggetto JOIN Negozio ON Negozio.id = Oggetto.idNegozio) "
+                + "JOIN Utente ON Utente.id = Negozio.idVenditore) "
+                + "JOIN Ordine ON Ordine.idNegozio = Negozio.id "
+                + "WHERE idVenditore = " + sellerId + " AND attivo = " + active 
+                + " AND Categoria.id = " + catId + " AND Oggetto.categoria = " + objCatId
+                + " AND Ordine.stato BETWEEN 1 AND 4 GROUP BY Negozio.id "
+                + "ORDER BY COUNT(Ordine.idOrdine) DESC;";
+    }
+          
+    
+    public static String selectShopByOpenDate(int sellerId)
+    {
+        return "SELECT * FROM Negozio WHERE idVenditore=" + sellerId + " ORDER BY dataApertura DESC;";
+    }
+          
+    
+    public static String selectShopByRevenue(int sellerId)
+    {
+        return "SELECT SUM(Ordine.quantita * Oggetto.prezzo) AS fatturato, Ordine.idNegozio, Negozio.nomeNegozio "
+                + "FROM (Oggetto JOIN Ordine ON Oggetto.id = Ordine.idOggetto) "
+                + "JOIN Negozio ON Negozio.id = Ordine.idNegozio "
+                + "WHERE Negozio.idVenditore = " + sellerId
+                + " AND Ordine.stato BETWEEN 1 AND 4 "
+                + "GROUP BY Negozio.id ORDER BY fatturato DESC;";
+    }
+          
+    
+    public static String selectShopBySellerIDAndShopID(int sellerId, int shopId)
+    {
+        return "SELECT * FROM Negozio WHERE idVenditore=" + sellerId + " AND id=" + shopId + ";";
+    }
+          
+    
+    public static String selectOrderByShopID(int shopId)
+    {
+        return "SELECT * FROM Ordine WHERE Ordine.idNegozio = " + shopId + "AND Ordine.stato BETWEEN 1 AND 4;";
+    }
+          
+    
+    public static String selectOrderByCategory(int shopId, int catId)
+    {
+        return "SELECT Ordine.* FROM Ordine JOIN Oggetto ON Oggetto.id = Ordine.idOggetto"
+                + "WHERE Ordine.idNegozio = " + shopId
+                + " AND Ordine.stato BETWEEN 1 AND 4 AND Oggetto.categoria = " + catId + ";";
+    }
+          
+    
+    public static String selectServiceRequestBySellerID(int sellerId)
+    {
+        return "SELECT * FROM Utente JOIN Assistenza ON Utente.id=Assistenza.idVenditore "
+                + "WHERE idVenditore=" + sellerId + ";";
+    }
+          
+    
+    public static String selectProductSaledGroupByCategoryAndShop(int sellerId)
+    {
+        return "SELECT * FROM (Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) "
+                + "JOIN Negozio ON Negozio.id=Oggetto.idNegozio "
+                + "WHERE idVenditore=" + sellerId + " AND stato=4 "
+                + "GROUP BY idNegozio ASC, Categoria.nome ASC;";
+    }
+          
+    
+    public static String selectProductSaledGroupByShop(int sellerId, String cat)
+    {
+        return "SELECT * FROM (Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) "
+                + "JOIN Negozio ON Negozio.id=Oggetto.idNegozio "
+                + "WHERE idVenditore=" + sellerId + " AND stato=4 AND Categoria.nome=" + cat
+                + " GROUP BY idNegozio ASC;";
+    }
+          
+    
+    public static String selectProductSaledOrderedByRating(int sellerId)
+    {
+        return "SELECT * FROM (Ordine JOIN RecensioneOggetto ON Ordine.idOggetto=RecensioneOggetto.idOggetto) "
+                + "JOIN Negozio ON Ordine.idNegozio=Negozio.id "
+                + "WHERE idVenditore=" + sellerId + " AND stato=4 "
+                + "ORDER BY AVG(RecensioneOggetto.valutazione) DESC;";
+    }
+          
+    
+    public static String selectShopOrderedByRating(int sellerId)
+    {
+        return "SELECT * FROM Negozio WHERE idVenditore=" + sellerId + " ORDER BY valutazione DESC;";
+    }
+          
+    
+    public static String selectProductDiscountedGroupByShopAndCategory(int sellerId)
+    {
+        return "SELECT * FROM (Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) "
+                + "JOIN Negozio ON Negozio.id=Oggetto.idNegozio "
+                + "WHERE idVenditore=" + sellerId + " AND sconto>0 "
+                + "GROUP BY Categoria.nome ASC, idNegozio ASC;";
+    }
+          
     /*
-    
-    public static String a()
+    public static String ()
     {
         return ;
-    }
-          
-    
-    public static String a()
-    {
-        return ;
-    }
-          
-    
-    public static String a()
-    {
-        return ;
-    }
-          
-    
-    public static String a()
-    {
-        return ;
-    }
-          
-    
-    public static String a()
-    {
-        return ;
-    }
-          
-    
-    public static String a()
-    {
-        return ;
-    }
-          
-    
-    public static String a()
-    {
-        return ;
-    }
-          
-    
-    public static String a()
-    {
-        return ;
-    }
-          
-    
-    public static String a()
-    {
-        return ;
-    }
-          
-    
-    public static String a()
-    {
-        return ;
-    }
-          
-    
-    public static String a()
-    {
-        return ;
-    }
-          
-    
-    public static String a()
-    {
-        return ;
-    }
-          
-    
-    public static String a()
-    {
-        return ;
-    }
-          
-    
-    public static String a()
-    {
-        return ;
-    }
-          
-    
-    public static String a()
-    {
-        return ;
+    SELECT * FROM (Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) JOIN Negozio ON Negozio.id=Oggetto.idNegozio WHERE idVenditore=ID AND sconto>0 GROUP BY Categoria.nome ASC, idNegozio ASC ORDER BY dataFineSconto ASC;
     }
           
     
