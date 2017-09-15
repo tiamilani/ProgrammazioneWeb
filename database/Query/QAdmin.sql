@@ -1,16 +1,16 @@
 -- QUERY AMMINISTRATORI
 
 -- ottenere il numero di richieste di assistenza
-SELECT SUM(id)
+SELECT COUNT(id)
 FROM Assistenza
 
 -- ottenere il numero di richieste di assistenza in sospeso
-SELECT SUM(id)
+SELECT COUNT(id)
 FROM Assistenza
 WHERE stato=0
-
+    
 -- ottenere il numero di richieste di assistenza risolte
-SELECT SUM(id)
+SELECT COUNT(id)
 FROM Assistenza
 WHERE stato=1
 

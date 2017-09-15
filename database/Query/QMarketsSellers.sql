@@ -5,7 +5,7 @@ SELECT *
 FROM Negozio
 WHERE idVenditore=ID
 
--- ottenere la lista di oggetti di negozi di un determinato venditore
+-- ottenere la lista di oggetti dei negozi di un determinato venditore
 SELECT Oggetto.*
 FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id)
 WHERE Negozio.idVenditore = ID AND Oggetto.ritiroInNegozio = 1;
@@ -18,12 +18,12 @@ WHERE Negozio.idVenditore = ID AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Ogg
 -- ottenere la lista di oggetti di una categoria nei negozi di un determinato venditore
 SELECT Oggetto.*
 FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id)
-WHERE Negozio.idVenditore = ID AND categoria=CATEGORIA AND Oggetto.ritiroInNegozio = 1;
+WHERE Negozio.idVenditore = ID AND Oggetto.categoria=CATEGORIA AND Oggetto.ritiroInNegozio = 1;
 
 -- ottenere la lista di oggetti di una categoria con una certa stringa nel nome,nei negozi di un determinato venditore
 SELECT Oggetto.*
 FROM Oggetto INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id)
-WHERE Negozio.idVenditore = ID AND categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;
+WHERE Negozio.idVenditore = ID AND Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;
 
 -- ottenere la lista di oggetti con un certo prezzo minimo dei negozi di un determinato venditore
 SELECT Oggetto.*
