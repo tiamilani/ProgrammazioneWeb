@@ -75,6 +75,6 @@ public class usersQuery {
                 "valutazione="+valutazione+","+
                 "UtenteType="+UtenteType+","+
                 "emailConfermata="+emailConfermata+""
-                + "WHERE id="+id+"";
+                + "WHERE id="+id+";";
     }
 }
