@@ -2,7 +2,6 @@
 
 JAVADIR=src/main/java/it
 #CLASSDIR=src/main/webapp/WEB-INF/classes/it
-SERVLET=/home/mattia/Netbeans/apache-tomcat-8.0.27/lib/servlet-api.jar
 
 function creaFileClass
 {
@@ -62,12 +61,35 @@ function spostaFileClass
 
 function rimuoviClass
 {
-    read -p "Dove puoi scannerizzare?" DELETE
+    read -p "Dove vuoi scannerizzare? [directory]" DELETE
     find "$DELETE" -type f -name *.class -exec rm '{}' +
+}
+
+function selezionaUtente
+{
+    read -p "Chi sei? [A/D/F/M]: " UTENTE
+    case $UTENTE in
+    	A|a)
+    		SERVLET=/Applications/Tomcat/lib/servlet-api.jar
+    	;;
+    	D|d)
+    		SERVLET=/mnt/c/Program Files/Apache Software Foundation/Tomcat 8.5/lib/servlet-api.jar
+    	;;
+    	F|f)
+    		SERVLET=/mnt/c/Program Files/Apache Software Foundation/Tomcat 8.5/lib/servlet-api.jar
+    	;;
+        M|m)
+            SERVLET=/home/mattia/Netbeans/apache-tomcat-8.0.27/lib/servlet-api.jar
+        ;;
+    	*)
+    		echo "Utente: A|D|F|M"
+            exit 1
+    esac
 }
 
 function creaClassi
 {
+    selezionaUtente
     creaFileClass
     echo "JAVA compilati - CLASS creati"
     sleep 2
