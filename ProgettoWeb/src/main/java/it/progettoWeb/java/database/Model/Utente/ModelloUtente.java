@@ -16,7 +16,7 @@ public class ModelloUtente {
     private String cognome;
     private String mail;
     private String password;
-    private int avatar;
+    private String avatar;
     private double valutazione;
     private int UtenteType;
     private boolean emailConfermata;
@@ -61,11 +61,11 @@ public class ModelloUtente {
         this.password = password;
     }
 
-    public int getAvatar() {
+    public String getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(int avatar) {
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 
