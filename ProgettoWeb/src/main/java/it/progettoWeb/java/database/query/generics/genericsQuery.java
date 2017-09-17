@@ -19,122 +19,122 @@ public class genericsQuery {
     /**
      * @author Brugix
      * Selezionare tutti gli utenti in base al loro tipo: 0=normale, 1=venditore, 2=amministratore
-     * @param type
+     * @param utenteType
      * @return String: elenco utenti
      */
-    public static String selectAllUsersByType(int type)
+    public static String selectAllUsersByType(int utenteType)
     {
-        return "SELECT * FROM Utente WHERE UtenteType = " + type + ";";
+        return "SELECT * FROM Utente WHERE UtenteType = " + utenteType + ";";
     }
     
     /**
      * @author Brugix
-     * Selezionare utente in base a email & password
-     * @param email
+     * Selezionare utente in base a mail & password
+     * @param mail
      * @param password
      * @return String: elenco utenti
      */
-    public static String selectUserByEmailAndPassword(String email, String password)
+    public static String selectUserByEmailAndPassword(String mail, String password)
     {
-        return "SELECT * FROM Utente WHERE mail = " + email + " AND password = " + password + ";";
+        return "SELECT * FROM Utente WHERE mail = " + mail + " AND password = " + password + ";";
     }
     
     /**
      * @author Brugix
      * Selezionare tutti gli utenti con un certo nome
-     * @param name
+     * @param nome
      * @return String: elenco utenti
      */
-    public static String selectAllUsersByName(String name)
+    public static String selectAllUsersByName(String nome)
     {
-        return "SELECT * FROM Utente WHERE nome = " + name + ";";
+        return "SELECT * FROM Utente WHERE nome = " + nome + ";";
     }
     
     /**
      * @author Brugix
      * Selezionare utente in base a nome & cognome
-     * @param name
-     * @param surname
+     * @param nome
+     * @param cognome
      * @return String: elenco utenti
      */
-    public static String selectAllUsersByNameAndSurname(String name, String surname)
+    public static String selectAllUsersByNameAndSurname(String nome, String cognome)
     {
-        return "SELECT * FROM Utente WHERE nome = " + name + " AND cognome = " + surname + ";";
+        return "SELECT * FROM Utente WHERE nome = " + nome + " AND cognome = " + cognome + ";";
     }
     
     /**
      * @author Brugix
      * Ottenere i dati di un utente in base all'ID utente
-     * @param userId
+     * @param idUtente
      * @return String: elenco utenti
      */
-    public static String selectUserByID(int userId)
+    public static String selectUserByID(int idUtente)
     {
-        return "SELECT * FROM Utente WHERE id = " + userId + ";";
+        return "SELECT * FROM Utente WHERE id = " + idUtente + ";";
     }
     
     /**
      * @author Brugix
      * Ottenere indirizzi di un utente avendo l'ID utente
-     * @param userId
+     * @param idUtente
      * @return String: elenco indirizzi
      */
-    public static String selectAddressByUserID(int userId)
+    public static String selectAddressByUserID(int idUtente)
     {
         return "SELECT Indirizzo.* "
                + "FROM Indirizzo INNER JOIN IndirizzoUtente ON "
-               + "(Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = " + userId + ");";
+               + "(Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = " + idUtente + ");";
     }
     
     /**
      * @author Brugix
-     * Ottenere i dati di un utente e l'indirizzo avendo email e password
-     * @param email
+     * Ottenere i dati di un utente e l'indirizzo avendo mail e password
+     * @param mail
      * @param password
      * @return String: elenco utenti & indirizzi
      */
-    public static String selectUserAndAddressByEmailAndPassword(String email, String password)
+    public static String selectUserAndAddressByEmailAndPassword(String mail, String password)
     {
         return "SELECT Utente.*, Indirizzo.* "
                + "FROM Utente INNER JOIN IndirizzoUtente INNER JOIN Indirizzo "
-               + "ON (Utente.mail = " + email + " AND Utente.password = " + password + " AND Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = Utente.id);";
+               + "ON (Utente.mail = " + mail + " AND Utente.password = " + password + " AND Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = Utente.id);";
     }
     
     /**
      * @author Brugix
      * Ottenere i dati di un utente e l'indirizzo avendo l'ID utente
-     * @param userId
+     * @param idUtente
      * @return String: elenco utenti & indirizzi
      */
-    public static String selectUserAndAddressByUserID(int userId)
+    public static String selectUserAndAddressByUserID(int idUtente)
     {
         return "SELECT Utente.*, Indirizzo.* "
                + "FROM Utente INNER JOIN IndirizzoUtente INNER JOIN Indirizzo "
-               + "ON (Utente.id = " + userId + " AND Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = Utente.id);";
+               + "ON (Utente.id = " + idUtente + " AND Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = Utente.id);";
     }
     
     /**
      * @author Brugix
      * Ottenere l'immagine di un utente
-     * @param userId
+     * @param idUtente
      * @return String: elenco immagini utente
      */
-    public static String selectUserImageByUserID(int userId)
+    public static String selectUserImageByUserID(int idUtente)
     {
-        return "SELECT src FROM imageUtente WHERE idU = " + userId + ";";
+        return "SELECT src FROM imageUtente WHERE idU = " + idUtente + ";";
     }
     
     /**
      * @author Brugix
      * Ottenere i dati di un utente, l'indirizzo ed l'immagine a cui fa riferimento
-     * @param email
+     * @param mail
      * @param password
      * @return String: elenco utenti & indirizzi & immagini
      */
-    public static String selectUserAndAddressAndImageByEmailAndPassword(String email, String password)
+    public static String selectUserAndAddressAndImageByEmailAndPassword(String mail, String password)
     {
         return "SELECT Utente.*, Indirizzo.*, imageUtente.src "
-               + "FROM Utente INNER JOIN IndirizzoUtente INNER JOIN Indirizzo ON (Utente.mail = " + email + " AND Utente.password = " + password + " AND Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = Utente.id) "
+               + "FROM Utente INNER JOIN IndirizzoUtente INNER JOIN Indirizzo ON (Utente.mail = " + mail + " AND Utente.password = " + password + " AND Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = Utente.id) "
                + "LEFT JOIN imageUtente ON (imageUtente.idU = Utente.id);";
     }
     
@@ -155,91 +155,92 @@ public class genericsQuery {
     /**
      * @author Brugix
      * Modificare l'immagine del profilo di un utente con un determinato ID utente
-     * @param userId
+     * @param idUtente
      * @param imagePath
      * @return String: conferma avvenuta operazione
      */
-    public static String updateUserImageByUserID(int userId, String imagePath)
+    public static String updateUserImageByUserID(int idUtente, String imagePath)
     {
-        return "UPDATE imageUtente SET imageUtente.src = " + imagePath + " WHERE imageUtente.idU = " + userId + ";";
+        return "UPDATE imageUtente SET imageUtente.src = " + imagePath + " WHERE imageUtente.idU = " + idUtente + ";";
     }
     
     /**
      * @author Brugix
-     * Modificare email utente
-     * @param userId
-     * @param email
+     * Modificare mail utente
+     * @param idUtente
+     * @param mail
      * @return String: conferma avvenuta operazione
      */
-    public static String updateUserEmailByUserID(int userId, String email)
+    public static String updateUserEmailByUserID(int idUtente, String mail)
     {
-        return "UPDATE Utente SET Utente.mail = " + email + " WHERE Utente.id = " + userId + ";";
+        return "UPDATE Utente SET Utente.mail = " + mail + " WHERE Utente.id = " + idUtente + ";";
     }
     
     /**
      * @author Brugix
      * Modificare password utente
-     * @param userId
+     * @param idUtente
      * @param password
      * @return String: conferma avvenuta operazione
      */
-    public static String updateUserPasswordByUserID(int userId, String password)
+    public static String updateUserPasswordByUserID(int idUtente, String password)
     {
-        return "UPDATE Utente SET Utente.password = " + password + " WHERE Utente.id = " + userId + ";";
+        return "UPDATE Utente SET Utente.password = " + password + " WHERE Utente.id = " + idUtente + ";";
     }
     
     /**
      * @author Brugix
      * Modificare indirizzo utente
      * (Suppongo l'utente abbia scelto un indirizzo dalla lista dei propri indirizzi quindi avrò l'ID dell'indirizzo)
-     * @param addrId
-     * @param city
+     * @param addrID
+     * @param citta
      * @param interno
-     * @param latitude
-     * @param longitude
-     * @param civicNumber
-     * @param province
-     * @param region
-     * @param country
+     * @param latitudine
+     * @param longitudine
+     * @param nCivico
+     * @param provincia
+     * @param regione
+     * @param stato
      * @param via
      * @return String: conferma avvenuta operazione
      */
-    public static String updateUserAddressByAddressID(int addrId, String city, String interno, String latitude, String longitude, String civicNumber, String province, String region, String country, String via)
+    public static String updateUserAddressByAddressID(int addrID, String stato, String regione, String provincia, String citta, String via,
+                                                      int nCivico, int interno, double latitudine, double longitudine)
     {
         return "UPDATE Indirizzo"
-               + " SET Indirizzo.citta = " + city
+               + " SET Indirizzo.citta = " + citta
                + " Indirizzo.interno = " + interno
-               + " Indirizzo.latitudine = " + latitude
-               + " Indirizzo.longitudine = " + longitude
-               + " Indirizzo.nCivico = " + civicNumber
-               + " Indirizzo.provincia = " + province
-               + " Indirizzo.regione = " + region
-               + " Indirizzo.stato = " + country
+               + " Indirizzo.latitudine = " + latitudine
+               + " Indirizzo.longitudine = " + longitudine
+               + " Indirizzo.nCivico = " + nCivico
+               + " Indirizzo.provincia = " + provincia
+               + " Indirizzo.regione = " + regione
+               + " Indirizzo.stato = " + stato
                + " Indirizzo.via = " + via
-               + " WHERE Indirizzo.idI = " + addrId + ";";
+               + " WHERE Indirizzo.idI = " + addrID + ";";
     }
     
     /**
      * @author Brugix
      * Rimuovere l'immagine del profilo di un determinato utente
-     * @param userId
+     * @param idUtente
      * @return String: conferma avvenuta operazione
      */
-    public static String deleteUserImageByUserID(int userId)
+    public static String deleteUserImageByUserID(int idUtente)
     {
-        return "DELETE FROM imageUtente WHERE imageUtente.idU = " + userId + ";";
+        return "DELETE FROM imageUtente WHERE imageUtente.idU = " + idUtente + ";";
     }
     
     /**
      * @author Brugix
      * Aggiungere una immagine del profilo di un utente
-     * @param userId
+     * @param idUtente
      * @param imagePath
      * @return String: conferma avvenuta operazione
      */
-    public static String insertUserImage(int userId, String imagePath)
+    public static String insertUserImage(int idUtente, String imagePath)
     {
         return "INSERT INTO image (src,idU) "
-               + "SELECT " + imagePath + ", Utente.id FROM Utente WHERE Utente.id = " + userId + ";";
+               + "SELECT " + imagePath + ", Utente.id FROM Utente WHERE Utente.id = " + idUtente + ";";
     }
 }

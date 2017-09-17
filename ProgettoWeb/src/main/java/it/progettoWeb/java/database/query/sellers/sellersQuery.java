@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package it.progettoWeb.java.database.query.sellers;
+
+import java.sql.Date;
+import java.sql.Timestamp;
+
 /**
  *
  * @author mattia
@@ -19,152 +23,152 @@ public class sellersQuery {
     /**
      * @author Brugix
      * Ottenere la lista dei propri negozi
-     * @param sellerId
+     * @param idVenditore
      * @return String: lista dei negozi
      */
-    public static String selectShopsBySellerID(int sellerId)
+    public static String selectShopsBySellerID(int idVenditore)
     {
-        return "SELECT * FROM Negozio WHERE idVenditore = " + sellerId + ";";
+        return "SELECT * FROM Negozio WHERE idVenditore = " + idVenditore + ";";
     }
     
     /**
      * @author Brugix
      * Ottenere la lista degli ordini ricevuti
-     * @param sellerId
+     * @param idVenditore
      * @return String: lista degli ordini
      */
-    public static String selectOrdersBySellerID(int sellerId)
+    public static String selectOrdersBySellerID(int idVenditore)
     {
-        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + sellerId + ";";
+        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + ";";
     }
           
     /**
      * @author Brugix
      * Ottenere la lista degli ordini ricevuti dal più nuovo al più vecchio
-     * @param sellerId
+     * @param idVenditore
      * @return String: lista degli ordini
      */
-    public static String selectNewestToOldestOrdersBySellerID(int sellerId)
+    public static String selectNewestToOldestOrdersBySellerID(int idVenditore)
     {
-        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + sellerId + " ORDER BY dataOrdine DESC;";
+        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " ORDER BY dataOrdine DESC;";
     }
           
     /**
      * @author Brugix
      * Ottenere la lista degli ordini non ancora in carico
-     * @param sellerId
+     * @param idVenditore
      * @return String: lista degli ordini
      */
-    public static String selectOrderNotConfirmedBySellerID(int sellerId) //??? non ancora in carico -> Not Confirmed ???
+    public static String selectOrderNotConfirmedBySellerID(int idVenditore) //??? non ancora in carico -> Not Confirmed ???
     {
-        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + sellerId + " AND stato=1;";
+        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND stato=1;";
     }
           
     /**
      * @author Brugix
      * Ottenere la lista degli ordini in lavorazione
-     * @param sellerId
+     * @param idVenditore
      * @return String: lista degli ordini
      */
-    public static String selectOrderConfirmedBySellerID(int sellerId) //??? In lavorazione -> Confirmed ???
+    public static String selectOrderConfirmedBySellerID(int idVenditore) //??? In lavorazione -> Confirmed ???
     {
-        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + sellerId + " AND stato=2;";
+        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND stato=2;";
     }
           
     /**
      * @author Brugix
      * Ottenere la lista degli ordini già spediti
-     * @param sellerId
+     * @param idVenditore
      * @return String: lista degli ordini
      */
-    public static String selectOrderShippedBySellerID(int sellerId)
+    public static String selectOrderShippedBySellerID(int idVenditore)
     {
-        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + sellerId + " AND stato=3;";
+        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND stato=3;";
     }
           
     /**
      * @author Brugix
      * Ottenere la lista degli ordini conclusi
-     * @param sellerId
+     * @param idVenditore
      * @return String: lista degli ordini
      */
-    public static String selectOrderClosedBySellerID(int sellerId)
+    public static String selectOrderClosedBySellerID(int idVenditore)
     {
-        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + sellerId + " AND stato=4;";
+        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND stato=4;";
     }
           
     /**
      * @author Brugix
      * Ottenere la lista degli ordini ricevuti in un determinato giorno
-     * @param sellerId
-     * @param date
+     * @param idVenditore
+     * @param dataOrdine
      * @return String: lista degli ordini
      */
-    public static String selectOrderByDate(int sellerId, String date)
+    public static String selectOrderByDate(int idVenditore, Timestamp dataOrdine)
     {
-        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + sellerId + " AND dataOrdine=" + date + ";";
+        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND dataOrdine=" + dataOrdine + ";";
     }
           
     /**
      * @author Brugix
      * Ottenere la lista degli ordini ricevuti nella settimana corrente
-     * @param sellerId
-     * @param date
+     * @param idVenditore
+     * @param dataOrdine
      * @return String: lista degli ordini
      */
-    public static String selectOrderByWeek(int sellerId, String date)
+    public static String selectOrderByWeek(int idVenditore, Timestamp dataOrdine)
     {
-        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + sellerId + " AND WEEK(dataOrdine)=WEEK(" + date + ");";
+        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND WEEK(dataOrdine)=WEEK(" + dataOrdine + ");";
     }
           
     /**
      * @author Brugix
      * Ottenere la lista degli ordini ricevuti nel mese corrente
-     * @param sellerId
-     * @param date
+     * @param idVenditore
+     * @param dataOrdine
      * @return String: lista degli ordini
      */
-    public static String selectOrderByMonth(int sellerId, String date)
+    public static String selectOrderByMonth(int idVenditore, Timestamp dataOrdine)
     {
-        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + sellerId + " AND MONTH(dataOrdine)=MONTH(" + date + ");";
+        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND MONTH(dataOrdine)=MONTH(" + dataOrdine + ");";
     }
           
     /**
      * @author Brugix
      * Ottenere la lista degli ordini ricevuti nell'anno corrente
-     * @param sellerId
-     * @param date
+     * @param idVenditore
+     * @param dataOrdine
      * @return String: lista degli ordini
      */
-    public static String selectOrderByYear(int sellerId, String date)
+    public static String selectOrderByYear(int idVenditore, Timestamp dataOrdine)
     {
-        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + sellerId + " AND YEAR(dataOrdine)=YEAR(" + date + ");";
+        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND YEAR(dataOrdine)=YEAR(" + dataOrdine + ");";
     }
           
     /**
      * @author Brugix
      * Ottenere la lista dei propri negozi con anche il numero di vendite
-     * @param sellerId
+     * @param idVenditore
      * @return String: lista dei negozi
      */
-    public static String selectShopAndSalesNumberBySellerID(int sellerId)
+    public static String selectShopAndSalesNumberBySellerID(int idVenditore)
     {
         return "SELECT idNegozio, COUNT(idOrdine) AS numeroVendite "
                 + "FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id "
-                + "WHERE idVenditore=" + sellerId + " GROUP BY idNegozio;";
+                + "WHERE idVenditore=" + idVenditore + " GROUP BY idNegozio;";
     }
           
     /**
      * @author Brugix
      * Ottenere la lista dei propri negozi ordinati per vendite maggiori
-     * @param sellerId
+     * @param idVenditore
      * @return String: lista dei negozi
      */
-    public static String selectShopWithHigherSalesBySellerID(int sellerId)
+    public static String selectShopWithHigherSalesBySellerID(int idVenditore)
     {
         return "SELECT idNegozio, COUNT(idOrdine) AS numeroVendite "
                 + "FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id "
-                + "WHERE idVenditore=" + sellerId
+                + "WHERE idVenditore=" + idVenditore
                 + " GROUP BY idNegozio "
                 + "ORDER BY COUNT(idOrdine) DESC;";
     }
@@ -172,14 +176,14 @@ public class sellersQuery {
     /**
      * @author Brugix
      * Ottenere la lista dei propri negozi per vendite minori
-     * @param sellerId
+     * @param idVenditore
      * @return String: lista dei negozi
      */
-    public static String selectShopWithLowestSalesBySellerID(int sellerId)
+    public static String selectShopWithLowestSalesBySellerID(int idVenditore)
     {
         return "SELECT idNegozio, COUNT(idOrdine) AS numeroVendite "
                 + "FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id "
-                + "WHERE idVenditore=" + sellerId
+                + "WHERE idVenditore=" + idVenditore
                 + " GROUP BY idNegozio "
                 + "ORDER BY COUNT(idOrdine) ASC;";
     }
@@ -187,33 +191,33 @@ public class sellersQuery {
     /**
      * @author Brugix
      * Ottenere la lista dei propri negozi con vendite inferiori ad un certo valore
-     * @param sellerId
-     * @param value
+     * @param idVenditore
+     * @param valore
      * @return String: lista dei negozi
      */
-    public static String selectShopWithLowerSalesThanBySellerID(int sellerId, int value)
+    public static String selectShopWithLowerSalesThanBySellerID(int idVenditore, int valore)
     {
         return "SELECT idNegozio, COUNT(idOrdine) AS numeroVendite "
                 + "FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id "
-                + "WHERE idVenditore=" + sellerId
+                + "WHERE idVenditore=" + idVenditore
                 + " GROUP BY idNegozio"
-                + " HAVING COUNT(idOrdine)<" + value + ";";
+                + " HAVING COUNT(idOrdine)<" + valore + ";";
     }
           
     /**
      * @author Brugix
      * Ottenere la lista dei propri negozi con vendite superiori ad un certo valore
-     * @param sellerId
-     * @param value
+     * @param idVenditore
+     * @param valore
      * @return String: lista dei negozi
      */
-    public static String selectShopWithHigherSalesThanBySellerID(int sellerId, int value)
+    public static String selectShopWithHigherSalesThanBySellerID(int idVenditore, int valore)
     {
         return "SELECT idNegozio, COUNT(idOrdine) AS numeroVendite "
                 + "FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id "
-                + "WHERE idVenditore=" + sellerId
+                + "WHERE idVenditore=" + idVenditore
                 + " GROUP BY idNegozio"
-                + " HAVING COUNT(idOrdine)>" + value + ";";
+                + " HAVING COUNT(idOrdine)>" + valore + ";";
     }
           
     
@@ -222,37 +226,37 @@ public class sellersQuery {
     /**
      * @author Brugix
      * Ottenere la lista dei negozi che vendono prodotti di una certa categoria
-     * @param sellerId
-     * @param active
-     * @param catId
+     * @param idVenditore
+     * @param attivo
+     * @param idCategoria
      * @return String: lista dei negozi
      */
-    public static String selectShopByCategory(int sellerId, int active, int catId)
+    public static String selectShopByCategory(int idVenditore, int attivo, int idCategoria)
     {
         return "SELECT * "
                 + "FROM ((Oggetto JOIN Categoria ON oggetto.categoria=Categoria.id) "
                 + "JOIN Negozio ON Negozio.id=Oggetto.idNegozio) "
                 + "JOIN Utente ON Utente.id=Negozio.idVenditore "
-                + "WHERE idVenditore=" + sellerId + " AND attivo=" + active + " AND Categoria.id=" + catId + ";";
+                + "WHERE idVenditore=" + idVenditore + " AND attivo=" + attivo + " AND Categoria.id=" + idCategoria + ";";
     }
           
     /**
      * @author Brugix
      * Ottenere la lista dei negozi che vendono prodotti di una certa categoria ordinate da quello con più vendite
-     * @param sellerId
-     * @param active
-     * @param catId
-     * @param objCatId
+     * @param idVenditore
+     * @param attivo
+     * @param idCategoria
+     * @param categoriaOggetto
      * @return String: lista dei negozi
      */
-    public static String selectShopWithHigherSalesByCategory(int sellerId, int active, int catId, int objCatId)
+    public static String selectShopWithHigherSalesByCategory(int idVenditore, int attivo, int idCategoria, int categoriaOggetto)
     {
         return "SELECT Negozio.*, COUNT(Ordine.idOrdine) "
                 + "FROM ((Oggetto JOIN Negozio ON Negozio.id = Oggetto.idNegozio) "
                 + "JOIN Utente ON Utente.id = Negozio.idVenditore) "
                 + "JOIN Ordine ON Ordine.idNegozio = Negozio.id "
-                + "WHERE idVenditore = " + sellerId + " AND attivo = " + active 
-                + " AND Categoria.id = " + catId + " AND Oggetto.categoria = " + objCatId
+                + "WHERE idVenditore = " + idVenditore + " AND attivo = " + attivo 
+                + " AND Categoria.id = " + idCategoria + " AND Oggetto.categoria = " + categoriaOggetto
                 + " AND Ordine.stato BETWEEN 1 AND 4 GROUP BY Negozio.id "
                 + "ORDER BY COUNT(Ordine.idOrdine) DESC;";
     }
@@ -260,20 +264,20 @@ public class sellersQuery {
     /**
      * @author Brugix
      * Ottenere la lista dei negozi che vendono prodotti di una certa categoria ordinate da quello con meno vendite
-     * @param sellerId
-     * @param active
-     * @param catId
-     * @param objCatId
+     * @param idVenditore
+     * @param attivo
+     * @param idCategoria
+     * @param categoriaOggetto
      * @return String: lista dei negozi
      */
-    public static String selectShopWithLowerSalesByCategory(int sellerId, int active, int catId, int objCatId)
+    public static String selectShopWithLowerSalesByCategory(int idVenditore, int attivo, int idCategoria, int categoriaOggetto)
     {
         return "SELECT Negozio.*, COUNT(Ordine.idOrdine) "
                 + "FROM ((Oggetto JOIN Negozio ON Negozio.id = Oggetto.idNegozio) "
                 + "JOIN Utente ON Utente.id = Negozio.idVenditore) "
                 + "JOIN Ordine ON Ordine.idNegozio = Negozio.id "
-                + "WHERE idVenditore = " + sellerId + " AND attivo = " + active 
-                + " AND Categoria.id = " + catId + " AND Oggetto.categoria = " + objCatId
+                + "WHERE idVenditore = " + idVenditore + " AND attivo = " + attivo 
+                + " AND Categoria.id = " + idCategoria + " AND Oggetto.categoria = " + categoriaOggetto
                 + " AND Ordine.stato BETWEEN 1 AND 4 GROUP BY Negozio.id "
                 + "ORDER BY COUNT(Ordine.idOrdine) DESC;";
     }
@@ -281,26 +285,26 @@ public class sellersQuery {
     /**
      * @author Brugix
      * Ottenere la lista dei propri negozi ordinati per data di apertura
-     * @param sellerId
+     * @param idVenditore
      * @return String: lista dei negozi
      */
-    public static String selectShopByOpenDate(int sellerId)
+    public static String selectShopByOpenDate(int idVenditore)
     {
-        return "SELECT * FROM Negozio WHERE idVenditore=" + sellerId + " ORDER BY dataApertura DESC;";
+        return "SELECT * FROM Negozio WHERE idVenditore=" + idVenditore + " ORDER BY dataApertura DESC;";
     }
           
     /**
      * @author Brugix
      * Ottenere la lista dei propri negozi ordinati per fatturato
-     * @param sellerId
+     * @param idVenditore
      * @return String: lista dei negozi
      */
-    public static String selectShopByRevenue(int sellerId)
+    public static String selectShopByRevenue(int idVenditore)
     {
         return "SELECT SUM(Ordine.quantita * Oggetto.prezzo) AS fatturato, Ordine.idNegozio, Negozio.nomeNegozio "
                 + "FROM (Oggetto JOIN Ordine ON Oggetto.id = Ordine.idOggetto) "
                 + "JOIN Negozio ON Negozio.id = Ordine.idNegozio "
-                + "WHERE Negozio.idVenditore = " + sellerId
+                + "WHERE Negozio.idVenditore = " + idVenditore
                 + " AND Ordine.stato BETWEEN 1 AND 4 "
                 + "GROUP BY Negozio.id ORDER BY fatturato DESC;";
     }
@@ -308,131 +312,131 @@ public class sellersQuery {
     /**
      * @author Brugix
      * Ottenere i dati di un negozio
-     * @param sellerId
-     * @param shopId
+     * @param idVenditore
+     * @param idNegozio
      * @return String: lista dei negozi
      */
-    public static String selectShopBySellerIDAndShopID(int sellerId, int shopId)
+    public static String selectShopBySellerIDAndShopID(int idVenditore, int idNegozio)
     {
-        return "SELECT * FROM Negozio WHERE idVenditore=" + sellerId + " AND id=" + shopId + ";";
+        return "SELECT * FROM Negozio WHERE idVenditore=" + idVenditore + " AND id=" + idNegozio + ";";
     }
           
     /**
      * @author Brugix
      * Ottenere i dati delle vendite di un determinato negozio
-     * @param shopId
+     * @param idNegozio
      * @return String: lista degli ordini
      */
-    public static String selectOrderByShopID(int shopId)
+    public static String selectOrderByShopID(int idNegozio)
     {
-        return "SELECT * FROM Ordine WHERE Ordine.idNegozio = " + shopId + "AND Ordine.stato BETWEEN 1 AND 4;";
+        return "SELECT * FROM Ordine WHERE Ordine.idNegozio = " + idNegozio + "AND Ordine.stato BETWEEN 1 AND 4;";
     }
           
     /**
      * @author Brugix
      * Ottenere i dati di vendita di un determinato negozio in una determinata categoria
-     * @param shopId
-     * @param catId
+     * @param idNegozio
+     * @param idCategoria
      * @return String: lista degli ordini
      */
-    public static String selectOrderByCategory(int shopId, int catId)
+    public static String selectOrderByCategory(int idNegozio, int idCategoria)
     {
         return "SELECT Ordine.* FROM Ordine JOIN Oggetto ON Oggetto.id = Ordine.idOggetto"
-                + "WHERE Ordine.idNegozio = " + shopId
-                + " AND Ordine.stato BETWEEN 1 AND 4 AND Oggetto.categoria = " + catId + ";";
+                + "WHERE Ordine.idNegozio = " + idNegozio
+                + " AND Ordine.stato BETWEEN 1 AND 4 AND Oggetto.categoria = " + idCategoria + ";";
     }
           
     /**
      * @author Brugix
      * Ottenere le richieste di assistenza in cui si è stati citati
-     * @param sellerId
+     * @param idVenditore
      * @return String: lista delle richieste di assistenza
      */
-    public static String selectServiceRequestBySellerID(int sellerId)
+    public static String selectServiceRequestBySellerID(int idVenditore)
     {
         return "SELECT * FROM Utente JOIN Assistenza ON Utente.id=Assistenza.idVenditore "
-                + "WHERE idVenditore=" + sellerId + ";";
+                + "WHERE idVenditore=" + idVenditore + ";";
     }
           
     /**
      * @author Brugix
      * Ottenere la lista dei prodotti venduti raggruppati per categoria e negozio
-     * @param sellerId
+     * @param idVenditore
      * @return String: lista dei prodotti
      */
-    public static String selectProductSaledGroupByCategoryAndShop(int sellerId)
+    public static String selectProductSaledGroupByCategoryAndShop(int idVenditore)
     {
         return "SELECT * FROM (Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) "
                 + "JOIN Negozio ON Negozio.id=Oggetto.idNegozio "
-                + "WHERE idVenditore=" + sellerId + " AND stato=4 "
+                + "WHERE idVenditore=" + idVenditore + " AND stato=4 "
                 + "GROUP BY idNegozio ASC, Categoria.nome ASC;";
     }
           
     /**
      * @author Brugix
      * Ottenere la lista dei prodotti venduti in una determinata categoria raggruppati per negozio
-     * @param sellerId
-     * @param cat
+     * @param idVenditore
+     * @param nomeCategoria
      * @return String: lista dei prodotti
      */
-    public static String selectProductSaledGroupByShop(int sellerId, String cat)
+    public static String selectProductSaledGroupByShop(int idVenditore, String nomeCategoria)
     {
         return "SELECT * FROM (Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) "
                 + "JOIN Negozio ON Negozio.id=Oggetto.idNegozio "
-                + "WHERE idVenditore=" + sellerId + " AND stato=4 AND Categoria.nome=" + cat
+                + "WHERE idVenditore=" + idVenditore + " AND stato=4 AND Categoria.nome=" + nomeCategoria
                 + " GROUP BY idNegozio ASC;";
     }
           
     /**
      * @author Brugix
      * Ottenere la lista dei prodotti venduti ordinati per valutazioni
-     * @param sellerId
+     * @param idVenditore
      * @return String: lista dei prodotti
      */
-    public static String selectProductSaledOrderedByRating(int sellerId)
+    public static String selectProductSaledOrderedByRating(int idVenditore)
     {
         return "SELECT * FROM (Ordine JOIN RecensioneOggetto ON Ordine.idOggetto=RecensioneOggetto.idOggetto) "
                 + "JOIN Negozio ON Ordine.idNegozio=Negozio.id "
-                + "WHERE idVenditore=" + sellerId + " AND stato=4 "
+                + "WHERE idVenditore=" + idVenditore + " AND stato=4 "
                 + "ORDER BY AVG(RecensioneOggetto.valutazione) DESC;";
     }
           
     /**
      * @author Brugix
      * Ottenere la lsita dei propri negozi ordinati per recensioni
-     * @param sellerId
+     * @param idVenditore
      * @return String: lista dei negozi
      */
-    public static String selectShopOrderedByRating(int sellerId)
+    public static String selectShopOrderedByRating(int idVenditore)
     {
-        return "SELECT * FROM Negozio WHERE idVenditore=" + sellerId + " ORDER BY valutazione DESC;";
+        return "SELECT * FROM Negozio WHERE idVenditore=" + idVenditore + " ORDER BY valutazione DESC;";
     }
           
     /**
      * @author Brugix
      * Ottenere la lista dei proprio prodotti in sconto raggruppati per categoria e negozio
-     * @param sellerId
+     * @param idVenditore
      * @return String: lista dei prodotti
      */
-    public static String selectProductDiscountedGroupByShopAndCategory(int sellerId)
+    public static String selectProductDiscountedGroupByShopAndCategory(int idVenditore)
     {
         return "SELECT * FROM (Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) "
                 + "JOIN Negozio ON Negozio.id=Oggetto.idNegozio "
-                + "WHERE idVenditore=" + sellerId + " AND sconto>0 "
+                + "WHERE idVenditore=" + idVenditore + " AND sconto>0 "
                 + "GROUP BY Categoria.nome ASC, idNegozio ASC;";
     }
           
     /**
      * @author Brugix
      * Ottenere la lista dei proprio prodotti in sconto raggruppati per categoria e negozio ordinati per scadenza più vicina dello sconto
-     * @param sellerId
+     * @param idVenditore
      * @return String: lista dei prodotti
      */
-    public static String selectProductsDiscountedGrupByShopAndCategoryOrderedByDeadline(int sellerId)
+    public static String selectProductsDiscountedGrupByShopAndCategoryOrderedByDeadline(int idVenditore)
     {
         return "SELECT * FROM (Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) "
                 + "JOIN Negozio ON Negozio.id=Oggetto.idNegozio "
-                + "WHERE idVenditore=" + sellerId + " AND sconto>0 "
+                + "WHERE idVenditore=" + idVenditore + " AND sconto>0 "
                 + "GROUP BY Categoria.nome ASC, idNegozio ASC "
                 + "ORDER BY dataFineSconto ASC;";
     }
@@ -440,134 +444,134 @@ public class sellersQuery {
     /**
      * @author Brugix
      * Ottenere la lista delle recensioni ricevute
-     * @param sellerId
+     * @param idVenditore
      * @return String: lista delle recensioni
      */
-    public static String selectSellerReview(int sellerId)
+    public static String selectSellerReview(int idVenditore)
     {
-        return "SELECT * FROM RecensioneVenditore WHERE idVenditore=" + sellerId + ";";
+        return "SELECT * FROM RecensioneVenditore WHERE idVenditore=" + idVenditore + ";";
     }
     
     /**
      * @author Brugix
      * Aggiungere un proprio negozio
-     * @param sellerId
-     * @param shopName
-     * @param rating
+     * @param idVenditore
+     * @param nomeNegozio
+     * @param valutazioneNegozio
      * @param idI
      * @return String: conferma avvenuta operazione
      */
-    public static String insertShop(int sellerId, String shopName, double rating, int idI)
+    public static String insertShop(int idVenditore, String nomeNegozio, double valutazioneNegozio, int idI)
     {
         return "INSERT INTO Negozio (idVenditore, nomeNegozio, valutazione, attivo, idI, dataApertura) "
-                + "VALUES (" + sellerId + "," +  shopName + "," + rating + ", '1' ," + idI + ", CURRENT_TIMESTAMP);";
+                + "VALUES (" + idVenditore + "," +  nomeNegozio + "," + valutazioneNegozio + ", '1' ," + idI + ", CURRENT_TIMESTAMP);";
     }
     
     /**
      * @author Brugix
      * Chiudere un proprio negozio (rimuoverlo)
-     * @param shopId
+     * @param idNegozio
      * @return String: conferma avvenuta operazione
      */
-    public static String updateShopStatus(int shopId)
+    public static String updateShopStatus(int idNegozio)
     {
-        return "UPDATE Negozio SET attivo=0 WHERE id=" + shopId + ";";
+        return "UPDATE Negozio SET attivo=0 WHERE id=" + idNegozio + ";";
     }
     
     /**
      * @author Brugix
      * Modificare lo stato di un ordine
-     * @param newStatus
-     * @param orderId
+     * @param nuovoStato
+     * @param idOrdine
      * @return String: conferma avvenuta operazione
      */
-    public static String updateOrderStatus(int newStatus, int orderId)
+    public static String updateOrderStatus(int nuovoStato, int idOrdine)
     {
-        return "UPDATE Ordine SET stato=" + newStatus + " WHERE idOrdine=" + orderId + ";";
+        return "UPDATE Ordine SET stato=" + nuovoStato + " WHERE idOrdine=" + idOrdine + ";";
     }
     
     /**
      * @author Brugix
      * Aggiungere ad un ordine spedito il codice di tracking
-     * @param track
-     * @param orderId
+     * @param codiceTracking
+     * @param idOrdine
      * @return String: conferma avvenuta operazione
      */
-    public static String updateOrderTracking(String track, int orderId)
+    public static String updateOrderTracking(String codiceTracking, int idOrdine)
     {
-        return "UPDATE Ordine SET codiceTracking=" + track + " WHERE idOrdine=" + orderId + ";";
+        return "UPDATE Ordine SET codiceTracking=" + codiceTracking + " WHERE idOrdine=" + idOrdine + ";";
     }
     
     /**
      * @author Brugix
-     * Aggiungere un prodotto ad un proprio negozio
-     * @param shopId
-     * @param prodName
-     * @param prodPrice
-     * @param prodDescr
-     * @param pickupInStore
-     * @param availability
-     * @param availabilityStatus
-     * @param discount
-     * @param endDiscount
-     * @param catId
+     * Aggiungere un prodotto (OGGETTO) ad un proprio negozio
+     * @param idNegozio
+     * @param nomeOggetto
+     * @param prezzoOggetto
+     * @param descrizioneOggetto
+     * @param ritiroInNegozio
+     * @param disponibilita
+     * @param statoDisponibilita
+     * @param sconto
+     * @param dataFineSconto
+     * @param idCategoria
      * @return String: conferma avvenuta operazione
      */
-    public static String insertProduct(int shopId, String prodName, double prodPrice, 
-            String prodDescr, int pickupInStore, int availability, int availabilityStatus, 
-            double discount, /*??? VARIAZIONE*/ String endDiscount, int catId)
+    public static String insertProduct(int idNegozio, String nomeOggetto, double prezzoOggetto, 
+            String descrizioneOggetto, int ritiroInNegozio, int disponibilita, int statoDisponibilita, 
+            double sconto, /*??? VARIAZIONE*/ Date dataFineSconto, int idCategoria)
     {
         return "INSERT INTO Oggetto "
                 + "(idNegozio, nome, prezzo, descrizione, ritiroInNegozio, disponibilita, "
                 + "statoDisponibilita, sconto, variazione, dataFineSconto, categoria) "
                 + "VALUES ("
-                + shopId
-                + ", " + prodName
-                + ", " + prodPrice
-                + ", " + prodDescr
-                + ", " + pickupInStore
-                + ", " + availability
-                + ", " + availabilityStatus
-                + ", " + discount
+                + idNegozio
+                + ", " + nomeOggetto
+                + ", " + prezzoOggetto
+                + ", " + descrizioneOggetto
+                + ", " + ritiroInNegozio
+                + ", " + disponibilita
+                + ", " + statoDisponibilita
+                + ", " + sconto
                 /*+ ", VARIAZIONE"*/
-                + ", " + endDiscount
-                + ", " + catId
+                + ", " + dataFineSconto
+                + ", " + idCategoria
                 + ");";
     }
     
     /**
      * @author Brugix
      * Rimuovere un oggetto da un proprio negozio
-     * @param shopId
+     * @param idNegozio
      * @return String: conferma avvenuta operazione
      */
-    public static String deleteProduct(int shopId)
+    public static String deleteProduct(int idNegozio)
     {
-        return "DELETE FROM Oggetto WHERE id=" + shopId + ";";
+        return "DELETE FROM Oggetto WHERE id=" + idNegozio + ";";
     }
     
     /**
      * @author Brugix
      * Modificare il prezzo di un oggetto di un proprio negozio
-     * @param prodId
-     * @param price
+     * @param idOggetti
+     * @param prezzoOggetto
      * @return String: conferma avvenuta operazione
      */
-    public static String updateProductPrice(int prodId, double price)
+    public static String updateProductPrice(int idOggetti, double prezzoOggetto)
     {
-        return "UPDATE Oggetto SET prezzo=" + price + " WHERE id=" + prodId + ";";
+        return "UPDATE Oggetto SET prezzo=" + prezzoOggetto + " WHERE id=" + idOggetti + ";";
     }
     
     /**
      * @author Brugix
      * Modificare lo sconto di un oggetto
-     * @param prodId
-     * @param discount
+     * @param idOggetti
+     * @param sconto
      * @return String: conferma avvenuta operazione
      */
-    public static String updateProductDiscount(int prodId, double discount)
+    public static String updateProductDiscount(int idOggetti, double sconto)
     {
-        return "UPDATE Oggetto SET sconto=" + discount + " WHERE id=" + prodId + ";";
+        return "UPDATE Oggetto SET sconto=" + sconto + " WHERE id=" + idOggetti + ";";
     }
     
     /*??? 
