@@ -200,5 +200,375 @@ public class objectsQuery {
     }
     
     
+    /*---1*/
+    
+    /*---2*/
+    public static String selectObjectByNameAndPIS(String nomeDownCase, int ritiroInNegozio)  //PIS = Pickup In Store
+    {
+        return "SELECT * FROM Oggetto WHERE nomeDownCase LIKE '%" + nomeDownCase + "%' AND Oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
+    }
+    
+    
+    public static String selectObjectByCategory(int idCategoria, int ritiroInNegozio)
+    {
+        return "SELECT * FROM Oggetto WHERE categoria = " + idCategoria + " AND Oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
+    }
+    
+    
+    public static String selectObjectByCategoryAndName(int idCategoria, String nomeDownCase, int ritiroInNegozio)
+    {
+        return "SELECT * FROM Oggetto WHERE categoria=" + idCategoria + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND Oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
+    }
+    
+    
+    public static String selectObjectLowerThanPrice(double prezzo, int ritiroInNegozio)
+    {
+        return "SELECT * FROM Oggetto WHERE prezzo >= " + prezzo + " AND Oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
+    }
+    
+    
+    public static String selectObjectHigherThanPrice(double prezzo, int ritiroInNegozio)
+    {
+        return "SELECT * FROM Oggetto WHERE prezzo <= " + prezzo + " AND Oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
+    }
+    
+    
+    public static String selectObjectBetweenPrices(double prezzoMin, double prezzoMax, int ritiroInNegozio)
+    {
+        return "SELECT * FROM Oggetto WHERE prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND Oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
+    }
+    
+    
+    public static String selectObjectByCategoryAndHigherThanPrice(int idCategoria, double prezzoMin, int ritiroInNegozio)
+    {
+        return "SELECT * FROM Oggetto WHERE categoria=" + idCategoria + " AND prezzo >= " + prezzoMin + " AND Oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
+    }
+    
+    
+    public static String selectObjectByCategoryAndLowerThanPrice(int idCategoria, double prezzoMax, int ritiroInNegozio)
+    {
+        return "SELECT * FROM Oggetto WHERE categoria=" + idCategoria + " AND prezzo <= " + prezzoMax + " AND Oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
+    }
+    
+    
+    public static String selectObjectByCategoryAndBetweenPrices(int idCategoria, double prezzoMin, double prezzoMax, int ritiroInNegozio)
+    {
+        return "SELECT * FROM Oggetto WHERE categoria=" + idCategoria + " AND prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND Oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
+    }
+    
+    
+    public static String selectObjectByNameAndHigherThanPrice(String nomeDownCase, double prezzoMin, int ritiroInNegozio)
+    {
+        return "SELECT * FROM Oggetto WHERE prezzo >= " + prezzoMin + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND Oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
+    }
+    
+    
+    public static String selectObjectByNameAndLowerThanPrice(String nomeDownCase, double prezzoMax, int ritiroInNegozio)
+    {
+        return "SELECT * FROM Oggetto WHERE prezzo <= " + prezzoMax + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND Oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
+    }
+    
+    
+    public static String selectObjectByNameAndBetweenPrices(String nomeDownCase, double prezzoMin, double prezzoMax, int ritiroInNegozio)
+    {
+        return "SELECT * FROM Oggetto WHERE prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND Oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
+    }
+    
+    
+    public static String selectObjectByCategoryAndNameAndHigherThanPrice(int idCategoria, String nomeDownCase, double prezzoMin, int ritiroInNegozio)
+    {
+        return "SELECT * FROM Oggetto WHERE categoria=" + idCategoria + " AND prezzo >= " + prezzoMin + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND Oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
+    }
+    
+    
+    public static String selectObjectByCategoryAndNameAndLowerThanPrice(int idCategoria, String nomeDownCase, double prezzoMax, int ritiroInNegozio)
+    {
+        return "SELECT * FROM Oggetto WHERE categoria=" + idCategoria + " AND prezzo <= " + prezzoMax + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND Oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
+    }
+    
+    
+    public static String selectObjectByCategoryAndNameAndBetweenPrices(int idCategoria, String nomeDownCase, double prezzoMin, double prezzoMax, int ritiroInNegozio)
+    {
+        return "SELECT * FROM Oggetto WHERE categoria=" + idCategoria + " AND prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND Oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
+    }
+    
+    
+    
+    
+    /*---3*/
+    
+    /*---4*/
+    
+    
+    public static String selectObjectByNameAnd()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
+    public static String a()
+    {
+        return "";
+    }
+    
+    
     
 }
