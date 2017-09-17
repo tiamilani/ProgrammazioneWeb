@@ -14,7 +14,7 @@ public class genericsQuery {
     }
     
     
-    /*--- LAST UPDATE -> 2017-09-14 ---*/
+    /*--- LAST UPDATE -> 2017-09-17 ---*/
     
     /**
      * @author Brugix

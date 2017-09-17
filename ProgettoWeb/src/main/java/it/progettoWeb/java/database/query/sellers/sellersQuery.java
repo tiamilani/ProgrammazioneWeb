@@ -17,7 +17,7 @@ public class sellersQuery {
         return "Hello from" + sellersQuery.class.toString();
     }
     
-    /*--- LAST UPDATE -> 2017-09-14 ---*/
+    /*--- LAST UPDATE -> 2017-09-17 ---*/
     
     
     /**
@@ -219,9 +219,6 @@ public class sellersQuery {
                 + " GROUP BY idNegozio"
                 + " HAVING COUNT(idOrdine)>" + valore + ";";
     }
-          
-    
-    /*--- LAST UPDATE -> 2017-09-14 ---*/
     
     /**
      * @author Brugix
@@ -364,7 +361,7 @@ public class sellersQuery {
      * @param idVenditore
      * @return String: lista dei prodotti
      */
-    public static String selectProductSaledGroupByCategoryAndShop(int idVenditore)
+    public static String selectObjectSaledGroupByCategoryAndShop(int idVenditore)
     {
         return "SELECT * FROM (Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) "
                 + "JOIN Negozio ON Negozio.id=Oggetto.idNegozio "
@@ -379,7 +376,7 @@ public class sellersQuery {
      * @param nomeCategoria
      * @return String: lista dei prodotti
      */
-    public static String selectProductSaledGroupByShop(int idVenditore, String nomeCategoria)
+    public static String selectObjectSaledGroupByShop(int idVenditore, String nomeCategoria)
     {
         return "SELECT * FROM (Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) "
                 + "JOIN Negozio ON Negozio.id=Oggetto.idNegozio "
@@ -393,7 +390,7 @@ public class sellersQuery {
      * @param idVenditore
      * @return String: lista dei prodotti
      */
-    public static String selectProductSaledOrderedByRating(int idVenditore)
+    public static String selectObjectSaledOrderedByRating(int idVenditore)
     {
         return "SELECT * FROM (Ordine JOIN RecensioneOggetto ON Ordine.idOggetto=RecensioneOggetto.idOggetto) "
                 + "JOIN Negozio ON Ordine.idNegozio=Negozio.id "
@@ -418,7 +415,7 @@ public class sellersQuery {
      * @param idVenditore
      * @return String: lista dei prodotti
      */
-    public static String selectProductDiscountedGroupByShopAndCategory(int idVenditore)
+    public static String selectObjectDiscountedGroupByShopAndCategory(int idVenditore)
     {
         return "SELECT * FROM (Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) "
                 + "JOIN Negozio ON Negozio.id=Oggetto.idNegozio "
@@ -432,7 +429,7 @@ public class sellersQuery {
      * @param idVenditore
      * @return String: lista dei prodotti
      */
-    public static String selectProductsDiscountedGrupByShopAndCategoryOrderedByDeadline(int idVenditore)
+    public static String selectObjectsDiscountedGrupByShopAndCategoryOrderedByDeadline(int idVenditore)
     {
         return "SELECT * FROM (Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) "
                 + "JOIN Negozio ON Negozio.id=Oggetto.idNegozio "
@@ -517,7 +514,7 @@ public class sellersQuery {
      * @param idCategoria
      * @return String: conferma avvenuta operazione
      */
-    public static String insertProduct(int idNegozio, String nomeOggetto, double prezzoOggetto, 
+    public static String insertObject(int idNegozio, String nomeOggetto, double prezzoOggetto, 
             String descrizioneOggetto, int ritiroInNegozio, int disponibilita, int statoDisponibilita, 
             double sconto, /*??? VARIAZIONE*/ Date dataFineSconto, int idCategoria)
     {
@@ -545,7 +542,7 @@ public class sellersQuery {
      * @param idNegozio
      * @return String: conferma avvenuta operazione
      */
-    public static String deleteProduct(int idNegozio)
+    public static String deleteObject(int idNegozio)
     {
         return "DELETE FROM Oggetto WHERE id=" + idNegozio + ";";
     }
@@ -557,7 +554,7 @@ public class sellersQuery {
      * @param prezzoOggetto
      * @return String: conferma avvenuta operazione
      */
-    public static String updateProductPrice(int idOggetti, double prezzoOggetto)
+    public static String updateObjectPrice(int idOggetti, double prezzoOggetto)
     {
         return "UPDATE Oggetto SET prezzo=" + prezzoOggetto + " WHERE id=" + idOggetti + ";";
     }
@@ -569,7 +566,7 @@ public class sellersQuery {
      * @param sconto
      * @return String: conferma avvenuta operazione
      */
-    public static String updateProductDiscount(int idOggetti, double sconto)
+    public static String updateObjectDiscount(int idOggetti, double sconto)
     {
         return "UPDATE Oggetto SET sconto=" + sconto + " WHERE id=" + idOggetti + ";";
     }
