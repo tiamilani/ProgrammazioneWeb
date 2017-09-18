@@ -405,6 +405,33 @@ public class objectsQuery {
     
     
     /*---1*/
+    public static String selectShopByLLR(int idUtente, double lat, double lon, double r) //LLR = Latitude - Longitude - Radius
+    {
+        return "Create OR REPLACE View NegoziDistanza_" + idUtente + " as"
+                + "SET @latitudine = " + lat + ";"
+                + "SET @longitudine = " + lon + ";"
+                + "SET @raggio = " + r + ";"
+                + "SELECT Negozio.id"
+                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI)"
+                + "WHERE @raggio >= 111.111"
+                + "* DEGREES(ACOS(COS(RADIANS(@latitudine))"
+                + "* COS(RADIANS(Indirizzo.latitudine))"
+                + "* COS(RADIANS(@longitudine - Indirizzo.longitudine))"
+                + "+ SIN(RADIANS(@latitudine))"
+                + "* SIN(RADIANS(Indirizzo.latitudine))));";
+    }
+    
+    
+    public static String selectObjectByLLR(double lat, double lon, double r)
+    {
+        return "";
+    }
+    
+    
+    public static String selectObjectByLLR(double lat, double lon, double r)
+    {
+        return "";
+    }
     
     
     
