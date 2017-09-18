@@ -16,6 +16,7 @@ public class ModelloAssistenza {
     
     //Nel caso vi siano problemi con le date
     //https://danielniko.wordpress.com/2012/04/17/simple-crud-using-jsp-servlet-and-mysql/
+    
     /**
      * Variabile intera utilizzata per identificare la richiesta di assitenza
      */
@@ -39,7 +40,7 @@ public class ModelloAssistenza {
     /**
      * Varibile intera utilizzata per identificare l'oggetto a appartenente all'ordine identificato in precedenza
      */
-    private int idOggetto;
+    private String idOggetto;
     /**
      * Variabile intera utilizzata per identificare lo stato in cui si trova la richiesta di assistenza
      */
@@ -141,7 +142,7 @@ public class ModelloAssistenza {
      * Funzione che permette di ottenre l'id del'ogetto presente nell'ordine a cui si riferisce la richeista di assistenza
      * @return int idOggetto
      */
-    public int getIdOggetto() {
+    public String getIdOggetto() {
         return idOggetto;
     }
 
@@ -149,7 +150,7 @@ public class ModelloAssistenza {
      * Funzione che permette di settare l'id delloggetto che si riferisce a questa richiesta di assistenza
      * @param idOggetto 
      */
-    public void setIdOggetto(int idOggetto) {
+    public void setIdOggetto(String idOggetto) {
         this.idOggetto = idOggetto;
     }
     

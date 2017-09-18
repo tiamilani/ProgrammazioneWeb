@@ -74,7 +74,7 @@ public class DaoUtente {
                 user.setCognome(rs.getString("cognome"));
                 user.setMail(rs.getString("mail"));
                 user.setPassword(rs.getString("password"));
-                user.setAvatar(rs.getInt("avatar"));
+                user.setAvatar(rs.getString("avatar"));
                 user.setValutazione(rs.getDouble("valutazione"));
                 user.setUtenteType(rs.getInt("UtenteType"));
                 user.setEmailConfermata(rs.getBoolean("emailConfermata"));
@@ -100,7 +100,7 @@ public class DaoUtente {
                 user.setCognome(rs.getString("cognome"));
                 user.setMail(rs.getString("mail"));
                 user.setPassword(rs.getString("password"));
-                user.setAvatar(rs.getInt("avatar"));
+                user.setAvatar(rs.getString("avatar"));
                 user.setValutazione(rs.getDouble("valutazione"));
                 user.setUtenteType(rs.getInt("UtenteType"));
                 user.setEmailConfermata(rs.getBoolean("emailConfermata"));
