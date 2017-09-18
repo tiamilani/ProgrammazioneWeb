@@ -67,6 +67,28 @@ function rimuoviClass
 
 function selezionaUtente
 {
+    read -p "Chi sei? [A/D/F/M]: " UTENTE
+    case $UTENTE in
+    	A|a)
+    		SERVLET=/Applications/Tomcat/lib/servlet-api.jar
+    	;;
+    	D|d)
+    		SERVLET=/mnt/c/Program Files/Apache Software Foundation/Tomcat 8.5/lib/servlet-api.jar
+    	;;
+    	F|f)
+    		SERVLET=/mnt/c/Program Files/Apache Software Foundation/Tomcat 8.5/lib/servlet-api.jar
+    	;;
+        M|m)
+            SERVLET=/home/mattia/Netbeans/apache-tomcat-8.0.27/lib/servlet-api.jar
+        ;;
+    	*)
+    		echo "Utente: A|D|F|M"
+            exit 1
+    esac
+}
+
+function rilevaDirectory
+{
     if [ -f "/Applications/Tomcat/lib/servlet-api.jar" ]
     then
         SERVLET=/Applications/Tomcat/lib/servlet-api.jar
@@ -77,30 +99,11 @@ function selezionaUtente
     then
         SERVLET=/home/mattia/Netbeans/apache-tomcat-8.0.27/lib/servlet-api.jar
     fi
-
-#    read -p "Chi sei? [A/D/F/M]: " UTENTE
-#    case $UTENTE in
-#    	A|a)
-#    		SERVLET=/Applications/Tomcat/lib/servlet-api.jar
-#    	;;
-#    	D|d)
-#    		SERVLET=/mnt/c/Program Files/Apache Software Foundation/Tomcat 8.5/lib/servlet-api.jar
-#    	;;
-#    	F|f)
-#    		SERVLET=/mnt/c/Program Files/Apache Software Foundation/Tomcat 8.5/lib/servlet-api.jar
-#    	;;
-#        M|m)
-#            SERVLET=/home/mattia/Netbeans/apache-tomcat-8.0.27/lib/servlet-api.jar
-#        ;;
-#    	*)
-#    		echo "Utente: A|D|F|M"
-#            exit 1
-#    esac
 }
 
 function creaClassi
 {
-    selezionaUtente
+    rilevaDirectory
     creaFileClass
     echo "JAVA compilati - CLASS creati"
     sleep 2
