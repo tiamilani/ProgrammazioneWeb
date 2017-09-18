@@ -98,7 +98,7 @@ public class UserController extends HttpServlet {
         user.setCognome(request.getParameter("cognome"));
         user.setMail(request.getParameter("mail"));
         user.setPassword(request.getParameter("password"));
-        user.setAvatar(0);
+        user.setAvatar("0");
         user.setValutazione(0);
         user.setUtenteType(Integer.parseInt(request.getParameter("UserType")));
         user.setEmailConfermata(false);

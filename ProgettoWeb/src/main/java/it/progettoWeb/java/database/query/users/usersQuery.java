@@ -49,7 +49,7 @@ public class usersQuery {
         return "SELECT Negozio.*, imageNegozio.src FROM Negozio INNER JOIN Utente ON (Utente.nome = '"+nome+"' AND Utente.cognome = '"+cognome+"' AND Utente.UtenteType = 1 AND Negozio.idVenditore = Utente.id)LEFT JOIN imageNegozio ON (Negozio.id = imageNegozio.idN);";
     }
     
-    public static String inserisciUtente(String nome,String cognome,String mail,String password,int avatar,double valutazione,int UtenteType,boolean emailConfermata){
+    public static String inserisciUtente(String nome,String cognome,String mail,String password,String avatar,double valutazione,int UtenteType,boolean emailConfermata){
         return "insert into Utente(nome, cognome, mail, password, avatar, valutazione, UtenteType, emailConfermata) values ("+
                 "'"+nome+"',"+
                 "'"+cognome+"',"+
@@ -65,7 +65,7 @@ public class usersQuery {
         return "DELETE FROM Utente WHERE id="+id+";";
     }
     
-    public static String updateUtente(int id,String nome,String cognome,String mail,String password,int avatar,double valutazione,int UtenteType,boolean emailConfermata){
+    public static String updateUtente(int id,String nome,String cognome,String mail,String password,String avatar,double valutazione,int UtenteType,boolean emailConfermata){
         return "update Utente set "+
                 "nome='"+nome+"',"+
                 "cognome='"+cognome+"',"+
