@@ -6,7 +6,7 @@
 package it.progettoWeb.java.database.Dao.Utente;
 
 /**
- *
+ * Classe utilizzata per gestire gli accessi al database per la tabella utente
  * @author mattia
  */
 
@@ -17,8 +17,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.Util.DbUtil;
+import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.query.users.usersQuery;
 
 public class DaoUtente {
