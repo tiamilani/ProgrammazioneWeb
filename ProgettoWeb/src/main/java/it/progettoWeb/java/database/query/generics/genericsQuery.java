@@ -17,7 +17,7 @@ public class genericsQuery {
     /*--- LAST UPDATE -> 2017-09-17 ---*/
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Selezionare tutti gli utenti in base al loro tipo: 0=normale, 1=venditore, 2=amministratore
      * @param utenteType
      * @return String: elenco utenti
@@ -28,7 +28,7 @@ public class genericsQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Selezionare utente in base a mail & password
      * @param mail
      * @param password
@@ -40,7 +40,7 @@ public class genericsQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Selezionare tutti gli utenti con un certo nome
      * @param nome
      * @return String: elenco utenti
@@ -51,7 +51,7 @@ public class genericsQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Selezionare utente in base a nome & cognome
      * @param nome
      * @param cognome
@@ -63,7 +63,7 @@ public class genericsQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere i dati di un utente in base all'ID utente
      * @param idUtente
      * @return String: elenco utenti
@@ -74,7 +74,7 @@ public class genericsQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere indirizzi di un utente avendo l'ID utente
      * @param idUtente
      * @return String: elenco indirizzi
@@ -87,7 +87,7 @@ public class genericsQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere i dati di un utente e l'indirizzo avendo mail e password
      * @param mail
      * @param password
@@ -101,7 +101,7 @@ public class genericsQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere i dati di un utente e l'indirizzo avendo l'ID utente
      * @param idUtente
      * @return String: elenco utenti & indirizzi
@@ -114,7 +114,7 @@ public class genericsQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere l'immagine di un utente
      * @param idUtente
      * @return String: elenco immagini utente
@@ -125,7 +125,7 @@ public class genericsQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere i dati di un utente, l'indirizzo ed l'immagine a cui fa riferimento
      * @param mail
      * @param password
@@ -139,7 +139,7 @@ public class genericsQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere gli utenti amministratori ordinati per numero di richieste
      * @return String: elenco utenti amministratori
      */
@@ -153,7 +153,7 @@ public class genericsQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Modificare l'immagine del profilo di un utente con un determinato ID utente
      * @param idUtente
      * @param imagePath
@@ -165,7 +165,7 @@ public class genericsQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Modificare mail utente
      * @param idUtente
      * @param mail
@@ -177,7 +177,7 @@ public class genericsQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Modificare password utente
      * @param idUtente
      * @param password
@@ -189,7 +189,7 @@ public class genericsQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Modificare indirizzo utente
      * (Suppongo l'utente abbia scelto un indirizzo dalla lista dei propri indirizzi quindi avrò l'ID dell'indirizzo)
      * @param addrID
@@ -221,7 +221,7 @@ public class genericsQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Rimuovere l'immagine del profilo di un determinato utente
      * @param idUtente
      * @return String: conferma avvenuta operazione
@@ -232,7 +232,7 @@ public class genericsQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Aggiungere una immagine del profilo di un utente
      * @param idUtente
      * @param imagePath

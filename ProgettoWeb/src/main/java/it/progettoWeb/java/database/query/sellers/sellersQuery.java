@@ -21,7 +21,7 @@ public class sellersQuery {
     
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista dei propri negozi
      * @param idVenditore
      * @return String: lista dei negozi
@@ -32,7 +32,7 @@ public class sellersQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista degli ordini ricevuti
      * @param idVenditore
      * @return String: lista degli ordini
@@ -43,7 +43,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista degli ordini ricevuti dal più nuovo al più vecchio
      * @param idVenditore
      * @return String: lista degli ordini
@@ -54,7 +54,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista degli ordini non ancora in carico
      * @param idVenditore
      * @return String: lista degli ordini
@@ -65,7 +65,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista degli ordini in lavorazione
      * @param idVenditore
      * @return String: lista degli ordini
@@ -76,7 +76,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista degli ordini già spediti
      * @param idVenditore
      * @return String: lista degli ordini
@@ -87,7 +87,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista degli ordini conclusi
      * @param idVenditore
      * @return String: lista degli ordini
@@ -98,7 +98,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista degli ordini ricevuti in un determinato giorno
      * @param idVenditore
      * @param dataOrdine
@@ -110,7 +110,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista degli ordini ricevuti nella settimana corrente
      * @param idVenditore
      * @param dataOrdine
@@ -122,7 +122,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista degli ordini ricevuti nel mese corrente
      * @param idVenditore
      * @param dataOrdine
@@ -134,7 +134,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista degli ordini ricevuti nell'anno corrente
      * @param idVenditore
      * @param dataOrdine
@@ -146,7 +146,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista dei propri negozi con anche il numero di vendite
      * @param idVenditore
      * @return String: lista dei negozi
@@ -159,7 +159,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista dei propri negozi ordinati per vendite maggiori
      * @param idVenditore
      * @return String: lista dei negozi
@@ -174,7 +174,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista dei propri negozi per vendite minori
      * @param idVenditore
      * @return String: lista dei negozi
@@ -189,7 +189,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista dei propri negozi con vendite inferiori ad un certo valore
      * @param idVenditore
      * @param valore
@@ -205,7 +205,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista dei propri negozi con vendite superiori ad un certo valore
      * @param idVenditore
      * @param valore
@@ -221,7 +221,7 @@ public class sellersQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista dei negozi che vendono prodotti di una certa categoria
      * @param idVenditore
      * @param attivo
@@ -238,7 +238,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista dei negozi che vendono prodotti di una certa categoria ordinate da quello con più vendite
      * @param idVenditore
      * @param attivo
@@ -259,7 +259,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista dei negozi che vendono prodotti di una certa categoria ordinate da quello con meno vendite
      * @param idVenditore
      * @param attivo
@@ -280,7 +280,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista dei propri negozi ordinati per data di apertura
      * @param idVenditore
      * @return String: lista dei negozi
@@ -291,7 +291,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista dei propri negozi ordinati per fatturato
      * @param idVenditore
      * @return String: lista dei negozi
@@ -307,7 +307,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere i dati di un negozio
      * @param idVenditore
      * @param idNegozio
@@ -319,7 +319,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere i dati delle vendite di un determinato negozio
      * @param idNegozio
      * @return String: lista degli ordini
@@ -330,7 +330,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere i dati di vendita di un determinato negozio in una determinata categoria
      * @param idNegozio
      * @param idCategoria
@@ -344,7 +344,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere le richieste di assistenza in cui si è stati citati
      * @param idVenditore
      * @return String: lista delle richieste di assistenza
@@ -356,7 +356,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista dei prodotti venduti raggruppati per categoria e negozio
      * @param idVenditore
      * @return String: lista dei prodotti
@@ -370,7 +370,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista dei prodotti venduti in una determinata categoria raggruppati per negozio
      * @param idVenditore
      * @param nomeCategoria
@@ -385,7 +385,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista dei prodotti venduti ordinati per valutazioni
      * @param idVenditore
      * @return String: lista dei prodotti
@@ -399,7 +399,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lsita dei propri negozi ordinati per recensioni
      * @param idVenditore
      * @return String: lista dei negozi
@@ -410,7 +410,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista dei proprio prodotti in sconto raggruppati per categoria e negozio
      * @param idVenditore
      * @return String: lista dei prodotti
@@ -424,7 +424,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista dei proprio prodotti in sconto raggruppati per categoria e negozio ordinati per scadenza più vicina dello sconto
      * @param idVenditore
      * @return String: lista dei prodotti
@@ -439,7 +439,7 @@ public class sellersQuery {
     }
           
     /**
-     * @author Brugix
+     * @author fbrug
      * Ottenere la lista delle recensioni ricevute
      * @param idVenditore
      * @return String: lista delle recensioni
@@ -450,7 +450,7 @@ public class sellersQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Aggiungere un proprio negozio
      * @param idVenditore
      * @param nomeNegozio
@@ -465,7 +465,7 @@ public class sellersQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Chiudere un proprio negozio (rimuoverlo)
      * @param idNegozio
      * @return String: conferma avvenuta operazione
@@ -476,7 +476,7 @@ public class sellersQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Modificare lo stato di un ordine
      * @param nuovoStato
      * @param idOrdine
@@ -488,7 +488,7 @@ public class sellersQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Aggiungere ad un ordine spedito il codice di tracking
      * @param codiceTracking
      * @param idOrdine
@@ -500,7 +500,7 @@ public class sellersQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Aggiungere un prodotto (OGGETTO) ad un proprio negozio
      * @param idNegozio
      * @param nomeOggetto
@@ -537,7 +537,7 @@ public class sellersQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Rimuovere un oggetto da un proprio negozio
      * @param idNegozio
      * @return String: conferma avvenuta operazione
@@ -548,7 +548,7 @@ public class sellersQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Modificare il prezzo di un oggetto di un proprio negozio
      * @param idOggetti
      * @param prezzoOggetto
@@ -560,7 +560,7 @@ public class sellersQuery {
     }
     
     /**
-     * @author Brugix
+     * @author fbrug
      * Modificare lo sconto di un oggetto
      * @param idOggetti
      * @param sconto
