@@ -61,7 +61,7 @@ function spostaFileClass
 
 function rimuoviClass
 {
-    read -p "Dove vuoi scannerizzare? [directory]" DELETE
+    read -p "Quale directory vuoi scannerizzare? " DELETE
     find "$DELETE" -type f -name *.class -exec rm '{}' +
 }
 
@@ -87,9 +87,23 @@ function selezionaUtente
     esac
 }
 
+function rilevaDirectory
+{
+    if [ -f "/Applications/Tomcat/lib/servlet-api.jar" ]
+    then
+        SERVLET=/Applications/Tomcat/lib/servlet-api.jar
+    elif [ -f "/mnt/c/Program Files/Apache Software Foundation/Tomcat 8.5/lib/servlet-api.jar" ]
+    then
+        SERVLET=/mnt/c/Program Files/Apache Software Foundation/Tomcat 8.5/lib/servlet-api.jar
+    elif [ -f "/home/mattia/Netbeans/apache-tomcat-8.0.27/lib/servlet-api.jar" ]
+    then
+        SERVLET=/home/mattia/Netbeans/apache-tomcat-8.0.27/lib/servlet-api.jar
+    fi
+}
+
 function creaClassi
 {
-    selezionaUtente
+    rilevaDirectory
     creaFileClass
     echo "JAVA compilati - CLASS creati"
     sleep 2
