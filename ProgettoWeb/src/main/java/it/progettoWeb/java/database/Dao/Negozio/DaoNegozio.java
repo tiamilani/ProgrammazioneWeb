@@ -93,4 +93,28 @@ public class DaoNegozio {
         
         return Stores;
     }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista di negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param lat Un double utilizzato per definire la latitudine desiderata
+     * @param lon Un double utilizzato per definire la longitudine desiderata
+     * @param rad Un double utilizzato per definire il raggio desiderata
+     * @return List<ModelloNegozio> lista di negozi
+     */
+    public List<ModelloNegozio> selectSellerSpecifiedSellerLatLonRad(int id, double lat, double lon, double rad) {
+        List<ModelloNegozio> Stores = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerSpecifiedSellerLatLonRad(id,lat,lon,rad));
+            while (rs.next()) {
+                Stores.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Stores;
+    }
 }

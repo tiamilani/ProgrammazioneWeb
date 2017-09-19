@@ -335,5 +335,254 @@ public class DaoOggetto {
         return Objects;
     }
     
-    //RIGA 200 FILE OBJECTSELLERSQUERY.JAVA
+    /**
+     * @author Mattia
+     * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerMinPriceAndNameAndCategory(int id, int priceMin, int cat, String pattern) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerMinPriceAndNameAndCategory(id,priceMin,cat,pattern));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerMaxPriceAndNameAndCategory(int id, int priceMax, int cat, String pattern) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerMaxPriceAndNameAndCategory(id,priceMax,cat,pattern));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerMinMaxPriceAndNameAndCategory(int id, int priceMin, int priceMax, int cat, String pattern) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerMinMaxPriceAndNameAndCategory(id,priceMin,priceMax,cat,pattern));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista di oggetti di negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param lat Un double utilizzato per definire la latitudine desiderata
+     * @param lon Un double utilizzato per definire la longitudine desiderata
+     * @param rad Un double utilizzato per definire il raggio desiderata
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRad(int id, double lat, double lon, double rad) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerLatLonRad(id,lat,lon,rad));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista di oggetti che contengono una stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param lat Un double utilizzato per definire la latitudine desiderata
+     * @param lon Un double utilizzato per definire la longitudine desiderata
+     * @param rad Un double utilizzato per definire il raggio desiderata
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRadAndName(int id, double lat, double lon, double rad, String pattern) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerLatLonRadAndName(id,lat,lon,rad,pattern));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista di oggetti di una categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param lat Un double utilizzato per definire la latitudine desiderata
+     * @param lon Un double utilizzato per definire la longitudine desiderata
+     * @param rad Un double utilizzato per definire il raggio desiderata
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRadAndCategory(int id, double lat, double lon, double rad, int cat) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerLatLonRadAndCategory(id,lat,lon,rad,cat));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista di oggetti di una categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param lat Un double utilizzato per definire la latitudine desiderata
+     * @param lon Un double utilizzato per definire la longitudine desiderata
+     * @param rad Un double utilizzato per definire il raggio desiderata
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRadAndNameCategory(int id, double lat, double lon, double rad, int cat, String pattern) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerLatLonRadAndNameCategory(id,lat,lon,rad,cat,pattern));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista di oggetti con un certo prezzo minimo nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param lat Un double utilizzato per definire la latitudine desiderata
+     * @param lon Un double utilizzato per definire la longitudine desiderata
+     * @param rad Un double utilizzato per definire il raggio desiderata
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRadAndMinPrice(int id, double lat, double lon, double rad, int priceMin) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerLatLonRadAndMinPrice(id,lat,lon,rad,priceMin));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista di oggetti con un certo prezzo massimo nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param lat Un double utilizzato per definire la latitudine desiderata
+     * @param lon Un double utilizzato per definire la longitudine desiderata
+     * @param rad Un double utilizzato per definire il raggio desiderata
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRadAndMaxPrice(int id, double lat, double lon, double rad, int priceMax) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerLatLonRadAndMaxPrice(id,lat,lon,rad,priceMax));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param lat Un double utilizzato per definire la latitudine desiderata
+     * @param lon Un double utilizzato per definire la longitudine desiderata
+     * @param rad Un double utilizzato per definire il raggio desiderata
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRadAndMinMaxPrice(int id, double lat, double lon, double rad, int priceMin, int priceMax) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerLatLonRadAndMinMaxPrice(id,lat,lon,rad,priceMin,priceMax));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    //Riga 420 objectSellers
 }
