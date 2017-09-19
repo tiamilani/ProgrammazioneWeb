@@ -573,14 +573,15 @@ public class marketsSellersQuery {
      * @author Damiano
      * Metodo che ritorna la lista degli oggetti presenti nei negozi di un determinato venditore 
      * a distanza minore o uguale al raggio a partire da una latitudine e una longitudine
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
      * @param id Un intero che rappresenta il venditore di cui si stanno cercando gli oggetti
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsbySellerNearby(double lat, double lon, double radius, int id){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsbySellerNearby(int idU, double lat, double lon, double radius, int id){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -599,6 +600,7 @@ public class marketsSellersQuery {
      * Metodo che ritorna la lista degli oggetti presenti nei negozi di un determinato venditore 
      * a distanza minore o uguale al raggio a partire da una latitudine e una longitudine e con una determinata
      * modalità di ritiro
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -606,8 +608,8 @@ public class marketsSellersQuery {
      * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsbySellerNearbySpecific(double lat, double lon, double radius, int id, int ritiro){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsbySellerNearbySpecific(int idU, double lat, double lon, double radius, int id, int ritiro){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -626,6 +628,7 @@ public class marketsSellersQuery {
      * @author Damiano
      * Metodo che ritorna la lista degli oggetti presenti nei negozi di un determinato venditore con una string nel 
      * nome a distanza minore o uguale al raggio a partire da una latitudine e una longitudine
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -633,8 +636,8 @@ public class marketsSellersQuery {
      * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsWithStringbySellerNearby(double lat, double lon, double radius, int id, String pattern){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsWithStringbySellerNearby(int idU, double lat, double lon, double radius, int id, String pattern){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -654,6 +657,7 @@ public class marketsSellersQuery {
      * Metodo che ritorna la lista degli oggetti presenti nei negozi di un determinato venditore con una stringa nel
      * nome a distanza minore o uguale al raggio a partire da una latitudine e una longitudine e con una determinata
      * modalità di ritiro
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -662,8 +666,8 @@ public class marketsSellersQuery {
      * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsWithStringbySellerNearbySpecific(double lat, double lon, double radius, int id, String pattern,  int ritiro){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsWithStringbySellerNearbySpecific(int idU, double lat, double lon, double radius, int id, String pattern,  int ritiro){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -682,6 +686,7 @@ public class marketsSellersQuery {
      * @author Damiano
      * Metodo che ritorna la lista degli oggetti in una categoria presenti nei negozi di un determinato venditore 
      * a distanza minore o uguale al raggio a partire da una latitudine e una longitudine
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -689,8 +694,8 @@ public class marketsSellersQuery {
      * @param categoria Un intero che rappresenta la categoria a cui gli oggetti cercati appartengono
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsInCategorybySellerNearby(double lat, double lon, double radius, int id, int categoria){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsInCategorybySellerNearby(int idU, double lat, double lon, double radius, int id, int categoria){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -710,6 +715,7 @@ public class marketsSellersQuery {
      * Metodo che ritorna la lista degli oggetti in una categoria presenti nei negozi di un determinato venditore 
      * a distanza minore o uguale al raggio a partire da una latitudine e una longitudine e con una determinata
      * modalità di ritiro
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -718,8 +724,8 @@ public class marketsSellersQuery {
      * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsInCategorybySellerNearbySpecific(double lat, double lon, double radius, int id, int categoria, int ritiro){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsInCategorybySellerNearbySpecific(int idU, double lat, double lon, double radius, int id, int categoria, int ritiro){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -738,6 +744,7 @@ public class marketsSellersQuery {
      * @author Damiano
      * Metodo che ritorna la lista degli oggetti in una categoria presenti nei negozi di un determinato venditore 
      * con una string nel nome a distanza minore o uguale al raggio a partire da una latitudine e una longitudine
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -746,8 +753,8 @@ public class marketsSellersQuery {
      * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsInCategoryWithStringbySellerNearby(double lat, double lon, double radius, int id, int categoria, String pattern){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsInCategoryWithStringbySellerNearby(int idU, double lat, double lon, double radius, int id, int categoria, String pattern){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -767,6 +774,7 @@ public class marketsSellersQuery {
      * Metodo che ritorna la lista degli oggetti in una categoria presenti nei negozi di un determinato venditore 
      * con una stringa nel nome a distanza minore o uguale al raggio a partire da una latitudine e una longitudine 
      * e con una determinata modalità di ritiro
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -776,8 +784,8 @@ public class marketsSellersQuery {
      * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsInCategoryWithStringbySellerNearbySpecific(double lat, double lon, double radius, int id, int categoria, String pattern, int ritiro){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsInCategoryWithStringbySellerNearbySpecific(int idU, double lat, double lon, double radius, int id, int categoria, String pattern, int ritiro){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -797,6 +805,7 @@ public class marketsSellersQuery {
      * @author Damiano
      * Metodo che ritorna la lista degli oggetti presenti nei negozi di un determinato venditore con un prezzo maggiore
      * di un certo minimo a distanza minore o uguale al raggio a partire da una latitudine e una longitudine
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -804,8 +813,8 @@ public class marketsSellersQuery {
      * @param minimo La soglia minima di prezzo
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsWithPriceHigherThanbySellerNearby(double lat, double lon, double radius, int id, double minimo){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsWithPriceHigherThanbySellerNearby(int idU, double lat, double lon, double radius, int id, double minimo){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -825,6 +834,7 @@ public class marketsSellersQuery {
      * Metodo che ritorna la lista degli oggetti presenti nei negozi di un determinato venditore con un prezzo maggiore
      * di un certo minimo a distanza minore o uguale al raggio a partire da una latitudine e una longitudine 
      * e con una determinata modalità di ritiro
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -833,8 +843,8 @@ public class marketsSellersQuery {
      * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsWithPriceHigherThanbySellerNearbySpecific(double lat, double lon, double radius, int id, double minimo, int ritiro){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsWithPriceHigherThanbySellerNearbySpecific(int idU, double lat, double lon, double radius, int id, double minimo, int ritiro){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -853,6 +863,7 @@ public class marketsSellersQuery {
      * @author Damiano
      * Metodo che ritorna la lista degli oggetti presenti nei negozi di un determinato venditore con un prezzo minore
      * di un certo massimo a distanza minore o uguale al raggio a partire da una latitudine e una longitudine
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -860,8 +871,8 @@ public class marketsSellersQuery {
      * @param massimo La soglia massima di prezzo
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsWithPriceLowerThanbySellerNearby(double lat, double lon, double radius, int id, double massimo){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsWithPriceLowerThanbySellerNearby(int idU, double lat, double lon, double radius, int id, double massimo){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -881,6 +892,7 @@ public class marketsSellersQuery {
      * Metodo che ritorna la lista degli oggetti presenti nei negozi di un determinato venditore con un prezzo minore
      * di un certo massimo a distanza minore o uguale al raggio a partire da una latitudine e una longitudine e 
      * con una determinata modalità di ritiro
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -889,8 +901,8 @@ public class marketsSellersQuery {
      * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsWithPriceLowerThanbySellerNearbySpecific(double lat, double lon, double radius, int id, double massimo, int ritiro){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsWithPriceLowerThanbySellerNearbySpecific(int idU, double lat, double lon, double radius, int id, double massimo, int ritiro){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -909,6 +921,7 @@ public class marketsSellersQuery {
      * @author Damiano
      * Metodo che ritorna la lista degli oggetti presenti nei negozi di un determinato venditore con un prezzo minore
      * di un certo massimo a distanza minore o uguale al raggio a partire da una latitudine e una longitudine
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -917,8 +930,8 @@ public class marketsSellersQuery {
      * @param massimo La soglia massima di prezzo
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsWithPriceBetweenRangebySellerNearby(double lat, double lon, double radius, int id, double minimo, double massimo){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsWithPriceBetweenRangebySellerNearby(int idU, double lat, double lon, double radius, int id, double minimo, double massimo){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -938,6 +951,7 @@ public class marketsSellersQuery {
      * Metodo che ritorna la lista degli oggetti presenti nei negozi di un determinato venditore con un prezzo minore
      * di un certo massimo a distanza minore o uguale al raggio a partire da una latitudine e una longitudine e 
      * con una determinata modalità di ritiro
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -947,8 +961,8 @@ public class marketsSellersQuery {
      * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsWithPriceBetweenRangebySellerNearbySpecific(double lat, double lon, double radius, int id, double minimo, double massimo, int ritiro){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsWithPriceBetweenRangebySellerNearbySpecific(int idU, double lat, double lon, double radius, int id, double minimo, double massimo, int ritiro){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -969,6 +983,7 @@ public class marketsSellersQuery {
      * Metodo che ritorna la lista degli oggetti in una categoria presenti nei negozi di un determinato venditore 
      * con un prezzo maggiore di un certo minimo a distanza minore o uguale al raggio a partire da una latitudine 
      * e una longitudine
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -977,8 +992,8 @@ public class marketsSellersQuery {
      * @param minimo La soglia minima di prezzo
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsInCategoryWithPriceHigherThanbySellerNearby(double lat, double lon, double radius, int id, int categoria, double minimo){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsInCategoryWithPriceHigherThanbySellerNearby(int idU, double lat, double lon, double radius, int id, int categoria, double minimo){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -998,6 +1013,7 @@ public class marketsSellersQuery {
      * Metodo che ritorna la lista degli oggetti in una categoria presenti nei negozi di un determinato venditore 
      * con un prezzo maggiore di un certo minimo a distanza minore o uguale al raggio a partire da una latitudine 
      * e una longitudine e con una determinata modalità di ritiro
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -1007,8 +1023,8 @@ public class marketsSellersQuery {
      * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsInCategoryWithPriceHigherThanbySellerNearbySpecific(double lat, double lon, double radius, int id, int categoria, double minimo, int ritiro){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsInCategoryWithPriceHigherThanbySellerNearbySpecific(int idU, double lat, double lon, double radius, int id, int categoria, double minimo, int ritiro){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -1029,6 +1045,7 @@ public class marketsSellersQuery {
      * Metodo che ritorna la lista degli oggetti in una categoria presenti nei negozi di un determinato venditore 
      * con un prezzo minore di un certo massimo a distanza minore o uguale al raggio a partire da una latitudine 
      * e una longitudine
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -1037,8 +1054,8 @@ public class marketsSellersQuery {
      * @param massimo La soglia massima di prezzo
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsInCategoryWithPriceLowerThanbySellerNearby(double lat, double lon, double radius, int id, int categoria, double massimo){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsInCategoryWithPriceLowerThanbySellerNearby(int idU, double lat, double lon, double radius, int id, int categoria, double massimo){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -1058,6 +1075,7 @@ public class marketsSellersQuery {
      * Metodo che ritorna la lista degli oggetti in una categoria presenti nei negozi di un determinato venditore 
      * con un prezzo minore di un certo massimo a distanza minore o uguale al raggio a partire da una latitudine 
      * e una longitudine e con una determinata modalità di ritiro
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -1067,8 +1085,8 @@ public class marketsSellersQuery {
      * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsInCategoryWithPriceLowerThanbySellerNearbySpecific(double lat, double lon, double radius, int id, int categoria, double massimo, int ritiro){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsInCategoryWithPriceLowerThanbySellerNearbySpecific(int idU, double lat, double lon, double radius, int id, int categoria, double massimo, int ritiro){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -1089,6 +1107,7 @@ public class marketsSellersQuery {
      * Metodo che ritorna la lista degli oggetti in una categoria presenti nei negozi di un determinato venditore 
      * con un prezzo compreso tra due valori di un certo massimo a distanza minore o uguale al raggio a partire 
      * da una latitudine e una longitudine
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -1098,8 +1117,8 @@ public class marketsSellersQuery {
      * @param massimo La soglia massima di prezzo
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsInCategoryWithPriceBetweenRangebySellerNearby(double lat, double lon, double radius, int id, int categoria, double minimo, double massimo){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsInCategoryWithPriceBetweenRangebySellerNearby(int idU, double lat, double lon, double radius, int id, int categoria, double minimo, double massimo){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -1119,6 +1138,7 @@ public class marketsSellersQuery {
      * Metodo che ritorna la lista degli oggetti in una categoria presenti nei negozi di un determinato venditore 
      * con un prezzo compreso tra due valori a distanza minore o uguale al raggio a partire da una latitudine e 
      * una longitudine e con una determinata modalità di ritiro
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -1129,8 +1149,8 @@ public class marketsSellersQuery {
      * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsInCategoryWithPriceBetweenRangebySellerNearbySpecific(double lat, double lon, double radius, int id, int categoria, double minimo, double massimo, int ritiro){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsInCategoryWithPriceBetweenRangebySellerNearbySpecific(int idU, double lat, double lon, double radius, int id, int categoria, double minimo, double massimo, int ritiro){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -1149,9 +1169,196 @@ public class marketsSellersQuery {
     
     /**
      * @author Damiano
+     * Metodo che ritorna la lista degli oggetti presenti nei negozi di un determinato venditore con un prezzo maggiore
+     * di un certo minimo a distanza minore o uguale al raggio a partire da una latitudine e una longitudine
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
+     * @param lat Un double che rappresenta la latidudine desiderata
+     * @param lon Un double che rappresenta la longitudine desiderata
+     * @param radius Un double che rappresenta il raggio di ricerca
+     * @param id Un intero che rappresenta il venditore di cui si stanno cercando gli oggetti
+     * @param minimo La soglia minima di prezzo
+     * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
+     * @return La stringa corrispondete alla query 
+     */
+    public static String itemsWithPriceHigherThanWithStringbySellerNearby(int idU, double lat, double lon, double radius, int id, double minimo, String pattern){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
+                + "SELECT Negozio.id "
+                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "WHERE " + radius + " >= 111.111 * "
+                + "         DEGREES(ACOS(COS(RADIANS(" + lat + ")) "
+                + "             * COS(RADIANS(Indirizzo.latitudine)) "
+                + "             * COS(RADIANS(" + lon + " - Indirizzo.longitudine)) "
+                + "             + SIN(RADIANS(" + lat + ")) "
+                + "             * SIN(RADIANS(Indirizzo.latitudine)))) "
+                + "     AND Negozio.idVenditore = " + id + "; "
+                + "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.prezzo >= " + minimo + " AND Oggetto.nomeDownCase LIKE '%" + pattern + "%';";
+    }
+    
+    /**
+     * @author Damiano
+     * Metodo che ritorna la lista degli oggetti presenti nei negozi di un determinato venditore con un prezzo maggiore
+     * di un certo minimo a distanza minore o uguale al raggio a partire da una latitudine e una longitudine 
+     * e con una determinata modalità di ritiro
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
+     * @param lat Un double che rappresenta la latidudine desiderata
+     * @param lon Un double che rappresenta la longitudine desiderata
+     * @param radius Un double che rappresenta il raggio di ricerca
+     * @param id Un intero che rappresenta il venditore di cui si stanno cercando gli oggetti
+     * @param minimo La soglia minima di prezzo
+     * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return La stringa corrispondete alla query 
+     */
+    public static String itemsWithPriceHigherThanWithStringbySellerNearbySpecific(int idU, double lat, double lon, double radius, int id, double minimo, String pattern, int ritiro){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
+                + "SELECT Negozio.id "
+                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "WHERE " + radius + " >= 111.111 * "
+                + "         DEGREES(ACOS(COS(RADIANS(" + lat + ")) "
+                + "             * COS(RADIANS(Indirizzo.latitudine)) "
+                + "             * COS(RADIANS(" + lon + " - Indirizzo.longitudine)) "
+                + "             + SIN(RADIANS(" + lat + ")) "
+                + "             * SIN(RADIANS(Indirizzo.latitudine)))) "
+                + "     AND Negozio.idVenditore = " + id + "; "
+                + "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.prezzo >= " + minimo + " AND Oggetto.nomeDownCase LIKE '%" + pattern + "%' "
+                + "AND Oggetto.ritiroInNegozio = " + ritiro + ";";
+    }
+    
+    /**
+     * @author Damiano
+     * Metodo che ritorna la lista degli oggetti presenti nei negozi di un determinato venditore con un prezzo minore
+     * di un certo massimo a distanza minore o uguale al raggio a partire da una latitudine e una longitudine
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
+     * @param lat Un double che rappresenta la latidudine desiderata
+     * @param lon Un double che rappresenta la longitudine desiderata
+     * @param radius Un double che rappresenta il raggio di ricerca
+     * @param id Un intero che rappresenta il venditore di cui si stanno cercando gli oggetti
+     * @param massimo La soglia massima di prezzo
+     * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
+     * @return La stringa corrispondete alla query 
+     */
+    public static String itemsWithPriceLowerThanWithStringbySellerNearby(int idU, double lat, double lon, double radius, int id, double massimo, String pattern){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
+                + "SELECT Negozio.id "
+                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "WHERE " + radius + " >= 111.111 * "
+                + "         DEGREES(ACOS(COS(RADIANS(" + lat + ")) "
+                + "             * COS(RADIANS(Indirizzo.latitudine)) "
+                + "             * COS(RADIANS(" + lon + " - Indirizzo.longitudine)) "
+                + "             + SIN(RADIANS(" + lat + ")) "
+                + "             * SIN(RADIANS(Indirizzo.latitudine)))) "
+                + "     AND Negozio.idVenditore = " + id + "; "
+                + "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.prezzo <= " + massimo + " AND Oggetto.nomeDownCase LIKE '%" + pattern + "%';";
+    }
+    
+    /**
+     * @author Damiano
+     * Metodo che ritorna la lista degli oggetti presenti nei negozi di un determinato venditore con un prezzo minore
+     * di un certo massimo a distanza minore o uguale al raggio a partire da una latitudine e una longitudine e 
+     * con una determinata modalità di ritiro
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
+     * @param lat Un double che rappresenta la latidudine desiderata
+     * @param lon Un double che rappresenta la longitudine desiderata
+     * @param radius Un double che rappresenta il raggio di ricerca
+     * @param id Un intero che rappresenta il venditore di cui si stanno cercando gli oggetti
+     * @param massimo La soglia massima di prezzo
+     * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return La stringa corrispondete alla query 
+     */
+    public static String itemsWithPriceLowerThanWithStringbySellerNearbySpecific(int idU, double lat, double lon, double radius, int id, double massimo, String pattern, int ritiro){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
+                + "SELECT Negozio.id "
+                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "WHERE " + radius + " >= 111.111 * "
+                + "         DEGREES(ACOS(COS(RADIANS(" + lat + ")) "
+                + "             * COS(RADIANS(Indirizzo.latitudine)) "
+                + "             * COS(RADIANS(" + lon + " - Indirizzo.longitudine)) "
+                + "             + SIN(RADIANS(" + lat + ")) "
+                + "             * SIN(RADIANS(Indirizzo.latitudine)))) "
+                + "     AND Negozio.idVenditore = " + id + "; "
+                + "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.prezzo <= " + massimo + "AND Oggetto.nomeDownCase LIKE '%" + pattern + "%' "
+                + "AND Oggetto.ritiroInNegozio = " + ritiro + ";";
+    }
+    
+    /**
+     * @author Damiano
+     * Metodo che ritorna la lista degli oggetti presenti nei negozi di un determinato venditore con un prezzo minore
+     * di un certo massimo a distanza minore o uguale al raggio a partire da una latitudine e una longitudine
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
+     * @param lat Un double che rappresenta la latidudine desiderata
+     * @param lon Un double che rappresenta la longitudine desiderata
+     * @param radius Un double che rappresenta il raggio di ricerca
+     * @param id Un intero che rappresenta il venditore di cui si stanno cercando gli oggetti
+     * @param minimo La soglia minima di prezzo
+     * @param massimo La soglia massima di prezzo
+     * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
+     * @return La stringa corrispondete alla query 
+     */
+    public static String itemsWithPriceBetweenRangeWithStringbySellerNearby(int idU, double lat, double lon, double radius, int id, double minimo, double massimo, String pattern){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
+                + "SELECT Negozio.id "
+                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "WHERE " + radius + " >= 111.111 * "
+                + "         DEGREES(ACOS(COS(RADIANS(" + lat + ")) "
+                + "             * COS(RADIANS(Indirizzo.latitudine)) "
+                + "             * COS(RADIANS(" + lon + " - Indirizzo.longitudine)) "
+                + "             + SIN(RADIANS(" + lat + ")) "
+                + "             * SIN(RADIANS(Indirizzo.latitudine)))) "
+                + "     AND Negozio.idVenditore = " + id + "; "
+                + "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.prezzo BETWEEN " + minimo + " AND " + massimo + ""
+                + "AND Oggetto.nomeDownCase LIKE '%" + pattern + "%';";
+    }
+    
+    /**
+     * @author Damiano
+     * Metodo che ritorna la lista degli oggetti presenti nei negozi di un determinato venditore con un prezzo minore
+     * di un certo massimo a distanza minore o uguale al raggio a partire da una latitudine e una longitudine e 
+     * con una determinata modalità di ritiro
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
+     * @param lat Un double che rappresenta la latidudine desiderata
+     * @param lon Un double che rappresenta la longitudine desiderata
+     * @param radius Un double che rappresenta il raggio di ricerca
+     * @param id Un intero che rappresenta il venditore di cui si stanno cercando gli oggetti
+     * @param minimo La soglia minima di prezzo
+     * @param massimo La soglia massima di prezzo
+     * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return La stringa corrispondete alla query 
+     */
+    public static String itemsWithPriceBetweenRangeWithStringbySellerNearbySpecific(int idU, double lat, double lon, double radius, int id, double minimo, double massimo, String pattern, int ritiro){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
+                + "SELECT Negozio.id "
+                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "WHERE " + radius + " >= 111.111 * "
+                + "         DEGREES(ACOS(COS(RADIANS(" + lat + ")) "
+                + "             * COS(RADIANS(Indirizzo.latitudine)) "
+                + "             * COS(RADIANS(" + lon + " - Indirizzo.longitudine)) "
+                + "             + SIN(RADIANS(" + lat + ")) "
+                + "             * SIN(RADIANS(Indirizzo.latitudine)))) "
+                + "     AND Negozio.idVenditore = " + id + "; "
+                + "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.prezzo BETWEEN " + minimo + " AND " + massimo + " "
+                + "AND Oggetto.nomeDownCase LIKE '%" + pattern + "%' AND Oggetto.ritiroInNegozio = " + ritiro + ";";
+    }
+    
+    /**
+     * @author Damiano
      * Metodo che ritorna la lista degli oggetti in una categoria presenti nei negozi di un determinato venditore 
-     * con un prezzo maggiore di un certo minimo a distanza minore o uguale al raggio a partire da una latitudine 
-     * e una longitudine
+     * con una stringa nel nome, con un prezzo maggiore di un certo minimo, a distanza minore o uguale al raggio 
+     * a partire da una latitudine e una longitudine
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -1161,8 +1368,8 @@ public class marketsSellersQuery {
      * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsInCategoryWithPriceHigherThanWithStringbySellerNearby(double lat, double lon, double radius, int id, int categoria, double minimo, String pattern){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsInCategoryWithPriceHigherThanWithStringbySellerNearby(int idU, double lat, double lon, double radius, int id, int categoria, double minimo, String pattern){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -1181,8 +1388,9 @@ public class marketsSellersQuery {
     /**
      * @author Damiano
      * Metodo che ritorna la lista degli oggetti in una categoria presenti nei negozi di un determinato venditore 
-     * con un prezzo maggiore di un certo minimo a distanza minore o uguale al raggio a partire da una latitudine 
-     * e una longitudine e con una determinata modalità di ritiro
+     * con una stringa nel nome, con un prezzo maggiore di un certo minimo, a distanza minore o uguale al raggio 
+     * a partire da una latitudine e una longitudine e con una determinata modalità di ritiro
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -1193,8 +1401,8 @@ public class marketsSellersQuery {
      * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsInCategoryWithPriceHigherThanWithStringbySellerNearbySpecific(double lat, double lon, double radius, int id, int categoria, double minimo, String pattern, int ritiro){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsInCategoryWithPriceHigherThanWithStringbySellerNearbySpecific(int idU, double lat, double lon, double radius, int id, int categoria, double minimo, String pattern, int ritiro){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -1213,8 +1421,9 @@ public class marketsSellersQuery {
     /**
      * @author Damiano
      * Metodo che ritorna la lista degli oggetti in una categoria presenti nei negozi di un determinato venditore 
-     * con un prezzo minore di un certo massimo a distanza minore o uguale al raggio a partire da una latitudine 
-     * e una longitudine
+     * con una stringa nel nome, con un prezzo minore di un certo massimo, a distanza minore o uguale al raggio
+     * a partire da una latitudine e una longitudine
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
      * @param lat Un double che rappresenta la latidudine desiderata
      * @param lon Un double che rappresenta la longitudine desiderata
      * @param radius Un double che rappresenta il raggio di ricerca
@@ -1224,103 +1433,8 @@ public class marketsSellersQuery {
      * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
      * @return La stringa corrispondete alla query 
      */
-    public static String itemsInCategoryWithPriceLowerThanWithStringbySellerNearby(double lat, double lon, double radius, int id, int categoria, double massimo, String pattern){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                + "WHERE " + radius + " >= 111.111 * "
-                + "         DEGREES(ACOS(COS(RADIANS(" + lat + ")) "
-                + "             * COS(RADIANS(Indirizzo.latitudine)) "
-                + "             * COS(RADIANS(" + lon + " - Indirizzo.longitudine)) "
-                + "             + SIN(RADIANS(" + lat + ")) "
-                + "             * SIN(RADIANS(Indirizzo.latitudine)))) "
-                + "     AND Negozio.idVenditore = " + id + "; "
-                + "SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                + "WHERE Oggetto.categoria = " + categoria + " AND Oggetto.prezzo <= " + massimo + ";";
-    }
-    
-    /**
-     * @author Damiano
-     * Metodo che ritorna la lista degli oggetti in una categoria presenti nei negozi di un determinato venditore 
-     * con un prezzo minore di un certo massimo a distanza minore o uguale al raggio a partire da una latitudine 
-     * e una longitudine e con una determinata modalità di ritiro
-     * @param lat Un double che rappresenta la latidudine desiderata
-     * @param lon Un double che rappresenta la longitudine desiderata
-     * @param radius Un double che rappresenta il raggio di ricerca
-     * @param id Un intero che rappresenta il venditore di cui si stanno cercando gli oggetti
-     * @param categoria Un intero che rappresenta la categoria a cui gli oggetti cercati appartengono
-     * @param massimo La soglia massima di prezzo
-     * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
-     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
-     * @return La stringa corrispondete alla query 
-     */
-    public static String itemsInCategoryWithPriceLowerThanWithStringbySellerNearbySpecific(double lat, double lon, double radius, int id, int categoria, double massimo, String pattern, int ritiro){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                + "WHERE " + radius + " >= 111.111 * "
-                + "         DEGREES(ACOS(COS(RADIANS(" + lat + ")) "
-                + "             * COS(RADIANS(Indirizzo.latitudine)) "
-                + "             * COS(RADIANS(" + lon + " - Indirizzo.longitudine)) "
-                + "             + SIN(RADIANS(" + lat + ")) "
-                + "             * SIN(RADIANS(Indirizzo.latitudine)))) "
-                + "     AND Negozio.idVenditore = " + id + "; "
-                + "SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                + "WHERE Oggetto.categoria = " + categoria + "AND Oggetto.prezzo <= " + massimo + " "
-                + "AND Oggetto.ritiroInNegozio = " + ritiro + ";";
-    }
-    
-    /**
-     * @author Damiano
-     * Metodo che ritorna la lista degli oggetti in una categoria presenti nei negozi di un determinato venditore 
-     * con un prezzo compreso tra due valori di un certo massimo a distanza minore o uguale al raggio a partire 
-     * da una latitudine e una longitudine
-     * @param lat Un double che rappresenta la latidudine desiderata
-     * @param lon Un double che rappresenta la longitudine desiderata
-     * @param radius Un double che rappresenta il raggio di ricerca
-     * @param id Un intero che rappresenta il venditore di cui si stanno cercando gli oggetti
-     * @param categoria Un intero che rappresenta la categoria a cui gli oggetti cercati appartengono
-     * @param minimo La soglia minima di prezzo
-     * @param massimo La soglia massima di prezzo
-     * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
-     * @return La stringa corrispondete alla query 
-     */
-    public static String itemsInCategoryWithPriceBetweenRangeWithStringbySellerNearby(double lat, double lon, double radius, int id, int categoria, double minimo, double massimo, String pattern){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                + "WHERE " + radius + " >= 111.111 * "
-                + "         DEGREES(ACOS(COS(RADIANS(" + lat + ")) "
-                + "             * COS(RADIANS(Indirizzo.latitudine)) "
-                + "             * COS(RADIANS(" + lon + " - Indirizzo.longitudine)) "
-                + "             + SIN(RADIANS(" + lat + ")) "
-                + "             * SIN(RADIANS(Indirizzo.latitudine)))) "
-                + "     AND Negozio.idVenditore = " + id + "; "
-                + "SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                + "WHERE Oggetto.categoria = " + categoria + " AND Oggetto.prezzo BETWEEN " + minimo + " AND " + massimo + ";";
-    }
-    
-    /**
-     * @author Damiano
-     * Metodo che ritorna la lista degli oggetti in una categoria presenti nei negozi di un determinato venditore 
-     * con un prezzo compreso tra due valori a distanza minore o uguale al raggio a partire da una latitudine e 
-     * una longitudine e con una determinata modalità di ritiro
-     * @param lat Un double che rappresenta la latidudine desiderata
-     * @param lon Un double che rappresenta la longitudine desiderata
-     * @param radius Un double che rappresenta il raggio di ricerca
-     * @param id Un intero che rappresenta il venditore di cui si stanno cercando gli oggetti
-     * @param categoria Un intero che rappresenta la categoria a cui gli oggetti cercati appartengono
-     * @param minimo La soglia minima di prezzo
-     * @param massimo La soglia massima di prezzo
-     * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
-     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
-     * @return La stringa corrispondete alla query 
-     */
-    public static String itemsInCategoryWithPriceBetweenRangeWithStringbySellerNearbySpecific(double lat, double lon, double radius, int id, int categoria, double minimo, double massimo, String pattern, int ritiro){
-        return "Create OR REPLACE View NegoziNellaDistanza_" + id + " as "
+    public static String itemsInCategoryWithPriceLowerThanWithStringbySellerNearby(int idU, double lat, double lon, double radius, int id, int categoria, double massimo, String pattern){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
                 + "SELECT Negozio.id "
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                 + "WHERE " + radius + " >= 111.111 * "
@@ -1333,121 +1447,112 @@ public class marketsSellersQuery {
                 + "SELECT Oggetto.* "
                 + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
                 + "WHERE Oggetto.categoria = " + categoria + " "
+                + "AND Oggetto.nomeDownCase LIKE '%" + pattern + "%' AND Oggetto.prezzo <= " + massimo + ";";
+    }
+    
+    /**
+     * @author Damiano
+     * Metodo che ritorna la lista degli oggetti in una categoria presenti nei negozi di un determinato venditore 
+     * con una stringa nel nome, con un prezzo minore di un certo massimo, a distanza minore o uguale al raggio 
+     * a partire da una latitudine e una longitudine e con una determinata modalità di ritiro
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
+     * @param lat Un double che rappresenta la latidudine desiderata
+     * @param lon Un double che rappresenta la longitudine desiderata
+     * @param radius Un double che rappresenta il raggio di ricerca
+     * @param id Un intero che rappresenta il venditore di cui si stanno cercando gli oggetti
+     * @param categoria Un intero che rappresenta la categoria a cui gli oggetti cercati appartengono
+     * @param massimo La soglia massima di prezzo
+     * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return La stringa corrispondete alla query 
+     */
+    public static String itemsInCategoryWithPriceLowerThanWithStringbySellerNearbySpecific(int idU, double lat, double lon, double radius, int id, int categoria, double massimo, String pattern, int ritiro){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
+                + "SELECT Negozio.id "
+                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "WHERE " + radius + " >= 111.111 * "
+                + "         DEGREES(ACOS(COS(RADIANS(" + lat + ")) "
+                + "             * COS(RADIANS(Indirizzo.latitudine)) "
+                + "             * COS(RADIANS(" + lon + " - Indirizzo.longitudine)) "
+                + "             + SIN(RADIANS(" + lat + ")) "
+                + "             * SIN(RADIANS(Indirizzo.latitudine)))) "
+                + "     AND Negozio.idVenditore = " + id + "; "
+                + "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.categoria = " + categoria + "AND Oggetto.prezzo <= " + massimo + " "
+                + "AND Oggetto.nomeDownCase LIKE '%" + pattern + "%' AND Oggetto.ritiroInNegozio = " + ritiro + ";";
+    }
+    
+    /**
+     * @author Damiano
+     * Metodo che ritorna la lista degli oggetti in una categoria presenti nei negozi di un determinato venditore 
+     * con una stringa nel nome, con un prezzo compreso tra due valori, a distanza minore o uguale al raggio 
+     * a partire da una latitudine e una longitudine
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
+     * @param lat Un double che rappresenta la latidudine desiderata
+     * @param lon Un double che rappresenta la longitudine desiderata
+     * @param radius Un double che rappresenta il raggio di ricerca
+     * @param id Un intero che rappresenta il venditore di cui si stanno cercando gli oggetti
+     * @param categoria Un intero che rappresenta la categoria a cui gli oggetti cercati appartengono
+     * @param minimo La soglia minima di prezzo
+     * @param massimo La soglia massima di prezzo
+     * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
+     * @return La stringa corrispondete alla query 
+     */
+    public static String itemsInCategoryWithPriceBetweenRangeWithStringbySellerNearby(int idU, double lat, double lon, double radius, int id, int categoria, double minimo, double massimo, String pattern){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
+                + "SELECT Negozio.id "
+                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "WHERE " + radius + " >= 111.111 * "
+                + "         DEGREES(ACOS(COS(RADIANS(" + lat + ")) "
+                + "             * COS(RADIANS(Indirizzo.latitudine)) "
+                + "             * COS(RADIANS(" + lon + " - Indirizzo.longitudine)) "
+                + "             + SIN(RADIANS(" + lat + ")) "
+                + "             * SIN(RADIANS(Indirizzo.latitudine)))) "
+                + "     AND Negozio.idVenditore = " + id + "; "
+                + "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.categoria = " + categoria + " AND Oggetto.nomeDownCase LIKE '%" + pattern + "%' "
+                + "AND Oggetto.prezzo BETWEEN " + minimo + " AND " + massimo + ";";
+    }
+    
+    /**
+     * @author Damiano
+     * Metodo che ritorna la lista degli oggetti in una categoria presenti nei negozi di un determinato venditore 
+     * con una stringa nel nome, con un prezzo compreso tra due valori, a distanza minore o uguale al raggio 
+     * a partire da una latitudine e una longitudine e con una determinata modalità di ritiro
+     * @param idU Un intero ceh rappresenta l'utente a cui si riferisce la view creata
+     * @param lat Un double che rappresenta la latidudine desiderata
+     * @param lon Un double che rappresenta la longitudine desiderata
+     * @param radius Un double che rappresenta il raggio di ricerca
+     * @param id Un intero che rappresenta il venditore di cui si stanno cercando gli oggetti
+     * @param categoria Un intero che rappresenta la categoria a cui gli oggetti cercati appartengono
+     * @param minimo La soglia minima di prezzo
+     * @param massimo La soglia massima di prezzo
+     * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return La stringa corrispondete alla query 
+     */
+    public static String itemsInCategoryWithPriceBetweenRangeWithStringbySellerNearbySpecific(int idU, double lat, double lon, double radius, int id, int categoria, double minimo, double massimo, String pattern, int ritiro){
+        return "Create OR REPLACE View NegoziNellaDistanza_" + idU + " as "
+                + "SELECT Negozio.id "
+                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "WHERE " + radius + " >= 111.111 * "
+                + "         DEGREES(ACOS(COS(RADIANS(" + lat + ")) "
+                + "             * COS(RADIANS(Indirizzo.latitudine)) "
+                + "             * COS(RADIANS(" + lon + " - Indirizzo.longitudine)) "
+                + "             + SIN(RADIANS(" + lat + ")) "
+                + "             * SIN(RADIANS(Indirizzo.latitudine)))) "
+                + "     AND Negozio.idVenditore = " + id + "; "
+                + "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.categoria = " + categoria + " AND Oggetto.nomeDownCase LIKE '%" + pattern + "%' "
                 + "AND Oggetto.prezzo BETWEEN " + minimo + " AND " + massimo + " "
                 + "AND Oggetto.ritiroInNegozio = " + ritiro + ";";
     }
     
 }
-/*
--- ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
-
-Create OR REPLACE View NegoziNellaDistanza as
-
-    SELECT Negozio.id
-	FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI)
-	WHERE 50>= 111.111 *
-			   DEGREES(ACOS(COS(RADIANS(45.7665600))
-					 * COS(RADIANS(Indirizzo.latitudine))
-					 * COS(RADIANS(11.727390 - Indirizzo.longitudine))
-					 + SIN(RADIANS(45.7665600))
-					 * SIN(RADIANS(Indirizzo.latitudine))))
-			AND Negozio.idVenditore = ID;
-
-SELECT Oggetto.*
-FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id)
-WHERE Oggetto.prezzo >= MINIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;
-
--- ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
-
-Create OR REPLACE View NegoziNellaDistanza as
-
-    SELECT Negozio.id
-	FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI)
-	WHERE 50>= 111.111 *
-			   DEGREES(ACOS(COS(RADIANS(45.7665600))
-					 * COS(RADIANS(Indirizzo.latitudine))
-					 * COS(RADIANS(11.727390 - Indirizzo.longitudine))
-					 + SIN(RADIANS(45.7665600))
-					 * SIN(RADIANS(Indirizzo.latitudine))))
-			AND Negozio.idVenditore = ID;
-
-SELECT Oggetto.*
-FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id)
-WHERE Oggetto.prezzo >= MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;
-
--- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
-
-Create OR REPLACE View NegoziNellaDistanza as
-
-    SELECT Negozio.id
-	FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI)
-	WHERE 50>= 111.111 *
-			   DEGREES(ACOS(COS(RADIANS(45.7665600))
-					 * COS(RADIANS(Indirizzo.latitudine))
-					 * COS(RADIANS(11.727390 - Indirizzo.longitudine))
-					 + SIN(RADIANS(45.7665600))
-					 * SIN(RADIANS(Indirizzo.latitudine))))
-			AND Negozio.idVenditore = ID;
-
-SELECT Oggetto.*
-FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id)
-WHERE Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;
-
--- ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
-
-Create OR REPLACE View NegoziNellaDistanza as
-
-    SELECT Negozio.id
-	FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI)
-	WHERE 50>= 111.111 *
-			   DEGREES(ACOS(COS(RADIANS(45.7665600))
-					 * COS(RADIANS(Indirizzo.latitudine))
-					 * COS(RADIANS(11.727390 - Indirizzo.longitudine))
-					 + SIN(RADIANS(45.7665600))
-					 * SIN(RADIANS(Indirizzo.latitudine))))
-			AND Negozio.idVenditore = ID;
-
-SELECT Oggetto.*
-FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id)
-WHERE Oggetto.prezzo >= MINIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;
-
--- ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
-
-Create OR REPLACE View NegoziNellaDistanza as
-
-    SELECT Negozio.id
-	FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI)
-	WHERE 50>= 111.111 *
-			   DEGREES(ACOS(COS(RADIANS(45.7665600))
-					 * COS(RADIANS(Indirizzo.latitudine))
-					 * COS(RADIANS(11.727390 - Indirizzo.longitudine))
-					 + SIN(RADIANS(45.7665600))
-					 * SIN(RADIANS(Indirizzo.latitudine))))
-			AND Negozio.idVenditore = ID;
-
-SELECT Oggetto.*
-FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id)
-WHERE Oggetto.prezzo <= MASSIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;
-
--- ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
-
-Create OR REPLACE View NegoziNellaDistanza as
-
-    SELECT Negozio.id
-	FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI)
-	WHERE 50>= 111.111 *
-			   DEGREES(ACOS(COS(RADIANS(45.7665600))
-					 * COS(RADIANS(Indirizzo.latitudine))
-					 * COS(RADIANS(11.727390 - Indirizzo.longitudine))
-					 + SIN(RADIANS(45.7665600))
-					 * SIN(RADIANS(Indirizzo.latitudine))))
-			AND Negozio.idVenditore = ID;
-
-SELECT Oggetto.*
-FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id)
-WHERE Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;
-
--- ottenere la lista di negozi di un determinato venditore
+/*-- ottenere la lista di negozi di un determinato venditore
 SELECT *
 FROM Negozio
 WHERE idVenditore=ID
