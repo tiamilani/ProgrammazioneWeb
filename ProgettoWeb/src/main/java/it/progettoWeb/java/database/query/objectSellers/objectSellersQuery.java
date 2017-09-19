@@ -6,7 +6,7 @@
 package it.progettoWeb.java.database.query.objectSellers;
 /**
  *
- * @author mattia
+ * @author andrea
  */
 public class objectSellersQuery {
     public static String hello() {
@@ -269,26 +269,28 @@ public class objectSellersQuery {
     /**
      * @author Andrea
      * Ottenere la lista di oggetti di negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
      * @param rad Un double utilizzato per definire il raggio desiderata
      * @return String: lista di oggetti
      */
-    public static String selectSellerObjectsSpecifiedSellerLatLonRad(int id, double lat, double lon, double rad){
-        return "Create OR REPLACE View NegoziDistanza_"+id+" as SELECT Negozio.id FROM "
+    public static String selectSellerObjectsSpecifiedSellerLatLonRad(int idU, int id, double lat, double lon, double rad){
+        return "Create OR REPLACE View NegoziDistanza_"+idU+" as SELECT Negozio.id FROM "
                 + "Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) WHERE "
                 + rad+" >= 111.111 * DEGREES(ACOS(COS(RADIANS("+lat+")) * "
                 + "COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+lon+" - "
                 + "Indirizzo.longitudine)) + SIN(RADIANS("+lat+")) * "
                 + "SIN(RADIANS(Indirizzo.latitudine)))) AND Negozio.idVenditore ='"+id+"'; "
-                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+id+" ON "
-                + "(Oggetto.idNegozio = NegoziDistanza_"+id+".id);";
+                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+idU+" ON "
+                + "(Oggetto.idNegozio = NegoziDistanza_"+idU+".id);";
     }
     
     /**
      * @author Andrea
      * Ottenere la lista di oggetti che contengono una stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
@@ -296,21 +298,22 @@ public class objectSellersQuery {
      * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
      * @return String: lista di oggetti
      */
-    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndName(int id, double lat, double lon, double rad, String pattern){
-        return "Create OR REPLACE View NegoziDistanza_"+id+" as SELECT Negozio.id FROM "
+    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndName(int idU, int id, double lat, double lon, double rad, String pattern){
+        return "Create OR REPLACE View NegoziDistanza_"+idU+" as SELECT Negozio.id FROM "
                 + "Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) WHERE "
                 + rad+" >= 111.111 * DEGREES(ACOS(COS(RADIANS("+lat+")) * "
                 + "COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+lon+" - "
                 + "Indirizzo.longitudine)) + SIN(RADIANS("+lat+")) * "
                 + "SIN(RADIANS(Indirizzo.latitudine)))) AND Negozio.idVenditore ='"+id+"'; "
-                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+id+" ON "
-                + "(Oggetto.idNegozio = NegoziDistanza_"+id+".id) "
+                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+idU+" ON "
+                + "(Oggetto.idNegozio = NegoziDistanza_"+idU+".id) "
                 + "WHERE Oggetto.nomeDownCase LIKE '%"+pattern+"%';";
     }
     
     /**
      * @author Andrea
      * Ottenere la lista di oggetti di una categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
@@ -318,21 +321,22 @@ public class objectSellersQuery {
      * @param cat Un intero utilizzato per identificare la categoria di appartenenza
      * @return String: lista di oggetti
      */
-    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndCategory(int id, double lat, double lon, double rad, int cat){
-        return "Create OR REPLACE View NegoziDistanza_"+id+" as SELECT Negozio.id FROM "
+    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndCategory(int idU, int id, double lat, double lon, double rad, int cat){
+        return "Create OR REPLACE View NegoziDistanza_"+idU+" as SELECT Negozio.id FROM "
                 + "Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) WHERE "
                 + rad+" >= 111.111 * DEGREES(ACOS(COS(RADIANS("+lat+")) * "
                 + "COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+lon+" - "
                 + "Indirizzo.longitudine)) + SIN(RADIANS("+lat+")) * "
                 + "SIN(RADIANS(Indirizzo.latitudine)))) AND Negozio.idVenditore ='"+id+"'; "
-                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+id+" ON "
-                + "(Oggetto.idNegozio = NegoziDistanza_"+id+".id) "
+                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+idU+" ON "
+                + "(Oggetto.idNegozio = NegoziDistanza_"+idU+".id) "
                 + "WHERE Oggetto.categoria='"+cat+"';";
     }
     
     /**
      * @author Andrea
      * Ottenere la lista di oggetti di una categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
@@ -341,21 +345,22 @@ public class objectSellersQuery {
      * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
      * @return String: lista di oggetti
      */
-    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndNameCategory(int id, double lat, double lon, double rad, int cat, String pattern){
-        return "Create OR REPLACE View NegoziDistanza_"+id+" as SELECT Negozio.id FROM "
+    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndNameCategory(int idU, int id, double lat, double lon, double rad, int cat, String pattern){
+        return "Create OR REPLACE View NegoziDistanza_"+idU+" as SELECT Negozio.id FROM "
                 + "Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) WHERE "
                 + rad+" >= 111.111 * DEGREES(ACOS(COS(RADIANS("+lat+")) * "
                 + "COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+lon+" - "
                 + "Indirizzo.longitudine)) + SIN(RADIANS("+lat+")) * "
                 + "SIN(RADIANS(Indirizzo.latitudine)))) AND Negozio.idVenditore ='"+id+"'; "
-                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+id+" ON "
-                + "(Oggetto.idNegozio = NegoziDistanza_"+id+".id) "
+                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+idU+" ON "
+                + "(Oggetto.idNegozio = NegoziDistanza_"+idU+".id) "
                 + "WHERE Oggetto.categoria='"+cat+"' AND Oggetto.nomeDownCase LIKE '%"+pattern+"%';";
     }
     
     /**
      * @author Andrea
      * Ottenere la lista di oggetti con un certo prezzo minimo nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
@@ -363,21 +368,22 @@ public class objectSellersQuery {
      * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
      * @return String: lista di oggetti
      */
-    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMinPrice(int id, double lat, double lon, double rad, int priceMin){
-        return "Create OR REPLACE View NegoziDistanza_"+id+" as SELECT Negozio.id FROM "
+    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMinPrice(int idU, int id, double lat, double lon, double rad, int priceMin){
+        return "Create OR REPLACE View NegoziDistanza_"+idU+" as SELECT Negozio.id FROM "
                 + "Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) WHERE "
                 + rad+" >= 111.111 * DEGREES(ACOS(COS(RADIANS("+lat+")) * "
                 + "COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+lon+" - "
                 + "Indirizzo.longitudine)) + SIN(RADIANS("+lat+")) * "
                 + "SIN(RADIANS(Indirizzo.latitudine)))) AND Negozio.idVenditore ='"+id+"'; "
-                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+id+" ON "
-                + "(Oggetto.idNegozio = NegoziDistanza_"+id+".id) "
+                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+idU+" ON "
+                + "(Oggetto.idNegozio = NegoziDistanza_"+idU+".id) "
                 + "WHERE Oggetto.prezzo >= "+priceMin+";";
     }
     
     /**
      * @author Andrea
      * Ottenere la lista di oggetti con un certo prezzo massimo nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
@@ -385,21 +391,22 @@ public class objectSellersQuery {
      * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
      * @return String: lista di oggetti
      */
-    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMaxPrice(int id, double lat, double lon, double rad, int priceMax){
-        return "Create OR REPLACE View NegoziDistanza_"+id+" as SELECT Negozio.id FROM "
+    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMaxPrice(int idU, int id, double lat, double lon, double rad, int priceMax){
+        return "Create OR REPLACE View NegoziDistanza_"+idU+" as SELECT Negozio.id FROM "
                 + "Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) WHERE "
                 + rad+" >= 111.111 * DEGREES(ACOS(COS(RADIANS("+lat+")) * "
                 + "COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+lon+" - "
                 + "Indirizzo.longitudine)) + SIN(RADIANS("+lat+")) * "
                 + "SIN(RADIANS(Indirizzo.latitudine)))) AND Negozio.idVenditore ='"+id+"'; "
-                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+id+" ON "
-                + "(Oggetto.idNegozio = NegoziDistanza_"+id+".id) "
+                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+idU+" ON "
+                + "(Oggetto.idNegozio = NegoziDistanza_"+idU+".id) "
                 + "WHERE Oggetto.prezzo <= "+priceMax+";";
     }
     
     /**
      * @author Andrea
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
@@ -408,21 +415,22 @@ public class objectSellersQuery {
      * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
      * @return String: lista di oggetti
      */
-    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMinMaxPrice(int id, double lat, double lon, double rad, int priceMin, int priceMax){
-        return "Create OR REPLACE View NegoziDistanza_"+id+" as SELECT Negozio.id FROM "
+    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMinMaxPrice(int idU, int id, double lat, double lon, double rad, int priceMin, int priceMax){
+        return "Create OR REPLACE View NegoziDistanza_"+idU+" as SELECT Negozio.id FROM "
                 + "Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) WHERE "
                 + rad+" >= 111.111 * DEGREES(ACOS(COS(RADIANS("+lat+")) * "
                 + "COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+lon+" - "
                 + "Indirizzo.longitudine)) + SIN(RADIANS("+lat+")) * "
                 + "SIN(RADIANS(Indirizzo.latitudine)))) AND Negozio.idVenditore ='"+id+"'; "
-                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+id+" ON "
-                + "(Oggetto.idNegozio = NegoziDistanza_"+id+".id) "
+                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+idU+" ON "
+                + "(Oggetto.idNegozio = NegoziDistanza_"+idU+".id) "
                 + "WHERE Oggetto.prezzo BETWEEN "+priceMin+" AND "+priceMax+";";
     }
     
     /**
      * @author Andrea
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
@@ -431,21 +439,22 @@ public class objectSellersQuery {
      * @param cat Un intero utilizzato per identificare la categoria di appartenenza
      * @return String: lista di oggetti
      */
-    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMinPriceCategory(int id, double lat, double lon, double rad, int priceMin, int cat){
-        return "Create OR REPLACE View NegoziDistanza_"+id+" as SELECT Negozio.id FROM "
+    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMinPriceCategory(int idU, int id, double lat, double lon, double rad, int priceMin, int cat){
+        return "Create OR REPLACE View NegoziDistanza_"+idU+" as SELECT Negozio.id FROM "
                 + "Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) WHERE "
                 + rad+" >= 111.111 * DEGREES(ACOS(COS(RADIANS("+lat+")) * "
                 + "COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+lon+" - "
                 + "Indirizzo.longitudine)) + SIN(RADIANS("+lat+")) * "
                 + "SIN(RADIANS(Indirizzo.latitudine)))) AND Negozio.idVenditore ='"+id+"'; "
-                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+id+" ON "
-                + "(Oggetto.idNegozio = NegoziDistanza_"+id+".id) "
+                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+idU+" ON "
+                + "(Oggetto.idNegozio = NegoziDistanza_"+idU+".id) "
                 + "WHERE Oggetto.prezzo >= "+priceMin+" AND Oggetto.categoria='"+cat+"';";
     }
     
     /**
      * @author Andrea
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
@@ -454,21 +463,22 @@ public class objectSellersQuery {
      * @param cat Un intero utilizzato per identificare la categoria di appartenenza
      * @return String: lista di oggetti
      */
-    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMaxPriceCategory(int id, double lat, double lon, double rad, int priceMax, int cat){
-        return "Create OR REPLACE View NegoziDistanza_"+id+" as SELECT Negozio.id FROM "
+    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMaxPriceCategory(int idU, int id, double lat, double lon, double rad, int priceMax, int cat){
+        return "Create OR REPLACE View NegoziDistanza_"+idU+" as SELECT Negozio.id FROM "
                 + "Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) WHERE "
                 + rad+" >= 111.111 * DEGREES(ACOS(COS(RADIANS("+lat+")) * "
                 + "COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+lon+" - "
                 + "Indirizzo.longitudine)) + SIN(RADIANS("+lat+")) * "
                 + "SIN(RADIANS(Indirizzo.latitudine)))) AND Negozio.idVenditore ='"+id+"'; "
-                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+id+" ON "
-                + "(Oggetto.idNegozio = NegoziDistanza_"+id+".id) "
+                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+idU+" ON "
+                + "(Oggetto.idNegozio = NegoziDistanza_"+idU+".id) "
                 + "WHERE Oggetto.prezzo <= "+priceMax+" AND Oggetto.categoria='"+cat+"';";
     }
     
     /**
      * @author Andrea
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
@@ -478,21 +488,22 @@ public class objectSellersQuery {
      * @param cat Un intero utilizzato per identificare la categoria di appartenenza
      * @return String: lista di oggetti
      */
-    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMinMaxPriceCategory(int id, double lat, double lon, double rad, int priceMin, int priceMax, int cat){
-        return "Create OR REPLACE View NegoziDistanza_"+id+" as SELECT Negozio.id FROM "
+    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMinMaxPriceCategory(int idU, int id, double lat, double lon, double rad, int priceMin, int priceMax, int cat){
+        return "Create OR REPLACE View NegoziDistanza_"+idU+" as SELECT Negozio.id FROM "
                 + "Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) WHERE "
                 + rad+" >= 111.111 * DEGREES(ACOS(COS(RADIANS("+lat+")) * "
                 + "COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+lon+" - "
                 + "Indirizzo.longitudine)) + SIN(RADIANS("+lat+")) * "
                 + "SIN(RADIANS(Indirizzo.latitudine)))) AND Negozio.idVenditore ='"+id+"'; "
-                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+id+" ON "
-                + "(Oggetto.idNegozio = NegoziDistanza_"+id+".id) "
+                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+idU+" ON "
+                + "(Oggetto.idNegozio = NegoziDistanza_"+idU+".id) "
                 + "WHERE Oggetto.prezzo BETWEEN "+priceMin+" AND "+priceMax+" AND Oggetto.categoria='"+cat+"';";
     }
     
     /**
      * @author Andrea
      * Ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
@@ -501,21 +512,22 @@ public class objectSellersQuery {
      * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
      * @return String: lista di oggetti
      */
-    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMinPriceName(int id, double lat, double lon, double rad, int priceMin, String pattern){
-        return "Create OR REPLACE View NegoziDistanza_"+id+" as SELECT Negozio.id FROM "
+    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMinPriceName(int idU, int id, double lat, double lon, double rad, int priceMin, String pattern){
+        return "Create OR REPLACE View NegoziDistanza_"+idU+" as SELECT Negozio.id FROM "
                 + "Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) WHERE "
                 + rad+" >= 111.111 * DEGREES(ACOS(COS(RADIANS("+lat+")) * "
                 + "COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+lon+" - "
                 + "Indirizzo.longitudine)) + SIN(RADIANS("+lat+")) * "
                 + "SIN(RADIANS(Indirizzo.latitudine)))) AND Negozio.idVenditore ='"+id+"'; "
-                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+id+" ON "
-                + "(Oggetto.idNegozio = NegoziDistanza_"+id+".id) "
+                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+idU+" ON "
+                + "(Oggetto.idNegozio = NegoziDistanza_"+idU+".id) "
                 + "WHERE Oggetto.prezzo >= "+priceMin+" AND Oggetto.nomeDownCase LIKE '%"+pattern+"%';";
     }
     
     /**
      * @author Andrea
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
@@ -524,21 +536,22 @@ public class objectSellersQuery {
      * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
      * @return String: lista di oggetti
      */
-    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMaxPriceName(int id, double lat, double lon, double rad, int priceMax, String pattern){
-        return "Create OR REPLACE View NegoziDistanza_"+id+" as SELECT Negozio.id FROM "
+    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMaxPriceName(int idU, int id, double lat, double lon, double rad, int priceMax, String pattern){
+        return "Create OR REPLACE View NegoziDistanza_"+idU+" as SELECT Negozio.id FROM "
                 + "Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) WHERE "
                 + rad+" >= 111.111 * DEGREES(ACOS(COS(RADIANS("+lat+")) * "
                 + "COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+lon+" - "
                 + "Indirizzo.longitudine)) + SIN(RADIANS("+lat+")) * "
                 + "SIN(RADIANS(Indirizzo.latitudine)))) AND Negozio.idVenditore ='"+id+"'; "
-                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+id+" ON "
-                + "(Oggetto.idNegozio = NegoziDistanza_"+id+".id) "
+                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+idU+" ON "
+                + "(Oggetto.idNegozio = NegoziDistanza_"+idU+".id) "
                 + "WHERE Oggetto.prezzo >= "+priceMax+" AND Oggetto.nomeDownCase LIKE '%"+pattern+"%';";
     }
     
     /**
      * @author Andrea
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
@@ -548,21 +561,22 @@ public class objectSellersQuery {
      * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
      * @return String: lista di oggetti
      */
-    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMinMaxPriceName(int id, double lat, double lon, double rad, int priceMin, int priceMax, String pattern){
-        return "Create OR REPLACE View NegoziDistanza_"+id+" as SELECT Negozio.id FROM "
+    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMinMaxPriceName(int idU, int id, double lat, double lon, double rad, int priceMin, int priceMax, String pattern){
+        return "Create OR REPLACE View NegoziDistanza_"+idU+" as SELECT Negozio.id FROM "
                 + "Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) WHERE "
                 + rad+" >= 111.111 * DEGREES(ACOS(COS(RADIANS("+lat+")) * "
                 + "COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+lon+" - "
                 + "Indirizzo.longitudine)) + SIN(RADIANS("+lat+")) * "
                 + "SIN(RADIANS(Indirizzo.latitudine)))) AND Negozio.idVenditore ='"+id+"'; "
-                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+id+" ON "
-                + "(Oggetto.idNegozio = NegoziDistanza_"+id+".id) "
+                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+idU+" ON "
+                + "(Oggetto.idNegozio = NegoziDistanza_"+idU+".id) "
                 + "WHERE Oggetto.prezzo BETWEEN "+priceMin+" AND "+priceMax+" AND Oggetto.nomeDownCase LIKE '%"+pattern+"%';";
     }
     
     /**
      * @author Andrea
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
@@ -572,21 +586,22 @@ public class objectSellersQuery {
      * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
      * @return String: lista di oggetti
      */
-    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMinPriceCategoryName(int id, double lat, double lon, double rad, int priceMin, int cat, String pattern){
-        return "Create OR REPLACE View NegoziDistanza_"+id+" as SELECT Negozio.id FROM "
+    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMinPriceCategoryName(int idU, int id, double lat, double lon, double rad, int priceMin, int cat, String pattern){
+        return "Create OR REPLACE View NegoziDistanza_"+idU+" as SELECT Negozio.id FROM "
                 + "Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) WHERE "
                 + rad+" >= 111.111 * DEGREES(ACOS(COS(RADIANS("+lat+")) * "
                 + "COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+lon+" - "
                 + "Indirizzo.longitudine)) + SIN(RADIANS("+lat+")) * "
                 + "SIN(RADIANS(Indirizzo.latitudine)))) AND Negozio.idVenditore ='"+id+"'; "
-                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+id+" ON "
-                + "(Oggetto.idNegozio = NegoziDistanza_"+id+".id) "
+                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+idU+" ON "
+                + "(Oggetto.idNegozio = NegoziDistanza_"+idU+".id) "
                 + "WHERE Oggetto.prezzo >= "+priceMin+" AND Oggetto.categoria='"+cat+"' AND Oggetto.nomeDownCase LIKE '%"+pattern+"%';";
     }
     
     /**
      * @author Andrea
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
@@ -596,21 +611,22 @@ public class objectSellersQuery {
      * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
      * @return String: lista di oggetti
      */
-    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMaxPriceCategoryName(int id, double lat, double lon, double rad, int priceMax, int cat, String pattern){
-        return "Create OR REPLACE View NegoziDistanza_"+id+" as SELECT Negozio.id FROM "
+    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMaxPriceCategoryName(int idU, int id, double lat, double lon, double rad, int priceMax, int cat, String pattern){
+        return "Create OR REPLACE View NegoziDistanza_"+idU+" as SELECT Negozio.id FROM "
                 + "Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) WHERE "
                 + rad+" >= 111.111 * DEGREES(ACOS(COS(RADIANS("+lat+")) * "
                 + "COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+lon+" - "
                 + "Indirizzo.longitudine)) + SIN(RADIANS("+lat+")) * "
                 + "SIN(RADIANS(Indirizzo.latitudine)))) AND Negozio.idVenditore ='"+id+"'; "
-                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+id+" ON "
-                + "(Oggetto.idNegozio = NegoziDistanza_"+id+".id) "
+                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+idU+" ON "
+                + "(Oggetto.idNegozio = NegoziDistanza_"+idU+".id) "
                 + "WHERE Oggetto.prezzo <= "+priceMax+" AND Oggetto.categoria='"+cat+"' AND Oggetto.nomeDownCase LIKE '%"+pattern+"%';";
     }
     
     /**
      * @author Andrea
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
@@ -621,15 +637,15 @@ public class objectSellersQuery {
      * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
      * @return String: lista di oggetti
      */
-    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMinMaxPriceCategoryName(int id, double lat, double lon, double rad, int priceMin, int priceMax, int cat, String pattern){
-        return "Create OR REPLACE View NegoziDistanza_"+id+" as SELECT Negozio.id FROM "
+    public static String selectSellerObjectsSpecifiedSellerLatLonRadAndMinMaxPriceCategoryName(int idU, int id, double lat, double lon, double rad, int priceMin, int priceMax, int cat, String pattern){
+        return "Create OR REPLACE View NegoziDistanza_"+idU+" as SELECT Negozio.id FROM "
                 + "Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) WHERE "
                 + rad+" >= 111.111 * DEGREES(ACOS(COS(RADIANS("+lat+")) * "
                 + "COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+lon+" - "
                 + "Indirizzo.longitudine)) + SIN(RADIANS("+lat+")) * "
                 + "SIN(RADIANS(Indirizzo.latitudine)))) AND Negozio.idVenditore ='"+id+"'; "
-                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+id+" ON "
-                + "(Oggetto.idNegozio = NegoziDistanza_"+id+".id) "
+                + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+idU+" ON "
+                + "(Oggetto.idNegozio = NegoziDistanza_"+idU+".id) "
                 + "WHERE Oggetto.prezzo BETWEEN "+priceMin+" AND "+priceMax+" AND "
                 + "Oggetto.categoria='"+cat+"' AND Oggetto.nomeDownCase LIKE '%"+pattern+"%';";
     }
