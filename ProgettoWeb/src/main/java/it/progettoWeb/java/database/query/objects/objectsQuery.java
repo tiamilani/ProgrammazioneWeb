@@ -13,6 +13,9 @@ public class objectsQuery {
         return "Hello from" + objectsQuery.class.toString();
     }
     
+    
+    /*---LAST UPDATE - 2017-09-20---*/
+    
     /**
      * @author fbrug
      * Ottenere la lista di oggetti che contengono una stringa nel nome
@@ -405,12 +408,22 @@ public class objectsQuery {
     
     
     /*---1*/
-    public static String selectShopByLLR(int idUtente, double lat, double lon, double r) //LLR = Latitude - Longitude - Radius
+    /**
+     * @author fbrug
+     * Ottenere la lista di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente
+     * @param lat
+     * @param lon
+     * @param r
+     * @return String: lista di negozi nell'area specificata
+     */
+    private static String LLR(int idUtente, double lat, double lon, double r)   //LLR = Latitude - Longitude - Radius
     {
         return "Create OR REPLACE View NegoziDistanza_" + idUtente + " as"
                 + "SET @latitudine = " + lat + ";"
                 + "SET @longitudine = " + lon + ";"
                 + "SET @raggio = " + r + ";"
+                
                 + "SELECT Negozio.id"
                 + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI)"
                 + "WHERE @raggio >= 111.111"
@@ -421,18 +434,329 @@ public class objectsQuery {
                 + "* SIN(RADIANS(Indirizzo.latitudine))));";
     }
     
-    
-    public static String selectObjectByLLR(double lat, double lon, double r)
+    /**
+     * @author fbrug
+     * Ottenere la lista di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente
+     * @param lat
+     * @param lon
+     * @param r
+     * @return String: lista di negozi
+     */
+    public static String selectShopByLLR(int idUtente, double lat, double lon, double r)
     {
-        return "";
+        return LLR(idUtente, lat, lon, r);
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere la lista di oggetti in negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente
+     * @param lat
+     * @param lon
+     * @param r
+     * @return String: lista di oggetti
+     */
+    public static String selectObjectByLLR(int idUtente, double lat, double lon, double r)
+    {
+        return LLR(idUtente, lat, lon, r) 
+                + "SELECT Oggetto.* FROM Oggetto "
+                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id);";
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere la lista di oggetti che contengono una stringa nel nome, nei negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente
+     * @param lat
+     * @param lon
+     * @param r
+     * @param nomeDownCase
+     * @return String: lista di oggetti
+     */
+    public static String selectObjectByNameAndLLR(int idUtente, double lat, double lon, double r, String nomeDownCase)
+    {
+        return LLR(idUtente, lat, lon, r)
+                + "SELECT Oggetto.* FROM Oggetto "
+                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere la lista di oggetti di una categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente
+     * @param lat
+     * @param lon
+     * @param r
+     * @param idCategoria
+     * @return String: lista di oggetti 
+     */
+    public static String selectObjectByCategoryAndLLR(int idUtente, double lat, double lon, double r, int idCategoria)
+    {
+        return LLR(idUtente, lat, lon, r)
+                + "SELECT Oggetto.* FROM Oggetto "
+                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.categoria=" + idCategoria + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere la lista di oggetti di una categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente
+     * @param lat
+     * @param lon
+     * @param r
+     * @param idCategoria
+     * @param nomeDownCase
+     * @return String: lista di oggetti 
+     */
+    public static String selectObjectByCategoryAndNameAndLLR(int idUtente, double lat, double lon, double r, int idCategoria, String nomeDownCase)
+    {
+        return LLR(idUtente, lat, lon, r)
+                + "SELECT Oggetto.* FROM Oggetto "
+                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.categoria=" + idCategoria + " AND Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere la lista di oggetti con un certo prezzo minimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente
+     * @param lat
+     * @param lon
+     * @param r
+     * @param prezzoMin
+     * @return String: lista di oggetti 
+     */
+    public static String selectObjectByLLRAndHigherThanPrice(int idUtente, double lat, double lon, double r, double prezzoMin)
+    {
+        return LLR(idUtente, lat, lon, r)
+                + "SELECT Oggetto.* FROM Oggetto "
+                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.prezzo >= " + prezzoMin + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere la lista di oggetti con un certo prezzo massimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente
+     * @param lat
+     * @param lon
+     * @param r
+     * @param prezzoMax
+     * @return String: lista di oggetti 
+     */
+    public static String selectObjectByLLRAndLowerThanPrice(int idUtente, double lat, double lon, double r, double prezzoMax)
+    {
+        return LLR(idUtente, lat, lon, r)
+                + "SELECT Oggetto.* FROM Oggetto "
+                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.prezzo <= " + prezzoMax + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente
+     * @param lat
+     * @param lon
+     * @param r
+     * @param prezzoMin
+     * @param prezzoMax
+     * @return String: lista di oggetti 
+     */
+    public static String selectObjectByLLRAndBetweenPrices(int idUtente, double lat, double lon, double r, double prezzoMin, double prezzoMax)
+    {
+        return LLR(idUtente, lat, lon, r)
+                + "SELECT Oggetto.* FROM Oggetto "
+                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente
+     * @param lat
+     * @param lon
+     * @param r
+     * @param idCategoria
+     * @param prezzoMin
+     * @return String: lista di oggetti 
+     */
+    public static String selectObjectByCategoryAndLLRAndHigherThanPrice(int idUtente, double lat, double lon, double r, int idCategoria, double prezzoMin)
+    {
+        return LLR(idUtente, lat, lon, r)
+                + "SELECT Oggetto.* FROM Oggetto "
+                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.prezzo >= " + prezzoMin + " AND Oggetto.categoria=" + idCategoria + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente
+     * @param lat
+     * @param lon
+     * @param r
+     * @param idCategoria
+     * @param prezzoMax
+     * @return String: lista di oggetti 
+     */
+    public static String selectObjectByCategoryAndLLRLowerThanPrice(int idUtente, double lat, double lon, double r, int idCategoria, double prezzoMax)
+    {
+        return LLR(idUtente, lat, lon, r)
+                + "SELECT Oggetto.* FROM Oggetto "
+                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.prezzo <= " + prezzoMax + " AND Oggetto.categoria=" + idCategoria + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente
+     * @param lat
+     * @param lon
+     * @param r
+     * @param idCategoria
+     * @param prezzoMin
+     * @param prezzoMax
+     * @return String: lista di oggetti 
+     */
+    public static String selectObjectByCategoryAndLLRAndBetweenPrices(int idUtente, double lat, double lon, double r, int idCategoria, double prezzoMin, double prezzoMax)
+    {
+        return LLR(idUtente, lat, lon, r)
+                + "SELECT Oggetto.* FROM Oggetto "
+                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND Oggetto.categoria=" + idCategoria + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente
+     * @param lat
+     * @param lon
+     * @param r
+     * @param prezzoMin
+     * @param nomeDownCase
+     * @return String: lista di oggetti 
+     */
+    public static String selectObjectByNameAndLLRAndHigherThanPrice(int idUtente, double lat, double lon, double r, double prezzoMin, String nomeDownCase)
+    {
+        return LLR(idUtente, lat, lon, r)
+                + "SELECT Oggetto.* FROM Oggetto "
+                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.prezzo >= " + prezzoMin
+                + " AND Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente
+     * @param lat
+     * @param lon
+     * @param r
+     * @param prezzoMax
+     * @param nomeDownCase
+     * @return String: lista di oggetti 
+     */
+    public static String selectObjectByNameAndLLRLowerThanPrice(int idUtente, double lat, double lon, double r, double prezzoMax, String nomeDownCase)
+    {
+        return LLR(idUtente, lat, lon, r)
+                + "SELECT Oggetto.* FROM Oggetto "
+                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.prezzo <= " + prezzoMax
+                + " AND Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente
+     * @param lat
+     * @param lon
+     * @param r
+     * @param prezzoMin
+     * @param prezzoMax
+     * @param nomeDownCase
+     * @return String: lista di oggetti 
+     */
+    public static String selectObjectByNameAndLLRAndBetweenPrices(int idUtente, double lat, double lon, double r, double prezzoMin, double prezzoMax, String nomeDownCase)
+    {
+        return LLR(idUtente, lat, lon, r)
+                + "SELECT Oggetto.* FROM Oggetto "
+                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.prezzo BETWEEN " + prezzoMin
+                + " AND Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
     
     
-    public static String selectObjectByLLR(double lat, double lon, double r)
+    /**
+     * @author fbrug
+     * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente
+     * @param lat
+     * @param lon
+     * @param r
+     * @param idCategoria
+     * @param prezzoMin
+     * @param nomeDownCase
+     * @return String: lista di oggetti 
+     */
+    public static String selectObjectByCategoryAndNameAndLLRAndHigherThanPrice(int idUtente, double lat, double lon, double r, int idCategoria, double prezzoMin, String nomeDownCase)
     {
-        return "";
+        return LLR(idUtente, lat, lon, r)
+                + "SELECT Oggetto.* FROM Oggetto "
+                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.prezzo >= " + prezzoMin + " AND Oggetto.categoria=" + idCategoria
+                + " AND Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
     
+    /**
+     * @author fbrug
+     * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente
+     * @param lat
+     * @param lon
+     * @param r
+     * @param idCategoria
+     * @param prezzoMax
+     * @param nomeDownCase
+     * @return String: lista di oggetti 
+     */
+    public static String selectObjectByCategoryAndNameAndLLRLowerThanPrice(int idUtente, double lat, double lon, double r, int idCategoria, double prezzoMax, String nomeDownCase)
+    {
+        return LLR(idUtente, lat, lon, r)
+                + "SELECT Oggetto.* FROM Oggetto "
+                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.prezzo <= " + prezzoMax + " AND Oggetto.categoria=" + idCategoria
+                + " AND Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente
+     * @param lat
+     * @param lon
+     * @param r
+     * @param idCategoria
+     * @param prezzoMin
+     * @param prezzoMax
+     * @param nomeDownCase
+     * @return String: lista di oggetti 
+     */
+    public static String selectObjectByCategoryAndNameAndLLRAndBetweenPrices(int idUtente, double lat, double lon, double r, int idCategoria, double prezzoMin, double prezzoMax, String nomeDownCase)
+    {
+        return LLR(idUtente, lat, lon, r)
+                + "SELECT Oggetto.* FROM Oggetto "
+                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "WHERE Oggetto.prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND Oggetto.categoria=" + idCategoria
+                + " AND Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
+    }
     
     
     
