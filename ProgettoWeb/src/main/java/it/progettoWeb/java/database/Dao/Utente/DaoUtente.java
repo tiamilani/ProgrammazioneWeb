@@ -22,10 +22,55 @@ import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.query.users.usersQuery;
 
 public class DaoUtente {
+    /**
+     * Costatnti che indicano i nomi delle colonne da poter riutilizzare all'interno del file
+     */
+    private static final String ID="id";
+    private static final String NOME="nome";
+    private static final String COGNOME="cognome";
+    private static final String MAIL="mail";
+    private static final String PASSWORD="password";
+    private static final String AVATAR="avatar";
+    private static final String VALUTAZIONE="valutazione";
+    private static final String UTENTETYPE="UtenteType";
+    private static final String EMAILCONFERMATA="emailConfermata";
+    
+    /**
+     * Variabile che gestisce la connessione con il db
+     */
     private Connection connection;
     
+    /**
+     * Costruttore della classe, utilizzato per instaurare la connessione con il db
+     */
     public DaoUtente() {
         connection = DbUtil.getConnection();
+    }
+
+    /**
+     * @author Mattia
+     * Funzione utilizzata per facilitare l'ottenimento dei modelli negozio da un result set
+     * @param rs un resultset da cui ricavare un modello negozio
+     * @return il modello negozio presente nel resultset
+     */
+    private ModelloUtente getModelloFromRs(ResultSet rs)
+    {
+        ModelloUtente User = new ModelloUtente();
+        
+        try{
+            User.setId(rs.getInt(ID));
+            User.setNome(rs.getString(NOME));
+            User.setCognome(rs.getString(COGNOME));
+            User.setMail(rs.getString(MAIL));
+            User.setPassword(rs.getString(PASSWORD));
+            User.setAvatar(rs.getString(AVATAR));
+            User.setValutazione(rs.getDouble(VALUTAZIONE));
+            User.setUtenteType(rs.getInt(UTENTETYPE));
+            User.setEmailConfermata(rs.getBoolean(EMAILCONFERMATA));
+        } catch (SQLException e) {
+        }
+        
+        return User;
     }
     
     
