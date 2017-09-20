@@ -10,6 +10,7 @@ package it.progettoWeb.java.database.Dao.ordiniRicevuti;
  * @author mattia
  */
 
+import it.progettoWeb.java.database.Model.ordiniRicevuti.ModelloOrdiniRicevuti;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,9 +22,42 @@ import it.progettoWeb.java.database.Util.DbUtil;
 
 public class DaoOrdiniRicevuti {
 
+    /**
+     * Costatnti che indicano i nomi delle colonne da poter riutilizzare all'interno del file
+     */
+    private static final String IDO="idO";
+    private static final String IDV="idV";
+    private static final String DATA="data";
+    
+    /**
+     * Variabile che gestisce la connessione con il db
+     */
     private Connection connection;
     
+    /**
+     * Costruttore della classe, utilizzato per instaurare la connessione con il db
+     */
     public DaoOrdiniRicevuti() {
         connection = DbUtil.getConnection();
-    }    
+    }
+
+    /**
+     * @author Mattia
+     * Funzione utilizzata per facilitare l'ottenimento dei modelli negozio da un result set
+     * @param rs un resultset da cui ricavare un modello negozio
+     * @return il modello negozio presente nel resultset
+     */
+    private ModelloOrdiniRicevuti getModelloFromRs(ResultSet rs)
+    {
+        ModelloOrdiniRicevuti OrdineRicevuto = new ModelloOrdiniRicevuti();
+        
+        try{
+            OrdineRicevuto.setIdO(rs.getInt(IDO));
+            OrdineRicevuto.setIdV(rs.getInt(IDV));
+            OrdineRicevuto.setData(rs.getDate(DATA));
+        } catch (SQLException e) {
+        }
+        
+        return OrdineRicevuto;
+    }
 }
