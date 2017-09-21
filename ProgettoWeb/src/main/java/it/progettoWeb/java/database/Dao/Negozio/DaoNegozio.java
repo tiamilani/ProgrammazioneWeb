@@ -20,6 +20,7 @@ import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.query.objectSellers.objectSellersQuery;
 import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
+import it.progettoWeb.java.database.query.users.usersQuery;
 
 public class DaoNegozio {
     /**
@@ -109,6 +110,69 @@ public class DaoNegozio {
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerSpecifiedSellerLatLonRad(id,lat,lon,rad));
+            while (rs.next()) {
+                Stores.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Stores;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista dei negozi da cui ho acquistato
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return List<ModelloNegozio> lista di negozi
+     */
+    public List<ModelloNegozio> selectStoresUsed(int idU) {
+        List<ModelloNegozio> Stores = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectStoresUsed(idU));
+            while (rs.next()) {
+                Stores.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Stores;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista dei negozi da cui ho acquistato e la loro prima foto
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return List<ModelloNegozio> lista di negozi
+     */
+    public List<ModelloNegozio> selectStoresUsedAndPhoto(int idU) {
+        List<ModelloNegozio> Stores = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectStoresUsedAndPhoto(idU));
+            while (rs.next()) {
+                Stores.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Stores;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista dei negozi da cui ho acquistato con i dati dell'oggetto acquistato, la prima foto del negozio e la prima dell'oggetto
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return List<ModelloNegozio> lista di negozi
+     */
+    public List<ModelloNegozio> selectStoresUsedAndDataPhotoSPhotoO(int idU) {
+        List<ModelloNegozio> Stores = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectStoresUsedAndDataPhotoSPhotoO(idU));
             while (rs.next()) {
                 Stores.add(getModelloFromRs(rs));
             }

@@ -148,7 +148,7 @@ public class usersQuery {
      * @author Andrea
      * Ottenere il carrello (La lista degli ordini che sono nel carrello)
      * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
-     * @return String: lista di negozi
+     * @return String: lista di ordini
      */
     public static String selectOrdersCart(int idU){
         return "SELECT Ordine.*, Carrello.subtotale FROM Carrello, Ordine WHERE "

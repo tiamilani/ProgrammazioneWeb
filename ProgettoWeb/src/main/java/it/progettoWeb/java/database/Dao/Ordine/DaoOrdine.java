@@ -20,6 +20,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
+import it.progettoWeb.java.database.query.users.usersQuery;
 
 public class DaoOrdine {
 
@@ -77,4 +78,68 @@ public class DaoOrdine {
         
         return Ordine;
     }  
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista degli ordini
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return List<ModelloOrdine> lista di ordini
+     */
+    public List<ModelloOrdine> selectOrders(int idU) {
+        List<ModelloOrdine> Ordini = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectOrders(idU));
+            while (rs.next()) {
+                Ordini.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return Ordini;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista degli ordini con richieste specifiche per l'ordine
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param orderStatus Un intero che rappresenta l'identificativo dello stato dell'ordine
+     * @return List<ModelloOrdine> lista di ordini
+     */
+    public List<ModelloOrdine> selectOrdersComplete(int idU, int orderStatus) {
+        List<ModelloOrdine> Ordini = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectOrdersComplete(idU,orderStatus));
+            while (rs.next()) {
+                Ordini.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return Ordini;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere il carrello (La lista degli ordini che sono nel carrello)
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return List<ModelloOrdine> lista di ordini
+     */
+    public List<ModelloOrdine> selectOrdersCart(int idU) {
+        List<ModelloOrdine> Ordini = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectOrdersCart(idU));
+            while (rs.next()) {
+                Ordini.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return Ordini;
+    }
 }

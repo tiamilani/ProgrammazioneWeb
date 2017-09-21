@@ -113,17 +113,7 @@ public class DaoUtente {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(usersQuery.selectAllUsers());
             while (rs.next()) {
-                ModelloUtente user = new ModelloUtente();
-                user.setId(rs.getInt("id"));
-                user.setNome(rs.getString("nome"));
-                user.setCognome(rs.getString("cognome"));
-                user.setMail(rs.getString("mail"));
-                user.setPassword(rs.getString("password"));
-                user.setAvatar(rs.getString("avatar"));
-                user.setValutazione(rs.getDouble("valutazione"));
-                user.setUtenteType(rs.getInt("UtenteType"));
-                user.setEmailConfermata(rs.getBoolean("emailConfermata"));
-                users.add(user);
+                users.add(getModelloFromRs(rs));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -140,15 +130,7 @@ public class DaoUtente {
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
-                user.setId(rs.getInt("id"));
-                user.setNome(rs.getString("nome"));
-                user.setCognome(rs.getString("cognome"));
-                user.setMail(rs.getString("mail"));
-                user.setPassword(rs.getString("password"));
-                user.setAvatar(rs.getString("avatar"));
-                user.setValutazione(rs.getDouble("valutazione"));
-                user.setUtenteType(rs.getInt("UtenteType"));
-                user.setEmailConfermata(rs.getBoolean("emailConfermata"));
+                user = getModelloFromRs(rs);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -156,4 +138,5 @@ public class DaoUtente {
 
         return user;
     }
+    
 }
