@@ -1,9 +1,0 @@
-QAdmin.sql
-QGenerics.sql
-QMarketsSellers.sql
-QObjects.sql
-QObjectsMarkets.sql
-QObjectsSellers.sql
-QSellers.sql
-QSummary.sql
-QUsers.sql
