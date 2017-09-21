@@ -15,11 +15,11 @@ public class adminQuery {
     
     /**
      * @author Damiano
-     * Metodo che ritorna la stringa che rappresenta la query per contare il numero di richieste di assistenza
+     * Metodo che ritorna la stringa che rappresenta la query per contare il numero di richieste di assistenza di un amministratore
      * @return La stringa che rappresenta la query
      */
-    public static String numberRequestOfAssistance(){
-        return "SELECT COUNT (id) FROM Assistenza;";
+    public static String numberRequestOfAssistance(int id){
+        return "SELECT count(idAmministratore) AS numRichieste FROM progettoweb.Assistenza where idAmministratore="+id+";";
      }
     
     /**

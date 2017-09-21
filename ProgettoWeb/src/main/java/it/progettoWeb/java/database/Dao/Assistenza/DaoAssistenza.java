@@ -19,6 +19,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
+import it.progettoWeb.java.database.query.admin.adminQuery;
 
 public class DaoAssistenza {
     /**
@@ -49,7 +50,7 @@ public class DaoAssistenza {
 
     /**
      * @author Mattia
-     * Funzione utilizzata per facilitare l'ottenimento dei modelli negozio da un result set
+     * Funzione utilizzata per facilitare l'ottenimento dei modelli da un result set
      * @param rs un resultset da cui ricavare un modello negozio
      * @return il modello negozio presente nel resultset
      */
@@ -74,4 +75,21 @@ public class DaoAssistenza {
         return Assistenza;
     }
     
+    /**
+     * @author Mattia
+     * Metodo che ritorna la stringa che rappresenta la query per contare il numero di richieste di assistenza di un amministratore
+     * @return int numRichieste
+     */
+    public int numberRequestOfAssistance(int id) {
+        int numRichieste=0;
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(adminQuery.numberRequestOfAssistance(id));
+            numRichieste=rs.getInt(numRichieste);
+        } catch (SQLException e) {
+        }
+        
+        return numRichieste;
+    }
 }

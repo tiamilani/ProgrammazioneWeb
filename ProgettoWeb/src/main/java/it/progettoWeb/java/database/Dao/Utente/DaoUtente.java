@@ -10,6 +10,8 @@ package it.progettoWeb.java.database.Dao.Utente;
  * @author mattia
  */
 
+import it.progettoWeb.java.database.Dao.immagineUtente.DaoImmagineUtente;
+import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
+import it.progettoWeb.java.database.Model.immagineUtente.ModelloImmagineUtente;
+import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
+import it.progettoWeb.java.database.query.generics.genericsQuery;
 import it.progettoWeb.java.database.query.users.usersQuery;
+import it.progettoWeb.java.utility.pair.pair;
+import it.progettoWeb.java.utility.tris.tris;
 
 public class DaoUtente {
     /**
@@ -81,7 +88,6 @@ public class DaoUtente {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
@@ -92,7 +98,6 @@ public class DaoUtente {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
@@ -103,7 +108,6 @@ public class DaoUtente {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
@@ -116,7 +120,6 @@ public class DaoUtente {
                 users.add(getModelloFromRs(rs));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
 
         return users;
@@ -125,18 +128,212 @@ public class DaoUtente {
     public ModelloUtente getUserById(int userId) {
         ModelloUtente user = new ModelloUtente();
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement(usersQuery.selectUserById(userId));
+            PreparedStatement preparedStatement = connection.prepareStatement(usersQuery.selectUserById(userId));
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
                 user = getModelloFromRs(rs);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
 
         return user;
     }
     
+    /**
+     * @author Mattia
+     * Selezionare tutti gli utenti in base al loro tipo: 0=normale, 1=venditore, 2=amministratore
+     * @param utenteType
+     * @return List<ModelloUtente> elenco utenti
+     */
+    public List<ModelloUtente> selectAllUsersByType(int utenteType) {
+        List<ModelloUtente> users = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.selectAllUsersByType(utenteType));
+            while (rs.next()) {
+                users.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return users;
+    }
+    
+    /**
+     * @author Mattia
+     * Selezionare utente in base a mail & password
+     * @param mail
+     * @param password
+     * @return ModelloUtente utente
+     */
+    public ModelloUtente selectUserByEmailAndPassword(String mail, String password) {
+        ModelloUtente user = new ModelloUtente();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(genericsQuery.selectUserByEmailAndPassword(mail,password));
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                user = getModelloFromRs(rs);
+            }
+        } catch (SQLException e) {
+        }
+
+        return user;
+    }
+    
+    /**
+     * @author Mattia
+     * Selezionare tutti gli utenti con un certo nome
+     * @param nome
+     * @return List<ModelloUtente> elenco utenti
+     */
+    public List<ModelloUtente> selectAllUsersByName(String nome) {
+        List<ModelloUtente> users = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.selectAllUsersByName(nome));
+            while (rs.next()) {
+                users.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return users;
+    }
+    
+    /**
+     * @author Mattia
+     * Selezionare tutti gli utenti con un certo nome & cognome
+     * @param nome
+     * @return List<ModelloUtente> elenco utenti
+     */
+    public List<ModelloUtente> selectAllUsersByNameAndSurname(String nome, String cognome) {
+        List<ModelloUtente> users = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.selectAllUsersByNameAndSurname(nome,cognome));
+            while (rs.next()) {
+                users.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return users;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere i dati di un utente in base all'ID utente
+     * @param idUtente
+     * @return ModelloUtente utente
+     */
+    public ModelloUtente selectUserByID(int idUtente) {
+        ModelloUtente user = new ModelloUtente();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(genericsQuery.selectUserByID(idUtente));
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                user = getModelloFromRs(rs);
+            }
+        } catch (SQLException e) {
+        }
+
+        return user;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere i dati di un utente e l'indirizzo avendo l'ID utente
+     * @param idUtente
+     * @return List<pair<ModelloUtente,ModelloIndirizzo>> elenco utenti ed indirizzi
+     */
+    public List<pair<ModelloUtente,ModelloIndirizzo>> selectUserAndAddressByUserID(int idUtente) {
+        List<pair<ModelloUtente,ModelloIndirizzo>> users = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.selectUserAndAddressByUserID(idUtente));
+            while (rs.next()) {
+                pair<ModelloUtente,ModelloIndirizzo> pr = new pair(getModelloFromRs(rs),DaoIndirizzo.getModelloFromRs(rs));
+                users.add(pr);
+            }
+        } catch (SQLException e) {
+        }
+
+        return users;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere i dati di un utente, l'indirizzo ed l'immagine a cui fa riferimento
+     * @param mail
+     * @param password
+     * @return triple<ModelloUtente,ModelloIndirizzo,ModelloImmagineUtente> elenco utenti ed indirizzi
+     */
+    public tris<ModelloUtente,ModelloIndirizzo,ModelloImmagineUtente> selectUserAndAddressAndImageByEmailAndPassword(String mail, String password) {
+         tris<ModelloUtente,ModelloIndirizzo,ModelloImmagineUtente> user = new tris(null,null,null);
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.selectUserAndAddressAndImageByEmailAndPassword(mail,password));
+            
+            if (rs.next()) {
+                user.setL(getModelloFromRs(rs));
+                user.setC(DaoIndirizzo.getModelloFromRs(rs));
+                user.setR(DaoImmagineUtente.getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return user;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere gli utenti amministratori ordinati per numero di richieste
+     * @return List<ModelloUtente> elenco utenti
+     */
+    public List<ModelloUtente> selectAdministratorByNumerOfRequests() {
+        List<ModelloUtente> users = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.selectAdministratorByNumerOfRequests());
+            while (rs.next()) {
+                users.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return users;
+    }
+    
+    /**
+     * @author Mattia
+     * Modificare mail utente
+     * @param ModelloUtente user
+     */
+    public void updateUserEmailByUserID(ModelloUtente user) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(genericsQuery.updateUserEmailByUserID(user.getId(),user.getMail()));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+        }
+    }
+    
+    /**
+     * @author Mattia
+     * Modificare password utente
+     * @param ModelloUtente user
+     */
+    public void updateUserPasswordByUserID(ModelloUtente user) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(genericsQuery.updateUserPasswordByUserID(user.getId(),user.getPassword()));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+        }
+    }
 }

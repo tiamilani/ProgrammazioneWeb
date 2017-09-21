@@ -19,6 +19,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
+import it.progettoWeb.java.database.query.generics.genericsQuery;
 
 public class DaoIndirizzo {
 
@@ -54,7 +55,7 @@ public class DaoIndirizzo {
      * @param rs un resultset da cui ricavare un modello negozio
      * @return il modello negozio presente nel resultset
      */
-    private ModelloIndirizzo getModelloFromRs(ResultSet rs)
+    public static ModelloIndirizzo getModelloFromRs(ResultSet rs)
     {
         ModelloIndirizzo Indirizzo = new ModelloIndirizzo();
         
@@ -73,5 +74,40 @@ public class DaoIndirizzo {
         }
         
         return Indirizzo;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere indirizzi di un utente avendo l'ID utente
+     * @param idUtente
+     * @return List<ModelloIndirizzo> elenco indirizzi
+     */
+    public List<ModelloIndirizzo> selectAddressByUserID(int idUtente) {
+        List<ModelloIndirizzo> addreses = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.selectAddressByUserID(idUtente));
+            while (rs.next()) {
+                addreses.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return addreses;
+    }
+    
+    /**
+     * @author Mattia
+     * Modificare password utente
+     * @param ModelloIndirizzo user
+     */
+    public void updateUserAddressByAddressID(ModelloIndirizzo address) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(genericsQuery.updateUserAddressByAddressID(address.getIdI(),address.getStato(),address.getRegione(),address.getProvincia(),address.getCitta(),address.getVia(),address.getnCivico(),address.getInterno(),address.getLatitudine(),address.getLongitudine()));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+        }
     }
 }
