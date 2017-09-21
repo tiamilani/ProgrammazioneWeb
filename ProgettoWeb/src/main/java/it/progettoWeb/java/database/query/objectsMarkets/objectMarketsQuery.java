@@ -435,61 +435,42 @@ public class objectMarketsQuery {
 
         // BASSANO DEL GRAPPA
     public static String hello() {
-            return "SET @latitudine = 45.7665600; SET @longitudine = 11.727390; SET @raggio = 50;
-    SELECT Negozio.*
-    FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI)
-    WHERE @raggio >= 111.111 *
-               DEGREES(ACOS(COS(RADIANS(@latitudine))
-                     * COS(RADIANS(Indirizzo.latitudine))
-                     * COS(RADIANS(@longitudine - Indirizzo.longitudine))
-                     + SIN(RADIANS(@latitudine))
-                     * SIN(RADIANS(Indirizzo.latitudine))));
-
-    ";
+            return "SET @latitudine = 45.7665600; "
+                    + "SET @longitudine = 11.727390; "
+                    + "SET @raggio = 50; "
+                    + "SELECT Negozio.* "
+                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "WHERE @raggio >= 111.111 * DEGREES(ACOS(COS(RADIANS(@latitudine)) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) "
+                    + "* COS(RADIANS(@longitudine - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS(@latitudine)) * SIN(RADIANS(Indirizzo.latitudine))));";
 
         }
         // ottenere la lista di oggetti in negozi data una determinata longitudine, latitudine ed un raggio di ricerca
-    Create OR REPLACE View NegoziNellaDistanza as
-
-        public static String hello() {
-            return "SELECT Negozio.id
-            FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI)
-            WHERE 50>= 111.111 *
-                               DEGREES(ACOS(COS(RADIANS(45.7665600))
-                                             * COS(RADIANS(Indirizzo.latitudine))
-                                             * COS(RADIANS(11.727390 - Indirizzo.longitudine))
-                                             + SIN(RADIANS(45.7665600))
-                                             * SIN(RADIANS(Indirizzo.latitudine))));
-
     public static String hello() {
-            return "SELECT Oggetto.*
-    FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id)
-    WHERE Oggetto.`dataFineSconto` IS NOT NULL;
-
-
-    ";
+            return "Create OR REPLACE View NegoziNellaDistanza as "
+                    + "SELECT Negozio.id "
+                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "SELECT Oggetto.* "
+                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                    + "WHERE Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti che contengono una stringa nel nome, nei negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-    Create OR REPLACE View NegoziNellaDistanza as
-
-        public static String hello() {
-            return "SELECT Negozio.id
-            FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI)
-            WHERE 50>= 111.111 *
-                               DEGREES(ACOS(COS(RADIANS(45.7665600))
-                                             * COS(RADIANS(Indirizzo.latitudine))
-                                             * COS(RADIANS(11.727390 - Indirizzo.longitudine))
-                                             + SIN(RADIANS(45.7665600))
-                                             * SIN(RADIANS(Indirizzo.latitudine))));
-
     public static String hello() {
-            return "SELECT Oggetto.*
-    FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id)
-    WHERE Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL;
-
-    ";
+            return "Create OR REPLACE View NegoziNellaDistanza as "
+                    + "SELECT Negozio.id "
+                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + " SELECT Oggetto.* "
+                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                    + "WHERE Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti di una categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
