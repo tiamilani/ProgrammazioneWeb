@@ -273,16 +273,6 @@ public class usersQuery {
     
     /**
      * @author Andrea
-     * Ottenere i dati di un venditore
-     * @param idV Un intero che rappresenta l'identificativo del venditore preso in considerazione
-     * @return String: informazioni di un venditore
-     */
-    public static String selectSpecifiedInfoSeller(int idV){
-        return "SELECT * FROM Utente WHERE Utente.id ="+idV+";";
-    }
-    
-    /**
-     * @author Andrea
      * Ottenere la lista dei prodotti nella stessa fascia di prezzo e categoria di quelli già acquistati
      * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @return String: informazioni di un venditore
@@ -460,6 +450,12 @@ public class usersQuery {
     public static String selectFirstPhotoUser(int idU){
         return "SELECT * FROM imageUtente WHERE imageUtente.idU ="+idU+" LIMIT 1;";
     }
+    
+    /*
+    *
+    * ARRIVATO FINO A QUI
+    *
+    */
     
     /**
      * @author Andrea

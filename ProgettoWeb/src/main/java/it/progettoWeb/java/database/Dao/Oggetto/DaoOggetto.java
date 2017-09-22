@@ -25,6 +25,7 @@ import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
 import it.progettoWeb.java.database.query.objectSellers.objectSellersQuery;
+import it.progettoWeb.java.database.query.users.usersQuery;
 
 public class DaoOggetto {
     
@@ -824,6 +825,27 @@ public class DaoOggetto {
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerLatLonRadAndMinMaxPriceCategoryName(idU,id,lat,lon,rad,priceMin,priceMax,cat,pattern));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista dei prodotti nella stessa fascia di prezzo e categoria di quelli già acquistati
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectProductsSamePriceCategoryAlreadyBought(int idU) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectProductsSamePriceCategoryAlreadyBought(idU));
             while (rs.next()) {
                 Objects.add(getModelloFromRs(rs));
             }

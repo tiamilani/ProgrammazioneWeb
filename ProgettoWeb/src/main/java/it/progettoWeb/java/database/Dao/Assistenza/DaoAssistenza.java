@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.query.admin.adminQuery;
+import it.progettoWeb.java.database.query.users.usersQuery;
 
 public class DaoAssistenza {
     /**
@@ -91,5 +92,65 @@ public class DaoAssistenza {
         }
         
         return numRichieste;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista delle richieste di assistenza fatte da uno specifico utente
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return List<ModelloAssistenza> lista di richieste di assistenza
+     */
+    public List<ModelloAssistenza> selectReviewsStores(int idU) {
+        List<ModelloAssistenza> richieste = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectAskSupport(idU));
+            while (rs.next()) {
+                richieste.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return richieste;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere i dettagli di una determinata richiesta di assistenza
+     * @param idA Un intero che rappresenta l'identificativo della richiesta di assistenza presa in considerazione
+     * @return ModelloAssistenza info richiesta di assistenza
+     */
+    public ModelloAssistenza selectSpecifiedInfoSupport(int idA) {
+        ModelloAssistenza richiesta = new ModelloAssistenza();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectAskSupport(idA));
+            if (rs.next()) {
+                richiesta = getModelloFromRs(rs);
+            }
+        } catch (SQLException e) {
+        }
+
+        return richiesta;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista di assistenze che hanno a che fare con un ordine
+     * @param idO Un intero che rappresenta l'identificativo dell'ordine preso in considerazione
+     * @return List<ModelloAssistenza> lista di richieste di assistenza
+     */
+    public List<ModelloAssistenza> selectSupportOfOrder(int idO) {
+        List<ModelloAssistenza> richieste = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectSupportOfOrder(idO));
+            while (rs.next()) {
+                richieste.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return richieste;
     }
 }

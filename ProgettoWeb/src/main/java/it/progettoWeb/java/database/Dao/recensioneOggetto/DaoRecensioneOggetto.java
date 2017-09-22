@@ -19,6 +19,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
+import it.progettoWeb.java.database.query.users.usersQuery;
 
 public class DaoRecensioneOggetto {
 
@@ -67,5 +68,65 @@ public class DaoRecensioneOggetto {
         }
         
         return RecensioneOggetto;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere le proprie recensioni di oggetti
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return List<ModelloRecensioneOggetto> lista di recensioni
+     */
+    public List<ModelloRecensioneOggetto> selectReviewsObjects(int idU) {
+        List<ModelloRecensioneOggetto> recensioni = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectReviewsObjects(idU));
+            while (rs.next()) {
+                recensioni.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return recensioni;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista delle proprie recensioni Oggetti dalla più utile
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return List<ModelloRecensioneOggetto> lista di recensioni
+     */
+    public List<ModelloRecensioneOggetto> selectObjectReviewsOrderUseful(int idU) {
+        List<ModelloRecensioneOggetto> recensioni = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectObjectReviewsOrderUseful(idU));
+            while (rs.next()) {
+                recensioni.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return recensioni;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista delle proprie recensioni Oggetti dalla meno utile
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return List<ModelloRecensioneOggetto> lista di recensioni
+     */
+    public List<ModelloRecensioneOggetto> selectObjectReviewsOrderUseless(int idU) {
+        List<ModelloRecensioneOggetto> recensioni = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectObjectReviewsOrderUseless(idU));
+            while (rs.next()) {
+                recensioni.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return recensioni;
     }
 }
