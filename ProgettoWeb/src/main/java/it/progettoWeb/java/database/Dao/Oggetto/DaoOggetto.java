@@ -854,4 +854,5 @@ public class DaoOggetto {
         
         return Objects;
     }
+    
 }

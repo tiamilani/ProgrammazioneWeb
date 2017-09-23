@@ -137,9 +137,70 @@ public class DaoOrdine {
                 Ordini.add(getModelloFromRs(rs));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
 
         return Ordini;
+    }
+    
+    /**
+     * @author Mattia
+     * Aggiungi un oggetto agli ordini nel carrello
+     * @param oggetto ModelloOrdine che rappresenta l'oggetto da inserire
+     */
+    public void insertObjectInCart(ModelloOrdine oggetto) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(usersQuery.insertObjectInCart(oggetto.getIdOrdine(), oggetto.getIdUtente(), oggetto.getQuantita(), oggetto.getIdOggetto()));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+        }
+    }
+    
+    /**
+     * @author Mattia
+     * Rimuovere un ordine (oggetto) dal carrello
+     * @param oggetto ModelloOrdine che rappresenta l'oggetto da inserire
+     */
+    public void removeObjectInCart(ModelloOrdine oggetto) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(usersQuery.removeObjectInCart(oggetto.getIdOrdine(), oggetto.getIdOggetto(), oggetto.getIdUtente()));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+        }
+    }
+    
+    /**
+     * @author Mattia
+     * Cambia lo stato degli ordini da from a to
+     * @param idUtente Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param from Un intero che rappresenta lo stato degli ordini da selezionare
+     * @param to Un intero che rappresenta lo stato da impostare agli ordini selezionati
+     */
+    public void changeOrderStatus(int idUtente, int from, int to) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(usersQuery.changeOrderStatus(idUtente, from, to));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+        }
+    }
+    
+    /**
+     * @author Mattia
+     * Aggiungi un oggetto agli ordini nella lista dei desideri
+     * @param oggetto ModelloOrdine che rappresenta l'oggetto da inserire
+     */
+    public void insertObjectInWislist(ModelloOrdine oggetto) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(usersQuery.insertObjectInWislist(oggetto.getIdOrdine(), oggetto.getIdUtente(), oggetto.getQuantita(), oggetto.getIdOggetto()));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+        }
     }
 }
