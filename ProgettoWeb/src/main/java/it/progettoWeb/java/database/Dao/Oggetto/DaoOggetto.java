@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
+import it.progettoWeb.java.database.query.marketsSellers.marketsSellersQuery;
 import it.progettoWeb.java.database.query.objectSellers.objectSellersQuery;
 
 public class DaoOggetto {
@@ -107,6 +108,73 @@ public class DaoOggetto {
     }
     
     /**
+     * @author Damiano
+     * Funzione utilizzata per ottenre la lista degli oggetti di un utente venditore partendo dall'id
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param ritiro Un intero che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di modelli Oggetto che risultano dalla query
+     */
+    public List<ModelloOggetto> itemsInShopBySellerSpecific(int id, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInShopBySellerSpecific(id, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Funzione utilizzata per ottenre la lista degli oggetti in sconto di un utente venditore partendo dall'id
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return List<ModelloOggetto> lista di modelli Oggetto che risultano dalla query
+     */
+    public List<ModelloOggetto> itemsInShopBySellerOnDiscount(int id) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInShopBySellerOnDiscount(id));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Funzione utilizzata per ottenre la lista degli oggetti in sconto di un utente venditore partendo dall'id
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param ritiro Un intero che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di modelli Oggetto che risultano dalla query
+     */
+    public List<ModelloOggetto> itemsInShopBySellerSpecificOnDiscount(int id, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInShopBySellerSpecificOnDiscount(id, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
      * @author Mattia
      * Ottenere la lista di oggetti che contengono una stringa nel nome nei negozi di un determinato venditore
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
@@ -129,18 +197,347 @@ public class DaoOggetto {
     }
     
     /**
-     * @author Mattia
-     * Ottenere la lista di oggetti con un certo prezzo minimo dei negozi di un determinato venditore
+     * @author Damiano
+     * Ottenere la lista di oggetti che contengono una stringa nel nome nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
-     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
-     * @return String: lista di oggetti
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @param ritiro Un intero che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithStringInShopBySellerSpecific(int id, String pattern, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithStringInShopBySellerSpecific(id, pattern, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto che contengono una stringa nel nome nei negozi di un determinato venditore
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithStringInShopBySellerOnDiscount(int id, String pattern) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithStringInShopBySellerOnDiscount(id, pattern));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto che contengono una stringa nel nome nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @param ritiro Un intero che indica se l'oggetto è ritirabile in negozio o meno     * @param ritiro
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithStringInShopBySellerSpecificOnDiscount(int id, String pattern, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithStringInShopBySellerSpecificOnDiscount(id, pattern, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti di una categoria nei negozi di un determinato venditore
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerAndCategory(int id, int cat) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerAndCategory(id, cat));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti di una categoria nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryInShopBySellerSpecific(int id, int cat, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryInShopBySellerSpecific(id, cat, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto di una categoria nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryInShopBySellerOnDiscount(int id, int cat) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryInShopBySellerOnDiscount(id, cat));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto di una categoria nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryInShopBySellerSpecificOnDiscount(int id, int cat, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryInShopBySellerSpecificOnDiscount(id, cat, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti di una categoria nei negozi di un determinato venditore con una stringa nel nome
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithStringInShopBySeller(int id, int cat, String pattern) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithStringInShopBySeller(id, cat, pattern));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti di una categoria nei negozi di un determinato venditore con una stringa nel nome e
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithStringInShopBySellerSpecific(int id, int cat, String pattern, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithStringInShopBySellerSpecific(id, cat, pattern, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto di una categoria nei negozi di un determinato venditore con una stringa nel nome
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithStringInShopBySellerOnDiscount(int id, int cat, String pattern) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithStringInShopBySellerOnDiscount(id, cat, pattern));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto di una categoria nei negozi di un determinato venditore con una stringa nel nome e
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param pattern Una stringa che deve essere presente nel nome dell'oggetto cercato
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithStringInShopBySellerSpecificOnDiscount(int id, int cat, String pattern, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithStringInShopBySellerSpecificOnDiscount(id, cat, pattern, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti con un certo prezzo massimo nei negozi di un determinato venditore
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato* @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerMinPrice(int id, int priceMin) {
         List<ModelloOggetto> Objects = new ArrayList<>();
         
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerMinPrice(id,priceMin));
+            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerMinPrice(id, priceMin));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti con un certo prezzo massimo nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato* @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno* @param ritiro
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithPriceHigherThanBySellerSpecific(int id, int priceMin, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceHigherThanBySellerSpecific(id, priceMin, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo massimo nei negozi di un determinato venditore
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato* @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithPriceHigherThanBySellerOnDiscount(int id, int priceMin) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceHigherThanBySellerOnDiscount(id, priceMin));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo massimo nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato* @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno* @param ritiro
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithPriceHigherThanBySellerSpecificOnDiscount(int id, int priceMin, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceHigherThanBySellerSpecificOnDiscount(id, priceMin, ritiro));
             while (rs.next()) {
                 Objects.add(getModelloFromRs(rs));
             }
@@ -163,6 +560,76 @@ public class DaoOggetto {
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerMaxPrice(id,priceMax));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti con un certo prezzo massimo nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithPriceLowerThanBySellerSpecific(int id, int priceMax, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceLowerThanBySellerSpecific(id, priceMax, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo massimo nei negozi di un determinato venditore
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithPriceLowerThanBySellerOnDiscount(int id, int priceMax) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceLowerThanBySellerOnDiscount(id, priceMax));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo massimo nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithPriceLowerThanBySellerSpecificOnDiscount(int id, int priceMax, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceLowerThanBySellerSpecificOnDiscount(id, priceMax, ritiro));
             while (rs.next()) {
                 Objects.add(getModelloFromRs(rs));
             }
@@ -196,6 +663,79 @@ public class DaoOggetto {
     }
     
     /**
+     * @author Damiano
+     * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno* @param ritiro
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithPriceBetweenRangeBySellerSpecific(int id, int priceMin, int priceMax, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceBetweenRangeBySellerSpecific(id, priceMin, priceMax, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo nei negozi di un determinato venditore
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithPriceBetweenRangeBySellerOnDiscount(int id, int priceMin, int priceMax) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceBetweenRangeBySellerOnDiscount(id, priceMin, priceMax));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno* @param ritiro
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithPriceBetweenRangeBySellerSpecificOnDiscount(int id, int priceMin, int priceMax, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceBetweenRangeBySellerSpecificOnDiscount(id, priceMin, priceMax, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
      * @author Mattia
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria nei negozi di un determinato venditore
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
@@ -219,6 +759,79 @@ public class DaoOggetto {
     }
     
     /**
+     * @author Damiano
+     * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithPriceHigherThanBySellerSpecific(int id, int priceMin, int cat, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceHigherThanBySellerSpecific(id, priceMin, cat, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo minimo in una certa categoria nei negozi di un determinato venditore
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithPriceHigherThanBySellerOnDiscount(int id, int priceMin, int cat) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceHigherThanBySellerOnDiscount(id, priceMin, cat));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo minimo in una certa categoria nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithPriceHigherThanBySellerSpecificOnDiscount(int id, int priceMin, int cat, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceHigherThanBySellerSpecificOnDiscount(id, priceMin, cat, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
      * @author Mattia
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
@@ -232,6 +845,79 @@ public class DaoOggetto {
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerMaxPriceAndCategory(id,priceMax,cat));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithPriceLowerThanBySellerSpecific(int id, int priceMax, int cat, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceLowerThanBySellerSpecific(id, priceMax, cat, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithPriceLowerThanBySellerOnDiscount(int id, int priceMax, int cat) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceLowerThanBySellerOnDiscount(id,priceMax,cat));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithPriceLowerThanBySellerSpecificOnDiscount(int id, int priceMax, int cat, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceLowerThanBySellerSpecificOnDiscount(id, priceMax, cat, ritiro));
             while (rs.next()) {
                 Objects.add(getModelloFromRs(rs));
             }
@@ -266,6 +952,82 @@ public class DaoOggetto {
     }
     
     /**
+     * @author Damiano
+     * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithPriceBetweenRangeBySellerSpecific(int id, int priceMin, int priceMax, int cat, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceBetweenRangeBySellerSpecific(id, priceMin, priceMax, cat, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+        /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithPriceBetweenRangeBySellerOnDiscount(int id, int priceMin, int priceMax, int cat) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceBetweenRangeBySellerOnDiscount(id, priceMin, priceMax, cat));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithPriceBetweenRangeBySellerSpecificOnDiscount(int id, int priceMin, int priceMax, int cat, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceBetweenRangeBySellerSpecificOnDiscount(id, priceMin, priceMax, cat, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
      * @author Mattia
      * Ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome nei negozi di un determinato venditore
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
@@ -289,6 +1051,79 @@ public class DaoOggetto {
     }
     
     /**
+     * @author Damiano
+     * Ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithPriceHigherThanWithStringBySellerSpecific(int id, int priceMin, String pattern, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceHigherThanWithStringBySellerSpecific(id, priceMin, pattern, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo minimo con una certa stringa nel nome nei negozi di un determinato venditore
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithPriceHigherThanWithStringBySellerOnDiscount(int id, int priceMin, String pattern) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceHigherThanWithStringBySellerOnDiscount(id, priceMin, pattern));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo minimo con una certa stringa nel nome nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithPriceHigherThanWithStringBySellerSpecificOnDiscount(int id, int priceMin, String pattern, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceHigherThanWithStringBySellerSpecificOnDiscount(id, priceMin, pattern, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
      * @author Mattia
      * Ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome nei negozi di un determinato venditore
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
@@ -302,6 +1137,79 @@ public class DaoOggetto {
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerMaxPriceAndName(id,priceMax,pattern));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithPriceLowerThanWithStringBySellerSpecific(int id, int priceMax, String pattern, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceLowerThanWithStringBySellerSpecific(id, priceMax, pattern, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo massimo con una certa stringa nel nome nei negozi di un determinato venditore
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithPriceLowerThanWithStringBySellerOnDiscount(int id, int priceMax, String pattern) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceLowerThanWithStringBySellerOnDiscount(id, priceMax, pattern));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo massimo con una certa stringa nel nome nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithPriceLowerThanWithStringBySellerSpecificOnDiscount(int id, int priceMax, String pattern, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceLowerThanWithStringBySellerSpecificOnDiscount(id, priceMax, pattern, ritiro));
             while (rs.next()) {
                 Objects.add(getModelloFromRs(rs));
             }
@@ -336,6 +1244,82 @@ public class DaoOggetto {
     }
     
     /**
+     * @author Damiano
+     * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @param ritiro Un intero che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithPriceBetweenRangeWithStringBySellerSpecific(int id, int priceMin, int priceMax, String pattern, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceBetweenRangeWithStringBySellerSpecific(id, priceMin, priceMax, pattern, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome nei negozi di un determinato venditore
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithPriceBetweenRangeWithStringBySellerOnDiscount(int id, int priceMin, int priceMax, String pattern) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceBetweenRangeWithStringBySellerOnDiscount(id, priceMin, priceMax, pattern));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @param ritiro Un intero che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithPriceBetweenRangeWithStringBySellerSpecificOnDiscount(int id, int priceMin, int priceMax, String pattern, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceBetweenRangeWithStringBySellerSpecificOnDiscount(id, priceMin, priceMax, pattern, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
      * @author Mattia
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
@@ -360,6 +1344,82 @@ public class DaoOggetto {
     }
     
     /**
+     * @author Damiano
+     * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithPriceHigherThanWithStringbySellerSpecific(int id, int priceMin, int cat, String pattern, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceHigherThanWithStringbySellerSpecific(id, priceMin, cat, pattern, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo minimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithPriceHigherThanWithStringbySellerOnDiscount(int id, int priceMin, int cat, String pattern) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceHigherThanWithStringbySellerOnDiscount(id, priceMin, cat, pattern));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo minimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithPriceHigherThanWithStringbySellerSpecificOnDiscount(int id, int priceMin, int cat, String pattern, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceHigherThanWithStringbySellerSpecificOnDiscount(id, priceMin, cat, pattern, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
      * @author Mattia
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
@@ -374,6 +1434,82 @@ public class DaoOggetto {
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerMaxPriceAndNameAndCategory(id,priceMax,cat,pattern));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithPriceLowerThanWithStringbySellerSpecific(int id, int priceMax, int cat, String pattern, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceLowerThanWithStringbySellerSpecific(id, priceMax, cat, pattern, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithPriceLowerThanWithStringbySellerOnDiscount(int id, int priceMax, int cat, String pattern) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceLowerThanWithStringbySellerOnDiscount(id, priceMax, cat, pattern));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @param ritiro Un interno che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithPriceLowerThanWithStringbySellerSpecificOnDiscount(int id, int priceMax, int cat, String pattern, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceLowerThanWithStringbySellerSpecificOnDiscount(id, priceMax, cat, pattern, ritiro));
             while (rs.next()) {
                 Objects.add(getModelloFromRs(rs));
             }
