@@ -1545,20 +1545,129 @@ public class DaoOggetto {
     }
     
     /**
+     * @author Damiano
+     * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @param ritiro Un intero che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithPriceBetweenRangeWithStringbySellerSpecific(int id, int priceMin, int priceMax, int cat, String pattern, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceBetweenRangeWithStringbySellerSpecific(id, cat, priceMin, priceMax, pattern, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithPriceBetweenRangeWithStringbySellerOnDiscount(int id, int priceMin, int priceMax, int cat, String pattern) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceBetweenRangeWithStringbySellerOnDiscount(id, cat, priceMin, priceMax, pattern));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
+     * con una determinata modalità di ritiro
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
+     * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @param ritiro Un intero che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithPriceBetweenRangeWithStringbySellerSpecificOnDiscount(int id, int priceMin, int priceMax, int cat, String pattern, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceBetweenRangeWithStringbySellerSpecificOnDiscount(id, cat, priceMin, priceMax, pattern, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
      * @author Mattia
      * Ottenere la lista di oggetti di negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
      * @param rad Un double utilizzato per definire il raggio desiderata
      * @return List<ModelloOggetto> lista di oggetti
      */
-    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRad(int id,int idU, double lat, double lon, double rad) {
+    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRad(int idU, int id, double lat, double lon, double rad) {
         List<ModelloOggetto> Objects = new ArrayList<>();
         
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerLatLonRad(idU,id,lat,lon,rad));
+            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerLatLonRad(idU, id, lat, lon, rad));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti di negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * con una determinata modalità di ritiro
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param lat Un double utilizzato per definire la latitudine desiderata
+     * @param lon Un double utilizzato per definire la longitudine desiderata
+     * @param rad Un double utilizzato per definire il raggio desiderata
+     * @param ritiro Un intero che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsbySellerNearbySpecific(int idU, int id, double lat, double lon, double rad, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsbySellerNearbySpecific(idU, lat, lon, rad, id, ritiro));
             while (rs.next()) {
                 Objects.add(getModelloFromRs(rs));
             }
@@ -1571,6 +1680,7 @@ public class DaoOggetto {
     /**
      * @author Mattia
      * Ottenere la lista di oggetti che contengono una stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
@@ -1578,7 +1688,7 @@ public class DaoOggetto {
      * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
      * @return List<ModelloOggetto> lista di oggetti
      */
-    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRadAndName(int idU,int id, double lat, double lon, double rad, String pattern) {
+    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRadAndName(int idU, int id, double lat, double lon, double rad, String pattern) {
         List<ModelloOggetto> Objects = new ArrayList<>();
         
         try {
@@ -1596,6 +1706,7 @@ public class DaoOggetto {
     /**
      * @author Mattia
      * Ottenere la lista di oggetti di una categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
@@ -1603,7 +1714,7 @@ public class DaoOggetto {
      * @param cat Un intero utilizzato per identificare la categoria di appartenenza
      * @return List<ModelloOggetto> lista di oggetti
      */
-    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRadAndCategory(int idU,int id, double lat, double lon, double rad, int cat) {
+    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRadAndCategory(int idU, int id, double lat, double lon, double rad, int cat) {
         List<ModelloOggetto> Objects = new ArrayList<>();
         
         try {
@@ -1621,6 +1732,7 @@ public class DaoOggetto {
     /**
      * @author Mattia
      * Ottenere la lista di oggetti di una categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
@@ -1629,7 +1741,7 @@ public class DaoOggetto {
      * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
      * @return List<ModelloOggetto> lista di oggetti
      */
-    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRadAndNameCategory(int idU,int id, double lat, double lon, double rad, int cat, String pattern) {
+    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRadAndNameCategory(int idU, int id, double lat, double lon, double rad, int cat, String pattern) {
         List<ModelloOggetto> Objects = new ArrayList<>();
         
         try {
@@ -1647,6 +1759,7 @@ public class DaoOggetto {
     /**
      * @author Mattia
      * Ottenere la lista di oggetti con un certo prezzo minimo nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
@@ -1654,7 +1767,7 @@ public class DaoOggetto {
      * @param priceMin Un intero utilizzato per delimitare il prezzo minimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
-    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRadAndMinPrice(int idU,int id, double lat, double lon, double rad, int priceMin) {
+    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRadAndMinPrice(int idU, int id, double lat, double lon, double rad, int priceMin) {
         List<ModelloOggetto> Objects = new ArrayList<>();
         
         try {
@@ -1672,6 +1785,7 @@ public class DaoOggetto {
     /**
      * @author Mattia
      * Ottenere la lista di oggetti con un certo prezzo massimo nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
@@ -1679,7 +1793,7 @@ public class DaoOggetto {
      * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
-    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRadAndMaxPrice(int idU,int id, double lat, double lon, double rad, int priceMax) {
+    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRadAndMaxPrice(int idU, int id, double lat, double lon, double rad, int priceMax) {
         List<ModelloOggetto> Objects = new ArrayList<>();
         
         try {
@@ -1697,6 +1811,7 @@ public class DaoOggetto {
     /**
      * @author Mattia
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param lat Un double utilizzato per definire la latitudine desiderata
      * @param lon Un double utilizzato per definire la longitudine desiderata
@@ -1705,7 +1820,7 @@ public class DaoOggetto {
      * @param priceMax Un intero utilizzato per delimitare il prezzo massimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
-    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRadAndMinMaxPrice(int idU,int id, double lat, double lon, double rad, int priceMin, int priceMax) {
+    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRadAndMinMaxPrice(int idU, int id, double lat, double lon, double rad, int priceMin, int priceMax) {
         List<ModelloOggetto> Objects = new ArrayList<>();
         
         try {
