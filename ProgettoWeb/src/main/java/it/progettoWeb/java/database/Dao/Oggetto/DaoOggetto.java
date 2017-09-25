@@ -898,7 +898,7 @@ public class DaoOggetto {
     /**
      * @author andrea
      * Ottenere la lista di oggetti con un certo prezzo minimo
-     * @param prezzoMin: Intero indicante il prezzo minimo desiderato
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectHigherThanPrice(double prezzoMin) {
@@ -918,7 +918,7 @@ public class DaoOggetto {
     /**
      * @author andrea
      * Ottenere la lista di oggetti con un certo prezzo massimo
-     * @param prezzoMax: Intero indicante il prezzo massimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectLowerThanPrice(double prezzoMax) {
@@ -938,8 +938,8 @@ public class DaoOggetto {
     /**
      * @author andrea
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo
-     * @param prezzoMin: Intero indicante il prezzo minimo desiderato
-     * @param prezzoMax: Intero indicante il prezzo massimo desiderato
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectBetweenPrices(double prezzoMin, double prezzoMax) {
@@ -960,7 +960,7 @@ public class DaoOggetto {
      * @author andrea
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria
      * @param idCategoria: Intero indicante l'id della categoria
-     * @param prezzoMin: Intero indicante il prezzo minimo desiderato
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectByCategoryAndHigherThanPrice(int idCategoria, double prezzoMin) {
@@ -981,7 +981,7 @@ public class DaoOggetto {
      * @author andrea
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria
      * @param idCategoria: Intero indicante l'id della categoria
-     * @param prezzoMax: Intero indicante il prezzo massimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectByCategoryAndLowerThanPrice(int idCategoria, double prezzoMax) {
@@ -1002,8 +1002,8 @@ public class DaoOggetto {
      * @author andrea
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria
      * @param idCategoria: Intero indicante l'id della categoria
-     * @param prezzoMin: Intero indicante il prezzo minimo desiderato
-     * @param prezzoMax: Intero indicante il prezzo massimo desiderato
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectByCategoryAndBetweenPrices(int idCategoria, double prezzoMin, double prezzoMax) {
@@ -1024,7 +1024,7 @@ public class DaoOggetto {
      * @author andrea
      * Ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome
      * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
-     * @param prezzoMin: Intero indicante il prezzo minimo desiderato
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectByNameAndHigherThanPrice(String nomeDownCase, double prezzoMin) {
@@ -1045,7 +1045,7 @@ public class DaoOggetto {
      * @author andrea
      * Ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome
      * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
-     * @param prezzoMax: Intero indicante il prezzo massimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectByNameAndLowerThanPrice(String nomeDownCase, double prezzoMax) {
@@ -1066,8 +1066,8 @@ public class DaoOggetto {
      * @author andrea
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome
      * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
-     * @param prezzoMin: Intero indicante il prezzo minimo desiderato
-     * @param prezzoMax: Intero indicante il prezzo massimo desiderato
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectByNameAndBetweenPrices(String nomeDownCase, double prezzoMin, double prezzoMax) {
@@ -1089,7 +1089,7 @@ public class DaoOggetto {
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome
      * @param idCategoria: Intero indicante l'id della categoria
      * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
-     * @param prezzoMin: Intero indicante il prezzo minimo desiderato
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectByCategoryAndNameAndHigherThanPrice(int idCategoria, String nomeDownCase, double prezzoMin) {
@@ -1111,7 +1111,7 @@ public class DaoOggetto {
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome
      * @param idCategoria: Intero indicante l'id della categoria
      * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
-     * @param prezzoMax: Intero indicante il prezzo massimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectByCategoryAndNameAndLowerThanPrice(int idCategoria, String nomeDownCase, double prezzoMax) {
@@ -1133,8 +1133,8 @@ public class DaoOggetto {
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome
      * @param idCategoria: Intero indicante l'id della categoria
      * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
-     * @param prezzoMin: Intero indicante il prezzo minimo desiderato
-     * @param prezzoMax: Intero indicante il prezzo massimo desiderato
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectByCategoryAndNameAndBetweenPrices(int idCategoria, String nomeDownCase, double prezzoMin, double prezzoMax) {
@@ -1239,7 +1239,7 @@ public class DaoOggetto {
      * @author andrea
      * Ottenere la lista di oggetti con un certo prezzo minimo di un determinato negozio
      * @param idNegozio: Intero indicante l'identificativo del negozio desiderato
-     * @param prezzoMin: Intero indicante il prezzo minimo desiderato
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectByShopAndHigherThanPrice(int idNegozio, double prezzoMin) {
@@ -1260,7 +1260,7 @@ public class DaoOggetto {
      * @author andrea
      * Ottenere la lista di oggetti con un certo prezzo massimo di un determinato negozio
      * @param idNegozio: Intero indicante l'identificativo del negozio desiderato
-     * @param prezzoMax: Intero indicante il prezzo massimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectByShopAndLowerThanPrice(int idNegozio, double prezzoMax) {
@@ -1281,8 +1281,8 @@ public class DaoOggetto {
      * @author andrea
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di un determinato negozio
      * @param idNegozio: Intero indicante l'identificativo del negozio desiderato
-     * @param prezzoMin: Intero indicante il prezzo minimo desiderato
-     * @param prezzoMax: Intero indicante il prezzo massimo desiderato
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectByShopAndBetweenPrices(int idNegozio, double prezzoMin, double prezzoMax) {
@@ -1304,7 +1304,7 @@ public class DaoOggetto {
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di un determinato negozio
      * @param idCategoria: Intero indicante l'id della categoria
      * @param idNegozio: Intero indicante l'identificativo del negozio desiderato
-     * @param prezzoMin: Intero indicante il prezzo minimo desiderato
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectByCategoryAndShopAndHigherThanPrice(int idCategoria, int idNegozio, double prezzoMin) {
@@ -1326,7 +1326,7 @@ public class DaoOggetto {
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di un determinato negozio
      * @param idCategoria: Intero indicante l'id della categoria
      * @param idNegozio: Intero indicante l'identificativo del negozio desiderato
-     * @param prezzoMax: Intero indicante il prezzo massimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectByCategoryAndShopAndLowerThanPrice(int idCategoria, int idNegozio, double prezzoMax) {
@@ -1348,8 +1348,8 @@ public class DaoOggetto {
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di un determinato negozio
      * @param idCategoria: Intero indicante l'id della categoria
      * @param idNegozio: Intero indicante l'identificativo del negozio desiderato
-     * @param prezzoMin: Intero indicante il prezzo minimo desiderato
-     * @param prezzoMax: Intero indicante il prezzo massimo desiderato
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectByCategoryAndShopAndBetweenPrices(int idCategoria, int idNegozio, double prezzoMin, double prezzoMax) {
@@ -1371,7 +1371,7 @@ public class DaoOggetto {
      * Ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di un determinato negozio
      * @param idNegozio: Intero indicante l'identificativo del negozio desiderato
      * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
-     * @param prezzoMin: Intero indicante il prezzo minimo desiderato
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectByShopAndNameAndHigherThanPrice(int idNegozio, String nomeDownCase, double prezzoMin) {
@@ -1393,7 +1393,7 @@ public class DaoOggetto {
      * Ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di un determinato negozio
      * @param idNegozio: Intero indicante l'identificativo del negozio desiderato
      * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
-     * @param prezzoMax: Intero indicante il prezzo massimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectByShopAndNameAndLowerThanPrice(int idNegozio, String nomeDownCase, double prezzoMax) {
@@ -1415,8 +1415,8 @@ public class DaoOggetto {
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di un determinato negozio
      * @param idNegozio: Intero indicante l'identificativo del negozio desiderato
      * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
-     * @param prezzoMin: Intero indicante il prezzo minimo desiderato
-     * @param prezzoMax: Intero indicante il prezzo massimo desiderato
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectByShopAndNameAndBetweenPrices(int idNegozio, String nomeDownCase, double prezzoMin, double prezzoMax) {
@@ -1439,7 +1439,7 @@ public class DaoOggetto {
      * @param idNegozio: Intero indicante l'identificativo del negozio desiderato
      * @param idCategoria: Intero indicante l'id della categoria
      * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
-     * @param prezzoMin: Intero indicante il prezzo minimo desiderato
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectByCategoryAndShopAndNameAndHigherThanPrice(int idNegozio, int idCategoria, String nomeDownCase, double prezzoMin) {
@@ -1462,7 +1462,7 @@ public class DaoOggetto {
      * @param idNegozio: Intero indicante l'identificativo del negozio desiderato
      * @param idCategoria: Intero indicante l'id della categoria
      * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
-     * @param prezzoMax: Intero indicante il prezzo massimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectByCategoryAndShopAndNameAndLowerThanPrice(int idNegozio, int idCategoria, String nomeDownCase, double prezzoMax) {
@@ -1485,8 +1485,8 @@ public class DaoOggetto {
      * @param idNegozio: Intero indicante l'identificativo del negozio desiderato
      * @param idCategoria: Intero indicante l'id della categoria
      * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
-     * @param prezzoMax: Intero indicante il prezzo massimo desiderato
-     * @param prezzoMin: Intero indicante il prezzo minimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
      * @return List<ModelloOggetto> lista di oggetti
      */
     public List<ModelloOggetto> selectObjectByCategoryAndShopAndNameAndBetweenPrices(int idNegozio, int idCategoria, String nomeDownCase, double prezzoMin, double prezzoMax) {
@@ -1542,6 +1542,667 @@ public class DaoOggetto {
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByNameAndLLR(idUtente, lat, lon, r, nomeDownCase));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti di una categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente: Intero indicante l'identificativo del soggetto desiderato
+     * @param lat: Double contenente il valore della latitudine
+     * @param lon: Double contenente il valore della longitudine
+     * @param r: Double contenente il valore della raggio di ricerca
+     * @param idCategoria: Intero indicante l'id della categoria
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByCategoryAndLLR(int idUtente, double lat, double lon, double r, int idCategoria) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByCategoryAndLLR(idUtente, lat, lon, r, idCategoria));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti di una categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente: Intero indicante l'identificativo del soggetto desiderato
+     * @param lat: Double contenente il valore della latitudine
+     * @param lon: Double contenente il valore della longitudine
+     * @param r: Double contenente il valore della raggio di ricerca
+     * @param idCategoria: Intero indicante l'id della categoria
+     * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByCategoryAndNameAndLLR(int idUtente, double lat, double lon, double r, int idCategoria, String nomeDownCase) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByCategoryAndNameAndLLR(idUtente, lat, lon, r, idCategoria, nomeDownCase));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo minimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente: Intero indicante l'identificativo del soggetto desiderato
+     * @param lat: Double contenente il valore della latitudine
+     * @param lon: Double contenente il valore della longitudine
+     * @param r: Double contenente il valore della raggio di ricerca
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByLLRAndHigherThanPrice(int idUtente, double lat, double lon, double r, double prezzoMin) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByLLRAndHigherThanPrice(idUtente, lat, lon, r, prezzoMin));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo massimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente: Intero indicante l'identificativo del soggetto desiderato
+     * @param lat: Double contenente il valore della latitudine
+     * @param lon: Double contenente il valore della longitudine
+     * @param r: Double contenente il valore della raggio di ricerca
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByLLRAndLowerThanPrice(int idUtente, double lat, double lon, double r, double prezzoMax) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByLLRAndLowerThanPrice(idUtente, lat, lon, r, prezzoMax));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente: Intero indicante l'identificativo del soggetto desiderato
+     * @param lat: Double contenente il valore della latitudine
+     * @param lon: Double contenente il valore della longitudine
+     * @param r: Double contenente il valore della raggio di ricerca
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByLLRAndBetweenPrices(int idUtente, double lat, double lon, double r, double prezzoMin, double prezzoMax) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByLLRAndBetweenPrices(idUtente, lat, lon, r, prezzoMin, prezzoMax));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente: Intero indicante l'identificativo del soggetto desiderato
+     * @param lat: Double contenente il valore della latitudine
+     * @param lon: Double contenente il valore della longitudine
+     * @param r: Double contenente il valore della raggio di ricerca
+     * @param idCategoria: Intero indicante l'id della categoria
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByCategoryAndLLRAndHigherThanPrice(int idUtente, double lat, double lon, double r, int idCategoria, double prezzoMin) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByCategoryAndLLRAndHigherThanPrice(idUtente, lat, lon, r, idCategoria, prezzoMin));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente: Intero indicante l'identificativo del soggetto desiderato
+     * @param lat: Double contenente il valore della latitudine
+     * @param lon: Double contenente il valore della longitudine
+     * @param r: Double contenente il valore della raggio di ricerca
+     * @param idCategoria: Intero indicante l'id della categoria
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByCategoryAndLLRLowerThanPrice(int idUtente, double lat, double lon, double r, int idCategoria, double prezzoMax) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByCategoryAndLLRLowerThanPrice(idUtente, lat, lon, r, idCategoria, prezzoMax));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente: Intero indicante l'identificativo del soggetto desiderato
+     * @param lat: Double contenente il valore della latitudine
+     * @param lon: Double contenente il valore della longitudine
+     * @param r: Double contenente il valore della raggio di ricerca
+     * @param idCategoria: Intero indicante l'id della categoria
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByCategoryAndLLRAndBetweenPrices(int idUtente, double lat, double lon, double r, int idCategoria, double prezzoMin, double prezzoMax) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByCategoryAndLLRAndBetweenPrices(idUtente, lat, lon, r, idCategoria, prezzoMin, prezzoMax));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente: Intero indicante l'identificativo del soggetto desiderato
+     * @param lat: Double contenente il valore della latitudine
+     * @param lon: Double contenente il valore della longitudine
+     * @param r: Double contenente il valore della raggio di ricerca
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByNameAndLLRAndHigherThanPrice(int idUtente, double lat, double lon, double r, double prezzoMin, String nomeDownCase) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByNameAndLLRAndHigherThanPrice(idUtente, lat, lon, r, prezzoMin, nomeDownCase));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente: Intero indicante l'identificativo del soggetto desiderato
+     * @param lat: Double contenente il valore della latitudine
+     * @param lon: Double contenente il valore della longitudine
+     * @param r: Double contenente il valore della raggio di ricerca
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
+     * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByNameAndLLRLowerThanPrice(int idUtente, double lat, double lon, double r, double prezzoMax, String nomeDownCase) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByNameAndLLRLowerThanPrice(idUtente, lat, lon, r, prezzoMax, nomeDownCase));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente: Intero indicante l'identificativo del soggetto desiderato
+     * @param lat: Double contenente il valore della latitudine
+     * @param lon: Double contenente il valore della longitudine
+     * @param r: Double contenente il valore della raggio di ricerca
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
+     * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByNameAndLLRAndBetweenPrices(int idUtente, double lat, double lon, double r, double prezzoMin, double prezzoMax, String nomeDownCase) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByNameAndLLRAndBetweenPrices(idUtente, lat, lon, r, prezzoMin, prezzoMax, nomeDownCase));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente: Intero indicante l'identificativo del soggetto desiderato
+     * @param lat: Double contenente il valore della latitudine
+     * @param lon: Double contenente il valore della longitudine
+     * @param r: Double contenente il valore della raggio di ricerca
+     * @param idCategoria: Intero indicante l'id della categoria
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByCategoryAndNameAndLLRAndHigherThanPrice(int idUtente, double lat, double lon, double r, int idCategoria, double prezzoMin, String nomeDownCase) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByCategoryAndNameAndLLRAndHigherThanPrice(idUtente, lat, lon, r, idCategoria, prezzoMin, nomeDownCase));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente: Intero indicante l'identificativo del soggetto desiderato
+     * @param lat: Double contenente il valore della latitudine
+     * @param lon: Double contenente il valore della longitudine
+     * @param r: Double contenente il valore della raggio di ricerca
+     * @param idCategoria: Intero indicante l'id della categoria
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
+     * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByCategoryAndNameAndLLRLowerThanPrice(int idUtente, double lat, double lon, double r, int idCategoria, double prezzoMax, String nomeDownCase) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByCategoryAndNameAndLLRLowerThanPrice(idUtente, lat, lon, r, idCategoria, prezzoMax, nomeDownCase));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente: Intero indicante l'identificativo del soggetto desiderato
+     * @param lat: Double contenente il valore della latitudine
+     * @param lon: Double contenente il valore della longitudine
+     * @param r: Double contenente il valore della raggio di ricerca
+     * @param idCategoria: Intero indicante l'id della categoria
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
+     * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByCategoryAndNameAndLLRAndBetweenPrices(int idUtente, double lat, double lon, double r, int idCategoria, double prezzoMin, double prezzoMax, String nomeDownCase) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByCategoryAndNameAndLLRAndBetweenPrices(idUtente, lat, lon, r, idCategoria, prezzoMin, prezzoMax, nomeDownCase));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti che contengono una stringa nel nome
+     * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
+     * @param ritiroInNegozio: Boolean indicante se l'opzione ritira in negozio è consentita
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByNameAndPIS(String nomeDownCase, int ritiroInNegozio) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByNameAndPIS(nomeDownCase, ritiroInNegozio));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti di una categoria
+     * @param idCategoria: Intero indicante l'id della categoria
+     * @param ritiroInNegozio: Boolean indicante se l'opzione ritira in negozio è consentita
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByCategoryAndPIS(int idCategoria, int ritiroInNegozio) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByCategoryAndPIS(idCategoria, ritiroInNegozio));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti di una categoria con una certa stringa nel nome
+     * @param idCategoria: Intero indicante l'id della categoria
+     * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
+     * @param ritiroInNegozio: Boolean indicante se l'opzione ritira in negozio è consentita
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByCategoryAndNameAndPIS(int idCategoria, String nomeDownCase, int ritiroInNegozio) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByCategoryAndNameAndPIS(idCategoria, nomeDownCase, ritiroInNegozio));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo minimo
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @param ritiroInNegozio: Boolean indicante se l'opzione ritira in negozio è consentita
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectHigherThanPriceAndPIS(double prezzoMin, int ritiroInNegozio) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectHigherThanPriceAndPIS(prezzoMin, ritiroInNegozio));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo massimo
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
+     * @param ritiroInNegozio: Boolean indicante se l'opzione ritira in negozio è consentita
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectLowerThanPriceAndPIS(double prezzoMax, int ritiroInNegozio) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectLowerThanPriceAndPIS(prezzoMax, ritiroInNegozio));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
+     * @param ritiroInNegozio: Boolean indicante se l'opzione ritira in negozio è consentita
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectBetweenPricesAndPIS(double prezzoMin, double prezzoMax, int ritiroInNegozio) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectBetweenPricesAndPIS(prezzoMin, prezzoMax, ritiroInNegozio));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria
+     * @param idCategoria: Intero indicante l'id della categoria
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @param ritiroInNegozio: Boolean indicante se l'opzione ritira in negozio è consentita
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByCategoryAndHigherThanPriceAndPIS(int idCategoria, double prezzoMin, int ritiroInNegozio) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByCategoryAndHigherThanPriceAndPIS(idCategoria, prezzoMin, ritiroInNegozio));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria
+     * @param idCategoria: Intero indicante l'id della categoria
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
+     * @param ritiroInNegozio: Boolean indicante se l'opzione ritira in negozio è consentita
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByCategoryAndLowerThanPriceAndPIS(int idCategoria, double prezzoMax, int ritiroInNegozio) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByCategoryAndLowerThanPriceAndPIS(idCategoria, prezzoMax, ritiroInNegozio));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria
+     * @param idCategoria: Intero indicante l'id della categoria
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
+     * @param ritiroInNegozio: Boolean indicante se l'opzione ritira in negozio è consentita
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByCategoryAndBetweenPricesAndPIS(int idCategoria, double prezzoMin, double prezzoMax, int ritiroInNegozio) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByCategoryAndBetweenPricesAndPIS(idCategoria, prezzoMin, prezzoMax, ritiroInNegozio));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome
+     * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @param ritiroInNegozio: Boolean indicante se l'opzione ritira in negozio è consentita
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByNameAndHigherThanPriceAndPIS(String nomeDownCase, double prezzoMin, int ritiroInNegozio) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByNameAndHigherThanPriceAndPIS(nomeDownCase, prezzoMin, ritiroInNegozio));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome
+     * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
+     * @param ritiroInNegozio: Boolean indicante se l'opzione ritira in negozio è consentita
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByNameAndLowerThanPriceAndPIS(String nomeDownCase, double prezzoMax, int ritiroInNegozio) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByNameAndLowerThanPriceAndPIS(nomeDownCase, prezzoMax, ritiroInNegozio));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome
+     * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
+     * @param ritiroInNegozio: Boolean indicante se l'opzione ritira in negozio è consentita
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByNameAndBetweenPricesAndPIS(String nomeDownCase, double prezzoMin, double prezzoMax, int ritiroInNegozio) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByNameAndBetweenPricesAndPIS(nomeDownCase, prezzoMin, prezzoMax, ritiroInNegozio));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome
+     * @param idCategoria: Intero indicante l'id della categoria
+     * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
+     * @param prezzoMin: Double indicante il prezzo minimo desiderato
+     * @param ritiroInNegozio: Boolean indicante se l'opzione ritira in negozio è consentita
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByCategoryAndNameAndHigherThanPriceAndPIS(int idCategoria, String nomeDownCase, double prezzoMin, int ritiroInNegozio) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByCategoryAndNameAndHigherThanPriceAndPIS(idCategoria, nomeDownCase, prezzoMin, ritiroInNegozio));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome
+     * @param idCategoria: Intero indicante l'id della categoria
+     * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
+     * @param prezzoMax: Double indicante il prezzo massimo desiderato
+     * @param ritiroInNegozio: Boolean indicante se l'opzione ritira in negozio è consentita
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectObjectByCategoryAndNameAndLowerThanPriceAndPIS(int idCategoria, String nomeDownCase, double prezzoMax, int ritiroInNegozio) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByCategoryAndNameAndLowerThanPriceAndPIS(idCategoria, nomeDownCase, prezzoMax, ritiroInNegozio));
             while (rs.next()) {
                 Objects.add(getModelloFromRs(rs));
             }
