@@ -1678,6 +1678,58 @@ public class DaoOggetto {
     }
     
     /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto di negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param lat Un double utilizzato per definire la latitudine desiderata
+     * @param lon Un double utilizzato per definire la longitudine desiderata
+     * @param rad Un double utilizzato per definire il raggio desiderata
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsbySellerNearbyOnDiscount(int idU, int id, double lat, double lon, double rad) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsbySellerNearbyOnDiscount(idU, lat, lon, rad, id));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto di negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * con una determinata modalità di ritiro
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param lat Un double utilizzato per definire la latitudine desiderata
+     * @param lon Un double utilizzato per definire la longitudine desiderata
+     * @param rad Un double utilizzato per definire il raggio desiderata
+     * @param ritiro Un intero che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsbySellerNearbySpecificOnDiscount(int idU, int id, double lat, double lon, double rad, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsbySellerNearbySpecificOnDiscount(idU, lat, lon, rad, id, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
      * @author Mattia
      * Ottenere la lista di oggetti che contengono una stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
      * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
@@ -1694,6 +1746,88 @@ public class DaoOggetto {
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerLatLonRadAndName(idU,id,lat,lon,rad,pattern));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti che contengono una stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * con una determinata modalità di ritiro
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param lat Un double utilizzato per definire la latitudine desiderata
+     * @param lon Un double utilizzato per definire la longitudine desiderata
+     * @param rad Un double utilizzato per definire il raggio desiderata
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @param ritiro Un intero che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithStringbySellerNearbySpecific(int idU, int id, double lat, double lon, double rad, String pattern, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithStringbySellerNearbySpecific(idU, lat, lon, rad, id, pattern, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto che contengono una stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param lat Un double utilizzato per definire la latitudine desiderata
+     * @param lon Un double utilizzato per definire la longitudine desiderata
+     * @param rad Un double utilizzato per definire il raggio desiderata
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithStringbySellerNearbyOnDiscount(int idU, int id, double lat, double lon, double rad, String pattern) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithStringbySellerNearbyOnDiscount(idU, lat, lon, rad, id, pattern));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto che contengono una stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * con una determinata modalità di ritiro
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param lat Un double utilizzato per definire la latitudine desiderata
+     * @param lon Un double utilizzato per definire la longitudine desiderata
+     * @param rad Un double utilizzato per definire il raggio desiderata
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @param ritiro Un intero che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsWithStringbySellerNearbySpecificOnDiscount(int idU, int id, double lat, double lon, double rad, String pattern, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithStringbySellerNearbySpecificOnDiscount(idU, lat, lon, rad, id, pattern, ritiro));
             while (rs.next()) {
                 Objects.add(getModelloFromRs(rs));
             }
@@ -1730,7 +1864,144 @@ public class DaoOggetto {
     }
     
     /**
+     * @author Damiano
+     * Ottenere la lista di oggetti di una categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * con una determinata modalità di ritiro
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param lat Un double utilizzato per definire la latitudine desiderata
+     * @param lon Un double utilizzato per definire la longitudine desiderata
+     * @param rad Un double utilizzato per definire il raggio desiderata
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param ritiro Un intero che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategorybySellerNearbySpecific(int idU, int id, double lat, double lon, double rad, int cat, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategorybySellerNearbySpecific(idU, lat, lon, rad, id, cat, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto di una categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param lat Un double utilizzato per definire la latitudine desiderata
+     * @param lon Un double utilizzato per definire la longitudine desiderata
+     * @param rad Un double utilizzato per definire il raggio desiderata
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategorybySellerNearbyOnDiscount(int idU, int id, double lat, double lon, double rad, int cat) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategorybySellerNearbyOnDiscount(idU, lat, lon, rad, id, cat));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti in sconto di una categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * con una determinata modalità di ritiro
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param lat Un double utilizzato per definire la latitudine desiderata
+     * @param lon Un double utilizzato per definire la longitudine desiderata
+     * @param rad Un double utilizzato per definire il raggio desiderata
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param ritiro Un intero che indica se l'ogetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategorybySellerNearbySpecificOnDiscount(int idU, int id, double lat, double lon, double rad, int cat, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategorybySellerNearbySpecificOnDiscount(idU, lat, lon, rad, id, cat, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
      * @author Mattia
+     * Ottenere la lista di oggetti di una categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param lat Un double utilizzato per definire la latitudine desiderata
+     * @param lon Un double utilizzato per definire la longitudine desiderata
+     * @param rad Un double utilizzato per definire il raggio desiderata
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerLatLonRadAndNameCategory(int idU, int id, double lat, double lon, double rad, int cat, String pattern) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerLatLonRadAndNameCategory(idU,id,lat,lon,rad,cat,pattern));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti di una categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
+     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param lat Un double utilizzato per definire la latitudine desiderata
+     * @param lon Un double utilizzato per definire la longitudine desiderata
+     * @param rad Un double utilizzato per definire il raggio desiderata
+     * @param cat Un intero utilizzato per identificare la categoria di appartenenza
+     * @param pattern Una stringa utilizzata per una ricerca basata sul confronto
+     * @param ritiro Un intero che indica se l'oggetto è ritirabile in negozio o meno
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<ModelloOggetto> itemsInCategoryWithStringbySellerNearbySpecific(int idU, int id, double lat, double lon, double rad, int cat, String pattern, int ritiro) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithStringbySellerNearbySpecific(idU, lat, lon, rad, id, cat, pattern, ritiro));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Damiano
      * Ottenere la lista di oggetti di una categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
      * @param idU Un intero che rappresenta l'identificativo dell'utente. Viene utilizzato per assegnare un nome univoco alla view
      * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
