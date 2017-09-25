@@ -17,93 +17,226 @@ public class objectMarketsQuery {
     // QUERY OGGETTI IN NEGOZI
     // ottenere la lista di oggetti di un determinato negozio
 
-    public static String selectObjectShopId() {
-        return "SELECT * FROM Oggetto WHERE Oggetto.idNegozio = 'idN' AND Oggetto.ritiroInNegozio = 1;";
+    /**
+     * 
+     * @param idS
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopId(int idS, int ritiroInNegozio ) { 
+        return "SELECT * FROM Oggetto WHERE Oggetto.idNegozio = "+ idS +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
     }
         // ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio
 
-    public static String selectObjectShopIdSpecificName() {
-        return "SELECT * FROM Oggetto WHERE idNegozio=ID AND nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;";
+    /**
+     * 
+     * @param idS
+     * @param name
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificName(int idS, String name, int ritiroInNegozio ) {
+        return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
     }
         // ottenere la lista di oggetti di una categoria di un determinato negozio
 
-    public static String selectObjectShopIdSpecificCategory() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.ritiroInNegozio = 1;";
+    /**
+     * 
+     * @param idS
+     * @param category
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificCategory(int idS, int category, int ritiroInNegozio ) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
     }
         // ottenere la lista di oggetti di una categoria con una certa stringa nel nome di un determinato negozio
 
-    public static String selectObjectShopIdSpecificCategoryAndSpecificName() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;";
+    /**
+     * 
+     * @param idS
+     * @param category
+     * @param name
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificCategoryAndSpecificName(int idS, int category, String name, int ritiroInNegozio ) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
         }
     
         // ottenere la lista di oggetti con un certo prezzo minimo di un determinato negozio
-    public static String selectObjectShopIdSpecificMinPrice() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.prezzo >= MINIMO AND Oggetto.ritiroInNegozio = 1;";
+    /**
+     * 
+     * @param idS
+     * @param min
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificMinPrice(int idS, double min, int ritiroInNegozio ) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo >= "+ min +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo di un determinato negozio
-    public static String selectObjectShopIdSpecificMaxPrice() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.prezzo <= MASSIMO AND Oggetto.ritiroInNegozio = 1;";
+    /**
+     * 
+     * @param idS
+     * @param max
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificMaxPrice(int idS, double max, int ritiroInNegozio ) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo <= "+ max +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di un determinato negozio
-    public static String selectObjectShopIdSpecificBetweenPrice() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.ritiroInNegozio = 1;";
+    /**
+     * 
+     * @param idS
+     * @param min
+     * @param max
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificBetweenPrice(int idS, double min, double max, int ritiroInNegozio ) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di un determinato negozio
-    public static String selectObjectShopIdSpecificCategoryAndSpecificMinPrice() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo >= MINIMO AND Oggetto.ritiroInNegozio = 1;";
+    /**
+     * 
+     * @param idS
+     * @param category
+     * @param min
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificCategoryAndSpecificMinPrice(int idS, int category, double min, int ritiroInNegozio ) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo >= "+ min +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di un determinato negozio
-    public static String selectObjectShopIdSpecificCategoryAndSpecificMaxPrice() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo <= MASSIMO AND Oggetto.ritiroInNegozio = 1;";
+    /**
+     * 
+     * @param idS
+     * @param category
+     * @param max
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificCategoryAndSpecificMaxPrice(int idS, int category, double max, int ritiroInNegozio ) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo <= "+ max +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di un determinato negozio
-    public static String selectObjectShopIdSpecificCategoryAndSpecificBetweenPrice() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.ritiroInNegozio = 1;";
+    /**
+     * 
+     * @param idS
+     * @param category
+     * @param min
+     * @param max
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificCategoryAndSpecificBetweenPrice(int idS, int category, double min, double max, int ritiroInNegozio ) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di un determinato negozio
-    public static String selectObjectShopIdSpecificNameAndSpecificMinPrice() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.prezzo >= MINIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;";
+    /**
+     * 
+     * @param idS
+     * @param name
+     * @param min
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificNameAndSpecificMinPrice(int idS, String name, double min, int ritiroInNegozio ) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo >= "+ min +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di un determinato negozio
-    public static String selectObjectShopIdSpecificNameAndSpecificMaxPrice() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.prezzo <= MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;";
+    /**
+     * 
+     * @param idS
+     * @param name
+     * @param max
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificNameAndSpecificMaxPrice(int idS, String name, double max, int ritiroInNegozio ) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo <= "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di un determinato negozio
-    public static String selectObjectShopIdSpecificNameAndSpecificBetweenPrice() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;";
+    /**
+     * 
+     * @param idS
+     * @param name
+     * @param min
+     * @param max
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificNameAndSpecificBetweenPrice(int idS, String name, double min, double max, int ritiroInNegozio ) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di un determinato negozio
-    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMinPrice() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo >= MINIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;";
+    /**
+     * 
+     * @param idS
+     * @param category
+     * @param name
+     * @param min
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMinPrice(int idS, int category, String name, double min, int ritiroInNegozio ) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo >= "+ min +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio
-    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMaxPrice() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo <= MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;";
+    /**
+     * 
+     * @param idS
+     * @param category
+     * @param name
+     * @param max
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMaxPrice(int idS, int category, String name, double max, int ritiroInNegozio ) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo <= "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio
-    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificBetweenPrice() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;";
+    /**
+     * 
+     * @param idS
+     * @param category
+     * @param name
+     * @param min
+     * @param max
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificBetweenPrice(int idS, int category, String name, double min, double max, int ritiroInNegozio ) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
     
         // ottenere la lista di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
-    
-        // BASSANO DEL GRAPPA
-    public static String selectShopWithlatitudeAndLongitude() {
-            return "SET @latitudine = 45.7665600; "
-                    + "SET @longitudine = 11.727390; "
-                    + "SET @raggio = 50; "
+    /**
+     * 
+     * @param raggio
+     * @param longitudine
+     * @param latitudine
+     * @return 
+     */
+    public static String selectShopWithlatitudeAndLongitude(double raggio, double longitudine, double latitudine) {
+            return "SET @latitudine = "+ latitudine +"; "
+                    + "SET @longitudine = "+ longitudine +"; "
+                    + "SET @raggio = "+ raggio +"; "
                     + "SELECT Negozio.* "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
                     + "WHERE @raggio >= 111.111 *DEGREES(ACOS(COS(RADIANS(@latitudine))"
@@ -114,880 +247,1073 @@ public class objectMarketsQuery {
 
         }
         // ottenere la lista di oggetti in negozi data una determinata longitudine, latitudine ed un raggio di ricerca
-    
-        public static String selectObjectShopWithLatitudeAndLongitude() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 *DEGREES(ACOS(COS(RADIANS(45.7665600))"
-                    + "* COS(RADIANS(Indirizzo.latitudine))"
-                    + "* COS(RADIANS(11.727390 - Indirizzo.longitudine))"
-                    + "+ SIN(RADIANS(45.7665600))* SIN(RADIANS(Indirizzo.latitudine))));"
-                    + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.ritiroInNegozio = 1;";
+    /**
+     * 
+     * @param raggio
+     * @param longitudine
+     * @param latitudine
+     * @param idU
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  int ritiroInNegozio ) {
+        return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
+                + "SELECT Negozio.id "
+                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "WHERE "+ raggio +">= 111.111 *DEGREES(ACOS(COS(RADIANS("+ latitudine +"))"
+                + "* COS(RADIANS(Indirizzo.latitudine))"
+                + "* COS(RADIANS("+ longitudine +" - Indirizzo.longitudine))"
+                + "+ SIN(RADIANS("+ latitudine +"))* SIN(RADIANS(Indirizzo.latitudine))));"
+                + "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
-        }
+    }
         // ottenere la lista di oggetti che contengono una stringa nel nome, nei negozi data una determinata longitudine, latitudine ed un raggio di ricerca
-
-    public static String selectObjectShopIdSpecificNameWithLatitudeAndLongitude() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    /**
+     * 
+     * @param raggio
+     * @param longitudine
+     * @param latitudine
+     * @param idU
+     * @param name
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificNameWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  String name, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
                     + "* COS(RADIANS(Indirizzo.latitudine)) "
-                    + "* COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "* COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
                     + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti di una categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
-
-    public static String selectObjectShopIdSpecificCategoryWithLatitudeAndLongitude() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    /**
+     * 
+     * @param raggio
+     * @param longitudine
+     * @param latitudine
+     * @param idU
+     * @param category
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificCategoryWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  int category, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
                     + "* COS(RADIANS(Indirizzo.latitudine)) "
-                    + "* COS(RADIANS(11.727390 - Indirizzo.longitudine)) + SIN(RADIANS(45.7665600)) "
+                    + "* COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) + SIN(RADIANS("+ latitudine +")) "
                     + "* SIN(RADIANS(Indirizzo.latitudine)))); "
                     + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.categoria=CATEGORIA AND Oggetto.ritiroInNegozio = 1;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.categoria="+ category +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti di una categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
-
-    public static String selectObjectShopIdSpecificCategoryAndSpecificNameWithLatitudeAndLongitude() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    /**
+     * 
+     * @param raggio
+     * @param longitudine
+     * @param latitudine
+     * @param idU
+     * @param category
+     * @param name
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificCategoryAndSpecificNameWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  int category, String name, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) WHERE Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;";
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
-
-    public static String selectObjectShopIdSpecificMinPriceWithLatitudeAndLongitude() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    /**
+     * 
+     * @param raggio
+     * @param longitudine
+     * @param latitudine
+     * @param idU
+     * @param min
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificMinPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  double min, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
                     + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo >= MINIMO AND Oggetto.ritiroInNegozio = 1;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo >= "+ min +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo vdi negozi data una determinata longitudine, latitudine ed un raggio di ricerca
-
-    public static String selectObjectShopIdSpecificMaxPriceWithLatitudeAndLongitude() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    /**
+     * 
+     * @param raggio
+     * @param longitudine
+     * @param latitudine
+     * @param idU
+     * @param max
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificMaxPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  double max, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
                     + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo <= MASSIMO AND Oggetto.ritiroInNegozio = 1;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo <= "+ max +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
-
-    public static String selectObjectShopIdSpecificBetweenPriceWithLatitudeAndLongitude() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    /**
+     * 
+     * @param raggio
+     * @param longitudine
+     * @param latitudine
+     * @param idU
+     * @param min
+     * @param max
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificBetweenPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  double min, double max, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
                     + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.ritiroInNegozio = 1;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
-
-    public static String selectObjectShopIdSpecificCategoryAndSpecificMinPriceWithLatitudeAndLongitude() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    /**
+     * 
+     * @param raggio
+     * @param longitudine
+     * @param latitudine
+     * @param idU
+     * @param category
+     * @param min
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificCategoryAndSpecificMinPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  int category, double min, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
                     + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo >= MINIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.ritiroInNegozio = 1;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo >= "+ min +" AND Oggetto.categoria="+ category +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+    /**
+     * 
+     * @param raggio
+     * @param longitudine
+     * @param latitudine
+     * @param idU
+     * @param category
+     * @param max
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificCategoryAndSpecificMaxPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  int category, double max, int ritiroInNegozio ) {
+        return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
+                + "SELECT Negozio.id "
+                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                + "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE Oggetto.prezzo <= "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +"; ";
 
-        public static String selectObjectShopIdSpecificCategoryAndSpecificMaxPriceWithLatitudeAndLongitude() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo <= MASSIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.ritiroInNegozio = 1; ";
+    }
+    // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+    /**
+     * 
+     * @param raggio
+     * @param longitudine
+     * @param latitudine
+     * @param idU
+     * @param category
+     * @param min
+     * @param max
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificCategoryAndSpecificBetweenPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  int category, double min, double max, int ritiroInNegozio ) {
+        return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
+                + "SELECT Negozio.id "
+                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                + "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
-        }
-        // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+    }
+    // ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+    /**
+     * 
+     * @param raggio
+     * @param longitudine
+     * @param latitudine
+     * @param idU
+     * @param name
+     * @param min
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificNameAndSpecificMinPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  String name, double min, int ritiroInNegozio ) {
+        return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
+                + "SELECT Negozio.id "
+                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                + "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE Oggetto.prezzo >= "+ min +" and Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
-        public static String selectObjectShopIdSpecificCategoryAndSpecificBetweenPriceWithLatitudeAndLongitude() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.ritiroInNegozio = 1;";
+    }
+    // ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+    /**
+     * 
+     * @param raggio
+     * @param longitudine
+     * @param latitudine
+     * @param idU
+     * @param name
+     * @param max
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificNameAndSpecificMaxPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  String name, double max, int ritiroInNegozio ) {
+        return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
+                + "SELECT Negozio.id "
+                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                + "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE Oggetto.prezzo <= "+ max +" and Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
-        }
-        // ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+    }
+    // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+    /**
+     * 
+     * @param raggio
+     * @param longitudine
+     * @param latitudine
+     * @param idU
+     * @param name
+     * @param min
+     * @param max
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificNameAndSpecificBetweenPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  String name, double min, double max, int ritiroInNegozio ) {
+        return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
+                + "SELECT Negozio.id "
+                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                + "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
-        public static String selectObjectShopIdSpecificNameAndSpecificMinPriceWithLatitudeAndLongitude() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo >= MINIMO and Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;";
+    }
+    // ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+    /**
+     * 
+     * @param raggio
+     * @param longitudine
+     * @param latitudine
+     * @param idU
+     * @param category
+     * @param name
+     * @param min
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMinPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  int category, String name, double min, int ritiroInNegozio ) {
+        return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
+                + "SELECT Negozio.id "
+                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                + "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE Oggetto.prezzo >= "+ min +" AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
-        }
-        // ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+    }
+    // ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+    /**
+     * 
+     * @param raggio
+     * @param longitudine
+     * @param latitudine
+     * @param idU
+     * @param category
+     * @param name
+     * @param max
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMaxPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  int category, String name, double max, int ritiroInNegozio ) {
+        return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
+                + "SELECT Negozio.id "
+                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                + "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE Oggetto.prezzo <= "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
-        public static String selectObjectShopIdSpecificNameAndSpecificMaxPriceWithLatitudeAndLongitude() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo <= MASSIMO and Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;";
+    }
+    // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+    /**
+     * 
+     * @param raggio
+     * @param longitudine
+     * @param latitudine
+     * @param idU
+     * @param category
+     * @param name
+     * @param min
+     * @param max
+     * @param ritiroInNegozio
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificBetweenPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  int category, String name, double min, double max, int ritiroInNegozio ) {
+        return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
+                + "SELECT Negozio.id "
+                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                + "SELECT Oggetto.* "
+                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
-        }
-        // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
-
-        public static String selectObjectShopIdSpecificNameAndSpecificBetweenPriceWithLatitudeAndLongitude() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;";
-
-        }
-        // ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
-
-        public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMinPriceWithLatitudeAndLongitude() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo >= MINIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;";
-
-        }
-        // ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
-
-        public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMaxPriceWithLatitudeAndLongitude() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo <= MASSIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;";
-
-        }
-        // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
-
-        public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificBetweenPriceWithLatitudeAndLongitude() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.ritiroInNegozio = 1;";
-
-        }
+    }
         // ottenere la lista di oggetti di un determinato negozio
-
-    public static String selectObjectShopIdWithDiscount() {
-            return "SELECT * FROM Oggetto WHERE Oggetto.idNegozio = 'idN' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+    /**
+     * 
+     * @param idS
+     * @return 
+     */
+    public static String selectObjectShopIdWithDiscount(int idS) {
+            return "SELECT * FROM Oggetto WHERE Oggetto.idNegozio = '"+ idS +"' AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio
-
-    public static String selectObjectShopIdSpecificNameWithDiscount() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+    /**
+     * 
+     * @param idS
+     * @param name
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificNameWithDiscount(int idS,String name) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti di una categoria di un determinato negozio
-
-    public static String selectObjectShopIdSpecificCategoryWithDiscount() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.`dataFineSconto` IS NOT NULL;";
+    /**
+     * 
+     * @param idS
+     * @param category
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificCategoryWithDiscount(int idS,int category) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti di una categoria con una certa stringa nel nome di un determinato negozio
-
-    public static String selectObjectShopIdSpecificCategoryAndSpecificNameWithDiscount() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+    /**
+     * 
+     * @param idS
+     * @param category
+     * @param name
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificCategoryAndSpecificNameWithDiscount(int idS, int category, String name) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo di un determinato negozio
-    public static String selectObjectShopIdSpecificMinPriceWithDiscount() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.prezzo >= MINIMO AND Oggetto.`dataFineSconto` IS NOT NULL;";
+    /**
+     * 
+     * @param idS
+     * @param min
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificMinPriceWithDiscount(int idS, double min) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo >= "+ min +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo di un determinato negozio
-    public static String selectObjectShopIdSpecificMaxPriceWithDiscount() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.prezzo <= MASSIMO AND Oggetto.`dataFineSconto` IS NOT NULL;";
+    /**
+     * 
+     * @param idS
+     * @param max
+     * @return 
+     */
+    public static String selectObjectShopIdSpecificMaxPriceWithDiscount(int idS, double max) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo <= "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di un determinato negozio
-    public static String selectObjectShopIdSpecificBetweenPriceWithDiscount() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.`dataFineSconto` IS NOT NULL;";
+    public static String selectObjectShopIdSpecificBetweenPriceWithDiscount(int idS, double min, double max) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di un determinato negozio
-    public static String selectObjectShopIdSpecificCategoryAndSpecificMinPriceWithDiscount() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo >= MINIMO AND Oggetto.`dataFineSconto` IS NOT NULL;";
+    public static String selectObjectShopIdSpecificCategoryAndSpecificMinPriceWithDiscount(int idS,int category, double min) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo >= "+ min +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di un determinato negozio
-    public static String selectObjectShopIdSpecificCategoryAndSpecificMaxPriceWithDiscount() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo <= MASSIMO AND Oggetto.`dataFineSconto` IS NOT NULL;";
+    public static String selectObjectShopIdSpecificCategoryAndSpecificMaxPriceWithDiscount(int idS, int category, double max) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo <= "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di un determinato negozio
-    public static String selectObjectShopIdSpecificCategoryAndSpecificBetweenPriceWithDiscount() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.`dataFineSconto` IS NOT NULL;";
+    public static String selectObjectShopIdSpecificCategoryAndSpecificBetweenPriceWithDiscount(int idS,int category, double min, double max) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di un determinato negozio
-    public static String selectObjectShopIdSpecificNameAndSpecificMinPriceWithDiscount() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.prezzo >= MINIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+    public static String selectObjectShopIdSpecificNameAndSpecificMinPriceWithDiscount(int idS,String name, double min) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo >= "+ min +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di un determinato negozio
-    public static String selectObjectShopIdSpecificNameAndSpecificMaxPriceWithDiscount() {
+    public static String selectObjectShopIdSpecificNameAndSpecificMaxPriceWithDiscount(int idS, String name, double max) {
             return "SELECT * "
                     + "FROM Oggetto "
-                    + "WHERE idNegozio=ID AND Oggetto.prezzo <= MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "WHERE idNegozio="+ idS +"  AND Oggetto.prezzo <= "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di un determinato negozio
-    public static String selectObjectShopIdSpecificNameAndSpecificBetweenPriceWithDiscount() {
+    public static String selectObjectShopIdSpecificNameAndSpecificBetweenPriceWithDiscount(int idS,String name, double min, double max) {
             return "SELECT * "
                     + "FROM Oggetto "
-                    + "WHERE idNegozio=ID AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "WHERE idNegozio="+ idS +"  AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di un determinato negozio
-    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMinPriceWithDiscount() {
+    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMinPriceWithDiscount(int idS, int category, String name, double min) {
             return "SELECT * "
                     + "FROM Oggetto "
-                    + "WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo >= MINIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo >= "+ min +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio
-    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMaxPriceWithDiscount() {
+    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMaxPriceWithDiscount(int idS, int category, String name, double max) {
             return "SELECT * "
                     + "FROM Oggetto "
-                    + "WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo <= MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo <= "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio
-    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificBetweenPriceWithDiscount() {
+    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificBetweenPriceWithDiscount(int idS, int category, String name, double min, double max) {
             return "SELECT * "
                     + "FROM Oggetto "
-                    + "WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
     
         // ottenere la lista di oggetti in negozi data una determinata longitudine, latitudine ed un raggio di ricerca
-    public static String selectObjectShopWithLatitudeAndLongitudeWithDiscount() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    public static String selectObjectShopWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
                     + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
                     + "WHERE Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti che contengono una stringa nel nome, nei negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-    public static String selectObjectShopIdSpecificNameWithLatitudeAndLongitudeWithDiscount() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    public static String selectObjectShopIdSpecificNameWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  String name) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti di una categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-    public static String selectObjectShopIdSpecificCategoryWithLatitudeAndLongitudeWithDiscount() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    public static String selectObjectShopIdSpecificCategoryWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  int category) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.categoria=CATEGORIA AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.categoria="+ category +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti di una categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-    public static String selectObjectShopIdSpecificCategoryAndSpecificNameWithLatitudeAndLongitudeWithDiscount() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    public static String selectObjectShopIdSpecificCategoryAndSpecificNameWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  int category, String name) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-    public static String selectObjectShopIdSpecificMinPriceWithLatitudeAndLongitudeWithDiscount() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    public static String selectObjectShopIdSpecificMinPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  double min) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
                     + " SELECT Oggetto.* "
-                    + " FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + " WHERE Oggetto.prezzo >= MINIMO AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + " FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + " WHERE Oggetto.prezzo >= "+ min +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo vdi negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-    public static String selectObjectShopIdSpecificMaxPriceWithLatitudeAndLongitudeWithDiscount() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    public static String selectObjectShopIdSpecificMaxPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  double max) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo <= MASSIMO AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo <= "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-    public static String selectObjectShopIdSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscount() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    public static String selectObjectShopIdSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  double min, double max) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + " SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + " SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-    public static String selectObjectShopIdSpecificCategoryAndSpecificMinPriceWithLatitudeAndLongitudeWithDiscount() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    public static String selectObjectShopIdSpecificCategoryAndSpecificMinPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  int category, double min) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
                     + " SELECT Oggetto.*"
-                    + " FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id)"
-                    + " WHERE Oggetto.prezzo >= MINIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + " FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id)"
+                    + " WHERE Oggetto.prezzo >= "+ min +" AND Oggetto.categoria="+ category +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-    public static String selectObjectShopIdSpecificCategoryAndSpecificMaxPriceWithLatitudeAndLongitudeWithDiscount() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    public static String selectObjectShopIdSpecificCategoryAndSpecificMaxPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  int category, double max, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
                     + " SELECT Oggetto.*"
-                    + " FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo <= MASSIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + " FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo <= "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-    public static String selectObjectShopIdSpecificCategoryAndSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscount() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    public static String selectObjectShopIdSpecificCategoryAndSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  int category, double min, double max, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-    public static String selectObjectShopIdSpecificNameAndSpecificMinPriceWithLatitudeAndLongitudeWithDiscount() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    public static String selectObjectShopIdSpecificNameAndSpecificMinPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  String name, double min, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo >= MINIMO and Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo >= "+ min +" and Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-    public static String selectObjectShopIdSpecificNameAndSpecificMaxPriceWithLatitudeAndLongitudeWithDiscount() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    public static String selectObjectShopIdSpecificNameAndSpecificMaxPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  String name, double max, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo <= MASSIMO and Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo <= "+ max +" and Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-    public static String selectObjectShopIdSpecificNameAndSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscount() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    public static String selectObjectShopIdSpecificNameAndSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  String name, double min, double max, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMinPriceWithLatitudeAndLongitudeWithDiscount() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMinPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  int category, String name, double min) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo >= MINIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo >= "+ min +" AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMaxPriceWithLatitudeAndLongitudeWithDiscount() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMaxPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  int category, String name, double max) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo <= MASSIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo <= "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscount() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  int category, String name, double min, double max) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine)))); "
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti di un determinato negozio
 
-    public static String selectObjectShopIdWithDiscountAndPickupInStore() {
+    public static String selectObjectShopIdWithDiscountAndPickupInStore(int PickupInStore, int idS, int ritiroInNegozio ) {
             return "SELECT * "
                     + "FROM Oggetto "
-                    + "WHERE Oggetto.idNegozio = 'idN' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "WHERE Oggetto.idNegozio = '"+ idS +"' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio
 
-    public static String selectObjectShopIdSpecificNameWithDiscountAndPickupInStore() {
+    public static String selectObjectShopIdSpecificNameWithDiscountAndPickupInStore(int PickupInStore, int idS,String name, int ritiroInNegozio ) {
             return "SELECT * "
                     + "FROM Oggetto "
-                    + "WHERE idNegozio=ID AND nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "WHERE idNegozio="+ idS +"  AND nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti di una categoria di un determinato negozio
 
-    public static String selectObjectShopIdSpecificCategoryWithDiscountAndPickupInStore() {
+    public static String selectObjectShopIdSpecificCategoryWithDiscountAndPickupInStore(int PickupInStore, int idS,int category, int ritiroInNegozio ) {
             return "SELECT * "
                     + "FROM Oggetto "
-                    + "WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti di una categoria con una certa stringa nel nome di un determinato negozio
 
-    public static String selectObjectShopIdSpecificCategoryAndSpecificNameWithDiscountAndPickupInStore() {
+    public static String selectObjectShopIdSpecificCategoryAndSpecificNameWithDiscountAndPickupInStore(int PickupInStore, int idS, int category, String name, int ritiroInNegozio ) {
             return "SELECT * "
                     + "FROM Oggetto "
-                    + "WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo di un determinato negozio
-    public static String selectObjectShopIdSpecificMinPriceWithDiscountAndPickupInStore() {
-            return "SELECT * FROM Oggetto WHERE idNegozio=ID AND Oggetto.prezzo >= MINIMO AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+    public static String selectObjectShopIdSpecificMinPriceWithDiscountAndPickupInStore(int PickupInStore, int idS, double min, int ritiroInNegozio ) {
+            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo >= "+ min +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo di un determinato negozio
-    public static String selectObjectShopIdSpecificMaxPriceWithDiscountAndPickupInStore() {
+    public static String selectObjectShopIdSpecificMaxPriceWithDiscountAndPickupInStore(int PickupInStore, int idS, double max, int ritiroInNegozio ) {
             return "SELECT * "
                     + "FROM Oggetto "
-                    + "WHERE idNegozio=ID AND Oggetto.prezzo <= MASSIMO AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "WHERE idNegozio="+ idS +"  AND Oggetto.prezzo <= "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di un determinato negozio
-    public static String selectObjectShopIdSpecificBetweenPriceWithDiscountAndPickupInStore() {
+    public static String selectObjectShopIdSpecificBetweenPriceWithDiscountAndPickupInStore(int PickupInStore, int idS, double min, double max, int ritiroInNegozio ) {
             return "SELECT * "
                     + "FROM Oggetto "
-                    + "WHERE idNegozio=ID AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "WHERE idNegozio="+ idS +"  AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di un determinato negozio
-    public static String selectObjectShopIdSpecificCategoryAndSpecificMinPriceWithDiscountAndPickupInStore() {
+    public static String selectObjectShopIdSpecificCategoryAndSpecificMinPriceWithDiscountAndPickupInStore(int PickupInStore, int idS,int category, double min, int ritiroInNegozio ) {
             return "SELECT * "
                     + "FROM Oggetto "
-                    + "WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo >= MINIMO AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo >= "+ min +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di un determinato negozio
-    public static String selectObjectShopIdSpecificCategoryAndSpecificMaxPriceWithDiscountAndPickupInStore() {
+    public static String selectObjectShopIdSpecificCategoryAndSpecificMaxPriceWithDiscountAndPickupInStore(int PickupInStore, int idS, int category, double max, int ritiroInNegozio ) {
             return "SELECT * "
                     + "FROM Oggetto "
-                    + "WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo <= MASSIMO AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo <= "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di un determinato negozio
-    public static String selectObjectShopIdSpecificCategoryAndSpecificBetweenPriceWithDiscountAndPickupInStore() {
+    public static String selectObjectShopIdSpecificCategoryAndSpecificBetweenPriceWithDiscountAndPickupInStore(int PickupInStore, int idS,int category, double min, double max, int ritiroInNegozio ) {
             return "SELECT * "
                     + "FROM Oggetto "
-                    + "WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di un determinato negozio
-    public static String selectObjectShopIdSpecificNameAndSpecificMinPriceWithDiscountAndPickupInStore() {
+    public static String selectObjectShopIdSpecificNameAndSpecificMinPriceWithDiscountAndPickupInStore(int PickupInStore, int idS,String name, double min, int ritiroInNegozio ) {
             return "SELECT * "
                     + "FROM Oggetto "
-                    + "WHERE idNegozio=ID AND Oggetto.prezzo >= MINIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "WHERE idNegozio="+ idS +"  AND Oggetto.prezzo >= "+ min +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di un determinato negozio
-    public static String selectObjectShopIdSpecificNameAndSpecificMaxPriceWithDiscountAndPickupInStore() {
+    public static String selectObjectShopIdSpecificNameAndSpecificMaxPriceWithDiscountAndPickupInStore(int PickupInStore, int idS, String name, double max, int ritiroInNegozio ) {
             return "SELECT * "
                     + "FROM Oggetto "
-                    + "WHERE idNegozio=ID AND Oggetto.prezzo <= MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "WHERE idNegozio="+ idS +"  AND Oggetto.prezzo <= "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di un determinato negozio
-    public static String selectObjectShopIdSpecificNameAndSpecificBetweenPriceWithDiscountAndPickupInStore() {
+    public static String selectObjectShopIdSpecificNameAndSpecificBetweenPriceWithDiscountAndPickupInStore(int PickupInStore, int idS,String name, double min, double max, int ritiroInNegozio ) {
             return "SELECT * "
                     + "FROM Oggetto "
-                    + "WHERE idNegozio=ID AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "WHERE idNegozio="+ idS +"  AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di un determinato negozio
-    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMinPriceWithDiscountAndPickupInStore() {
+    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMinPriceWithDiscountAndPickupInStore(int PickupInStore, int idS, int category, String name, double min, int ritiroInNegozio ) {
             return "SELECT * "
                     + "FROM Oggetto "
-                    + "WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo >= MINIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo >= "+ min +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio
-    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMaxPriceWithDiscountAndPickupInStore() {
+    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMaxPriceWithDiscountAndPickupInStore(int PickupInStore, int idS, int category, String name, double max, int ritiroInNegozio ) {
             return "SELECT * "
                     + "FROM Oggetto "
-                    + "WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo <= MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo <= "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio
-    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificBetweenPriceWithDiscountAndPickupInStore() {
+    public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificBetweenPriceWithDiscountAndPickupInStore(int PickupInStore, int idS, int category, String name, double min, double max, int ritiroInNegozio ) {
             return "SELECT * "
                     + "FROM Oggetto "
-                    + "WHERE idNegozio=ID AND Oggetto.categoria=CATEGORIA AND Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
     
         // ottenere la lista di oggetti in negozi data una determinata longitudine, latitudine ed un raggio di ricerca
-    public static String selectObjectShopWithLatitudeAndLongitudeWithDiscountAndPickupInStore() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    public static String selectObjectShopWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU,  int PickupInStore, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine))));"
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti che contengono una stringa nel nome, nei negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-    public static String selectObjectShopIdSpecificNameWithLatitudeAndLongitudeWithDiscountAndPickupInStore() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+    public static String selectObjectShopIdSpecificNameWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU,  int PickupInStore, String name, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine))));"
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti di una categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-        public static String selectObjectShopIdSpecificCategoryWithLatitudeAndLongitudeWithDiscountAndPickupInStore() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+        public static String selectObjectShopIdSpecificCategoryWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU,  int PickupInStore, int category, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine))));"
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.categoria=CATEGORIA AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.categoria="+ category +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti di una categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-        public static String selectObjectShopIdSpecificCategoryAndSpecificNameWithLatitudeAndLongitudeWithDiscountAndPickupInStore() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+        public static String selectObjectShopIdSpecificCategoryAndSpecificNameWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU,  int PickupInStore, int category, String name, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine))));"
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-        public static String selectObjectShopIdSpecificMinPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+        public static String selectObjectShopIdSpecificMinPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU,  int PickupInStore, double min, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine))));"
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo >= MINIMO AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo >= "+ min +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo vdi negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-        public static String selectObjectShopIdSpecificMaxPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+        public static String selectObjectShopIdSpecificMaxPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU,  int PickupInStore, double max, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine))));"
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo <= MASSIMO AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo <= "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-        public static String selectObjectShopIdSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+        public static String selectObjectShopIdSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU,  int PickupInStore, double min, double max, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine))));"
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-        public static String selectObjectShopIdSpecificCategoryAndSpecificMinPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+        public static String selectObjectShopIdSpecificCategoryAndSpecificMinPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU,  int PickupInStore, int category, double min, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine))));"
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo >= MINIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo >= "+ min +" AND Oggetto.categoria="+ category +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-        public static String selectObjectShopIdSpecificCategoryAndSpecificMaxPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+        public static String selectObjectShopIdSpecificCategoryAndSpecificMaxPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU,  int PickupInStore, int category, double max, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine))));"
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo <= MASSIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo <= "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-        public static String selectObjectShopIdSpecificCategoryAndSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+        public static String selectObjectShopIdSpecificCategoryAndSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU,  int PickupInStore, int category, double min, double max, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine))));"
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-        public static String selectObjectShopIdSpecificNameAndSpecificMinPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+        public static String selectObjectShopIdSpecificNameAndSpecificMinPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU,  int PickupInStore, String name, double min, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine))));"
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo >= MINIMO and Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo >= "+ min +" and Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-        public static String selectObjectShopIdSpecificNameAndSpecificMaxPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+        public static String selectObjectShopIdSpecificNameAndSpecificMaxPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU,  int PickupInStore, String name, double max, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine))));"
-                    + " SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) WHERE Oggetto.prezzo <= MASSIMO and Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
+                    + " SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) WHERE Oggetto.prezzo <= "+ max +" and Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-        public static String selectObjectShopIdSpecificNameAndSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+        public static String selectObjectShopIdSpecificNameAndSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU,  int PickupInStore, String name, double min, double max, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine))));"
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-        public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMinPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+        public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMinPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU,  int PickupInStore, int category, String name, double min, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine))));"
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo >= MINIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo >= "+ min +" AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-        public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMaxPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+        public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMaxPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU,  int PickupInStore, int category, String name, double max, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine))));"
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo <= MASSIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1;";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo <= "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
         // ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
 
-        public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore() {
-            return "Create OR REPLACE View NegoziNellaDistanza as "
+        public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU,  int PickupInStore, int category, String name, double min, double max, int ritiroInNegozio ) {
+            return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
                     + "SELECT Negozio.id "
                     + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
-                    + "WHERE 50>= 111.111 * DEGREES(ACOS(COS(RADIANS(45.7665600)) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS(11.727390 - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS(45.7665600)) * SIN(RADIANS(Indirizzo.latitudine))));"
+                    + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
+                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
                     + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
-                    + "WHERE Oggetto.prezzo BETWEEN MINIMO AND MASSIMO AND Oggetto.categoria=CATEGORIA AND Oggetto.nomeDownCase LIKE '%STRINGA%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = 1";
+                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +"";
         }
 }
