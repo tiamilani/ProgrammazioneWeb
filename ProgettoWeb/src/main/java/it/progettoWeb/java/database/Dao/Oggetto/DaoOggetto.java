@@ -25,6 +25,7 @@ import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
 import it.progettoWeb.java.database.query.objectSellers.objectSellersQuery;
+import it.progettoWeb.java.database.query.sellers.sellersQuery;
 
 public class DaoOggetto {
     
@@ -832,4 +833,74 @@ public class DaoOggetto {
         
         return Objects;
     }
+    
+    
+    
+    /**
+     * @author fbrug
+     * Ottenere la lista dei prodotti venduti raggruppati per categoria e negozio
+     * @param idVenditore: intero rappresentante l'ID del venditore
+     * @return String: lista dei prodotti
+     */
+    public List<ModelloOggetto> selectObjectSaledGroupByCategoryAndShop(int idVenditore)
+    {
+        List<ModelloOggetto> oggetti = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectObjectSaledGroupByCategoryAndShop(idVenditore));
+            
+            while(rs.next())
+                oggetti.add(getModelloFromRs(rs));
+        } catch(SQLException e) {}
+        
+        return oggetti;
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere la lista dei prodotti venduti in una determinata categoria raggruppati per negozio
+     * @param idVenditore: intero rappresentante l'ID del venditore
+     * @param nomeCategoria: rappresenta il nome della categoria da ricercare
+     * @return String: lista dei prodotti
+     */
+    public List<ModelloOggetto> selectObjectSaledGroupByShop(int idVenditore, String nomeCategoria)
+    {
+        List<ModelloOggetto> oggetti = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectObjectSaledGroupByShop(idVenditore, nomeCategoria));
+            
+            while(rs.next())
+                oggetti.add(getModelloFromRs(rs));
+        } catch(SQLException e) {}
+        
+        return oggetti;
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere la lista dei prodotti venduti ordinati per valutazioni
+     * @param idVenditore: intero rappresentante l'ID del venditore
+     * @return String: lista dei prodotti
+     */
+    public List<ModelloOggetto> selectObjectSaledOrderedByRating(int idVenditore)
+    {
+        List<ModelloOggetto> oggetti = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectObjectSaledOrderedByRating(idVenditore));
+            
+            while(rs.next())
+                oggetti.add(getModelloFromRs(rs));
+        } catch(SQLException e) {}
+        
+        return oggetti;
+    }
+    
 }

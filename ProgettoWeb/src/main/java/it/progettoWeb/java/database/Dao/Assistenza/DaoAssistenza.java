@@ -19,6 +19,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
+import it.progettoWeb.java.database.query.sellers.sellersQuery;
 
 public class DaoAssistenza {
     /**
@@ -74,4 +75,27 @@ public class DaoAssistenza {
         return Assistenza;
     }
     
+    
+    
+    /**
+     * @author fbrug
+     * Ottenere le richieste di assistenza in cui si è stati citati
+     * @param idVenditore: intero rappresentante l'ID del venditore
+     * @return String: lista delle richieste di assistenza
+     */
+    public List<ModelloAssistenza> selectServiceRequestBySellerID(int idVenditore)
+    {
+        List<ModelloAssistenza> assistenze = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectServiceRequestBySellerID(idVenditore));
+            
+            while(rs.next())
+                assistenze.add(getModelloFromRs(rs));
+        } catch(SQLException e) {}
+        
+        return assistenze;
+    }
 }
