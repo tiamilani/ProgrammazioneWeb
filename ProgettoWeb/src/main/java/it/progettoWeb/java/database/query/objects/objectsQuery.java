@@ -461,7 +461,7 @@ public class objectsQuery {
     {
         return LLR(idUtente, lat, lon, r) 
                 + "SELECT Oggetto.* FROM Oggetto "
-                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id);";
+                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id);";
     }
     
     /**
@@ -478,7 +478,7 @@ public class objectsQuery {
     {
         return LLR(idUtente, lat, lon, r)
                 + "SELECT Oggetto.* FROM Oggetto "
-                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
     
@@ -496,7 +496,7 @@ public class objectsQuery {
     {
         return LLR(idUtente, lat, lon, r)
                 + "SELECT Oggetto.* FROM Oggetto "
-                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE Oggetto.categoria=" + idCategoria + ";";
     }
     
@@ -515,7 +515,7 @@ public class objectsQuery {
     {
         return LLR(idUtente, lat, lon, r)
                 + "SELECT Oggetto.* FROM Oggetto "
-                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE Oggetto.categoria=" + idCategoria + " AND Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
     
@@ -533,7 +533,7 @@ public class objectsQuery {
     {
         return LLR(idUtente, lat, lon, r)
                 + "SELECT Oggetto.* FROM Oggetto "
-                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE Oggetto.prezzo >= " + prezzoMin + ";";
     }
     
@@ -551,7 +551,7 @@ public class objectsQuery {
     {
         return LLR(idUtente, lat, lon, r)
                 + "SELECT Oggetto.* FROM Oggetto "
-                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE Oggetto.prezzo <= " + prezzoMax + ";";
     }
     
@@ -570,7 +570,7 @@ public class objectsQuery {
     {
         return LLR(idUtente, lat, lon, r)
                 + "SELECT Oggetto.* FROM Oggetto "
-                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE Oggetto.prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + ";";
     }
     
@@ -589,7 +589,7 @@ public class objectsQuery {
     {
         return LLR(idUtente, lat, lon, r)
                 + "SELECT Oggetto.* FROM Oggetto "
-                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE Oggetto.prezzo >= " + prezzoMin + " AND Oggetto.categoria=" + idCategoria + ";";
     }
     
@@ -608,7 +608,7 @@ public class objectsQuery {
     {
         return LLR(idUtente, lat, lon, r)
                 + "SELECT Oggetto.* FROM Oggetto "
-                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE Oggetto.prezzo <= " + prezzoMax + " AND Oggetto.categoria=" + idCategoria + ";";
     }
     
@@ -628,7 +628,7 @@ public class objectsQuery {
     {
         return LLR(idUtente, lat, lon, r)
                 + "SELECT Oggetto.* FROM Oggetto "
-                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE Oggetto.prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND Oggetto.categoria=" + idCategoria + ";";
     }
     
@@ -647,7 +647,7 @@ public class objectsQuery {
     {
         return LLR(idUtente, lat, lon, r)
                 + "SELECT Oggetto.* FROM Oggetto "
-                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE Oggetto.prezzo >= " + prezzoMin
                 + " AND Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
@@ -667,7 +667,7 @@ public class objectsQuery {
     {
         return LLR(idUtente, lat, lon, r)
                 + "SELECT Oggetto.* FROM Oggetto "
-                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE Oggetto.prezzo <= " + prezzoMax
                 + " AND Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
@@ -688,7 +688,7 @@ public class objectsQuery {
     {
         return LLR(idUtente, lat, lon, r)
                 + "SELECT Oggetto.* FROM Oggetto "
-                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE Oggetto.prezzo BETWEEN " + prezzoMin
                 + " AND Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
@@ -710,7 +710,7 @@ public class objectsQuery {
     {
         return LLR(idUtente, lat, lon, r)
                 + "SELECT Oggetto.* FROM Oggetto "
-                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE Oggetto.prezzo >= " + prezzoMin + " AND Oggetto.categoria=" + idCategoria
                 + " AND Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
@@ -731,7 +731,7 @@ public class objectsQuery {
     {
         return LLR(idUtente, lat, lon, r)
                 + "SELECT Oggetto.* FROM Oggetto "
-                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE Oggetto.prezzo <= " + prezzoMax + " AND Oggetto.categoria=" + idCategoria
                 + " AND Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
@@ -753,7 +753,7 @@ public class objectsQuery {
     {
         return LLR(idUtente, lat, lon, r)
                 + "SELECT Oggetto.* FROM Oggetto "
-                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE Oggetto.prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND Oggetto.categoria=" + idCategoria
                 + " AND Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
@@ -813,7 +813,7 @@ public class objectsQuery {
 ////                + "+ SIN(RADIANS(@latitudine))"
 ////                + "* SIN(RADIANS(Indirizzo.latitudine))));"
 ////                + "SELECT Oggetto.* FROM Oggetto "
-////                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id);";
+////                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id);";
 ////    }
 ////    
 ////    /**
@@ -842,7 +842,7 @@ public class objectsQuery {
 ////                + "+ SIN(RADIANS(@latitudine))"
 ////                + "* SIN(RADIANS(Indirizzo.latitudine))));"
 ////                + "SELECT Oggetto.* FROM Oggetto "
-////                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+////                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
 ////                + "WHERE Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
 ////    }
 ////    
@@ -872,7 +872,7 @@ public class objectsQuery {
 ////                + "+ SIN(RADIANS(@latitudine))"
 ////                + "* SIN(RADIANS(Indirizzo.latitudine))));"
 ////                + "SELECT Oggetto.* FROM Oggetto "
-////                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+////                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
 ////                + "WHERE Oggetto.categoria=" + idCategoria + ";";
 ////    }
 ////    
@@ -903,7 +903,7 @@ public class objectsQuery {
 ////                + "+ SIN(RADIANS(@latitudine))"
 ////                + "* SIN(RADIANS(Indirizzo.latitudine))));"
 ////                + "SELECT Oggetto.* FROM Oggetto "
-////                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+////                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
 ////                + "WHERE Oggetto.categoria=" + idCategoria + " AND Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
 ////    }
 ////    
@@ -933,7 +933,7 @@ public class objectsQuery {
 ////                + "+ SIN(RADIANS(@latitudine))"
 ////                + "* SIN(RADIANS(Indirizzo.latitudine))));"
 ////                + "SELECT Oggetto.* FROM Oggetto "
-////                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+////                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
 ////                + "WHERE Oggetto.prezzo >= " + prezzoMin + ";";
 ////    }
 ////    
@@ -963,7 +963,7 @@ public class objectsQuery {
 ////                + "+ SIN(RADIANS(@latitudine))"
 ////                + "* SIN(RADIANS(Indirizzo.latitudine))));"
 ////                + "SELECT Oggetto.* FROM Oggetto "
-////                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+////                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
 ////                + "WHERE Oggetto.prezzo <= " + prezzoMax + ";";
 ////    }
 ////    
@@ -994,7 +994,7 @@ public class objectsQuery {
 ////                + "+ SIN(RADIANS(@latitudine))"
 ////                + "* SIN(RADIANS(Indirizzo.latitudine))));"
 ////                + "SELECT Oggetto.* FROM Oggetto "
-////                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+////                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
 ////                + "WHERE Oggetto.prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + ";";
 ////    }
 ////    
@@ -1025,7 +1025,7 @@ public class objectsQuery {
 ////                + "+ SIN(RADIANS(@latitudine))"
 ////                + "* SIN(RADIANS(Indirizzo.latitudine))));"
 ////                + "SELECT Oggetto.* FROM Oggetto "
-////                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+////                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
 ////                + "WHERE Oggetto.prezzo >= " + prezzoMin + " AND Oggetto.categoria=" + idCategoria + ";";
 ////    }
 ////    
@@ -1056,7 +1056,7 @@ public class objectsQuery {
 ////                + "+ SIN(RADIANS(@latitudine))"
 ////                + "* SIN(RADIANS(Indirizzo.latitudine))));"
 ////                + "SELECT Oggetto.* FROM Oggetto "
-////                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+////                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
 ////                + "WHERE Oggetto.prezzo <= " + prezzoMax + " AND Oggetto.categoria=" + idCategoria + ";";
 ////    }
 ////    
@@ -1088,7 +1088,7 @@ public class objectsQuery {
 ////                + "+ SIN(RADIANS(@latitudine))"
 ////                + "* SIN(RADIANS(Indirizzo.latitudine))));"
 ////                + "SELECT Oggetto.* FROM Oggetto "
-////                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+////                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
 ////                + "WHERE Oggetto.prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND Oggetto.categoria=" + idCategoria + ";";
 ////    }
 ////    
@@ -1119,7 +1119,7 @@ public class objectsQuery {
 ////                + "+ SIN(RADIANS(@latitudine))"
 ////                + "* SIN(RADIANS(Indirizzo.latitudine))));"
 ////                + "SELECT Oggetto.* FROM Oggetto "
-////                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+////                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
 ////                + "WHERE Oggetto.prezzo >= " + prezzoMin
 ////                + " AND Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
 ////    }
@@ -1151,7 +1151,7 @@ public class objectsQuery {
 ////                + "+ SIN(RADIANS(@latitudine))"
 ////                + "* SIN(RADIANS(Indirizzo.latitudine))));"
 ////                + "SELECT Oggetto.* FROM Oggetto "
-////                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+////                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
 ////                + "WHERE Oggetto.prezzo <= " + prezzoMax
 ////                + " AND Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
 ////    }
@@ -1184,7 +1184,7 @@ public class objectsQuery {
 ////                + "+ SIN(RADIANS(@latitudine))"
 ////                + "* SIN(RADIANS(Indirizzo.latitudine))));"
 ////                + "SELECT Oggetto.* FROM Oggetto "
-////                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+////                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
 ////                + "WHERE Oggetto.prezzo BETWEEN " + prezzoMin
 ////                + " AND Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
 ////    }
@@ -1218,7 +1218,7 @@ public class objectsQuery {
 ////                + "+ SIN(RADIANS(@latitudine))"
 ////                + "* SIN(RADIANS(Indirizzo.latitudine))));"
 ////                + "SELECT Oggetto.* FROM Oggetto "
-////                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+////                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
 ////                + "WHERE Oggetto.prezzo >= " + prezzoMin + " AND Oggetto.categoria=" + idCategoria
 ////                + " AND Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
 ////    }
@@ -1251,7 +1251,7 @@ public class objectsQuery {
 ////                + "+ SIN(RADIANS(@latitudine))"
 ////                + "* SIN(RADIANS(Indirizzo.latitudine))));"
 ////                + "SELECT Oggetto.* FROM Oggetto "
-////                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+////                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
 ////                + "WHERE Oggetto.prezzo <= " + prezzoMax + " AND Oggetto.categoria=" + idCategoria
 ////                + " AND Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
 ////    }
@@ -1285,7 +1285,7 @@ public class objectsQuery {
 ////                + "+ SIN(RADIANS(@latitudine))"
 ////                + "* SIN(RADIANS(Indirizzo.latitudine))));"
 ////                + "SELECT Oggetto.* FROM Oggetto "
-////                + "INNER JOIN NegoziNellaDistanza ON (Oggetto.idNegozio = NegoziNellaDistanza.id) "
+////                + "INNER JOIN NegoziDistanza_"+idUtente+" ON (Oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
 ////                + "WHERE Oggetto.prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND Oggetto.categoria=" + idCategoria
 ////                + " AND Oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
 ////    }
