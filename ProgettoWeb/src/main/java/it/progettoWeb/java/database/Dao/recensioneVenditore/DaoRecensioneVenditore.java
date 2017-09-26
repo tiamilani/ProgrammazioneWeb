@@ -19,6 +19,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
+import it.progettoWeb.java.database.query.sellers.sellersQuery;
 import it.progettoWeb.java.database.query.users.usersQuery;
 
 public class DaoRecensioneVenditore {
@@ -68,6 +69,28 @@ public class DaoRecensioneVenditore {
         }
         
         return RecensioneVenditore;
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere la lista delle recensioni ricevute
+     * @param idVenditore: intero rappresentante l'ID del venditore
+     * @return String: lista delle recensioni
+     */
+    public List<ModelloRecensioneVenditore> selectSellerReview(int idVenditore)
+    {
+        List<ModelloRecensioneVenditore> recensioniV = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectSellerReview(idVenditore));
+            
+            while(rs.next())
+                recensioniV.add(getModelloFromRs(rs));
+        } catch(SQLException e) {}
+        
+        return recensioniV;
     }   
     
     /**
