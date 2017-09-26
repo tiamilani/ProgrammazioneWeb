@@ -476,16 +476,16 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Aggiungere un prodotto (OGGETTO) ad un proprio negozio
-     * @param idNegozio
-     * @param nomeOggetto
-     * @param prezzoOggetto
-     * @param descrizioneOggetto
-     * @param ritiroInNegozio
-     * @param disponibilita
-     * @param statoDisponibilita
-     * @param sconto
-     * @param dataFineSconto
-     * @param idCategoria
+     * @param idNegozio: intero rapprensentante l'ID del negozio in cui inserire il nuovo oggetto
+     * @param nomeOggetto: nome del nuovo oggetto da inserire
+     * @param prezzoOggetto: prezzo del nuovo oggetto da inserire
+     * @param descrizioneOggetto: descrizione del nuovo oggetto da inserire
+     * @param ritiroInNegozio: disponibilità o meno del ritiro in negozio per l'oggetto (0 = no, 1 = si)
+     * @param disponibilita: rappresenta la quantità dell'oggetto disponibile in negozio
+     * @param statoDisponibilita: indica lo stato della disponibilità
+     * @param sconto: indica lo sconto applicato all'oggetto
+     * @param dataFineSconto: indica la data in cui terminerà lo sconto applicato all'oggetto
+     * @param idCategoria: intero rappresentante l'ID della categoria di cui l'oggetto fa parte
      * @return String: conferma avvenuta operazione
      */
     public static String insertObject(int idNegozio, String nomeOggetto, double prezzoOggetto, 
@@ -494,7 +494,7 @@ public class sellersQuery {
     {
         return "INSERT INTO Oggetto "
                 + "(idNegozio, nome, prezzo, descrizione, ritiroInNegozio, disponibilita, "
-                + "statoDisponibilita, sconto, variazione, dataFineSconto, categoria) "
+                + "statoDisponibilita, sconto, dataFineSconto, categoria) "
                 + "VALUES ("
                 + idNegozio
                 + ", " + nomeOggetto
@@ -512,7 +512,7 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Rimuovere un oggetto da un proprio negozio
-     * @param idNegozio
+     * @param idNegozio: intero rapprensentante l'ID del negozio in cui eliminare l'oggetto
      * @return String: conferma avvenuta operazione
      */
     public static String deleteObject(int idNegozio)
@@ -523,25 +523,25 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Modificare il prezzo di un oggetto di un proprio negozio
-     * @param idOggetti
-     * @param prezzoOggetto
+     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param prezzoOggetto: il nuovo prezzo dell'oggetto
      * @return String: conferma avvenuta operazione
      */
-    public static String updateObjectPrice(int idOggetti, double prezzoOggetto)
+    public static String updateObjectPrice(int idOggetto, double prezzoOggetto)
     {
-        return "UPDATE Oggetto SET prezzo=" + prezzoOggetto + " WHERE id=" + idOggetti + ";";
+        return "UPDATE Oggetto SET prezzo=" + prezzoOggetto + " WHERE id=" + idOggetto + ";";
     }
     
     /**
      * @author fbrug
      * Modificare lo sconto di un oggetto
-     * @param idOggetti
-     * @param sconto
+     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param sconto: il nuovo sconto applicato all'oggetto
      * @return String: conferma avvenuta operazione
      */
-    public static String updateObjectDiscount(int idOggetti, double sconto)
+    public static String updateObjectDiscount(int idOggetto, double sconto)
     {
-        return "UPDATE Oggetto SET sconto=" + sconto + " WHERE id=" + idOggetti + ";";
+        return "UPDATE Oggetto SET sconto=" + sconto + " WHERE id=" + idOggetto + ";";
     }
     
     /*??? 

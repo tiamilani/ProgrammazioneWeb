@@ -26,6 +26,7 @@ import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
 import it.progettoWeb.java.database.query.objectSellers.objectSellersQuery;
 import it.progettoWeb.java.database.query.sellers.sellersQuery;
+import java.sql.Date;
 
 public class DaoOggetto {
     
@@ -945,5 +946,79 @@ public class DaoOggetto {
         } catch(SQLException e) {}
         
         return oggetti;
+    }
+    
+    /**
+     * @author fbrug
+     * Aggiungere un prodotto (OGGETTO) ad un proprio negozio
+     * @param idNegozio: intero rapprensentante l'ID del negozio in cui inserire il nuovo oggetto
+     * @param nomeOggetto: nome del nuovo oggetto da inserire
+     * @param prezzoOggetto: prezzo del nuovo oggetto da inserire
+     * @param descrizioneOggetto: descrizione del nuovo oggetto da inserire
+     * @param ritiroInNegozio: disponibilità o meno del ritiro in negozio per l'oggetto (0 = no, 1 = si)
+     * @param disponibilita: rappresenta la quantità dell'oggetto disponibile in negozio
+     * @param statoDisponibilita: indica lo stato della disponibilità
+     * @param sconto: indica lo sconto applicato all'oggetto
+     * @param dataFineSconto: indica la data in cui terminerà lo sconto applicato all'oggetto
+     * @param idCategoria: intero rappresentante l'ID della categoria di cui l'oggetto fa parte
+     */
+    public void insertObject(int idNegozio, String nomeOggetto, double prezzoOggetto, 
+            String descrizioneOggetto, int ritiroInNegozio, int disponibilita, int statoDisponibilita, 
+            double sconto, Date dataFineSconto, int idCategoria)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(sellersQuery.insertObject(idNegozio, nomeOggetto, prezzoOggetto, descrizioneOggetto, 
+                    ritiroInNegozio, disponibilita, statoDisponibilita, sconto, dataFineSconto, idCategoria));
+        } catch(SQLException e) {}
+    }
+    
+    /**
+     * @author fbrug
+     * Rimuovere un oggetto da un proprio negozio
+     * @param idNegozio: intero rapprensentante l'ID del negozio in cui eliminare l'oggetto
+     * @return String: conferma avvenuta operazione
+     */
+    public void deleteObject(int idNegozio)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(sellersQuery.deleteObject(idNegozio));
+        }
+        catch (SQLException e) {}
+    }
+       
+    /**
+     * @author fbrug
+     * Modificare il prezzo di un oggetto di un proprio negozio
+     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param prezzoOggetto: il nuovo prezzo dell'oggetto
+     */
+    public void updateObjectPrice(int idOggetto, double prezzoOggetto)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(sellersQuery.updateObjectPrice(idOggetto, prezzoOggetto));
+        }
+        catch (SQLException e) {}
+    }
+    
+    /**
+     * @author fbrug
+     * Modificare lo sconto di un oggetto
+     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param sconto: il nuovo sconto applicato all'oggetto
+     */
+    public void updateObjectDiscount(int idOggetto, double sconto)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(sellersQuery.updateObjectDiscount(idOggetto, sconto));
+        }
+        catch (SQLException e) {}
     }
 }
