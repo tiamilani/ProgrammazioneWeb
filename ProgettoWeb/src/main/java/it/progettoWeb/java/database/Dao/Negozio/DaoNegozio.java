@@ -20,6 +20,7 @@ import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.query.objectSellers.objectSellersQuery;
 import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
+import it.progettoWeb.java.database.query.objects.objectsQuery;
 import it.progettoWeb.java.database.query.sellers.sellersQuery;
 import it.progettoWeb.java.database.query.objectsMarkets.objectMarketsQuery;
 import it.progettoWeb.java.database.query.users.usersQuery;
@@ -183,7 +184,7 @@ public class DaoNegozio {
         
         return Stores;
     }
-  
+    
     /**
      * @author fbrug
      * Ottenere la lista dei propri negozi
@@ -601,6 +602,29 @@ public class DaoNegozio {
             statement.executeQuery(sellersQuery.deleteShopImage(idNegozio, imagePath));
         }
         catch (SQLException e) {}
+    }
+  
+  /**
+     * @author andrea
+     * Ottenere la lista di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param idUtente: Intero indicante l'identificativo del soggetto desiderato
+     * @param lat: Double contenente il valore della latitudine
+     * @param lon: Double contenente il valore della longitudine
+     * @param r: Double contenente il valore della raggio di ricerca
+     * @return List<ModelloNegozio> lista di negozi
+     */
+    public List<ModelloNegozio> LLR(int idUtente, double lat, double lon, double r) {
+      List<ModelloNegozio> Stores = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+          ResultSet rs = statement.executeQuery(objectsQuery.selectShopByLLR(idUtente, lat, lon, r));
+            while (rs.next()) {
+                Stores.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+        
+        return Stores;
     }
   
     /**
