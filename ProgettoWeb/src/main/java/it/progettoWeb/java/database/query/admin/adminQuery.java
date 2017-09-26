@@ -13,6 +13,7 @@ public class adminQuery {
         return "Hello from" + adminQuery.class.toString();
     }
     
+    
     /**
      * @author Damiano
      * Metodo che ritorna la stringa che rappresenta la query per contare il numero di richieste di assistenza di un amministratore
@@ -24,19 +25,22 @@ public class adminQuery {
     
     /**
      * @author Damiano
-     * Metodo che ritorna la stringa che rappresenta la query per contare il numero di richieste di assistenza in sospeso
+     * Metodo che ritorna il numero di richieste di assistenza in un determinato stato
+     * @param stato variabile che identifica lo stato da cercare
      * @return La stringa che rappresenta la query
      */
-    public static String numberSuspendedRequestOfAssistance(){
-        return "SELECT COUNT (id) FROM Assistenza WHERE stato = 0;";
+    public static String numberRequestOfAssistanceInAState(int stato){
+        return "SELECT COUNT (id) AS numRichieste FROM Assistenza WHERE stato = "+stato+";";
     }
     
     /**
      * @author Damiano
-     * Metodo che ritorna la stringa che rappresenta la query per contare il numero di richieste di assistenza in completate
+     * Metodo che ritorna il numero di richieste di assistenza in un determinato stato di un determinato ammimnistratore
+     * @param stato variabile che identifica lo stato da cercare
+     * @param id variabile che identifica l'amministratore di cui si vogliono ottenre i dati
      * @return La stringa che rappresenta la query
      */
-    public static String numberCompletedRequestOfAssistance(){
-        return "SELECT COUNT (id) FROM Assistenza WHERE stato = 1;";
+    public static String numberRequestOfAssistanceInAStateOfSpecificAdministrator(int stato,int id){
+        return "SELECT COUNT (id) AS numRichieste FROM Assistenza WHERE stato = "+stato+" AND idAmministratore="+id+";";
     }
 }

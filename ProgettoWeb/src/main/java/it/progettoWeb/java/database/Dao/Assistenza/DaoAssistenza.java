@@ -87,7 +87,46 @@ public class DaoAssistenza {
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(adminQuery.numberRequestOfAssistance(id));
-            numRichieste=rs.getInt(numRichieste);
+            numRichieste=rs.getInt("numRichieste");
+        } catch (SQLException e) {
+        }
+        
+        return numRichieste;
+    }
+    
+    /**
+     * @author Mattia
+     * Metodo che ritorna il numero di richieste di assistenza in un determinato stato
+     * @param stato variabile che identifica lo stato da cercare
+     * @return int numRichieste
+     */
+    public int numberRequestOfAssistanceInAState(int stato) {
+        int numRichieste=0;
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(adminQuery.numberRequestOfAssistanceInAState(stato));
+            numRichieste=rs.getInt("numRichieste");
+        } catch (SQLException e) {
+        }
+        
+        return numRichieste;
+    }
+    
+    /**
+     * @author Mattia
+     * Metodo che ritorna il numero di richieste di assistenza in un determinato stato di un determinato ammimnistratore
+     * @param stato variabile che identifica lo stato da cercare
+     * @param id variabile che identifica l'amministratore di cui si vogliono ottenre i dati
+     * @return int numRichieste
+     */
+    public int numberRequestOfAssistanceInAStateOfSpecificAdministrator(int stato, int id) {
+        int numRichieste=0;
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(adminQuery.numberRequestOfAssistanceInAStateOfSpecificAdministrator(stato,id));
+            numRichieste=rs.getInt("numRichieste");
         } catch (SQLException e) {
         }
         
