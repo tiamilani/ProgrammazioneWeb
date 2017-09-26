@@ -470,9 +470,6 @@ public class sellersQuery {
         return "UPDATE Ordine SET codiceTracking=" + codiceTracking + " WHERE idOrdine=" + idOrdine + ";";
     }
     
-    
-    ////////////////////////
-    
     /**
      * @author fbrug
      * Aggiungere un prodotto (OGGETTO) ad un proprio negozio
