@@ -19,6 +19,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
+import it.progettoWeb.java.database.query.users.usersQuery;
 
 public class DaoRispostaVenditore {
 
@@ -43,7 +44,7 @@ public class DaoRispostaVenditore {
 
     /**
      * @author Mattia
-     * Funzione utilizzata per facilitare l'ottenimento dei modelli negozio da un result set
+     * Funzione utilizzata per facilitare l'ottenimento dei modelli da un result set
      * @param rs un resultset da cui ricavare un modello negozio
      * @return il modello negozio presente nel resultset
      */
@@ -59,5 +60,25 @@ public class DaoRispostaVenditore {
         }
         
         return RispostaVenditore;
-    }   
+    } 
+    
+    /**
+     * @author Mattia
+     * Ottenere le risposte alle proprie recensioni di venditori
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return List<ModelloRispostaVenditore> lista di risposte
+     */
+    public List<ModelloRispostaVenditore> selectAnswerReviewsSellers(int idU) {
+        List<ModelloRispostaVenditore> risposte = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectAnswerReviewsSellers(idU));
+            while (rs.next()) {
+                risposte.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return risposte;
+    }
 }

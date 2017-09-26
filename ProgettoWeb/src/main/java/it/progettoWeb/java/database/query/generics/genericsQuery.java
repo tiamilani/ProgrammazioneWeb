@@ -32,7 +32,7 @@ public class genericsQuery {
      * Selezionare utente in base a mail & password
      * @param mail
      * @param password
-     * @return String: elenco utenti
+     * @return String: un utente
      */
     public static String selectUserByEmailAndPassword(String mail, String password)
     {
@@ -66,7 +66,7 @@ public class genericsQuery {
      * @author fbrug
      * Ottenere i dati di un utente in base all'ID utente
      * @param idUtente
-     * @return String: elenco utenti
+     * @return String: un utente
      */
     public static String selectUserByID(int idUtente)
     {
