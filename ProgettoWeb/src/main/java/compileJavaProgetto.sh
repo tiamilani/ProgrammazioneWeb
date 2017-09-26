@@ -50,6 +50,9 @@ function spostaFileClass
                 CLASSDIR2=${DIR2/main\/java\/it/main\/webapp\/WEB-INF\/classes\/it}
                 #echo "CLASSDIR2: $CLASSDIR2"
 
+                DIR=$(dirname $CLASSDIR2)
+
+                mkdir -p $DIR
                 mv $DIR2 $CLASSDIR2
                 #echo "mv $DIR2 $CLASSDIR2"
                 #echo -e "$(cat listFile.txt | sed '1d')" > listFile.txt
