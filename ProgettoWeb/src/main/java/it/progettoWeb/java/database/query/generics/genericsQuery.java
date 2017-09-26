@@ -240,7 +240,7 @@ public class genericsQuery {
      */
     public static String insertUserImage(int idUtente, String imagePath)
     {
-        return "INSERT INTO image (src,idU) "
+        return "INSERT INTO imageUtente (src,idU) "
                + "SELECT " + imagePath + ", Utente.id FROM Utente WHERE Utente.id = " + idUtente + ";";
     }
 }

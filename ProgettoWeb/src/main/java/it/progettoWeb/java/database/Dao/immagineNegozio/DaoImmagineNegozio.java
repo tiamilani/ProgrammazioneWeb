@@ -19,6 +19,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
+import it.progettoWeb.java.database.query.users.usersQuery;
 
 public class DaoImmagineNegozio {
     /**
@@ -56,5 +57,47 @@ public class DaoImmagineNegozio {
         }
         
         return ImmagineNegozio;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista delle immagini di un negozio
+     * @param idN Un intero che rappresenta l'identificativo del negozio preso in considerazione
+     * @return List<ModelloImmagineNegozio> lista di immagini
+     */
+    public List<ModelloImmagineNegozio> selectPhotoStore(int idN) {
+        List<ModelloImmagineNegozio> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectPhotoStore(idN));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere solo la prima immagine di un negozio
+     * @param idN Un intero che rappresenta l'identificativo del negozio preso in considerazione
+     * @return ModelloImmagineNegozio prima immagine di un oggetto
+     */
+    public ModelloImmagineNegozio selectFirstPhotoStore(int idN) {
+        ModelloImmagineNegozio img = new ModelloImmagineNegozio();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectFirstPhotoStore(idN));
+            if (rs.next()) {
+                img = getModelloFromRs(rs);
+            }
+        } catch (SQLException e) {
+        }
+        
+        return img;
     }
 }

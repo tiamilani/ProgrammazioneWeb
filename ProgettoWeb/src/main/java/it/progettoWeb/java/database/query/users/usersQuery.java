@@ -273,16 +273,6 @@ public class usersQuery {
     
     /**
      * @author Andrea
-     * Ottenere i dati di un venditore
-     * @param idV Un intero che rappresenta l'identificativo del venditore preso in considerazione
-     * @return String: informazioni di un venditore
-     */
-    public static String selectSpecifiedInfoSeller(int idV){
-        return "SELECT * FROM Utente WHERE Utente.id ="+idV+";";
-    }
-    
-    /**
-     * @author Andrea
      * Ottenere la lista dei prodotti nella stessa fascia di prezzo e categoria di quelli già acquistati
      * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @return String: informazioni di un venditore
@@ -467,27 +457,27 @@ public class usersQuery {
      * @param idOr Un intero che rappresenta l'identificativo dell'ordine preso in considerazione
      * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param quant Un intero che rappresenta la quantità del prodotto da inserire nel carrello
-     * @param idO Un intero che rappresenta l'identificativo dell'oggetto preso in considerazione
+     * @param idO Una stringa che rappresenta l'identificativo dell'oggetto preso in considerazione
      */
-    public static String insertObjectInCart(int idOr, int idU, int quant, int idO){
+    public static String insertObjectInCart(int idOr, int idU, int quant, String idO){
         return "INSERT INTO progettoweb.Ordine (idOrdine, idOggetto, idNegozio, "
             + "idUtente, stato, quantita, codiceTracking, dataArrivoPresunta, "
             + "dataOrdine, prezzoDiAcquisto) SELECT "+idOr+", Oggetto.id , "
             + "Oggetto.idNegozio , "+idU+", 0, "+quant+", NULL, NULL, CURRENT_TIMESTAMP, "
             + "(Oggetto.prezzo - (Oggetto.prezzo*Oggetto.sconto)/100) FROM "
-            + "Oggetto WHERE Oggetto.id ="+idO+";";
+            + "Oggetto WHERE Oggetto.id ='"+idO+"';";
     }
     
     /**
      * @author Andrea
      * Rimuovere un ordine (oggetto) dal carrello
      * @param idOr Un intero che rappresenta l'identificativo dell'ordine preso in considerazione
-     * @param idOg Un intero che rappresenta l'identificativo dell'oggetto preso in considerazione
+     * @param idOg Una stringa che rappresenta l'identificativo dell'oggetto preso in considerazione
      * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      */
-    public static String removeObjectInCart(int idOr, int idOg, int idU){
+    public static String removeObjectInCart(int idOr, String idOg, int idU){
         return "DELETE FROM Ordine WHERE idOrdine ="+idOr+" AND "
-                + "idOggetto ="+idOg+" AND IDUTENTE ="+idU+";";
+                + "idOggetto ='"+idOg+"' AND IDUTENTE ="+idU+";";
     }
     
     /**
@@ -508,15 +498,15 @@ public class usersQuery {
      * @param idOr Un intero che rappresenta l'identificativo dell'ordine preso in considerazione
      * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param quant Un intero che rappresenta la quantità del prodotto da inserire nel carrello
-     * @param idO Un intero che rappresenta l'identificativo dell'oggetto preso in considerazione
+     * @param idO Una stringa che rappresenta l'identificativo dell'oggetto preso in considerazione
      */
-    public static String insertObjectInWislist(int idOr, int idU, int quant, int idO){
+    public static String insertObjectInWislist(int idOr, int idU, int quant, String idO){
         return "INSERT INTO progettoweb.Ordine (idOrdine, idOggetto, idNegozio, "
                 + "idUtente, stato, quantita, codiceTracking, dataArrivoPresunta, "
                 + "dataOrdine, prezzoDiAcquisto) SELECT "+idOr+", Oggetto.id , "
                 + "Oggetto.idNegozio , "+idU+", 5, "+quant+", NULL, NULL, CURRENT_TIMESTAMP, "
                 + "(Oggetto.prezzo - (Oggetto.prezzo*Oggetto.sconto)/100) FROM "
-                + "Oggetto WHERE Oggetto.id ="+idO+";";
+                + "Oggetto WHERE Oggetto.id ='"+idO+"';";
     }
     
     /**
@@ -554,17 +544,17 @@ public class usersQuery {
     /**
      * @author Andrea
      * Aggiungi una recensione ad un determinato oggetto
-     * @param idO Un intero che rappresenta l'identificativo dell'oggetto preso in considerazione
+     * @param idO Una stringa che rappresenta l'identificativo dell'oggetto preso in considerazione
      * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param txt Una stringa contenente il testo della recensione
      * @param val Un intero indicante la valutazione della recensione
      * @param data Un Datetime indicante la data di creazione della recensione
      * @param star Un intero indicante l'utilità della recensione
      */
-    public static String addReviewToObject(int idO, int idU, String txt, int val, Date data, int star){
+    public static String addReviewToObject(String idO, int idU, String txt, int val, Date data, int star){
         return "INSERT INTO progettoweb.RecensioneOggetto (id, idOggetto, "
                 + "idUtente, testo, valutazione, data, utilita) VALUES "
-                + "(NULL, "+idO+", "+idU+", '"+txt+"', "+val+", "+data+", "+star+");";
+                + "(NULL, '"+idO+"', "+idU+", '"+txt+"', "+val+", "+data+", "+star+");";
     }
     
     /**
@@ -596,13 +586,13 @@ public class usersQuery {
     /**
      * @author Andrea
      * Ottenere un boolean se si ha recensito oppure no un oggetto (se il count è 1 vuol dire di si)
-     * @param idO Un intero che rappresenta l'identificativo dell'oggetto preso in considerazione
+     * @param idO Una Stringa che rappresenta l'identificativo dell'oggetto preso in considerazione
      * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @return String: booleano indicante se si ha recensito o no un oggetto
      */
-    public static String reviewOrNotObject(int idO, int idU){
+    public static String reviewOrNotObject(String idO, int idU){
         return "SELECT COUNT(idOggetto) AS counter FROM RecensioneOggetto WHERE "
-                + "RecensioneOggetto.idOggetto ="+idO+" AND "
+                + "RecensioneOggetto.idOggetto ='"+idO+"' AND "
                 + "RecensioneOggetto.idUtente ="+idU+";";
     }
     
@@ -618,10 +608,9 @@ public class usersQuery {
      * @param interno Intero rappresentate il numero di interno in considerazione
      * @param lat Double rappresentate la latitudine in considerazione
      * @param lon Double rappresentate la longitudine in considerazione
-     * @param idI Un intero che rappresenta l'identificativo dell'indirizzo preso in considerazione
      * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      */
-    public static String insertAddress(String stato, String regione, String provincia, String citta, String via, int nCivico, int interno, double lat, double lon, int idI, int idU){
+    public static String insertAddress(String stato, String regione, String provincia, String citta, String via, int nCivico, int interno, double lat, double lon, int idU){
         return "INSERT INTO progettoweb.Indirizzo (idI, stato, regione, provincia, "
                 + "citta, via, nCivico, interno, latitudine, longitudine) VALUES "
                 + "(NULL, '"+stato+"', '"+regione+"', '"+provincia+"', '"+citta+"', '"+via+"', "+nCivico+", "+interno+", "+lat+", "+lon+"); "
