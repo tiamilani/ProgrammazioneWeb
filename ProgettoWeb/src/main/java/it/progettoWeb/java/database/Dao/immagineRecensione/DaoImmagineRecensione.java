@@ -19,6 +19,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
+import it.progettoWeb.java.database.query.users.usersQuery;
 
 public class DaoImmagineRecensione {
 
@@ -57,5 +58,47 @@ public class DaoImmagineRecensione {
         }
         
         return ImmagineRecensione;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista delle immagini di una recensione
+     * @param idR Un intero che rappresenta l'identificativo della recensione presa in considerazione
+     * @return List<ModelloImmagineRecensione> lista di immagini
+     */
+    public List<ModelloImmagineRecensione> selectPhotoReview(int idR) {
+        List<ModelloImmagineRecensione> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectPhotoReview(idR));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere solo la prima immagine di una recensione
+     * @param idR Un intero che rappresenta l'identificativo della recensione presa in considerazione
+     * @return ModelloImmagineRecensione prima immagine di un oggetto
+     */
+    public ModelloImmagineRecensione selectFirstPhotoReview(int idR) {
+        ModelloImmagineRecensione img = new ModelloImmagineRecensione();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectFirstPhotoReview(idR));
+            if (rs.next()) {
+                img = getModelloFromRs(rs);
+            }
+        } catch (SQLException e) {
+        }
+        
+        return img;
     }
 }

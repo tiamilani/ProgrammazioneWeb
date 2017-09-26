@@ -19,6 +19,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
+import it.progettoWeb.java.database.query.users.usersQuery;
 
 public class DaoRecensioneNegozio {
 
@@ -67,5 +68,102 @@ public class DaoRecensioneNegozio {
         }
         
         return RecensioneNegozio;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere le proprie recensioni di negozi
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return List<ModelloRecensioneNegozio> lista di recensioni
+     */
+    public List<ModelloRecensioneNegozio> selectReviewsStores(int idU) {
+        List<ModelloRecensioneNegozio> recensioni = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectReviewsStores(idU));
+            while (rs.next()) {
+                recensioni.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return recensioni;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista delle proprie recensioni Negozio dalla più utile
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return List<ModelloRecensioneNegozio> lista di recensioni
+     */
+    public List<ModelloRecensioneNegozio> selectStoreReviewsOrderUseful(int idU) {
+        List<ModelloRecensioneNegozio> recensioni = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectStoreReviewsOrderUseful(idU));
+            while (rs.next()) {
+                recensioni.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return recensioni;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista delle proprie recensioni Negozio dalla meno utile
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return List<ModelloRecensioneNegozio> lista di recensioni
+     */
+    public List<ModelloRecensioneNegozio> selectStoreReviewsOrderUseless(int idU) {
+        List<ModelloRecensioneNegozio> recensioni = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectStoreReviewsOrderUseless(idU));
+            while (rs.next()) {
+                recensioni.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return recensioni;
+    }
+    
+    /**
+     * @author Mattia
+     * Aggiungi una recensione ad un determinato negozio
+     * @param recensione oggetto recensione da inserire
+     */
+    public void addReviewToStore(ModelloRecensioneNegozio recensione) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(usersQuery.addReviewToStore(recensione.getIdNegozio(), recensione.getIdUtente(), recensione.getTesto(), recensione.getValutazione(), recensione.getData(), recensione.getUtilita()));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+        }
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere un boolean se si ha recensito oppure no un negozio (se il count è 1 vuol dire di si)
+     * @param idN Un intero che rappresenta l'identificativo del negozio preso in considerazione
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return int booleano indicante se si ha recensito o no un negozio
+     */
+    public int reviewOrNotStore(ModelloRecensioneNegozio recensione) {
+        int numRecensioni = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(usersQuery.reviewOrNotStore(recensione.getIdNegozio(),recensione.getIdUtente()));
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                numRecensioni = rs.getInt("counter");
+            }
+        } catch (SQLException e) {
+        }
+
+        return numRecensioni;
     }
 }

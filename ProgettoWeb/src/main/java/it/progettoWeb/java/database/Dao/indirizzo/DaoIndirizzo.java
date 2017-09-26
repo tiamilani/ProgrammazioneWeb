@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.query.generics.genericsQuery;
+import it.progettoWeb.java.database.query.users.usersQuery;
 
 public class DaoIndirizzo {
 
@@ -98,13 +99,43 @@ public class DaoIndirizzo {
     
     /**
      * @author Mattia
-     * Modificare password utente
+     * Modificare indirizzo utente
      * @param ModelloIndirizzo user
      */
     public void updateUserAddressByAddressID(ModelloIndirizzo address) {
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(genericsQuery.updateUserAddressByAddressID(address.getIdI(),address.getStato(),address.getRegione(),address.getProvincia(),address.getCitta(),address.getVia(),address.getnCivico(),address.getInterno(),address.getLatitudine(),address.getLongitudine()));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+        }
+    }
+    
+    /**
+     * @author Mattia
+     * aggiungere indirizzo utente
+     * @param ModelloIndirizzo user
+     */
+    public void insertAddress(ModelloIndirizzo address, int idU) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(usersQuery.insertAddress(address.getStato(),address.getRegione(),address.getProvincia(),address.getCitta(),address.getVia(),address.getnCivico(),address.getInterno(),address.getLatitudine(),address.getLongitudine(),idU));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+        }
+    }
+    
+    /**
+     * @author Mattia
+     * elimina indirizzo utente
+     * @param ModelloIndirizzo user
+     */
+    public void deleteAddress(int idU) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(usersQuery.deleteAddress(idU));
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

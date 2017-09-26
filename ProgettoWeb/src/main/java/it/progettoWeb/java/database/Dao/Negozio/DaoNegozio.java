@@ -20,6 +20,7 @@ import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.query.objectSellers.objectSellersQuery;
 import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
+import it.progettoWeb.java.database.query.objectsMarkets.objectMarketsQuery;
 import it.progettoWeb.java.database.query.users.usersQuery;
 
 public class DaoNegozio {
@@ -173,6 +174,29 @@ public class DaoNegozio {
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(usersQuery.selectStoresUsedAndDataPhotoSPhotoO(idU));
+            while (rs.next()) {
+                Stores.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Stores;
+    }
+    
+    /**
+     * @author Mattia
+     * ottenere la lista di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
+     * @param raggio variabile utilizzata per specificare il raggio di ricerca
+     * @param longitudine variabile utilizzata per specificare la longitudine dal punto in cui effettuare la ricerca
+     * @param latitudine variabile utilizzata per specificare la latituidine dal punto in cui effettuare la ricerca
+     * @return List<ModelloNegozio> lista di negozi
+     */
+    public List<ModelloNegozio> selectShopWithlatitudeAndLongitude(double raggio, double longitudine, double latitudine) {
+        List<ModelloNegozio> Stores = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectMarketsQuery.selectShopWithlatitudeAndLongitude(raggio,longitudine,latitudine));
             while (rs.next()) {
                 Stores.add(getModelloFromRs(rs));
             }

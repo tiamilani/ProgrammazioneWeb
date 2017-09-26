@@ -19,6 +19,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
+import it.progettoWeb.java.database.query.users.usersQuery;
 
 public class DaoRecensioneVenditore {
 
@@ -68,4 +69,100 @@ public class DaoRecensioneVenditore {
         
         return RecensioneVenditore;
     }   
+    
+    /**
+     * @author Mattia
+     * Ottenere le proprie recensioni di negozi
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return List<ModelloRecensioneVenditore> lista di recensioni
+     */
+    public List<ModelloRecensioneVenditore> selectReviewsSellers(int idU) {
+        List<ModelloRecensioneVenditore> recensioni = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectReviewsSellers(idU));
+            while (rs.next()) {
+                recensioni.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return recensioni;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista delle proprie recensioni Venditore dalla più utile
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return List<ModelloRecensioneVenditore> lista di recensioni
+     */
+    public List<ModelloRecensioneVenditore> selectSellerReviewsOrderUseful(int idU) {
+        List<ModelloRecensioneVenditore> recensioni = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectSellerReviewsOrderUseful(idU));
+            while (rs.next()) {
+                recensioni.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return recensioni;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista delle proprie recensioni Venditore dalla meno utile
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return List<ModelloRecensioneVenditore> lista di recensioni
+     */
+    public List<ModelloRecensioneVenditore> selectSellerReviewsOrderUseless(int idU) {
+        List<ModelloRecensioneVenditore> recensioni = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectSellerReviewsOrderUseless(idU));
+            while (rs.next()) {
+                recensioni.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return recensioni;
+    }
+    
+    /**
+     * @author Mattia
+     * Aggiungi una recensione ad un determinato venditore
+     * @param recensione oggetto recensione da inserire
+     */
+    public void addReviewToSeller(ModelloRecensioneVenditore recensione) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(usersQuery.addReviewToSeller(recensione.getIdVenditore(), recensione.getIdUtente(), recensione.getTesto(), recensione.getValutazione(), recensione.getData(), recensione.getUtilita()));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+        }
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere un boolean se si ha recensito oppure no un venditore (se il count è 1 vuol dire di si)
+     * @param recensione oggetto recensione da inserire
+     * @return int NumRecensioni
+     */
+    public int reviewOrNotSeller(ModelloRecensioneVenditore recensione) {
+        int numRecensioni = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(usersQuery.reviewOrNotSeller(recensione.getIdVenditore(),recensione.getIdUtente()));
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                numRecensioni = rs.getInt("counter");
+            }
+        } catch (SQLException e) {
+        }
+
+        return numRecensioni;
+    }
 }

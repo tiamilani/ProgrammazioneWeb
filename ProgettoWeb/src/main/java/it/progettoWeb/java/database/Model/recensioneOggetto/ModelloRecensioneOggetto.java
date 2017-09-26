@@ -5,7 +5,7 @@
  */
 package it.progettoWeb.java.database.Model.recensioneOggetto;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * classe utilizzata per gestire gli oggetti di tipo RecensioneOggetto

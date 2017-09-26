@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.query.generics.genericsQuery;
+import it.progettoWeb.java.database.query.users.usersQuery;
 
 public class DaoImmagineUtente {
    
@@ -125,5 +126,47 @@ public class DaoImmagineUtente {
 
         } catch (SQLException e) {
         }
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere la lista delle immagini di un utente
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return List<ModelloImmagineUtente> lista di immagini
+     */
+    public List<ModelloImmagineUtente> selectPhotoUser(int idU) {
+        List<ModelloImmagineUtente> Objects = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectPhotoUser(idU));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+        
+        return Objects;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere solo la prima immagine di un utente
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return ModelloImmagineUtente prima immagine di un utente
+     */
+    public ModelloImmagineUtente selectFirstPhotoUser(int idU) {
+        ModelloImmagineUtente img = new ModelloImmagineUtente();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectFirstPhotoUser(idU));
+            if (rs.next()) {
+                img = getModelloFromRs(rs);
+            }
+        } catch (SQLException e) {
+        }
+        
+        return img;
     }
 }
