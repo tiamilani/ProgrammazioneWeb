@@ -193,7 +193,7 @@ public class DaoOrdine {
      * @author fbrug
      * Ottenere la lista degli ordini in base al loro stato
      * @param idVenditore: intero rappresentante l'ID del venditore
-     * @param stato: intero rappresentante lo stato dell'ordine (non in carico, in lavorazione, spedito, concluso)
+     * @param stato: intero rappresentante lo stato dell'ordine (0 = nel carrello, 1 = pagato, 2 = in lavorazione, 3 = spedito, 4 = consegnato = nella lista desideri)
      * @return String: lista degli ordini
      */
     public List<ModelloOrdine> selectOrderBySellerIDAndStatus(int idVenditore, int stato)
@@ -349,6 +349,33 @@ public class DaoOrdine {
         return ordini;
     }
     
+    /**
+     * @author fbrug
+     * Modificare lo stato di un ordine
+     * @param nuovoStato: nuovo stato dell'ordine (0 = nel carrello, 1 = pagato, 2 = in lavorazione, 3 = spedito, 4 = consegnato = nella lista desideri)
+     * @param idOrdine: intero rappresentante l'ID dell'ordine da ricercare
+     */
+    public void updateOrderStatus(int idOrdine, int nuovoStato)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(sellersQuery.updateOrderStatus(idOrdine, nuovoStato));
+        } catch(SQLException e) {}
+    }
     
-    ///////////////////////////////
+    /**
+     * @author fbrug
+     * Aggiungere ad un ordine spedito il codice di tracking
+     * @param codiceTracking: nuovo codice usato per il tracking dell'ordine
+     * @param idOrdine: intero rappresentante l'ID dell'ordine da ricercare
+     */
+    public void updateOrderTracking(int idOrdine, String codiceTracking)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(sellersQuery.updateOrderTracking(idOrdine, codiceTracking));
+        } catch(SQLException e) {}
+    }
 }

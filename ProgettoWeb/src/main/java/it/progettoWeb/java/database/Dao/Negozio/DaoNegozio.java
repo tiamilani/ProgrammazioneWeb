@@ -341,7 +341,7 @@ public class DaoNegozio {
      * @author fbrug
      * Ottenere la lista dei negozi che vendono prodotti di una certa categoria
      * @param idVenditore: intero rappresentante l'ID del venditore
-     * @param attivo: intero rappresentante la situazione del negozio (in attività o chiuso)
+     * @param attivo: intero rappresentante la situazione del negozio (0 = chiuso, 1 = in attività)
      * @param idCategoria: intero rappresentante l'ID della categoria
      * @return String: lista dei negozi
      */
@@ -368,7 +368,7 @@ public class DaoNegozio {
      * @author fbrug
      * Ottenere la lista dei negozi che vendono prodotti di una certa categoria ordinate da quello con più vendite
      * @param idVenditore: intero rappresentante l'ID del venditore
-     * @param attivo: intero rappresentante la situazione del negozio (in attività o chiuso)
+     * @param attivo: intero rappresentante la situazione del negozio (0 = chiuso, 1 = in attività)
      * @param idCategoria: intero rappresentante l'ID della categoria
      * @param categoriaOggetto: intero rappresentante la cetegoria dell'oggetto ricercato
      * @return String: lista dei negozi
@@ -396,7 +396,7 @@ public class DaoNegozio {
      * @author fbrug
      * Ottenere la lista dei negozi che vendono prodotti di una certa categoria ordinate da quello con meno vendite
      * @param idVenditore: intero rappresentante l'ID del venditore
-     * @param attivo: intero rappresentante la situazione del negozio (in attività o chiuso)
+     * @param attivo: intero rappresentante la situazione del negozio (0 = chiuso, 1 = in attività)
      * @param idCategoria: intero rappresentante l'ID della categoria
      * @param categoriaOggetto: intero rappresentante la cetegoria dell'oggetto ricercato
      * @return String: lista dei negozi
@@ -502,6 +502,62 @@ public class DaoNegozio {
     //////////////////////
     
     
+    /**
+     * @author fbrug
+     * Ottenere la lista dei propri negozi ordinati per recensioni
+     * @param idVenditore: intero rappresentante l'ID del venditore
+     * @return String: lista dei negozi
+     */
+    public List<ModelloNegozio> selectShopOrderedByRating(int idVenditore)
+    {
+        List<ModelloNegozio> stores = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectShopOrderedByRating(idVenditore));
+            
+            while(rs.next())
+            {
+                stores.add(getModelloFromRs(rs));
+            }
+        }
+        catch (SQLException e) {}
+        
+        return stores;
+    }
     
+    /**
+     * @author fbrug
+     * Aggiungere un proprio negozio
+     * @param idVenditore: intero rappresentante l'ID del venditore, proprietario del nuovo negozio
+     * @param nomeNegozio: nome del nuovo negozio da inserire
+     * @param valutazioneNegozio: valutazione iniziale del nuovo negozio
+     * @param idI: intero rappresentante l'ID dell'indirizzo del nuovo negozio
+     */
+    public void insertShop(int idVenditore, String nomeNegozio, double valutazioneNegozio, int idI)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(sellersQuery.insertShop(idVenditore, nomeNegozio, valutazioneNegozio, idI));
+        }
+        catch (SQLException e) {}
+    }
     
+    /**
+     * @author fbrug
+     * Chiudere un proprio negozio (cambiare il suo stato)
+     * @param idNegozio: intero rappresentante l'ID del negozio a cui cambiare lo stato
+     * @param attivo: nuovo stato del negozio (0 = chiuso, 1 = in attività)
+     */
+    public void updateShopStatus(int idNegozio, int attivo)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(sellersQuery.updateShopStatus(idNegozio, attivo));
+        }
+        catch (SQLException e) {}
+    }
 }

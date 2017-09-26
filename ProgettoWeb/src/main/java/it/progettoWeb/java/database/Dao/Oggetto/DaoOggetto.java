@@ -903,4 +903,47 @@ public class DaoOggetto {
         return oggetti;
     }
     
+    /**
+     * @author fbrug
+     * Ottenere la lista dei proprio prodotti in sconto raggruppati per categoria e negozio
+     * @param idVenditore: intero rappresentante l'ID del venditore
+     * @return String: lista dei prodotti
+     */
+    public List<ModelloOggetto> selectObjectDiscountedGroupByShopAndCategory(int idVenditore)
+    {
+        List<ModelloOggetto> oggetti = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectObjectDiscountedGroupByShopAndCategory(idVenditore));
+            
+            while(rs.next())
+                oggetti.add(getModelloFromRs(rs));
+        } catch(SQLException e) {}
+        
+        return oggetti;
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere la lista dei proprio prodotti in sconto raggruppati per categoria e negozio ordinati per scadenza più vicina dello sconto
+     * @param idVenditore: intero rappresentante l'ID del venditore
+     * @return String: lista dei prodotti
+     */
+    public List<ModelloOggetto> selectObjectsDiscountedGrupByShopAndCategoryOrderedByDeadline(int idVenditore)
+    {
+        List<ModelloOggetto> oggetti = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectObjectsDiscountedGrupByShopAndCategoryOrderedByDeadline(idVenditore));
+            
+            while(rs.next())
+                oggetti.add(getModelloFromRs(rs));
+        } catch(SQLException e) {}
+        
+        return oggetti;
+    }
 }

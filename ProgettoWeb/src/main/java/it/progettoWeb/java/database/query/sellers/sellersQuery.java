@@ -59,7 +59,7 @@ public class sellersQuery {
      * @author fbrug
      * Ottenere la lista degli ordini in base al loro stato
      * @param idVenditore: intero rappresentante l'ID del venditore
-     * @param stato: intero rappresentante lo stato dell'ordine (non in carico, in lavorazione, spedito, concluso)
+     * @param stato: intero rappresentante lo stato dell'ordine (0 = nel carrello, 1 = pagato, 2 = in lavorazione, 3 = spedito, 4 = consegnato = nella lista desideri)
      * @return String: lista degli ordini
      */
     public static String selectOrderBySellerIDAndStatus(int idVenditore, int stato)
@@ -194,7 +194,7 @@ public class sellersQuery {
      * @author fbrug
      * Ottenere la lista dei negozi che vendono prodotti di una certa categoria
      * @param idVenditore: intero rappresentante l'ID del venditore
-     * @param attivo: intero rappresentante la situazione del negozio (in attività o chiuso)
+     * @param attivo: intero rappresentante la situazione del negozio (0 = chiuso, 1 = in attività)
      * @param idCategoria: intero rappresentante l'ID della categoria
      * @return String: lista dei negozi
      */
@@ -211,7 +211,7 @@ public class sellersQuery {
      * @author fbrug
      * Ottenere la lista dei negozi che vendono prodotti di una certa categoria ordinate da quello con più vendite
      * @param idVenditore: intero rappresentante l'ID del venditore
-     * @param attivo: intero rappresentante la situazione del negozio (in attività o chiuso)
+     * @param attivo: intero rappresentante la situazione del negozio (0 = chiuso, 1 = in attività)
      * @param idCategoria: intero rappresentante l'ID della categoria
      * @param categoriaOggetto: intero rappresentante la cetegoria dell'oggetto ricercato
      * @return String: lista dei negozi
@@ -232,7 +232,7 @@ public class sellersQuery {
      * @author fbrug
      * Ottenere la lista dei negozi che vendono prodotti di una certa categoria ordinate da quello con meno vendite
      * @param idVenditore: intero rappresentante l'ID del venditore
-     * @param attivo: intero rappresentante la situazione del negozio (in attività o chiuso)
+     * @param attivo: intero rappresentante la situazione del negozio (0 = chiuso, 1 = in attività)
      * @param idCategoria: intero rappresentante l'ID della categoria
      * @param categoriaOggetto: intero rappresentante la cetegoria dell'oggetto ricercato
      * @return String: lista dei negozi
@@ -367,14 +367,11 @@ public class sellersQuery {
                 + "WHERE idVenditore=" + idVenditore + " AND stato=4 "
                 + "ORDER BY AVG(RecensioneOggetto.valutazione) DESC;";
     }
-    
-    
-    ///////////////////////////////
           
     /**
      * @author fbrug
      * Ottenere la lista dei propri negozi ordinati per recensioni
-     * @param idVenditore
+     * @param idVenditore: intero rappresentante l'ID del venditore
      * @return String: lista dei negozi
      */
     public static String selectShopOrderedByRating(int idVenditore)
@@ -385,7 +382,7 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista dei proprio prodotti in sconto raggruppati per categoria e negozio
-     * @param idVenditore
+     * @param idVenditore: intero rappresentante l'ID del venditore
      * @return String: lista dei prodotti
      */
     public static String selectObjectDiscountedGroupByShopAndCategory(int idVenditore)
@@ -399,7 +396,7 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista dei proprio prodotti in sconto raggruppati per categoria e negozio ordinati per scadenza più vicina dello sconto
-     * @param idVenditore
+     * @param idVenditore: intero rappresentante l'ID del venditore
      * @return String: lista dei prodotti
      */
     public static String selectObjectsDiscountedGrupByShopAndCategoryOrderedByDeadline(int idVenditore)
@@ -414,7 +411,7 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista delle recensioni ricevute
-     * @param idVenditore
+     * @param idVenditore: intero rappresentante l'ID del venditore
      * @return String: lista delle recensioni
      */
     public static String selectSellerReview(int idVenditore)
@@ -425,10 +422,10 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Aggiungere un proprio negozio
-     * @param idVenditore
-     * @param nomeNegozio
-     * @param valutazioneNegozio
-     * @param idI
+     * @param idVenditore: intero rappresentante l'ID del venditore, proprietario del nuovo negozio
+     * @param nomeNegozio: nome del nuovo negozio da inserire
+     * @param valutazioneNegozio: valutazione iniziale del nuovo negozio
+     * @param idI: intero rappresentante l'ID dell'indirizzo del nuovo negozio
      * @return String: conferma avvenuta operazione
      */
     public static String insertShop(int idVenditore, String nomeNegozio, double valutazioneNegozio, int idI)
@@ -439,23 +436,24 @@ public class sellersQuery {
     
     /**
      * @author fbrug
-     * Chiudere un proprio negozio (rimuoverlo)
-     * @param idNegozio
+     * Chiudere un proprio negozio (cambiare il suo stato)
+     * @param idNegozio: intero rappresentante l'ID del negozio a cui cambiare lo stato
+     * @param attivo: nuovo stato del negozio (0 = chiuso, 1 = in attività)
      * @return String: conferma avvenuta operazione
      */
-    public static String updateShopStatus(int idNegozio)
+    public static String updateShopStatus(int idNegozio, int attivo)
     {
-        return "UPDATE Negozio SET attivo=0 WHERE id=" + idNegozio + ";";
+        return "UPDATE Negozio SET attivo=" + attivo + " WHERE id=" + idNegozio + ";";
     }
     
     /**
      * @author fbrug
      * Modificare lo stato di un ordine
-     * @param nuovoStato
-     * @param idOrdine
+     * @param nuovoStato: nuovo stato dell'ordine (0 = nel carrello, 1 = pagato, 2 = in lavorazione, 3 = spedito, 4 = consegnato = nella lista desideri)
+     * @param idOrdine: intero rappresentante l'ID dell'ordine da ricercare
      * @return String: conferma avvenuta operazione
      */
-    public static String updateOrderStatus(int nuovoStato, int idOrdine)
+    public static String updateOrderStatus(int idOrdine , int nuovoStato)
     {
         return "UPDATE Ordine SET stato=" + nuovoStato + " WHERE idOrdine=" + idOrdine + ";";
     }
@@ -463,14 +461,17 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Aggiungere ad un ordine spedito il codice di tracking
-     * @param codiceTracking
-     * @param idOrdine
+     * @param codiceTracking: nuovo codice usato per il tracking dell'ordine
+     * @param idOrdine: intero rappresentante l'ID dell'ordine da ricercare
      * @return String: conferma avvenuta operazione
      */
-    public static String updateOrderTracking(String codiceTracking, int idOrdine)
+    public static String updateOrderTracking(int idOrdine, String codiceTracking)
     {
         return "UPDATE Ordine SET codiceTracking=" + codiceTracking + " WHERE idOrdine=" + idOrdine + ";";
     }
+    
+    
+    ////////////////////////
     
     /**
      * @author fbrug
