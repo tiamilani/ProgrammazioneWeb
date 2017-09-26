@@ -560,4 +560,53 @@ public class DaoNegozio {
         }
         catch (SQLException e) {}
     }
+    
+   /**
+     * @author fbrug
+     * Aggiungere una immagine del profilo di un negozio
+     * @param idNegozio: intero rappresentante l'ID del negozio a cui inserire l'immagine
+     * @param imagePath: il path della nuova immagine
+     */
+    public void insertShopImage(int idNegozio, String imagePath)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(sellersQuery.insertShopImage(idNegozio, imagePath));
+        }
+        catch (SQLException e) {}
+    }
+    
+    /**
+     * @author fbrug
+     * Modificare l'immagine del profilo di un negozio con un determinato ID negozio
+     * @param idNegozio: intero rappresentante l'ID del negozio a cui cambiare l'immagine
+     * @param oldImagePath: il path dell'immagine da modificare
+     * @param newImagePath: il path della nuova immagine
+     */
+    public void updateShopImage(int idNegozio, String oldImagePath, String newImagePath)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(sellersQuery.updateShopImage(idNegozio, oldImagePath, newImagePath));
+        }
+        catch (SQLException e) {}
+    }
+    
+    /**
+     * @author fbrug
+     * Rimuovere l'immagine di un determinato negozio
+     * @param idNegozio: intero rappresentante l'ID del negozio a cui rimuovere l'immagine
+     * @param imagePath: il path dell'immagine da rimuovere
+     */
+    public void deleteShopImage(int idNegozio, String imagePath)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(sellersQuery.deleteShopImage(idNegozio, imagePath));
+        }
+        catch (SQLException e) {}
+    }
 }

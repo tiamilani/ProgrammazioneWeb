@@ -544,13 +544,81 @@ public class sellersQuery {
         return "UPDATE Oggetto SET sconto=" + sconto + " WHERE id=" + idOggetto + ";";
     }
     
-    /*??? 
+    /**
+     * @author fbrug
+     * Aggiungere una immagine del profilo di un oggetto
+     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui inserire l'immagine
+     * @param imagePath: il path della nuova immagine
+     * @return String: conferma avvenuta operazione
+     */
+    public static String insertObjectImage(int idOggetto, String imagePath)
+    {
+        return "INSERT INTO imageOggetto (src, idO) "
+                + "SELECT " + imagePath + ", Oggetto.id FROM Oggetto WHERE Oggetto.id = " + idOggetto + ";";
+    }
     
+    /**
+     * @author fbrug
+     * Modificare l'immagine del profilo di un oggetto con un determinato ID oggetto
+     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui cambiare l'immagine
+     * @param oldImagePath: il path dell'immagine da modificare
+     * @param newImagePath: il path della nuova immagine
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateObjectImage(int idOggetto, String oldImagePath, String newImagePath)
+    {
+        return "UPDATE imageOggetto SET imageOggetto.src = " + newImagePath + " "
+                + "WHERE imageOggetto.idO = " + idOggetto + " AND imageOggetto.src = " + oldImagePath + ";";
+    }
     
+    /**
+     * @author fbrug
+     * Rimuovere l'immagine di un determinato oggetto
+     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui rimuovere l'immagine
+     * @param imagePath: il path dell'immagine da rimuovere
+     * @return String: conferma avvenuta operazione
+     */
+    public static String deleteObjectImage(int idOggetto, String imagePath)
+    {
+        return "DELETE FROM imageOggetto WHERE imageOggetto.idO = " + idOggetto + " AND imageOggetto.src = " + imagePath + ";";
+    }
     
-    -- aggiungere una foto ad un prodotto
-    -- aggiungere una foto ad un negozio
-    -- rimuovere una foto di un prodotto
-    -- rimuovere una foto di un negozio
-    */
+    /**
+     * @author fbrug
+     * Aggiungere una immagine del profilo di un negozio
+     * @param idNegozio: intero rappresentante l'ID del negozio a cui inserire l'immagine
+     * @param imagePath: il path della nuova immagine
+     * @return String: conferma avvenuta operazione
+     */
+    public static String insertShopImage(int idNegozio, String imagePath)
+    {
+        return "INSERT INTO imageNegozio (src, idN) "
+                + "SELECT " + imagePath + ", Negozio.id FROM Negozio WHERE Negozio.id = " + idNegozio + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * Modificare l'immagine del profilo di un negozio con un determinato ID negozio
+     * @param idNegozio: intero rappresentante l'ID del negozio a cui cambiare l'immagine
+     * @param oldImagePath: il path dell'immagine da modificare
+     * @param newImagePath: il path della nuova immagine
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateShopImage(int idNegozio, String oldImagePath, String newImagePath)
+    {
+        return "UPDATE imageNegozio SET imageNegozio.src = " + newImagePath + " "
+                + "WHERE imageNegozio.idO = " + idNegozio + " AND imageNegozio.src = " + oldImagePath + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * Rimuovere l'immagine di un determinato negozio
+     * @param idNegozio: intero rappresentante l'ID del negozio a cui rimuovere l'immagine
+     * @param imagePath: il path dell'immagine da rimuovere
+     * @return String: conferma avvenuta operazione
+     */
+    public static String deleteShopImage(int idNegozio, String imagePath)
+    {
+        return "DELETE FROM imageNegozio WHERE imageNegozio.idO = " + idNegozio + " AND imageNegozio.src = " + imagePath + ";";
+    }
 }

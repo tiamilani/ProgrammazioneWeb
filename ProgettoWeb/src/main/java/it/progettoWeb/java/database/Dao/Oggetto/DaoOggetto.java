@@ -1021,4 +1021,53 @@ public class DaoOggetto {
         }
         catch (SQLException e) {}
     }
+    
+    /**
+     * @author fbrug
+     * Aggiungere una immagine del profilo di un utente
+     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui inserire l'immagine
+     * @param imagePath: il path della nuova immagine
+     */
+    public void insertObjectImage(int idOggetto, String imagePath)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(sellersQuery.insertObjectImage(idOggetto, imagePath));
+        }
+        catch (SQLException e) {}
+    }
+    
+    /**
+     * @author fbrug
+     * Modificare l'immagine del profilo di un oggetto con un determinato ID oggetto
+     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui cambiare l'immagine
+     * @param oldImagePath: il path dell'immagine da modificare
+     * @param newImagePath: il path della nuova immagine
+     */
+    public void updateObjectImage(int idOggetto, String oldImagePath, String newImagePath)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(sellersQuery.updateObjectImage(idOggetto, oldImagePath, newImagePath));
+        }
+        catch (SQLException e) {}
+    }
+    
+    /**
+     * @author fbrug
+     * Rimuovere l'immagine di un determinato oggetto
+     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui rimuovere l'immagine
+     * @param imagePath: il path dell'immagine da rimuovere
+     */
+    public void deleteObjectImage(int idOggetto, String imagePath)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(sellersQuery.deleteObjectImage(idOggetto, imagePath));
+        }
+        catch (SQLException e) {}
+    }
 }
