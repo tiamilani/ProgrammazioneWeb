@@ -14,7 +14,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <%@include file="../Header/HomeHeader/HomeHeader.jsp" %><br>
+        <%@include file="../Header/HomeHeader/HomeHeader.jsp" %>
         <%@include file="../Components/Carosello/carosello.jsp" %>
         <%@include file="../Components/Liste/ListaOggetto/testListaOggetto.jsp" %>
         <%@include file="../Components/Oggetto/longObject.jsp" %>

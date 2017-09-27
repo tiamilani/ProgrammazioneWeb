@@ -4,13 +4,13 @@
     Author     : mattia
 --%>
 
-<div class="card">
-    <img class="card-img-top" src="..." alt="Card image cap">
+<div class="card" style="margin-left: 1%; margin-right: 1%;">
+    <img class="card-img-top" src="http://localhost:8084/ProgettoWeb/jspFile/Finale/Img/Mario-Transparent-Background.png" alt="Card image cap">
     <div class="card-body">
-      <h4 class="card-title">Card title</h4>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      <h4 class="card-title">Super mario</h4>
+      <p class="card-text">Questo è il pupazzo di super mario</p>
     </div>
     <div class="card-footer">
-      <small class="text-muted">Last updated 3 mins ago</small>
+      <small class="text-muted">500 euri</small>
     </div>
   </div>
