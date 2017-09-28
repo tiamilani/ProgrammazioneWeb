@@ -35,5 +35,8 @@ if(table == 'utente'):
     outDoc.write(";")
 
 if(table == 'indirizzo'):
+    outDoc.write("INSERT INTO " + tables + " ()")
+
+
 outDoc.close()
 inDoc.close()
