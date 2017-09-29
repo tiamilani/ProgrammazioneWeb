@@ -16,3 +16,39 @@
 .paddingNav{
     margin-left: 1%;
 }
+
+#expand{
+    width: 30%;
+    display: block;
+    margin: 0 0 0 auto;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+#expand:focus{
+    width: 80%;
+}
+
+.modal-footer{
+    align-items: center;
+    justify-content: center;
+}
+
+.col-6{
+    display: block;
+    position: relative;
+    margin-bottom: 1em;
+}
+
+label{
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.modal-dialog{
+    width: 30%;
+}
+
+.modal-dialog input:focus{
+    border-bottom-color: orange;
+}

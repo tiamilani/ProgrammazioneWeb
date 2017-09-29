@@ -11,6 +11,7 @@ C:\Users\DAS\Desktop\UNIVERSITA'\II Anno\Programmazione web\Project\Programmazio
 C:\Users\DAS\Desktop\UNIVERSITA'\II Anno\Programmazione web\Project\ProgrammazioneWeb\ProgettoWeb\src\main\java\it\progettoWeb\java\database\Model\Oggetto\ModelloOggetto.java
 C:\Users\DAS\Desktop\UNIVERSITA'\II Anno\Programmazione web\Project\ProgrammazioneWeb\ProgettoWeb\src\main\java\it\progettoWeb\java\database\query\objects\objectsQuery.java
 C:\Users\DAS\Desktop\UNIVERSITA'\II Anno\Programmazione web\Project\ProgrammazioneWeb\ProgettoWeb\src\main\java\it\progettoWeb\java\database\query\admin\adminQuery.java
+C:\Users\DAS\Desktop\UNIVERSITA'\II Anno\Programmazione web\Project\ProgrammazioneWeb\ProgettoWeb\src\main\java\it\progettoWeb\java\Controller\Categorie\CategoriaController.java
 C:\Users\DAS\Desktop\UNIVERSITA'\II Anno\Programmazione web\Project\ProgrammazioneWeb\ProgettoWeb\src\main\java\it\progettoWeb\java\database\query\sellers\sellersQuery.java
 C:\Users\DAS\Desktop\UNIVERSITA'\II Anno\Programmazione web\Project\ProgrammazioneWeb\ProgettoWeb\src\main\java\it\progettoWeb\java\database\Dao\Negozio\DaoNegozio.java
 C:\Users\DAS\Desktop\UNIVERSITA'\II Anno\Programmazione web\Project\ProgrammazioneWeb\ProgettoWeb\src\main\java\it\progettoWeb\java\database\Model\Carrello\ModelloCarrello.java
@@ -50,8 +51,10 @@ C:\Users\DAS\Desktop\UNIVERSITA'\II Anno\Programmazione web\Project\Programmazio
 C:\Users\DAS\Desktop\UNIVERSITA'\II Anno\Programmazione web\Project\ProgrammazioneWeb\ProgettoWeb\src\main\java\it\progettoWeb\java\database\Model\immagineUtente\ModelloImmagineUtente.java
 C:\Users\DAS\Desktop\UNIVERSITA'\II Anno\Programmazione web\Project\ProgrammazioneWeb\ProgettoWeb\src\main\java\it\progettoWeb\java\database\Dao\indirizzo\DaoIndirizzo.java
 C:\Users\DAS\Desktop\UNIVERSITA'\II Anno\Programmazione web\Project\ProgrammazioneWeb\ProgettoWeb\src\main\java\it\progettoWeb\java\database\Dao\Oggetto\DaoOggetto.java
+C:\Users\DAS\Desktop\UNIVERSITA'\II Anno\Programmazione web\Project\ProgrammazioneWeb\ProgettoWeb\src\main\java\it\progettoWeb\java\database\Model\Categoria\ModelloCategoria.java
 C:\Users\DAS\Desktop\UNIVERSITA'\II Anno\Programmazione web\Project\ProgrammazioneWeb\ProgettoWeb\src\main\java\it\progettoWeb\java\database\Model\immagineNegozio\ModelloImmagineNegozio.java
 C:\Users\DAS\Desktop\UNIVERSITA'\II Anno\Programmazione web\Project\ProgrammazioneWeb\ProgettoWeb\src\main\java\it\progettoWeb\java\database\query\objectSellers\objectSellersQuery.java
+C:\Users\DAS\Desktop\UNIVERSITA'\II Anno\Programmazione web\Project\ProgrammazioneWeb\ProgettoWeb\src\main\java\it\progettoWeb\java\database\Dao\Categoria\DaoCategoria.java
 C:\Users\DAS\Desktop\UNIVERSITA'\II Anno\Programmazione web\Project\ProgrammazioneWeb\ProgettoWeb\src\main\java\it\progettoWeb\java\utility\pair\pair.java
 C:\Users\DAS\Desktop\UNIVERSITA'\II Anno\Programmazione web\Project\ProgrammazioneWeb\ProgettoWeb\src\main\java\it\progettoWeb\java\database\Model\tipoSpedizione\ModelloTipoSpedizione.java
 C:\Users\DAS\Desktop\UNIVERSITA'\II Anno\Programmazione web\Project\ProgrammazioneWeb\ProgettoWeb\src\main\java\it\progettoWeb\java\database\Model\Utente\ModelloUtente.java
