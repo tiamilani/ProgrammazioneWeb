@@ -34,7 +34,7 @@ if(table == 'utente'):
     outDoc.write(";")
 
 if(table == 'indirizzo'):
-    outDoc.write("INSERT INTO " + table + " (id, stato, regione, provincia, citta, via, nCivico, interno, latitudine, longitudine) VALUES \n")
+    outDoc.write("INSERT INTO " + table + " (idI, stato, regione, provincia, citta, via, nCivico, interno, latitudine, longitudine) VALUES \n")
     l = 0
     for line in inDoc:
         valori = line.split(",")

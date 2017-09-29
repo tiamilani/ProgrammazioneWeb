@@ -1,4 +1,4 @@
-INSERT INTO indirizzo (id, stato, regione, provincia, citta, via, nCivico, interno, latitudine, longitudine) VALUES 
+INSERT INTO indirizzo (idI, stato, regione, provincia, citta, via, nCivico, interno, latitudine, longitudine) VALUES 
 (NULL, 'Italia', 'Lombardia', 'Milano', 'Milano', 'Via Valassina', 27, 2, NULL, NULL),
 (NULL, 'Italia', 'Lombardia', 'Milano', 'Milano', 'Via Orti', 3, NULL, NULL, NULL),
 (NULL, 'Italia', 'Lombardia', 'Milano', 'Milano', 'Via Bistolfi Leonardo', 49, 1, NULL, NULL),
