@@ -17,6 +17,15 @@ public class genericsQuery {
     /*--- LAST UPDATE -> 2017-09-17 ---*/
     
     /**
+     * @author Mattia
+     * @return String: elenco categorie
+     */
+    public static String selectAllCategory()
+    {
+        return "SELECT * FROM Categoria;";
+    }
+    
+    /**
      * @author fbrug
      * Selezionare tutti gli utenti in base al loro tipo: 0=normale, 1=venditore, 2=amministratore
      * @param utenteType
