@@ -23,7 +23,7 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista dei propri negozi
-     * @param idVenditore
+     * @param idVenditore: intero rappresentante l'ID del venditore
      * @return String: lista dei negozi
      */
     public static String selectShopsBySellerID(int idVenditore)
@@ -34,7 +34,7 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista degli ordini ricevuti
-     * @param idVenditore
+     * @param idVenditore: intero rappresentante l'ID del venditore
      * @return String: lista degli ordini
      */
     public static String selectOrdersBySellerID(int idVenditore)
@@ -45,63 +45,33 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista degli ordini ricevuti dal più nuovo al più vecchio
-     * @param idVenditore
+     * @param idVenditore: intero rappresentante l'ID del venditore
      * @return String: lista degli ordini
      */
     public static String selectNewestToOldestOrdersBySellerID(int idVenditore)
     {
         return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " ORDER BY dataOrdine DESC;";
     }
-          
+    
+    
+    
     /**
      * @author fbrug
-     * Ottenere la lista degli ordini non ancora in carico
-     * @param idVenditore
+     * Ottenere la lista degli ordini in base al loro stato
+     * @param idVenditore: intero rappresentante l'ID del venditore
+     * @param stato: intero rappresentante lo stato dell'ordine (0 = nel carrello, 1 = pagato, 2 = in lavorazione, 3 = spedito, 4 = consegnato = nella lista desideri)
      * @return String: lista degli ordini
      */
-    public static String selectOrderNotConfirmedBySellerID(int idVenditore) //??? non ancora in carico -> Not Confirmed ???
+    public static String selectOrderBySellerIDAndStatus(int idVenditore, int stato)
     {
-        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND stato=1;";
+        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND stato=" + stato + ";";
     }
-          
-    /**
-     * @author fbrug
-     * Ottenere la lista degli ordini in lavorazione
-     * @param idVenditore
-     * @return String: lista degli ordini
-     */
-    public static String selectOrderConfirmedBySellerID(int idVenditore) //??? In lavorazione -> Confirmed ???
-    {
-        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND stato=2;";
-    }
-          
-    /**
-     * @author fbrug
-     * Ottenere la lista degli ordini già spediti
-     * @param idVenditore
-     * @return String: lista degli ordini
-     */
-    public static String selectOrderShippedBySellerID(int idVenditore)
-    {
-        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND stato=3;";
-    }
-          
-    /**
-     * @author fbrug
-     * Ottenere la lista degli ordini conclusi
-     * @param idVenditore
-     * @return String: lista degli ordini
-     */
-    public static String selectOrderClosedBySellerID(int idVenditore)
-    {
-        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND stato=4;";
-    }
-          
+    
     /**
      * @author fbrug
      * Ottenere la lista degli ordini ricevuti in un determinato giorno
-     * @param idVenditore
-     * @param dataOrdine
+     * @param idVenditore: intero rappresentante l'ID del venditore
+     * @param dataOrdine: data usata per trovare ordini
      * @return String: lista degli ordini
      */
     public static String selectOrderByDate(int idVenditore, Timestamp dataOrdine)
@@ -112,8 +82,8 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista degli ordini ricevuti nella settimana corrente
-     * @param idVenditore
-     * @param dataOrdine
+     * @param idVenditore: intero rappresentante l'ID del venditore
+     * @param dataOrdine: data usata per trovare ordini
      * @return String: lista degli ordini
      */
     public static String selectOrderByWeek(int idVenditore, Timestamp dataOrdine)
@@ -124,8 +94,8 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista degli ordini ricevuti nel mese corrente
-     * @param idVenditore
-     * @param dataOrdine
+     * @param idVenditore: intero rappresentante l'ID del venditore
+     * @param dataOrdine: data usata per trovare ordini
      * @return String: lista degli ordini
      */
     public static String selectOrderByMonth(int idVenditore, Timestamp dataOrdine)
@@ -136,8 +106,8 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista degli ordini ricevuti nell'anno corrente
-     * @param idVenditore
-     * @param dataOrdine
+     * @param idVenditore: intero rappresentante l'ID del venditore
+     * @param dataOrdine: data usata per trovare ordini
      * @return String: lista degli ordini
      */
     public static String selectOrderByYear(int idVenditore, Timestamp dataOrdine)
@@ -148,7 +118,7 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista dei propri negozi con anche il numero di vendite
-     * @param idVenditore
+     * @param idVenditore: intero rappresentante l'ID del venditore
      * @return String: lista dei negozi
      */
     public static String selectShopAndSalesNumberBySellerID(int idVenditore)
@@ -161,7 +131,7 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista dei propri negozi ordinati per vendite maggiori
-     * @param idVenditore
+     * @param idVenditore: intero rappresentante l'ID del venditore
      * @return String: lista dei negozi
      */
     public static String selectShopWithHigherSalesBySellerID(int idVenditore)
@@ -176,7 +146,7 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista dei propri negozi per vendite minori
-     * @param idVenditore
+     * @param idVenditore: intero rappresentante l'ID del venditore
      * @return String: lista dei negozi
      */
     public static String selectShopWithLowestSalesBySellerID(int idVenditore)
@@ -191,8 +161,8 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista dei propri negozi con vendite inferiori ad un certo valore
-     * @param idVenditore
-     * @param valore
+     * @param idVenditore: intero rappresentante l'ID del venditore
+     * @param valore: intero rappresentante il numero di vendite del negozio
      * @return String: lista dei negozi
      */
     public static String selectShopWithLowerSalesThanBySellerID(int idVenditore, int valore)
@@ -207,8 +177,8 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista dei propri negozi con vendite superiori ad un certo valore
-     * @param idVenditore
-     * @param valore
+     * @param idVenditore: intero rappresentante l'ID del venditore
+     * @param valore: intero rappresentante il numero di vendite del negozio
      * @return String: lista dei negozi
      */
     public static String selectShopWithHigherSalesThanBySellerID(int idVenditore, int valore)
@@ -223,9 +193,9 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista dei negozi che vendono prodotti di una certa categoria
-     * @param idVenditore
-     * @param attivo
-     * @param idCategoria
+     * @param idVenditore: intero rappresentante l'ID del venditore
+     * @param attivo: intero rappresentante la situazione del negozio (0 = chiuso, 1 = in attività)
+     * @param idCategoria: intero rappresentante l'ID della categoria
      * @return String: lista dei negozi
      */
     public static String selectShopByCategory(int idVenditore, int attivo, int idCategoria)
@@ -240,10 +210,10 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista dei negozi che vendono prodotti di una certa categoria ordinate da quello con più vendite
-     * @param idVenditore
-     * @param attivo
-     * @param idCategoria
-     * @param categoriaOggetto
+     * @param idVenditore: intero rappresentante l'ID del venditore
+     * @param attivo: intero rappresentante la situazione del negozio (0 = chiuso, 1 = in attività)
+     * @param idCategoria: intero rappresentante l'ID della categoria
+     * @param categoriaOggetto: intero rappresentante la cetegoria dell'oggetto ricercato
      * @return String: lista dei negozi
      */
     public static String selectShopWithHigherSalesByCategory(int idVenditore, int attivo, int idCategoria, int categoriaOggetto)
@@ -261,10 +231,10 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista dei negozi che vendono prodotti di una certa categoria ordinate da quello con meno vendite
-     * @param idVenditore
-     * @param attivo
-     * @param idCategoria
-     * @param categoriaOggetto
+     * @param idVenditore: intero rappresentante l'ID del venditore
+     * @param attivo: intero rappresentante la situazione del negozio (0 = chiuso, 1 = in attività)
+     * @param idCategoria: intero rappresentante l'ID della categoria
+     * @param categoriaOggetto: intero rappresentante la cetegoria dell'oggetto ricercato
      * @return String: lista dei negozi
      */
     public static String selectShopWithLowerSalesByCategory(int idVenditore, int attivo, int idCategoria, int categoriaOggetto)
@@ -282,7 +252,7 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista dei propri negozi ordinati per data di apertura
-     * @param idVenditore
+     * @param idVenditore: intero rappresentante l'ID del venditore
      * @return String: lista dei negozi
      */
     public static String selectShopByOpenDate(int idVenditore)
@@ -293,7 +263,7 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista dei propri negozi ordinati per fatturato
-     * @param idVenditore
+     * @param idVenditore: intero rappresentante l'ID del venditore
      * @return String: lista dei negozi
      */
     public static String selectShopByRevenue(int idVenditore)
@@ -309,19 +279,19 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere i dati di un negozio
-     * @param idVenditore
-     * @param idNegozio
+     * @param idVenditore: intero rappresentante l'ID del venditore
+     * @param idNegozio: intero rappresentante l'ID del negozio
      * @return String: lista dei negozi
      */
     public static String selectShopBySellerIDAndShopID(int idVenditore, int idNegozio)
     {
         return "SELECT * FROM Negozio WHERE idVenditore=" + idVenditore + " AND id=" + idNegozio + ";";
     }
-          
+    
     /**
      * @author fbrug
      * Ottenere i dati delle vendite di un determinato negozio
-     * @param idNegozio
+     * @param idNegozio: intero rappresentante l'ID del negozio
      * @return String: lista degli ordini
      */
     public static String selectOrderByShopID(int idNegozio)
@@ -332,8 +302,8 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere i dati di vendita di un determinato negozio in una determinata categoria
-     * @param idNegozio
-     * @param idCategoria
+     * @param idNegozio: intero rappresentante l'ID del negozio
+     * @param idCategoria: intero rappresentante l'ID della categoria
      * @return String: lista degli ordini
      */
     public static String selectOrderByCategory(int idNegozio, int idCategoria)
@@ -342,11 +312,11 @@ public class sellersQuery {
                 + "WHERE Ordine.idNegozio = " + idNegozio
                 + " AND Ordine.stato BETWEEN 1 AND 4 AND Oggetto.categoria = " + idCategoria + ";";
     }
-          
+    
     /**
      * @author fbrug
      * Ottenere le richieste di assistenza in cui si è stati citati
-     * @param idVenditore
+     * @param idVenditore: intero rappresentante l'ID del venditore
      * @return String: lista delle richieste di assistenza
      */
     public static String selectServiceRequestBySellerID(int idVenditore)
@@ -354,11 +324,11 @@ public class sellersQuery {
         return "SELECT * FROM Utente JOIN Assistenza ON Utente.id=Assistenza.idVenditore "
                 + "WHERE idVenditore=" + idVenditore + ";";
     }
-          
+    
     /**
      * @author fbrug
      * Ottenere la lista dei prodotti venduti raggruppati per categoria e negozio
-     * @param idVenditore
+     * @param idVenditore: intero rappresentante l'ID del venditore
      * @return String: lista dei prodotti
      */
     public static String selectObjectSaledGroupByCategoryAndShop(int idVenditore)
@@ -372,8 +342,8 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista dei prodotti venduti in una determinata categoria raggruppati per negozio
-     * @param idVenditore
-     * @param nomeCategoria
+     * @param idVenditore: intero rappresentante l'ID del venditore
+     * @param nomeCategoria: rappresenta il nome della categoria da ricercare
      * @return String: lista dei prodotti
      */
     public static String selectObjectSaledGroupByShop(int idVenditore, String nomeCategoria)
@@ -387,7 +357,7 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista dei prodotti venduti ordinati per valutazioni
-     * @param idVenditore
+     * @param idVenditore: intero rappresentante l'ID del venditore
      * @return String: lista dei prodotti
      */
     public static String selectObjectSaledOrderedByRating(int idVenditore)
@@ -400,8 +370,8 @@ public class sellersQuery {
           
     /**
      * @author fbrug
-     * Ottenere la lsita dei propri negozi ordinati per recensioni
-     * @param idVenditore
+     * Ottenere la lista dei propri negozi ordinati per recensioni
+     * @param idVenditore: intero rappresentante l'ID del venditore
      * @return String: lista dei negozi
      */
     public static String selectShopOrderedByRating(int idVenditore)
@@ -412,7 +382,7 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista dei proprio prodotti in sconto raggruppati per categoria e negozio
-     * @param idVenditore
+     * @param idVenditore: intero rappresentante l'ID del venditore
      * @return String: lista dei prodotti
      */
     public static String selectObjectDiscountedGroupByShopAndCategory(int idVenditore)
@@ -426,7 +396,7 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista dei proprio prodotti in sconto raggruppati per categoria e negozio ordinati per scadenza più vicina dello sconto
-     * @param idVenditore
+     * @param idVenditore: intero rappresentante l'ID del venditore
      * @return String: lista dei prodotti
      */
     public static String selectObjectsDiscountedGrupByShopAndCategoryOrderedByDeadline(int idVenditore)
@@ -441,7 +411,7 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Ottenere la lista delle recensioni ricevute
-     * @param idVenditore
+     * @param idVenditore: intero rappresentante l'ID del venditore
      * @return String: lista delle recensioni
      */
     public static String selectSellerReview(int idVenditore)
@@ -452,10 +422,10 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Aggiungere un proprio negozio
-     * @param idVenditore
-     * @param nomeNegozio
-     * @param valutazioneNegozio
-     * @param idI
+     * @param idVenditore: intero rappresentante l'ID del venditore, proprietario del nuovo negozio
+     * @param nomeNegozio: nome del nuovo negozio da inserire
+     * @param valutazioneNegozio: valutazione iniziale del nuovo negozio
+     * @param idI: intero rappresentante l'ID dell'indirizzo del nuovo negozio
      * @return String: conferma avvenuta operazione
      */
     public static String insertShop(int idVenditore, String nomeNegozio, double valutazioneNegozio, int idI)
@@ -466,23 +436,24 @@ public class sellersQuery {
     
     /**
      * @author fbrug
-     * Chiudere un proprio negozio (rimuoverlo)
-     * @param idNegozio
+     * Chiudere un proprio negozio (cambiare il suo stato)
+     * @param idNegozio: intero rappresentante l'ID del negozio a cui cambiare lo stato
+     * @param attivo: nuovo stato del negozio (0 = chiuso, 1 = in attività)
      * @return String: conferma avvenuta operazione
      */
-    public static String updateShopStatus(int idNegozio)
+    public static String updateShopStatus(int idNegozio, int attivo)
     {
-        return "UPDATE Negozio SET attivo=0 WHERE id=" + idNegozio + ";";
+        return "UPDATE Negozio SET attivo=" + attivo + " WHERE id=" + idNegozio + ";";
     }
     
     /**
      * @author fbrug
      * Modificare lo stato di un ordine
-     * @param nuovoStato
-     * @param idOrdine
+     * @param nuovoStato: nuovo stato dell'ordine (0 = nel carrello, 1 = pagato, 2 = in lavorazione, 3 = spedito, 4 = consegnato = nella lista desideri)
+     * @param idOrdine: intero rappresentante l'ID dell'ordine da ricercare
      * @return String: conferma avvenuta operazione
      */
-    public static String updateOrderStatus(int nuovoStato, int idOrdine)
+    public static String updateOrderStatus(int idOrdine , int nuovoStato)
     {
         return "UPDATE Ordine SET stato=" + nuovoStato + " WHERE idOrdine=" + idOrdine + ";";
     }
@@ -490,11 +461,11 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Aggiungere ad un ordine spedito il codice di tracking
-     * @param codiceTracking
-     * @param idOrdine
+     * @param codiceTracking: nuovo codice usato per il tracking dell'ordine
+     * @param idOrdine: intero rappresentante l'ID dell'ordine da ricercare
      * @return String: conferma avvenuta operazione
      */
-    public static String updateOrderTracking(String codiceTracking, int idOrdine)
+    public static String updateOrderTracking(int idOrdine, String codiceTracking)
     {
         return "UPDATE Ordine SET codiceTracking=" + codiceTracking + " WHERE idOrdine=" + idOrdine + ";";
     }
@@ -502,25 +473,25 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Aggiungere un prodotto (OGGETTO) ad un proprio negozio
-     * @param idNegozio
-     * @param nomeOggetto
-     * @param prezzoOggetto
-     * @param descrizioneOggetto
-     * @param ritiroInNegozio
-     * @param disponibilita
-     * @param statoDisponibilita
-     * @param sconto
-     * @param dataFineSconto
-     * @param idCategoria
+     * @param idNegozio: intero rapprensentante l'ID del negozio in cui inserire il nuovo oggetto
+     * @param nomeOggetto: nome del nuovo oggetto da inserire
+     * @param prezzoOggetto: prezzo del nuovo oggetto da inserire
+     * @param descrizioneOggetto: descrizione del nuovo oggetto da inserire
+     * @param ritiroInNegozio: disponibilità o meno del ritiro in negozio per l'oggetto (0 = no, 1 = si)
+     * @param disponibilita: rappresenta la quantità dell'oggetto disponibile in negozio
+     * @param statoDisponibilita: indica lo stato della disponibilità
+     * @param sconto: indica lo sconto applicato all'oggetto
+     * @param dataFineSconto: indica la data in cui terminerà lo sconto applicato all'oggetto
+     * @param idCategoria: intero rappresentante l'ID della categoria di cui l'oggetto fa parte
      * @return String: conferma avvenuta operazione
      */
     public static String insertObject(int idNegozio, String nomeOggetto, double prezzoOggetto, 
             String descrizioneOggetto, int ritiroInNegozio, int disponibilita, int statoDisponibilita, 
-            double sconto, /*??? VARIAZIONE*/ Date dataFineSconto, int idCategoria)
+            double sconto, Date dataFineSconto, int idCategoria)
     {
         return "INSERT INTO Oggetto "
                 + "(idNegozio, nome, prezzo, descrizione, ritiroInNegozio, disponibilita, "
-                + "statoDisponibilita, sconto, variazione, dataFineSconto, categoria) "
+                + "statoDisponibilita, sconto, dataFineSconto, categoria) "
                 + "VALUES ("
                 + idNegozio
                 + ", " + nomeOggetto
@@ -530,7 +501,6 @@ public class sellersQuery {
                 + ", " + disponibilita
                 + ", " + statoDisponibilita
                 + ", " + sconto
-                /*+ ", VARIAZIONE"*/
                 + ", " + dataFineSconto
                 + ", " + idCategoria
                 + ");";
@@ -539,7 +509,7 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Rimuovere un oggetto da un proprio negozio
-     * @param idNegozio
+     * @param idNegozio: intero rapprensentante l'ID del negozio in cui eliminare l'oggetto
      * @return String: conferma avvenuta operazione
      */
     public static String deleteObject(int idNegozio)
@@ -550,36 +520,102 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Modificare il prezzo di un oggetto di un proprio negozio
-     * @param idOggetti
-     * @param prezzoOggetto
+     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param prezzoOggetto: il nuovo prezzo dell'oggetto
      * @return String: conferma avvenuta operazione
      */
-    public static String updateObjectPrice(int idOggetti, double prezzoOggetto)
+    public static String updateObjectPrice(int idOggetto, double prezzoOggetto)
     {
-        return "UPDATE Oggetto SET prezzo=" + prezzoOggetto + " WHERE id=" + idOggetti + ";";
+        return "UPDATE Oggetto SET prezzo=" + prezzoOggetto + " WHERE id=" + idOggetto + ";";
     }
     
     /**
      * @author fbrug
      * Modificare lo sconto di un oggetto
-     * @param idOggetti
-     * @param sconto
+     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param sconto: il nuovo sconto applicato all'oggetto
      * @return String: conferma avvenuta operazione
      */
-    public static String updateObjectDiscount(int idOggetti, double sconto)
+    public static String updateObjectDiscount(int idOggetto, double sconto)
     {
-        return "UPDATE Oggetto SET sconto=" + sconto + " WHERE id=" + idOggetti + ";";
+        return "UPDATE Oggetto SET sconto=" + sconto + " WHERE id=" + idOggetto + ";";
     }
     
-    /*??? 
-    -- rimuovere uno sconto dagli oggetti in sconto
-            UPDATE Oggetto SET prezzo=0 WHERE id=ID;
+    /**
+     * @author fbrug
+     * Aggiungere una immagine del profilo di un oggetto
+     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui inserire l'immagine
+     * @param imagePath: il path della nuova immagine
+     * @return String: conferma avvenuta operazione
+     */
+    public static String insertObjectImage(int idOggetto, String imagePath)
+    {
+        return "INSERT INTO imageOggetto (src, idO) "
+                + "SELECT " + imagePath + ", Oggetto.id FROM Oggetto WHERE Oggetto.id = " + idOggetto + ";";
+    }
     
+    /**
+     * @author fbrug
+     * Modificare l'immagine del profilo di un oggetto con un determinato ID oggetto
+     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui cambiare l'immagine
+     * @param oldImagePath: il path dell'immagine da modificare
+     * @param newImagePath: il path della nuova immagine
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateObjectImage(int idOggetto, String oldImagePath, String newImagePath)
+    {
+        return "UPDATE imageOggetto SET imageOggetto.src = " + newImagePath + " "
+                + "WHERE imageOggetto.idO = " + idOggetto + " AND imageOggetto.src = " + oldImagePath + ";";
+    }
     
+    /**
+     * @author fbrug
+     * Rimuovere l'immagine di un determinato oggetto
+     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui rimuovere l'immagine
+     * @param imagePath: il path dell'immagine da rimuovere
+     * @return String: conferma avvenuta operazione
+     */
+    public static String deleteObjectImage(int idOggetto, String imagePath)
+    {
+        return "DELETE FROM imageOggetto WHERE imageOggetto.idO = " + idOggetto + " AND imageOggetto.src = " + imagePath + ";";
+    }
     
-    -- aggiungere una foto ad un prodotto
-    -- aggiungere una foto ad un negozio
-    -- rimuovere una foto di un prodotto
-    -- rimuovere una foto di un negozio
-    */
+    /**
+     * @author fbrug
+     * Aggiungere una immagine del profilo di un negozio
+     * @param idNegozio: intero rappresentante l'ID del negozio a cui inserire l'immagine
+     * @param imagePath: il path della nuova immagine
+     * @return String: conferma avvenuta operazione
+     */
+    public static String insertShopImage(int idNegozio, String imagePath)
+    {
+        return "INSERT INTO imageNegozio (src, idN) "
+                + "SELECT " + imagePath + ", Negozio.id FROM Negozio WHERE Negozio.id = " + idNegozio + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * Modificare l'immagine del profilo di un negozio con un determinato ID negozio
+     * @param idNegozio: intero rappresentante l'ID del negozio a cui cambiare l'immagine
+     * @param oldImagePath: il path dell'immagine da modificare
+     * @param newImagePath: il path della nuova immagine
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateShopImage(int idNegozio, String oldImagePath, String newImagePath)
+    {
+        return "UPDATE imageNegozio SET imageNegozio.src = " + newImagePath + " "
+                + "WHERE imageNegozio.idO = " + idNegozio + " AND imageNegozio.src = " + oldImagePath + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * Rimuovere l'immagine di un determinato negozio
+     * @param idNegozio: intero rappresentante l'ID del negozio a cui rimuovere l'immagine
+     * @param imagePath: il path dell'immagine da rimuovere
+     * @return String: conferma avvenuta operazione
+     */
+    public static String deleteShopImage(int idNegozio, String imagePath)
+    {
+        return "DELETE FROM imageNegozio WHERE imageNegozio.idO = " + idNegozio + " AND imageNegozio.src = " + imagePath + ";";
+    }
 }

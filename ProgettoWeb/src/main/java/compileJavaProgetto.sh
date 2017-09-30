@@ -50,6 +50,9 @@ function spostaFileClass
                 CLASSDIR2=${DIR2/main\/java\/it/main\/webapp\/WEB-INF\/classes\/it}
                 #echo "CLASSDIR2: $CLASSDIR2"
 
+                DIR=$(dirname $CLASSDIR2)
+
+                mkdir -p $DIR
                 mv $DIR2 $CLASSDIR2
                 #echo "mv $DIR2 $CLASSDIR2"
                 #echo -e "$(cat listFile.txt | sed '1d')" > listFile.txt
@@ -61,8 +64,10 @@ function spostaFileClass
 
 function rimuoviClass
 {
-    read -p "Quale directory vuoi scannerizzare? " DELETE
-    find "$DELETE" -type f -name *.class -exec rm '{}' +
+    ROOT=$(pwd .)
+    START=${ROOT%ProgettoWeb/*}
+    # read -p "Quale directory vuoi scannerizzare? " DELETE
+    find "$START" -type f -name *.class -exec rm '{}' +
 }
 
 function selezionaUtente
@@ -112,8 +117,14 @@ function creaClassi
     sleep 1
 }
 
-if [ -n "$1" ]
-    then rimuoviClass
-else
-    creaClassi
-fi
+function init
+{
+    echo "Questo script può compilare file java o rimuovere file class. Per la prima funzione attendere, per la secondo rilanciare lo script passando una stringa qualsiasi come parametro aggiuntivo"
+    if [ -n "$1" ]
+        then rimuoviClass
+    else
+        creaClassi
+    fi
+}
+
+init $1

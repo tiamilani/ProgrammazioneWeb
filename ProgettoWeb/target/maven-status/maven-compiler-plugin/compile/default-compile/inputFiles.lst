@@ -15,6 +15,7 @@
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Dao/immagineNegozio/DaoImmagineNegozio.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Model/immagineNegozio/ModelloImmagineNegozio.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Model/Ordine/ModelloOrdine.java
+/home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Dao/Categoria/DaoCategoria.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Model/immagineUtente/ModelloImmagineUtente.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/query/admin/adminQuery.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/query/objectSellers/objectSellersQuery.java
@@ -31,8 +32,10 @@
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/query/summary/summaryQuery.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Model/immagineRecensione/ModelloImmagineRecensione.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Dao/recensioneVenditore/DaoRecensioneVenditore.java
+/home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Model/Categoria/ModelloCategoria.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Dao/Oggetto/DaoOggetto.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Model/Assistenza/ModelloAssistenza.java
+/home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/Controller/RecensioneOggetto/RecensioneOggettoController.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Dao/recensioneNegozio/DaoRecensioneNegozio.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Dao/indirizzo/DaoIndirizzo.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Model/rispostaOggetto/ModelloRispostaOggetto.java
@@ -40,6 +43,7 @@
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Dao/rispostaOggetto/DaoRispostaOggetto.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Model/Carrello/ModelloCarrello.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Model/recensioneNegozio/ModelloRecensioneNegozio.java
+/home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/Controller/HomeController/HomeController.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Dao/ordiniRicevuti/DaoOrdiniRicevuti.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/utility/tris/tris.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Dao/Ordine/DaoOrdine.java
@@ -51,6 +55,7 @@
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Dao/rispostaNegozio/DaoRispostaNegozio.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Dao/immagineUtente/DaoImmagineUtente.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Model/rispostaVenditore/ModelloRispostaVenditore.java
+/home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Model/Categoria/ModelloListeCategoria.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Model/rispostaNegozio/ModelloRispostaNegozio.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Dao/recensioneOggetto/DaoRecensioneOggetto.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/query/sellers/sellersQuery.java

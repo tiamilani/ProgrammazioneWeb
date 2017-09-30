@@ -6,6 +6,7 @@ it/progettoWeb/java/database/query/marketsSellers/marketsSellersQuery.class
 it/progettoWeb/java/database/Util/DbUtil.class
 it/progettoWeb/java/database/Model/immagineRecensione/ModelloImmagineRecensione.class
 it/progettoWeb/java/database/Model/indirizzo/ModelloIndirizzo.class
+it/progettoWeb/java/Controller/HomeController/HomeController.class
 it/progettoWeb/java/database/Dao/Negozio/DaoNegozio.class
 it/progettoWeb/java/database/Dao/tipoSpedizione/DaoTipoSpedizione.class
 it/progettoWeb/java/database/Dao/Assistenza/DaoAssistenza.class
@@ -16,16 +17,19 @@ it/progettoWeb/java/database/query/objectSellers/objectSellersQuery.class
 it/progettoWeb/java/database/Model/spedizioneOggetto/ModelloSpedizioneOggetto.class
 it/progettoWeb/java/database/query/admin/adminQuery.class
 it/progettoWeb/java/database/query/objects/objectsQuery.class
+it/progettoWeb/java/Controller/RecensioneOggetto/RecensioneOggettoController.class
 it/progettoWeb/java/database/Dao/indirizzo/DaoIndirizzo.class
 it/progettoWeb/java/utility/pair/pair.class
 it/progettoWeb/java/database/query/generics/genericsQuery.class
 it/progettoWeb/java/database/Model/Utente/ModelloUtente.class
 it/progettoWeb/java/database/Model/recensioneVenditore/ModelloRecensioneVenditore.class
+it/progettoWeb/java/database/Model/Categoria/ModelloListeCategoria.class
 it/progettoWeb/java/database/Dao/recensioneVenditore/DaoRecensioneVenditore.class
 it/progettoWeb/java/database/Dao/rispostaNegozio/DaoRispostaNegozio.class
 it/progettoWeb/java/database/Model/rispostaVenditore/ModelloRispostaVenditore.class
 it/progettoWeb/java/database/Model/tipoSpedizione/ModelloTipoSpedizione.class
 it/progettoWeb/java/database/Model/recensioneNegozio/ModelloRecensioneNegozio.class
+it/progettoWeb/java/database/Dao/Categoria/DaoCategoria.class
 it/progettoWeb/java/database/Dao/Ordine/DaoOrdine.class
 it/progettoWeb/java/database/Dao/ordiniRicevuti/DaoOrdiniRicevuti.class
 it/progettoWeb/java/database/Model/Carrello/ModelloCarrello.class
@@ -51,6 +55,7 @@ it/progettoWeb/java/database/Model/Ordine/ModelloOrdine.class
 it/progettoWeb/java/database/Model/recensioneOggetto/ModelloRecensioneOggetto.class
 it/progettoWeb/java/database/Model/rispostaNegozio/ModelloRispostaNegozio.class
 it/progettoWeb/java/database/query/sellers/sellersQuery.class
+it/progettoWeb/java/database/Model/Categoria/ModelloCategoria.class
 it/progettoWeb/java/database/Model/rispostaOggetto/ModelloRispostaOggetto.class
 it/progettoWeb/java/database/Dao/immagineUtente/DaoImmagineUtente.class
 it/progettoWeb/java/database/Dao/Utente/DaoUtente.class
