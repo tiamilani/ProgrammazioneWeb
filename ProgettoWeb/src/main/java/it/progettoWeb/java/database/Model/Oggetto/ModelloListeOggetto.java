@@ -13,25 +13,25 @@ import java.util.List;
  * @author mattia
  */
 public class ModelloListeOggetto {
-    private List<ModelloOggetto> listaCategorie;
+    private List<ModelloOggetto> listaOggetto;
     
     public ModelloListeOggetto(){
-        listaCategorie = new ArrayList<>();
+        listaOggetto = new ArrayList<>();
     }
     
     public ModelloListeOggetto(List<ModelloOggetto> existingList){
-        listaCategorie = existingList;
+        listaOggetto = existingList;
     }
     
     public void add(ModelloOggetto categoria){
-        listaCategorie.add(categoria);
+        listaOggetto.add(categoria);
     }
     
     public ModelloOggetto get(int index){
-        return listaCategorie.get(index);
+        return listaOggetto.get(index);
     }
     
     public List<ModelloOggetto> getList(){
-        return listaCategorie;
+        return listaOggetto;
     }
 }

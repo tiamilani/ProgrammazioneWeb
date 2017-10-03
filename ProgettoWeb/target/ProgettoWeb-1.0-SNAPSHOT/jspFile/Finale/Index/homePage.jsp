@@ -7,7 +7,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
+    
+    <head>
+        <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
+        <title>ShopEro</title>
+    </head>
+    
     <body>
         <jsp:useBean id="listacategoriesessione" class="it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria" scope="session" />
         

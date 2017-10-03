@@ -13,25 +13,25 @@ import java.util.List;
  * @author mattia
  */
 public class ModelloListeOrdine {
-    private List<ModelloOrdine> listaCategorie;
+    private List<ModelloOrdine> lsitaOrdine;
     
     public ModelloListeOrdine(){
-        listaCategorie = new ArrayList<>();
+        lsitaOrdine = new ArrayList<>();
     }
     
     public ModelloListeOrdine(List<ModelloOrdine> existingList){
-        listaCategorie = existingList;
+        lsitaOrdine = existingList;
     }
     
     public void add(ModelloOrdine categoria){
-        listaCategorie.add(categoria);
+        lsitaOrdine.add(categoria);
     }
     
     public ModelloOrdine get(int index){
-        return listaCategorie.get(index);
+        return lsitaOrdine.get(index);
     }
     
     public List<ModelloOrdine> getList(){
-        return listaCategorie;
+        return lsitaOrdine;
     }
 }
