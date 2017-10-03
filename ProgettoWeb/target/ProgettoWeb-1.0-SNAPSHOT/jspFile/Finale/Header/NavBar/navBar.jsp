@@ -3,6 +3,25 @@
     Created on : 27-set-2017, 20.48.38
     Author     : mattia
 --%>
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+</head>
+
+<script>
+  $(document).ready(function(){
+    $('#registerModal input').focus(function(){
+        $(this).next('label').addClass('moveUp');
+    });
+  });
+
+  $(document).ready(function(){
+    $('#registerModal input').on('focusout', function() {
+  	if(!$(this).val()) $(this).next('label').removeClass('moveUp');
+    });
+  });
+</script>
+
 <div class="pos-f-t">
   <div class="collapse" id="navbarToggleFiltri">
         <div class="bg-light p-4">
@@ -57,21 +76,40 @@
             <h4 class="modal-title">Creare un account</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
-          <div class="modal-body">
-              <label for="customerName">Nome</label>
-              <input class="col-6" type="text" id="customerName">
-              <label for="customerSurname">Cognome</label>
-              <input class="col-6" type="text" id="customerSurname">
-              <label for="customerEmail">E-mail</label>
-              <input class="col-6" type="text" id="customerEmail">
-              <label for="customerPassword">Password</label>
-              <input class="col-6" type="password" id="customerPassword">
-              <label for="customerConfirmPassword">Digita nuovamente la password</label>
-              <input class="col-6" type="password" id="customerConfirmPassword">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="col-6 btn btn-default" data-dismiss="modal" type="submit ">Crea il tuo account</button>
-          </div>
+          <form action="index.jsp">
+            <div class="modal-body">
+                <div>
+                    <i class="large material-icons">person_outline</i>
+                    <input class="col-10 modal-input" type="text" id="customerName" required>
+                    <label for="customerName">Nome</label>
+                </div>
+                <div>
+                    <i class="large material-icons">group</i>
+                    <input class="col-10 modal-input" type="text" id="customerSurname" required>
+                    <label for="customerSurname">Cognome</label>
+                </div>
+                <div>
+                    <i class="large material-icons">email</i>
+                    <input class="col-10 modal-input" type="text" id="customerEmail" required>
+                    <label for="customerEmail">E-mail</label>
+                </div>
+                <div>
+                    <i class="large material-icons">lock_outline</i>
+                    <input class="col-10 modal-input" type="password" id="customerPassword" required>
+                    <label for="customerPassword">Password</label>
+                </div>
+                <div>
+                    <i class="large material-icons">lock_outline</i>
+                    <input class="col-10 modal-input" type="password" id="customerConfirmPassword" required>
+                    <label for="customerConfirmPassword">Ripeti la password</label>
+                </div>
+                    <p>Creando il tuo accont, accetti le nostro condizioni sulla privacy<p>
+              
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="col-6 btn btn-default">Crea il tuo account</button>
+            </div>
+          </form>
         </div>
 
     </div>
