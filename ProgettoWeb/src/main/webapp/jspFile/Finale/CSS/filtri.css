@@ -1,14 +1,23 @@
 .dropdown{
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-right: 3%;
+    margin-left: 3%;
 }
 
-.priceLabel{
-    margin-left: 10%;
-    margin-right: 10%;
+.labelSpacing{
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+.spazziatuaOggetti{
+    margin-left: 3%;
+    margin-right: 3%;
 }
 
 .filterRow{
     margin-left: 3%;
     margin-right: 3%;
+}
+
+.checkboxMargin{
+    margin-top: 10%;
 }

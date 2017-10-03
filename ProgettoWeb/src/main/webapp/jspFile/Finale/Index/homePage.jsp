@@ -15,6 +15,7 @@
     
     <body>
         <jsp:useBean id="listacategoriesessione" class="it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria" scope="session" />
+        <jsp:useBean id="LsitaOggetti" class="it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto" scope="session" />
         
         <div class="container-fluid">
             <%@include file="../Header/NavBar/navBar.jsp" %>

@@ -43,8 +43,6 @@
 
         <div class="row3">
             <form class="form-inline">
-                <input class="col-3 form-control mr-sm-2" type="email" name="email" placeholder="email"/>
-                <input class="col-3 form-control mr-sm-2" type="password" name="password" placeholder="password"/>
                 <button  class="col-2 paddingNav btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
                 <button  type="button" class="col-2 paddingNav btn btn-outline-primary my-2 my-sm-0" data-toggle="modal"
                          data-target="#registerModal">Registrati</button>

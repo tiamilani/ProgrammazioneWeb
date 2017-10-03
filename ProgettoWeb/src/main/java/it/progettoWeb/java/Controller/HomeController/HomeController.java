@@ -6,8 +6,10 @@
 package it.progettoWeb.java.Controller.HomeController;
 
 import it.progettoWeb.java.database.Dao.Categoria.DaoCategoria;
+import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
 import it.progettoWeb.java.database.Model.Categoria.ModelloCategoria;
 import it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria;
+import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -26,10 +28,12 @@ public class HomeController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static String HOME_PAGE = "/jspFile/Finale/Index/homePage.jsp";
     private DaoCategoria daoCat;
+    private DaoOggetto daoOgg;
 
     public HomeController() {
         super();
         daoCat = new DaoCategoria();
+        daoOgg = new DaoOggetto();
     }
     
     /**
@@ -58,6 +62,10 @@ public class HomeController extends HttpServlet {
             request.setAttribute("categoria", categoria);
             request.setAttribute("listacategorie", listaCategorie);
             request.getSession().setAttribute("listacategoriesessione", listaCategorie);
+            
+            //Richiedo oggetti per riempire la home page
+            ModelloListeOggetto oggetti = new ModelloListeOggetto(daoOgg.selectObjectLowerThanPrice(1000));
+            request.getSession().setAttribute("LsitaOggetti", oggetti);
         }
         else {
              //Qui va mostrata una pagina di errore   

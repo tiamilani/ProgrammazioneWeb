@@ -8,8 +8,11 @@
     <h2>Categoria...</h2>
 </div>
 <div class="card-group">
+    <c:set var = "ogg" scope = "page" value = "${LsitaOggetti.getList().get(1)}"/>
         <%@include file="../../Oggetto/oggetto.jsp" %>
+    <c:set var = "ogg" scope = "page" value = "${LsitaOggetti.getList().get(2)}"/>
         <%@include file="../../Oggetto/oggetto.jsp" %>
+    <c:set var = "ogg" scope = "page" value = "${LsitaOggetti.getList().get(3)}"/>
         <%@include file="../../Oggetto/oggetto.jsp" %>
 </div>
 
