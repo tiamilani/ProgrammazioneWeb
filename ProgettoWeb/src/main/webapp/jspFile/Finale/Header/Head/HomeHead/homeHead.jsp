@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../CSS/navBar.css">
     <link rel="stylesheet" href="../CSS/slideShow.css">
     <link rel="stylesheet" href="../CSS/oggetto.css">
+    <link rel="stylesheet" href="../CSS/filtri.css">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>

@@ -7,7 +7,7 @@
   <div class="collapse" id="navbarToggleFiltri">
         <div class="bg-light p-4">
           <h4>Filtri</h4>
-          <span class="text-muted">Toggle che mostra i filtri</span>
+          <%@include file="filtri.jsp" %>
         </div>
       </div>
    <div class="collapse" id="navbarToggleCategorie">
