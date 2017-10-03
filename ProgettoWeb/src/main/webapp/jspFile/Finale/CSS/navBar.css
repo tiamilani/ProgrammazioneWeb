@@ -16,3 +16,59 @@
 .paddingNav{
     margin-left: 1%;
 }
+
+#expand{
+    width: 30%;
+    display: block;
+    margin: 0 0 0 auto;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+#expand:focus{
+    width: 80%;
+}
+
+.modal-footer{
+    align-items: center;
+    justify-content: center;
+}
+
+label{
+    font-size: 14px;
+    font-weight: 700;
+    margin-left: 45px;
+    position: relative;
+    top: -3.2em;
+    transition: all 0.3s ease-in-out;
+}
+
+.moveUp{
+    transform: translateY(-35px);
+    font-size: 10px;
+}
+
+.modal-dialog{
+    width: 30%;
+}
+
+input:focus{
+    border-bottom: 1px solid orange;
+    outline: none;
+}
+
+
+.modal-input{
+    width: 100%;
+    padding: 8px 10px;
+    margin: 5px;
+    margin-top: 3px;
+    position: relative;
+    top: -0.5em;
+    display: inline-block;
+    box-sizing: border-box;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    border-bottom: 1px solid gainsboro;
+}
