@@ -5,6 +5,13 @@
     
     margin-left:5%; 
     margin-right:5%;
+    
+    color: inherit;
+}
+
+.cardSmall:hover{
+    color:#4285F4;
+    text-decoration: none; 
 }
 
 .cardLong {
