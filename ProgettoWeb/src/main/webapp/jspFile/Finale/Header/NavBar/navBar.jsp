@@ -14,7 +14,7 @@
         <div class="bg-light p-4">
             <h4>Categorie</h4>
             <c:forEach items="${listacategoriesessione.getList()}" var="cat">
-                <c:url value="http://localhost:8084/ProgettoWeb/jspFile/Finale/Categorie/categoria.jsp" var="catUrl">
+                <c:url value="http://localhost:8080/ProgettoWeb/jspFile/Finale/Categorie/categoria.jsp" var="catUrl">
                     <c:param name="id" value="${cat.getId()}" />
                 </c:url>
                 <a class="nav-link" href="${catUrl}"><c:out value="${cat.getNome()}"/></a>
@@ -22,8 +22,8 @@
         </div>
       </div>
     <nav class="navbar navbar-light bg-white fixed-top navbar-expand-lg">
-      <a class="navbar-brand" href="http://localhost:8084/ProgettoWeb/jspFile/Finale/Index/index.jsp">
-        <img src="http://localhost:8084/ProgettoWeb/jspFile/Finale/Img/square.png" width="30" height="30" class="d-inline-block align-top" alt="IMG">
+      <a class="navbar-brand" href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Index/index.jsp">
+        <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png" width="30" height="30" class="d-inline-block align-top" alt="IMG">
         ShopEro
       </a>
         <div class="navbar-nav">
