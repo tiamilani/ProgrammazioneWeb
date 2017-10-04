@@ -16,6 +16,10 @@ public class ModelloCategoria {
     private String descrizione;
     private int oggettiPresenti;
 
+    public ModelloCategoria(){
+        //No arguments
+    }
+    
     public int getId() {
         return id;
     }

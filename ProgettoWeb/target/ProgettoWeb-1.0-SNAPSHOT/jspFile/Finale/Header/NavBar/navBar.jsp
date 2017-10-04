@@ -3,36 +3,22 @@
     Created on : 27-set-2017, 20.48.38
     Author     : mattia
 --%>
-<head>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-</head>
-
-<script>
-  $(document).ready(function(){
-    $('#registerModal input').focus(function(){
-        $(this).next('label').addClass('moveUp');
-    });
-  });
-
-  $(document).ready(function(){
-    $('#registerModal input').on('focusout', function() {
-  	if(!$(this).val()) $(this).next('label').removeClass('moveUp');
-    });
-  });
-</script>
-
 <div class="pos-f-t">
   <div class="collapse" id="navbarToggleFiltri">
         <div class="bg-light p-4">
           <h4>Filtri</h4>
-          <span class="text-muted">Toggle che mostra i filtri</span>
+          <%@include file="filtri.jsp" %>
         </div>
       </div>
    <div class="collapse" id="navbarToggleCategorie">
         <div class="bg-light p-4">
-          <h4>Categorie</h4>
-          <span class="text-muted">Toggle che mostra le categorie</span>
+            <h4>Categorie</h4>
+            <c:forEach items="${listacategoriesessione.getList()}" var="cat">
+                <c:url value="http://localhost:8084/ProgettoWeb/jspFile/Finale/Categorie/categoria.jsp" var="catUrl">
+                    <c:param name="id" value="${cat.getId()}" />
+                </c:url>
+                <a class="nav-link" href="${catUrl}"><c:out value="${cat.getNome()}"/></a>
+            </c:forEach>
         </div>
       </div>
     <nav class="navbar navbar-light bg-white fixed-top navbar-expand-lg">
@@ -51,6 +37,7 @@
         <div class="row2">
             <form class="form-inline">
                 <input class="form-control mr-sm-2" id="expand" type="text" name="search" placeholder="Search..."/>
+
                 <button  class="col-2 btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form></div>
 
@@ -65,6 +52,7 @@
         </div>
     </nav>
 </div>
+            
 
 <%-- messo esternamente al resto in modo da non influenzare il suo autofocus da proprietà di posizionamento prima definite--%>
 <div id="registerModal" class="modal fade" role="dialog">

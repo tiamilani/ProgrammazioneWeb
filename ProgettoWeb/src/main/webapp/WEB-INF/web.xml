@@ -17,8 +17,8 @@
         <servlet-class>it.progettoWeb.java.Controller.RecensioneOggetto.RecensioneOggettoController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CategoriaController</servlet-name>
-        <servlet-class>it.progettoWeb.java.Controller.Categorie.CategoriaController</servlet-class>
+        <servlet-name>HomeController</servlet-name>
+        <servlet-class>it.progettoWeb.java.Controller.HomeController.HomeController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
@@ -29,8 +29,8 @@
         <url-pattern>/RecensioneOggettoController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CategoriaController</servlet-name>
-        <url-pattern>/CategoriaController</url-pattern>
+        <servlet-name>HomeController</servlet-name>
+        <url-pattern>/HomeController</url-pattern>
     </servlet-mapping>
     <jsp-config>
         <taglib>
