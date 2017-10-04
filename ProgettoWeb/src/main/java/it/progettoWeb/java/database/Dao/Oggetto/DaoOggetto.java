@@ -30,6 +30,7 @@ import it.progettoWeb.java.database.query.sellers.sellersQuery;
 import java.sql.Date;
 import it.progettoWeb.java.database.query.objectsMarkets.objectMarketsQuery;
 import it.progettoWeb.java.database.query.users.usersQuery;
+import java.sql.PreparedStatement;
 
 public class DaoOggetto {
 
@@ -90,6 +91,8 @@ public class DaoOggetto {
         return Object;
     }
 
+    
+    
     /**
      * @author Mattia
      * Funzione utilizzata per ottenre la lista degli oggetti di un utente venditore partendo dall'id
@@ -133,6 +136,21 @@ public class DaoOggetto {
         return Objects;
     }
 
+    public ModelloOggetto getObjectById(String objectId) {
+        ModelloOggetto oggetto = new ModelloOggetto();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(objectsQuery.selectObjectById(objectId));
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                oggetto = getModelloFromRs(rs);
+            }
+        } catch (SQLException e) {
+        }
+
+        return oggetto;
+    }
+    
     /**
      * @author Mattia
      * Ottenere la lista di oggetti con un certo prezzo minimo dei negozi di un determinato venditore

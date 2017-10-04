@@ -3,16 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.progettoWeb.java.Controller.HomeController;
+package it.progettoWeb.java.Controller.Oggetto;
 
-import it.progettoWeb.java.database.Dao.Categoria.DaoCategoria;
+import it.progettoWeb.java.database.Dao.Negozio.DaoNegozio;
 import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
-import it.progettoWeb.java.database.Model.Categoria.ModelloCategoria;
-import it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria;
-import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
+import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
+import it.progettoWeb.java.database.Dao.recensioneOggetto.DaoRecensioneOggetto;
+import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
+import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
+import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
+import it.progettoWeb.java.database.Model.recensioneOggetto.ModelloListeRecensioneOggetto;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,17 +25,21 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mattia
  */
-public class HomeController extends HttpServlet {
+public class objectSelectedController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static String HOME_PAGE = "/jspFile/Finale/Index/homePage.jsp";
-    private DaoCategoria daoCat;
-    private DaoOggetto daoOgg;
-
-    public HomeController() {
+    private static String HOME_PAGE = "/jspFile/Finale/DescrizioneOggetto/descrizioneOggetto.jsp";
+    private DaoNegozio daoNegozio;
+    private DaoUtente daoUtente;
+    private DaoRecensioneOggetto daoRecensione;
+    private DaoOggetto daoOggetto;
+    
+    public objectSelectedController() {
         super();
-        daoCat = new DaoCategoria();
-        daoOgg = new DaoOggetto();
+        daoNegozio = new DaoNegozio();
+        daoUtente = new DaoUtente();
+        daoRecensione = new DaoRecensioneOggetto();
+        daoOggetto = new DaoOggetto();
     }
     
     /**
@@ -48,36 +54,24 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String forward="";
-        String action = request.getParameter("action");
-
-        if (action.equalsIgnoreCase("Inizializzazione")){
-            forward = HOME_PAGE;
-            int idUtente = 0;
-            List<ModelloCategoria> Categorie = daoCat.selectAllCategory();
-            ModelloCategoria categoria = Categorie.get(0);
-            ModelloListeCategoria listaCategorie = new ModelloListeCategoria(Categorie);
-            request.setAttribute("user", idUtente);
-            request.setAttribute("categorie", Categorie);
-            request.setAttribute("categoria", categoria);
-            request.setAttribute("listacategorie", listaCategorie);
-            request.getSession().setAttribute("listacategoriesessione", listaCategorie);
-            
-            //Richiedo oggetti per riempire la home page
-            ModelloListeOggetto oggetti = new ModelloListeOggetto(daoOgg.selectObjectLowerThanPrice(1000));
-            request.getSession().setAttribute("LsitaOggetti", oggetti);
-        }
-        else {
-             //Qui va mostrata una pagina di errore   
-            
-            //forward = INSERT_OR_EDIT;
-        }
-
+        String forward=HOME_PAGE;
+        String idOggetto = request.getParameter("idOggetto");
+        
+        ModelloOggetto oggetto = daoOggetto.getObjectById(idOggetto);
+        ModelloNegozio negozio = daoNegozio.getStoreById(oggetto.getIdNegozio());
+        ModelloUtente venditore = daoUtente.getUserById(negozio.getIdVenditore());
+        ModelloListeRecensioneOggetto recensioni = new ModelloListeRecensioneOggetto(daoRecensione.selectReviewsObjects(idOggetto));
+        
+        request.setAttribute("oggetto", oggetto);
+        request.setAttribute("negozio", negozio);
+        request.setAttribute("venditore", venditore);
+        request.setAttribute("recensioni", recensioni);
+        
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
-        
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -114,6 +108,6 @@ public class HomeController extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }
+    }// </editor-fold>
 
 }

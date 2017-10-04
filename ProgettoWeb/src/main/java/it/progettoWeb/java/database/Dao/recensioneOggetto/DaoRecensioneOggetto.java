@@ -19,6 +19,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
+import it.progettoWeb.java.database.query.generics.genericsQuery;
 import it.progettoWeb.java.database.query.users.usersQuery;
 
 public class DaoRecensioneOggetto {
@@ -68,6 +69,26 @@ public class DaoRecensioneOggetto {
         }
         
         return RecensioneOggetto;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere le recensioni di un oggetto
+     * @param idU Un intero che rappresenta l'identificativo dell'oggetto preso in considerazione
+     * @return List<ModelloRecensioneOggetto> lista di recensioni
+     */
+    public List<ModelloRecensioneOggetto> selectReviewsObjects(String idO) {
+        List<ModelloRecensioneOggetto> recensioni = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.selectReviewsObjects(idO));
+            while (rs.next()) {
+                recensioni.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return recensioni;
     }
     
     /**

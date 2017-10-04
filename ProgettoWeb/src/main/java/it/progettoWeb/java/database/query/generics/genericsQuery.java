@@ -82,6 +82,11 @@ public class genericsQuery {
         return "SELECT * FROM Utente WHERE id = " + idUtente + ";";
     }
     
+    public static String selectStoreById(int idStore)
+    {
+        return "SELECT * FROM Negozio WHERE id = " + idStore + ";";
+    }
+    
     /**
      * @author fbrug
      * Ottenere indirizzi di un utente avendo l'ID utente
@@ -251,5 +256,9 @@ public class genericsQuery {
     {
         return "INSERT INTO imageUtente (src,idU) "
                + "SELECT " + imagePath + ", Utente.id FROM Utente WHERE Utente.id = " + idUtente + ";";
+    }
+
+    public static String selectReviewsObjects(String idO) {
+        return "SELECT * FROM RecensioneOggetto WHERE idOggetto = '" + idO + "';";
     }
 }

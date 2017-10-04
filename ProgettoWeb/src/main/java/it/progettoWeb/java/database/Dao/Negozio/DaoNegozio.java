@@ -20,6 +20,7 @@ import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.query.objectSellers.objectSellersQuery;
 import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
+import it.progettoWeb.java.database.query.generics.genericsQuery;
 import it.progettoWeb.java.database.query.objects.objectsQuery;
 import it.progettoWeb.java.database.query.sellers.sellersQuery;
 import it.progettoWeb.java.database.query.objectsMarkets.objectMarketsQuery;
@@ -50,7 +51,7 @@ public class DaoNegozio {
     public DaoNegozio() {
         connection = DbUtil.getConnection();
     }
-
+    
     /**
      * @author Mattia
      * Funzione utilizzata per facilitare l'ottenimento dei modelli negozio da un result set
@@ -96,6 +97,26 @@ public class DaoNegozio {
         }
         
         return Stores;
+    }
+    
+    /**
+     * Permette di selezionare un oggetto negozio avendone l'id
+     * @param storeId
+     * @return 
+     */
+    public ModelloNegozio getStoreById(int storeId) {
+        ModelloNegozio negozio = new ModelloNegozio();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(genericsQuery.selectStoreById(storeId));
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                negozio = getModelloFromRs(rs);
+            }
+        } catch (SQLException e) {
+        }
+
+        return negozio;
     }
     
     /**
