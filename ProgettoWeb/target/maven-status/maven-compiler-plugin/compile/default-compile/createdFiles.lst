@@ -24,6 +24,7 @@ it/progettoWeb/java/database/Model/spedizioneOggetto/ModelloSpedizioneOggetto.cl
 it/progettoWeb/java/database/query/admin/adminQuery.class
 it/progettoWeb/java/database/query/objects/objectsQuery.class
 it/progettoWeb/java/Controller/RecensioneOggetto/RecensioneOggettoController.class
+it/progettoWeb/java/Controller/Oggetto/objectSelectedController.class
 it/progettoWeb/java/database/Model/indirizzo/ModelloListeIndirizzo.class
 it/progettoWeb/java/database/Dao/indirizzo/DaoIndirizzo.class
 it/progettoWeb/java/utility/pair/pair.class

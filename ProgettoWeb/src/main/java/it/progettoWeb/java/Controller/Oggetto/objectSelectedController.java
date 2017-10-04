@@ -54,7 +54,7 @@ public class objectSelectedController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String forward="";
+        String forward=HOME_PAGE;
         String idOggetto = request.getParameter("idOggetto");
         
         ModelloOggetto oggetto = daoOggetto.getObjectById(idOggetto);

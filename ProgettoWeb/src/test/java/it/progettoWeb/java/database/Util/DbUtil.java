@@ -36,8 +36,8 @@ public class DbUtil {
                 
                 String driver = "com.mysql.jdbc.Driver";
                 String url = "jdbc:mysql://localhost/progettoweb?zeroDateTimeBehavior=convertToNull";
-                String user = "root";
-                String password = "M1.ilani";
+                String user = "progettoweb";
+                String password = "ginoPerna";
                 
                 Class.forName(driver);
                 connection = DriverManager.getConnection(url, user, password);
