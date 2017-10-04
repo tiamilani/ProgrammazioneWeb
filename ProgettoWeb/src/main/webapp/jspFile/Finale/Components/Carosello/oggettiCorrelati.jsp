@@ -1,7 +1,7 @@
 <%-- 
-    Document   : slideShow
-    Created on : 28-set-2017, 16.00.01
-    Author     : mattia
+    Document   : oggettiCorrelati
+    Created on : 3-ott-2017, 22.32.00
+    Author     : andreafadi
 --%>
 
 <div class="carouselSpacing">
