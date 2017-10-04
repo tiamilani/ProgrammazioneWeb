@@ -43,7 +43,8 @@
 
         <div class="row3">
             <form class="form-inline">
-                <button  class="col-2 paddingNav btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+                <button  type="button" class="col-2 paddingNav btn btn-outline-success my-2 my-sm-0" data-toggle="modal"
+                         data-target="#loginModal">Login</button>
                 <button  type="button" class="col-2 paddingNav btn btn-outline-primary my-2 my-sm-0" data-toggle="modal"
                          data-target="#registerModal">Registrati</button>
             </form>
@@ -93,7 +94,40 @@
               
             </div>
             <div class="modal-footer">
-              <button type="submit" class="col-6 btn btn-default">Crea il tuo account</button>
+              <button type="submit" class="col-2 paddingNav btn btn-outline-primary my-2 my-sm-0">Crea il tuo account</button>
+            </div>
+          </form>
+        </div>
+
+    </div>
+</div>
+
+<div id="loginModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Login</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <form action="index.jsp">
+            <div class="modal-body">
+                <div>
+                    <i class="large material-icons">email</i>
+                    <input class="col-10 modal-input" type="text" id="customerEmail" required>
+                    <label for="customerEmail">E-mail</label>
+                </div>
+                <div>
+                    <i class="large material-icons">lock_outline</i>
+                    <input class="col-10 modal-input" type="password" id="customerPassword" required>
+                    <label for="customerPassword">Password</label>
+                </div>
+                    <a href="#">Password dimenticata</a>
+              
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="col-2 paddingNav btn btn-outline-primary my-2 my-sm-0">Login</button>
             </div>
           </form>
         </div>
