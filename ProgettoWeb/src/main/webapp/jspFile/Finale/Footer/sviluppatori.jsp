@@ -8,10 +8,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
+        <title>ShopEro Developer</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <div class="container-fluid">
+            <%@include file="../Header/NavBar/navBar.jsp" %>
+            <%@include file="../Components/Carosello/slideShowSviluppatori.jsp" %>
+            <hr>
+            <%@include file="../Footer/footer.jsp" %>
     </body>
 </html>

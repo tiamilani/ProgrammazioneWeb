@@ -20,11 +20,12 @@
         <div class="container-fluid">
             <%@include file="../Header/NavBar/navBar.jsp" %>
             <%@include file="../Components/Carosello/slideShow.jsp" %>
+            <div class="row rowListaOggetto">
+                <h2>Oggetti che potrebbero piacerti</h2>
+            </div>
             <%@include file="../Components/Liste/ListaOggetto/testListaOggetto.jsp" %>
             <hr>
             <%@include file="../Footer/footer.jsp" %>
-            <%--<a href="test.jsp">test</a>--%>
-            <jsp:forward page="../DescrizioneOggetto/descrizioneOggetto.jsp" />
         </div>
     </body>
 </html>

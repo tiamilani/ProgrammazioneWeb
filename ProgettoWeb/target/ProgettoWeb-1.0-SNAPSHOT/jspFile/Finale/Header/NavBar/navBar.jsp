@@ -3,14 +3,54 @@
     Created on : 27-set-2017, 20.48.38
     Author     : mattia
 --%>
+<script type="text/javascript">
+function search() {
+    alert('I am an alert box!');
+    //alert(document.forms["filterForm"].getElementsByTagName("filtroCategoria"));
+    //document.getElementById("myForm").submit();
+}
+</script>
+<script>
+function myFunction() {
+    var idCategoria = document.forms["filterForm"].elements[0].value;
+    var minPrice = document.forms["filterForm"].elements[1].value;
+    var maxPrice = document.forms["filterForm"].elements[2].value;
+    var nomeVenditore = document.forms["filterForm"].elements[3].value;
+    var nomeNegozio = document.forms["filterForm"].elements[4].value;
+    var checkRitiroInNegozio = document.forms["filterForm"].elements[5].checked;
+    var checkProdottiScontati = document.forms["filterForm"].elements[6].checked;
+    var latitudine = document.forms["filterForm"].elements[7].value;
+    var longitudine = document.forms["filterForm"].elements[8].value;
+    var raggio = document.forms["filterForm"].elements[9].value;
+    var valutazioneMinima = document.forms["filterForm"].elements[10].value;
+    
+    document.form1.hiddenidCategoria.value = String(idCategoria);
+    alert(document.form1.hiddenidCategoria.value);
+    document.form1.hiddenminPrice.value = String(minPrice);
+    document.form1.hiddenmaxPrice.value = String(maxPrice);
+    document.form1.hiddennomeVenditore.value = String(nomeVenditore);
+    document.form1.hiddennomeNegozio.value = String(nomeNegozio);
+    document.form1.hiddencheckRitiroInNegozio.value = String(checkRitiroInNegozio);
+    document.form1.hiddencheckProdottiScontati.value = String(checkProdottiScontati);
+    document.form1.hiddenlatitudine.value = String(latitudine);
+    document.form1.hiddenlongitudine.value = String(longitudine);
+    document.form1.hiddenraggio.value = String(raggio);
+    document.form1.hiddenvalutazioneMinima.value = String(valutazioneMinima);
+    
+    alert('idCategoria: '+ idCategoria +' minPrice: '+ minPrice +' maxPrice: '+ maxPrice +' nomeVenditore: '+ nomeVenditore +' nomeNegozio: '+ nomeNegozio +' checkRitiroInNegozio: '+ checkRitiroInNegozio +' checkProdottiScontati: '+ checkProdottiScontati +' latitudine: '+ latitudine +' longitudine: '+ longitudine +' raggio: '+ raggio +' valutazioneMinima: ' + valutazioneMinima + '')
+
+    form1.action = "${pageContext.request.contextPath}/searchObjectController";
+    form1.submit();
+}
+</script>
 <div class="pos-f-t">
-  <div class="collapse" id="navbarToggleFiltri">
+    <div class="collapse" id="navbarToggleFiltri">
         <div class="bg-light p-4">
           <h4>Filtri</h4>
           <%@include file="filtri.jsp" %>
         </div>
-      </div>
-   <div class="collapse" id="navbarToggleCategorie">
+    </div>
+    <div class="collapse" id="navbarToggleCategorie">
         <div class="bg-light p-4">
             <h4>Categorie</h4>
             <c:forEach items="${listacategoriesessione.getList()}" var="cat">
@@ -20,34 +60,55 @@
                 <a class="nav-link" href="${catUrl}"><c:out value="${cat.getNome()}"/></a>
             </c:forEach>
         </div>
-      </div>
+    </div>
     <nav class="navbar navbar-light bg-white fixed-top navbar-expand-lg">
-      <a class="navbar-brand" href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Index/index.jsp">
-        <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png" width="30" height="30" class="d-inline-block align-top" alt="IMG">
-        ShopEro
-      </a>
-        <div class="navbar-nav">
-            <button class=" col-8 paddingNav btn btn-link my-2 my-sm-0" type="button" data-toggle="collapse" data-target="#navbarToggleCategorie" aria-controls="navbarToggleCategorie" aria-expanded="false" aria-label="Toggle navigation">
-                    Categorie
-            </button>
-            <button class="col-4 paddingNav btn btn-link my-2 my-sm-0" type="button" data-toggle="collapse" data-target="#navbarToggleFiltri" aria-controls="navbarToggleFiltri" aria-expanded="false" aria-label="Toggle navigation">
-                    Filtri
-            </button>
+        <div class="col-1">
+            <a class="navbar-brand" href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Index/index.jsp">
+              <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png" width="30" height="30" class="d-inline-block align-top" alt="IMG">
+              ShopEro
+            </a>
         </div>
-        <div class="row2">
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" id="expand" type="text" name="search" placeholder="Search..."/>
+        <div class="col-2">
+            <div class="row">
+                <div class="navbar-nav">
+                    <button class="paddingNav btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#navbarToggleCategorie" aria-controls="navbarToggleCategorie" aria-expanded="false" aria-label="Toggle navigation">
+                            Categorie
+                    </button>
+                    <button class="paddingNav btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#navbarToggleFiltri" aria-controls="navbarToggleFiltri" aria-expanded="false" aria-label="Toggle navigation">
+                            Filtri
+                    </button>
+                </div>
+            </div>
+        </div>
 
-                <button  class="col-2 btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form></div>
-
-        <div class="row3">
-            <form class="form-inline">
-                <button  type="button" class="col-2 paddingNav btn btn-outline-success my-2 my-sm-0" data-toggle="modal"
-                         data-target="#loginModal">Login</button>
-                <button  type="button" class="col-2 paddingNav btn btn-outline-primary my-2 my-sm-0" data-toggle="modal"
-                         data-target="#registerModal">Registrati</button>
-            </form>
+        <div class="col-9 floatRight">
+            <div class="row">
+                <div class="col-10">
+                    <form class="form-inline" <%--action="${pageContext.request.contextPath}/searchObjectController"--%> id="form1" name="form1" method="POST">
+                    <input class="form-control" id="expand" type="text" name="search" placeholder="Search..."/>
+                    <input type='hidden' id= 'hiddenidCategoria' name = 'hiddenidCategoria' value='' />
+                    <input type='hidden' id= 'hiddenminPrice' name = 'hiddenminPrice' value='' />
+                    <input type='hidden' id= 'hiddenmaxPrice' name = 'hiddenmaxPrice' value='' />
+                    <input type='hidden' id= 'hiddennomeVenditore' name = 'hiddennomeVenditore' value='' />
+                    <input type='hidden' id= 'hiddennomeNegozio' name = 'hiddennomeNegozio' value='' />
+                    <input type='hidden' id= 'hiddencheckRitiroInNegozio' name = 'hiddencheckRitiroInNegozio' value='' />
+                    <input type='hidden' id= 'hiddencheckProdottiScontati' name = 'hiddencheckProdottiScontati' value='' />
+                    <input type='hidden' id= 'hiddenlatitudine' name = 'hiddenlatitudine' value='' />
+                    <input type='hidden' id= 'hiddenlongitudine' name = 'hiddenlongitudine' value='' />
+                    <input type='hidden' id= 'hiddenraggio' name = 'hiddenraggio' value='' />
+                    <input type='hidden' id= 'hiddenvalutazioneMinima' name = 'hiddenvalutazioneMinima' value='' />
+                    <button class="btn btn-outline-success" type="submit" value="submit" onclick="myFunction()">Search</button>
+                </form>
+                </div>
+                <div class="col-2">
+                    <form class="form-inline">
+                        <button  type="button" class="btn btn-outline-success" data-toggle="modal"
+                                 data-target="#loginModal">Login</button>
+                        <button  type="button" class="btn btn-outline-primary" data-toggle="modal"
+                                 data-target="#registerModal">Registrati</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </nav>
 </div>
