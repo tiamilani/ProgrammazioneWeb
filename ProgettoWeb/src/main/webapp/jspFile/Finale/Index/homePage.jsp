@@ -24,6 +24,7 @@
             <hr>
             <%@include file="../Footer/footer.jsp" %>
             <%--<a href="test.jsp">test</a>--%>
+            <jsp:forward page="../DescrizioneOggetto/descrizioneOggetto.jsp" />
         </div>
     </body>
 </html>
