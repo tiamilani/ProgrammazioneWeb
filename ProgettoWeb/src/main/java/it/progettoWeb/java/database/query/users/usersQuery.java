@@ -377,8 +377,8 @@ public class usersQuery {
      * @param idO Un intero che rappresenta l'identificativo dell'oggetto preso in considerazione
      * @return String: lista di foto
      */
-    public static String selectPhotoObject(int idO){
-        return "SELECT * FROM imageOggetto WHERE imageOggetto.idO ="+idO+";";
+    public static String selectPhotoObject(String idO){
+        return "SELECT * FROM imageOggetto WHERE imageOggetto.idO ='"+idO+"';";
     }
     
     /**

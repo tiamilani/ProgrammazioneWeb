@@ -42,5 +42,5 @@
         $('#loginModal input').on('focusout', function() {
             if(!$(this).val()) $(this).next('label').removeClass('moveUp');
         });
-      });
-</script>
+      });      
+    </script>
