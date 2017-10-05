@@ -22,6 +22,17 @@ public class objectsQuery {
      * @param nomeDownCase
      * @return String: elenco oggetti
      */
+    public static String selectObjectById(String id)
+    {
+        return "SELECT * FROM Oggetto WHERE id = '" + id + "';";
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere la lista di oggetti che contengono una stringa nel nome
+     * @param nomeDownCase
+     * @return String: elenco oggetti
+     */
     public static String selectObjectByName(String nomeDownCase)
     {
         return "SELECT * FROM Oggetto WHERE nomeDownCase LIKE '%" + nomeDownCase + "%';";

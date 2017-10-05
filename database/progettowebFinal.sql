@@ -413,7 +413,7 @@ DELIMITER //
 CREATE TRIGGER `AggiornamentoOrdiniSeVieneModificatoIlPrezzo` AFTER UPDATE ON `Oggetto`
  FOR EACH ROW BEGIN
 
-DECLARE curDate DATETIME DEFAULT NOW(); 
+DECLARE curDate DATETIME DEFAULT NOW();
 
 
 IF(curDate <= new.dataFineSconto)
@@ -439,7 +439,7 @@ CREATE TRIGGER `NomeSenzaLettereMaiuscole` AFTER INSERT ON `Oggetto`
 UPDATE Oggetto
 	SET nomeDownCase = LOWER(nome)
     WHERE Oggetto.id = new.id;
-    
+
 END
 //
 DELIMITER ;
@@ -512,7 +512,7 @@ ELSE
     UPDATE Carrello c
         SET c.subTotal = c.subTotal - (old.prezzoDiAcquisto * old.quantita)
         WHERE c.idUtente = old.idUtente AND old.stato = 0;
-    
+
     IF (SELECT subTotal
        	FROM Carrello
        	WHERE idUtente = old.idUtente) = 0
@@ -537,12 +537,12 @@ DELIMITER //
 CREATE TRIGGER `CreoElementoCarrello` BEFORE INSERT ON `Ordine`
  FOR EACH ROW BEGIN
 declare x int default 0;
-SET x = (SELECT COUNT(idUtente) 
-         FROM Carrello 
+SET x = (SELECT COUNT(idUtente)
+         FROM Carrello
          WHERE Carrello.idUtente = new.idUtente
          LIMIT 1
         );
-        
+
 IF(x < 1) THEN
 	INSERT INTO Carrello
 		(idOrdine,idUtente,subTotal)
@@ -1126,7 +1126,7 @@ DELIMITER $$
 --
 -- Eventi
 --
-DROP EVENT `ControlloScontiAttivi`$$
+DROP EVENT IF EXISTS `ControlloScontiAttivi`$$
 CREATE DEFINER=`progettoweb`@`%` EVENT `ControlloScontiAttivi` ON SCHEDULE EVERY 1 DAY STARTS '2017-07-22 00:01:00' ENDS '2018-07-22 00:01:00' ON COMPLETION PRESERVE ENABLE COMMENT 'Evento utilizzato per eliminare gli sconti terminati' DO UPDATE Oggetto SET Oggetto.`sconto` = 0, Oggetto.`dataFineSconto` = IF(Oggetto.`dataFineSconto`<CURDATE(), NULL,Oggetto.`dataFineSconto`)$$
 
 DELIMITER ;

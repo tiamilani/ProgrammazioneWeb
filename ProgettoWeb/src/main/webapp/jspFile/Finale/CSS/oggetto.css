@@ -5,6 +5,13 @@
     
     margin-left:5%; 
     margin-right:5%;
+    
+    color: inherit;
+}
+
+.cardSmall:hover{
+    color:#4285F4;
+    text-decoration: none; 
 }
 
 .cardLong {
@@ -30,4 +37,9 @@
     margin-top: 2%; /* Margine tra una card group e quello che c'è sopra */
     margin-right: 25%;
     margin-left: 25%;
+}
+
+.rowListaOggetto{
+    margin-left:25%; 
+    margin-right:25%;
 }
