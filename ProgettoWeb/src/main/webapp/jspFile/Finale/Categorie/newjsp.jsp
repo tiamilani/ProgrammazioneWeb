@@ -10,22 +10,24 @@
     
     <head>
         <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
-        <title>ShopEro</title>
+        <title>Oggetti Categoria</title>
     </head>
     
     <body>
-        <a href="../Categorie/newjsp.jsp">cccccccccccc</a>
-        <a href="../Categorie/categoria.jsp">categoria</a>
-        <jsp:useBean id="listacategoriesessione" class="it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria" scope="session" />
-        <jsp:useBean id="ListaOggetti" class="it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto" scope="session" />
+        <!-- Bean per la categoria e la lista oggettiCategoria -->
+        <jsp:useBean id="categoria" class="it.progettoWeb.java.database.Model.Categoria.ModelloCategoria" scope="request" />
+        <jsp:useBean id="ListaOggetti" class="it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto" scope="request" />
+        
         <div class="container">
             <%@include file="../Header/NavBar/navBar.jsp" %>
         </div>
         <div class="container-fluid">
-            <%@include file="../Components/Carosello/slideShow.jsp" %>
-            <div class="row rowListaOggetto">
-                <h2>Oggetti che potrebbero piacerti</h2>
-            </div>
+            <h1>CATEGORIA</h1>
+
+            <!-- Stampo nome e descrizione categoria selezionata -->
+            <h2><c:out value="${categoria.getNome()}"/></h2>
+            <p><c:out value="${categoria.getDescrizione()}"/></p>
+            
             <%@include file="../Components/Liste/ListaOggetto/testListaOggetto.jsp" %>
             <hr>
             <%@include file="../Footer/footer.jsp" %>
