@@ -7,8 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    
     <head>
+        <!--<d%@include file="/ProgettoWeb/jspFile/Finale/Header/Head/HomeHead/homeHead.jsp" %>-->
         <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
         <title>Oggetti Categoria</title>
     </head>

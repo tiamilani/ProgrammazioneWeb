@@ -14,7 +14,6 @@
     </head>
     
     <body>
-        <a href="../Categorie/newjsp.jsp">cccccccccccc</a>
         <a href="../Categorie/categoria.jsp">categoria</a>
         <jsp:useBean id="listacategoriesessione" class="it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria" scope="session" />
         <jsp:useBean id="ListaOggetti" class="it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto" scope="session" />
