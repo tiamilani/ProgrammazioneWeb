@@ -4,6 +4,7 @@
     Author     : mattia
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,9 +13,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:useBean id="listacategoriesessione" class="it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria" scope="session" />
+        <jsp:useBean id="categoria" class="it.progettoWeb.java.database.Model.Categoria.ModelloCategoria" scope="request" />
         <h1>CIAO</h1>
-        <p>Io sono qui per mostrare le informazioni e gli oggetti della categoria: <%=  request.getParameter("id") %></p>
+        <p>Io sono qui per mostrare le informazioni e gli oggetti della categoria: <c:out value="${categoria.getNome()}"/></p>
         
     </body>
 </html>

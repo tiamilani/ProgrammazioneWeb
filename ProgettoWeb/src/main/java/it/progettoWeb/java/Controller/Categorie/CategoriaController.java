@@ -6,6 +6,9 @@
 package it.progettoWeb.java.Controller.Categorie;
 
 import it.progettoWeb.java.database.Dao.Categoria.DaoCategoria;
+import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
+import it.progettoWeb.java.database.Model.Categoria.ModelloCategoria;
+import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -21,12 +24,14 @@ import javax.servlet.http.HttpServletResponse;
 public class CategoriaController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static String LIST_CATEGORY = "/jspFile/Finale/Header/Categorie/ottieniListaCategorie.jsp";
-    private DaoCategoria dao;
+    private static String LIST_CATEGORY = "/jspFile/Finale/Categorie/categoria.jsp";
+    private DaoCategoria daoCategoria;
+    private DaoOggetto daoOggetto;
     
     public CategoriaController(){
         super();
-        dao = new DaoCategoria();
+        daoCategoria = new DaoCategoria();
+        daoOggetto = new DaoOggetto();
     }
     
     /**
@@ -42,7 +47,6 @@ public class CategoriaController extends HttpServlet {
             throws ServletException, IOException {
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -55,14 +59,14 @@ public class CategoriaController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String forward="";
-        String action = request.getParameter("action");
+        int idCategoria = Integer.parseInt(request.getParameter("id"));
 
-        if (action.equalsIgnoreCase("listCategory")){
-            forward = LIST_CATEGORY;
-            System.out.println(dao.selectAllCategory().size());
-            request.setAttribute("categorie", dao.selectAllCategory());
-        } else {
-        }
+        forward = LIST_CATEGORY;
+        ModelloCategoria categoria = daoCategoria.selectCategoryById(idCategoria);
+        ModelloListeOggetto ListaOggetti = new ModelloListeOggetto(daoOggetto.selectObjectByCategory(idCategoria));
+        
+        request.setAttribute("categoria", categoria);
+        request.setAttribute("ListaOggetti", ListaOggetti);
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
@@ -90,6 +94,6 @@ public class CategoriaController extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

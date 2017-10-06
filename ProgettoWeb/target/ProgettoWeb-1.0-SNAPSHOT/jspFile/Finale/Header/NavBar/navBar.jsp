@@ -54,7 +54,7 @@ function myFunction() {
         <div class="bg-light p-4">
             <h4>Categorie</h4>
             <c:forEach items="${listacategoriesessione.getList()}" var="cat">
-                <c:url value="http://localhost:8080/ProgettoWeb/jspFile/Finale/Categorie/categoria.jsp" var="catUrl">
+                <c:url value="/CategoriaController" var="catUrl">
                     <c:param name="id" value="${cat.getId()}" />
                 </c:url>
                 <a class="nav-link" href="${catUrl}"><c:out value="${cat.getNome()}"/></a>
