@@ -3,13 +3,6 @@
     Created on : 27-set-2017, 20.48.38
     Author     : mattia
 --%>
-<script type="text/javascript">
-function search() {
-    alert('I am an alert box!');
-    //alert(document.forms["filterForm"].getElementsByTagName("filtroCategoria"));
-    //document.getElementById("myForm").submit();
-}
-</script>
 <script>
 function myFunction() {
     var idCategoria = document.forms["filterForm"].elements[0].value;
@@ -25,7 +18,6 @@ function myFunction() {
     var valutazioneMinima = document.forms["filterForm"].elements[10].value;
     
     document.form1.hiddenidCategoria.value = String(idCategoria);
-    alert(document.form1.hiddenidCategoria.value);
     document.form1.hiddenminPrice.value = String(minPrice);
     document.form1.hiddenmaxPrice.value = String(maxPrice);
     document.form1.hiddennomeVenditore.value = String(nomeVenditore);
@@ -37,8 +29,7 @@ function myFunction() {
     document.form1.hiddenraggio.value = String(raggio);
     document.form1.hiddenvalutazioneMinima.value = String(valutazioneMinima);
     
-    alert('idCategoria: '+ idCategoria +' minPrice: '+ minPrice +' maxPrice: '+ maxPrice +' nomeVenditore: '+ nomeVenditore +' nomeNegozio: '+ nomeNegozio +' checkRitiroInNegozio: '+ checkRitiroInNegozio +' checkProdottiScontati: '+ checkProdottiScontati +' latitudine: '+ latitudine +' longitudine: '+ longitudine +' raggio: '+ raggio +' valutazioneMinima: ' + valutazioneMinima + '')
-
+    //alert('idCategoria: '+ idCategoria +' minPrice: '+ minPrice +' maxPrice: '+ maxPrice +' nomeVenditore: '+ nomeVenditore +' nomeNegozio: '+ nomeNegozio +' checkRitiroInNegozio: '+ checkRitiroInNegozio +' checkProdottiScontati: '+ checkProdottiScontati +' latitudine: '+ latitudine +' longitudine: '+ longitudine +' raggio: '+ raggio +' valutazioneMinima: ' + valutazioneMinima + '')
     form1.action = "${pageContext.request.contextPath}/searchObjectController";
     form1.submit();
 }
@@ -54,7 +45,7 @@ function myFunction() {
         <div class="bg-light p-4">
             <h4>Categorie</h4>
             <c:forEach items="${listacategoriesessione.getList()}" var="cat">
-                <c:url value="http://localhost:8080/ProgettoWeb/jspFile/Finale/Categorie/categoria.jsp" var="catUrl">
+                <c:url value="/CategoriaController" var="catUrl">
                     <c:param name="id" value="${cat.getId()}" />
                 </c:url>
                 <a class="nav-link" href="${catUrl}"><c:out value="${cat.getNome()}"/></a>
@@ -84,7 +75,7 @@ function myFunction() {
         <div class="col-9 floatRight">
             <div class="row">
                 <div class="col-10">
-                    <form class="form-inline" <%--action="${pageContext.request.contextPath}/searchObjectController"--%> id="form1" name="form1" method="POST">
+                    <form class="form-inline" <%--action="${pageContext.request.contextPath}/searchObjectController"--%> id="form1" name="form1" method="GET">
                     <input class="form-control" id="expand" type="text" name="search" placeholder="Search..."/>
                     <input type='hidden' id= 'hiddenidCategoria' name = 'hiddenidCategoria' value='' />
                     <input type='hidden' id= 'hiddenminPrice' name = 'hiddenminPrice' value='' />
