@@ -25,6 +25,16 @@ public class genericsQuery {
         return "SELECT * FROM Categoria;";
     }
     
+    public static String selectRandomObjects(int limit)
+    {
+        return "SELECT * FROM Oggetto ORDER BY RAND() LIMIT " + limit + ";";
+    }
+    
+    public static String selectAddressByIdAddress(int idAddress)
+    {
+        return "SELECT * FROM Indirizzo WHERE idI = " + idAddress + ";";
+    }
+    
     /**
      * @author Mattia
      * @return String: categoria singola

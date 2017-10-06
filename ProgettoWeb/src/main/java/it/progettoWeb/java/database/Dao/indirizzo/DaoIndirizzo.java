@@ -97,6 +97,21 @@ public class DaoIndirizzo {
         return addreses;
     }
     
+    public ModelloIndirizzo selectAddressByIdAddress(int addressId) {
+        ModelloIndirizzo address = new ModelloIndirizzo();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(genericsQuery.selectAddressByIdAddress(addressId));
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                address = getModelloFromRs(rs);
+            }
+        } catch (SQLException e) {
+        }
+
+        return address;
+    }
+    
     /**
      * @author Mattia
      * Modificare indirizzo utente

@@ -4,7 +4,7 @@
     Author     : mattia
 --%>
 
-<div class="carouselSpacing">
+<div class="carouselSpacing" id="car">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>

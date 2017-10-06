@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
+import it.progettoWeb.java.database.query.generics.genericsQuery;
 import it.progettoWeb.java.database.query.marketsSellers.marketsSellersQuery;
 import it.progettoWeb.java.database.query.objectSellers.objectSellersQuery;
 import it.progettoWeb.java.database.query.objects.objectsQuery;
@@ -127,6 +128,21 @@ public class DaoOggetto {
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsWithString(id,pattern));
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return Objects;
+    }
+    
+    public List<ModelloOggetto> selectRandomObjects(int limit) {
+        List<ModelloOggetto> Objects = new ArrayList<>();
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.selectRandomObjects(limit));
             while (rs.next()) {
                 Objects.add(getModelloFromRs(rs));
             }
