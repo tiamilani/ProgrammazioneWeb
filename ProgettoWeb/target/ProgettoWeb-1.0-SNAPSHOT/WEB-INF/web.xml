@@ -24,6 +24,10 @@
         <servlet-name>objectSelectedController</servlet-name>
         <servlet-class>it.progettoWeb.java.Controller.Oggetto.objectSelectedController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>searchObjectController</servlet-name>
+        <servlet-class>it.progettoWeb.java.Controller.SearchObject.searchObjectController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>objectSelectedController</servlet-name>
         <url-pattern>/objectSelectedController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>searchObjectController</servlet-name>
+        <url-pattern>/searchObjectController</url-pattern>
     </servlet-mapping>
     <jsp-config>
         <taglib>

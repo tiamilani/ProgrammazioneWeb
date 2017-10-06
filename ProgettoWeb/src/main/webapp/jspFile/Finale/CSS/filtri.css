@@ -21,3 +21,12 @@
 .checkboxMargin{
     margin-top: 10%;
 }
+
+.container-fluid {
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.container {
+    max-width: 100%;
+}

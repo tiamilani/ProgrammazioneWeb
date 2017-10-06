@@ -8,10 +8,15 @@ package it.progettoWeb.java.Controller.Oggetto;
 import it.progettoWeb.java.database.Dao.Negozio.DaoNegozio;
 import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
+import it.progettoWeb.java.database.Dao.immagineOggetto.DaoImmagineOggetto;
+import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
 import it.progettoWeb.java.database.Dao.recensioneOggetto.DaoRecensioneOggetto;
 import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
+import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
+import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
+import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
 import it.progettoWeb.java.database.Model.recensioneOggetto.ModelloListeRecensioneOggetto;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,6 +38,8 @@ public class objectSelectedController extends HttpServlet {
     private DaoUtente daoUtente;
     private DaoRecensioneOggetto daoRecensione;
     private DaoOggetto daoOggetto;
+    private DaoIndirizzo daoIndirizzo;
+    private DaoImmagineOggetto daoImmagineOggetto;
     
     public objectSelectedController() {
         super();
@@ -40,6 +47,8 @@ public class objectSelectedController extends HttpServlet {
         daoUtente = new DaoUtente();
         daoRecensione = new DaoRecensioneOggetto();
         daoOggetto = new DaoOggetto();
+        daoIndirizzo = new DaoIndirizzo();
+        daoImmagineOggetto = new DaoImmagineOggetto();
     }
     
     /**
@@ -61,11 +70,17 @@ public class objectSelectedController extends HttpServlet {
         ModelloNegozio negozio = daoNegozio.getStoreById(oggetto.getIdNegozio());
         ModelloUtente venditore = daoUtente.getUserById(negozio.getIdVenditore());
         ModelloListeRecensioneOggetto recensioni = new ModelloListeRecensioneOggetto(daoRecensione.selectReviewsObjects(idOggetto));
+        ModelloIndirizzo indirizzo = daoIndirizzo.selectAddressByIdAddress(negozio.getIdI());
+        ModelloListeImmagineOggetto immagini = new ModelloListeImmagineOggetto(daoImmagineOggetto.selectPhotoObject(idOggetto));
+        ModelloListeOggetto randomOggetti = new ModelloListeOggetto(daoOggetto.selectRandomObjects(12));
         
         request.setAttribute("oggetto", oggetto);
         request.setAttribute("negozio", negozio);
         request.setAttribute("venditore", venditore);
         request.setAttribute("recensioni", recensioni);
+        request.setAttribute("indirizzo", indirizzo);
+        request.setAttribute("listaImmagini", immagini);
+        request.setAttribute("randomOggetti", randomOggetti);
         
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);

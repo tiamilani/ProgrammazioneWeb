@@ -26,8 +26,8 @@ public class DaoImmagineOggetto {
     /**
      * Costatnti che indicano i nomi delle colonne da poter riutilizzare all'interno del file
      */
-    private static final String SRC="id";
-    private static final String IDO="idOggeto";
+    private static final String SRC="src";
+    private static final String IDO="idO";
     
     /**
      * Variabile che gestisce la connessione con il db
@@ -63,10 +63,10 @@ public class DaoImmagineOggetto {
     /**
      * @author Mattia
      * Ottenere la lista delle immagini di un oggetto
-     * @param idO Un intero che rappresenta l'identificativo dell'oggetto preso in considerazione
+     * @param idO Una Stringa che rappresenta l'identificativo dell'oggetto preso in considerazione
      * @return List<ModelloImmagineOggetto> lista di immagini
      */
-    public List<ModelloImmagineOggetto> selectPhotoObject(int idO) {
+    public List<ModelloImmagineOggetto> selectPhotoObject(String idO) {
         List<ModelloImmagineOggetto> Objects = new ArrayList<>();
         
         try {

@@ -1,32 +1,37 @@
+.navbar{
+    padding-left: 0%;
+    padding-right: 0%;
+}
+
 .navbar-brand{
-	margin-left: 3%;
-	margin-right: 3%;
+	float: left;
+        margin-left: 3%;
 }
 
-.row2{
-    width: 40%;
-    margin-left: 10%;
+.navbar-nav{
+    float: left;
 }
 
-.row3{
-    width: 40%;
-    margin-right: 0%;
-}
 
 .paddingNav{
-    margin-left: 1%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.floatRight{
+    float: right;
 }
 
 #expand{
-    width: 30%;
+    width: 15%;
     display: block;
     margin: 0 0 0 auto;
-    -webkit-transition: width 0.4s ease-in-out;
+    -webkit-transition: width 0.2s ease-in-out;
     transition: width 0.4s ease-in-out;
 }
 
 #expand:focus{
-    width: 80%;
+    width: 90%;
 }
 
 .modal-footer{

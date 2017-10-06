@@ -4,8 +4,8 @@
     Author     : andreafadi
 --%>
 
-<div style="float: right; width: 100px;">
-    <div style="position: fixed;">
+<div style="float: right; width: 18%;">
+    <div style="position: fixed; border: 1px solid black;">
         <h1>Ciao, sono un fixed menu</h1>
     </div>
 </div>

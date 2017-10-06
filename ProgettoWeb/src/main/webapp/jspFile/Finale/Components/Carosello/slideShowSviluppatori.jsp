@@ -4,7 +4,7 @@
     Author     : mattia
 --%>
 
-<div class="carouselSpacing" id="car">
+<div class="carouselSpacingDeveloper">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -13,7 +13,7 @@
       </ol>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="d-block w-100" src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png" alt="First slide">
+          <img class="d-block w-100" src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/developer1.jpg" alt="First slide">
           <div class="container">
             <div class="carousel-caption d-none d-md-block text-left">
               <h1>Lorem ipsum</h1>
@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png" alt="Second slide">
+          <img class="d-block w-100" src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/developer2.jpg" alt="Second slide">
           <div class="container">
             <div class="carousel-caption d-none d-md-block text-right">
               <h1>Lorem ipsum</h1>
@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png" alt="Third slide">
+          <img class="d-block w-100" src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/developer3.jpg" alt="Third slide">
           <div class="container">
             <div class="carousel-caption d-none d-md-block text-top">
               <h1>Lorem ipsum</h1>

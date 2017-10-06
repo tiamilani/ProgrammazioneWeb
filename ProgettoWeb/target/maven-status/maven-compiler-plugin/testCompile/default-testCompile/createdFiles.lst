@@ -6,8 +6,8 @@ it/progettoWeb/java/Functions.class
 it/progettoWeb/java/database/query/objectsMarkets/objectMarketsQuery.class
 it/progettoWeb/java/database/query/marketsSellers/marketsSellersQuery.class
 it/progettoWeb/java/database/Util/DbUtil.class
-it/progettoWeb/java/database/Model/Utente/ModelloUtente.class
 it/progettoWeb/java/database/query/generics/genericsQuery.class
+it/progettoWeb/java/database/Model/Utente/ModelloUtente.class
 it/progettoWeb/java/database/query/sellers/sellersQuery.class
 it/progettoWeb/java/database/Dao/Utente/DaoUtente.class
 it/progettoWeb/java/database/query/objectSellers/objectSellersQuery.class
