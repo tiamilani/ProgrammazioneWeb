@@ -1,7 +1,25 @@
 .carouselSpacing{
-    margin-top: 3%;
-    margin-left: 10%;
-    margin-right: 10%;
+
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.oggettiCorrelati {
+    height: 50%;
+    margin-bottom: 0;
+}
+
+.carousel-inner {
+}
+
+#map-canvas {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.descrizione {
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 .carouselSpacingDeveloper{
