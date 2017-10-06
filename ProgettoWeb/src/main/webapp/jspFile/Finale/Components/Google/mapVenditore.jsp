@@ -17,6 +17,8 @@
     
     var map;
     var myCenter;
+    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var labelIndex = 0;
     function createMapObject() {
         myCenter = new google.maps.LatLng(latitude,longitude);
         
@@ -31,7 +33,8 @@
         map = new google.maps.Map(mapCanvas, mapOptions);
         
         var marker = new google.maps.Marker({
-            position: myCenter
+            position: myCenter,
+            label: labels[labelIndex++ % labels.length]
         });
         
         marker.setMap(map);
@@ -60,6 +63,6 @@
 </script>
 
 <div class="text-center">
-    <h3>Puoi ritirare il prodotto in questo punto vendita</h3>
+    <h3>Il venditore possiede questi punti vendita</h3>
 </div>
 <div id="mapObject"></div>

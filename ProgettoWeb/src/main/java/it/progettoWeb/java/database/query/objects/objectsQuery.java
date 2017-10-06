@@ -13,7 +13,6 @@ public class objectsQuery {
         return "Hello from" + objectsQuery.class.toString();
     }
     
-    
     /*---LAST UPDATE - 2017-09-20---*/
     
     /**

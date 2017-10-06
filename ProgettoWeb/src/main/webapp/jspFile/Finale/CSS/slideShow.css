@@ -1,5 +1,4 @@
-.carouselSpacing{
-
+.carouselSpacing, .carouselSpacingDeveloper{
     margin-top: 5%;
     margin-bottom: 5%;
 }
@@ -17,13 +16,6 @@
     margin-bottom: 5%;
 }
 
-.descrizione {
-    margin-top: 5%;
-    margin-bottom: 5%;
-}
-
-.carouselSpacingDeveloper{
-    margin-top: 3%;
-    margin-left: 20%;
-    margin-right: 20%;
+#collapReview:hover {
+    text-decoration: none;
 }
