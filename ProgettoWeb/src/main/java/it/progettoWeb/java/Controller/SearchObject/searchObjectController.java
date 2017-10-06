@@ -20,7 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 public class searchObjectController extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
-    private static String HOME_PAGE = "/jspFile/Finale/search/searchResult.jsp";
+    private static String SEARCH_PAGE = "/jspFile/Finale/search/searchResult.jsp";
+    private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,23 +33,54 @@ public class searchObjectController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String forward=HOME_PAGE;
+        String forward=SEARCH_PAGE;
+        String error="";
         
-        String search = (String)request.getAttribute("search");
-        String categoria = (String)request.getAttribute("hiddenidCategoria");
-        int nminPrice = Integer.getInteger((String)request.getAttribute("hiddenminPrice"));
-        int maxPrice = Integer.getInteger((String)request.getAttribute("hiddenmaxPrice"));
-        String nomeVenditore = (String)request.getAttribute("hiddennomeVenditore");
-        String nomeNegozio = (String)request.getAttribute("hiddennomeNegozio");
-        boolean checkRitiroInNegozio = (boolean)request.getAttribute("hiddencheckRitiroInNegozio");
-        boolean checkProdottiScontati = (boolean)request.getAttribute("hiddencheckProdottiScontati");
-        double latitudine = Double.parseDouble((String)request.getAttribute("hiddenlatitudine"));
-        double longitudine = Double.parseDouble((String)request.getAttribute("hiddenlongitudine"));
-        double raggio = Double.parseDouble((String)request.getAttribute("hiddenraggio"));
-        int valutazioneMinima = Integer.getInteger((String)request.getAttribute("hiddenvalutazioneMinima"));
+        String search="", categoria="", nomeVenditore="", nomeNegozio="";
+        int minPrice=0, maxPrice=0, valutazioneMinima=0;
+        boolean checkRitiroInNegozio=false, checkProdottiScontati=false;
+        double latitudine=0, longitudine=0, raggio=0;
+        
+        search = request.getParameter("search");
+        categoria = request.getParameter("hiddenidCategoria");
+        minPrice = ((request.getParameter("hiddenminPrice") == null || "".equals(request.getParameter("hiddenminPrice"))) ? 0 : Integer.parseInt(request.getParameter("hiddenminPrice")));
+        maxPrice = ((request.getParameter("hiddenmaxPrice") == null || "".equals(request.getParameter("hiddenmaxPrice"))) ? 0 : Integer.parseInt(request.getParameter("hiddenmaxPrice")));
+        nomeVenditore = ((request.getParameter("hiddennomeVenditore") == null || "".equals(request.getParameter("hiddennomeVenditore"))) ? "" : request.getParameter("hiddennomeVenditore"));
+        nomeNegozio = ((request.getParameter("hiddennomeNegozio") == null || "".equals(request.getParameter("hiddennomeNegozio"))) ? "" : request.getParameter("hiddennomeNegozio"));
+        checkRitiroInNegozio =  ((request.getParameter("hiddencheckRitiroInNegozio") == null) ? false : Boolean.getBoolean(request.getParameter("hiddencheckRitiroInNegozio")));
+        checkProdottiScontati = ((request.getParameter("hiddencheckProdottiScontati") == null) ? false : Boolean.getBoolean(request.getParameter("hiddencheckProdottiScontati")));
+        latitudine = ((request.getParameter("hiddenlatitudine") == null || "".equals(request.getParameter("hiddenlatitudine"))) ? 0 : Double.parseDouble(request.getParameter("hiddenlatitudine")));
+        longitudine = ((request.getParameter("hiddenlongitudine") == null || "".equals(request.getParameter("hiddenlongitudine"))) ? 0 : Double.parseDouble(request.getParameter("hiddenlongitudine")));
+        raggio = ((request.getParameter("hiddenraggio") == null || "".equals(request.getParameter("hiddenraggio"))) ? 0 : Double.parseDouble(request.getParameter("hiddenraggio")));
+        valutazioneMinima = ((request.getParameter("hiddenvalutazioneMinima") == null || "".equals(request.getParameter("hiddenvalutazioneMinima")) || "Choose...".equals(request.getParameter("hiddenvalutazioneMinima"))) ? 0 : Integer.parseInt(request.getParameter("hiddenvalutazioneMinima")));
+        
+        search = search.trim().replaceAll(" +", " ");
+        
+        if(search.length() < 3) {
+            forward=ERROR_PAGE;
+            RequestDispatcher view = request.getRequestDispatcher(forward);
+            view.forward(request, response);
+        }
+        /*
+        String test = search;
+        if(test == null || test.length() < 10){
+            forward=ERROR_PAGE;
+            RequestDispatcher view = request.getRequestDispatcher(forward);
+            view.forward(request, response);
+        }*/
         
         request.setAttribute("search",search);
         request.setAttribute("hiddenidCategoria", categoria);
+        request.setAttribute("hiddenminPrice", minPrice);
+        request.setAttribute("hiddenmaxPrice", maxPrice);
+        request.setAttribute("hiddennomeVenditore", nomeVenditore);
+        request.setAttribute("hiddennomeNegozio", nomeNegozio);
+        request.setAttribute("hiddencheckRitiroInNegozio", checkRitiroInNegozio);
+        request.setAttribute("hiddencheckProdottiScontati", checkProdottiScontati);
+        request.setAttribute("hiddenlatitudine", latitudine);
+        request.setAttribute("hiddenlongitudine", longitudine);
+        request.setAttribute("hiddenraggio", raggio);
+        request.setAttribute("hiddenvalutazioneMinima", valutazioneMinima);
         
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
