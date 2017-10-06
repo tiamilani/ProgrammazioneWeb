@@ -36,6 +36,16 @@ public class searchObjectController extends HttpServlet {
         
         String search = (String)request.getAttribute("search");
         String categoria = (String)request.getAttribute("hiddenidCategoria");
+        int nminPrice = Integer.getInteger((String)request.getAttribute("hiddenminPrice"));
+        int maxPrice = Integer.getInteger((String)request.getAttribute("hiddenmaxPrice"));
+        String nomeVenditore = (String)request.getAttribute("hiddennomeVenditore");
+        String nomeNegozio = (String)request.getAttribute("hiddennomeNegozio");
+        boolean checkRitiroInNegozio = (boolean)request.getAttribute("hiddencheckRitiroInNegozio");
+        boolean checkProdottiScontati = (boolean)request.getAttribute("hiddencheckProdottiScontati");
+        double latitudine = Double.parseDouble((String)request.getAttribute("hiddenlatitudine"));
+        double longitudine = Double.parseDouble((String)request.getAttribute("hiddenlongitudine"));
+        double raggio = Double.parseDouble((String)request.getAttribute("hiddenraggio"));
+        int valutazioneMinima = Integer.getInteger((String)request.getAttribute("hiddenvalutazioneMinima"));
         
         request.setAttribute("search",search);
         request.setAttribute("hiddenidCategoria", categoria);
