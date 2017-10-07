@@ -26,7 +26,7 @@ public class DaoTipoSpedizione {
      * Costatnti che indicano i nomi delle colonne da poter riutilizzare all'interno del file
      */
     private static final String IDS="idS";
-    private static final String IDU="idU";
+    private static final String IDN="idN";
     private static final String NOME="Nome";
     private static final String PREZZO="Prezzo";
     private static final String CORRIERE="Corriere";
@@ -56,7 +56,7 @@ public class DaoTipoSpedizione {
         
         try{
             TipoSpedizione.setIdS(rs.getInt(IDS));
-            TipoSpedizione.setIdU(rs.getInt(IDU));
+            TipoSpedizione.setIdN(rs.getInt(IDN));
             TipoSpedizione.setNome(rs.getString(NOME));
             TipoSpedizione.setPrezzo(rs.getDouble(PREZZO));
             TipoSpedizione.setCorriere(rs.getString(CORRIERE));
