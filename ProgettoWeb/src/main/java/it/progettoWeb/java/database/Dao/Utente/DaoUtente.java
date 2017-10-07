@@ -175,6 +175,7 @@ public class DaoUtente {
 
             if (rs.next()) {
                 user = getModelloFromRs(rs);
+                System.out.println("id: " + user.getId() + "" + user.getNome());
             }
         } catch (SQLException e) {
         }

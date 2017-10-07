@@ -24,6 +24,7 @@ public class UserController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static String INSERT_OR_EDIT = "/jspFile/DaoTest/userJsp.jsp";
     private static String LIST_USER = "/jspFile/DaoTest/listUser.jsp";
+    private static String HOME_PAGE = "/jspFile/Finale/Index/homePage.jsp";
     private DaoUtente dao;
 
     public UserController() {
@@ -92,29 +93,23 @@ public class UserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ModelloUtente user = new ModelloUtente();
-        
-        user.setNome(request.getParameter("nome"));
-        user.setCognome(request.getParameter("cognome"));
-        user.setMail(request.getParameter("mail"));
-        user.setPassword(request.getParameter("password"));
-        user.setAvatar("0");
-        user.setValutazione(0);
-        user.setUtenteType(Integer.parseInt(request.getParameter("UserType")));
-        user.setEmailConfermata(false);
-        
-        String userid = request.getParameter("userid");
-        if(userid == null || userid.isEmpty())
-        {
-            dao.addUser(user);
+        String forward="";
+        String action = request.getParameter("action");
+
+        if (action.equalsIgnoreCase("selectUser")){
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+            ModelloUtente utente = dao.selectUserByEmailAndPassword(email, password);
+            utente.setNome("Cazzo volante");
+            request.getSession().removeAttribute("utente");
+            request.getSession().setAttribute("utente", utente);
+            forward = HOME_PAGE;
+            
+            RequestDispatcher view = request.getRequestDispatcher(forward);
+            view.forward(request, response);
         }
-        else
-        {
-            user.setId(Integer.parseInt(userid));
-            dao.updateUser(user);
-        }
-        RequestDispatcher view = request.getRequestDispatcher(LIST_USER);
-        request.setAttribute("users", dao.getAllUsers());
+
+        RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
     }
 

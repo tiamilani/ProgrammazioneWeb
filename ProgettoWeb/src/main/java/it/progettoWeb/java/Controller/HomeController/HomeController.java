@@ -10,6 +10,7 @@ import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
 import it.progettoWeb.java.database.Model.Categoria.ModelloCategoria;
 import it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
+import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -53,14 +54,10 @@ public class HomeController extends HttpServlet {
 
         if (action.equalsIgnoreCase("Inizializzazione")){
             forward = HOME_PAGE;
-            int idUtente = 0;
-            List<ModelloCategoria> Categorie = daoCat.selectAllCategory();
-            ModelloCategoria categoria = Categorie.get(0);
-            ModelloListeCategoria listaCategorie = new ModelloListeCategoria(Categorie);
-            request.setAttribute("user", idUtente);
-            request.setAttribute("categorie", Categorie);
-            request.setAttribute("categoria", categoria);
-            request.setAttribute("listacategorie", listaCategorie);
+            ModelloUtente utente = new ModelloUtente();
+            utente.setId(-1);
+            ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCat.selectAllCategory());
+            request.getSession().setAttribute("utente", utente);
             request.getSession().setAttribute("listacategoriesessione", listaCategorie);
             
             //Richiedo oggetti per riempire la home page

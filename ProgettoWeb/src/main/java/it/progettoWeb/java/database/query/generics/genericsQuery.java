@@ -64,7 +64,7 @@ public class genericsQuery {
      */
     public static String selectUserByEmailAndPassword(String mail, String password)
     {
-        return "SELECT * FROM Utente WHERE mail = " + mail + " AND password = " + password + ";";
+        return "SELECT * FROM Utente WHERE mail = '" + mail + "' AND password = '" + password + "';";
     }
     
     /**
