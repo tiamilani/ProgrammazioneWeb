@@ -10,6 +10,6 @@
     <head>
     </head>
     <body>
-        <jsp:forward page="/HomeController?action=Inizializzazione" />
+        <jsp:forward page="/UserController?action=DescrizioneVenditore&idUtente=1" />
     </body>
 </html>

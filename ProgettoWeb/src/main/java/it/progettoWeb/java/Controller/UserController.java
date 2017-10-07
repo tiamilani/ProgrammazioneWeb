@@ -22,8 +22,7 @@ import javax.servlet.RequestDispatcher;
 public class UserController extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
-    private static String INSERT_OR_EDIT = "/jspFile/DaoTest/userJsp.jsp";
-    private static String LIST_USER = "/jspFile/DaoTest/listUser.jsp";
+    private static String DESCRIZIONE = "/jspFile/Finale/DescrizioneVenditore/descrizioneVenditore.jsp";
     private DaoUtente dao;
 
     public UserController() {
@@ -60,21 +59,11 @@ public class UserController extends HttpServlet {
         String forward="";
         String action = request.getParameter("action");
 
-        if (action.equalsIgnoreCase("delete")){
-            int userId = Integer.parseInt(request.getParameter("userId"));
-            dao.deleteUser(userId);
-            forward = LIST_USER;
-            request.setAttribute("users", dao.getAllUsers());    
-        } else if (action.equalsIgnoreCase("edit")){
-            forward = INSERT_OR_EDIT;
-            int userId = Integer.parseInt(request.getParameter("userId"));
-            ModelloUtente user = dao.getUserById(userId);
-            request.setAttribute("user", user);
-        } else if (action.equalsIgnoreCase("listUser")){
-            forward = LIST_USER;
-            request.setAttribute("users", dao.getAllUsers());
-        } else {
-            forward = INSERT_OR_EDIT;
+        if(action.equals("DescrizioneVenditore")){
+            int idUtente = Integer.parseInt(request.getParameter("idUtente"));
+            ModelloUtente venditore = dao.selectUserByID(idUtente);
+            request.setAttribute("venditore", venditore);
+            forward = DESCRIZIONE;
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -113,7 +102,7 @@ public class UserController extends HttpServlet {
             user.setId(Integer.parseInt(userid));
             dao.updateUser(user);
         }
-        RequestDispatcher view = request.getRequestDispatcher(LIST_USER);
+        RequestDispatcher view = request.getRequestDispatcher(DESCRIZIONE);
         request.setAttribute("users", dao.getAllUsers());
         view.forward(request, response);
     }

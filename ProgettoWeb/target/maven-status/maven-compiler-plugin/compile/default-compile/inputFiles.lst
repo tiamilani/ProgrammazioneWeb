@@ -41,6 +41,7 @@
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/Finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Dao/Assistenza/DaoAssistenza.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/Finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Model/immagineNegozio/ModelloListeImmagineNegozio.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/Finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Model/Categoria/ModelloCategoria.java
+/home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/Finale/ProgettoWeb/src/main/java/it/progettoWeb/java/Controller/Venditore/sellerSelectedController.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/Finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Model/Ordine/ModelloOrdine.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/Finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Dao/immagineNegozio/DaoImmagineNegozio.java
 /home/mattia/Documenti/Universita/Corsi/2Anno/2Semestre/ProgrammazioneWeb/progetti/Finale/ProgettoWeb/src/main/java/it/progettoWeb/java/database/Model/Oggetto/ModelloListeOggetto.java

@@ -69,6 +69,7 @@ it/progettoWeb/java/database/Dao/indirizzoUtente/DaoIndirizzoUtente.class
 it/progettoWeb/java/database/Model/recensioneOggetto/ModelloListeRecensioneOggetto.class
 it/progettoWeb/java/database/Model/Ordine/ModelloOrdine.class
 it/progettoWeb/java/database/Model/recensioneOggetto/ModelloRecensioneOggetto.class
+it/progettoWeb/java/Controller/Venditore/sellerSelectedController.class
 it/progettoWeb/java/database/Model/ordiniRicevuti/ModelloListeOrdiniRicevuti.class
 it/progettoWeb/java/database/Model/rispostaNegozio/ModelloRispostaNegozio.class
 it/progettoWeb/java/database/query/sellers/sellersQuery.class
