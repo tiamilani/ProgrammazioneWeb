@@ -6,7 +6,6 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
     <link rel='stylesheet' href="http://getbootstrap.com/docs/4.0/examples/carousel/carousel.css">
-    <!--<link rel="stylesheet" href="../CSS/navBar.css">-->
     <link rel="stylesheet" href="/ProgettoWeb/jspFile/Finale/CSS/navBar.css">
     <link rel="stylesheet" href="/ProgettoWeb/jspFile/Finale/CSS/slideShow.css">
     <link rel="stylesheet" href="/ProgettoWeb/jspFile/Finale/CSS/oggetto.css">
