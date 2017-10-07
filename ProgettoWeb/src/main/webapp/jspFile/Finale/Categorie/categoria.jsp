@@ -21,13 +21,16 @@
         <div class="container">
             <%@include file="../Header/NavBar/navBar.jsp" %>
         </div>
-        <div class="container-fluid" style="text-align: center">
+        
+        <div class="container" style="text-align: center">
             <h1>CATEGORIA</h1>
 
             <!-- Stampo nome e descrizione categoria selezionata -->
             <h2><c:out value="${categoria.getNome()}"/></h2>
-            <p><c:out value="${categoria.getDescrizione()}"/></p>
-            
+            <p><c:out value="${categoria.getDescrizione()}"/></p>            
+        </div>
+        
+        <div class="container-fluid">
             <%@include file="../Components/Liste/ListaOggetto/testListaOggetto.jsp" %>
             <hr>
             <%@include file="../Footer/footer.jsp" %>
