@@ -3,6 +3,7 @@
     Created on : 27-set-2017, 20.48.38
     Author     : mattia
 --%>
+<!DOCTYPE html>
 <script type="text/javascript">
 function search() {
     alert('I am an alert box!');
@@ -37,7 +38,7 @@ function myFunction() {
     document.form1.hiddenraggio.value = String(raggio);
     document.form1.hiddenvalutazioneMinima.value = String(valutazioneMinima);
     
-    alert('idCategoria: '+ idCategoria +' minPrice: '+ minPrice +' maxPrice: '+ maxPrice +' nomeVenditore: '+ nomeVenditore +' nomeNegozio: '+ nomeNegozio +' checkRitiroInNegozio: '+ checkRitiroInNegozio +' checkProdottiScontati: '+ checkProdottiScontati +' latitudine: '+ latitudine +' longitudine: '+ longitudine +' raggio: '+ raggio +' valutazioneMinima: ' + valutazioneMinima + '')
+    alert('idCategoria: '+ idCategoria +' minPrice: '+ minPrice +' maxPrice: '+ maxPrice +' nomeVenditore: '+ nomeVenditore +' nomeNegozio: '+ nomeNegozio +' checkRitiroInNegozio: '+ checkRitiroInNegozio +' checkProdottiScontati: '+ checkProdottiScontati +' latitudine: '+ latitudine +' longitudine: '+ longitudine +' raggio: '+ raggio +' valutazioneMinima: ' + valutazioneMinima + '');
 
     form1.action = "${pageContext.request.contextPath}/searchObjectController";
     form1.submit();
