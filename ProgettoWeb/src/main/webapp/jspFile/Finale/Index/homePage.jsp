@@ -14,6 +14,9 @@
     </head>
     
     <body>
+        <a href="../Utente/modificaDatiUtente.jsp">modificaDatiUtente</a>
+        <a href="../../DaoTest/userJsp.jsp">modificaDatiUtente2</a>
+        <a href="/ProgettoWeb/UserController?action=edit&userId=2">clicca qui per modificare i dati utente</a>
         <jsp:useBean id="listacategoriesessione" class="it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria" scope="session" />
         <jsp:useBean id="ListaOggetti" class="it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto" scope="session" />
         <div class="container">

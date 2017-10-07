@@ -30,3 +30,8 @@
 .container {
     max-width: 100%;
 }
+
+.column-brux {
+    float: left;
+    width: 33%;
+}
