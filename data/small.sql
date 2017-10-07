@@ -226,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `Indirizzo` (
 -- Dump dei dati per la tabella `Indirizzo`
 --
 
-INSERT INTO indirizzo (`idI`, `stato`, `regione`, `provincia`, `citta`, `via`, `nCivico`, `interno`, `latitudine`, `longitudine`) VALUES
+INSERT INTO `Indirizzo` (`idI`, `stato`, `regione`, `provincia`, `citta`, `via`, `nCivico`, `interno`, `latitudine`, `longitudine`) VALUES
 (1, 'Italia', 'Lombardia', 'Milano', 'Milano', 'Via Valassina', 27, 2, 45.5005692, 9.187734699999965),
 (2, 'Italia', 'Lombardia', 'Milano', 'Milano', 'Via Orti', 3, NULL, 45.4549309, 9.198682800000029),
 (3, 'Italia', 'Trentino Alto Adige', 'Trento', 'Trento', 'Corso 3 Novembre 1918', 102, 15, 46.0608004, 11.124980899999969),
@@ -252,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `IndirizzoUtente` (
 -- Dump dei dati per la tabella `IndirizzoUtente`
 --
 
-INSERT INTO indirizzoUtente (`idI`, `idU`) VALUES
+INSERT INTO `IndirizzoUtente` (`idI`, `idU`) VALUES
 (2, 1),
 (5, 3),
 (4, 2),
@@ -282,7 +282,7 @@ CREATE TABLE IF NOT EXISTS `Negozio` (
 -- Dump dei dati per la tabella `Negozio`
 --
 
-INSERT INTO negozio (`id`, `idVenditore`, `nomeNegozio`, `valutazione`, `attivo`, `idI`, `dataApertura`, `linkSito`, `orarioNegozio`) VALUES
+INSERT INTO `Negozio` (`id`, `idVenditore`, `nomeNegozio`, `valutazione`, `attivo`, `idI`, `dataApertura`, `linkSito`, `orarioNegozio`) VALUES
 (1, 2, 'Mediaworld', NULL, 1, 6, '2017-06-25 13:30:15', NULL, "Lunedi: 8:00 - 19:00, Martedi: 8:00 - 19:00, Mercoledi: 8:00 - 19:00, Giovedi: 8:00 - 19:00, Venerdi: 8:00 - 19:00, Sabato: 8:00 - 19:00, Domenica: Chiuso"),
 (2, 2, 'Unieuro', NULL, 1, 8, '2016-01-01 07:00:00', NULL, "Lunedi: 8:00 - 22:00, Martedi: 8:00 - 22:00, Mercoledi: 8:00 - 22:00, Giovedi: 8:00 - 22:00, Venerdi: 8:00 - 22:00, Sabato: 9:00 - 22:00, Domenica: 10:00 - 20:00"),
 (3, 1, 'Ikea', 8, 0, 7, '2017-07-20 14:02:41', NULL, 'Lunedi: 8:00 - 19:00, Martedi: 8:00 - 19:00, Mercoledi: 8:00 - 19:00, Giovedi: 8:00 - 19:00, Venerdi: 8:00 - 19:00, Sabato: 8:00 - 19:00, Domenica: Chiuso');
@@ -476,7 +476,7 @@ CREATE TABLE IF NOT EXISTS `ordiniRicevuti` (
 -- Dump dei dati per la tabella `ordiniRicvuti`
 --
 
-INSERT INTO `ordiniRIcevuti` (`idO`, `idV`, `data`) VALUES
+INSERT INTO `ordiniRicevuti` (`idO`, `idV`, `data`) VALUES
 (1, 2, '2017-10-01 19:13:20');
 
 -- --------------------------------------------------------
@@ -667,7 +667,7 @@ CREATE TABLE IF NOT EXISTS `Utente` (
 -- Dump dei dati per la tabella `Utente`
 --
 
-INSERT INTO utente (`id`, `nome`, `cognome`, `mail`, `password`, `avatar`, `valutazione`, `UtenteType`, `emailConfermata`) VALUES
+INSERT INTO `Utente` (`id`, `nome`, `cognome`, `mail`, `password`, `avatar`, `valutazione`, `UtenteType`, `emailConfermata`) VALUES
 (1, 'Paolo', 'Rossi', 'paolored@gmail.com', MD5('paoloilrosso'), 'http://localhost:8080/progettoWeb/jspFile/Finale/Img/square.png', NULL, 1, b'0'),
 (2, 'Giorgio', 'Ugolini', 'giorgiougo@libero.it', MD5('gio65ugo'), 'http://localhost:8080/progettoWeb/jspFile/Finale/Img/square.png', NULL, 1, b'0'),
 (3, 'Andrea', 'Colombo', 'andrea.uccello@tiscali.it', MD5('andreavoea'), 'http://localhost:8080/progettoWeb/jspFile/Finale/Img/square.png', NULL, 0, b'0'),
