@@ -16,10 +16,10 @@ public class ModelloTipoSpedizione {
      */
     private int idS;
     /**
-     * Variabile utilizzata per identificare l'utente venditore che ha inserito questo tipo di spedizione
+     * Variabile utilizzata per identificare il negozio che permette questo tipo di spedizione
      * E a cui appartiene
      */
-    private int idU;
+    private int idN;
     /**
      * Nome della spedizione
      */
@@ -54,19 +54,19 @@ public class ModelloTipoSpedizione {
     }
 
     /**
-     * Funzione utilizzata per settare l'id del venditore che ha creato quel tipo di spedizione
-     * @return int idU
+     * Funzione utilizzata per ottenere l'id del negozio che utilizza quel tipo di spedizione
+     * @return int idN
      */
-    public int getIdU() {
-        return idU;
+    public int getIdN() {
+        return idN;
     }
 
     /**
-     * Funzione per settare l'id dellutente venditore che ha creato questo tipo di spedizione
-     * @param idU 
+     * Funzione per settare l'id del negozio che utilizza questo tipo di spedizione
+     * @param idN 
      */
-    public void setIdU(int idU) {
-        this.idU = idU;
+    public void setIdN(int idN) {
+        this.idN = idN;
     }
     
     /**
