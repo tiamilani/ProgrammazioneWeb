@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
+import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
+import it.progettoWeb.java.database.Model.indirizzo.ModelloListeIndirizzo;
 import javax.servlet.RequestDispatcher;
 
 /**
@@ -25,10 +27,12 @@ public class UserController extends HttpServlet {
     private static String INSERT_OR_EDIT = "/jspFile/DaoTest/userJsp.jsp";
     private static String LIST_USER = "/jspFile/DaoTest/listUser.jsp";
     private DaoUtente dao;
+    private DaoIndirizzo daoI;
 
     public UserController() {
         super();
         dao = new DaoUtente();
+        daoI = new DaoIndirizzo();
     }
     
     /**
@@ -65,15 +69,19 @@ public class UserController extends HttpServlet {
             dao.deleteUser(userId);
             forward = LIST_USER;
             request.setAttribute("users", dao.getAllUsers());    
-        } else if (action.equalsIgnoreCase("edit")){
+        } else if (action.equalsIgnoreCase("edit"))
+        {
             forward = INSERT_OR_EDIT;
             int userId = Integer.parseInt(request.getParameter("userId"));
             ModelloUtente user = dao.getUserById(userId);
+            ModelloListeIndirizzo lInd = new ModelloListeIndirizzo(daoI.selectAddressByUserID(userId));
             request.setAttribute("user", user);
+            request.setAttribute("listaIndirizzi", lInd);
         } else if (action.equalsIgnoreCase("listUser")){
             forward = LIST_USER;
             request.setAttribute("users", dao.getAllUsers());
-        } else {
+        }
+        else {
             forward = INSERT_OR_EDIT;
         }
 
@@ -92,6 +100,16 @@ public class UserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        /*String forward="";
+        String action = request.getParameter("action");
+        if (action.equalsIgnoreCase("show"))
+        {
+            forward = "/jspFile/Finale/Index/test.jsp";
+            RequestDispatcher view = request.getRequestDispatcher(forward);
+            view.forward(request, response);
+        }*/
+        
+        
         ModelloUtente user = new ModelloUtente();
         
         user.setNome(request.getParameter("nome"));

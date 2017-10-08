@@ -18,55 +18,81 @@
         <title>Add new user</title>
     </head>
     <body>
+        <!-- Bean per l'utente e la lista dei suoi indirizzi -->
+        <jsp:useBean id="user" class="it.progettoWeb.java.database.Model.Utente.ModelloUtente" scope="request" />
+        <jsp:useBean id="listaIndirizzi" class="it.progettoWeb.java.database.Model.indirizzo.ModelloListeIndirizzo" scope="request" />
+        
+                
         <div class="container">
             <%@include file="../Finale/Header/NavBar/navBar.jsp" %>
             <hr>
         </div>
             
         <div class="container" style="text-align: center">
-            <form method="POST" action='<c:out value="${pageContext.request.contextPath}"/>/UserController' name="frmAddUser">
-                
-                <!--
-                <div class="row">
-    <div class="col-sm-3" style="background-color:lavender;">.col-sm-4<br/><hr>ciao</div>
-    <div class="col-sm-1" style="background-color:lavender;">.col-sm-1</div>
-    <div class="col-sm-4" style="background-color:lavenderblush;">.col-sm-4</div>
-    <div class="col-sm-4" style="background-color:lavender;">.col-sm-4</div>
-  </div>
-                -->
-                
-                
-                
-                
-                
-                
-                
-                
+            <form method="POST" action='<c:out value="${pageContext.request.contextPath}"/>/UserController' name="frmAddUser">                
                 <div class="container" style="text-align: left">
-                    Id (Lasciare vuoto per nuovi utenti):
+                    
+                    <b>Id (Lasciare vuoto per nuovi utenti):</b>
                         <span style="padding-left: 2em">
                             <input style="padding-left: 2em" type="text" name="userid" value="<c:out value="${user.id}" />"/>
                         </span><hr>
-                    Nome:
+                    <b>Nome:</b>
                         <span style="padding-left: 2em">
                             <input type="text" name="nome" value="<c:out value="${user.nome}" />" />
                         </span><hr>
-                    Cognome:
+                    <b>Cognome:</b>
                         <span style="padding-left: 2em">
                             <input type="text" name="cognome" value="<c:out value="${user.cognome}" />" />
                         </span><hr>
-                    Email:
+                    <b>Email:</b>
                         <span style="padding-left: 2em">
-                            <input type="email" name="email" value="<c:out value="${user.mail}" />" />
+                            <input type="email" name="mail" value="<c:out value="${user.mail}" />" />
                         </span><hr>
-                    Password:
+                    <b>Password:</b>
                         <span style="padding-left: 2em">
                             <input type="password" name="password" value="<c:out value="${user.password}" />" />
                         </span><hr>
-                    Tipo Utente:
+                    <b>Tipo Utente:</b>
                         <span style="padding-left: 2em">
                             <input type="text" name="UserType" value="<c:out value="${user.getUtenteType()}" />" />
                         </span><hr>
+                        
+                    <c:set var ="iterator" scope="page" value="${0}"/>
+                    <c:forEach items="${listaIndirizzi.getList()}" var="ind">
+                        
+                        <h4>Indirizzo <c:out value="${iterator}"/>:</h4>
+                        <b>Via</b>
+                        <span style="padding-left: 2em">
+                            <input style="padding-left: 2em" type="text" name="via" value="<c:out value="${ind.via}" />"/>
+                        </span><br/>
+                        <b>Numero Civico</b>
+                        <span style="padding-left: 2em">
+                            <input style="padding-left: 2em" type="text" name="nCivico" value="<c:out value="${ind.nCivico}" />"/>
+                        </span><br/>
+                        <b>Interno</b>
+                        <span style="padding-left: 2em">
+                            <input style="padding-left: 2em" type="text" name="interno" value="<c:out value="${ind.interno}" />"/>
+                        </span><br/>
+                        <b>Citta'</b>
+                        <span style="padding-left: 2em">
+                            <input style="padding-left: 2em" type="text" name="citta" value="<c:out value="${ind.citta}" />"/>
+                        </span><br/>
+                        <b>Provincia:</b>
+                        <span style="padding-left: 2em">
+                            <input style="padding-left: 2em" type="text" name="provincia" value="<c:out value="${ind.provincia}" />"/>
+                        </span><br/>
+                        <b>Regione:</b>
+                        <span style="padding-left: 2em">
+                            <input style="padding-left: 2em" type="text" name="regione" value="<c:out value="${ind.regione}" />"/>
+                        </span><br/>
+                        <b>Stato:</b>
+                        <span style="padding-left: 2em">
+                            <input style="padding-left: 2em" type="text" name="stato" value="<c:out value="${ind.stato}" />"/>
+                        </span><hr>
+                        
+                        <c:set var ="iterator" value="${iterator + 1}"/>
+                        
+                    </c:forEach>
                         
                     <input type="submit" value="SAVE CHANGES" />
                 </div>
@@ -81,47 +107,11 @@
 </html>
 
 
-
-
-
-
-
-<!--
-<%-- 
-    Document   : userJsp
-    Created on : 12-set-2017, 17.11.59
-    Author     : mattia
---%>
-<-%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<-%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<-%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
-        <script type="text/javascript" src="js/jquery-ui-1.8.18.custom.min.js"></script>
-        <title>Add new user</title>
-    </head>
-    <body>
-         <form method="POST" action='<-c:out value="${pageContext.request.contextPath}"/>/UserController' name="frmAddUser">
-        Id (Lasciare vuoto per nuovi utenti) : <input
-            type="text" name="userid"
-            value="<-c:out value="${user.id}" />" /> <br /> 
-        First Name : <input
-            type="text" name="nome"
-            value="<-c:out value="${user.nome}" />" /> <br /> 
-        Last Name : <input
-            type="text" name="cognome"
-            value="<-c:out value="${user.cognome}" />" /> <br /> 
-        Email : <input type="text" name="email"
-            value="<-c:out value="${user.mail}" />" /> <br /> 
-        Password: <input type="text" name="password"
-            value="<-c:out value="${user.password}" />" /> <br />
-        Tipo Utente: <input type="text" name="UserType"
-            value="<-c:out value="${user.getUtenteType()}" />" /> <br />
-        <input type="submit" value="Submit" />
-    </form>
-    </body>
-</html>
--->
+ <!--
+                <div class="row">
+    <div class="col-sm-3" style="background-color:lavender;">.col-sm-4<br/><hr>ciao</div>
+    <div class="col-sm-1" style="background-color:lavender;">.col-sm-1</div>
+    <div class="col-sm-4" style="background-color:lavenderblush;">.col-sm-4</div>
+    <div class="col-sm-4" style="background-color:lavender;">.col-sm-4</div>
+  </div>
+                -->
