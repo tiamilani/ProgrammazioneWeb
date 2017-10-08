@@ -15,8 +15,9 @@
         <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script> 
     </head>
+    
     <body>
         <div class="container-fluid">
             <%@include file="../Header/NavBar/navBar.jsp" %>
@@ -30,13 +31,13 @@
                     </p>
                 </div>
             </div>
-            <div class="content">
-                <div class="row justify-content-around">
-                    <div class="col-3">
+            <div class="content container-fluid">
+                <div class="card-deck">
+                    <div class="col col-xs-12 col-sm-6 col-md-3 col-lg-3">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title text-center">Andrea Fadi</h4>
-                                <img class="rounded-circle mx-auto d-block card-body img-responsive" src="../Img/Andrea_Fadi.jpg" alt="Andrea Fadi">
+                                <h4 class="card-title text-center"> Andrea Fadi</h4>
+                                <img class="rounded-circle img-thumbnail d-block mx-auto" src="../Img/Andrea_Fadi.jpg" alt="Andrea Fadi">
                                 <h6 class="card-subtitle text-muted text-center">Full Stack Developer &AMP; Web Designer</h6>
                             </div>
                             <div class="card-social">
@@ -46,11 +47,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col col-xs-12 col-sm-6 col-md-3 col-lg-3">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title text-center">Damiano Sartori</h4>
-                                <img class="rounded-circle mx-auto d-block card-body img-responsive" src="../Img/Damiano_Sartori.jpg" alt="Damiano Sartori">
+                                <img class="rounded-circle img-thumbnail  d-block mx-auto" src="../Img/Damiano_Sartori.jpg" alt="Damiano Sartori">
                                 <h6 class="card-subtitle text-muted text-center">Full Stack Developer &AMP; Data Modelling</h6>
                             </div>
                             <div class="card-social">
@@ -60,11 +61,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col col-xs-12 col-sm-6 col-md-3 col-lg-3">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title text-center">Federico Brugiolo</h4>
-                                <img class="rounded-circle mx-auto d-block card-body img-responsive" src="../Img/Federico_Brugiolo.jpg" alt="Federico Brugiolo">
+                                <img class="rounded-circle img-thumbnail d-block mx-auto" src="../Img/Federico_Brugiolo.jpg" alt="Federico Brugiolo">
                                 <h6 class="card-subtitle text-muted text-center">Full Stack Developer &AMP; Web Designer</h6>
                             </div>
                             <div class="card-social">
@@ -73,11 +74,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col col-xs-12 col-sm-6 col-md-3 col-lg-3">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title text-center">Mattia Milani</h4>
-                                <img class="rounded-circle mx-auto d-block card-body img-responsive" src="../Img/Mattia_Milani.jpg" alt="Mattia Milani">
+                                <img class="rounded-circle img-thumbnail d-block mx-auto" src="../Img/Mattia_Milani.jpg" alt="Mattia Milani">
                                 <h6 class="card-subtitle text-muted text-center">Full Stack Developer &AMP; Data Modelling</h6>
                             </div>
                             <div class="card-social">
@@ -89,8 +90,43 @@
                     </div>
                 </div>
             </div>
+
+            
+            <div>
+                <div class="row justify-content-center">  
+                    <div class="col-6 description">
+                        <h1 id="findUs">Dove Trovarci</h1>
+                    </div>
+                </div>
+                <div class="row justify-content-around">
+                    <div id="mapObject" style="height: 400px; width: 600px"></div>
+                </div>
+            </div>
+
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATC6NxeSsKDBncZwJ4aDivvvs6_5iusSc&callback=createMapAboutUs" async defer></script>
+            <script type="text/javascript">
+            var myCenter;
+            function createMapAboutUs() {
+                myCenter = new google.maps.LatLng(46.066993034254345, 11.149814128875732);
+                var mapCanvas = document.getElementById("mapObject");
+
+                var mapOptions = {
+                    center: myCenter,
+                    zoom: 16,
+                    mapType: google.maps.MapTypeId.ROADMAP
+                };
+
+                var map = new google.maps.Map(mapCanvas, mapOptions);
+
+                var marker = new google.maps.Marker({
+                    position: myCenter
+                });
+
+                marker.setMap(map);
+            }
+            </script>    
+               
+            <%@include file="../Footer/footer.jsp"%>
         </div>
-                 
-        <jsp:include page="../Footer/footer.jsp"/>
     </body>
 </html>

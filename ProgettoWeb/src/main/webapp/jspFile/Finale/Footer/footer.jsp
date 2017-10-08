@@ -16,7 +16,7 @@
                         <a href="../Footer/sviluppatori.jsp">Chi siamo</a>
                     </div>
                     <div class="col-2">
-                        <a href="../Footer/sviluppatori.jsp">Dove siamo</a>
+                        <a href="../Footer/sviluppatori.jsp#findUs">Dove siamo</a>
                     </div>
                     <div class="col-2">
                         <a href="../Policy/Privacy/privacyPolicy.jsp">Privacy policies</a>

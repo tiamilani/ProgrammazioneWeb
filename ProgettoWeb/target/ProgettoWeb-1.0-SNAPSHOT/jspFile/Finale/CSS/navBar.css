@@ -4,8 +4,8 @@
 }
 
 .navbar-brand{
-	float: left;
-        margin-left: 3%;
+    float: left;
+    margin-left: 3%;
 }
 
 .navbar-nav{
@@ -18,6 +18,11 @@
     margin-right: 5%;
 }
 
+.buttonSpace{
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
 .floatRight{
     float: right;
 }
@@ -26,12 +31,12 @@
     width: 15%;
     display: block;
     margin: 0 0 0 auto;
-    -webkit-transition: width 0.2s ease-in-out;
-    transition: width 0.4s ease-in-out;
+    -webkit-transition: width 0.1s ease-in-out;
+    transition: width 0.2s ease-in-out;
 }
 
 #expand:focus{
-    width: 90%;
+    width: 100%;
 }
 
 .modal-footer{
@@ -42,7 +47,7 @@
 label{
     font-size: 14px;
     font-weight: 700;
-    margin-left: 45px;
+    margin-left: 44px;
     position: relative;
     top: -3.2em;
     transition: all 0.3s ease-in-out;
@@ -61,7 +66,6 @@ input:focus{
     border-bottom: 1px solid orange;
     outline: none;
 }
-
 
 .modal-input{
     width: 100%;

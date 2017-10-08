@@ -6,11 +6,11 @@
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
     <link rel='stylesheet' href="http://getbootstrap.com/docs/4.0/examples/carousel/carousel.css">
-    <link rel="stylesheet" href="../CSS/navBar.css">
-    <link rel="stylesheet" href="../CSS/slideShow.css">
-    <link rel="stylesheet" href="../CSS/oggetto.css">
-    <link rel="stylesheet" href="../CSS/filtri.css">
-    <link rel="stylesheet" href="../CSS/footer.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/navBar.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/slideShow.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/oggetto.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/filtri.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/footer.css">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
