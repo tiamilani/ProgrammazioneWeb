@@ -46,6 +46,15 @@ public class genericsQuery {
     }
     
     /**
+     * @author Mattia
+     * @return String: categoria singola
+     */
+    public static String selectCategoryById(int id)
+    {
+        return "SELECT * FROM Categoria WHERE id="+id+";";
+    }
+    
+    /**
      * @author fbrug
      * Selezionare tutti gli utenti in base al loro tipo: 0=normale, 1=venditore, 2=amministratore
      * @param utenteType
@@ -54,6 +63,11 @@ public class genericsQuery {
     public static String selectAllUsersByType(int utenteType)
     {
         return "SELECT * FROM Utente WHERE UtenteType = " + utenteType + ";";
+    }
+    
+    public static String selectUserByEmail(String email)
+    {
+        return "SELECT * FROM Utente WHERE mail = '" + email + "';";
     }
     
     /**
@@ -65,7 +79,7 @@ public class genericsQuery {
      */
     public static String selectUserByEmailAndPassword(String mail, String password)
     {
-        return "SELECT * FROM Utente WHERE mail = " + mail + " AND password = " + password + ";";
+        return "SELECT * FROM Utente WHERE mail = '" + mail + "' AND password = '" + password + "';";
     }
     
     /**

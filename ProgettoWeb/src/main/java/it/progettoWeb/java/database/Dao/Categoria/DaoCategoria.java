@@ -90,4 +90,24 @@ public class DaoCategoria {
         
         return categorie;
     }
+    
+    /**
+     * Permette di selezionare un oggetto Categoria avendone l'id
+     * @param catId
+     * @return 
+     */
+    public ModelloCategoria selectCategoryById(int catId) {
+        ModelloCategoria categoria = new ModelloCategoria();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(genericsQuery.selectCategoryById(catId));
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                categoria = getModelloFromRs(rs);
+            }
+        } catch (SQLException e) {
+        }
+
+        return categoria;
+    }
 }

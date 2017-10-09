@@ -186,6 +186,21 @@ public class DaoUtente {
         return user;
     }
     
+    public ModelloUtente selectUserByEmail(String mail) {
+        ModelloUtente user = new ModelloUtente();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(genericsQuery.selectUserByEmail(mail));
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                user = getModelloFromRs(rs);
+            }
+        } catch (SQLException e) {
+        }
+
+        return user;
+    }
+    
     /**
      * @author Mattia
      * Selezionare tutti gli utenti con un certo nome

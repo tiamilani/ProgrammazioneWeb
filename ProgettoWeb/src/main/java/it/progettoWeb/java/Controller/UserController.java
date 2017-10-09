@@ -30,13 +30,14 @@ import it.progettoWeb.java.utility.pair.pair;
 import it.progettoWeb.java.utility.tris.tris;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
+import it.progettoWeb.java.database.query.generics.genericsQuery;
 
 /**
  *
  * @author mattia
  */
 public class UserController extends HttpServlet {
-    
+
     private static final long serialVersionUID = 1L;
     private static String DESCRIZIONEVENDITORE = "/jspFile/Finale/DescrizioneVenditore/descrizioneVenditore.jsp";
     private static String DESCRIZIONENEGOZIO = "/jspFile/Finale/DescrizioneNegozio/descrizioneNegozio.jsp";
@@ -44,6 +45,11 @@ public class UserController extends HttpServlet {
     private DaoRecensioneVenditore daoRecensione;
     private DaoNegozio daoNegozio;
     private DaoOggetto daoOggetto;
+    private static String INSERT_OR_EDIT = "/jspFile/DaoTest/userJsp.jsp";
+    private static String LIST_USER = "/jspFile/DaoTest/listUser.jsp";
+    private static String HOME_PAGE = "/jspFile/Finale/Index/homePage.jsp";
+    private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
+    private DaoUtente dao;
 
     public UserController() {
         super();
@@ -52,7 +58,7 @@ public class UserController extends HttpServlet {
         daoNegozio = new DaoNegozio();
         daoOggetto = new DaoOggetto();
     }
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -64,7 +70,7 @@ public class UserController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -90,7 +96,7 @@ public class UserController extends HttpServlet {
             ModelloListeNegozio listaNegozi = new ModelloListeNegozio(listaNegoziIndirizziImmagini.getL());
             ModelloListeIndirizzo listaIndirizzi = new ModelloListeIndirizzo(listaNegoziIndirizziImmagini.getC());
             ModelloListeImmagineNegozio listaImmagini = new ModelloListeImmagineNegozio(listaNegoziIndirizziImmagini.getR());
-            
+
             request.setAttribute("venditore", venditore);
             request.setAttribute("recensioni", recensioni);
             request.setAttribute("listaNegozi", listaNegozi);
@@ -98,7 +104,7 @@ public class UserController extends HttpServlet {
             request.setAttribute("listaImmagini", listaImmagini);
             forward = DESCRIZIONEVENDITORE;
         }
-        
+
         if(action.equals("DescrizioneNegozio")){
             int idNegozio = Integer.parseInt(request.getParameter("idNegozio"));
             tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> negozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(idNegozio);
@@ -108,7 +114,7 @@ public class UserController extends HttpServlet {
             pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectObjectsImageSelledByStoreID(idNegozio);
             ModelloListeOggetto listaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
             ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
-            
+
             request.setAttribute("negozio", negozio);
             request.setAttribute("immagine", immagine);
             request.setAttribute("indirizzo", indirizzo);
@@ -132,7 +138,58 @@ public class UserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String forward="";
+        String action = request.getParameter("action");
+
+        if (action.equalsIgnoreCase("selectUser")){
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+            ModelloUtente utente = dao.selectUserByEmailAndPassword(email, password);
+            request.getSession().removeAttribute("utente");
+            request.getSession().setAttribute("utente", utente);
+            forward = HOME_PAGE;
+
+            RequestDispatcher view = request.getRequestDispatcher(forward);
+            view.forward(request, response);
+        }
+        if(action.equalsIgnoreCase("addUser")){
+            forward = HOME_PAGE;
+            RequestDispatcher view = request.getRequestDispatcher(forward);
+            view.forward(request, response);
+
+            ModelloUtente utente = new ModelloUtente();
+            utente.setNome(request.getParameter("nome"));
+            utente.setCognome(request.getParameter("cognome"));
+            utente.setMail(request.getParameter("email"));
+            utente.setPassword(request.getParameter("password"));
+            String confirmPassword = request.getParameter("confirmPassword");
+
+            if(!utente.getPassword().equals(confirmPassword)){
+                forward=ERROR_PAGE;
+                request.setAttribute("errore", "La conferma della password non è uguale alla password");
+                //RequestDispatcher view = request.getRequestDispatcher(forward);
+                view.forward(request, response);
+            }
+
+            ModelloUtente userAlreadyExists = dao.selectUserByEmail(utente.getMail());
+            if(userAlreadyExists.getId()>0){
+                forward=ERROR_PAGE;
+                request.setAttribute("errore", "Esiste già un utente con questa email");
+                //RequestDispatcher view = request.getRequestDispatcher(forward);
+                view.forward(request, response);
+            }
+
+            utente.setUtenteType(0);
+            dao.addUser(utente);
+
+            forward = HOME_PAGE;
+            //RequestDispatcher view = request.getRequestDispatcher(forward);
+            view.forward(request, response);
+        }
+
+        forward = HOME_PAGE;
+        RequestDispatcher view = request.getRequestDispatcher(forward);
+        view.forward(request, response);
     }
 
     /**
