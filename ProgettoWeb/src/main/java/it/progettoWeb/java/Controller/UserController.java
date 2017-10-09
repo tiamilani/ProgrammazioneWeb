@@ -49,12 +49,9 @@ public class UserController extends HttpServlet {
     private DaoRecensioneVenditore daoRecensione;
     private DaoNegozio daoNegozio;
     private DaoOggetto daoOggetto;
-    private static String INSERT_OR_EDIT = "/jspFile/DaoTest/userJsp.jsp";
-    private static String LIST_USER = "/jspFile/DaoTest/listUser.jsp";
     private static String HOME_PAGE = "/jspFile/Finale/Index/homePage.jsp";
     private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
-    private DaoUtente dao;
-    private DaoIndirizzo daoI;
+    private DaoIndirizzo daoIndirizzo;
 
     public UserController() {
         super();
@@ -97,20 +94,20 @@ public class UserController extends HttpServlet {
 
         if (action.equalsIgnoreCase("delete")){
             int userId = Integer.parseInt(request.getParameter("userId"));
-            dao.deleteUser(userId);
+            daoUtente.deleteUser(userId);
             forward = LIST_USER;
-            request.setAttribute("users", dao.getAllUsers());    
+            request.setAttribute("users", daoUtente.getAllUsers());    
         } else if (action.equalsIgnoreCase("edit"))
         {
             forward = INSERT_OR_EDIT;
             int userId = Integer.parseInt(request.getParameter("userId"));
-            ModelloUtente user = dao.getUserById(userId);
-            ModelloListeIndirizzo lInd = new ModelloListeIndirizzo(daoI.selectAddressByUserID(userId));
+            ModelloUtente user = daoUtente.getUserById(userId);
+            ModelloListeIndirizzo lInd = new ModelloListeIndirizzo(daoIndirizzo.selectAddressByUserID(userId));
             request.setAttribute("user", user);
             request.setAttribute("listaIndirizzi", lInd);
         } else if (action.equalsIgnoreCase("listUser")){
             forward = LIST_USER;
-            request.setAttribute("users", dao.getAllUsers());
+            request.setAttribute("users", daoUtente.getAllUsers());
         }
         else 
         {
@@ -177,7 +174,7 @@ public class UserController extends HttpServlet {
         if (action.equalsIgnoreCase("selectUser")){
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            ModelloUtente utente = dao.selectUserByEmailAndPassword(email, password);
+            ModelloUtente utente = daoUtente.selectUserByEmailAndPassword(email, password);
             request.getSession().removeAttribute("utente");
             request.getSession().setAttribute("utente", utente);
             forward = HOME_PAGE;
@@ -204,7 +201,7 @@ public class UserController extends HttpServlet {
                 view.forward(request, response);
             }
 
-            ModelloUtente userAlreadyExists = dao.selectUserByEmail(utente.getMail());
+            ModelloUtente userAlreadyExists = daoUtente.selectUserByEmail(utente.getMail());
             if(userAlreadyExists.getId()>0){
                 forward=ERROR_PAGE;
                 request.setAttribute("errore", "Esiste già un utente con questa email");
@@ -213,7 +210,7 @@ public class UserController extends HttpServlet {
             }
 
             utente.setUtenteType(0);
-            dao.addUser(utente);
+            daoUtente.addUser(utente);
 
             forward = HOME_PAGE;
             //RequestDispatcher view = request.getRequestDispatcher(forward);
