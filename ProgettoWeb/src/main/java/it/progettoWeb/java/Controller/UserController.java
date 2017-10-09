@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
 import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
-import it.progettoWeb.java.database.Model.indirizzo.ModelloListeIndirizzo;
 import it.progettoWeb.java.database.Dao.recensioneVenditore.DaoRecensioneVenditore;
 import it.progettoWeb.java.database.Model.Negozio.ModelloListeNegozio;
 import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
@@ -32,7 +31,6 @@ import it.progettoWeb.java.utility.pair.pair;
 import it.progettoWeb.java.utility.tris.tris;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
-import it.progettoWeb.java.database.query.generics.genericsQuery;
 
 /**
  *
@@ -41,16 +39,15 @@ import it.progettoWeb.java.database.query.generics.genericsQuery;
 public class UserController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static String LIST_USER = "/jspFile/DaoTest/listUser.jsp";
     private static String INSERT_OR_EDIT = "/jspFile/Finale/Utente/modificaDatiUtente.jsp";
     private static String DESCRIZIONEVENDITORE = "/jspFile/Finale/DescrizioneVenditore/descrizioneVenditore.jsp";
     private static String DESCRIZIONENEGOZIO = "/jspFile/Finale/DescrizioneNegozio/descrizioneNegozio.jsp";
+    private static String HOME_PAGE = "/jspFile/Finale/Index/homePage.jsp";
+    private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
     private DaoUtente daoUtente;
     private DaoRecensioneVenditore daoRecensione;
     private DaoNegozio daoNegozio;
     private DaoOggetto daoOggetto;
-    private static String HOME_PAGE = "/jspFile/Finale/Index/homePage.jsp";
-    private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
     private DaoIndirizzo daoIndirizzo;
 
     public UserController() {
@@ -92,12 +89,7 @@ public class UserController extends HttpServlet {
         String action = request.getParameter("action");
 
 
-        if (action.equalsIgnoreCase("delete")){
-            int userId = Integer.parseInt(request.getParameter("userId"));
-            daoUtente.deleteUser(userId);
-            forward = LIST_USER;
-            request.setAttribute("users", daoUtente.getAllUsers());    
-        } else if (action.equalsIgnoreCase("edit"))
+        if (action.equalsIgnoreCase("edit"))
         {
             forward = INSERT_OR_EDIT;
             int userId = Integer.parseInt(request.getParameter("userId"));
@@ -106,17 +98,8 @@ public class UserController extends HttpServlet {
             request.setAttribute("user", user);
             request.setAttribute("listaIndirizzi", lInd);
         } else if (action.equalsIgnoreCase("listUser")){
-            forward = LIST_USER;
             request.setAttribute("users", daoUtente.getAllUsers());
-        }
-        else 
-        {
-            forward = INSERT_OR_EDIT;
-            RequestDispatcher view = request.getRequestDispatcher(forward);
-            view.forward(request, response);
-        }
-        
-        if(action.equals("DescrizioneVenditore")){
+        } else if(action.equals("DescrizioneVenditore")){
             int idUtente = Integer.parseInt(request.getParameter("idUtente"));
             ModelloUtente venditore = daoUtente.selectUserByID(idUtente);
             ModelloListeRecensioneVenditore recensioni = new ModelloListeRecensioneVenditore(daoRecensione.selectSellerReview(idUtente));
@@ -131,9 +114,7 @@ public class UserController extends HttpServlet {
             request.setAttribute("listaIndirizzi", listaIndirizzi);
             request.setAttribute("listaImmagini", listaImmagini);
             forward = DESCRIZIONEVENDITORE;
-        }
-
-        if(action.equals("DescrizioneNegozio")){
+        } else if(action.equals("DescrizioneNegozio")){
             int idNegozio = Integer.parseInt(request.getParameter("idNegozio"));
             tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> negozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(idNegozio);
             ModelloNegozio negozio = negozioIndirizzoImmagine.getL();
@@ -150,7 +131,11 @@ public class UserController extends HttpServlet {
             request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
             forward = DESCRIZIONENEGOZIO;
         }
-
+        else 
+        {
+            forward = ERROR_PAGE;
+        }
+        
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
     }
