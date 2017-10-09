@@ -24,8 +24,9 @@ import javax.servlet.RequestDispatcher;
 public class UserController extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
-    private static String INSERT_OR_EDIT = "/jspFile/DaoTest/userJsp.jsp";
+    //private static String INSERT_OR_EDIT = "/jspFile/DaoTest/userJsp.jsp";
     private static String LIST_USER = "/jspFile/DaoTest/listUser.jsp";
+    private static String INSERT_OR_EDIT = "/jspFile/Finale/Utente/modificaDatiUtente.jsp";
     private DaoUtente dao;
     private DaoIndirizzo daoI;
 

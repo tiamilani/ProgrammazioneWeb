@@ -117,14 +117,16 @@ public class DaoIndirizzo {
      * Modificare indirizzo utente
      * @param ModelloIndirizzo user
      */
-    public void updateUserAddressByAddressID(ModelloIndirizzo address) {
+    public String updateUserAddressByAddressID(ModelloIndirizzo address) {
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(genericsQuery.updateUserAddressByAddressID(address.getIdI(),address.getStato(),address.getRegione(),address.getProvincia(),address.getCitta(),address.getVia(),address.getnCivico(),address.getInterno(),address.getLatitudine(),address.getLongitudine()));
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
+            return e.getMessage();
         }
+        return "ok";
     }
     
     /**
@@ -132,14 +134,16 @@ public class DaoIndirizzo {
      * aggiungere indirizzo utente
      * @param ModelloIndirizzo user
      */
-    public void insertAddress(ModelloIndirizzo address, int idU) {
+    public String insertAddress(ModelloIndirizzo address, int idU) {
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(usersQuery.insertAddress(address.getStato(),address.getRegione(),address.getProvincia(),address.getCitta(),address.getVia(),address.getnCivico(),address.getInterno(),address.getLatitudine(),address.getLongitudine(),idU));
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
+            return e.getMessage();
         }
+        return "ok";
     }
     
     /**
@@ -147,10 +151,10 @@ public class DaoIndirizzo {
      * elimina indirizzo utente
      * @param ModelloIndirizzo user
      */
-    public void deleteAddress(int idU) {
+    public void deleteAddress(int idI) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement(usersQuery.deleteAddress(idU));
+                    .prepareStatement(usersQuery.deleteAddress(idI));
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

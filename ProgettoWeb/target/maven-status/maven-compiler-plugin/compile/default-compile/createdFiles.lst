@@ -1,5 +1,6 @@
 it\progettoWeb\java\database\query\summary\summaryQuery.class
 it\progettoWeb\java\database\Dao\spedizioneOggetto\DaoSpedizioneOggetto.class
+it\progettoWeb\java\Controller\Indirizzo\IndirizzoController.class
 it\progettoWeb\java\database\Dao\Oggetto\DaoOggetto.class
 it\progettoWeb\java\database\Model\Carrello\ModelloCarrello.class
 it\progettoWeb\java\database\Dao\rispostaVenditore\DaoRispostaVenditore.class
