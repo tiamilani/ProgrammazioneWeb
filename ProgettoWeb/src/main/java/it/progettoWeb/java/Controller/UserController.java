@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
+import it.progettoWeb.java.database.query.generics.genericsQuery;
 import javax.servlet.RequestDispatcher;
 
 /**
@@ -25,6 +26,7 @@ public class UserController extends HttpServlet {
     private static String INSERT_OR_EDIT = "/jspFile/DaoTest/userJsp.jsp";
     private static String LIST_USER = "/jspFile/DaoTest/listUser.jsp";
     private static String HOME_PAGE = "/jspFile/Finale/Index/homePage.jsp";
+    private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
     private DaoUtente dao;
 
     public UserController() {
@@ -100,15 +102,49 @@ public class UserController extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             ModelloUtente utente = dao.selectUserByEmailAndPassword(email, password);
-            utente.setNome("Cazzo volante");
             request.getSession().removeAttribute("utente");
             request.getSession().setAttribute("utente", utente);
             forward = HOME_PAGE;
             
             RequestDispatcher view = request.getRequestDispatcher(forward);
             view.forward(request, response);
+        } 
+        if(action.equalsIgnoreCase("addUser")){
+            forward = HOME_PAGE;
+            RequestDispatcher view = request.getRequestDispatcher(forward);
+            view.forward(request, response);
+            
+            ModelloUtente utente = new ModelloUtente();
+            utente.setNome(request.getParameter("nome"));
+            utente.setCognome(request.getParameter("cognome"));
+            utente.setMail(request.getParameter("email"));
+            utente.setPassword(request.getParameter("password"));
+            String confirmPassword = request.getParameter("confirmPassword");
+            
+            if(!utente.getPassword().equals(confirmPassword)){
+                forward=ERROR_PAGE;
+                request.setAttribute("errore", "La conferma della password non è uguale alla password");
+                //RequestDispatcher view = request.getRequestDispatcher(forward);
+                view.forward(request, response);
+            }
+            
+            ModelloUtente userAlreadyExists = dao.selectUserByEmail(utente.getMail());
+            if(userAlreadyExists.getId()>0){
+                forward=ERROR_PAGE;
+                request.setAttribute("errore", "Esiste già un utente con questa email");
+                //RequestDispatcher view = request.getRequestDispatcher(forward);
+                view.forward(request, response);
+            }
+            
+            utente.setUtenteType(0);
+            dao.addUser(utente);
+            
+            forward = HOME_PAGE;
+            //RequestDispatcher view = request.getRequestDispatcher(forward);
+            view.forward(request, response);
         }
-
+        
+        forward = HOME_PAGE;
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
     }

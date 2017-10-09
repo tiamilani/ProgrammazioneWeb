@@ -175,7 +175,21 @@ public class DaoUtente {
 
             if (rs.next()) {
                 user = getModelloFromRs(rs);
-                System.out.println("id: " + user.getId() + "" + user.getNome());
+            }
+        } catch (SQLException e) {
+        }
+
+        return user;
+    }
+    
+    public ModelloUtente selectUserByEmail(String mail) {
+        ModelloUtente user = new ModelloUtente();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(genericsQuery.selectUserByEmail(mail));
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                user = getModelloFromRs(rs);
             }
         } catch (SQLException e) {
         }

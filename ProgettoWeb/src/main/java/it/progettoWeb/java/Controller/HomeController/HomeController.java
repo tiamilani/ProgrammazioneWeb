@@ -51,6 +51,7 @@ public class HomeController extends HttpServlet {
         
         String forward="";
         String action = request.getParameter("action");
+        request.getSession().invalidate();
 
         if (action.equalsIgnoreCase("Inizializzazione")){
             forward = HOME_PAGE;
@@ -62,7 +63,7 @@ public class HomeController extends HttpServlet {
             
             //Richiedo oggetti per riempire la home page
             ModelloListeOggetto oggetti = new ModelloListeOggetto(daoOgg.selectObjectLowerThanPrice(1000));
-            request.getSession().setAttribute("ListaOggetti", oggetti);
+            request.setAttribute("ListaOggetti", oggetti);
         }
         else {
              //Qui va mostrata una pagina di errore   

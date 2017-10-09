@@ -5,6 +5,8 @@
  */
 package it.progettoWeb.java.Controller.SearchObject;
 
+import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
+import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -22,6 +24,14 @@ public class searchObjectController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static String SEARCH_PAGE = "/jspFile/Finale/search/searchResult.jsp";
     private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
+    
+    private DaoOggetto dao;
+
+    public searchObjectController() {
+        super();
+        dao = new DaoOggetto();
+    }
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -58,9 +68,15 @@ public class searchObjectController extends HttpServlet {
         
         if(search.length() < 3) {
             forward=ERROR_PAGE;
+            String errore = "Nome elemento da cercare troppo corto";
+            request.setAttribute("errore", errore);
             RequestDispatcher view = request.getRequestDispatcher(forward);
             view.forward(request, response);
         }
+        
+        ModelloListeOggetto listaOggetti = new ModelloListeOggetto(dao.selectObjectByName(search.toLowerCase()));
+        request.setAttribute("ListaOggetti", listaOggetti);
+        
         /*
         String test = search;
         if(test == null || test.length() < 10){
@@ -68,7 +84,7 @@ public class searchObjectController extends HttpServlet {
             RequestDispatcher view = request.getRequestDispatcher(forward);
             view.forward(request, response);
         }*/
-        
+        /*
         request.setAttribute("search",search);
         request.setAttribute("hiddenidCategoria", categoria);
         request.setAttribute("hiddenminPrice", minPrice);
@@ -80,7 +96,7 @@ public class searchObjectController extends HttpServlet {
         request.setAttribute("hiddenlatitudine", latitudine);
         request.setAttribute("hiddenlongitudine", longitudine);
         request.setAttribute("hiddenraggio", raggio);
-        request.setAttribute("hiddenvalutazioneMinima", valutazioneMinima);
+        request.setAttribute("hiddenvalutazioneMinima", valutazioneMinima);*/
         
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);

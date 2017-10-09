@@ -3,6 +3,7 @@
     Created on : 27-set-2017, 20.48.38
     Author     : mattia
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
 function myFunction() {
     var idCategoria = document.forms["filterForm"].elements[0].value;
@@ -45,11 +46,21 @@ function myFunction() {
     <div class="collapse" id="navbarToggleCategorie">
         <div class="bg-light p-4">
             <h4>Categorie</h4>
+            <c:set var="i" value="${0}" />
             <c:forEach items="${listacategoriesessione.getList()}" var="cat">
-                <c:url value="/CategoriaController" var="catUrl">
-                    <c:param name="id" value="${cat.getId()}" />
-                </c:url>
-                <a class="nav-link" href="${catUrl}"><c:out value="${cat.getNome()}"/></a>
+                <c:if test="${i == 0}">
+                    <div class="row">
+                </c:if>
+                <div class="col-2">
+                    <c:url value="/CategoriaController" var="catUrl">
+                        <c:param name="id" value="${cat.getId()}" />
+                    </c:url>
+                    <a class="nav-link" href="${catUrl}"><c:out value="${cat.getNome()}"/></a>
+                </div>
+                <c:set var="i" value="${i+1}" />
+                <c:if test="${i == 6}">
+                    </div>
+                </c:if>
             </c:forEach>
         </div>
     </div>
@@ -99,10 +110,18 @@ function myFunction() {
                     </form>
                 </div>
                 <div class="col-4">
-                        <button  type="button" class="btn btn-outline-primary buttonSpace" data-toggle="modal"
+                    <c:choose>
+                        <c:when test="${utente.getId() != -1}">
+                            <button  type="button" class="btn btn-outline-primary buttonSpace" data-toggle="modal"
+                                 data-target="#loginModal"><i class="Small material-icons">person</i> Account</button>
+                        </c:when>
+                        <c:otherwise>
+                            <button  type="button" class="btn btn-outline-primary buttonSpace" data-toggle="modal"
                                  data-target="#loginModal"><i class="Small material-icons">person</i> Login</button>
-                        <button  type="button" class="btn btn-outline-success buttonSpace" data-toggle="modal"
-                                 data-target="#registerModal"><i class="Small material-icons">person_add</i> Registrati</button>
+                            <button  type="button" class="btn btn-outline-success buttonSpace" data-toggle="modal"
+                                     data-target="#registerModal"><i class="Small material-icons">person_add</i> Registrati</button>
+                        </c:otherwise>
+                    </c:choose>
                         <button  type="button" class="btn btn-outline-primary buttonSpace"><i class="Small material-icons">shopping_basket</i> carrello</button>
                 </div>
             </div>
@@ -121,38 +140,38 @@ function myFunction() {
             <h4 class="modal-title">Creare un account</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
-          <form action="index.jsp">
+          <form action="${pageContext.request.contextPath}/UserController?action=addUser" method="POST">
             <div class="modal-body">
                 <div>
                     <i class="large material-icons">person_outline</i>
-                    <input class="col-10 modal-input" type="text" id="customerName" required>
+                    <input class="col-10 modal-input" type="text" id="customerName" name="nome" required>
                     <label for="customerName">Nome</label>
                 </div>
                 <div>
                     <i class="large material-icons">group</i>
-                    <input class="col-10 modal-input" type="text" id="customerSurname" required>
+                    <input class="col-10 modal-input" type="text" id="customerSurname" name="cognome" required>
                     <label for="customerSurname">Cognome</label>
                 </div>
                 <div>
                     <i class="large material-icons">email</i>
-                    <input class="col-10 modal-input" type="text" id="customerEmail" required>
+                    <input class="col-10 modal-input" type="text" id="customerEmail" name="email" required>
                     <label for="customerEmail">E-mail</label>
                 </div>
                 <div>
                     <i class="large material-icons">lock_outline</i>
-                    <input class="col-10 modal-input" type="password" id="customerPassword" required>
+                    <input class="col-10 modal-input" type="password" id="customerPassword" name="password" required>
                     <label for="customerPassword">Password</label>
                 </div>
                 <div>
                     <i class="large material-icons">lock_outline</i>
-                    <input class="col-10 modal-input" type="password" id="customerConfirmPassword" required>
+                    <input class="col-10 modal-input" type="password" id="customerConfirmPassword" name="confirmPassword" required>
                     <label for="customerConfirmPassword">Ripeti la password</label>
                 </div>
                     <p>Creando il tuo accont, accetti le nostro condizioni sulla privacy<p>
               
             </div>
             <div class="modal-footer">
-              <button type="submit" class="col-2 paddingNav btn btn-outline-primary my-2 my-sm-0">Crea il tuo account</button>
+              <button type="submit" class="col-2 paddingNav btn btn-outline-primary">Crea il tuo account</button>
             </div>
           </form>
         </div>
@@ -173,12 +192,12 @@ function myFunction() {
             <div class="modal-body">
                 <div>
                     <i class="large material-icons">email</i>
-                    <input class="col-10 modal-input" type="text" id="email" required>
+                    <input class="col-10 modal-input" type="text" id="email" name="email" required>
                     <label for="customerEmail">E-mail</label>
                 </div>
                 <div>
                     <i class="large material-icons">lock_outline</i>
-                    <input class="col-10 modal-input" type="password" id="password" required>
+                    <input class="col-10 modal-input" type="password" id="password" name="password" required>
                     <label for="customerPassword">Password</label>
                 </div>
                     <a href="#">Password dimenticata</a>

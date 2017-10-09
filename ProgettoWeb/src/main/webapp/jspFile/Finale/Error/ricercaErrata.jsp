@@ -4,6 +4,7 @@
     Author     : mattia
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,7 +14,7 @@
         <meta http-equiv="refresh" content="3;URL=${pageContext.request.contextPath}/jspFile/Finale/Index/homePage.jsp">
     </head>
     <body>
-        <h1>Hei non puoi cercare certe cose</h1>
+        <h1><%=  request.getParameter("errore") %></h1>
         <p>ora ti riporto alla homePage</p>
     </body>
 </html>

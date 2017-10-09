@@ -55,6 +55,11 @@ public class genericsQuery {
         return "SELECT * FROM Utente WHERE UtenteType = " + utenteType + ";";
     }
     
+    public static String selectUserByEmail(String email)
+    {
+        return "SELECT * FROM Utente WHERE mail = '" + email + "';";
+    }
+    
     /**
      * @author fbrug
      * Selezionare utente in base a mail & password

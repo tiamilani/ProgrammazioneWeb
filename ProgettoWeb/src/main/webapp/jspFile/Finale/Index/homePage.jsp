@@ -15,7 +15,7 @@
     
     <body>
         <jsp:useBean id="listacategoriesessione" class="it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria" scope="session" />
-        <jsp:useBean id="ListaOggetti" class="it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto" scope="session" />
+        <%--<jsp:useBean id="ListaOggetti" class="it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto" scope="request" />--%>
         <jsp:useBean id="utente" class="it.progettoWeb.java.database.Model.Utente.ModelloUtente" scope="session" />
         
         <div class="container">
@@ -23,23 +23,10 @@
         </div>
         <div class="container-fluid">
             <%@include file="../Components/Carosello/slideShow.jsp" %>
-            <c:choose>
-                <c:when test="${utente.getId() != -1}">
-                    <p>id: <c:out value="${utente.getId()}" /></p>
-                    <p>nome: <c:out value="${utente.getNome()}"/></p>
-                    <p>cognome: <c:out value="${utente.getCognome()}"/></p>
-                    <p>email <c:out value="${utente.getMail()}"/></p>
-                </c:when>
-                <c:when test="${utente.getId() == null}">
-                    <p>NULL ID</p>
-                </c:when>
-                <c:otherwise>
-                    <h1>Utente non loggato</h1>
-                </c:otherwise>
-            </c:choose>
             <div class="row rowListaOggetto">
                 <h2>Oggetti che potrebbero piacerti</h2>
             </div>
+            <c:set var ="iterator" scope="page" value="${0}"/>
             <%@include file="../Components/Liste/ListaOggetto/testListaOggetto.jsp" %>
             <hr>
             <%@include file="../Footer/footer.jsp" %>
