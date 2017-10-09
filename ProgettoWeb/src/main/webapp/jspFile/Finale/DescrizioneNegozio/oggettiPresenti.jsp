@@ -38,7 +38,7 @@
                         <div class="row">
                             <div class="col-6">
                                 <c:url value="/objectSelectedController" var="objUrl" >
-                                    <c:param name="idOggetto" value="${ogg.getId()}" />
+                                    <c:param name="idOggetto" value="${listaOggetti.get(i).getId()}" />
                                 </c:url>
                                 <a href="${objUrl}" class="card cardSmall" style="box-shadow: none;">
                                     <img class="imgCard" src="${listaImmaginiOggetto.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: cover;">
@@ -50,7 +50,7 @@
                             </div>
                             <div class="col-6">
                                 <c:url value="/objectSelectedController" var="objUrl" >
-                                    <c:param name="idOggetto" value="${ogg.getId()}" />
+                                    <c:param name="idOggetto" value="${listaOggetti.get(i+1).getId()}" />
                                 </c:url>
                                 <a href="${objUrl}" class="card cardSmall" style="box-shadow: none;">
                                     <img class="imgCard" src="${listaImmaginiOggetto.get(i+1).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: cover;">
@@ -68,7 +68,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <c:url value="/objectSelectedController" var="objUrl" >
-                                            <c:param name="idOggetto" value="${ogg.getId()}" />
+                                            <c:param name="idOggetto" value="${listaOggetti.get(i).getId()}" />
                                         </c:url>
                                         <a href="${objUrl}" class="card cardSmall" style="box-shadow: none;">
                                             <img class="imgCard" src="${listaImmaginiOggetto.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: cover;">
@@ -84,7 +84,7 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <c:url value="/objectSelectedController" var="objUrl" >
-                                            <c:param name="idOggetto" value="${ogg.getId()}" />
+                                            <c:param name="idOggetto" value="${listaOggetti.get(i).getId()}" />
                                         </c:url>
                                         <a href="${objUrl}" class="card cardSmall" style="box-shadow: none;">
                                             <img class="imgCard" src="${listaImmaginiOggetto.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: cover;">
@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="col-6">
                                         <c:url value="/objectSelectedController" var="objUrl" >
-                                            <c:param name="idOggetto" value="${ogg.getId()}" />
+                                            <c:param name="idOggetto" value="${listaOggetti.get(i+1).getId()}" />
                                         </c:url>
                                         <a href="${objUrl}" class="card cardSmall" style="box-shadow: none;">
                                             <img class="imgCard" src="${listaImmaginiOggetto.get(i+1).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: cover;">

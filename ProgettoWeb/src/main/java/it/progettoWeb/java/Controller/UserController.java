@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
 import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
-import it.progettoWeb.java.database.Model.indirizzo.ModelloListeIndirizzo;
 import it.progettoWeb.java.database.Dao.recensioneVenditore.DaoRecensioneVenditore;
 import it.progettoWeb.java.database.Model.Negozio.ModelloListeNegozio;
 import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
@@ -32,7 +31,6 @@ import it.progettoWeb.java.utility.pair.pair;
 import it.progettoWeb.java.utility.tris.tris;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
-import it.progettoWeb.java.database.query.generics.genericsQuery;
 
 /**
  *
@@ -112,8 +110,6 @@ public class UserController extends HttpServlet {
         else 
         {
             forward = INSERT_OR_EDIT;
-            RequestDispatcher view = request.getRequestDispatcher(forward);
-            view.forward(request, response);
         }
         
         if(action.equals("DescrizioneVenditore")){

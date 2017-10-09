@@ -48,7 +48,7 @@
                             <div class="col-6">
                                 <c:url value="/UserController" var="storeUrl">
                                     <c:param name="action" value="DescrizioneNegozio" />
-                                    <c:param name="idNegozio" value="${listaNegozi.get(i).getId()}" />
+                                    <c:param name="idNegozio" value="${listaNegozi.get(i+1).getId()}" />
                                 </c:url>
                                 <a href="${storeUrl}" class="card cardSmall" style="box-shadow: none;">
                                     <img class="imgCard" src="${listaImmagini.get(i+1).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: cover;"> <!--add object-fit: contain;-->
@@ -97,7 +97,7 @@
                                     <div class="col-6">
                                         <c:url value="/UserController" var="storeUrl">
                                             <c:param name="action" value="DescrizioneNegozio" />
-                                            <c:param name="idNegozio" value="${listaNegozi.get(i).getId()}" />
+                                            <c:param name="idNegozio" value="${listaNegozi.get(i+1).getId()}" />
                                         </c:url>
                                         <a href="${storeUrl}" class="card cardSmall" style="box-shadow: none;">
                                             <img class="imgCard" src="${listaImmagini.get(i+1).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: cover;"> <!--add object-fit: contain;-->
