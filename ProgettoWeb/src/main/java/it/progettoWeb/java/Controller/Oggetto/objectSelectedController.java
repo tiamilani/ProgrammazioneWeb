@@ -15,11 +15,14 @@ import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
+import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto;
 import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
 import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
 import it.progettoWeb.java.database.Model.recensioneOggetto.ModelloListeRecensioneOggetto;
+import it.progettoWeb.java.utility.pair.pair;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -72,7 +75,9 @@ public class objectSelectedController extends HttpServlet {
         ModelloListeRecensioneOggetto recensioni = new ModelloListeRecensioneOggetto(daoRecensione.selectReviewsObjects(idOggetto));
         ModelloIndirizzo indirizzo = daoIndirizzo.selectAddressByIdAddress(negozio.getIdI());
         ModelloListeImmagineOggetto immagini = new ModelloListeImmagineOggetto(daoImmagineOggetto.selectPhotoObject(idOggetto));
-        ModelloListeOggetto randomOggetti = new ModelloListeOggetto(daoOggetto.selectRandomObjects(12));
+        pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectRandomObjectsAndImage(12);
+        ModelloListeOggetto listaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
+        ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
         
         request.setAttribute("oggetto", oggetto);
         request.setAttribute("negozio", negozio);
@@ -80,7 +85,8 @@ public class objectSelectedController extends HttpServlet {
         request.setAttribute("recensioni", recensioni);
         request.setAttribute("indirizzo", indirizzo);
         request.setAttribute("listaImmagini", immagini);
-        request.setAttribute("randomOggetti", randomOggetti);
+        request.setAttribute("listaOggetti", listaOggetti);
+        request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
         
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);

@@ -14,10 +14,10 @@
     </head>
     
     <body>
-        <a href="/ProgettoWeb/UserController?action=listUser">clicca qui per modificare i dati utente</a>
-        
         <jsp:useBean id="listacategoriesessione" class="it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria" scope="session" />
-        <jsp:useBean id="ListaOggetti" class="it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto" scope="session" />
+        <%--<jsp:useBean id="ListaOggetti" class="it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto" scope="request" />--%>
+        <jsp:useBean id="utente" class="it.progettoWeb.java.database.Model.Utente.ModelloUtente" scope="session" />
+        
         <div class="container">
             <%@include file="../Header/NavBar/navBar.jsp" %>
         </div>
@@ -26,6 +26,7 @@
             <div class="row rowListaOggetto">
                 <h2>Oggetti che potrebbero piacerti</h2>
             </div>
+            <c:set var ="iterator" scope="page" value="${0}"/>
             <%@include file="../Components/Liste/ListaOggetto/testListaOggetto.jsp" %>
             <hr>
             <%@include file="../Footer/footer.jsp" %>

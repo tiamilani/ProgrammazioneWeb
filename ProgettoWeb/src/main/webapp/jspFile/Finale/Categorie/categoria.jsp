@@ -3,12 +3,13 @@
     Created on : 06-oct-2017, 9.54.06
     Author     : fbrug
 --%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <!--<d%@include file="/ProgettoWeb/jspFile/Finale/Header/Head/HomeHead/homeHead.jsp" %>-->
         <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
         <title>Oggetti Categoria</title>
     </head>

@@ -5,37 +5,66 @@
  */
 package it.progettoWeb.java.Controller;
 
+import it.progettoWeb.java.database.Dao.Negozio.DaoNegozio;
+import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
 import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
-import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.Model.indirizzo.ModelloListeIndirizzo;
+import it.progettoWeb.java.database.Dao.recensioneVenditore.DaoRecensioneVenditore;
+import it.progettoWeb.java.database.Model.Negozio.ModelloListeNegozio;
+import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
+import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
+import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
+import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
+import it.progettoWeb.java.database.Model.immagineNegozio.ModelloImmagineNegozio;
+import it.progettoWeb.java.database.Model.immagineNegozio.ModelloListeImmagineNegozio;
+import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto;
+import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
+import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
+import it.progettoWeb.java.database.Model.indirizzo.ModelloListeIndirizzo;
+import it.progettoWeb.java.database.Model.recensioneVenditore.ModelloListeRecensioneVenditore;
+import it.progettoWeb.java.utility.pair.pair;
+import it.progettoWeb.java.utility.tris.tris;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
+import it.progettoWeb.java.database.query.generics.genericsQuery;
 
 /**
  *
  * @author mattia
  */
 public class UserController extends HttpServlet {
-    
+
     private static final long serialVersionUID = 1L;
-    //private static String INSERT_OR_EDIT = "/jspFile/DaoTest/userJsp.jsp";
     private static String LIST_USER = "/jspFile/DaoTest/listUser.jsp";
     private static String INSERT_OR_EDIT = "/jspFile/Finale/Utente/modificaDatiUtente.jsp";
+    private static String DESCRIZIONEVENDITORE = "/jspFile/Finale/DescrizioneVenditore/descrizioneVenditore.jsp";
+    private static String DESCRIZIONENEGOZIO = "/jspFile/Finale/DescrizioneNegozio/descrizioneNegozio.jsp";
+    private DaoUtente daoUtente;
+    private DaoRecensioneVenditore daoRecensione;
+    private DaoNegozio daoNegozio;
+    private DaoOggetto daoOggetto;
+    private static String INSERT_OR_EDIT = "/jspFile/DaoTest/userJsp.jsp";
+    private static String LIST_USER = "/jspFile/DaoTest/listUser.jsp";
+    private static String HOME_PAGE = "/jspFile/Finale/Index/homePage.jsp";
+    private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
     private DaoUtente dao;
     private DaoIndirizzo daoI;
 
     public UserController() {
         super();
-        dao = new DaoUtente();
-        daoI = new DaoIndirizzo();
+        daoIndirizzo = new DaoIndirizzo();
+        daoUtente = new DaoUtente();
+        daoRecensione = new DaoRecensioneVenditore();
+        daoNegozio = new DaoNegozio();
+        daoOggetto = new DaoOggetto();
     }
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -47,7 +76,7 @@ public class UserController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,6 +93,7 @@ public class UserController extends HttpServlet {
             throws ServletException, IOException {
         String forward="";
         String action = request.getParameter("action");
+
 
         if (action.equalsIgnoreCase("delete")){
             int userId = Integer.parseInt(request.getParameter("userId"));
@@ -82,8 +112,46 @@ public class UserController extends HttpServlet {
             forward = LIST_USER;
             request.setAttribute("users", dao.getAllUsers());
         }
-        else {
+        else 
+        {
             forward = INSERT_OR_EDIT;
+            RequestDispatcher view = request.getRequestDispatcher(forward);
+            view.forward(request, response);
+        }
+        
+        if(action.equals("DescrizioneVenditore")){
+            int idUtente = Integer.parseInt(request.getParameter("idUtente"));
+            ModelloUtente venditore = daoUtente.selectUserByID(idUtente);
+            ModelloListeRecensioneVenditore recensioni = new ModelloListeRecensioneVenditore(daoRecensione.selectSellerReview(idUtente));
+            tris<List<ModelloNegozio>, List<ModelloIndirizzo>, List<ModelloImmagineNegozio>> listaNegoziIndirizziImmagini = daoUtente.selectStoreAndAddressImageByUser(idUtente);
+            ModelloListeNegozio listaNegozi = new ModelloListeNegozio(listaNegoziIndirizziImmagini.getL());
+            ModelloListeIndirizzo listaIndirizzi = new ModelloListeIndirizzo(listaNegoziIndirizziImmagini.getC());
+            ModelloListeImmagineNegozio listaImmagini = new ModelloListeImmagineNegozio(listaNegoziIndirizziImmagini.getR());
+
+            request.setAttribute("venditore", venditore);
+            request.setAttribute("recensioni", recensioni);
+            request.setAttribute("listaNegozi", listaNegozi);
+            request.setAttribute("listaIndirizzi", listaIndirizzi);
+            request.setAttribute("listaImmagini", listaImmagini);
+            forward = DESCRIZIONEVENDITORE;
+        }
+
+        if(action.equals("DescrizioneNegozio")){
+            int idNegozio = Integer.parseInt(request.getParameter("idNegozio"));
+            tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> negozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(idNegozio);
+            ModelloNegozio negozio = negozioIndirizzoImmagine.getL();
+            ModelloImmagineNegozio immagine = negozioIndirizzoImmagine.getR();
+            ModelloIndirizzo indirizzo = negozioIndirizzoImmagine.getC();
+            pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectObjectsImageSelledByStoreID(idNegozio);
+            ModelloListeOggetto listaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
+            ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
+
+            request.setAttribute("negozio", negozio);
+            request.setAttribute("immagine", immagine);
+            request.setAttribute("indirizzo", indirizzo);
+            request.setAttribute("listaOggetti", listaOggetti);
+            request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
+            forward = DESCRIZIONENEGOZIO;
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -101,39 +169,59 @@ public class UserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*String forward="";
+
+        
+        String forward="";
         String action = request.getParameter("action");
-        if (action.equalsIgnoreCase("show"))
-        {
-            forward = "/jspFile/Finale/Index/test.jsp";
+
+        if (action.equalsIgnoreCase("selectUser")){
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+            ModelloUtente utente = dao.selectUserByEmailAndPassword(email, password);
+            request.getSession().removeAttribute("utente");
+            request.getSession().setAttribute("utente", utente);
+            forward = HOME_PAGE;
+
             RequestDispatcher view = request.getRequestDispatcher(forward);
             view.forward(request, response);
-        }*/
-        
-        
-        ModelloUtente user = new ModelloUtente();
-        
-        user.setNome(request.getParameter("nome"));
-        user.setCognome(request.getParameter("cognome"));
-        user.setMail(request.getParameter("mail"));
-        user.setPassword(request.getParameter("password"));
-        user.setAvatar("0");
-        user.setValutazione(0);
-        user.setUtenteType(Integer.parseInt(request.getParameter("UserType")));
-        user.setEmailConfermata(false);
-        
-        String userid = request.getParameter("userid");
-        if(userid == null || userid.isEmpty())
-        {
-            dao.addUser(user);
         }
-        else
-        {
-            user.setId(Integer.parseInt(userid));
-            dao.updateUser(user);
+        if(action.equalsIgnoreCase("addUser")){
+            forward = HOME_PAGE;
+            RequestDispatcher view = request.getRequestDispatcher(forward);
+            view.forward(request, response);
+
+            ModelloUtente utente = new ModelloUtente();
+            utente.setNome(request.getParameter("nome"));
+            utente.setCognome(request.getParameter("cognome"));
+            utente.setMail(request.getParameter("email"));
+            utente.setPassword(request.getParameter("password"));
+            String confirmPassword = request.getParameter("confirmPassword");
+
+            if(!utente.getPassword().equals(confirmPassword)){
+                forward=ERROR_PAGE;
+                request.setAttribute("errore", "La conferma della password non è uguale alla password");
+                //RequestDispatcher view = request.getRequestDispatcher(forward);
+                view.forward(request, response);
+            }
+
+            ModelloUtente userAlreadyExists = dao.selectUserByEmail(utente.getMail());
+            if(userAlreadyExists.getId()>0){
+                forward=ERROR_PAGE;
+                request.setAttribute("errore", "Esiste già un utente con questa email");
+                //RequestDispatcher view = request.getRequestDispatcher(forward);
+                view.forward(request, response);
+            }
+
+            utente.setUtenteType(0);
+            dao.addUser(utente);
+
+            forward = HOME_PAGE;
+            //RequestDispatcher view = request.getRequestDispatcher(forward);
+            view.forward(request, response);
         }
-        RequestDispatcher view = request.getRequestDispatcher(LIST_USER);
-        request.setAttribute("users", dao.getAllUsers());
+
+        forward = HOME_PAGE;
+        RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
     }
 

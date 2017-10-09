@@ -32,7 +32,10 @@ public class CategoriaController extends HttpServlet {
         super();
         daoCategoria = new DaoCategoria();
         daoOggetto = new DaoOggetto();
+<<<<<<< HEAD
         
+=======
+>>>>>>> master
     }
     
     /**

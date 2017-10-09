@@ -1,5 +1,5 @@
 <%-- 
-    Document   : oggettiCorrelati
+    Document   : fotoOggetto
     Created on : 3-ott-2017, 22.32.00
     Author     : andreafadi
 --%>
@@ -30,7 +30,7 @@
                         <div class="carousel-item">
                     </c:otherwise>
                 </c:choose>
-                            <img class="d-block w-100" src="${img.getSrc()}" alt="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png" style="width: auto; height: auto; object-fit: contain;">
+                            <img class="d-block w-100" src="${img.getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: auto; object-fit: contain;">
                         </div>
                 <c:set var="i" value="${i+1}"/>
             </c:forEach>

@@ -4,8 +4,17 @@
     Author     : andreafadi
 --%>
 
-<div style="float: right; width: 18%;">
-    <div style="position: fixed; border: 1px solid black;">
-        <h1>Ciao, sono un fixed menu</h1>
+<div class="sidenav">
+    Prezzo: ${oggetto.getPrezzo()} Euro<br>
+    <c:if test="${oggetto.getSconto() > 0}">
+        Sconto: ${oggetto.getSconto()} %<br>
+        Valido fino al: ${oggetto.getDataFineSconto()}<br>
+    </c:if>
+    Disponibilita': ${oggetto.getDisponibilita()}<br><br>
+    
+    <div class="text-center">
+        <a href="#" class="btn btn-info btn-lg text-center">
+            <span class="fa fa-shopping-cart"></span>Acquista
+        </a>
     </div>
 </div>
