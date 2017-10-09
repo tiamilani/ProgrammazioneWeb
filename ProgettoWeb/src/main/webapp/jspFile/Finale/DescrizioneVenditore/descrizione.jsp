@@ -4,21 +4,17 @@
     Author     : andreafadi
 --%>
 
-<div class="descrizione">
+<div class="descrizione" id="descrizione">
     <div style="width: 100%; margin: 0 auto;">
         <div class="text-center">
-            <h1>${oggetto.getNome()}</h1><br/>
+            <h1>${venditore.getCognome()} ${venditore.getNome()}</h1><br>
+            <img class="d-block w-100" src="${venditore.getAvatar()}" alt="IMAGE NOT LOADED" style="width: 100px; height: 100px; object-fit: contain;">
         </div>
         <div class="text-justify">
             <h5>
-                Prezzo: ${oggetto.getPrezzo()} Euro<br/>
-                <c:if test="${oggetto.getSconto() > 0}">
-                    Sconto: ${oggetto.getSconto()} %<br/>
-                    Valido fino al: ${oggetto.getDataFineSconto()}<br/>
-                </c:if>
-                Disponibilita': ${oggetto.getDisponibilita()}
-            </h5><br/>
-            <h5>${oggetto.getDescrizione()}</h5><br/>
+                Email: ${venditore.getMail()}<br>
+                Valutazione: ${venditore.getValutazione()} / 5
+            </h5>
         </div>
     </div>
 </div>

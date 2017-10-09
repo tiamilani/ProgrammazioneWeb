@@ -10,8 +10,11 @@ package it.progettoWeb.java.database.Dao.Utente;
  * @author mattia
  */
 
+import it.progettoWeb.java.database.Dao.Negozio.DaoNegozio;
+import it.progettoWeb.java.database.Dao.immagineNegozio.DaoImmagineNegozio;
 import it.progettoWeb.java.database.Dao.immagineUtente.DaoImmagineUtente;
 import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
+import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
+import it.progettoWeb.java.database.Model.immagineNegozio.ModelloImmagineNegozio;
 import it.progettoWeb.java.database.Model.immagineUtente.ModelloImmagineUtente;
 import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
 import it.progettoWeb.java.database.query.generics.genericsQuery;
@@ -262,6 +266,58 @@ public class DaoUtente {
         }
 
         return users;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere coppia Negozio, Indirizzo
+     * @param idUtente
+     * @return pair<List<ModelloNegozio>,List<ModelloIndirizzo>> elenco negozi ed indirizzi
+     */
+    public pair<List<ModelloNegozio>,List<ModelloIndirizzo>> selectStoreAndAddressByUser(int idUtente) {
+        pair<List<ModelloNegozio>,List<ModelloIndirizzo>> res;
+        List<ModelloNegozio> negozio = new ArrayList<>();
+        List<ModelloIndirizzo> indirizzo = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.selectStoreAndAddressByUser(idUtente));
+            
+            while (rs.next()) {
+                negozio.add(DaoNegozio.getModelloFromRs(rs));
+                indirizzo.add(DaoIndirizzo.getModelloFromRs(rs));
+            }
+        } catch (SQLException e) { }
+        
+        res = new pair(negozio, indirizzo);
+        return res;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere trio Negozio, Indirizzo, Immagine
+     * @param idUtente
+     * @return tris<List<ModelloNegozio>,List<ModelloIndirizzo>, List<ModelloImmagineNegzio>> elenco negozi con indirizzi e immagine
+     */
+    public tris<List<ModelloNegozio>,List<ModelloIndirizzo>, List<ModelloImmagineNegozio>> selectStoreAndAddressImageByUser(int idUtente) {
+        tris<List<ModelloNegozio>,List<ModelloIndirizzo>, List<ModelloImmagineNegozio>> res;
+        List<ModelloNegozio> negozi = new ArrayList<>();
+        List<ModelloIndirizzo> indirizzi = new ArrayList<>();
+        List<ModelloImmagineNegozio> immagini = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.selectStoreAndAddressImageByUser(idUtente));
+            
+            while (rs.next()) {
+                negozi.add(DaoNegozio.getModelloFromRs(rs));
+                indirizzi.add(DaoIndirizzo.getModelloFromRs(rs));
+                immagini.add(DaoImmagineNegozio.getModelloFromRs(rs));
+            }
+        } catch (SQLException e) { }
+        
+        res = new tris(negozi, indirizzi, immagini);
+        return res;
     }
     
     /**

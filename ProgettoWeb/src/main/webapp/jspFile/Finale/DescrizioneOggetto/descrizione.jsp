@@ -7,18 +7,17 @@
 <div class="descrizione">
     <div style="width: 100%; margin: 0 auto;">
         <div class="text-center">
-            <h1>${oggetto.getNome()}</h1><br/>
+            <h1>${oggetto.getNome()}</h1><br>
         </div>
         <div class="text-justify">
-            <h5>
-                Prezzo: ${oggetto.getPrezzo()} Euro<br/>
-                <c:if test="${oggetto.getSconto() > 0}">
-                    Sconto: ${oggetto.getSconto()} %<br/>
-                    Valido fino al: ${oggetto.getDataFineSconto()}<br/>
-                </c:if>
-                Disponibilita': ${oggetto.getDisponibilita()}
-            </h5><br/>
-            <h5>${oggetto.getDescrizione()}</h5><br/>
+            <h5>${oggetto.getDescrizione()}</h5><br>
+            <h5>Venduto da: 
+                <c:url value="/UserController" var="sellerUrl">
+                    <c:param name="action" value="DescrizioneVenditore" />
+                    <c:param name="idUtente" value="${venditore.getId()}" />
+                </c:url>
+                <a href="${sellerUrl}" target="_blank">${venditore.getCognome()} ${venditore.getNome()}</a>
+            </h5>
         </div>
     </div>
 </div>

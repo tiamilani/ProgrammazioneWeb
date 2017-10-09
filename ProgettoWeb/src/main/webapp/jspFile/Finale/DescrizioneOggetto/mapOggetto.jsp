@@ -17,8 +17,6 @@
     
     var map;
     var myCenter;
-    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    var labelIndex = 0;
     function createMapObject() {
         myCenter = new google.maps.LatLng(latitude,longitude);
         
@@ -33,8 +31,7 @@
         map = new google.maps.Map(mapCanvas, mapOptions);
         
         var marker = new google.maps.Marker({
-            position: myCenter,
-            label: labels[labelIndex++ % labels.length]
+            position: myCenter
         });
         
         marker.setMap(map);
@@ -50,12 +47,10 @@
         });
         
         $('#mapObject').css("height",$('#fotoOggetto').height());
-        $('#mapObject').css("width",$('#fotoOggetto').width());
     }
 
     $(window).resize(function(){
         $('#mapObject').css("height",$('#fotoOggetto').height());
-        $('#mapObject').css("width",$('#fotoOggetto').width());
         google.maps.event.trigger(map, 'resize');
         map.setZoom( 15 );
         map.setCenter( myCenter );
@@ -63,6 +58,6 @@
 </script>
 
 <div class="text-center">
-    <h3>Il venditore possiede questi punti vendita</h3>
+    <h3>Puoi ritirare il prodotto in questo punto vendita</h3>
 </div>
 <div id="mapObject"></div>

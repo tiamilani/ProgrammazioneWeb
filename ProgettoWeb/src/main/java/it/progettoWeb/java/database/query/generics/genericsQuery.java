@@ -30,6 +30,16 @@ public class genericsQuery {
         return "SELECT * FROM Oggetto ORDER BY RAND() LIMIT " + limit + ";";
     }
     
+    public static String selectRandomObjectsAndImages(int limit)
+    {
+        return "SELECT Oggetto.*, imageOggetto.* FROM Oggetto JOIN imageOggetto ON Oggetto.id=imageOggetto.idO GROUP BY Oggetto.id ORDER BY RAND() LIMIT " + limit + ";";
+    }
+    
+    public static String selectObjectsImageSelledByStoreID(int idNegozio)
+    {
+        return "SELECT Oggetto.*, imageOggetto.* FROM Oggetto JOIN imageOggetto ON Oggetto.id=imageOggetto.idO WHERE Oggetto.idNegozio = " + idNegozio + " GROUP BY Oggetto.id ORDER BY RAND();";
+    }
+    
     public static String selectAddressByIdAddress(int idAddress)
     {
         return "SELECT * FROM Indirizzo WHERE idI = " + idAddress + ";";
@@ -146,6 +156,39 @@ public class genericsQuery {
     public static String selectUserImageByUserID(int idUtente)
     {
         return "SELECT src FROM imageUtente WHERE idU = " + idUtente + ";";
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere coppia Negozio, Indirizzo
+     * @param idUtente 
+     * @return Negozio.*, Indirizzo.*
+     */
+    public static String selectStoreAndAddressByUser(int idUtente)
+    {
+        return "SELECT Negozio.*, Indirizzo.* FROM Negozio JOIN Indirizzo ON Negozio.idI=Indirizzo.idI WHERE Negozio.idVenditore=" + idUtente + ";";
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere tris Negozio, Indirizzo, Immagine
+     * @param idUtente 
+     * @return Negozio.*, Indirizzo.*, ImmagineNegozio.*
+     */
+    public static String selectStoreAndAddressImageByUser(int idUtente)
+    {
+        return "SELECT Negozio.*, Indirizzo.*, imageNegozio.* FROM Negozio JOIN Indirizzo ON Negozio.idI=Indirizzo.idI JOIN imageNegozio ON Negozio.id=imageNegozio.idN WHERE Negozio.idVenditore=" + idUtente + " GROUP BY Negozio.id;";
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere tris Negozio, Indirizzo, Immagine
+     * @param idNegozio Id del negozio di cui si vogliono le informazioni
+     * @return Negozio.*, Indirizzo.*, ImmagineNegozio.*
+     */
+    public static String selectStoreAddressImageByStoreID(int idNegozio)
+    {
+        return "SELECT Negozio.*, Indirizzo.*, imageNegozio.* FROM Negozio JOIN Indirizzo ON Negozio.idI=Indirizzo.idI JOIN imageNegozio ON Negozio.id=imageNegozio.idN WHERE Negozio.id=" + idNegozio + " GROUP BY Negozio.id;";
     }
     
     /**

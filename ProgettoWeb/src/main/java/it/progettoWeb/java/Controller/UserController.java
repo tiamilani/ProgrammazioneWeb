@@ -5,14 +5,30 @@
  */
 package it.progettoWeb.java.Controller;
 
+import it.progettoWeb.java.database.Dao.Negozio.DaoNegozio;
+import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
+import it.progettoWeb.java.database.Dao.recensioneVenditore.DaoRecensioneVenditore;
+import it.progettoWeb.java.database.Model.Negozio.ModelloListeNegozio;
+import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
+import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
+import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
+import it.progettoWeb.java.database.Model.immagineNegozio.ModelloImmagineNegozio;
+import it.progettoWeb.java.database.Model.immagineNegozio.ModelloListeImmagineNegozio;
+import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto;
+import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
+import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
+import it.progettoWeb.java.database.Model.indirizzo.ModelloListeIndirizzo;
+import it.progettoWeb.java.database.Model.recensioneVenditore.ModelloListeRecensioneVenditore;
+import it.progettoWeb.java.utility.pair.pair;
+import it.progettoWeb.java.utility.tris.tris;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 
 /**
@@ -22,12 +38,19 @@ import javax.servlet.RequestDispatcher;
 public class UserController extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
-    private static String DESCRIZIONE = "/jspFile/Finale/DescrizioneVenditore/descrizioneVenditore.jsp";
-    private DaoUtente dao;
+    private static String DESCRIZIONEVENDITORE = "/jspFile/Finale/DescrizioneVenditore/descrizioneVenditore.jsp";
+    private static String DESCRIZIONENEGOZIO = "/jspFile/Finale/DescrizioneNegozio/descrizioneNegozio.jsp";
+    private DaoUtente daoUtente;
+    private DaoRecensioneVenditore daoRecensione;
+    private DaoNegozio daoNegozio;
+    private DaoOggetto daoOggetto;
 
     public UserController() {
         super();
-        dao = new DaoUtente();
+        daoUtente = new DaoUtente();
+        daoRecensione = new DaoRecensioneVenditore();
+        daoNegozio = new DaoNegozio();
+        daoOggetto = new DaoOggetto();
     }
     
     /**
@@ -61,9 +84,37 @@ public class UserController extends HttpServlet {
 
         if(action.equals("DescrizioneVenditore")){
             int idUtente = Integer.parseInt(request.getParameter("idUtente"));
-            ModelloUtente venditore = dao.selectUserByID(idUtente);
+            ModelloUtente venditore = daoUtente.selectUserByID(idUtente);
+            ModelloListeRecensioneVenditore recensioni = new ModelloListeRecensioneVenditore(daoRecensione.selectSellerReview(idUtente));
+            tris<List<ModelloNegozio>, List<ModelloIndirizzo>, List<ModelloImmagineNegozio>> listaNegoziIndirizziImmagini = daoUtente.selectStoreAndAddressImageByUser(idUtente);
+            ModelloListeNegozio listaNegozi = new ModelloListeNegozio(listaNegoziIndirizziImmagini.getL());
+            ModelloListeIndirizzo listaIndirizzi = new ModelloListeIndirizzo(listaNegoziIndirizziImmagini.getC());
+            ModelloListeImmagineNegozio listaImmagini = new ModelloListeImmagineNegozio(listaNegoziIndirizziImmagini.getR());
+            
             request.setAttribute("venditore", venditore);
-            forward = DESCRIZIONE;
+            request.setAttribute("recensioni", recensioni);
+            request.setAttribute("listaNegozi", listaNegozi);
+            request.setAttribute("listaIndirizzi", listaIndirizzi);
+            request.setAttribute("listaImmagini", listaImmagini);
+            forward = DESCRIZIONEVENDITORE;
+        }
+        
+        if(action.equals("DescrizioneNegozio")){
+            int idNegozio = Integer.parseInt(request.getParameter("idNegozio"));
+            tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> negozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(idNegozio);
+            ModelloNegozio negozio = negozioIndirizzoImmagine.getL();
+            ModelloImmagineNegozio immagine = negozioIndirizzoImmagine.getR();
+            ModelloIndirizzo indirizzo = negozioIndirizzoImmagine.getC();
+            pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectObjectsImageSelledByStoreID(idNegozio);
+            ModelloListeOggetto listaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
+            ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
+            
+            request.setAttribute("negozio", negozio);
+            request.setAttribute("immagine", immagine);
+            request.setAttribute("indirizzo", indirizzo);
+            request.setAttribute("listaOggetti", listaOggetti);
+            request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
+            forward = DESCRIZIONENEGOZIO;
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -81,30 +132,7 @@ public class UserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ModelloUtente user = new ModelloUtente();
-        
-        user.setNome(request.getParameter("nome"));
-        user.setCognome(request.getParameter("cognome"));
-        user.setMail(request.getParameter("mail"));
-        user.setPassword(request.getParameter("password"));
-        user.setAvatar("0");
-        user.setValutazione(0);
-        user.setUtenteType(Integer.parseInt(request.getParameter("UserType")));
-        user.setEmailConfermata(false);
-        
-        String userid = request.getParameter("userid");
-        if(userid == null || userid.isEmpty())
-        {
-            dao.addUser(user);
-        }
-        else
-        {
-            user.setId(Integer.parseInt(userid));
-            dao.updateUser(user);
-        }
-        RequestDispatcher view = request.getRequestDispatcher(DESCRIZIONE);
-        request.setAttribute("users", dao.getAllUsers());
-        view.forward(request, response);
+        processRequest(request, response);
     }
 
     /**

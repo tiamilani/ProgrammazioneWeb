@@ -61,7 +61,7 @@ function myFunction() {
             </c:forEach>
         </div>
     </div>
-    <nav class="navbar navbar-light bg-white fixed-top navbar-expand-lg">
+    <nav id="navbarFiltri" class="navbar navbar-light bg-white fixed-top navbar-expand-lg">
         <div class="col-1">
             <a class="navbar-brand" href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Index/index.jsp">
               <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png" width="30" height="30" class="d-inline-block align-top" alt="IMG">

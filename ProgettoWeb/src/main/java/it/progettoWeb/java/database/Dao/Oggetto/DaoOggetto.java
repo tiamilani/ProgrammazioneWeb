@@ -15,6 +15,7 @@ package it.progettoWeb.java.database.Dao.Oggetto;
  * @author mattia
  */
 
+import it.progettoWeb.java.database.Dao.immagineOggetto.DaoImmagineOggetto;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
+import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto;
+import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
 import it.progettoWeb.java.database.query.generics.genericsQuery;
 import it.progettoWeb.java.database.query.marketsSellers.marketsSellersQuery;
 import it.progettoWeb.java.database.query.objectSellers.objectSellersQuery;
@@ -31,6 +34,7 @@ import it.progettoWeb.java.database.query.sellers.sellersQuery;
 import java.sql.Date;
 import it.progettoWeb.java.database.query.objectsMarkets.objectMarketsQuery;
 import it.progettoWeb.java.database.query.users.usersQuery;
+import it.progettoWeb.java.utility.pair.pair;
 import java.sql.PreparedStatement;
 
 public class DaoOggetto {
@@ -69,7 +73,7 @@ public class DaoOggetto {
      * @param rs un resultset da cui ricavare un modello Oggetto
      * @return il modello Oggetto presente nel resultset
      */
-    private ModelloOggetto getModelloFromRs(ResultSet rs)
+    public static ModelloOggetto getModelloFromRs(ResultSet rs)
     {
         ModelloOggetto Object = new ModelloOggetto();
 
@@ -150,6 +154,54 @@ public class DaoOggetto {
         }
 
         return Objects;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere coppia Oggetto, Immagine
+     * @param limit Quanti oggetti ricavare
+     * @return pair<List<ModelloOggetto>,List<ModelloImmagineOggetto>> elenco oggetti ed immagine
+     */
+    public pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> selectRandomObjectsAndImage(int limit) {
+        pair<List<ModelloOggetto>,List<ModelloImmagineOggetto>> res;
+        List<ModelloOggetto> oggetti = new ArrayList<>();
+        List<ModelloImmagineOggetto> immagini = new ArrayList<>();
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.selectRandomObjectsAndImages(limit));
+            while (rs.next()) {
+                oggetti.add(DaoOggetto.getModelloFromRs(rs));
+                immagini.add(DaoImmagineOggetto.getModelloFromRs(rs));
+            }
+        } catch (SQLException e) { }
+
+        res = new pair(oggetti, immagini);
+        return res;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere coppia Oggetto, Immagine
+     * @param idNegozio Il negozio che vende determinati oggetti
+     * @return pair<List<ModelloOggetto>,List<ModelloImmagineOggetto>> elenco oggetti ed immagine
+     */
+    public pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> selectObjectsImageSelledByStoreID(int idNegozio) {
+        pair<List<ModelloOggetto>,List<ModelloImmagineOggetto>> res;
+        List<ModelloOggetto> oggetti = new ArrayList<>();
+        List<ModelloImmagineOggetto> immagini = new ArrayList<>();
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.selectObjectsImageSelledByStoreID(idNegozio));
+            while (rs.next()) {
+                oggetti.add(DaoOggetto.getModelloFromRs(rs));
+                immagini.add(DaoImmagineOggetto.getModelloFromRs(rs));
+            }
+        } catch (SQLException e) { }
+
+        res = new pair(oggetti, immagini);
+        return res;
     }
 
     public ModelloOggetto getObjectById(String objectId) {
