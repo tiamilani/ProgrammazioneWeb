@@ -60,9 +60,13 @@ function myFunction() {
                 </div>
                 <c:set var="i" value="${i+1}" />
                 <c:if test="${i == 6}">
+                    <c:set var="i" value="${0}" />
                     </div>
                 </c:if>
             </c:forEach>
+            <c:if test="${i != 0}">
+                </div>
+            </c:if>
         </div>
     </div>
     <nav id="navbarFiltri" class="navbar navbar-light bg-white fixed-top navbar-expand-lg">

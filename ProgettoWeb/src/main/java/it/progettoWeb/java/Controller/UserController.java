@@ -39,16 +39,15 @@ import javax.servlet.RequestDispatcher;
 public class UserController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static String LIST_USER = "/jspFile/DaoTest/listUser.jsp";
     private static String INSERT_OR_EDIT = "/jspFile/Finale/Utente/modificaDatiUtente.jsp";
     private static String DESCRIZIONEVENDITORE = "/jspFile/Finale/DescrizioneVenditore/descrizioneVenditore.jsp";
     private static String DESCRIZIONENEGOZIO = "/jspFile/Finale/DescrizioneNegozio/descrizioneNegozio.jsp";
+    private static String HOME_PAGE = "/jspFile/Finale/Index/homePage.jsp";
+    private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
     private DaoUtente daoUtente;
     private DaoRecensioneVenditore daoRecensione;
     private DaoNegozio daoNegozio;
     private DaoOggetto daoOggetto;
-    private static String HOME_PAGE = "/jspFile/Finale/Index/homePage.jsp";
-    private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
     private DaoIndirizzo daoIndirizzo;
 
     public UserController() {
@@ -90,12 +89,7 @@ public class UserController extends HttpServlet {
         String action = request.getParameter("action");
 
 
-        if (action.equalsIgnoreCase("delete")){
-            int userId = Integer.parseInt(request.getParameter("userId"));
-            daoUtente.deleteUser(userId);
-            forward = LIST_USER;
-            request.setAttribute("users", daoUtente.getAllUsers());    
-        } else if (action.equalsIgnoreCase("edit"))
+        if (action.equalsIgnoreCase("edit"))
         {
             forward = INSERT_OR_EDIT;
             int userId = Integer.parseInt(request.getParameter("userId"));
@@ -104,15 +98,8 @@ public class UserController extends HttpServlet {
             request.setAttribute("user", user);
             request.setAttribute("listaIndirizzi", lInd);
         } else if (action.equalsIgnoreCase("listUser")){
-            forward = LIST_USER;
             request.setAttribute("users", daoUtente.getAllUsers());
-        }
-        else 
-        {
-            forward = INSERT_OR_EDIT;
-        }
-        
-        if(action.equals("DescrizioneVenditore")){
+        } else if(action.equals("DescrizioneVenditore")){
             int idUtente = Integer.parseInt(request.getParameter("idUtente"));
             ModelloUtente venditore = daoUtente.selectUserByID(idUtente);
             ModelloListeRecensioneVenditore recensioni = new ModelloListeRecensioneVenditore(daoRecensione.selectSellerReview(idUtente));
@@ -127,9 +114,7 @@ public class UserController extends HttpServlet {
             request.setAttribute("listaIndirizzi", listaIndirizzi);
             request.setAttribute("listaImmagini", listaImmagini);
             forward = DESCRIZIONEVENDITORE;
-        }
-
-        if(action.equals("DescrizioneNegozio")){
+        } else if(action.equals("DescrizioneNegozio")){
             int idNegozio = Integer.parseInt(request.getParameter("idNegozio"));
             tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> negozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(idNegozio);
             ModelloNegozio negozio = negozioIndirizzoImmagine.getL();
@@ -145,6 +130,10 @@ public class UserController extends HttpServlet {
             request.setAttribute("listaOggetti", listaOggetti);
             request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
             forward = DESCRIZIONENEGOZIO;
+        }
+        else
+        {
+            forward = ERROR_PAGE;
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -163,7 +152,7 @@ public class UserController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        
+
         String forward="";
         String action = request.getParameter("action");
 
