@@ -38,7 +38,7 @@
     </servlet>
     <servlet>
         <servlet-name>OrdineController</servlet-name>
-        <servlet-class>OrdineController</servlet-class>
+        <servlet-class>it.progettoWeb.java.Controller.Ordine.OrdineController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>

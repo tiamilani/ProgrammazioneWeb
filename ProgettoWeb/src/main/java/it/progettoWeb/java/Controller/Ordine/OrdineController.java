@@ -4,10 +4,13 @@
  * and open the template in the editor.
  */
 
+package it.progettoWeb.java.Controller.Ordine;
+
+import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
 import it.progettoWeb.java.database.Dao.Ordine.DaoOrdine;
+import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
 import it.progettoWeb.java.database.Model.Ordine.ModelloOrdine;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -30,6 +33,7 @@ public class OrdineController extends HttpServlet {
     
     private static String LIST_ORDERS = "/jspFile/Finale/Ordine/listOrder.jsp";
     private DaoOrdine daoOrdine;
+    private DaoOggetto daoOggetto;
     
     
     /**
@@ -67,25 +71,43 @@ public class OrdineController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        System.out.println("------------------------------");
+        System.out.println("OK");
         
         //Richiede l'ID dell'utente di cui mostrare gli ordini
         int userId = Integer.parseInt(request.getParameter("userId"));
         
-        System.out.println("userId = "+userId);
-        
         List<ModelloOrdine> orders = new ArrayList<>();
         orders = daoOrdine.selectOrdersComplete(userId, 0);
-        
-        for (ModelloOrdine order : orders)
-        {
-            System.out.println(order.getIdOrdine() + "   " + order.getIdOrdine() + "   " + order.getStato());     
-        }
         
         //Richiama la pagina di visualizzazione degli ordini (la pagina del carrello)
         String forward = LIST_ORDERS;
         request.setAttribute("cart", orders);
         request.setAttribute("userId", userId);
+        
+        
+        
+        
+        //Seleziona oggetti presenti negli ordini
+        
+        /**
+         * Per ogni order.idOrdine, prendo order.idOggetto
+         * Recupero le info relative a order.idOggetto
+         * 
+         *      NON CI SARANNO MAI più righe di ordine con idOrdine + idOggetto UGUALI
+         * 
+         * Salvo le info dell'oggetto in una lista e le passo come parametro
+         */
+        
+        
+        List<ModelloOggetto> objects = new ArrayList<>();
+        for (ModelloOrdine order : orders)
+        {
+            String idOggettto = order.getIdOggetto();
+            
+            objects.add(daoOggetto.getObjectById(idOggettto));
+        }
+        
+        request.setAttribute("objects", objects);
         
         
         RequestDispatcher view = request.getRequestDispatcher(forward);
