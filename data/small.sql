@@ -46,7 +46,11 @@ CREATE TABLE IF NOT EXISTS `Assistenza` (
 -- Dump dei dati per la tabella `Assistenza`
 --
 
-source assistenza.sql;
+INSERT INTO `Assistenza` (`id`, `idUtente`, `idVenditore`, `idAmministratore`, `idOrdine`, `idOggetto`, `stato`, `soluzione`, `dataApertura`, `dataChiusura`) VALUES
+(1, 3, 1, 5, 1, '1', 0, NULL, '2017-10-07 19:13:20', NULL),
+(2, 4, NULL, 5, NULL, '4', 1, 'I soldi sono stati restituiti al cliente', '2017-09-21 12:10:01', '2017-10-01 09:08:22'),
+(3, 3, 2, 5, NULL, '5', 1, 'La descrizione dell''articolo era corretta, nessun rimborso', '2017-03-01 00:24:13', '2017-03-05 14:51:12'),
+(4, 3, NULL, 5, NULL, '2', 0, NULL, '2016-12-21', NULL);
 
 -- --------------------------------------------------------
 
@@ -65,7 +69,8 @@ CREATE TABLE IF NOT EXISTS `Carrello` (
 -- Dump dei dati per la tabella `Carrello`
 --
 
-source carrello.sql;
+INSERT INTO `Carrello` (`idUtente`, `idOrdine`, `subTotal`) VALUES
+(4, 5, 998);
 
 -- --------------------------------------------------------
 
@@ -86,8 +91,36 @@ CREATE TABLE IF NOT EXISTS `Categoria` (
 -- Dump dei dati per la tabella `Categoria`
 --
 
-source categoria.sql;
-
+INSERT INTO `Categoria` (`id`, `nome`, `sottoCategoria`, `descrizione`, `oggettiPresenti`) VALUES
+(1, 'Elettronica', NULL, 'Materiale Elettronico', 3),
+(2, 'Casa', NULL, 'Materiale per Casa e Cucina', 1),
+(3, 'Abbigliamento', NULL, 'il mondo dei vestiti', 0),
+(4, 'Alimentari', NULL, 'Ne trovi per tutti i tuoi gusti', 0),
+(5, 'Auto e Moto', NULL, 'Il mondo dei motori ai tuoi piedi', 0),
+(6, 'Bellezza', NULL, 'Coccolati con questi prodotti', 0),
+(7, 'Cancelleria e Ufficio', NULL, 'Tutto quello che vorrai avere sulla tua scrivania', 0),
+(8, 'CD e Vinili', NULL, 'Lasciati trasportare in un mondo di note', 0),
+(9, 'Fai da te', NULL, 'Costruisci il mondo intorno a te', 0),
+(10, 'Film e TV', NULL, 'Non cambiare canale, resta sincronizzato sulle offerte', 0),
+(11, 'Giardino e giardinaggio', NULL, 'Rendi il tuo giardino uno spettacolo', 0),
+(12, 'Giochi e giocattoli', NULL, 'Divertiti come non mai', 0),
+(13, 'Gioielli', NULL, 'Rendi prezioso il tuo corpo', 0),
+(14, 'Fatto a mano', NULL, 'Guarda come potremo sorprenderti', 0),
+(15, 'Illuminazione', NULL, 'Rendi luminosa la tua strada', 0),
+(16, 'Industria e scienza', NULL, 'Esplora il mondo con un occhio scientifico', 0),
+(17, 'Informatica', NULL, 'Gioca lavora o divertiti con tutte le ultime tecnologie uscite in commercio', 0),
+(18, 'Libri', NULL, 'Entra in un nuovo mondo fatto di fantasia', 0),
+(19, 'Moda', NULL, 'Fatti travolgere dalle ultime creazioni', 0),
+(20, 'Orologi', NULL, 'Rendi ogni secondo speciale', 0),
+(21, 'Prima infanzia', NULL, 'Il tuo bambino ha bisogno di te! Usa solo prodotti di prima scelta', 0),
+(22, 'Prodotti per animali', NULL, 'Fai gustare al tuo animale qualcosa creato appositamente per lui', 0),
+(23, 'Salute', NULL, 'Prenditi cura di te stesso', 0),
+(24, 'Scarpe e borse', NULL, 'L''accessorio giusto al momento giusto', 0),
+(25, 'Software', NULL, 'Il meglio per il tuo computer', 0),
+(26, 'Sport e tempo libero', NULL, 'Dai la giusta importanza ai tuoi hobby', 0),
+(27, 'Strumenti musicali e dj', NULL, 'Solo il meglio per i musicisti di oggi e domani', 0),
+(28, 'Valigeria', NULL, 'Non lasciare niente a casa ', 0),
+(29, 'Videogiochi', NULL, 'Gustati i migliori titoli del momento', 0);
 -- --------------------------------------------------------
 
 --
@@ -192,7 +225,15 @@ CREATE TABLE IF NOT EXISTS `Indirizzo` (
 -- Dump dei dati per la tabella `Indirizzo`
 --
 
-source indirizzo.sql;
+INSERT INTO `Indirizzo` (`idI`, `stato`, `regione`, `provincia`, `citta`, `via`, `nCivico`, `interno`, `latitudine`, `longitudine`) VALUES
+(1, 'Italia', 'Lombardia', 'Milano', 'Milano', 'Via Valassina', 27, 2, 45.5005692, 9.187734699999965),
+(2, 'Italia', 'Lombardia', 'Milano', 'Milano', 'Via Orti', 3, NULL, 45.4549309, 9.198682800000029),
+(3, 'Italia', 'Trentino Alto Adige', 'Trento', 'Trento', 'Corso 3 Novembre 1918', 102, 15, 46.0608004, 11.124980899999969),
+(4, 'Italia', 'Piemonte', 'Torino', 'Torino', 'Corso 3 Novembre 1918', 102, 15, 45.07489349999999, 7.652501499999971),
+(5, 'Italia', 'Veneto', 'Treviso', 'Treviso', 'Piazza dei Signori', 3, NULL, 45.6654873, 12.245583500000066),
+(6, 'Italia', 'Trentino Alto Adige', 'Trento', 'Trento', 'Via Brennero', 282, NULL, 46.0884487, 11.117878099999984),
+(7, 'Italia', 'Piemonte', 'Torino', 'Collegno', 'Viale Svezia', 1, NULL, 45.097961, 7.581563999999958),
+(8, 'Italia', 'Veneto', 'Milano', 'Milano', 'Piazza del Duomo', 1, NULL, 45.465043, 9.191806000000042);
 
 -- --------------------------------------------------------
 
@@ -210,7 +251,12 @@ CREATE TABLE IF NOT EXISTS `IndirizzoUtente` (
 -- Dump dei dati per la tabella `IndirizzoUtente`
 --
 
-source indirizzoUtente.sql;
+INSERT INTO `IndirizzoUtente` (`idI`, `idU`) VALUES
+(2, 1),
+(5, 3),
+(4, 2),
+(3, 4),
+(1, 5);
 
 -- --------------------------------------------------------
 
@@ -235,7 +281,10 @@ CREATE TABLE IF NOT EXISTS `Negozio` (
 -- Dump dei dati per la tabella `Negozio`
 --
 
-source negozio.sql;
+INSERT INTO `Negozio` (`id`, `idVenditore`, `nomeNegozio`, `valutazione`, `attivo`, `idI`, `dataApertura`, `linkSito`, `orarioNegozio`) VALUES
+(1, 2, 'Mediaworld', NULL, 1, 6, '2017-06-25 13:30:15', NULL, "Lunedi: 8:00 - 19:00, Martedi: 8:00 - 19:00, Mercoledi: 8:00 - 19:00, Giovedi: 8:00 - 19:00, Venerdi: 8:00 - 19:00, Sabato: 8:00 - 19:00, Domenica: Chiuso"),
+(2, 2, 'Unieuro', NULL, 1, 8, '2016-01-01 07:00:00', NULL, "Lunedi: 8:00 - 22:00, Martedi: 8:00 - 22:00, Mercoledi: 8:00 - 22:00, Giovedi: 8:00 - 22:00, Venerdi: 8:00 - 22:00, Sabato: 9:00 - 22:00, Domenica: 10:00 - 20:00"),
+(3, 1, 'Ikea', 8, 0, 7, '2017-07-20 14:02:41', NULL, 'Lunedi: 8:00 - 19:00, Martedi: 8:00 - 19:00, Mercoledi: 8:00 - 19:00, Giovedi: 8:00 - 19:00, Venerdi: 8:00 - 19:00, Sabato: 8:00 - 19:00, Domenica: Chiuso');
 
 -- --------------------------------------------------------
 
@@ -263,8 +312,14 @@ CREATE TABLE IF NOT EXISTS `Oggetto` (
 -- Dump dei dati per la tabella `Oggetto`
 --
 
-source oggetto.sql;
-
+INSERT INTO `Oggetto` (`id`, `idNegozio`, `nome`, `nomeDownCase`, `prezzo`, `descrizione`, `ritiroInNegozio`, `disponibilita`, `statoDisponibilita`, `sconto`, `dataFineSconto`, `categoria`) VALUES
+('1', 1, 'iPhone SE', 'iphone se', 259.99, 'iPhone SE 16GB Bianco', 0, 23, 0, 15, '2017-12-30 00:00:00', 1),
+('2', 2, 'HTC U11', 'htc u11', 499, 'HTC U11 32GB Bianco', 0, 6, 0, 0, NULL, 1),
+('3', 2, 'Huawei P10 Lite', 'huawei p10 lite', 260, 'Huawei P10 Lite 32GB Nero', 0, 1, 0, 0, NULL, 1),
+('4', 3, 'Pentola Acciaio Inossidabile', 'pentola acciaio inossidabile', 50, 'Pentola Acciaio Inossidabile, insdistrutibile!', 1, 45, 0, 0, NULL, 2),
+('5', 1, 'Earpods', 'earpods', 29, 'Auricolari wire apple', 1, 65, 1, 0, NULL, 1),
+('6', 1, 'Huawei P10 Lite', 'huawei p10 lite', 289, 'Huawei P10 Lite 32GB Nero', 0, 1, 0, 0, NULL, 1),
+('7', 1, 'HTC U11', 'htc u11', 469, 'HTC U11 32GB Bianco', 1, 25, 0, 0, NULL, 1);
 --
 -- Trigger `Oggetto`
 --
@@ -329,7 +384,14 @@ CREATE TABLE IF NOT EXISTS `Ordine` (
 -- Dump dei dati per la tabella `Ordine`
 --
 
-source ordine.sql;
+INSERT INTO `Ordine` (`idOrdine`, `idOggetto`, `idNegozio`, `idUtente`, `stato`, `quantita`, `codiceTracking`, `dataArrivoPresunta`, `dataOrdine`, `prezzoDiAcquisto`, `idS`) VALUES
+(1, '1', 1, 3, 3, 1, NULL, NULL, '2017-10-01 19:13:20', 300, NULL),
+(1, '6', 1, 3, 1, 2, NULL, NULL, '2017-10-01 19:13:20', 319, NULL),
+(1, '7', 1, 3, 0, 1, NULL, NULL, '2017-10-01 19:13:20', 450, NULL),
+(2, '2', 2, 4, 1, 1, NULL, NULL, '2017-07-23 09:27:52', 200, NULL),
+(3, '3', 2, 3, 2, 1, NULL, NULL, '2017-07-25 07:53:01', 100, NULL),
+(4, '4', 3, 4, 2, 1, NULL, NULL, '2017-07-25 07:58:55', 50, NULL),
+(5, '2', 2, 4, 0, 2, NULL, NULL, '2017-10-07 09:06:44', 998, NULL);
 
 --
 -- Trigger `Ordine`
@@ -412,7 +474,7 @@ CREATE TABLE IF NOT EXISTS `ordiniRicevuti` (
 -- Dump dei dati per la tabella `ordiniRicvuti`
 --
 
-INSERT INTO `ordiniRIcevuti` (`idO`, `idV`, `data`) VALUES
+INSERT INTO `ordiniRicevuti` (`idO`, `idV`, `data`) VALUES
 (1, 2, '2017-10-01 19:13:20');
 
 -- --------------------------------------------------------
@@ -462,7 +524,10 @@ CREATE TABLE IF NOT EXISTS `RecensioneOggetto` (
 -- Dump dei dati per la tabella `RecensioneOggetto`
 --
 
-source recensioneOggetto.sql;
+INSERT INTO `RecensioneOggetto` (`id`, `idOggetto`, `idUtente`, `testo`, `valutazione`, `data`, `utilita`) VALUES
+(1, '1', 1, 'Bene ma non benissimo, si vede che è una cinesata', 2, '2017-07-14 00:00:00', 4),
+(2, '5', 1, 'Ad Andrea Fadi piace questo elemento', 5, '2017-07-25 08:21:56', 12),
+(3, '3', 2, 'Era scritto motosega e invece è un telefono', 1, '2017-07-25 11:18:35', 3);
 
 -- --------------------------------------------------------
 
@@ -600,7 +665,12 @@ CREATE TABLE IF NOT EXISTS `Utente` (
 -- Dump dei dati per la tabella `Utente`
 --
 
-source utente.sql;
+INSERT INTO `Utente` (`id`, `nome`, `cognome`, `mail`, `password`, `avatar`, `valutazione`, `UtenteType`, `emailConfermata`) VALUES
+(1, 'Paolo', 'Rossi', 'paolored@gmail.com', MD5('paoloilrosso'), 'http://localhost:8080/progettoWeb/jspFile/Finale/Img/square.png', NULL, 1, b'0'),
+(2, 'Giorgio', 'Ugolini', 'giorgiougo@libero.it', MD5('gio65ugo'), 'http://localhost:8080/progettoWeb/jspFile/Finale/Img/square.png', NULL, 1, b'0'),
+(3, 'Andrea', 'Colombo', 'andrea.uccello@tiscali.it', MD5('andreavoea'), 'http://localhost:8080/progettoWeb/jspFile/Finale/Img/square.png', NULL, 0, b'0'),
+(4, 'Fabio', 'Basilio', 'fabiob75@outlook.com', MD5('basilico'), 'http://localhost:8080/progettoWeb/jspFile/Finale/Img/square.png', NULL, 0, b'0'),
+(5, 'Luigi', 'Di Prima', 'luigilostesso@libero.it', MD5('sempremi'), 'http://localhost:8080/progettoWeb/jspFile/Finale/Img/square.png', NULL, 2, b'0');
 
 --
 -- Indexes for dumped tables

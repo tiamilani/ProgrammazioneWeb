@@ -4,8 +4,8 @@
 }
 
 .navbar-brand{
-	float: left;
-        margin-left: 3%;
+    float: left;
+    margin-left: 3%;
 }
 
 .navbar-nav{
@@ -47,7 +47,7 @@
 label{
     font-size: 14px;
     font-weight: 700;
-    margin-left: 45px;
+    margin-left: 44px;
     position: relative;
     top: -3.2em;
     transition: all 0.3s ease-in-out;
@@ -66,7 +66,6 @@ input:focus{
     border-bottom: 1px solid orange;
     outline: none;
 }
-
 
 .modal-input{
     width: 100%;
