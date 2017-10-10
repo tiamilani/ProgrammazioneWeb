@@ -8,6 +8,8 @@
 -- Assistenza.stato	=	0	->	In Corso
 -- 					=	1	->	Conclusa
 
+-- Assistenza.soluzione   = 0 ->
+
 -- Negozio.attivo	=	0	->	Chiuso
 --					=	1	->	Aperto
 
@@ -24,8 +26,8 @@
 -- Utente.UtenteType	=	0	->	Normale
 -- 						=	1	->	Venditore
 -- 						=	2	->	Amministratore
--- 						=	3	->	Account NON Confermato
--- 						=	4	->	Super Admin
+
+
 
 -- il carrello si autogestisce quando viene inserito un ordine nel carrello
 -- aumenta o diminuisce in automatico il subtotale

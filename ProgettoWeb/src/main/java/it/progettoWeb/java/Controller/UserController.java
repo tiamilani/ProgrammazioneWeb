@@ -132,11 +132,11 @@ public class UserController extends HttpServlet {
             request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
             forward = DESCRIZIONENEGOZIO;
         }
-        else 
+        else
         {
             forward = ERROR_PAGE;
         }
-        
+
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
     }
@@ -153,7 +153,7 @@ public class UserController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        
+
         String forward="";
         String action = request.getParameter("action");
 

@@ -40,7 +40,7 @@ public class HomeController extends HttpServlet {
         daoCat = new DaoCategoria();
         daoOggetto = new DaoOggetto();
     }
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -52,7 +52,7 @@ public class HomeController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String forward="";
         String action = request.getParameter("action");
         request.getSession().invalidate();
@@ -64,24 +64,24 @@ public class HomeController extends HttpServlet {
             ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCat.selectAllCategory());
             request.getSession().setAttribute("utente", utente);
             request.getSession().setAttribute("listacategoriesessione", listaCategorie);
-            
+
             //Richiedo oggetti per riempire la home page
             pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectRandomObjectsAndImage(12);
             ModelloListeOggetto listaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
             ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
             request.setAttribute("ListaOggetti", listaOggetti);
             request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
-            
+
             }
         else {
-             //Qui va mostrata una pagina di errore   
-            
+             //Qui va mostrata una pagina di errore
+
             //forward = INSERT_OR_EDIT;
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
-        
+
     }
 
     /**

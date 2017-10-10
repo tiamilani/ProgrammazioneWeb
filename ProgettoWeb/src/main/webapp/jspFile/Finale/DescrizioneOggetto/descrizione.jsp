@@ -16,7 +16,7 @@
                     <c:param name="action" value="DescrizioneVenditore" />
                     <c:param name="idUtente" value="${venditore.getId()}" />
                 </c:url>
-                <a href="${sellerUrl}" target="_blank">${venditore.getCognome()} ${venditore.getNome()}</a>
+                <a href="${sellerUrl}">${venditore.getCognome()} ${venditore.getNome()}</a>
             </h5>
         </div>
     </div>

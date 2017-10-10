@@ -3,6 +3,12 @@
     margin-right: 10%;
 }
 
-.footerAlign{
+.footer{
+    position: absolute;
     text-align: center;
+    font-family: 'Cookie', cursive;
+    font-size: 22px;
+    right: 0;
+    left: 0;
+    background-color: gainsboro;
 }
