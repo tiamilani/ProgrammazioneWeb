@@ -10,8 +10,8 @@
 <div class="wrapper">
     <div class="container">
         
+        <ul id="pagination-demo" class="pagination-sm" style="display: inline-block;"></ul>
         <div id="page-content" class="page-content"></div>
-        <ul id="pagination-demo" class="pagination-sm"></ul>
         
         <c:set var="numPage" value="${1}"/>
         <c:forEach var="i" begin="${0}" end="${recensioni.getList().size() -1}" step="3">

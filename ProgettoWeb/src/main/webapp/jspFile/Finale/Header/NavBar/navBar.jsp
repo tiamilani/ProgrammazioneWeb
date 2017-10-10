@@ -119,9 +119,8 @@ function myFunction() {
                 </div>
                 <div class="col-4">
                     <c:choose>
-                        <c:when test="${utente.getId() != -1}">
-                            <button  type="button" class="btn btn-outline-primary buttonSpace" data-toggle="modal"
-                                 data-target="#loginModal"><i class="Small material-icons">person</i> Account</button>
+                        <c:when test="${utenteSessione.getId() != -1}">
+                            <a  href="${pageContext.request.contextPath}/jspFile/Finale/Utente/utente.jsp" class="btn btn-outline-primary buttonSpace"><i class="Small material-icons">person</i> Account</a>
                         </c:when>
                         <c:otherwise>
                             <button  type="button" class="btn btn-outline-primary buttonSpace" data-toggle="modal"
@@ -175,10 +174,11 @@ function myFunction() {
                     <input class="col-10 modal-input" type="password" id="customerConfirmPassword" name="confirmPassword" required>
                     <label for="customerConfirmPassword">Ripeti la password</label>
                 </div>
-                <%
+                <%--<%
                     ReCaptcha c = ReCaptchaFactory.newReCaptcha("6Le96jMUAAAAAC5kV0EuyDRuTXUColh5_HReQeCS", "6Le96jMUAAAAAGYR8rQmfOljKJPNIEnZnh8PEPTY", false);
                     out.print(c.createRecaptchaHtml(null, null));
-                %>
+                %>--%>
+                <div class="g-recaptcha" data-sitekey="6Le96jMUAAAAAC5kV0EuyDRuTXUColh5_HReQeCS"></div>
 
                 <p>Creando il tuo accont, accetti le nostro condizioni sulla privacy<p>
                 <div id="html_element"></div>

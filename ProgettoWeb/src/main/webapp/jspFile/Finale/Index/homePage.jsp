@@ -13,7 +13,7 @@
 
 <html>
     <jsp:useBean id="listacategoriesessione" class="it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria" scope="session" />
-    <jsp:useBean id="utente" class="it.progettoWeb.java.database.Model.Utente.ModelloUtente" scope="session" />
+    <%--<jsp:useBean id="utenteSessione" class="it.progettoWeb.java.database.Model.Utente.ModelloUtente" scope="session" />--%>
     <jsp:useBean id="listaImmaginiOggetto" class="it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto" scope="request" />
     <head>
         <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
@@ -27,6 +27,14 @@
         
         <div class="container-fluid">
             <%@include file="../Components/Carosello/slideShow.jsp" %>
+            <c:choose>
+                <c:when test="${utenteSessione.getId() != -1}">
+                    <h1>UTENTE: id <c:out value="${utenteSessione.getId()}" /> nome <c:out value="${utenteSessione.getNome()}" /></h1>
+                </c:when>
+                <c:otherwise>
+                    <h1>UTENTE NON LOGGATO</h1>
+                </c:otherwise>
+            </c:choose>
             <div class="row rowListaOggetto">
                 <h2>Oggetti che potrebbero piacerti</h2>
             </div>

@@ -31,8 +31,8 @@ import it.progettoWeb.java.utility.pair.pair;
 import it.progettoWeb.java.utility.tris.tris;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
-import net.tanesha.recaptcha.ReCaptchaImpl;
-import net.tanesha.recaptcha.ReCaptchaResponse;
+import it.progettoWeb.java.utility.VerifyRecaptcha;
+import javax.servlet.http.Cookie;
 
 /**
  *
@@ -98,9 +98,11 @@ public class UserController extends HttpServlet {
             ModelloListeIndirizzo lInd = new ModelloListeIndirizzo(daoIndirizzo.selectAddressByUserID(userId));
             request.setAttribute("user", user);
             request.setAttribute("listaIndirizzi", lInd);
-        } else if (action.equalsIgnoreCase("listUser")){
+        } 
+        else if (action.equalsIgnoreCase("listUser")){
             request.setAttribute("users", daoUtente.getAllUsers());
-        } else if(action.equals("DescrizioneVenditore")){
+        } 
+        else if(action.equals("DescrizioneVenditore")){
             int idUtente = Integer.parseInt(request.getParameter("idUtente"));
             ModelloUtente venditore = daoUtente.selectUserByID(idUtente);
             ModelloListeRecensioneVenditore recensioni = new ModelloListeRecensioneVenditore(daoRecensione.selectSellerReview(idUtente));
@@ -115,7 +117,8 @@ public class UserController extends HttpServlet {
             request.setAttribute("listaIndirizzi", listaIndirizzi);
             request.setAttribute("listaImmagini", listaImmagini);
             forward = DESCRIZIONEVENDITORE;
-        } else if(action.equals("DescrizioneNegozio")){
+        } 
+        else if(action.equals("DescrizioneNegozio")){
             int idNegozio = Integer.parseInt(request.getParameter("idNegozio"));
             tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> negozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(idNegozio);
             ModelloNegozio negozio = negozioIndirizzoImmagine.getL();
@@ -132,9 +135,19 @@ public class UserController extends HttpServlet {
             request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
             forward = DESCRIZIONENEGOZIO;
         }
+        else if(action.equalsIgnoreCase("logout")){
+            request.getSession().invalidate();
+            
+            Cookie ck=new Cookie("user","");//creating cookie object  
+            ck.setMaxAge(0);
+            response.addCookie(ck);//adding cookie in the response 
+            
+            forward = HOME_PAGE;
+        }
         else
         {
             forward = ERROR_PAGE;
+            request.setAttribute("errore", "Comando non trovato");
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -158,24 +171,26 @@ public class UserController extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action.equalsIgnoreCase("selectUser")){
+            
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             ModelloUtente utente = daoUtente.selectUserByEmailAndPassword(email, password);
-            request.getSession().removeAttribute("utente");
-            request.getSession().setAttribute("utente", utente);
+            
+            request.getSession().removeAttribute("utenteSessione");
+            request.getSession().setAttribute("utenteSessione", utente);
+            
+            Cookie ck=new Cookie("user",String.valueOf(utente.getId()));//creating cookie object  
+            ck.setMaxAge(-1);
+            response.addCookie(ck);//adding cookie in the response  
+            
             forward = HOME_PAGE;
         }
         else if(action.equalsIgnoreCase("addUser")){
             
             String remoteAddr = request.getRemoteAddr();
-            ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
-            reCaptcha.setPrivateKey("6Le96jMUAAAAAGYR8rQmfOljKJPNIEnZnh8PEPTY");
+            String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
 
-            String challenge = request.getParameter("recaptcha_challenge_field");
-            String uresponse = request.getParameter("recaptcha_response_field");
-            ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
-
-            if (reCaptchaResponse.isValid()) {
+            if (VerifyRecaptcha.verify(gRecaptchaResponse)) {
                 ModelloUtente utente = new ModelloUtente();
                 utente.setNome(request.getParameter("nome"));
                 utente.setCognome(request.getParameter("cognome"));

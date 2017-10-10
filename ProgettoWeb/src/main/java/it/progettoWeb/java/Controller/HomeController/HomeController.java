@@ -7,6 +7,7 @@ package it.progettoWeb.java.Controller.HomeController;
 
 import it.progettoWeb.java.database.Dao.Categoria.DaoCategoria;
 import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
+import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
 import it.progettoWeb.java.database.Model.Categoria.ModelloCategoria;
 import it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
@@ -20,9 +21,11 @@ import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,11 +37,13 @@ public class HomeController extends HttpServlet {
     private static String HOME_PAGE = "/jspFile/Finale/Index/homePage.jsp";
     private DaoCategoria daoCat;
     private DaoOggetto daoOggetto;
+    private DaoUtente daoUtente;
 
     public HomeController() {
         super();
         daoCat = new DaoCategoria();
         daoOggetto = new DaoOggetto();
+        daoUtente = new DaoUtente();
     }
 
     /**
@@ -55,14 +60,50 @@ public class HomeController extends HttpServlet {
 
         String forward="";
         String action = request.getParameter("action");
-        request.getSession().invalidate();
 
         if (action.equalsIgnoreCase("Inizializzazione")){
             forward = HOME_PAGE;
             ModelloUtente utente = new ModelloUtente();
             utente.setId(-1);
+            
+            /*HttpSession session = request.getSession(false);
+            if(session != null) {
+                ModelloUtente utenteInSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+                if(utenteInSessione == null){
+                    request.getSession().setAttribute("utenteSessione", utente);
+                }
+                else if(utenteInSessione.getId() == -1){
+                    request.getSession().setAttribute("utenteSessione", utente);
+                }
+            } else {
+                request.getSession().setAttribute("utenteSessione", utente);
+            }*/
+            
+            Cookie[] cookies = request.getCookies();
+            if ((cookies != null) && (cookies.length > 0)) {
+                int idUtente=-1;
+                 
+                for (Cookie cookie : cookies) {
+                    switch (cookie.getName()) {
+                        case "user":
+                            if(cookie.getMaxAge() != 0)
+                                idUtente = Integer.parseInt(cookie.getValue());
+                            break;
+                    }
+                }
+                if(idUtente == -1){
+                    request.getSession().setAttribute("utenteSessione", utente);
+                }
+                else {
+                    ModelloUtente utenteSessione = daoUtente.getUserById(idUtente);
+                    request.getSession().setAttribute("utenteSessione", utenteSessione);
+                }
+            } 
+            else {
+                 request.getSession().setAttribute("utenteSessione", utente);
+            }
+            
             ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCat.selectAllCategory());
-            request.getSession().setAttribute("utente", utente);
             request.getSession().setAttribute("listacategoriesessione", listaCategorie);
 
             //Richiedo oggetti per riempire la home page
