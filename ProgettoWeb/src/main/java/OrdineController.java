@@ -5,8 +5,11 @@
  */
 
 import it.progettoWeb.java.database.Dao.Ordine.DaoOrdine;
+import it.progettoWeb.java.database.Model.Ordine.ModelloOrdine;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -64,12 +67,24 @@ public class OrdineController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        System.out.println("------------------------------");
+        
         //Richiede l'ID dell'utente di cui mostrare gli ordini
         int userId = Integer.parseInt(request.getParameter("userId"));
         
+        System.out.println("userId = "+userId);
+        
+        List<ModelloOrdine> orders = new ArrayList<>();
+        orders = daoOrdine.selectOrdersComplete(userId, 0);
+        
+        for (ModelloOrdine order : orders)
+        {
+            System.out.println(order.getIdOrdine() + "   " + order.getIdOrdine() + "   " + order.getStato());     
+        }
+        
         //Richiama la pagina di visualizzazione degli ordini (la pagina del carrello)
         String forward = LIST_ORDERS;
-        request.setAttribute("cart", daoOrdine.selectOrdersComplete(userId, 0));
+        request.setAttribute("cart", orders);
         request.setAttribute("userId", userId);
         
         

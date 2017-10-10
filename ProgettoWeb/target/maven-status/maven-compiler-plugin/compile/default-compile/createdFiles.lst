@@ -7,6 +7,7 @@ it\progettoWeb\java\database\Dao\rispostaVenditore\DaoRispostaVenditore.class
 it\progettoWeb\java\Controller\UserController.class
 it\progettoWeb\java\database\Model\immagineUtente\ModelloListeImmagineUtente.class
 it\progettoWeb\java\database\Model\recensioneVenditore\ModelloListeRecensioneVenditore.class
+OrdineController.class
 it\progettoWeb\java\database\Dao\rispostaOggetto\DaoRispostaOggetto.class
 it\progettoWeb\java\Controller\Categorie\CategoriaController.class
 it\progettoWeb\java\Controller\SearchObject\searchObjectController.class

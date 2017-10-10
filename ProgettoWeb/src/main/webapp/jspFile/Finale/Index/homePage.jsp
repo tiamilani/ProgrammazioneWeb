@@ -14,6 +14,11 @@
     </head>
     
     <body>
+        <c:set value="3" var="userToCheck"/>
+        <br/><br/><br/><br/><br/>
+        <a href="/ProgettoWeb/OrdineController?userId=<c:out value="${userToCheck}"/>">ordine utente <c:out value="${userToCheck}"/></a>
+        
+        
         <jsp:useBean id="listacategoriesessione" class="it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria" scope="session" />
         <%--<jsp:useBean id="ListaOggetti" class="it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto" scope="request" />--%>
         <jsp:useBean id="utente" class="it.progettoWeb.java.database.Model.Utente.ModelloUtente" scope="session" />
