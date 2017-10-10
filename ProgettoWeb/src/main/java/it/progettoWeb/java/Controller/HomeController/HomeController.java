@@ -64,8 +64,8 @@ public class HomeController extends HttpServlet {
             request.getSession().setAttribute("listacategoriesessione", listaCategorie);
             
             //Richiedo oggetti per riempire la home page
-            ModelloListeOggetto oggetti = new ModelloListeOggetto(daoOgg.selectObjectLowerThanPrice(1000));
-            request.getSession().setAttribute("LsitaOggetti", oggetti);
+            ModelloListeOggetto oggetti = new ModelloListeOggetto(daoOgg.selectObjectLowerThanPrice(1000)); 
+            request.setAttribute("ListaOggetti", oggetti);
         }
         else {
              //Qui va mostrata una pagina di errore   

@@ -82,17 +82,17 @@ function myFunction() {
                                     <input class="form-control" id="expand" type="text" name="search" placeholder="Search..."/>
                             </div>
                             <div class="col-1">
-                                <input type='hidden' id= 'hiddenidCategoria' name = 'hiddenidCategoria' value='' />
-                                <input type='hidden' id= 'hiddenminPrice' name = 'hiddenminPrice' value='' />
-                                <input type='hidden' id= 'hiddenmaxPrice' name = 'hiddenmaxPrice' value='' />
-                                <input type='hidden' id= 'hiddennomeVenditore' name = 'hiddennomeVenditore' value='' />
-                                <input type='hidden' id= 'hiddennomeNegozio' name = 'hiddennomeNegozio' value='' />
-                                <input type='hidden' id= 'hiddencheckRitiroInNegozio' name = 'hiddencheckRitiroInNegozio' value='' />
-                                <input type='hidden' id= 'hiddencheckProdottiScontati' name = 'hiddencheckProdottiScontati' value='' />
-                                <input type='hidden' id= 'hiddenlatitudine' name = 'hiddenlatitudine' value='' />
-                                <input type='hidden' id= 'hiddenlongitudine' name = 'hiddenlongitudine' value='' />
-                                <input type='hidden' id= 'hiddenraggio' name = 'hiddenraggio' value='' />
-                                <input type='hidden' id= 'hiddenvalutazioneMinima' name = 'hiddenvalutazioneMinima' value='' />
+                                <input type='hidden' id='hiddenidCategoria' name='hiddenidCategoria' value='' />
+                                <input type='hidden' id='hiddenminPrice' name='hiddenminPrice' value='' />
+                                <input type='hidden' id='hiddenmaxPrice' name='hiddenmaxPrice' value='' />
+                                <input type='hidden' id='hiddennomeVenditore' name='hiddennomeVenditore' value='' />
+                                <input type='hidden' id='hiddennomeNegozio' name='hiddennomeNegozio' value='' />
+                                <input type='hidden' id='hiddencheckRitiroInNegozio' name='hiddencheckRitiroInNegozio' value='' />
+                                <input type='hidden' id='hiddencheckProdottiScontati' name='hiddencheckProdottiScontati' value='' />
+                                <input type='hidden' id='hiddenlatitudine' name='hiddenlatitudine' value='' />
+                                <input type='hidden' id='hiddenlongitudine' name='hiddenlongitudine' value='' />
+                                <input type='hidden' id='hiddenraggio' name='hiddenraggio' value='' />
+                                <input type='hidden' id='hiddenvalutazioneMinima' name='hiddenvalutazioneMinima' value='' />
                                 <button class="btn btn-outline-primary" type="submit" value="submit" onclick="myFunction()"><i class="Small material-icons">search</i></button>
                             </div>
                     </form>

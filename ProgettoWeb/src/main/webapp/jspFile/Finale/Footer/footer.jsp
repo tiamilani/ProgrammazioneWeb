@@ -25,10 +25,10 @@
                         <a href="../Policy/Regolamento/regolamentoVenditori.jsp">Regolamento venditori</a>
                     </div>
                     <div class="col-2">
-                        <a href="#">Assistenza</a>
+                        <a href="../Footer/assistenza.jsp">Assistenza</a>
                     </div>
                     <div class="col-2">
-                        <a href="/Policy/Regolamento/regolamentoPagamenti">Pagamenti</a>
+                        <a href="../Policy/Regolamento/regolamentoPagamenti">Pagamenti</a>
                     </div>
                 </div>
             </div>

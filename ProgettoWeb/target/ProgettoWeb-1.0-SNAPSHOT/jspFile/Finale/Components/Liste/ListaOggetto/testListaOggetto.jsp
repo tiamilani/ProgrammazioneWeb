@@ -5,7 +5,7 @@
 --%>
 
 <c:set var ="iterator" scope="page" value="${0}"/>
-<c:forEach items="${LsitaOggetti.getList()}" var="ogg">
+<c:forEach items="${ListaOggetti.getList()}" var="ogg">
     <c:if test ="${iterator == 0}">
         <div class="card-group">
     </c:if>
