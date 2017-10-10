@@ -4,6 +4,7 @@
     Author     : mattia
 --%>
  
+<hr>
 <footer class="footer">
     <div class="footerSpacing">
         <div class="row footerAlign">

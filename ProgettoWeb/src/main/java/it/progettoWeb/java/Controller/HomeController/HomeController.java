@@ -10,7 +10,11 @@ import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
 import it.progettoWeb.java.database.Model.Categoria.ModelloCategoria;
 import it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
+import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
+import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto;
+import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
+import it.progettoWeb.java.utility.pair.pair;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -29,12 +33,12 @@ public class HomeController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static String HOME_PAGE = "/jspFile/Finale/Index/homePage.jsp";
     private DaoCategoria daoCat;
-    private DaoOggetto daoOgg;
+    private DaoOggetto daoOggetto;
 
     public HomeController() {
         super();
         daoCat = new DaoCategoria();
-        daoOgg = new DaoOggetto();
+        daoOggetto = new DaoOggetto();
     }
     
     /**
@@ -62,9 +66,13 @@ public class HomeController extends HttpServlet {
             request.getSession().setAttribute("listacategoriesessione", listaCategorie);
             
             //Richiedo oggetti per riempire la home page
-            ModelloListeOggetto oggetti = new ModelloListeOggetto(daoOgg.selectObjectLowerThanPrice(1000));
-            request.setAttribute("ListaOggetti", oggetti);
-        }
+            pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectRandomObjectsAndImage(12);
+            ModelloListeOggetto listaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
+            ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
+            request.setAttribute("ListaOggetti", listaOggetti);
+            request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
+            
+            }
         else {
              //Qui va mostrata una pagina di errore   
             

@@ -31,6 +31,8 @@ import it.progettoWeb.java.utility.pair.pair;
 import it.progettoWeb.java.utility.tris.tris;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
+import net.tanesha.recaptcha.ReCaptchaImpl;
+import net.tanesha.recaptcha.ReCaptchaResponse;
 
 /**
  *
@@ -42,7 +44,7 @@ public class UserController extends HttpServlet {
     private static String INSERT_OR_EDIT = "/jspFile/Finale/Utente/modificaDatiUtente.jsp";
     private static String DESCRIZIONEVENDITORE = "/jspFile/Finale/DescrizioneVenditore/descrizioneVenditore.jsp";
     private static String DESCRIZIONENEGOZIO = "/jspFile/Finale/DescrizioneNegozio/descrizioneNegozio.jsp";
-    private static String HOME_PAGE = "/jspFile/Finale/Index/homePage.jsp";
+    private static String HOME_PAGE = "/jspFile/Finale/Index/index.jsp";
     private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
     private DaoUtente daoUtente;
     private DaoRecensioneVenditore daoRecensione;
@@ -73,7 +75,6 @@ public class UserController extends HttpServlet {
 
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -163,46 +164,50 @@ public class UserController extends HttpServlet {
             request.getSession().removeAttribute("utente");
             request.getSession().setAttribute("utente", utente);
             forward = HOME_PAGE;
-
-            RequestDispatcher view = request.getRequestDispatcher(forward);
-            view.forward(request, response);
         }
-        if(action.equalsIgnoreCase("addUser")){
-            forward = HOME_PAGE;
-            RequestDispatcher view = request.getRequestDispatcher(forward);
-            view.forward(request, response);
+        else if(action.equalsIgnoreCase("addUser")){
+            
+            String remoteAddr = request.getRemoteAddr();
+            ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
+            reCaptcha.setPrivateKey("6Le96jMUAAAAAGYR8rQmfOljKJPNIEnZnh8PEPTY");
 
-            ModelloUtente utente = new ModelloUtente();
-            utente.setNome(request.getParameter("nome"));
-            utente.setCognome(request.getParameter("cognome"));
-            utente.setMail(request.getParameter("email"));
-            utente.setPassword(request.getParameter("password"));
-            String confirmPassword = request.getParameter("confirmPassword");
+            String challenge = request.getParameter("recaptcha_challenge_field");
+            String uresponse = request.getParameter("recaptcha_response_field");
+            ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
 
-            if(!utente.getPassword().equals(confirmPassword)){
+            if (reCaptchaResponse.isValid()) {
+                ModelloUtente utente = new ModelloUtente();
+                utente.setNome(request.getParameter("nome"));
+                utente.setCognome(request.getParameter("cognome"));
+                utente.setMail(request.getParameter("email"));
+                utente.setPassword(request.getParameter("password"));
+                String confirmPassword = request.getParameter("confirmPassword");
+
+                if(!utente.getPassword().equals(confirmPassword)){
+                    forward=ERROR_PAGE;
+                    request.setAttribute("errore", "La conferma della password non è uguale alla password");
+                }
+                else 
+                {
+                    ModelloUtente userAlreadyExists = daoUtente.selectUserByEmail(utente.getMail());
+                    if(userAlreadyExists.getId()>0){
+                        forward=ERROR_PAGE;
+                        request.setAttribute("errore", "Esiste già un utente con questa email");
+                    }
+                    else
+                    {
+                        utente.setUtenteType(0);
+                        daoUtente.addUser(utente);
+
+                        forward = HOME_PAGE;
+                    }
+                }
+            } else {
                 forward=ERROR_PAGE;
-                request.setAttribute("errore", "La conferma della password non è uguale alla password");
-                //RequestDispatcher view = request.getRequestDispatcher(forward);
-                view.forward(request, response);
+                request.setAttribute("errore", "Captcha errato");
             }
-
-            ModelloUtente userAlreadyExists = daoUtente.selectUserByEmail(utente.getMail());
-            if(userAlreadyExists.getId()>0){
-                forward=ERROR_PAGE;
-                request.setAttribute("errore", "Esiste già un utente con questa email");
-                //RequestDispatcher view = request.getRequestDispatcher(forward);
-                view.forward(request, response);
-            }
-
-            utente.setUtenteType(0);
-            daoUtente.addUser(utente);
-
-            forward = HOME_PAGE;
-            //RequestDispatcher view = request.getRequestDispatcher(forward);
-            view.forward(request, response);
         }
-
-        forward = HOME_PAGE;
+        
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
     }
@@ -215,6 +220,6 @@ public class UserController extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

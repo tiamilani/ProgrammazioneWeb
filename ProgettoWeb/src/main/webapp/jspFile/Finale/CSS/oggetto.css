@@ -3,15 +3,23 @@
     transition: 0.2s;
     border-radius: 5px; /* 5px rounded corners */
     
-    margin-left:5%; 
-    margin-right:5%;
+    margin-left:2%; 
+    margin-right:2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
     
     color: inherit;
 }
 
 .cardSmall:hover{
+    margin-left:2%; 
+    margin-right:2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    
     color:#4285F4;
-    text-decoration: none; 
+    text-decoration: none;
+    
 }
 
 .cardLong {
