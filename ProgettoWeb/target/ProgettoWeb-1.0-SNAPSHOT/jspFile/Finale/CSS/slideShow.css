@@ -1,19 +1,9 @@
-.carouselSpacing{
-
+.carouselSpacing, .carouselSpacingDeveloper{
     margin-top: 5%;
-    margin-bottom: 5%;
 }
 
 .oggettiCorrelati {
     height: 50%;
-    margin-bottom: 0;
-}
-
-.carousel-inner {
-}
-
-#map-canvas {
-    margin-top: 5%;
     margin-bottom: 5%;
 }
 
@@ -22,8 +12,43 @@
     margin-bottom: 5%;
 }
 
-.carouselSpacingDeveloper{
-    margin-top: 3%;
-    margin-left: 20%;
-    margin-right: 20%;
+#mapObject, #mapSeller, #mapStore {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+#collapReview:hover {
+    text-decoration: none;
+}
+
+.sidenav {
+    height: auto;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: rgb(209, 210, 211);
+    color: black;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+/*.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}*/
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
 }

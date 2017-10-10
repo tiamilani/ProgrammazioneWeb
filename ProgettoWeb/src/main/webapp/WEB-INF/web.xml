@@ -28,6 +28,14 @@
         <servlet-name>searchObjectController</servlet-name>
         <servlet-class>it.progettoWeb.java.Controller.SearchObject.searchObjectController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CategoriaController</servlet-name>
+        <servlet-class>it.progettoWeb.java.Controller.Categorie.CategoriaController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IndirizzoController</servlet-name>
+        <servlet-class>it.progettoWeb.java.Controller.Indirizzo.IndirizzoController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>searchObjectController</servlet-name>
         <url-pattern>/searchObjectController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CategoriaController</servlet-name>
+        <url-pattern>/CategoriaController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IndirizzoController</servlet-name>
+        <url-pattern>/IndirizzoController</url-pattern>
     </servlet-mapping>
     <jsp-config>
         <taglib>

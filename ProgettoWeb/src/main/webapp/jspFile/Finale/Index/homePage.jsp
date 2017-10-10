@@ -15,14 +15,18 @@
     
     <body>
         <jsp:useBean id="listacategoriesessione" class="it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria" scope="session" />
-        <jsp:useBean id="LsitaOggetti" class="it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto" scope="session" />
+        <%--<jsp:useBean id="ListaOggetti" class="it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto" scope="request" />--%>
+        <jsp:useBean id="utente" class="it.progettoWeb.java.database.Model.Utente.ModelloUtente" scope="session" />
         
-        <div class="container-fluid">
+        <div class="container">
             <%@include file="../Header/NavBar/navBar.jsp" %>
+        </div>
+        <div class="container-fluid">
             <%@include file="../Components/Carosello/slideShow.jsp" %>
             <div class="row rowListaOggetto">
                 <h2>Oggetti che potrebbero piacerti</h2>
             </div>
+            <c:set var ="iterator" scope="page" value="${0}"/>
             <%@include file="../Components/Liste/ListaOggetto/testListaOggetto.jsp" %>
             <hr>
             <%@include file="../Footer/footer.jsp" %>

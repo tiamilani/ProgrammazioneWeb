@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : searchResult
     Created on : 5-ott-2017, 16.37.56
     Author     : mattia
@@ -26,13 +26,13 @@
     <body>
         <jsp:useBean id="ListaOggetti" class="it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto" scope="request" />
         <%@include file="../Header/NavBar/navBar.jsp" %>
-        
-        <div class="container-fluid"> 
-            
+
+        <div class="container-fluid">
+
             <div class="summary">
                 <p>Risultati in <%=  request.getParameter("hiddenidCategoria")%> per: <%=  request.getParameter("search")%><p>
                 <p>Nome venditore:<%=  request.getAttribute("ListaOggetti") %></p>
-        
+
                 <%
                     ModelloListeOggetto trovati = (ModelloListeOggetto)request.getAttribute("ListaOggetti");
                     System.out.println(trovati.getList().size());

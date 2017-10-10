@@ -77,7 +77,7 @@ public class usersQuery {
                 "valutazione="+valutazione+","+
                 "UtenteType="+UtenteType+","+
                 "emailConfermata="+emailConfermata+""
-                + "WHERE id="+id+";";
+                + " WHERE id="+id+";";
     }
     
     // QUERY UTENTE
@@ -631,3 +631,18 @@ public class usersQuery {
         return "DELETE FROM Indirizzo WHERE idI ="+idI+";";
     }
 }
+
+
+/*
+public static String insertAddress(String stato, String regione, String provincia, String citta, String via, int nCivico, int interno, double lat, double lon, int idU){
+        return "INSERT INTO Indirizzo (idI, stato, regione, provincia, "
+                + "citta, via, nCivico, interno, latitudine, longitudine) VALUES "
+                + "(NULL, '"+stato+"', '"+regione+"', '"+provincia+"', '"+citta+"', '"+via+"', "+nCivico+", "+interno+", "+lat+", "+lon+"); "
+                + "DECLARE @IDI int(11); SET @IDI = 1; "
+                + "SELECT @IDI=idI FROM Indirizzo WHERE stato ='"+stato+"' AND "
+                + "regione = '"+regione+"' AND provincia = '"+provincia+"' AND "
+                + "citta = '"+citta+"' AND via = '"+via+"' AND nCivico = "+nCivico+" AND interno = "+interno+"; "
+                + "INSERT INTO IndirizzoUtente (idI, idU) "
+                + "VALUES (@IDI, "+idU+");";
+    }
+*/

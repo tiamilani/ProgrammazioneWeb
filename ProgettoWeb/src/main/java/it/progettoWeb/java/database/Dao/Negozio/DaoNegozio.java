@@ -10,6 +10,8 @@ package it.progettoWeb.java.database.Dao.Negozio;
  * @author mattia
  */
 
+import it.progettoWeb.java.database.Dao.immagineNegozio.DaoImmagineNegozio;
+import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,11 +22,14 @@ import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.query.objectSellers.objectSellersQuery;
 import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
+import it.progettoWeb.java.database.Model.immagineNegozio.ModelloImmagineNegozio;
+import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
 import it.progettoWeb.java.database.query.generics.genericsQuery;
 import it.progettoWeb.java.database.query.objects.objectsQuery;
 import it.progettoWeb.java.database.query.sellers.sellersQuery;
 import it.progettoWeb.java.database.query.objectsMarkets.objectMarketsQuery;
 import it.progettoWeb.java.database.query.users.usersQuery;
+import it.progettoWeb.java.utility.tris.tris;
 
 public class DaoNegozio {
     /**
@@ -58,7 +63,7 @@ public class DaoNegozio {
      * @param rs un resultset da cui ricavare un modello negozio
      * @return il modello negozio presente nel resultset
      */
-    private ModelloNegozio getModelloFromRs(ResultSet rs)
+    public static ModelloNegozio getModelloFromRs(ResultSet rs)
     {
         ModelloNegozio Store = new ModelloNegozio();
         
@@ -117,6 +122,33 @@ public class DaoNegozio {
         }
 
         return negozio;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere trio Negozio, Indirizzo, Immagine
+     * @param idNegozio
+     * @return tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegzio> Negozio con indirizzo e immagine
+     */
+    public tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> selectStoreAddressImageByStoreID(int idNegozio) {
+        tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> res;
+        ModelloNegozio negozio = new ModelloNegozio();
+        ModelloIndirizzo indirizzo = new ModelloIndirizzo();
+        ModelloImmagineNegozio immagine = new ModelloImmagineNegozio();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.selectStoreAddressImageByStoreID(idNegozio));
+            
+            while (rs.next()) {
+                negozio = DaoNegozio.getModelloFromRs(rs);
+                indirizzo = DaoIndirizzo.getModelloFromRs(rs);
+                immagine = DaoImmagineNegozio.getModelloFromRs(rs);
+            }
+        } catch (SQLException e) { }
+        
+        res = new tris(negozio, indirizzo, immagine);
+        return res;
     }
     
     /**

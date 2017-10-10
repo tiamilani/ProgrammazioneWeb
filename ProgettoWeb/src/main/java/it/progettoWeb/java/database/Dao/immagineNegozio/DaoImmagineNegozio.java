@@ -46,7 +46,7 @@ public class DaoImmagineNegozio {
      * @param rs un resultset da cui ricavare un modello negozio
      * @return il modello negozio presente nel resultset
      */
-    private ModelloImmagineNegozio getModelloFromRs(ResultSet rs)
+    public static ModelloImmagineNegozio getModelloFromRs(ResultSet rs)
     {
         ModelloImmagineNegozio ImmagineNegozio = new ModelloImmagineNegozio();
         

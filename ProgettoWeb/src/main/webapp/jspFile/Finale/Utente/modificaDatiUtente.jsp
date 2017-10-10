@@ -9,22 +9,20 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
-        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui-1.8.18.custom.min.js"></script>
-        <%@include file="../Finale/Header/Head/HomeHead/homeHead.jsp" %>
+        <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
         <title>Add new user</title>
     </head>
     <body>
         <!-- Bean per l'utente e la lista dei suoi indirizzi -->
         <jsp:useBean id="user" class="it.progettoWeb.java.database.Model.Utente.ModelloUtente" scope="request" />
-        <jsp:useBean id="listaIndirizzi" class="it.progettoWeb.java.database.Model.indirizzo.ModelloListeIndirizzo" scope="request" />
+        <!--<-jsp:useBean id="listaIndirizzi" class="it.progettoWeb.java.database.Model.indirizzo.ModelloListeIndirizzo" scope="request" />-->
         
                 
         <div class="container">
-            <%@include file="../Finale/Header/NavBar/navBar.jsp" %>
+            <%@include file="../Header/NavBar/navBar.jsp" %>
             <hr>
         </div>
             
@@ -57,10 +55,12 @@
                             <input type="text" name="UserType" value="<c:out value="${user.getUtenteType()}" />" />
                         </span><hr>
                         
-                    <c:set var ="iterator" scope="page" value="${0}"/>
-                    <c:forEach items="${listaIndirizzi.getList()}" var="ind">
                         
-                        <h4>Indirizzo <c:out value="${iterator}"/>:</h4>
+                   <!--
+                    <-c:set var ="iterator" scope="page" value="${0}"/>
+                    <-c:forEach items="${listaIndirizzi.getList()}" var="ind">
+                        
+                        <h4>Indirizzo <-c:out value="${iterator}"/>:</h4>
                         <b>Via</b>
                         <span style="padding-left: 2em">
                             <input style="padding-left: 2em" type="text" name="via" value="<c:out value="${ind.via}" />"/>
@@ -90,18 +90,20 @@
                             <input style="padding-left: 2em" type="text" name="stato" value="<c:out value="${ind.stato}" />"/>
                         </span><hr>
                         
-                        <c:set var ="iterator" value="${iterator + 1}"/>
+                        <-c:set var ="iterator" value="${iterator + 1}"/>
                         
-                    </c:forEach>
+                    <-/c:forEach>-->
                         
                     <input type="submit" value="SAVE CHANGES" />
                 </div>
             </form>
+                    
+            <a href="/ProgettoWeb/IndirizzoController?action=listAddress&userId=<c:out value="${user.getId()}"/>">Modifica Dati Indirizzo</a>
         </div>
                 
         <div class="container">
             <hr>
-            <%@include file="../Finale/Footer/footer.jsp" %>
+            <%@include file="../Footer/footer.jsp" %>
         </div>
     </body>
 </html>

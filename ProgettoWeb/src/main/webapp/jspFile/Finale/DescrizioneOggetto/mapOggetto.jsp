@@ -47,15 +47,17 @@
         });
         
         $('#mapObject').css("height",$('#fotoOggetto').height());
-        $('#mapObject').css("width",$('#fotoOggetto').width());
     }
 
     $(window).resize(function(){
         $('#mapObject').css("height",$('#fotoOggetto').height());
-        $('#mapObject').css("width",$('#fotoOggetto').width());
         google.maps.event.trigger(map, 'resize');
         map.setZoom( 15 );
         map.setCenter( myCenter );
    });
 </script>
+
+<div class="text-center">
+    <h3>Puoi ritirare il prodotto in questo punto vendita</h3>
+</div>
 <div id="mapObject"></div>

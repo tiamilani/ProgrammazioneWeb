@@ -121,6 +121,7 @@ INSERT INTO `Categoria` (`id`, `nome`, `sottoCategoria`, `descrizione`, `oggetti
 (27, 'Strumenti musicali e dj', NULL, 'Solo il meglio per i musicisti di oggi e domani', 0),
 (28, 'Valigeria', NULL, 'Non lasciare niente a casa ', 0),
 (29, 'Videogiochi', NULL, 'Gustati i migliori titoli del momento', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -320,6 +321,7 @@ INSERT INTO `Oggetto` (`id`, `idNegozio`, `nome`, `nomeDownCase`, `prezzo`, `des
 ('5', 1, 'Earpods', 'earpods', 29, 'Auricolari wire apple', 1, 65, 1, 0, NULL, 1),
 ('6', 1, 'Huawei P10 Lite', 'huawei p10 lite', 289, 'Huawei P10 Lite 32GB Nero', 0, 1, 0, 0, NULL, 1),
 ('7', 1, 'HTC U11', 'htc u11', 469, 'HTC U11 32GB Bianco', 1, 25, 0, 0, NULL, 1);
+
 --
 -- Trigger `Oggetto`
 --
