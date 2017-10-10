@@ -87,7 +87,7 @@ public class DaoImmagineOggetto {
      * @param idO Un intero che rappresenta l'identificativo dell'oggetto preso in considerazione
      * @return ModelloImmagineOggetto prima immagine di un oggetto
      */
-    public ModelloImmagineOggetto selectFirstPhotoObject(int idO) {
+    public ModelloImmagineOggetto selectFirstPhotoObject(String idO) {
         ModelloImmagineOggetto img = new ModelloImmagineOggetto();
         
         try {

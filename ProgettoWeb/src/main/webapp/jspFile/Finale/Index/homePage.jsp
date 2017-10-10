@@ -17,7 +17,6 @@
         <c:set value="3" var="userToCheck"/>
         <br/><br/><br/><br/><br/>
         <a href="/ProgettoWeb/OrdineController?userId=<c:out value="${userToCheck}"/>">ordine utente <c:out value="${userToCheck}"/></a>
-        <a href="/ProgettoWeb/IndirizzoController?action=listAddress&userId=<c:out value="${userToCheck}"/>">ordine utente <c:out value="${userToCheck}"/></a>
         
         
         <jsp:useBean id="listacategoriesessione" class="it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria" scope="session" />

@@ -28,6 +28,7 @@
                 <!-- oggetto --> <th>immagineOggetto</th>
                 <!-- oggetto --> <th>nomeOggetto</th>
                 <!-- oggetto --> <th>prezzoOggetto</th>
+                <!-- oggetto --> <th>scontoOggetto</th>
                 <!-- ordine --> <th>quantita</th>
                 <!-- ordine --> <th>dataOrdine</th> <!-- Data nella quale viene creato l'ordine -->
                 <!-- ordine --> <th>dataArrivoPresunta</th>
@@ -40,28 +41,29 @@
             <c:forEach items="${cart}" var="order">
                 <!-- SETTA CONDIZIONE PER TROVARE OGGETTO RELATIVO ALL'ORDINE -->
                 <c:forEach items="${objects}" var="object">
-                    <c:if test="${cart.idOggetto == object.id}">
-                        
+                    <c:if test="${order.idOggetto eq object.getL().getId()}">
+                        <tr>
+                            <td><c:out value="${order.idOrdine}" /></td>
+                            <td><c:out value="${order.idOggetto}" /></td>
+                            <td><c:out value="${order.idNegozio}" /></td>
+                            <td><c:out value="${object.getR().getSrc()}" /></td>
+                            <td><c:out value="${object.getL().getNome()}" /></td>
+                            <td><c:out value="${object.getL().getPrezzo()}" /></td>
+                            <td><c:out value="${object.getL().getSconto()}" />%</td>
+                            <td><c:out value="${order.quantita}" /></td>
+                            <td><c:out value="${order.dataOrdine}" /></td>
+                            <td><c:out value="${order.dataArrivoPresunta}" /></td>
+                            <td><c:out value="${order.prezzoDiAcquisto}" /></td>
+                            <td><c:out value="${order.codiceTracking}" /></td>
+
+                            <!--<td><a href="<c:out value="${pageContext.request.contextPath}"/>/IndirizzoController?action=edit&addrId=<c:out value="${address.getIdI()}"/>&userId=<c:out value="${userId}"/>">Update</a></td>
+                            <td><a href="<c:out value="${pageContext.request.contextPath}"/>/IndirizzoController?action=delete&addrId=<c:out value="${address.getIdI()}"/>&userId=${userId}">Delete</a></td>-->
+                        </tr>
                     </c:if>
                 </c:forEach>
                 
                 
-                <tr>
-                    <td><c:out value="${order.idOrdine}" /></td>
-                    <td><c:out value="${order.idOggetto}" /></td>
-                    <td><c:out value="${order.idNegozio}" /></td>
-                    <td></td><!-- immagine oggetto -->
-                    <td></td><!-- nome oggetto -->
-                    <td></td><!-- prezzo oggetto -->
-                    <td><c:out value="${order.quantita}" /></td>
-                    <td><c:out value="${order.dataOrdine}" /></td>
-                    <td><c:out value="${order.dataArrivoPresunta}" /></td>
-                    <td><c:out value="${order.prezzoDiAcquisto}" /></td>
-                    <td><c:out value="${order.codiceTracking}" /></td>
-
-                    <!--<td><a href="<c:out value="${pageContext.request.contextPath}"/>/IndirizzoController?action=edit&addrId=<c:out value="${address.getIdI()}"/>&userId=<c:out value="${userId}"/>">Update</a></td>
-                    <td><a href="<c:out value="${pageContext.request.contextPath}"/>/IndirizzoController?action=delete&addrId=<c:out value="${address.getIdI()}"/>&userId=${userId}">Delete</a></td>-->
-                </tr>
+                
             </c:forEach>
         </tbody>
     </table>

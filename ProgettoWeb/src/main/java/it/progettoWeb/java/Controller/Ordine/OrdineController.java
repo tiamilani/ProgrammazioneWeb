@@ -8,8 +8,11 @@ package it.progettoWeb.java.Controller.Ordine;
 
 import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
 import it.progettoWeb.java.database.Dao.Ordine.DaoOrdine;
+import it.progettoWeb.java.database.Dao.immagineOggetto.DaoImmagineOggetto;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
 import it.progettoWeb.java.database.Model.Ordine.ModelloOrdine;
+import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto;
+import it.progettoWeb.java.utility.pair.pair;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +37,7 @@ public class OrdineController extends HttpServlet {
     private static String LIST_ORDERS = "/jspFile/Finale/Ordine/listOrder.jsp";
     private DaoOrdine daoOrdine;
     private DaoOggetto daoOggetto;
+    private DaoImmagineOggetto daoImmagineOggetto;
     
     
     /**
@@ -43,6 +47,8 @@ public class OrdineController extends HttpServlet {
     {
         super();
         daoOrdine = new DaoOrdine();
+        daoOggetto = new DaoOggetto();
+        daoImmagineOggetto = new DaoImmagineOggetto();
     }
 
     /**
@@ -71,8 +77,6 @@ public class OrdineController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        System.out.println("OK");
-        
         //Richiede l'ID dell'utente di cui mostrare gli ordini
         int userId = Integer.parseInt(request.getParameter("userId"));
         
@@ -87,24 +91,14 @@ public class OrdineController extends HttpServlet {
         
         
         
-        //Seleziona oggetti presenti negli ordini
+        //Seleziona oggetti presenti negli ordini + la loro PRIMA immagine
+        List<pair<ModelloOggetto, ModelloImmagineOggetto>> objects = new ArrayList<>();
+        String idOggetto;
         
-        /**
-         * Per ogni order.idOrdine, prendo order.idOggetto
-         * Recupero le info relative a order.idOggetto
-         * 
-         *      NON CI SARANNO MAI più righe di ordine con idOrdine + idOggetto UGUALI
-         * 
-         * Salvo le info dell'oggetto in una lista e le passo come parametro
-         */
-        
-        
-        List<ModelloOggetto> objects = new ArrayList<>();
         for (ModelloOrdine order : orders)
         {
-            String idOggettto = order.getIdOggetto();
-            
-            objects.add(daoOggetto.getObjectById(idOggettto));
+            idOggetto = order.getIdOggetto();            
+            objects.add(new pair<>(daoOggetto.getObjectById(idOggetto), daoImmagineOggetto.selectFirstPhotoObject(idOggetto)));
         }
         
         request.setAttribute("objects", objects);
