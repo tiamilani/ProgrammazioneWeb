@@ -34,6 +34,8 @@
             </c:if>
             <%@include file="oggettiCorrelati.jsp" %>
             <%@include file="recensioni.jsp" %>
+        </div>
+        <div class="container">
             <%@include file="../Footer/footer.jsp" %>
         </div>
     </body>

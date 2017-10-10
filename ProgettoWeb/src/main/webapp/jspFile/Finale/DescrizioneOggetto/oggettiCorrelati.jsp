@@ -108,7 +108,6 @@
                         </c:choose>
                     </c:otherwise>
                 </c:choose>
-                <c:set var="i" value="${i+2}"/>
             </div>
             </c:forEach>
         </div>
