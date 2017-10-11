@@ -27,14 +27,7 @@
         
         <div class="container-fluid">
             <%@include file="../Components/Carosello/slideShow.jsp" %>
-            <c:choose>
-                <c:when test="${utenteSessione.getId() != -1}">
-                    <h1>UTENTE: id <c:out value="${utenteSessione.getId()}" /> nome <c:out value="${utenteSessione.getNome()}" /></h1>
-                </c:when>
-                <c:otherwise>
-                    <h1>UTENTE NON LOGGATO</h1>
-                </c:otherwise>
-            </c:choose>
+            
             <div class="row rowListaOggetto">
                 <h2>Oggetti che potrebbero piacerti</h2>
             </div>
