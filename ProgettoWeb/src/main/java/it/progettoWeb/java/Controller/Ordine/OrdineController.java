@@ -103,6 +103,15 @@ public class OrdineController extends HttpServlet {
         
         request.setAttribute("objects", objects);
         
+        System.out.println("-------------------");
+        System.out.println(objects.get(0).getL().getPrezzo());
+        System.out.println(objects.get(1).getL().getPrezzo());
+        System.out.println(orders.get(0).getQuantita());
+        System.out.println(orders.get(1).getQuantita());
+        
+        
+        
+        
         
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
