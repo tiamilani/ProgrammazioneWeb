@@ -76,32 +76,32 @@ public class HomeController extends HttpServlet {
                     request.getSession().setAttribute("utenteSessione", utente);
                 }
             } else {
-                Cookie[] cookies = request.getCookies();
-                if ((cookies != null) && (cookies.length > 0)) {
-                    int idUtente=-1;
-
-                    for (Cookie cookie : cookies) {
-                        switch (cookie.getName()) {
-                            case "user":
-                                if(cookie.getMaxAge() != 0)
-                                    idUtente = Integer.parseInt(cookie.getValue());
-                                break;
-                        }
-                    }
-                    if(idUtente == -1){
-                        request.getSession().setAttribute("utenteSessione", utente);
-                    }
-                    else {
-                        ModelloUtente utenteSessione = daoUtente.getUserById(idUtente);
-                        request.getSession().setAttribute("utenteSessione", utenteSessione);
-                    }
-                } 
-                else {
-                     request.getSession().setAttribute("utenteSessione", utente);
-                }
+                request.getSession().setAttribute("utenteSessione", utente);
             }
             
-            
+            Cookie[] cookies = request.getCookies();
+            if ((cookies != null) && (cookies.length > 0)) {
+                int idUtente=-1;
+
+                for (Cookie cookie : cookies) {
+                    switch (cookie.getName()) {
+                        case "user":
+                            if(cookie.getMaxAge() != 0)
+                                idUtente = Integer.parseInt(cookie.getValue());
+                            break;
+                    }
+                }
+                if(idUtente == -1){
+                    request.getSession().setAttribute("utenteSessione", utente);
+                }
+                else {
+                    ModelloUtente utenteSessione = daoUtente.getUserById(idUtente);
+                    request.getSession().setAttribute("utenteSessione", utenteSessione);
+                }
+            } 
+            else {
+                 request.getSession().setAttribute("utenteSessione", utente);
+            }
             
             ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCat.selectAllCategory());
             request.getSession().setAttribute("listacategoriesessione", listaCategorie);

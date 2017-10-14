@@ -19,6 +19,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
+import it.progettoWeb.java.database.query.users.usersQuery;
 
 public class DaoIndirizzoUtente {
 
@@ -58,4 +59,20 @@ public class DaoIndirizzoUtente {
         
         return IndirizzoUtente;
     }   
+    
+    /**
+     * @author Mattia
+     * elimina indirizzo utente
+     * @param idI identificativo indirizzo
+     * @param idU identificativo utente
+     */
+    public void deleteAddress(int idI,int idU) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(usersQuery.deleteAddressUtente(idI,idU));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+        }
+    }
 }

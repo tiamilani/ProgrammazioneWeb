@@ -27,6 +27,7 @@ import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOg
 import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
 import it.progettoWeb.java.database.Model.indirizzo.ModelloListeIndirizzo;
 import it.progettoWeb.java.database.Model.recensioneVenditore.ModelloListeRecensioneVenditore;
+import it.progettoWeb.java.database.query.generics.genericsQuery;
 import it.progettoWeb.java.utility.pair.pair;
 import it.progettoWeb.java.utility.tris.tris;
 import java.util.List;
@@ -44,6 +45,8 @@ public class UserController extends HttpServlet {
     private static String INSERT_OR_EDIT = "/jspFile/Finale/Utente/modificaDatiUtente.jsp";
     private static String DESCRIZIONEVENDITORE = "/jspFile/Finale/DescrizioneVenditore/descrizioneVenditore.jsp";
     private static String DESCRIZIONENEGOZIO = "/jspFile/Finale/DescrizioneNegozio/descrizioneNegozio.jsp";
+    private static String GESTIONEUTENTE ="/jspFile/Finale/Utente/impostazioneUtente.jsp";
+    private static String USERPAGE = "/jspFile/Finale/Utente/utente.jsp";
     private static String HOME_PAGE = "/jspFile/Finale/Index/index.jsp";
     private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
     private DaoUtente daoUtente;
@@ -118,6 +121,29 @@ public class UserController extends HttpServlet {
             request.setAttribute("listaImmagini", listaImmagini);
             forward = DESCRIZIONEVENDITORE;
         } 
+        else if(action.equals("infoCurrentUser")){
+            ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+            ModelloListeIndirizzo listaIndirizzi = new ModelloListeIndirizzo(daoIndirizzo.selectAddressByUserID(utente.getId()));
+            
+            request.setAttribute("listaIndirizzi", listaIndirizzi);
+            forward = GESTIONEUTENTE;
+        }
+        else if(action.equals("updateMail")){
+            ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+            String newEmail = (String)request.getParameter("changeEmail");
+            
+            if(utente.getMail().equalsIgnoreCase(newEmail)){
+                forward=ERROR_PAGE;
+                request.setAttribute("errore", "La mail deve differire da quella precedente");
+            }
+            else{
+                utente.setMail(newEmail);
+
+                daoUtente.updateUserEmailByUserID(utente);
+            }
+            response.sendRedirect("UserController?action=infoCurrentUser");
+            return;
+        }
         else if(action.equals("DescrizioneNegozio")){
             int idNegozio = Integer.parseInt(request.getParameter("idNegozio"));
             tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> negozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(idNegozio);
@@ -176,13 +202,14 @@ public class UserController extends HttpServlet {
             String password = request.getParameter("password");
             ModelloUtente utente = daoUtente.selectUserByEmailAndPassword(email, password);
             
-            request.getSession().removeAttribute("utenteSessione");
-            request.getSession().setAttribute("utenteSessione", utente);
-            
-            Cookie ck=new Cookie("user",String.valueOf(utente.getId()));//creating cookie object  
-            ck.setMaxAge(-1);
-            response.addCookie(ck);//adding cookie in the response  
-            
+            if(utente.getId() > 0){
+                request.getSession().removeAttribute("utenteSessione");
+                request.getSession().setAttribute("utenteSessione", utente);
+
+                Cookie ck=new Cookie("user",String.valueOf(utente.getId()));//creating cookie object  
+                ck.setMaxAge(-1);
+                response.addCookie(ck);//adding cookie in the response  
+            }
             forward = HOME_PAGE;
         }
         else if(action.equalsIgnoreCase("addUser")){
@@ -220,6 +247,29 @@ public class UserController extends HttpServlet {
             } else {
                 forward=ERROR_PAGE;
                 request.setAttribute("errore", "Captcha errato");
+            }
+        }
+        else if(action.equalsIgnoreCase("updatePassword")){
+            String newPassword = request.getParameter("newPassword");
+            String newConfirmedPassword = request.getParameter("newConfirmPassword");
+            
+            ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+            
+            if(!newPassword.equals(newConfirmedPassword)){
+                forward=ERROR_PAGE;
+                request.setAttribute("errore", "La conferma della password non è uguale alla password");
+            }
+            else {
+                if(utente.getPassword().equals(newPassword)){
+                    forward=ERROR_PAGE;
+                    request.setAttribute("errore", "La nuova password non può essere uguale a quella vecchia");
+                }
+                else {
+                    utente.setPassword(newPassword);
+                    daoUtente.updateUserPasswordByUserID(utente);
+                    response.sendRedirect("UserController?action=infoCurrentUser");
+                    return;
+                }
             }
         }
         
