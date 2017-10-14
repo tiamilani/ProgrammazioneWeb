@@ -53,7 +53,7 @@
                                     <table>
                                         <tr>
                                             <!-- Nome prodotto -->
-                                            <td><c:out value="${object.getL().getNome()}" /></td>
+                                            <td><c:out value="${object.getL().getNome()}" /></p></td>
                                         </tr>
                                         <tr>
                                             <!-- Disponibilita' prodotto -->
@@ -79,8 +79,11 @@
                                             <td>
                                                 <c:set var="prezzoScontato" value="${prezzo - (prezzo * sconto / 100)}"/>
                                                 
-                                                <del><fmt:formatNumber value = "${prezzo}" type = "currency"/></del>
-                                                <fmt:formatNumber value = "${prezzoScontato}" type = "currency"/>
+                                                <!-- OLD    <del><fmt:formatNumber value = "${prezzo}" type = "currency"/></del>-->
+                                                <!-- OLD    <span id="lblPrezzoScontato${iterator}"><fmt:formatNumber value = "${prezzoScontato}" type = "currency"/></span>-->
+                                                
+                                                <del>EUR <fmt:formatNumber type = "number"  minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzo}" /></del>
+                                                EUR <span id="lblPrezzoScontato${iterator}"><fmt:formatNumber type = "number"  minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzoScontato}" /></span>
                                                 <br/>
                                                 <p>(Applicato sconto del <c:out value="${sconto}"/> %)</p>
                                                 
@@ -90,7 +93,9 @@
                                         </c:if>
                                         <c:if test="${sconto == 0}">
                                             <td>
-                                                <fmt:formatNumber value = "${prezzo}" type = "currency"/>
+                                                <!-- OLD    <span id="lblPrezzo${iterator}"><fmt:formatNumber value = "${prezzo}" type = "currency"/></span>-->
+                                                
+                                                EUR <span id="lblPrezzo${iterator}"><fmt:formatNumber type = "number" minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzo}" /></span>
                                                 
                                                 <c:set var="prezzoTot" value="${prezzoTot + (prezzo * quantita)}"/>
                                             </td>
@@ -100,15 +105,119 @@
                                 <!-- Quantita' prodotto nel carrello -->
                                 <td>
                                     <p style="text-align: left">Quantita': 
-                                        <input id="${iterator}" type="number" min="1" max="${disp}" style="width: 3em; text-align: right"  value="${quantita}" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onchange="checkInput(this)"/>
+                                        <input id="${iterator}" type="number" min="1" max="${disp}" style="width: 3em; text-align: right" data-oldvalueQuantita="${quantita}"  value="${quantita}" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onchange="checkInput(this)"/>
                                     </p>
                                     
                                     
                                     <script>
                                         function checkInput(elem)
                                         {
-                                            //Ricevo l'evento 'onchange' da <InpuNumber>
+                                            //Per il momento salvo la quantita' vecchia in un attributo dell'elemento (trova metodo alternativo, in modo che l'utente non possa modificarlo)
+                                            var oldQuantita = parseInt(elem.getAttribute("data-oldvalueQuantita"));
+                                            var newQuantita = parseInt(elem.value);
+                                            var prezzoOggetto = 0;
+                                            var oldPrezzoTotale = (parseFloat(document.getElementById("lblResultCart").getAttribute("data-oldvaluePrezzo"))).toFixed(2);
+                                            var oldNumeroArticoli = parseFloat(document.getElementById("lblResultCart").getAttribute("data-oldvalueOggetti"));
+                                            var newPrezzoTotale = 0;
+                                            var newNumeroArticoli = 0;
+
+                                            //Ottengo il prezzo dell'oggetto
+                                            if(document.getElementById("lblPrezzo"+elem.id) == null)
+                                                prezzoOggetto = (parseFloat(document.getElementById("lblPrezzoScontato"+elem.id).innerHTML.replace(',', '.'))).toFixed(2);
+                                            else
+                                                prezzoOggetto = (parseFloat(document.getElementById("lblPrezzo"+elem.id).innerHTML.replace(',', '.'))).toFixed(2);
+                                           
+                                           
+                                           //TEST 2 -> FAILED
+                                           /*
+                                            * Vorrei assegnare alla variabile prezzoTot (variabile JSP) il valore della variabile nuovoPrezzoTotale (variabile javascript).
+                                            * Questo non è possibile, poiché JSP is executed on the server and JavaScript on the browser.
+                                            * Quindi si può leggere il valore di una variabile JSP, ma non si può modificare (dentro lo script).
+                                            * L'unico sistema è cambiare il testo di un elemento
                                             
+                                           //<-c:set var="prezzoTot" value="${nuovoPrezzoTotale}"/>;
+                                           //alert(${prezzoTot});*/
+                                           
+                                           
+                                           
+                                           //TEST 3 -> FUNZIA!!!
+                                           
+                                           //Ottengo il prezzo dell'oggetto e il vecchio prezzo totale
+                                           prezzoOggetto = parseFloat(prezzoOggetto);
+                                           oldPrezzoTotale = parseFloat(oldPrezzoTotale);
+                                           
+                                           
+                                           
+                                           //alert("oldQuantita = " + (oldQuantita));
+                                           //alert("newQuantita = " + (newQuantita));
+                                           //alert("prezzoOggetto = " + (prezzoOggetto));
+                                           //alert("oldPrezzoTotale = " + (oldPrezzoTotale));
+                                           //alert("oldOggetti = " + (oldNumeroArticoli));
+                                           
+                                           
+                                           
+                                           
+                                           //Calcolo il nuovo prezzo totale e il nuovo numero di articoli
+                                           newPrezzoTotale = (oldPrezzoTotale + prezzoOggetto * (newQuantita - oldQuantita));
+                                           newNumeroArticoli = oldNumeroArticoli + (newQuantita - oldQuantita);
+                                           
+                                           //alert("newPrezzoTotale = " + newPrezzoTotale);
+                                           //alert("newNumeroArticoli = " + newNumeroArticoli);
+                                           
+                                           
+                                           //Stampo il nuovo numero di articoli e il nuovo prezzo totale
+                                           var newText = "<b>Prezzo provvisorio (" + newNumeroArticoli + " articoli): EUR " + newPrezzoTotale.toFixed(2);
+                                           document.getElementById("lblResultCart").innerHTML = newText;
+                                           
+                                           //Setto i vari attriuti (dei vari elementi utilizzati nel processo) con i nuovi valori
+                                           document.getElementById("lblResultCart").setAttribute("data-oldvaluePrezzo", newPrezzoTotale.toString());
+                                           document.getElementById("lblResultCart").setAttribute("data-oldvalueOggetti", newNumeroArticoli.toString());
+                                           elem.setAttribute("data-oldvalueQuantita", newQuantita.toString());
+    
+    
+                                           
+                                           
+                                           
+                                           
+                                           //TEST 1 -> FUNZIA (ma non salva il prezzoTot globale)
+                                           /*
+                                           //Calcolo il nuovo prezzo totale provvisorio
+                                           //nuovoPrezzoTotale = prezzoTot + prezzoOggetto * (newQuantita - oldQuantita)
+                                           nuovoPrezzoTotale = (${prezzoTot} + prezzoOggetto * (newQuantita - oldQuantita)).toFixed(2);
+                                           
+                                           
+                                           //Calcolo il numero di articoli totali provvisori
+                                           nuovoNumeroArticoli = ${nOggetti} + (newQuantita - oldQuantita);
+                                           
+                                           alert("oldQuantita = " + oldQuantita);
+                                           alert("prezzoOggetto = " + prezzoOggetto);
+                                           alert("nuovoPrezzoTotale = " + nuovoPrezzoTotale);
+                                           alert("nuovoNumeroArticoli = " + nuovoNumeroArticoli);
+                                           
+                                           
+                                           //Scrivo i valori di nuovoNumeroArticoli e nuovoPrezzoTotale
+                                           var newText = "<b>Prezzo provvisorio (" + nuovoNumeroArticoli + " articoli): EUR " + nuovoPrezzoTotale;
+                                           alert(newText);
+                                           
+                                           document.getElementById("lblResultCart").innerHTML = newText;
+                                           
+                                           
+                                           
+                                           //Cambio i valori delle variabili globali --> NON SI PUO' FARE
+                                           //<-c:set var="prezzoTot" value="${prezzoTot + nuovoPrezzoTotale}"/>;
+                                           //<-c:set var="nOggetti" value="${nOggetti + nuovoNumeroArticoli}"/>;
+                                           
+                                           */
+                                           
+                                           
+                                            /*
+                                             * TEST 0
+                                             * PROBLEMA
+                                             * Lo script viene caricato solo la prima volta, e le variabili vengono istanziate SOLO con i dati del primo elemento
+                                             * NON E' DINAMICO!
+                                             
+                                            
+                                            //Ricevo l'evento 'onchange' da <InpuNumber>
                                             
                                             //Calcolo nuovoNumeroArticoli e nuovoPrezzoTotale basandomi sull'ID di <InputNumber>
                                             var index = parseInt(elem.id);
@@ -127,7 +236,7 @@
                                             alert(${prezzoTot} + " + " + prezzoOggetto + " * (" + nuovaQuantita + " - " + ${cart.get(index).getQuantita()});
                                             nuovoPrezzoTotale = ${prezzoTot} + prezzoOggetto * (nuovaQuantita - ${cart.get(index).getQuantita()});
                                             
-                                            alert("nuovo prezzo = " + nuovoPrezzoTotale);
+                                            alert("nuovo prezzo = " + nuovoPrezzoTotale);*/
                                         }
                                     </script>
                                 </td>
@@ -139,7 +248,8 @@
                 </c:forEach>
             </table>
             <hr size="3" width="100%" align="left"/>
-            <p id="lblResultCart" style="text-align: left"><b>Prezzo provvisorio (<c:out value="${nOggetti}"/> articoli): <fmt:formatNumber value = "${prezzoTot}" type = "currency"/></b></p>
+            <!-- OLD    <p id="lblResultCart" style="text-align: left"><b>Prezzo provvisorio (<c:out value="${nOggetti}"/> articoli): <fmt:formatNumber value = "${prezzoTot}" type = "currency"/></b></p>-->
+            <p id="lblResultCart" style="text-align: left" data-oldvaluePrezzo="${prezzoTot}" data-oldvalueOggetti="${nOggetti}"><b>Prezzo provvisorio (<c:out value="${nOggetti}"/> articoli): <fmt:formatNumber type = "number" minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzoTot}"/></b></p>
         </div>
         
         <div class="container">
