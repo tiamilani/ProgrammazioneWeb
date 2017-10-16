@@ -7,75 +7,142 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="${pageContext.request.contextPath}/jspFile/Finale/Pagination/jquery.twbsPagination.js"></script>
 
-<div class="wrapper">
+<div class="wrapper" style="justify-content: center; align-items: center;">
     <div class="container">
-        
-        <ul id="pagination-demo" class="pagination-sm" style="display: inline-block;"></ul>
-        <div id="page-content" class="page-content"></div>
-        
+
+        <ul id="pagination-demo" class="pagination-sm" style="display: block;"></ul>
+        <div id="page-content" class="page-content" style="background: transparent;"></div>
+
+
         <c:set var="numPage" value="${1}"/>
-        <c:forEach var="i" begin="${0}" end="${recensioni.getList().size() -1}" step="3">
+        <c:forEach var="i" begin="${0}" end="${recensioniUtenteImmagini.getL().size() -1}" step="3">
             <c:choose>
-                <c:when test="${((recensioni.getList().size() % 3) == 0) or (i == (recensioni.getList().size() - 1)) or (i == (recensioni.getList().size() - 2))}">
-                    <c:if test="${(recensioni.getList().size() % 3) == 0}">
+                <c:when test="${((recensioniUtenteImmagini.getL().size() % 3) == 0) or (i == (recensioniUtenteImmagini.getL().size() - 1)) or (i == (recensioniUtenteImmagini.getL().size() - 2))}">
+                    <c:if test="${(recensioniUtenteImmagini.getL().size() % 3) == 0}">
                         <div id="page-content${numPage}" class="page-content" style="display: none;">
                             <c:set var="numPage" value="${numPage+1}"/>
                             <div class="jumbotron" style="padding: 1rem 1rem">
-                                <a href="#review${i}" data-toggle="collapse" id="collapReview"><h1 class="h1-responsive">${recensioni.get(i).getData()}</h1></a>
+                                <a href="#review${i}" data-toggle="collapse" id="collapReview"><h1 class="h1-responsive">${recensioniUtenteImmagini.getR().get(i).getCognome()} ${recensioniUtenteImmagini.getR().get(i).getNome()}</h1></a>
                                 <div id="review${i}" class="collapse">
-                                    <p class="lead">Valutazione: ${recensioni.get(i).getValutazione()} / 5</p>
+                                    <p class="lead">Data: ${recensioniUtenteImmagini.getL().get(i).getData()}</p>
                                     <hr class="my-2">
-                                    <p>${recensioni.get(i).getTesto()}</p>
+                                    <p class="lead">Valutazione: ${recensioniUtenteImmagini.getL().get(i).getValutazione()} / 5</p>
+                                    <hr class="my-2">
+                                    <p class="lead">${recensioniUtenteImmagini.getL().get(i).getTesto()}</p>
+                                    <c:if test="${recensioniUtenteImmagini.getC().get(i).getList().size() > 0}">
+                                        <div id="carousel">
+                                            <c:forEach items="${recensioniUtenteImmagini.getC().get(i).getList()}" var="img">
+                                                <div class="slide">
+                                                    <img src="${img.getSrc()}" alt="IMAGE NOT LOADED" style="width: 200px; height: 300px; object-fit: cover;">
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                    </c:if>
                                 </div>
                             </div>
                             <div class="jumbotron" style="padding: 1rem 1rem">
-                                <a href="#review${i+1}" data-toggle="collapse" id="collapReview"><h1 class="h1-responsive">${recensioni.get(i+1).getData()}</h1></a>
+                                <a href="#review${i+1}" data-toggle="collapse" id="collapReview"><h1 class="h1-responsive">${recensioniUtenteImmagini.getR().get(i+1).getCognome()} ${recensioniUtenteImmagini.getR().get(i+1).getNome()}</h1></a>
                                 <div id="review${i+1}" class="collapse">
-                                    <p class="lead">Valutazione: ${recensioni.get(i+1).getValutazione()} / 5</p>
+                                    <p class="lead">Data: ${recensioniUtenteImmagini.getL().get(i+1).getData()}</p>
                                     <hr class="my-2">
-                                    <p>${recensioni.get(i+1).getTesto()}</p>
+                                    <p class="lead">Valutazione: ${recensioniUtenteImmagini.getL().get(i+1).getValutazione()} / 5</p>
+                                    <hr class="my-2">
+                                    <p class="lead">${recensioniUtenteImmagini.getL().get(i+1).getTesto()}</p>
+                                    <c:if test="${recensioniUtenteImmagini.getC().get(i+1).getList().size() > 0}">
+                                        <div id="carousel">
+                                            <c:forEach items="${recensioniUtenteImmagini.getC().get(i+1).getList()}" var="img">
+                                                <div class="slide">
+                                                    <img src="${img.getSrc()}" alt="IMAGE NOT LOADED" style="width: 200px; height: 300px; object-fit: cover;">
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                    </c:if>
                                 </div>
                             </div>
                             <div class="jumbotron" style="padding: 1rem 1rem">
-                                <a href="#review${i+2}" data-toggle="collapse" id="collapReview"><h1 class="h1-responsive">${recensioni.get(i+2).getData()}</h1></a>
+                                <a href="#review${i+2}" data-toggle="collapse" id="collapReview"><h1 class="h1-responsive">${recensioniUtenteImmagini.getR().get(i+2).getCognome()} ${recensioniUtenteImmagini.getR().get(i+2).getNome()}</h1></a>
                                 <div id="review${i+2}" class="collapse">
-                                    <p class="lead">Valutazione: ${recensioni.get(i+2).getValutazione()} / 5</p>
+                                    <p class="lead">Data: ${recensioniUtenteImmagini.getL().get(i+2).getData()}</p>
                                     <hr class="my-2">
-                                    <p>${recensioni.get(i+2).getTesto()}</p>
+                                    <p class="lead">Valutazione: ${recensioniUtenteImmagini.getL().get(i+2).getValutazione()} / 5</p>
+                                    <hr class="my-2">
+                                    <p class="lead">${recensioniUtenteImmagini.getL().get(i+2).getTesto()}</p>
+                                    <c:if test="${recensioniUtenteImmagini.getC().get(i+2).getList().size() > 0}">
+                                        <div id="carousel">
+                                            <c:forEach items="${recensioniUtenteImmagini.getC().get(i+2).getList()}" var="img">
+                                                <div class="slide">
+                                                    <img src="${img.getSrc()}" alt="IMAGE NOT LOADED" style="width: 200px; height: 300px; object-fit: cover;">
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
                     </c:if>
-                    <c:if test="${i == (recensioni.getList().size() - 1)}">
+                    <c:if test="${i == (recensioniUtenteImmagini.getL().size() - 1)}">
                         <div id="page-content${numPage}" class="page-content" style="display: none;">
                             <c:set var="numPage" value="${numPage+1}"/>
                             <div class="jumbotron" style="padding: 1rem 1rem">
-                                <a href="#review${i}" data-toggle="collapse" id="collapReview"><h1 class="h1-responsive">${recensioni.get(i).getData()}</h1></a>
+                                <a href="#review${i}" data-toggle="collapse" id="collapReview"><h1 class="h1-responsive">${recensioniUtenteImmagini.getR().get(i).getCognome()} ${recensioniUtenteImmagini.getR().get(i).getNome()}</h1></a>
                                 <div id="review${i}" class="collapse">
-                                    <p class="lead">Valutazione: ${recensioni.get(i).getValutazione()} / 5</p>
+                                    <p class="lead">Data: ${recensioniUtenteImmagini.getL().get(i).getData()}</p>
                                     <hr class="my-2">
-                                    <p>${recensioni.get(i).getTesto()}</p>
+                                    <p class="lead">Valutazione: ${recensioniUtenteImmagini.getL().get(i).getValutazione()} / 5</p>
+                                    <hr class="my-2">
+                                    <p class="lead">${recensioniUtenteImmagini.getL().get(i).getTesto()}</p>
+                                    <c:if test="${recensioniUtenteImmagini.getC().get(i).getList().size() > 0}">
+                                        <div id="carousel">
+                                            <c:forEach items="${recensioniUtenteImmagini.getC().get(i).getList()}" var="img">
+                                                <div class="slide">
+                                                    <img src="${img.getSrc()}" alt="IMAGE NOT LOADED" style="width: 200px; height: 300px; object-fit: cover;">
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
                     </c:if>
-                    <c:if test="${i == (recensioni.getList().size() - 2)}">
+                    <c:if test="${i == (recensioniUtenteImmagini.getL().size() - 2)}">
                         <div id="page-content${numPage}" class="page-content" style="display: none;">
                             <c:set var="numPage" value="${numPage+1}"/>
                             <div class="jumbotron" style="padding: 1rem 1rem">
-                                <a href="#review${i}" data-toggle="collapse" id="collapReview"><h1 class="h1-responsive">${recensioni.get(i).getData()}</h1></a>
+                                <a href="#review${i}" data-toggle="collapse" id="collapReview"><h1 class="h1-responsive">${recensioniUtenteImmagini.getR().get(i).getCognome()} ${recensioniUtenteImmagini.getR().get(i).getNome()}</h1></a>
                                 <div id="review${i}" class="collapse">
-                                    <p class="lead">Valutazione: ${recensioni.get(i).getValutazione()} / 5</p>
+                                    <p class="lead">Data: ${recensioniUtenteImmagini.getL().get(i).getData()}</p>
                                     <hr class="my-2">
-                                    <p>${recensioni.get(i).getTesto()}</p>
+                                    <p class="lead">Valutazione: ${recensioniUtenteImmagini.getL().get(i).getValutazione()} / 5</p>
+                                    <hr class="my-2">
+                                    <p class="lead">${recensioniUtenteImmagini.getL().get(i).getTesto()}</p>
+                                    <c:if test="${recensioniUtenteImmagini.getC().get(i).getList().size() > 0}">
+                                        <div id="carousel">
+                                            <c:forEach items="${recensioniUtenteImmagini.getC().get(i).getList()}" var="img">
+                                                <div class="slide">
+                                                    <img src="${img.getSrc()}" alt="IMAGE NOT LOADED" style="width: 200px; height: 300px; object-fit: cover;">
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                    </c:if>
                                 </div>
                             </div>
                             <div class="jumbotron" style="padding: 1rem 1rem">
-                                <a href="#review${i+1}" data-toggle="collapse" id="collapReview"><h1 class="h1-responsive">${recensioni.get(i+1).getData()}</h1></a>
+                                <a href="#review${i+1}" data-toggle="collapse" id="collapReview"><h1 class="h1-responsive">${recensioniUtenteImmagini.getR().get(i+1).getCognome()} ${recensioniUtenteImmagini.getR().get(i+1).getNome()}</h1></a>
                                 <div id="review${i+1}" class="collapse">
-                                    <p class="lead">Valutazione: ${recensioni.get(i+1).getValutazione()} / 5</p>
+                                    <p class="lead">Data: ${recensioniUtenteImmagini.getL().get(i+1).getData()}</p>
                                     <hr class="my-2">
-                                    <p>${recensioni.get(i+1).getTesto()}</p>
+                                    <p class="lead">Valutazione: ${recensioniUtenteImmagini.getL().get(i+1).getValutazione()} / 5</p>
+                                    <hr class="my-2">
+                                    <p class="lead">${recensioniUtenteImmagini.getL().get(i+1).getTesto()}</p>
+                                    <c:if test="${recensioniUtenteImmagini.getC().get(i+1).getList().size() > 0}">
+                                        <div id="carousel">
+                                            <c:forEach items="${recensioniUtenteImmagini.getC().get(i+1).getList()}" var="img">
+                                                <div class="slide">
+                                                    <img src="${img.getSrc()}" alt="IMAGE NOT LOADED" style="width: 200px; height: 300px; object-fit: cover;">
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -85,27 +152,60 @@
                     <div id="page-content${numPage}" class="page-content" style="display: none;">
                         <c:set var="numPage" value="${numPage+1}"/>
                         <div class="jumbotron" style="padding: 1rem 1rem">
-                            <a href="#review${i}" data-toggle="collapse" id="collapReview"><h1 class="h1-responsive">${recensioni.get(i).getData()}</h1></a>
+                            <a href="#review${i}" data-toggle="collapse" id="collapReview"><h1 class="h1-responsive">${recensioniUtenteImmagini.getR().get(i).getCognome()} ${recensioniUtenteImmagini.getR().get(i).getNome()}</h1></a>
                             <div id="review${i}" class="collapse">
-                                <p class="lead">Valutazione: ${recensioni.get(i).getValutazione()} / 5</p>
+                                <p class="lead">Data: ${recensioniUtenteImmagini.getL().get(i).getData()}</p>
                                 <hr class="my-2">
-                                <p>${recensioni.get(i).getTesto()}</p>
+                                <p class="lead">Valutazione: ${recensioniUtenteImmagini.getL().get(i).getValutazione()} / 5</p>
+                                <hr class="my-2">
+                                <p class="lead">${recensioniUtenteImmagini.getL().get(i).getTesto()}</p>
+                                <c:if test="${recensioniUtenteImmagini.getC().get(i).getList().size() > 0}">
+                                    <div id="carousel">
+                                        <c:forEach items="${recensioniUtenteImmagini.getC().get(i).getList()}" var="img">
+                                            <div class="slide">
+                                                <img src="${img.getSrc()}" alt="IMAGE NOT LOADED" style="width: 200px; height: 300px; object-fit: cover;">
+                                            </div>
+                                        </c:forEach>
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
                         <div class="jumbotron" style="padding: 1rem 1rem">
-                            <a href="#review${i+1}" data-toggle="collapse" id="collapReview"><h1 class="h1-responsive">${recensioni.get(i+1).getData()}</h1></a>
+                            <a href="#review${i+1}" data-toggle="collapse" id="collapReview"><h1 class="h1-responsive">${recensioniUtenteImmagini.getR().get(i+1).getCognome()} ${recensioniUtenteImmagini.getR().get(i+1).getNome()}</h1></a>
                             <div id="review${i+1}" class="collapse">
-                                <p class="lead">Valutazione: ${recensioni.get(i+1).getValutazione()} / 5</p>
+                                <p class="lead">Data: ${recensioniUtenteImmagini.getL().get(i+1).getData()}</p>
                                 <hr class="my-2">
-                                <p>${recensioni.get(i+1).getTesto()}</p>
+                                <p class="lead">Valutazione: ${recensioniUtenteImmagini.getL().get(i+1).getValutazione()} / 5</p>
+                                <hr class="my-2">
+                                <p class="lead">${recensioniUtenteImmagini.getL().get(i+1).getTesto()}</p>
+                                <c:if test="${recensioniUtenteImmagini.getC().get(i+1).getList().size() > 0}">
+                                    <div id="carousel">
+                                        <c:forEach items="${recensioniUtenteImmagini.getC().get(i+1).getList()}" var="img">
+                                            <div class="slide">
+                                                <img src="${img.getSrc()}" alt="IMAGE NOT LOADED" style="width: 200px; height: 300px; object-fit: cover;">
+                                            </div>
+                                        </c:forEach>
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
                         <div class="jumbotron" style="padding: 1rem 1rem">
-                            <a href="#review${i+2}" data-toggle="collapse" id="collapReview"><h1 class="h1-responsive">${recensioni.get(i+2).getData()}</h1></a>
+                            <a href="#review${i+2}" data-toggle="collapse" id="collapReview"><h1 class="h1-responsive">${recensioniUtenteImmagini.getR().get(i+2).getCognome()} ${recensioniUtenteImmagini.getR().get(i+2).getNome()}</h1></a>
                             <div id="review${i+2}" class="collapse">
-                                <p class="lead">Valutazione: ${recensioni.get(i+2).getValutazione()} / 5</p>
+                                <p class="lead">Data: ${recensioniUtenteImmagini.getL().get(i+2).getData()}</p>
                                 <hr class="my-2">
-                                <p>${recensioni.get(i+2).getTesto()}</p>
+                                <p class="lead">Valutazione: ${recensioniUtenteImmagini.getL().get(i+2).getValutazione()} / 5</p>
+                                <hr class="my-2">
+                                <p class="lead">${recensioniUtenteImmagini.getL().get(i+2).getTesto()}</p>
+                                <c:if test="${recensioniUtenteImmagini.getC().get(i+2).getList().size() > 0}">
+                                    <div id="carousel">
+                                        <c:forEach items="${recensioniUtenteImmagini.getC().get(i+2).getList()}" var="img">
+                                            <div class="slide">
+                                                <img src="${img.getSrc()}" alt="IMAGE NOT LOADED" style="width: 200px; height: 300px; object-fit: cover;">
+                                            </div>
+                                        </c:forEach>
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
                     </div>
@@ -138,11 +238,33 @@ h1{
   width: 100%;
   max-width: 660px;
 }
+
+.card {
+    background-color: transparent;
+}
+
+.jumbotron {
+    margin: 0;
+    margin-bottom: 5%;
+}
+
+#carousel {
+    width: 100%;
+    height: 300px;
+
+    overflow-x: auto;
+    overflow-y: auto;
+    white-space:nowrap;
+}
+
+#carousel .slide {
+    display: inline-block;
+}
 </style>
 
 <script>
     $('#pagination-demo').twbsPagination({
-        totalPages: Math.ceil(${recensioni.getList().size() / 3}),
+        totalPages: Math.ceil(${recensioniUtenteImmagini.getL().size() / 3}),
         visiblePages: 5,
         next: 'Next',
         prev: 'Prev',

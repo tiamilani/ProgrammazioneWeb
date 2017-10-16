@@ -64,7 +64,7 @@ public class DaoUtente {
      * @param rs un resultset da cui ricavare un modello negozio
      * @return il modello negozio presente nel resultset
      */
-    private ModelloUtente getModelloFromRs(ResultSet rs)
+    public static ModelloUtente getModelloFromRs(ResultSet rs)
     {
         ModelloUtente User = new ModelloUtente();
         
