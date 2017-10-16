@@ -27,7 +27,6 @@ import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOg
 import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
 import it.progettoWeb.java.database.Model.indirizzo.ModelloListeIndirizzo;
 import it.progettoWeb.java.database.Model.recensioneVenditore.ModelloListeRecensioneVenditore;
-import it.progettoWeb.java.database.query.generics.genericsQuery;
 import it.progettoWeb.java.utility.pair.pair;
 import it.progettoWeb.java.utility.tris.tris;
 import java.util.List;
@@ -164,7 +163,8 @@ public class UserController extends HttpServlet {
         else if(action.equalsIgnoreCase("logout")){
             request.getSession().invalidate();
             
-            Cookie ck=new Cookie("user","");//creating cookie object  
+            Cookie ck=new Cookie("user","");//creating cookie object 
+            ck.setValue("-1");
             ck.setMaxAge(0);
             response.addCookie(ck);//adding cookie in the response 
             

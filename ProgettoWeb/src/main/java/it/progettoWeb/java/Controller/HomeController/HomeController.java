@@ -67,40 +67,70 @@ public class HomeController extends HttpServlet {
             utente.setId(-1);
             
             HttpSession session = request.getSession(false);
-            if(session != null) {
-                ModelloUtente utenteInSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
-                if(utenteInSessione == null){
-                    request.getSession().setAttribute("utenteSessione", utente);
-                }
-                else if(utenteInSessione.getId() == -1){
-                    request.getSession().setAttribute("utenteSessione", utente);
-                }
-            } else {
-                request.getSession().setAttribute("utenteSessione", utente);
-            }
             
             Cookie[] cookies = request.getCookies();
-            if ((cookies != null) && (cookies.length > 0)) {
-                int idUtente=-1;
+            
+            if(session != null) {
+                log("La sessione non è nulla");
+                ModelloUtente utenteInSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+                if(utenteInSessione == null || utenteInSessione.getId() == -1){
+                    log("Utente nullo o -1");
+                    if ((cookies != null) && (cookies.length > 0)) {
+                        log("Il cookie esiste");
+                        int idUtente=-1;
 
-                for (Cookie cookie : cookies) {
-                    switch (cookie.getName()) {
-                        case "user":
-                            if(cookie.getMaxAge() != 0)
-                                idUtente = Integer.parseInt(cookie.getValue());
-                            break;
+                        for (Cookie cookie : cookies) {
+                            switch (cookie.getName()) {
+                                case "user":
+                                    if(cookie.getMaxAge() != 0)
+                                        idUtente = Integer.parseInt(cookie.getValue());
+                                        log("Il valore nel cookie è: " +idUtente+ "");
+                                    break;
+                            }
+                        }
+                        
+                        if(idUtente == -1){
+                            log("Il valore trovato è -1");
+                            request.getSession().setAttribute("utenteSessione", utente);
+                        }
+                        else {
+                            log("Il valore trovato è diverso da -1 setto l'utente corretto");
+                            ModelloUtente utenteSessione = daoUtente.getUserById(idUtente);
+                            request.getSession().setAttribute("utenteSessione", utenteSessione);
+                        }
+                    } 
+                    else {
+                        log("Cookie non trovato");
+                         request.getSession().setAttribute("utenteSessione", utente);
                     }
                 }
-                if(idUtente == -1){
-                    request.getSession().setAttribute("utenteSessione", utente);
-                }
                 else {
-                    ModelloUtente utenteSessione = daoUtente.getUserById(idUtente);
-                    request.getSession().setAttribute("utenteSessione", utenteSessione);
+                    log("Utente non nullo o -1");
                 }
-            } 
-            else {
-                 request.getSession().setAttribute("utenteSessione", utente);
+            } else {
+                log("La sessione è nulla");
+                if ((cookies != null) && (cookies.length > 0)) {
+                    int idUtente=-1;
+
+                    for (Cookie cookie : cookies) {
+                        switch (cookie.getName()) {
+                            case "user":
+                                if(cookie.getMaxAge() != 0)
+                                    idUtente = Integer.parseInt(cookie.getValue());
+                                break;
+                        }
+                    }
+                    if(idUtente == -1){
+                        request.getSession().setAttribute("utenteSessione", utente);
+                    }
+                    else {
+                        ModelloUtente utenteSessione = daoUtente.getUserById(idUtente);
+                        request.getSession().setAttribute("utenteSessione", utenteSessione);
+                    }
+                } 
+                else {
+                     request.getSession().setAttribute("utenteSessione", utente);
+                }
             }
             
             ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCat.selectAllCategory());
