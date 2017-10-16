@@ -8,6 +8,7 @@ it/progettoWeb/java/database/Util/DbUtil.class
 it/progettoWeb/java/database/Model/immagineRecensione/ModelloImmagineRecensione.class
 it/progettoWeb/java/database/Model/indirizzo/ModelloIndirizzo.class
 it/progettoWeb/java/Controller/HomeController/HomeController.class
+it/progettoWeb/java/Controller/InserisciRecensione/InserisciRecensioneController.class
 it/progettoWeb/java/Controller/Categorie/CategoriaController.class
 it/progettoWeb/java/database/Model/immagineOggetto/ModelloListeImmagineOggetto.class
 it/progettoWeb/java/database/Model/Oggetto/ModelloListeOggetto.class
@@ -24,7 +25,6 @@ it/progettoWeb/java/Controller/Indirizzo/IndirizzoController.class
 it/progettoWeb/java/database/Model/spedizioneOggetto/ModelloSpedizioneOggetto.class
 it/progettoWeb/java/database/query/admin/adminQuery.class
 it/progettoWeb/java/database/query/objects/objectsQuery.class
-it/progettoWeb/java/Controller/RecensioneOggetto/RecensioneOggettoController.class
 it/progettoWeb/java/Controller/Oggetto/objectSelectedController.class
 it/progettoWeb/java/Controller/SearchObject/searchObjectController.class
 it/progettoWeb/java/database/Model/indirizzo/ModelloListeIndirizzo.class
