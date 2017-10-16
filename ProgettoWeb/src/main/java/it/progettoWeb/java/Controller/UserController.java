@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
 import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
+import it.progettoWeb.java.database.Dao.recensioneNegozio.DaoRecensioneNegozio;
 import it.progettoWeb.java.database.Dao.recensioneVenditore.DaoRecensioneVenditore;
 import it.progettoWeb.java.database.Model.Negozio.ModelloListeNegozio;
 import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
@@ -24,9 +25,13 @@ import it.progettoWeb.java.database.Model.immagineNegozio.ModelloImmagineNegozio
 import it.progettoWeb.java.database.Model.immagineNegozio.ModelloListeImmagineNegozio;
 import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto;
 import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
+import it.progettoWeb.java.database.Model.immagineRecensione.ModelloListeImmagineRecensione;
 import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
 import it.progettoWeb.java.database.Model.indirizzo.ModelloListeIndirizzo;
+import it.progettoWeb.java.database.Model.recensioneNegozio.ModelloRecensioneNegozio;
+import it.progettoWeb.java.database.Model.recensioneOggetto.ModelloRecensioneOggetto;
 import it.progettoWeb.java.database.Model.recensioneVenditore.ModelloListeRecensioneVenditore;
+import it.progettoWeb.java.database.Model.recensioneVenditore.ModelloRecensioneVenditore;
 import it.progettoWeb.java.utility.pair.pair;
 import it.progettoWeb.java.utility.tris.tris;
 import java.util.List;
@@ -45,7 +50,8 @@ public class UserController extends HttpServlet {
     private static String HOME_PAGE = "/jspFile/Finale/Index/homePage.jsp";
     private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
     private DaoUtente daoUtente;
-    private DaoRecensioneVenditore daoRecensione;
+    private DaoRecensioneVenditore daoRecensioneV;
+    private DaoRecensioneNegozio daoRecensioneN;
     private DaoNegozio daoNegozio;
     private DaoOggetto daoOggetto;
     private DaoIndirizzo daoIndirizzo;
@@ -54,7 +60,8 @@ public class UserController extends HttpServlet {
         super();
         daoIndirizzo = new DaoIndirizzo();
         daoUtente = new DaoUtente();
-        daoRecensione = new DaoRecensioneVenditore();
+        daoRecensioneV = new DaoRecensioneVenditore();
+        daoRecensioneN = new DaoRecensioneNegozio();
         daoNegozio = new DaoNegozio();
         daoOggetto = new DaoOggetto();
     }
@@ -102,17 +109,33 @@ public class UserController extends HttpServlet {
         } else if(action.equals("DescrizioneVenditore")){
             int idUtente = Integer.parseInt(request.getParameter("idUtente"));
             ModelloUtente venditore = daoUtente.selectUserByID(idUtente);
-            ModelloListeRecensioneVenditore recensioni = new ModelloListeRecensioneVenditore(daoRecensione.selectSellerReview(idUtente));
+            ModelloListeRecensioneVenditore recensioni = new ModelloListeRecensioneVenditore(daoRecensioneV.selectSellerReview(idUtente));
             tris<List<ModelloNegozio>, List<ModelloIndirizzo>, List<ModelloImmagineNegozio>> listaNegoziIndirizziImmagini = daoUtente.selectStoreAndAddressImageByUser(idUtente);
             ModelloListeNegozio listaNegozi = new ModelloListeNegozio(listaNegoziIndirizziImmagini.getL());
             ModelloListeIndirizzo listaIndirizzi = new ModelloListeIndirizzo(listaNegoziIndirizziImmagini.getC());
             ModelloListeImmagineNegozio listaImmagini = new ModelloListeImmagineNegozio(listaNegoziIndirizziImmagini.getR());
+            
+            pair<List<ModelloRecensioneVenditore>, List<ModelloUtente>> recensioniVenditori;
+            recensioniVenditori = daoRecensioneV.selectReviewUserBySeller(idUtente);
+            
+            try {
+                ModelloUtente utenteSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+
+                if(utenteSessione.getId() != -1)
+                {
+                    if(daoRecensioneV.reviewOrNotSeller(idUtente, utenteSessione.getId()) > 0)
+                        request.setAttribute("utenteSessione", utenteSessione);
+                }
+            } catch (NullPointerException e) {}
+
+            //request.setAttribute("utenteSessione", recensioniVenditori.getR().get(0));
 
             request.setAttribute("venditore", venditore);
             request.setAttribute("recensioni", recensioni);
             request.setAttribute("listaNegozi", listaNegozi);
             request.setAttribute("listaIndirizzi", listaIndirizzi);
             request.setAttribute("listaImmagini", listaImmagini);
+            request.setAttribute("recensioniVenditori", recensioniVenditori);
             forward = DESCRIZIONEVENDITORE;
         } else if(action.equals("DescrizioneNegozio")){
             int idNegozio = Integer.parseInt(request.getParameter("idNegozio"));
@@ -120,15 +143,32 @@ public class UserController extends HttpServlet {
             ModelloNegozio negozio = negozioIndirizzoImmagine.getL();
             ModelloImmagineNegozio immagine = negozioIndirizzoImmagine.getR();
             ModelloIndirizzo indirizzo = negozioIndirizzoImmagine.getC();
+            
+            pair<List<ModelloRecensioneNegozio>, List<ModelloUtente>> recensioniNegozi;
+            recensioniNegozi = daoRecensioneN.selectReviewImagesUserByStore(idNegozio);
+        
             pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectObjectsImageSelledByStoreID(idNegozio);
             ModelloListeOggetto listaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
             ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
 
+            try {
+                ModelloUtente utenteSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+
+                if(utenteSessione.getId() != -1)
+                {
+                    if(daoRecensioneN.reviewOrNotStore(idNegozio, utenteSessione.getId()) > 0)
+                        request.setAttribute("utenteSessione", utenteSessione);
+                }
+            } catch (NullPointerException e) {}
+
+            //request.setAttribute("utenteSessione", recensioniNegozi.getR().get(0));
+        
             request.setAttribute("negozio", negozio);
             request.setAttribute("immagine", immagine);
             request.setAttribute("indirizzo", indirizzo);
             request.setAttribute("listaOggetti", listaOggetti);
             request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
+            request.setAttribute("recensioniNegozi", recensioniNegozi);
             forward = DESCRIZIONENEGOZIO;
         }
         else

@@ -516,13 +516,12 @@ public class usersQuery {
      * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param txt Una stringa contenente il testo della recensione
      * @param val Un intero indicante la valutazione della recensione
-     * @param data Un Datetime indicante la data di creazione della recensione
      * @param star Un intero indicante l'utilità della recensione
      */
-    public static String addReviewToSeller(int idV, int idU, String txt, int val, Date data, int star){
-        return "INSERT INTO progettoweb.RecensioneVenditore (id, idVenditore, "
-                + "idUtente, testo, valutazione, data, utilita) VALUES "
-                + "(NULL, "+idV+", "+idU+", '"+txt+"', "+val+", "+data+", "+star+");";
+    public static String addReviewToSeller(int idV, int idU, String txt, int val, int star){
+        return "INSERT INTO RecensioneVenditore (id, idVenditore, idUtente, testo, "
+                + "valutazione, data, utilita) VALUES (NULL, '" + idV + "', " + 
+                idU + ", '" + txt + "', " + val + ", CURRENT_TIMESTAMP, " + star + ");";
     }
     
     /**
@@ -532,13 +531,12 @@ public class usersQuery {
      * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param txt Una stringa contenente il testo della recensione
      * @param val Un intero indicante la valutazione della recensione
-     * @param data Un Datetime indicante la data di creazione della recensione
      * @param star Un intero indicante l'utilità della recensione
      */
-    public static String addReviewToStore(int idN, int idU, String txt, int val, Date data, int star){
-        return "INSERT INTO progettoweb.RecensioneNegozio (id, idNegozio, "
-                + "idUtente, testo, valutazione, data, utilita) VALUES "
-                + "(NULL, "+idN+", "+idU+", '"+txt+"', "+val+", "+data+", "+star+");";
+    public static String addReviewToStore(int idN, int idU, String txt, int val, int star){
+        return "INSERT INTO RecensioneNegozio (id, idNegozio, idUtente, testo, "
+                + "valutazione, data, utilita) VALUES (NULL, '" + idN + "', " + 
+                idU + ", '" + txt + "', " + val + ", CURRENT_TIMESTAMP, " + star + ");";
     }
     
     /**
@@ -551,10 +549,10 @@ public class usersQuery {
      * @param data Un Datetime indicante la data di creazione della recensione
      * @param star Un intero indicante l'utilità della recensione
      */
-    public static String addReviewToObject(String idO, int idU, String txt, int val, Date data, int star){
-        return "INSERT INTO progettoweb.RecensioneOggetto (id, idOggetto, "
-                + "idUtente, testo, valutazione, data, utilita) VALUES "
-                + "(NULL, '"+idO+"', "+idU+", '"+txt+"', "+val+", "+data+", "+star+");";
+    public static String addReviewToObject(String idO, int idU, String txt, int val, int star){
+        return "INSERT INTO RecensioneOggetto (id, idOggetto, idUtente, testo, "
+                + "valutazione, data, utilita) VALUES (NULL, '" + idO + "', " + 
+                idU + ", '" + txt + "', " + val + ", CURRENT_TIMESTAMP, " + star + ");";
     }
     
     /**

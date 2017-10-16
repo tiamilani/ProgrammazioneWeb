@@ -27,6 +27,32 @@ public class objectsQuery {
     }
     
     /**
+     * @author andrea
+     * Ottenere Recensione, Utente
+     * @param idO Una stringa che rappresenta l'identificativo dell'oggetto preso in considerazione
+     * @return elenco recensioni e utente
+     */
+    public static String selectReviewUserByObject(String idO)
+    {
+        return "SELECT RecensioneOggetto.*, Utente.* FROM "
+                + "RecensioneOggetto JOIN Utente ON RecensioneOggetto.idUtente=Utente.id "
+                + "WHERE RecensioneOggetto.idOggetto='" + idO + "';";
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere Immagini
+     * @param idR Un intero che rappresenta l'identificativo della recensione presa in considerazione
+     * @return elenco immagini
+     */
+    public static String selectImagesByObject(int idR)
+    {
+        return "SELECT imageRecensione.* FROM imageRecensione JOIN RecensioneOggetto ON "
+                + "imageRecensione.idR=RecensioneOggetto.id WHERE "
+                + "RecensioneOggetto.id=" + idR + ";";
+    }
+    
+    /**
      * @author fbrug
      * Ottenere la lista di oggetti che contengono una stringa nel nome
      * @param nomeDownCase

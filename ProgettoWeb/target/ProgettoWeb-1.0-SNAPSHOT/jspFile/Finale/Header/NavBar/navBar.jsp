@@ -33,6 +33,7 @@ function myFunction() {
     document.form1.hiddenvalutazioneMinima.value = String(valutazioneMinima);
 
     //alert('idCategoria: '+ idCategoria +' minPrice: '+ minPrice +' maxPrice: '+ maxPrice +' nomeVenditore: '+ nomeVenditore +' nomeNegozio: '+ nomeNegozio +' checkRitiroInNegozio: '+ checkRitiroInNegozio +' checkProdottiScontati: '+ checkProdottiScontati +' latitudine: '+ latitudine +' longitudine: '+ longitudine +' raggio: '+ raggio +' valutazioneMinima: ' + valutazioneMinima + '')
+
     form1.action = "${pageContext.request.contextPath}/searchObjectController";
     form1.submit();
 }
@@ -60,9 +61,13 @@ function myFunction() {
                 </div>
                 <c:set var="i" value="${i+1}" />
                 <c:if test="${i == 6}">
+                    <c:set var="i" value="${0}" />
                     </div>
                 </c:if>
             </c:forEach>
+            <c:if test="${i != 0}">
+                </div>
+            </c:if>
         </div>
     </div>
     <nav id="navbarFiltri" class="navbar navbar-light bg-white fixed-top navbar-expand-lg">
