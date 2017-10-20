@@ -7,12 +7,14 @@ package it.progettoWeb.java.Controller;
 
 import it.progettoWeb.java.database.Dao.Negozio.DaoNegozio;
 import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
+import it.progettoWeb.java.database.Dao.Ordine.DaoOrdine;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
+import it.progettoWeb.java.database.Dao.immagineOggetto.DaoImmagineOggetto;
 import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
 import it.progettoWeb.java.database.Dao.recensioneNegozio.DaoRecensioneNegozio;
 import it.progettoWeb.java.database.Dao.recensioneVenditore.DaoRecensioneVenditore;
@@ -20,16 +22,15 @@ import it.progettoWeb.java.database.Model.Negozio.ModelloListeNegozio;
 import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
+import it.progettoWeb.java.database.Model.Ordine.ModelloListeOrdine;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.Model.immagineNegozio.ModelloImmagineNegozio;
 import it.progettoWeb.java.database.Model.immagineNegozio.ModelloListeImmagineNegozio;
 import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto;
 import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
-import it.progettoWeb.java.database.Model.immagineRecensione.ModelloListeImmagineRecensione;
 import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
 import it.progettoWeb.java.database.Model.indirizzo.ModelloListeIndirizzo;
 import it.progettoWeb.java.database.Model.recensioneNegozio.ModelloRecensioneNegozio;
-import it.progettoWeb.java.database.Model.recensioneOggetto.ModelloRecensioneOggetto;
 import it.progettoWeb.java.database.Model.recensioneVenditore.ModelloListeRecensioneVenditore;
 import it.progettoWeb.java.database.Model.recensioneVenditore.ModelloRecensioneVenditore;
 import it.progettoWeb.java.utility.pair.pair;
@@ -37,6 +38,7 @@ import it.progettoWeb.java.utility.tris.tris;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import it.progettoWeb.java.utility.VerifyRecaptcha;
+import java.util.ArrayList;
 import javax.servlet.http.Cookie;
 
 /**
@@ -52,13 +54,17 @@ public class UserController extends HttpServlet {
     private static String GESTIONEUTENTE ="/jspFile/Finale/Utente/impostazioneUtente.jsp";
     private static String USERPAGE = "/jspFile/Finale/Utente/utente.jsp";
     private static String HOME_PAGE = "/jspFile/Finale/Index/index.jsp";
+    private static String INFOORDERDONE= "/jspFile/Finale/Utente/infoOrdiniUtente.jsp";
     private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
+    
     private DaoUtente daoUtente;
     private DaoRecensioneVenditore daoRecensioneV;
     private DaoRecensioneNegozio daoRecensioneN;
     private DaoNegozio daoNegozio;
     private DaoOggetto daoOggetto;
     private DaoIndirizzo daoIndirizzo;
+    private DaoOrdine daoOrdine;
+    private DaoImmagineOggetto daoImgOggetto;
 
     public UserController() {
         super();
@@ -68,6 +74,8 @@ public class UserController extends HttpServlet {
         daoRecensioneN = new DaoRecensioneNegozio();
         daoNegozio = new DaoNegozio();
         daoOggetto = new DaoOggetto();
+        daoOrdine = new DaoOrdine();
+        daoImgOggetto = new DaoImmagineOggetto();
     }
 
     /**
@@ -199,6 +207,60 @@ public class UserController extends HttpServlet {
             request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
             request.setAttribute("recensioniNegozi", recensioniNegozi);
             forward = DESCRIZIONENEGOZIO;
+        }
+        else if(action.equalsIgnoreCase("orderList")){
+            ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+            String order = request.getParameter("order");
+            ModelloListeOrdine listaordini = new ModelloListeOrdine();
+            
+            if(order.equalsIgnoreCase("data")){
+                listaordini = new ModelloListeOrdine(daoOrdine.selectOrders(utente.getId()));
+            } else if(order.equalsIgnoreCase("tipo")){
+                ModelloListeOrdine listaOrdiniPagati = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 1));
+                ModelloListeOrdine listaOrdiniInLavorazione = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 2));
+                ModelloListeOrdine listaOrdiniSpedito = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 3));
+                ModelloListeOrdine listaOrdiniConsegnato = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 4));
+
+                listaordini = new ModelloListeOrdine();
+                for(int i = 0; i < listaOrdiniPagati.getList().size(); i++)
+                    listaordini.add(listaOrdiniPagati.get(i));
+                for(int i = 0; i < listaOrdiniInLavorazione.getList().size(); i++)
+                    listaordini.add(listaOrdiniInLavorazione.get(i));
+                for(int i = 0; i < listaOrdiniSpedito.getList().size(); i++)
+                    listaordini.add(listaOrdiniSpedito.get(i));
+                for(int i = 0; i < listaOrdiniConsegnato.getList().size(); i++)
+                    listaordini.add(listaOrdiniConsegnato.get(i));
+            } else if(order.equalsIgnoreCase("lavorazione")){
+                listaordini = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 2));
+            } else if(order.equalsIgnoreCase("spediti")){
+                listaordini = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 3));
+            }
+            
+            ModelloListeImmagineOggetto immaginiOggetti = new ModelloListeImmagineOggetto();
+            ModelloListeOggetto oggetti = new ModelloListeOggetto();
+            ModelloListeNegozio negozi = new ModelloListeNegozio();
+            List<ModelloUtente> venditori = new ArrayList<>();
+            
+            for(int i=0; i<listaordini.getList().size(); i++){
+                ModelloOggetto oggetto = daoOggetto.getObjectById(listaordini.get(i).getIdOggetto());
+                ModelloImmagineOggetto immagine = new ModelloImmagineOggetto();
+                immagine = daoImgOggetto.selectFirstPhotoObject(oggetto.getId());
+                ModelloNegozio negozio = daoNegozio.getStoreById(oggetto.getIdNegozio());
+                ModelloUtente venditore = daoUtente.getUserById(negozio.getIdVenditore());
+                
+                immaginiOggetti.add(immagine);
+                oggetti.add(oggetto);
+                negozi.add(negozio);
+                venditori.add(venditore);
+            }
+            
+            request.setAttribute("listaImmagini", immaginiOggetti);
+            request.setAttribute("listaOggetti", oggetti);
+            request.setAttribute("listaNegozi", negozi);
+            request.setAttribute("listaVenditori", venditori);
+            request.setAttribute("listaOrdini", listaordini);
+            request.setAttribute("order", order);
+            forward = INFOORDERDONE;
         }
         else if(action.equalsIgnoreCase("logout")){
             request.getSession().invalidate();

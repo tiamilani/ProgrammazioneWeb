@@ -56,7 +56,6 @@ public class IndirizzoController extends HttpServlet {
         
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -131,7 +130,10 @@ public class IndirizzoController extends HttpServlet {
             indirizzo.setnCivico(Integer.parseInt(request.getParameter("nCivico")));
             indirizzo.setInterno(Integer.parseInt(request.getParameter("interno")));
             
-            String[] LatLon = GoogleGeoCode(
+            indirizzo.setLatitudine(Double.parseDouble(request.getParameter("latitudine")));
+            indirizzo.setLongitudine(Double.parseDouble(request.getParameter("longitudine")));
+            
+            /*String[] LatLon = GoogleGeoCode(
                 indirizzo.getnCivico(),
                 indirizzo.getVia(),
                 indirizzo.getCitta(),
@@ -147,7 +149,7 @@ public class IndirizzoController extends HttpServlet {
                 indirizzo.setLongitudine(Double.parseDouble(LatLon[1]));
             } else {
                 indirizzo.setLongitudine(0.0);
-            }
+            }*/
             
             //indirizzo.setLatitudine(5.0);
             //indirizzo.setLongitudine(5.0);
@@ -173,15 +175,15 @@ public class IndirizzoController extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
-    
+/*    
     private static final String GEO_CODE_SERVER = "http://maps.googleapis.com/maps/api/geocode/json?";
 
     private String[] GoogleGeoCode(int nCivico, String via, String citta, String provincia)
     {
-        //String code = "33, Via Passeggiata Archeologica, Agrigento, AG";
-        String code = nCivico + "," + via + "," + citta + "," + provincia;
+        String code = "33, Via Passeggiata Archeologica, Agrigento, AG";
+        //String code = nCivico + "," + via + "," + citta + "," + provincia;
 
         String response = getLocation(code);
 
@@ -285,5 +287,5 @@ public class IndirizzoController extends HttpServlet {
         Double.parseDouble(ord);
 
         return ord;
-    }
+    } */
 }

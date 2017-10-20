@@ -12,7 +12,6 @@ package it.progettoWeb.java.database.Dao.immagineOggetto;
 
 import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -84,21 +83,19 @@ public class DaoImmagineOggetto {
     /**
      * @author Mattia
      * Ottenere solo la prima immagine di un oggetto
-     * @param idO Un intero che rappresenta l'identificativo dell'oggetto preso in considerazione
+     * @param idO Una stringa che rappresenta l'identificativo dell'oggetto preso in considerazione
      * @return ModelloImmagineOggetto prima immagine di un oggetto
      */
-    public ModelloImmagineOggetto selectFirstPhotoObject(int idO) {
+    public ModelloImmagineOggetto selectFirstPhotoObject(String idO) {
         ModelloImmagineOggetto img = new ModelloImmagineOggetto();
-        
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(usersQuery.selectFirstPhotoObject(idO));
             if (rs.next()) {
                 img = getModelloFromRs(rs);
             }
-        } catch (SQLException e) {
-        }
-        
+        } catch (SQLException e) {   
+        } 
         return img;
     }
 }
