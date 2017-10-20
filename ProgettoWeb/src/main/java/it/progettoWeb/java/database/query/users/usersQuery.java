@@ -493,6 +493,20 @@ public class usersQuery {
     }
     
     /**
+     * @author fbrug
+     * Cambia la quantità di un prodotto nell'ordine
+     * @param idOr Un intero che rappresenta l'identificativo dell'ordine preso in considerazione
+     * @param idOg Una stringa che rappresenta l'identificativo dell'oggetto preso in considerazione
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param newQuantity Un intero rappresentate la nuova quantità dell'oggetto nell'ordine selezionato
+     */
+    public static String changeOrderQuantity(int idOr, String idOg, int idU, int newQuantity)
+    {
+        return "UPDATE progettoweb.Ordine SET quantita = " + newQuantity + " WHERE "
+                + "idOrdine = " + idOr + " AND idOggetto = '" + idOg + "' AND IDUTENTE = " + idU + ";";
+    }
+    
+    /**
      * @author Andrea
      * Aggiungi un oggetto agli ordini nella lista dei desideri
      * @param idOr Un intero che rappresenta l'identificativo dell'ordine preso in considerazione

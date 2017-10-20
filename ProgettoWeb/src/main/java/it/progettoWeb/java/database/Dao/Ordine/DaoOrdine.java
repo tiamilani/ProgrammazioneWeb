@@ -426,6 +426,24 @@ public class DaoOrdine {
     }
     
     /**
+     * @author fbrug
+     * @param idOr Un intero che rappresenta l'identificativo dell'ordine preso in considerazione
+     * @param idOg Una stringa che rappresenta l'identificativo dell'oggetto preso in considerazione
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param newQuantity Un intero rappresentate la nuova quantità dell'oggetto nell'ordine selezionato
+     */
+    public void changeOrderQuantity(int idOr, String idOg, int idU, int newQuantity)
+    {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(usersQuery.changeOrderQuantity(idOr, idOg, idU, newQuantity));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+        }
+    }
+    
+    /**
      * @author Mattia
      * Aggiungi un oggetto agli ordini nella lista dei desideri
      * @param oggetto ModelloOrdine che rappresenta l'oggetto da inserire

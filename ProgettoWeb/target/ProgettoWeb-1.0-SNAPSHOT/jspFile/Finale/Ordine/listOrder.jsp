@@ -16,11 +16,54 @@
         <title>Carrello</title>
     </head>
     <body>
+        <jsp:useBean id="cart" class="it.progettoWeb.java.database.Model.Ordine.ModelloListeOrdine" scope="session" />
         
         <c:set var="iterator" value="0"/>
         <c:set var="prezzoTot" value="0"/>
         <c:set var="nOggetti" value="0"/>
+        <c:set var="userId_request" value="${userId_request}"/>
         <fmt:setLocale value = "it_IT"/>
+        
+        
+        <div style="display: none">
+            <form method="POST" id="formSaveChanges" name="formSaveChanges">
+                <input type="text" id="toDo" name="toDo" value="saveChanges"/>
+                <input type="text" id="idUtente" name="idUtente" value="${userId_request}"/>
+                <input type="text" id="nOrders" name="nOrders" value="${cart.size()}"/>
+                
+                <c:forEach items="${cart}" var="order">
+                    <input type="tetx" id="idOrdine${iterator}" name="idOrdine${iterator}" value="${order.idOrdine}"/>
+                    <input type="tetx" id="idOggetto${iterator}" name="idOggetto${iterator}" value="${order.idOggetto}"/>
+                    <input type="tetx" id="quantita${iterator}" name="quantita${iterator}" value="${order.getQuantita()}"/>
+                           
+                    <c:set var="iterator" value="${iterator + 1}"/>
+                </c:forEach>
+            </form>
+        </div>
+
+        
+        <script>
+            window.onbeforeunload = function(event)
+            {
+                //NON VA CON IL REFRESH DELLA PAGINA!!!
+                saveChanges();
+                //event.returnValue = "Write something clever here..";
+                
+                //evemt.returnValue = true;
+                //event.returnValue = true;
+                //return true
+            };
+            
+            
+            
+            function saveChanges()
+            {
+                document.formSaveChanges.action="${pageContext.request.contextPath}/OrdineController";
+                document.formSaveChanges.submit();
+            };
+        </script>
+        
+        
         
         <div class="container">
             <%@include file="../Header/NavBar/navBar.jsp" %>
@@ -28,13 +71,14 @@
         </div>
         
         <div class="container-fluid">
+            
+            <c:set var="iterator" value="0"/>
+            
             <h2><b>CARRELLO</b></h2>
             <table width="100%" cellpadding="5">
                 <c:forEach items="${cart}" var="order">
                     <c:forEach items="${objects}" var="object">
                         <c:if test="${order.idOggetto eq object.getL().getId()}">
-                            <p><c:out value="${objects.get(iterator).getL().getNome()}"/></p>
-                            
                             <c:set var="disp" value="${object.getL().getDisponibilita()}"/>
                             <c:set var="sconto" value="${object.getL().getSconto()}"/>
                             <c:set var="prezzo" value="${object.getL().getPrezzo()}"/>
@@ -78,10 +122,6 @@
                                         <c:if test="${sconto > 0}">
                                             <td>
                                                 <c:set var="prezzoScontato" value="${prezzo - (prezzo * sconto / 100)}"/>
-                                                
-                                                <!-- OLD    <del><fmt:formatNumber value = "${prezzo}" type = "currency"/></del>-->
-                                                <!-- OLD    <span id="lblPrezzoScontato${iterator}"><fmt:formatNumber value = "${prezzoScontato}" type = "currency"/></span>-->
-                                                
                                                 <del>EUR <fmt:formatNumber type = "number"  minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzo}" /></del>
                                                 EUR <span id="lblPrezzoScontato${iterator}"><fmt:formatNumber type = "number"  minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzoScontato}" /></span>
                                                 <br/>
@@ -93,8 +133,6 @@
                                         </c:if>
                                         <c:if test="${sconto == 0}">
                                             <td>
-                                                <!-- OLD    <span id="lblPrezzo${iterator}"><fmt:formatNumber value = "${prezzo}" type = "currency"/></span>-->
-                                                
                                                 EUR <span id="lblPrezzo${iterator}"><fmt:formatNumber type = "number" minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzo}" /></span>
                                                 
                                                 <c:set var="prezzoTot" value="${prezzoTot + (prezzo * quantita)}"/>
@@ -105,11 +143,80 @@
                                 <!-- Quantita' prodotto nel carrello -->
                                 <td>
                                     <p style="text-align: left">Quantita': 
-                                        <input id="${iterator}" type="number" min="1" max="${disp}" style="width: 3em; text-align: right" data-oldvalueQuantita="${quantita}"  value="${quantita}" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onchange="checkInput(this)"/>
+                                        <input id="${iterator}" type="number" min="1" max="${disp}" style="width: 3em; text-align: right" data-oldvalueQuantita="${quantita}"  value="${quantita}" onkeypress='checkInputText(event, this)' onchange="checkInput(this)" onclick="checkInput(this)"/>
                                     </p>
+                                    
+                                    <!--OLD<form method="POST" id="formRemove" name="formRemove">
+                                        <div style="display: none">
+                                            <input type="text" id="toDo" name="toDo" value="remove"/>
+                                            
+                                            <input type="text" id="idOrdine" name="idOrdine" value="${order.idOrdine}"/>
+                                            <input type="text" id="idOggetto" name="idOggetto" value="${order.idOggetto}"/>
+                                            <input type="text" id="idUtente" name="idUtente" value="${userId_request}"/>
+                                        </div>
+                                        <input id="remove${iterator}" type="submit" value="Rimuovi" onclick="removeObject(this)" data-idInput="${iterator}"/>
+                                    </form>-->
+                                    <button type="button" onclick="removeObject(this)" data-idInput="${iterator}">Rimuovi</button>
                                     
                                     
                                     <script>
+                                        function removeObject(elem)
+                                        {
+                                            /*--OLD
+                                             * chiama la servlet con parametro toDo=remove e, dopo aver recuperato idOrdine-idOggetto-idUtente, 
+                                             * elimina la riga corrispondente dalla tabella ORDINE
+                                             * 
+                                             
+                                            var iterator = parseInt(elem.getAttribute("data-idInput"));
+                                            var id = "quantita" + iterator.toString();
+                                            var quantita = parseInt(document.getElementById(elem.getAttribute("data-idInput")).value);
+                                            document.getElementById(id).value = quantita;
+                                            
+                                            document.formRemove.action="${pageContext.request.contextPath}/OrdineController";
+                                            document.formRemove.submit();*/
+    
+                                            
+                                            /*---NEW
+                                             * Setto il valore dell'<intput> quantita relativo all'oggetto selezionato a 0
+                                             * Dopo chiamo la servlet con parametro toDo=saveChanges (quindi uso solo la funzione
+                                             * saveChanges) e salvo i parametri cambiati.
+                                             * Se la quantita' e' 0, elimino la riga corrispondente dalla tabella ORDINE
+                                            */
+                                            var iterator = parseInt(elem.getAttribute("data-idInput"));
+                                            var id = "quantita" + iterator.toString();
+                                            
+                                            document.getElementById(id).value = 0;
+                                            
+                                            saveChanges();
+                                        };
+                                        
+                                        
+                                        
+                                        
+                                        function checkInputText(e, elem)
+                                        {
+                                            /*
+                                             * Prende anche caratteri come '-'  ',' '.' '+' 
+                                             */
+                                            //alert(e.keyCode);
+                                            if(!((e.keyCode > 95 && e.keyCode < 106)
+                                                || (e.keyCode > 47 && e.keyCode < 58) 
+                                                || e.keyCode == 8)) {
+                                                  return false;
+                                              }
+                                            
+                                            if(e.keyCode != 43 && e.keyCode != 44 && e.keyCode != 45 && e.keyCode != 46)
+                                            {
+                                                //alert("charcode = " + e.keyCode);
+                                                if(e.keyCode == 13)
+                                                    checkInput(elem);
+
+                                                return (e.keyCode >= 48 && e.keyCode <= 57);
+                                            }
+                                            
+                                        };
+                                    
+                                        
                                         function checkInput(elem)
                                         {
                                             //Per il momento salvo la quantita' vecchia in un attributo dell'elemento (trova metodo alternativo, in modo che l'utente non possa modificarlo)
@@ -127,43 +234,13 @@
                                             else
                                                 prezzoOggetto = (parseFloat(document.getElementById("lblPrezzo"+elem.id).innerHTML.replace(',', '.'))).toFixed(2);
                                            
-                                           
-                                           //TEST 2 -> FAILED
-                                           /*
-                                            * Vorrei assegnare alla variabile prezzoTot (variabile JSP) il valore della variabile nuovoPrezzoTotale (variabile javascript).
-                                            * Questo non è possibile, poiché JSP is executed on the server and JavaScript on the browser.
-                                            * Quindi si può leggere il valore di una variabile JSP, ma non si può modificare (dentro lo script).
-                                            * L'unico sistema è cambiare il testo di un elemento
-                                            
-                                           //<-c:set var="prezzoTot" value="${nuovoPrezzoTotale}"/>;
-                                           //alert(${prezzoTot});*/
-                                           
-                                           
-                                           
-                                           //TEST 3 -> FUNZIA!!!
-                                           
                                            //Ottengo il prezzo dell'oggetto e il vecchio prezzo totale
                                            prezzoOggetto = parseFloat(prezzoOggetto);
                                            oldPrezzoTotale = parseFloat(oldPrezzoTotale);
                                            
-                                           
-                                           
-                                           //alert("oldQuantita = " + (oldQuantita));
-                                           //alert("newQuantita = " + (newQuantita));
-                                           //alert("prezzoOggetto = " + (prezzoOggetto));
-                                           //alert("oldPrezzoTotale = " + (oldPrezzoTotale));
-                                           //alert("oldOggetti = " + (oldNumeroArticoli));
-                                           
-                                           
-                                           
-                                           
                                            //Calcolo il nuovo prezzo totale e il nuovo numero di articoli
                                            newPrezzoTotale = (oldPrezzoTotale + prezzoOggetto * (newQuantita - oldQuantita));
                                            newNumeroArticoli = oldNumeroArticoli + (newQuantita - oldQuantita);
-                                           
-                                           //alert("newPrezzoTotale = " + newPrezzoTotale);
-                                           //alert("newNumeroArticoli = " + newNumeroArticoli);
-                                           
                                            
                                            //Stampo il nuovo numero di articoli e il nuovo prezzo totale
                                            var newText = "<b>Prezzo provvisorio (" + newNumeroArticoli + " articoli): EUR " + newPrezzoTotale.toFixed(2);
@@ -173,71 +250,9 @@
                                            document.getElementById("lblResultCart").setAttribute("data-oldvaluePrezzo", newPrezzoTotale.toString());
                                            document.getElementById("lblResultCart").setAttribute("data-oldvalueOggetti", newNumeroArticoli.toString());
                                            elem.setAttribute("data-oldvalueQuantita", newQuantita.toString());
-    
-    
                                            
-                                           
-                                           
-                                           
-                                           //TEST 1 -> FUNZIA (ma non salva il prezzoTot globale)
-                                           /*
-                                           //Calcolo il nuovo prezzo totale provvisorio
-                                           //nuovoPrezzoTotale = prezzoTot + prezzoOggetto * (newQuantita - oldQuantita)
-                                           nuovoPrezzoTotale = (${prezzoTot} + prezzoOggetto * (newQuantita - oldQuantita)).toFixed(2);
-                                           
-                                           
-                                           //Calcolo il numero di articoli totali provvisori
-                                           nuovoNumeroArticoli = ${nOggetti} + (newQuantita - oldQuantita);
-                                           
-                                           alert("oldQuantita = " + oldQuantita);
-                                           alert("prezzoOggetto = " + prezzoOggetto);
-                                           alert("nuovoPrezzoTotale = " + nuovoPrezzoTotale);
-                                           alert("nuovoNumeroArticoli = " + nuovoNumeroArticoli);
-                                           
-                                           
-                                           //Scrivo i valori di nuovoNumeroArticoli e nuovoPrezzoTotale
-                                           var newText = "<b>Prezzo provvisorio (" + nuovoNumeroArticoli + " articoli): EUR " + nuovoPrezzoTotale;
-                                           alert(newText);
-                                           
-                                           document.getElementById("lblResultCart").innerHTML = newText;
-                                           
-                                           
-                                           
-                                           //Cambio i valori delle variabili globali --> NON SI PUO' FARE
-                                           //<-c:set var="prezzoTot" value="${prezzoTot + nuovoPrezzoTotale}"/>;
-                                           //<-c:set var="nOggetti" value="${nOggetti + nuovoNumeroArticoli}"/>;
-                                           
-                                           */
-                                           
-                                           
-                                            /*
-                                             * TEST 0
-                                             * PROBLEMA
-                                             * Lo script viene caricato solo la prima volta, e le variabili vengono istanziate SOLO con i dati del primo elemento
-                                             * NON E' DINAMICO!
-                                             
-                                            
-                                            //Ricevo l'evento 'onchange' da <InpuNumber>
-                                            
-                                            //Calcolo nuovoNumeroArticoli e nuovoPrezzoTotale basandomi sull'ID di <InputNumber>
-                                            var index = parseInt(elem.id);
-                                            var prezzoOggetto = ${objects.get(index).getL().getPrezzo() - (objects.get(index).getL().getPrezzo() * objects.get(index).getL().getSconto() / 100)};
-                                            var nuovaQuantita = elem.value;
-                                            var nuovoNumeroArticoli = 0;
-                                            var nuovoPrezzoTotale = 0;
-                                            
-                                            alert("InputNumber.id = " + index);
-                                            alert("vecchiaQuantita = " + ${cart.get(index).getQuantita()});
-                                            alert("nuovaQuantita = " + nuovaQuantita);
-                                            alert("prezzo - (prezzo * sconto / 100) = " + ${objects.get(index).getL().getPrezzo()} + " - (" + ${objects.get(index).getL().getPrezzo()} + " * " + ${objects.get(index).getL().getSconto()} + " / 100");
-                                            alert("prezzoOggetto = " + prezzoOggetto);
-                                            
-                                            
-                                            alert(${prezzoTot} + " + " + prezzoOggetto + " * (" + nuovaQuantita + " - " + ${cart.get(index).getQuantita()});
-                                            nuovoPrezzoTotale = ${prezzoTot} + prezzoOggetto * (nuovaQuantita - ${cart.get(index).getQuantita()});
-                                            
-                                            alert("nuovo prezzo = " + nuovoPrezzoTotale);*/
-                                        }
+                                           document.getElementById("quantita"+elem.id).value = newQuantita.toString();
+                                        };
                                     </script>
                                 </td>
                             </tr>
@@ -248,8 +263,7 @@
                 </c:forEach>
             </table>
             <hr size="3" width="100%" align="left"/>
-            <!-- OLD    <p id="lblResultCart" style="text-align: left"><b>Prezzo provvisorio (<c:out value="${nOggetti}"/> articoli): <fmt:formatNumber value = "${prezzoTot}" type = "currency"/></b></p>-->
-            <p id="lblResultCart" style="text-align: left" data-oldvaluePrezzo="${prezzoTot}" data-oldvalueOggetti="${nOggetti}"><b>Prezzo provvisorio (<c:out value="${nOggetti}"/> articoli): <fmt:formatNumber type = "number" minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzoTot}"/></b></p>
+            <p id="lblResultCart" style="text-align: left" data-oldvaluePrezzo="${prezzoTot}" data-oldvalueOggetti="${nOggetti}"><b>Prezzo provvisorio (<c:out value="${nOggetti}"/> articoli): EUR <fmt:formatNumber type = "number" minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzoTot}"/></b></p>
         </div>
         
         <div class="container">
