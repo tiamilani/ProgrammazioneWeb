@@ -90,7 +90,7 @@
                             <tr>
                                 
                                 <!-- Immagine prodotto -->
-                                <td style="text-align: center"><c:out value="${object.getR().getSrc()}" /></td>
+                                <td style="text-align: center"><img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png" alt="<c:out value="${object.getR().getSrc()}"/>"/></td>
 
                                 <!-- Descrizione prodotto -->
                                 <td>
@@ -101,7 +101,7 @@
                                         </tr>
                                         <tr>
                                             <!-- Disponibilita' prodotto -->
-                                            <td>
+                                            <td id="lblDisponibilita${iterator}" data-disponibilita="${disp}">
                                                 <c:if test="${disp == 0}">
                                                     <p>Non disponibile</p>
                                                 </c:if>
@@ -146,37 +146,13 @@
                                         <input id="${iterator}" type="number" min="1" max="${disp}" style="width: 3em; text-align: right" data-oldvalueQuantita="${quantita}"  value="${quantita}" onkeypress='checkInputText(event, this)' onchange="checkInput(this)" onclick="checkInput(this)"/>
                                     </p>
                                     
-                                    <!--OLD<form method="POST" id="formRemove" name="formRemove">
-                                        <div style="display: none">
-                                            <input type="text" id="toDo" name="toDo" value="remove"/>
-                                            
-                                            <input type="text" id="idOrdine" name="idOrdine" value="${order.idOrdine}"/>
-                                            <input type="text" id="idOggetto" name="idOggetto" value="${order.idOggetto}"/>
-                                            <input type="text" id="idUtente" name="idUtente" value="${userId_request}"/>
-                                        </div>
-                                        <input id="remove${iterator}" type="submit" value="Rimuovi" onclick="removeObject(this)" data-idInput="${iterator}"/>
-                                    </form>-->
                                     <button type="button" onclick="removeObject(this)" data-idInput="${iterator}">Rimuovi</button>
                                     
                                     
                                     <script>
                                         function removeObject(elem)
                                         {
-                                            /*--OLD
-                                             * chiama la servlet con parametro toDo=remove e, dopo aver recuperato idOrdine-idOggetto-idUtente, 
-                                             * elimina la riga corrispondente dalla tabella ORDINE
-                                             * 
-                                             
-                                            var iterator = parseInt(elem.getAttribute("data-idInput"));
-                                            var id = "quantita" + iterator.toString();
-                                            var quantita = parseInt(document.getElementById(elem.getAttribute("data-idInput")).value);
-                                            document.getElementById(id).value = quantita;
-                                            
-                                            document.formRemove.action="${pageContext.request.contextPath}/OrdineController";
-                                            document.formRemove.submit();*/
-    
-                                            
-                                            /*---NEW
+                                            /*
                                              * Setto il valore dell'<intput> quantita relativo all'oggetto selezionato a 0
                                              * Dopo chiamo la servlet con parametro toDo=saveChanges (quindi uso solo la funzione
                                              * saveChanges) e salvo i parametri cambiati.
@@ -195,25 +171,17 @@
                                         
                                         function checkInputText(e, elem)
                                         {
-                                            /*
-                                             * Prende anche caratteri come '-'  ',' '.' '+' 
-                                             */
-                                            //alert(e.keyCode);
-                                            if(!((e.keyCode > 95 && e.keyCode < 106)
-                                                || (e.keyCode > 47 && e.keyCode < 58) 
-                                                || e.keyCode == 8)) {
-                                                  return false;
-                                              }
-                                            
-                                            if(e.keyCode != 43 && e.keyCode != 44 && e.keyCode != 45 && e.keyCode != 46)
+                                            if(e.keyCode == 13) // invio
                                             {
-                                                //alert("charcode = " + e.keyCode);
-                                                if(e.keyCode == 13)
-                                                    checkInput(elem);
-
-                                                return (e.keyCode >= 48 && e.keyCode <= 57);
+                                                checkInput(elem);
+                                                return true;
+                                            }
+                                            else if(e.keyCode >= 48 && e.keyCode <= 57) // tra 0 e 9 
+                                            {
+                                                return true;
                                             }
                                             
+                                            e.returnValue = false;
                                         };
                                     
                                         
@@ -227,6 +195,16 @@
                                             var oldNumeroArticoli = parseFloat(document.getElementById("lblResultCart").getAttribute("data-oldvalueOggetti"));
                                             var newPrezzoTotale = 0;
                                             var newNumeroArticoli = 0;
+                                            var disponibilitaProdotto = parseInt(document.getElementById("lblDisponibilita"+elem.id).getAttribute("data-disponibilita"));
+                                            
+                                            
+                                            //Se (newQuantita > disponibilitaProdotto) allora setto (newQuantita = disponibilitaProdotto)
+                                            if(newQuantita > disponibilitaProdotto)
+                                            {
+                                                newQuantita = disponibilitaProdotto;
+                                                elem.value = disponibilitaProdotto.toString();
+                                            }
+                                                
 
                                             //Ottengo il prezzo dell'oggetto
                                             if(document.getElementById("lblPrezzo"+elem.id) == null)
@@ -272,3 +250,13 @@
         </div>
     </body>
 </html>
+
+<!-- PROBLEMI
+DA FA' -> 1) l'utente deve fare il login e accedere alla pagina del carrello dalla navbar, e l'id dell'utente c'è l'hai già in sessione e sicuramente per motivi di sicurezza non andrebbe passato in get
+DONE -> 2)Ho inserito del testo nella quantità, dopo di che ho rimesso un numero ma continuava a dare errore
+FUNZIA -> 3)Ho modificato la quantità, sono tornato alla home e la quantità è andata persa
+FUNZIA -> 4)Quando imposto quantità 0 l'oggetto andrebbe rimosso
+FUNZIA -> 5)Sarebbe carino mostrare anche un'immagine dell'oggetto affianco al nome
+FUNZIA -> 6)Premo su rimuovi ma non rimuove niente, ricarica la pagina e c'è ancora l'oggetto
+DONE -> 7)Non dovrei poter ordinare più oggetti di quanti ne ha messi a disposizione il venditore, ma questo si può modificare nella servlet quando si premerà su procedi
+-->

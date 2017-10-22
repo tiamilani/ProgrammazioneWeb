@@ -201,6 +201,19 @@ public class UserController extends HttpServlet {
             //RequestDispatcher view = request.getRequestDispatcher(forward);
             view.forward(request, response);
         }
+        if(action.equalsIgnoreCase("becomeSeller"))
+        {
+            System.out.println("Sei diventato un venditore!");
+            
+            /*
+            int idUtente = Integer.parseInt(request.getParameter("idUtente"));
+            ModelloUtente utente = daoUtente.getUserById(idUtente);
+            utente.setUtenteType(1);//0=normale, 1=venditore, 2=amministratore
+            daoUtente.updateUser(utente);
+            forward = HOME_PAGE;
+            view.forward(request, response);
+            */
+        }
 
         forward = HOME_PAGE;
         RequestDispatcher view = request.getRequestDispatcher(forward);

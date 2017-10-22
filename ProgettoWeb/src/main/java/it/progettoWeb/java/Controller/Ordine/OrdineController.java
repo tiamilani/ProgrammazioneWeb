@@ -123,101 +123,54 @@ public class OrdineController extends HttpServlet {
         String toDo = request.getParameter("toDo");System.out.println(toDo);
         int idUtente = Integer.parseInt(request.getParameter("idUtente"));
         
-        //if (toDo.equalsIgnoreCase("saveChanges"))
-        //{
-            System.out.println("DENTRO onbeforeunload");
-            
-            
-            
-            
-            String identificatore;
-            
-            //Ricavo il numero di ordini presenti nel carrello
-            int nOrders =  Integer.parseInt(request.getParameter("nOrders"));
-            
-            for(int i = 0; i < nOrders; i++)
-            {
-                //Ricavo idOrdine, idOggetto, nuovaQuantita
-                identificatore = "idOrdine" + Integer.toString(i);
-                int idOrdine = Integer.parseInt(request.getParameter(identificatore));
-                
-                identificatore = "idOggetto" + Integer.toString(i);
-                String idOggetto = request.getParameter(identificatore);
-                
-                identificatore = "quantita" + Integer.toString(i);
-                int newQuantita = Integer.parseInt(request.getParameter(identificatore));
-                
-                
-                
-                /*
-                System.out.println("idOrdine = " + idOrdine);
-                System.out.println("idOggetto = " + idOggetto);
-                System.out.println("idUtente = " + idUtente);
-                System.out.println("quantita = " + newQuantita);
-                */
-                
-                if(newQuantita == 0)
-                {
-                    //Ricavo l'oggetto corrispondente ai parametri ricevuti
-                    ModelloOrdine ord = new ModelloOrdine();
-                    ord.setIdOrdine(idOrdine);
-                    ord.setIdOggetto(idOggetto);
-                    ord.setIdUtente(idUtente);
+        
+        String identificatore;
 
-                    //Elimino l'ordine dalla tabella ORDINE
-                    //System.out.println("REMOVE oggetto idOrdine = " + idOrdine + " idOggetto = " + idOggetto
-                    //+ " idUtente = " + idUtente + " newQuantita = " + newQuantita);
-                    daoOrdine.removeObjectInCart(ord);
-                }
-                else
-                {
-                    //System.out.println("UPDATE oggetto idOrdine = " + idOrdine + " idOggetto = " + idOggetto
-                    //+ " idUtente = " + idUtente + " newQuantita = " + newQuantita);
-                    daoOrdine.changeOrderQuantity(idOrdine, idOggetto, idUtente, newQuantita);
-                }
-            }
-            
-            
-            
-            
-            
-        //}
-        /*
-        OLD
-        else if (toDo.equalsIgnoreCase("remove"))
+        //Ricavo il numero di ordini presenti nel carrello
+        int nOrders =  Integer.parseInt(request.getParameter("nOrders"));
+
+        for(int i = 0; i < nOrders; i++)
         {
-            //Ricavo i parametri
-            int idOrdine = Integer.parseInt(request.getParameter("idOrdine"));
-            String idOggetto = request.getParameter("idOggetto");
-            idUtente = Integer.parseInt(request.getParameter("idUtente"));
-            
-            
+            //Ricavo idOrdine, idOggetto, nuovaQuantita
+            identificatore = "idOrdine" + Integer.toString(i);
+            int idOrdine = Integer.parseInt(request.getParameter(identificatore));
+
+            identificatore = "idOggetto" + Integer.toString(i);
+            String idOggetto = request.getParameter(identificatore);
+
+            identificatore = "quantita" + Integer.toString(i);
+            int newQuantita = Integer.parseInt(request.getParameter(identificatore));
+
+
+
+            /*
             System.out.println("idOrdine = " + idOrdine);
             System.out.println("idOggetto = " + idOggetto);
             System.out.println("idUtente = " + idUtente);
-            
+            System.out.println("quantita = " + newQuantita);
+            */
 
-            /*
-            Bottone che chiama la servlet e:
-                - salva le nuove quantità degli oggetti
-                - rimuove l'oggetto selezionato (recuperare l'ID dell'oggetto; salvalo come dato nel bottone)
-            La servlet richiamerà se stessa e ricaricherà la pagina con i nuovi dati
+            if(newQuantita == 0)
+            {
+                //Ricavo l'oggetto corrispondente ai parametri ricevuti
+                ModelloOrdine ord = new ModelloOrdine();
+                ord.setIdOrdine(idOrdine);
+                ord.setIdOggetto(idOggetto);
+                ord.setIdUtente(idUtente);
 
-
-            cambia valori nella tabella ordine + carrello
-
-            *-/
-
-
-            //Ricavo l'oggetto corrispondente ai parametri ricevuti
-            ModelloOrdine ord = new ModelloOrdine();
-            ord.setIdOrdine(idOrdine);
-            ord.setIdOggetto(idOggetto);
-            ord.setIdUtente(idUtente);
-
-            //Elimino l'ordine dalla tabella ORDINE
-            //daoOrdine.removeObjectInCart(ord);
-        }*/
+                //Elimino l'ordine dalla tabella ORDINE
+                System.out.println("REMOVE oggetto idOrdine = " + idOrdine + " idOggetto = " + idOggetto
+                + " idUtente = " + idUtente + " newQuantita = " + newQuantita);
+                daoOrdine.removeObjectInCart(ord);
+            }
+            else
+            {
+                //Faccio l'update dell'ordine
+                System.out.println("UPDATE oggetto idOrdine = " + idOrdine + " idOggetto = " + idOggetto
+                + " idUtente = " + idUtente + " newQuantita = " + newQuantita);
+                daoOrdine.changeOrderQuantity(idOrdine, idOggetto, idUtente, newQuantita);
+            }
+        }
         
         //Ricarica la pagina con il carrello modificato
         String forward = "OrdineController?userId=" + idUtente;
