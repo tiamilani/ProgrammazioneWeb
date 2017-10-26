@@ -201,18 +201,17 @@ public class UserController extends HttpServlet {
             //RequestDispatcher view = request.getRequestDispatcher(forward);
             view.forward(request, response);
         }
-        if(action.equalsIgnoreCase("becomeSeller"))
+        else if(action.equalsIgnoreCase("becomeSeller"))
         {
             System.out.println("Sei diventato un venditore!");
             
-            /*
-            int idUtente = Integer.parseInt(request.getParameter("idUtente"));
-            ModelloUtente utente = daoUtente.getUserById(idUtente);
-            utente.setUtenteType(1);//0=normale, 1=venditore, 2=amministratore
+            ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+            utente.setUtenteType(1);
             daoUtente.updateUser(utente);
+            
+            RequestDispatcher view = request.getRequestDispatcher(forward);
             forward = HOME_PAGE;
             view.forward(request, response);
-            */
         }
 
         forward = HOME_PAGE;
