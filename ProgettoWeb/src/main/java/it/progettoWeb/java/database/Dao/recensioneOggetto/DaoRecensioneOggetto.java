@@ -10,6 +10,12 @@ package it.progettoWeb.java.database.Dao.recensioneOggetto;
  * @author mattia
  */
 
+import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
+import it.progettoWeb.java.database.Dao.immagineRecensione.DaoImmagineRecensione;
+import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
+import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
+import it.progettoWeb.java.database.Model.immagineRecensione.ModelloImmagineRecensione;
+import it.progettoWeb.java.database.Model.immagineRecensione.ModelloListeImmagineRecensione;
 import it.progettoWeb.java.database.Model.recensioneOggetto.ModelloRecensioneOggetto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,7 +26,9 @@ import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.query.generics.genericsQuery;
+import it.progettoWeb.java.database.query.objects.objectsQuery;
 import it.progettoWeb.java.database.query.users.usersQuery;
+import it.progettoWeb.java.utility.tris.tris;
 
 public class DaoRecensioneOggetto {
 
@@ -53,7 +61,7 @@ public class DaoRecensioneOggetto {
      * @param rs un resultset da cui ricavare un modello negozio
      * @return il modello negozio presente nel resultset
      */
-    private ModelloRecensioneOggetto getModelloFromRs(ResultSet rs)
+    public static ModelloRecensioneOggetto getModelloFromRs(ResultSet rs)
     {
         ModelloRecensioneOggetto RecensioneOggetto = new ModelloRecensioneOggetto();
         
@@ -74,7 +82,7 @@ public class DaoRecensioneOggetto {
     /**
      * @author Mattia
      * Ottenere le recensioni di un oggetto
-     * @param idU Un intero che rappresenta l'identificativo dell'oggetto preso in considerazione
+     * @param idO Un intero che rappresenta l'identificativo dell'oggetto preso in considerazione
      * @return List<ModelloRecensioneOggetto> lista di recensioni
      */
     public List<ModelloRecensioneOggetto> selectReviewsObjects(String idO) {
@@ -89,6 +97,49 @@ public class DaoRecensioneOggetto {
         }
 
         return recensioni;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere trio Recensione, Immagini, Utente
+     * @param idO Una stringa che rappresenta l'identificativo dell'oggetto preso in considerazione
+     * @return tris<List<ModelloListeImmagineRecensione>,List<ModelloListeImmagini>, List<ModelloUtente>> elenco recensioni, immagini e utente
+     */
+    public tris<List<ModelloRecensioneOggetto>,List<ModelloListeImmagineRecensione>, List<ModelloUtente>> selectReviewImagesUserByObject(String idO) {
+        tris<List<ModelloRecensioneOggetto>,List<ModelloListeImmagineRecensione>, List<ModelloUtente>> res;
+        List<ModelloRecensioneOggetto> recensioni = new ArrayList<>();
+        List<ModelloListeImmagineRecensione> immagini = new ArrayList<>();
+        List<ModelloUtente> utenti = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectReviewUserByObject(idO));
+            
+            while (rs.next()) {
+                recensioni.add(DaoRecensioneOggetto.getModelloFromRs(rs));
+                utenti.add(DaoUtente.getModelloFromRs(rs));
+            }
+        } catch (SQLException e) { }
+        
+        try {
+            Statement statement = connection.createStatement();
+            ModelloListeImmagineRecensione immaginiSingleReview;
+            
+            for(int i = 0; i < recensioni.size(); i++)
+            {
+                ResultSet rs = statement.executeQuery(objectsQuery.selectImagesByObject(recensioni.get(i).getId()));
+                
+                immaginiSingleReview = new ModelloListeImmagineRecensione();
+                while (rs.next()) {
+                    immaginiSingleReview.add(DaoImmagineRecensione.getModelloFromRs(rs));
+                }
+                
+                immagini.add(immaginiSingleReview);
+            }
+        } catch (SQLException e) { }
+        
+        res = new tris(recensioni, immagini, utenti);
+        return res;
     }
     
     /**
@@ -159,7 +210,7 @@ public class DaoRecensioneOggetto {
     public void addReviewToObject(ModelloRecensioneOggetto recensione) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement(usersQuery.addReviewToObject(recensione.getIdOggetto(), recensione.getIdUtente(), recensione.getTesto(), recensione.getValutazione(), recensione.getData(), recensione.getUtilita()));
+                    .prepareStatement(usersQuery.addReviewToObject(recensione.getIdOggetto(), recensione.getIdUtente(), recensione.getTesto(), recensione.getValutazione(), recensione.getUtilita()));
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -169,13 +220,14 @@ public class DaoRecensioneOggetto {
     /**
      * @author Mattia
      * Ottenere un boolean se si ha recensito oppure no un venditore (se il count è 1 vuol dire di si)
-     * @param recensione oggetto recensione da inserire
+     * @param idOggetto oggetto di cui si vuole fare la ricerca
+     * @param idUtente utente di cui si vuole fare la ricerca
      * @return int NumRecensioni
      */
-    public int reviewOrNotObject(ModelloRecensioneOggetto recensione) {
+    public int reviewOrNotObject(String idOggetto, int idUtente) {
         int numRecensioni = 0;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(usersQuery.reviewOrNotObject(recensione.getIdOggetto(),recensione.getIdUtente()));
+            PreparedStatement preparedStatement = connection.prepareStatement(usersQuery.reviewOrNotObject(idOggetto, idUtente));
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {

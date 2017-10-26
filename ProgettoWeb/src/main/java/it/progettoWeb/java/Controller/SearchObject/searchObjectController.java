@@ -20,18 +20,18 @@ import javax.servlet.http.HttpServletResponse;
  * @author mattia
  */
 public class searchObjectController extends HttpServlet {
-    
+
     private static final long serialVersionUID = 1L;
     private static String SEARCH_PAGE = "/jspFile/Finale/search/searchResult.jsp";
     private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
-    
+
     private DaoOggetto dao;
 
     public searchObjectController() {
         super();
         dao = new DaoOggetto();
     }
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,16 +41,17 @@ public class searchObjectController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String forward=SEARCH_PAGE;
-        String error="";
-        
-        String search="", categoria="", nomeVenditore="", nomeNegozio="";
-        int minPrice=0, maxPrice=0, valutazioneMinima=0;
-        boolean checkRitiroInNegozio=false, checkProdottiScontati=false;
-        double latitudine=0, longitudine=0, raggio=0;
-        
+        String error = "";
+
+        String search = "", categoria = "", nomeVenditore = "", nomeNegozio = "";
+        int minPrice = 0, maxPrice = 0, valutazioneMinima = 0;
+        boolean checkRitiroInNegozio = false, checkProdottiScontati = false;
+        double latitudine = 0, longitudine = 0, raggio = 0;
+
         search = request.getParameter("search");
         categoria = request.getParameter("hiddenidCategoria");
         minPrice = ((request.getParameter("hiddenminPrice") == null || "".equals(request.getParameter("hiddenminPrice"))) ? 0 : Integer.parseInt(request.getParameter("hiddenminPrice")));
@@ -63,20 +64,23 @@ public class searchObjectController extends HttpServlet {
         longitudine = ((request.getParameter("hiddenlongitudine") == null || "".equals(request.getParameter("hiddenlongitudine"))) ? 0 : Double.parseDouble(request.getParameter("hiddenlongitudine")));
         raggio = ((request.getParameter("hiddenraggio") == null || "".equals(request.getParameter("hiddenraggio"))) ? 0 : Double.parseDouble(request.getParameter("hiddenraggio")));
         valutazioneMinima = ((request.getParameter("hiddenvalutazioneMinima") == null || "".equals(request.getParameter("hiddenvalutazioneMinima")) || "Choose...".equals(request.getParameter("hiddenvalutazioneMinima"))) ? 0 : Integer.parseInt(request.getParameter("hiddenvalutazioneMinima")));
-        
+
         search = search.trim().replaceAll(" +", " ");
-        
+
+        System.out.println(nomeVenditore);
+
         if(search.length() < 3) {
-            forward=ERROR_PAGE;
+            forward = ERROR_PAGE;
+
             String errore = "Nome elemento da cercare troppo corto";
             request.setAttribute("errore", errore);
             RequestDispatcher view = request.getRequestDispatcher(forward);
             view.forward(request, response);
         }
-        
+
         ModelloListeOggetto listaOggetti = new ModelloListeOggetto(dao.selectObjectByName(search.toLowerCase()));
         request.setAttribute("ListaOggetti", listaOggetti);
-        
+
         /*
         String test = search;
         if(test == null || test.length() < 10){
@@ -97,7 +101,7 @@ public class searchObjectController extends HttpServlet {
         request.setAttribute("hiddenlongitudine", longitudine);
         request.setAttribute("hiddenraggio", raggio);
         request.setAttribute("hiddenvalutazioneMinima", valutazioneMinima);*/
-        
+
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
     }

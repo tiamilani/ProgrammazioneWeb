@@ -12,7 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
 import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
+import it.progettoWeb.java.database.Dao.indirizzoUtente.DaoIndirizzoUtente;
+import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
+import it.progettoWeb.java.database.Model.indirizzo.ModelloListeIndirizzo;
+import it.progettoWeb.java.database.query.users.usersQuery;
 import java.io.InputStream;
 import java.net.URL;
 import javax.servlet.RequestDispatcher;
@@ -21,24 +25,21 @@ import javax.servlet.RequestDispatcher;
  *
  * @author mattia
  */
-public class IndirizzoController extends HttpServlet
-{
+public class IndirizzoController extends HttpServlet {
+    
     private static final long serialVersionUID = 1L;
-    //URL che mostra la lista degli indirizzi di un utente specificato
     private static String LIST_ADDRESS = "/jspFile/Finale/Utente/listAddress.jsp";
-    //URL che permette la modifica/inserimento dei dati di un indirizzo
     private static String INSERT_OR_EDIT = "/jspFile/Finale/Utente/modificaDatiIndirizzo.jsp";
-    private DaoUtente daoUtente;
-    private DaoIndirizzo daoIndirizzo;
+    private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
+    private DaoUtente daoU;
+    private DaoIndirizzo daoI;
+    private DaoIndirizzoUtente daoIndirizzoUtente;
 
-    /**
-     * Costruttore della classe IndirizzoController
-     */
-    public IndirizzoController()
-    {
+    public IndirizzoController() {
         super();
-        daoUtente = new DaoUtente();
-        daoIndirizzo = new DaoIndirizzo();
+        daoU = new DaoUtente();
+        daoI = new DaoIndirizzo();
+        daoIndirizzoUtente = new DaoIndirizzoUtente();
     }
     
     /**
@@ -66,55 +67,36 @@ public class IndirizzoController extends HttpServlet
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
+            throws ServletException, IOException {
         String forward="";
-        //Richiede il parametro "action"
         String action = request.getParameter("action");
 
-        
-        if (action.equalsIgnoreCase("delete"))
+        if (action.equalsIgnoreCase("cancIndirizzo"))
         {
-            //Chiede l'ID dell'indirizzo e elimina l'indirizzo dal DB
-            int addrId = Integer.parseInt(request.getParameter("addrId"));
-            daoIndirizzo.deleteAddress(addrId);
+            int addrId = Integer.parseInt(request.getParameter("id"));
             
-            //Richiama la pagina di visualizzazione degli indirizzi dell'utente specificato
-            forward = LIST_ADDRESS;
-            int userId = Integer.parseInt(request.getParameter("userId"));
-            request.setAttribute("address", daoIndirizzo.selectAddressByUserID(userId));
-            request.setAttribute("userId", userId);
+            daoI.deleteAddress(addrId);
+            
+            response.sendRedirect("UserController?action=infoCurrentUser");
+            return;
         } 
         else if (action.equalsIgnoreCase("edit"))
         {
-            //Chiede l'ID dell'indirizzo e l'ID dell'utente
             int addrId = Integer.parseInt(request.getParameter("addrId"));
-            ModelloIndirizzo addr = daoIndirizzo.selectAddressByIdAddress(addrId);
+            ModelloIndirizzo addr = daoI.selectAddressByIdAddress(addrId);
             
             int userId = Integer.parseInt(request.getParameter("userId"));
             request.setAttribute("userId", userId);
             
-            //Richiama la pagina di inserimento/modifica dati indirizzo
             forward = INSERT_OR_EDIT;
             request.setAttribute("addr", addr);
         } 
         else if (action.equalsIgnoreCase("listAddress"))
         {
-            //Chiede l'ID dell'utente
-            int userId = Integer.parseInt(request.getParameter("userId"));
-           
-            //Richiama la pagina di visualizzazione degli indirizzi dell'utente specificato
-            forward = LIST_ADDRESS;
-            request.setAttribute("address", daoIndirizzo.selectAddressByUserID(userId));
-            request.setAttribute("userId", userId);
-        }
-        else 
-        {
-            //Chiede l'ID dell'utente
             int userId = Integer.parseInt(request.getParameter("userId"));
             
-            //Richiama la pagina di inserimento/modifica dati indirizzo
-            forward = INSERT_OR_EDIT;
+            forward = LIST_ADDRESS;
+            request.setAttribute("address", daoI.selectAddressByUserID(userId));
             request.setAttribute("userId", userId);
         }
 
@@ -134,53 +116,52 @@ public class IndirizzoController extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        String forward="";
+        String action = request.getParameter("action");
         
-        System.out.println("---------------------------------------------------------");
-        
-        //Chiede l'ID dell'utente
-        ModelloIndirizzo addr = new ModelloIndirizzo();
-        int userId = Integer.parseInt(request.getParameter("userId"));
-        
-        System.out.println("userId = "+userId);
-        
-        //Chiedo i parametri dell'indirizzo e li inserisco nel ModelloIndirizzo
-        addr.setStato(request.getParameter("stato"));System.out.println("stato = "+request.getParameter("stato"));
-        addr.setRegione(request.getParameter("regione"));System.out.println("regione = "+request.getParameter("regione"));
-        addr.setProvincia(request.getParameter("provincia"));System.out.println("provincia = "+request.getParameter("provincia"));
-        addr.setCitta(request.getParameter("citta"));System.out.println("citta = "+request.getParameter("citta"));
-        addr.setVia(request.getParameter("via"));System.out.println("via = "+request.getParameter("via"));
-        addr.setnCivico(Integer.parseInt(request.getParameter("nCivico")));System.out.println("nCivico = "+Integer.parseInt(request.getParameter("nCivico")));
-        addr.setInterno(Integer.parseInt(request.getParameter("interno")));System.out.println("interno = "+Integer.parseInt(request.getParameter("interno")));
-        
-        //Calcolo Latitudine & Longitudine, dopodiché le insierisco nel ModelloIndirizzo
-        String[] LatLon = GoogleGeoCode(
-                Integer.parseInt(request.getParameter("nCivico")),
-                request.getParameter("via"),
-                request.getParameter("citta"),
-                request.getParameter("provincia"));
-        
-        addr.setLatitudine(Double.parseDouble(LatLon[0]));System.out.println("stato = "+Double.parseDouble(LatLon[0]));
-        addr.setLongitudine(Double.parseDouble(LatLon[1]));System.out.println("stato = "+Double.parseDouble(LatLon[1]));
-        
-        //Chiedo l'ID dell'indirizzo
-        String addrId = request.getParameter("addrid");System.out.println("addrid = "+request.getParameter("addrid"));
-        if(addrId == null || addrId.isEmpty())
-        {
-            //L'ID non c'è -> questo è un nuovo indirizzo
-            String x =daoIndirizzo.insertAddress(addr,userId); 
-            System.out.println("RESULT INSERT = "+x);
+        if(action.equalsIgnoreCase("addAddr")){
+            ModelloIndirizzo indirizzo = new ModelloIndirizzo();
+            ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+            
+            indirizzo.setStato("Italia");
+            indirizzo.setRegione(request.getParameter("regione"));
+            indirizzo.setProvincia(request.getParameter("provincia"));
+            indirizzo.setCitta(request.getParameter("citta"));
+            indirizzo.setVia(request.getParameter("via"));
+            indirizzo.setnCivico(Integer.parseInt(request.getParameter("nCivico")));
+            indirizzo.setInterno(Integer.parseInt(request.getParameter("interno")));
+            
+            String[] LatLon = GoogleGeoCode(
+                indirizzo.getnCivico(),
+                indirizzo.getVia(),
+                indirizzo.getCitta(),
+                indirizzo.getProvincia());
+            
+            if(LatLon[0]!=null){
+                indirizzo.setLatitudine(Double.parseDouble(LatLon[0]));
+            } else {
+                indirizzo.setLatitudine(0.0);
+            }
+            
+            if(LatLon[1]!=null){
+                indirizzo.setLongitudine(Double.parseDouble(LatLon[1]));
+            } else {
+                indirizzo.setLongitudine(0.0);
+            }
+            
+            //indirizzo.setLatitudine(5.0);
+            //indirizzo.setLongitudine(5.0);
+            
+            daoI.insertAddress(indirizzo,utente.getId());
+            
+            //forward = ERROR_PAGE;
+            //request.setAttribute("errore", usersQuery.insertAddress(indirizzo.getStato(),indirizzo.getRegione(),indirizzo.getProvincia(),indirizzo.getCitta(),indirizzo.getVia(),indirizzo.getnCivico(),indirizzo.getInterno(),indirizzo.getLatitudine(),indirizzo.getLongitudine(),utente.getId()));
+            
+            response.sendRedirect("UserController?action=infoCurrentUser");
+            return;
         }
-        else
-        {
-            //L'ID è presente -> modifico i dati dell'indirizzo esistente
-            addr.setIdI(Integer.parseInt(addrId));
-            String x =daoIndirizzo.updateUserAddressByAddressID(addr);
-            System.out.println("RESULT UPDATE = "+x);
-        }
         
-        RequestDispatcher view = request.getRequestDispatcher(LIST_ADDRESS);
-        request.setAttribute("address", daoIndirizzo.selectAddressByUserID(userId));
-        request.setAttribute("userId", userId);
+        RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
     }
 

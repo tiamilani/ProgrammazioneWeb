@@ -3,6 +3,8 @@
     Created on : 27-set-2017, 20.48.38
     Author     : mattia
 --%>
+<%@page import="net.tanesha.recaptcha.ReCaptchaFactory"%>
+<%@page import="net.tanesha.recaptcha.ReCaptcha"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <script>
@@ -18,7 +20,7 @@ function myFunction() {
     var longitudine = document.forms["filterForm"].elements[8].value;
     var raggio = document.forms["filterForm"].elements[9].value;
     var valutazioneMinima = document.forms["filterForm"].elements[10].value;
-    
+
     document.form1.hiddenidCategoria.value = String(idCategoria);
     document.form1.hiddenminPrice.value = String(minPrice);
     document.form1.hiddenmaxPrice.value = String(maxPrice);
@@ -30,13 +32,14 @@ function myFunction() {
     document.form1.hiddenlongitudine.value = String(longitudine);
     document.form1.hiddenraggio.value = String(raggio);
     document.form1.hiddenvalutazioneMinima.value = String(valutazioneMinima);
-    
+
     //alert('idCategoria: '+ idCategoria +' minPrice: '+ minPrice +' maxPrice: '+ maxPrice +' nomeVenditore: '+ nomeVenditore +' nomeNegozio: '+ nomeNegozio +' checkRitiroInNegozio: '+ checkRitiroInNegozio +' checkProdottiScontati: '+ checkProdottiScontati +' latitudine: '+ latitudine +' longitudine: '+ longitudine +' raggio: '+ raggio +' valutazioneMinima: ' + valutazioneMinima + '')
 
     form1.action = "${pageContext.request.contextPath}/searchObjectController";
     form1.submit();
 }
 </script>
+
 <div class="pos-f-t">
     <div class="collapse" id="navbarToggleFiltri">
         <div class="bg-light p-4">
@@ -80,7 +83,7 @@ function myFunction() {
             <div class="row">
                 <div class="navbar-nav">
                     <button class="paddingNav btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#navbarToggleCategorie" aria-controls="navbarToggleCategorie" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="Small material-icons">arrow_drop_down</i>    
+                        <i class="Small material-icons">arrow_drop_down</i>
                         Categorie
                     </button>
                     <button class="paddingNav btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#navbarToggleFiltri" aria-controls="navbarToggleFiltri" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,26 +102,25 @@ function myFunction() {
                                     <input class="form-control" id="expand" type="text" name="search" placeholder="Search..."/>
                             </div>
                             <div class="col-1">
-                                <input type='hidden' id= 'hiddenidCategoria' name = 'hiddenidCategoria' value='' />
-                                <input type='hidden' id= 'hiddenminPrice' name = 'hiddenminPrice' value='' />
-                                <input type='hidden' id= 'hiddenmaxPrice' name = 'hiddenmaxPrice' value='' />
-                                <input type='hidden' id= 'hiddennomeVenditore' name = 'hiddennomeVenditore' value='' />
-                                <input type='hidden' id= 'hiddennomeNegozio' name = 'hiddennomeNegozio' value='' />
-                                <input type='hidden' id= 'hiddencheckRitiroInNegozio' name = 'hiddencheckRitiroInNegozio' value='' />
-                                <input type='hidden' id= 'hiddencheckProdottiScontati' name = 'hiddencheckProdottiScontati' value='' />
-                                <input type='hidden' id= 'hiddenlatitudine' name = 'hiddenlatitudine' value='' />
-                                <input type='hidden' id= 'hiddenlongitudine' name = 'hiddenlongitudine' value='' />
-                                <input type='hidden' id= 'hiddenraggio' name = 'hiddenraggio' value='' />
-                                <input type='hidden' id= 'hiddenvalutazioneMinima' name = 'hiddenvalutazioneMinima' value='' />
+                                <input type='hidden' id = 'hiddenidCategoria' name = 'hiddenidCategoria' value='' />
+                                <input type='hidden' id = 'hiddenminPrice' name = 'hiddenminPrice' value='' />
+                                <input type='hidden' id = 'hiddenmaxPrice' name = 'hiddenmaxPrice' value='' />
+                                <input type='hidden' id = 'hiddennomeVenditore' name = 'hiddennomeVenditore' value='' />
+                                <input type='hidden' id = 'hiddennomeNegozio' name = 'hiddennomeNegozio' value='' />
+                                <input type='hidden' id = 'hiddencheckRitiroInNegozio' name = 'hiddencheckRitiroInNegozio' value='' />
+                                <input type='hidden' id = 'hiddencheckProdottiScontati' name = 'hiddencheckProdottiScontati' value='' />
+                                <input type='hidden' id = 'hiddenlatitudine' name = 'hiddenlatitudine' value='' />
+                                <input type='hidden' id = 'hiddenlongitudine' name = 'hiddenlongitudine' value='' />
+                                <input type='hidden' id = 'hiddenraggio' name = 'hiddenraggio' value='' />
+                                <input type='hidden' id = 'hiddenvalutazioneMinima' name = 'hiddenvalutazioneMinima' value='' />
                                 <button class="btn btn-outline-primary" type="submit" value="submit" onclick="myFunction()"><i class="Small material-icons">search</i></button>
                             </div>
                     </form>
                 </div>
                 <div class="col-4">
                     <c:choose>
-                        <c:when test="${utente.getId() != -1}">
-                            <button  type="button" class="btn btn-outline-primary buttonSpace" data-toggle="modal"
-                                 data-target="#loginModal"><i class="Small material-icons">person</i> Account</button>
+                        <c:when test="${utenteSessione.getId() != -1}">
+                            <a  href="${pageContext.request.contextPath}/jspFile/Finale/Utente/utente.jsp" class="btn btn-outline-primary buttonSpace"><i class="Small material-icons">person</i> Account</a>
                         </c:when>
                         <c:otherwise>
                             <button  type="button" class="btn btn-outline-primary buttonSpace" data-toggle="modal"
@@ -133,9 +135,9 @@ function myFunction() {
         </div>
     </nav>
 </div>
-            
 
-<%-- messo esternamente al resto in modo da non influenzare il suo autofocus da proprietà di posizionamento prima definite--%>
+
+<%-- messo esternamente al resto in modo da non influenzare il suo autofocus da proprietï¿½ di posizionamento prima definite--%>
 <div id="registerModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
@@ -145,7 +147,7 @@ function myFunction() {
             <h4 class="modal-title">Creare un account</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
-          <form action="${pageContext.request.contextPath}/UserController?action=addUser" method="POST">
+          <form id="registrationForm" action="${pageContext.request.contextPath}/UserController?action=addUser" method="POST">
             <div class="modal-body">
                 <div>
                     <i class="large material-icons">person_outline</i>
@@ -172,11 +174,17 @@ function myFunction() {
                     <input class="col-10 modal-input" type="password" id="customerConfirmPassword" name="confirmPassword" required>
                     <label for="customerConfirmPassword">Ripeti la password</label>
                 </div>
-                    <p>Creando il tuo accont, accetti le nostro condizioni sulla privacy<p>
-              
+                <%--<%
+                    ReCaptcha c = ReCaptchaFactory.newReCaptcha("6Le96jMUAAAAAC5kV0EuyDRuTXUColh5_HReQeCS", "6Le96jMUAAAAAGYR8rQmfOljKJPNIEnZnh8PEPTY", false);
+                    out.print(c.createRecaptchaHtml(null, null));
+                %>--%>
+                <div class="g-recaptcha" data-sitekey="6Le96jMUAAAAAC5kV0EuyDRuTXUColh5_HReQeCS"></div>
+
+                <p>Creando il tuo accont, accetti le nostro condizioni sulla privacy<p>
+                <div id="html_element"></div>
             </div>
             <div class="modal-footer">
-              <button type="submit" class="col-2 paddingNav btn btn-outline-primary">Crea il tuo account</button>
+              <button type="submit" class="col paddingNav btn btn-outline-primary">Crea il tuo account</button>
             </div>
           </form>
         </div>
@@ -206,7 +214,7 @@ function myFunction() {
                     <label for="customerPassword">Password</label>
                 </div>
                     <a href="#">Password dimenticata</a>
-              
+
             </div>
             <div class="modal-footer">
               <button type="submit" class="col-2 paddingNav btn btn-outline-primary my-2 my-sm-0">Login</button>

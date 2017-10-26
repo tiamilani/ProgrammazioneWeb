@@ -41,6 +41,19 @@ public class sellersQuery {
     {
         return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + ";";
     }
+    
+    /**
+     * @author andrea
+     * Ottenere Recensione, Venditore
+     * @param idV Una stringa che rappresenta l'identificativo del venditore preso in considerazione
+     * @return elenco recensioni e venditore
+     */
+    public static String selectReviewUserBySeller(int idV)
+    {
+        return "SELECT RecensioneVenditore.*, Utente.* FROM "
+                + "RecensioneVenditore JOIN Utente ON RecensioneVenditore.idUtente=Utente.id "
+                + "WHERE RecensioneVenditore.idVenditore='" + idV + "';";
+    }
           
     /**
      * @author fbrug

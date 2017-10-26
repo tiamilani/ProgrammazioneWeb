@@ -10,7 +10,10 @@ package it.progettoWeb.java.database.Dao.immagineRecensione;
  * @author mattia
  */
 
+import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
+import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
 import it.progettoWeb.java.database.Model.immagineRecensione.ModelloImmagineRecensione;
+import it.progettoWeb.java.database.Model.recensioneOggetto.ModelloRecensioneOggetto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +22,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
+import it.progettoWeb.java.database.query.objects.objectsQuery;
 import it.progettoWeb.java.database.query.users.usersQuery;
+import it.progettoWeb.java.utility.tris.tris;
 
 public class DaoImmagineRecensione {
 
@@ -47,7 +52,7 @@ public class DaoImmagineRecensione {
      * @param rs un resultset da cui ricavare un modello negozio
      * @return il modello negozio presente nel resultset
      */
-    private ModelloImmagineRecensione getModelloFromRs(ResultSet rs)
+    public static ModelloImmagineRecensione getModelloFromRs(ResultSet rs)
     {
         ModelloImmagineRecensione ImmagineRecensione = new ModelloImmagineRecensione();
         

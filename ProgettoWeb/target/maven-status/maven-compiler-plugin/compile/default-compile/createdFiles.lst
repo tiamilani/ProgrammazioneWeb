@@ -3,6 +3,7 @@ it\progettoWeb\java\database\Dao\spedizioneOggetto\DaoSpedizioneOggetto.class
 it\progettoWeb\java\Controller\Indirizzo\IndirizzoController.class
 it\progettoWeb\java\database\Dao\Oggetto\DaoOggetto.class
 it\progettoWeb\java\database\Model\Carrello\ModelloCarrello.class
+it\progettoWeb\java\Controller\InserisciRecensione\InserisciRecensioneController.class
 it\progettoWeb\java\database\Dao\rispostaVenditore\DaoRispostaVenditore.class
 it\progettoWeb\java\Controller\UserController.class
 it\progettoWeb\java\database\Model\immagineUtente\ModelloListeImmagineUtente.class
@@ -32,7 +33,7 @@ it\progettoWeb\java\Controller\Oggetto\objectSelectedController.class
 it\progettoWeb\java\database\Model\tipoSpedizione\ModelloTipoSpedizione.class
 it\progettoWeb\java\Functions.class
 it\progettoWeb\java\database\query\objectsMarkets\objectMarketsQuery.class
-it\progettoWeb\java\Controller\RecensioneOggetto\RecensioneOggettoController.class
+it\progettoWeb\java\utility\VerifyRecaptcha.class
 it\progettoWeb\java\database\Model\indirizzoUtente\ModelloIndirizzoUtente.class
 it\progettoWeb\java\database\query\admin\adminQuery.class
 it\progettoWeb\java\database\Model\indirizzo\ModelloIndirizzo.class

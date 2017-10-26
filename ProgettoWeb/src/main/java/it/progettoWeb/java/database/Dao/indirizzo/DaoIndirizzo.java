@@ -134,16 +134,32 @@ public class DaoIndirizzo {
      * aggiungere indirizzo utente
      * @param ModelloIndirizzo user
      */
-    public String insertAddress(ModelloIndirizzo address, int idU) {
+    public void insertAddress(ModelloIndirizzo address, int idU) {
         try {
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement(usersQuery.insertAddress(address.getStato(),address.getRegione(),address.getProvincia(),address.getCitta(),address.getVia(),address.getnCivico(),address.getInterno(),address.getLatitudine(),address.getLongitudine(),idU));
-            preparedStatement.executeUpdate();
-
+            //PreparedStatement preparedStatement = connection
+              //      .prepareStatement(usersQuery.insertAddress(address.getStato(),address.getRegione(),address.getProvincia(),address.getCitta(),address.getVia(),address.getnCivico(),address.getInterno(),address.getLatitudine(),address.getLongitudine(),idU));
+            //preparedStatement.executeUpdate();
+            
+            Statement stat = connection.createStatement();
+            stat.addBatch(usersQuery.insertAddress1(address.getStato(),address.getRegione(),address.getProvincia(),address.getCitta(),address.getVia(),address.getnCivico(),address.getInterno(),address.getLatitudine(),address.getLongitudine()));
+            stat.addBatch(usersQuery.insertAddress2());
+            stat.executeBatch();
+            
+            PreparedStatement preparedStatement = connection.prepareStatement(usersQuery.insertAddress3(address.getStato(),address.getRegione(),address.getProvincia(),address.getCitta(),address.getVia(),address.getnCivico(),address.getInterno(),address.getLatitudine(),address.getLongitudine()));
+            ResultSet rs = preparedStatement.executeQuery();
+            int idI=1;
+            if (rs.next()) {
+                idI = rs.getInt("@IDI:=idI");
+            }
+            
+            stat.clearBatch();
+            stat.addBatch(usersQuery.insertAddress4(idI,idU));
+            stat.executeBatch();
+            //stat.addBatch(usersQuery.insertAddress3(address.getStato(),address.getRegione(),address.getProvincia(),address.getCitta(),address.getVia(),address.getnCivico(),address.getInterno(),address.getLatitudine(),address.getLongitudine()));
+            //stat.addBatch(usersQuery.insertAddress4(idU));
+            
         } catch (SQLException e) {
-            return e.getMessage();
         }
-        return "ok";
     }
     
     /**

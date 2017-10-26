@@ -29,6 +29,19 @@ public class marketsSellersQuery {
     }
     
     /**
+     * @author andrea
+     * Ottenere Recensione, Negozio
+     * @param idN Una stringa che rappresenta l'identificativo del negozio preso in considerazione
+     * @return elenco recensioni e negozio
+     */
+    public static String selectReviewUserByStore(int idN)
+    {
+        return "SELECT RecensioneNegozio.*, Utente.* FROM "
+                + "RecensioneNegozio JOIN Utente ON RecensioneNegozio.idUtente=Utente.id "
+                + "WHERE RecensioneNegozio.idNegozio='" + idN + "';";
+    }
+    
+    /**
      * @author Damiano
      * Metodo che permette di ottenere la lista degli oggetti presenti nei negozi di un determinato venditore
      * @param id Un intero che rappresenta il venditore di cui si stanno cercando gli oggetti presenti nei suoi negozi

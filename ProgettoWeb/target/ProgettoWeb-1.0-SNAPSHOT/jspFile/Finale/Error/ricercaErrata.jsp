@@ -11,10 +11,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ricerca non consentita</title>
-        <meta http-equiv="refresh" content="3;URL=${pageContext.request.contextPath}/jspFile/Finale/Index/index.jsp">
+        <meta http-equiv="refresh" content="10;URL=${pageContext.request.contextPath}/jspFile/Finale/Index/index.jsp">
     </head>
     <body>
-        <h1><%=  request.getParameter("errore") %></h1>
+        <h1><c:out value="${errore}" /></h1>
         <p>ora ti riporto alla homePage</p>
     </body>
 </html>

@@ -113,7 +113,7 @@ INSERT INTO `Categoria` (`id`, `nome`, `sottoCategoria`, `descrizione`, `oggetti
 (18, 'Libri', NULL, 'Entra in un nuovo mondo fatto di fantasia', 0),
 (19, 'Moda', NULL, 'Fatti travolgere dalle ultime creazioni', 0),
 (20, 'Orologi', NULL, 'Rendi ogni secondo speciale', 0),
-(21, 'Prima infanzia', NULL, 'Il tuo bambino ha bisogno di te! usa solo prodotti di prima scelta', 0),
+(21, 'Prima infanzia', NULL, 'Il tuo bambino ha bisogno di te! Usa solo prodotti di prima scelta', 0),
 (22, 'Prodotti per animali', NULL, 'Fai gustare al tuo animale qualcosa creato appositamente per lui', 0),
 (23, 'Salute', NULL, 'Prenditi cura di te stesso', 0),
 (24, 'Scarpe e borse', NULL, 'L''accessorio giusto al momento giusto', 0),
