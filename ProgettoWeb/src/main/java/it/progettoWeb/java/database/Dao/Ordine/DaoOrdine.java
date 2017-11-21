@@ -192,7 +192,7 @@ public class DaoOrdine {
      * @author fbrug
      * Ottenere la lista degli ordini in base al loro stato
      * @param idVenditore: intero rappresentante l'ID del venditore
-     * @param stato: intero rappresentante lo stato dell'ordine (0 = nel carrello, 1 = pagato, 2 = in lavorazione, 3 = spedito, 4 = consegnato = nella lista desideri)
+     * @param stato: intero rappresentante lo stato dell'ordine (0 = nel carrello, 1 = pagato, 2 = in lavorazione, 3 = spedito, 4 = consegnato, 5 = nella lista desideri)
      * @return String: lista degli ordini
      */
     public List<ModelloOrdine> selectOrderBySellerIDAndStatus(int idVenditore, int stato)
@@ -452,6 +452,47 @@ public class DaoOrdine {
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(usersQuery.insertObjectInWislist(oggetto.getIdOrdine(), oggetto.getIdUtente(), oggetto.getQuantita(), oggetto.getIdOggetto()));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+        }
+    }
+    
+    /*---2017-11-20---*/
+    
+    /**
+     * @author fbrug
+     * Seleziona gli ordini con lo stesso tipo di spedizione (in base all'idS)
+     * @param idS: intero rappresentante l'ID della spedzione associata all'ordine
+     * @return lista degli ordini
+     */
+    public List<ModelloOrdine> selectOrderByIdS(int idS)
+    {
+        List<ModelloOrdine> ordini = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectOrderByIdS(idS));
+            
+            while(rs.next())
+                ordini.add(getModelloFromRs(rs));
+        } catch(SQLException e) {}
+        
+        return ordini;
+    }
+    
+    /**
+     * @author fbrug
+     * Aggiorna il valore dell'idS dell'ordine selezionato
+     * @param idOrdine: intero rappresentante l'ID dell'ordine
+     * @param idS: intero rappresentante l'ID della spedizione associata all'ordine
+     */
+    public void updateOrderIdS(int idOrdine, int idS)
+    {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(sellersQuery.updateOrderIdS(idOrdine, idS));
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

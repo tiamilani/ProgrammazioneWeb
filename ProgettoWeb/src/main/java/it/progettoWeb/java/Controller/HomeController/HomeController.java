@@ -7,11 +7,13 @@ package it.progettoWeb.java.Controller.HomeController;
 
 import it.progettoWeb.java.database.Dao.Categoria.DaoCategoria;
 import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
+import it.progettoWeb.java.database.Dao.Ordine.DaoOrdine;
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
 import it.progettoWeb.java.database.Model.Categoria.ModelloCategoria;
 import it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
+import it.progettoWeb.java.database.Model.Ordine.ModelloListeOrdine;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto;
 import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
@@ -38,12 +40,14 @@ public class HomeController extends HttpServlet {
     private DaoCategoria daoCat;
     private DaoOggetto daoOggetto;
     private DaoUtente daoUtente;
+    private DaoOrdine daoOrdine;
 
     public HomeController() {
         super();
         daoCat = new DaoCategoria();
         daoOggetto = new DaoOggetto();
         daoUtente = new DaoUtente();
+        daoOrdine = new DaoOrdine();
     }
 
     /**
@@ -121,7 +125,7 @@ public class HomeController extends HttpServlet {
                         }
                     }
                     if(idUtente == -1){
-                        request.getSession().setAttribute("utenteSessione", utente);
+                        request.getSession().setAttribute("utenteSessione", utente);       
                     }
                     else {
                         ModelloUtente utenteSessione = daoUtente.getUserById(idUtente);
@@ -132,6 +136,25 @@ public class HomeController extends HttpServlet {
                      request.getSession().setAttribute("utenteSessione", utente);
                 }
             }
+            
+            /*--- 2017-11-06 */
+            ModelloListeOrdine carrelloInSessione = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
+            if(carrelloInSessione == null || carrelloInSessione.getId() == -1)
+            {
+                ModelloUtente utenteInSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+                if(utenteInSessione.getId() == -1)
+                {
+                    request.getSession().setAttribute("carrelloSessione", new ModelloListeOrdine());
+                }
+                else
+                {
+                    ModelloListeOrdine carrello = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utenteInSessione.getId(), 0));
+                    carrello.setId(carrello.hashCode());
+                    request.getSession().removeAttribute("carrelloSessione");
+                    request.getSession().setAttribute("carrelloSessione", carrello);
+                }
+            }
+            /*---*/
             
             ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCat.selectAllCategory());
             request.getSession().setAttribute("listacategoriesessione", listaCategorie);

@@ -36,7 +36,12 @@ public class ModelloTipoSpedizione {
      * Variabile usata per indicare il tempo richiesto in giorni lavorativi
      */
     private int tempoRichiesto;
-
+    
+    /**
+     * Variabile usata per indicare il numero massimo di oggetti in una spedizione
+     */
+    private int numeroMassimo;
+    
     /**
      * Funzione utilizzata per ottenere l'id della spedizione
      * @return int idS
@@ -131,5 +136,21 @@ public class ModelloTipoSpedizione {
      */
     public void setTempoRichiesto(int tempoRichiesto) {
         this.tempoRichiesto = tempoRichiesto;
+    }
+    
+    /**
+     * Funzione utilizzata per ottenere il numero massimo di oggetti in una spedizione
+     * @return int numeroMassimo
+     */
+    public int getNumeroMassimo() {
+        return numeroMassimo;
+    }
+    
+    /**
+     * Funzione utilizzata per settare il numero massimo di oggetti in una spedizione
+     * @param numeroMassimo 
+     */
+    public void setNumeroMassimo(int numeroMassimo) {
+        this.numeroMassimo = numeroMassimo;
     }
 }

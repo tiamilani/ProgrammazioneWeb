@@ -7,6 +7,7 @@ package it.progettoWeb.java.Controller;
 
 import it.progettoWeb.java.database.Dao.Negozio.DaoNegozio;
 import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
+import it.progettoWeb.java.database.Dao.Ordine.DaoOrdine;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +21,8 @@ import it.progettoWeb.java.database.Model.Negozio.ModelloListeNegozio;
 import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
+import it.progettoWeb.java.database.Model.Ordine.ModelloListeOrdine;
+import it.progettoWeb.java.database.Model.Ordine.ModelloOrdine;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.Model.immagineNegozio.ModelloImmagineNegozio;
 import it.progettoWeb.java.database.Model.immagineNegozio.ModelloListeImmagineNegozio;
@@ -53,13 +56,13 @@ public class UserController extends HttpServlet {
     private static String USERPAGE = "/jspFile/Finale/Utente/utente.jsp";
     private static String HOME_PAGE = "/jspFile/Finale/Index/index.jsp";
     private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
-    private static String DIVENTA_VENDITORE = "/jspFile/Finale/Utente/diventaVenditore.jsp";
     private DaoUtente daoUtente;
     private DaoRecensioneVenditore daoRecensioneV;
     private DaoRecensioneNegozio daoRecensioneN;
     private DaoNegozio daoNegozio;
     private DaoOggetto daoOggetto;
     private DaoIndirizzo daoIndirizzo;
+    private DaoOrdine daoOrdine;
 
     public UserController() {
         super();
@@ -69,6 +72,7 @@ public class UserController extends HttpServlet {
         daoRecensioneN = new DaoRecensioneNegozio();
         daoNegozio = new DaoNegozio();
         daoOggetto = new DaoOggetto();
+        daoOrdine = new DaoOrdine();
     }
 
     /**
@@ -209,6 +213,7 @@ public class UserController extends HttpServlet {
             ck.setMaxAge(0);
             response.addCookie(ck);//adding cookie in the response 
             
+            
             forward = HOME_PAGE;
         }
         else
@@ -250,6 +255,28 @@ public class UserController extends HttpServlet {
                 Cookie ck=new Cookie("user",String.valueOf(utente.getId()));//creating cookie object  
                 ck.setMaxAge(-1);
                 response.addCookie(ck);//adding cookie in the response  
+                
+                /*
+                /*Creazione carrello in sessione*
+                ModelloListeOrdine carrello = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 0));
+                request.getSession().removeAttribute("carrelloSessione");
+                request.getSession().setAttribute("carrelloSessione", carrello);
+                
+                carrello.setId(carrello.hashCode());
+                */
+                /*--- 2017-11-06 Creazione carrello in sessione */
+                ModelloListeOrdine carrelloInSessione = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
+                if(carrelloInSessione.getSize() > 0)
+                    for(ModelloOrdine ordine : carrelloInSessione.getList()) 
+                    {
+                        ordine.setIdUtente(utente.getId());
+                        daoOrdine.insertObjectInCart(ordine);
+                    }
+                
+                ModelloListeOrdine carrello = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 0));
+                request.getSession().removeAttribute("carrelloSessione");
+                request.getSession().setAttribute("carrelloSessione", carrello);
+                /*---*/
             }
             forward = HOME_PAGE;
         }
@@ -315,15 +342,11 @@ public class UserController extends HttpServlet {
         }
         else if(action.equalsIgnoreCase("becomeSeller"))
         {
-            System.out.println("Sei diventato un venditore!");
-
             ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
             utente.setUtenteType(1);
             daoUtente.updateUser(utente);
 
-            RequestDispatcher view = request.getRequestDispatcher(forward);
-            forward = HOME_PAGE;
-            view.forward(request, response);
+            forward = USERPAGE;
         }
         
         

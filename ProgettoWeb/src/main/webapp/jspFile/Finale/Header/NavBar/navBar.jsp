@@ -129,7 +129,8 @@ function myFunction() {
                                      data-target="#registerModal"><i class="Small material-icons">person_add</i> Registrati</button>
                         </c:otherwise>
                     </c:choose>
-                        <button  type="button" class="btn btn-outline-primary buttonSpace"><i class="Small material-icons">shopping_basket</i> carrello</button>
+                        <!--<button type="button" class="btn btn-outline-primary buttonSpace"><i class="Small material-icons">shopping_basket</i> carrello</button>-->
+                        <a  href="${pageContext.request.contextPath}/OrdineController?action=listOrders" class="btn btn-outline-primary buttonSpace"><i class="Small material-icons">shopping_basket</i> Carrello</a>
                 </div>
             </div>
         </div>

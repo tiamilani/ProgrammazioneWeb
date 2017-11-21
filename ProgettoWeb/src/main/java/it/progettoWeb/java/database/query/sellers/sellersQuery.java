@@ -631,4 +631,31 @@ public class sellersQuery {
     {
         return "DELETE FROM imageNegozio WHERE imageNegozio.idO = " + idNegozio + " AND imageNegozio.src = " + imagePath + ";";
     }
+    
+    
+    
+    /*---2017-11-20---*/
+    
+    /**
+     * @author fbrug
+     * Seleziona gli ordini con lo stesso tipo di spedizione (in base all'idS)
+     * @param idS: intero rappresentante l'ID della spedzione associata all'ordine
+     * @return String: lista degli ordini
+     */
+    public static String selectOrderByIdS(int idS)
+    {
+        return "SELECT * FROM Ordine WHERE Ordine.idS = " + idS + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * Aggiorna il valore dell'idS dell'ordine selezionato
+     * @param idOrdine: intero rappresentante l'ID dell'ordine
+     * @param idS: intero rappresentante l'ID della spedizione associata all'ordine
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateOrderIdS(int idOrdine, int idS)
+    {
+        return "UPDATE Ordine SET idS = " + idS + " WHERE idOrdine = " + idOrdine + ";";
+    }
 }

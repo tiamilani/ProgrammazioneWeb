@@ -18,6 +18,7 @@ it\progettoWeb\java\database\Dao\ordiniRicevuti\DaoOrdiniRicevuti.class
 it\progettoWeb\java\database\Model\immagineNegozio\ModelloImmagineNegozio.class
 it\progettoWeb\java\database\query\objects\objectsQuery.class
 it\progettoWeb\java\database\Dao\recensioneOggetto\DaoRecensioneOggetto.class
+it\progettoWeb\java\database\query\deliveryType\deliveryTypeQuery.class
 it\progettoWeb\java\utility\tris\tris.class
 it\progettoWeb\java\database\Model\immagineOggetto\ModelloListeImmagineOggetto.class
 it\progettoWeb\java\database\Model\rispostaOggetto\ModelloRispostaOggetto.class
