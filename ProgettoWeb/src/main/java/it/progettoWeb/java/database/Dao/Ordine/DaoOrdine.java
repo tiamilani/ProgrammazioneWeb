@@ -40,6 +40,7 @@ public class DaoOrdine {
     private static final String DATAORDINE="dataOrdine";
     private static final String PREZZODIACQUISTO="prezzoDiAcquisto";
     private static final String IDS="idS";
+    private static final String IDI="idI";
     
     /**
      * Variabile che gestisce la connessione con il db
@@ -75,6 +76,7 @@ public class DaoOrdine {
             Ordine.setDataOrdine(rs.getTimestamp(DATAORDINE));
             Ordine.setPrezzoDiAcquisto(rs.getDouble(PREZZODIACQUISTO));
             Ordine.setIdS(rs.getInt(IDS));
+            Ordine.setIdI(rs.getInt(IDI));
         } catch (SQLException e) {
         }
         
@@ -493,6 +495,48 @@ public class DaoOrdine {
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(sellersQuery.updateOrderIdS(idOrdine, idS));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+        }
+    }
+    
+    
+    /*---2017-11-21---*/
+    
+    /**
+     * @author fbrug
+     * Seleziona gli ordini con lo stesso indirizzo spedizione (in base all'idI)
+     * @param idI: intero rappresentante l'ID dell'indirizzo associato all'ordine
+     * @return lista degli ordini
+     */
+    public List<ModelloOrdine> selectOrderByIdI(int idI)
+    {
+        List<ModelloOrdine> ordini = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectOrderByIdI(idI));
+            
+            while(rs.next())
+                ordini.add(getModelloFromRs(rs));
+        } catch(SQLException e) {}
+        
+        return ordini;
+    }
+    
+    /**
+     * @author fbrug
+     * Aggiorna il valore dell'idI dell'ordine selezionato
+     * @param idOrdine: intero rappresentante l'ID dell'ordine
+     * @param idI: intero rappresentante l'ID dell'indirizzo associato all'ordine
+     */
+    public void updateOrderIdI(int idOrdine, int idI)
+    {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(sellersQuery.updateOrderIdI(idOrdine, idI));
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

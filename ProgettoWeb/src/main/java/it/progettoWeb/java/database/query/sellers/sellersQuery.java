@@ -656,6 +656,35 @@ public class sellersQuery {
      */
     public static String updateOrderIdS(int idOrdine, int idS)
     {
-        return "UPDATE Ordine SET idS = " + idS + " WHERE idOrdine = " + idOrdine + ";";
+        if(idS == -1) //Ritiro in negozio
+            return "UPDATE Ordine SET idS = NULL WHERE idOrdine = " + idOrdine + ";";
+        else
+            return "UPDATE Ordine SET idS = " + idS + " WHERE idOrdine = " + idOrdine + ";";
+    }
+    
+    
+    /*---2017-11-21---*/
+    
+    /**
+     * @author fbrug
+     * Seleziona gli ordini con lo stesso indirizzo spedizione (in base all'idI)
+     * @param idI: intero rappresentante l'ID dell'indirizzo associato all'ordine
+     * @return String: lista degli ordini
+     */
+    public static String selectOrderByIdI(int idI)
+    {
+        return "SELECT * FROM Ordine WHERE Ordine.idI = " + idI + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * Aggiorna il valore dell'idI dell'ordine selezionato
+     * @param idOrdine: intero rappresentante l'ID dell'ordine
+     * @param idI: intero rappresentante l'ID dell'indirizzo associato all'ordine
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateOrderIdI(int idOrdine, int idI)
+    {
+        return "UPDATE Ordine SET idI = " + idI + " WHERE idOrdine = " + idOrdine + ";";
     }
 }

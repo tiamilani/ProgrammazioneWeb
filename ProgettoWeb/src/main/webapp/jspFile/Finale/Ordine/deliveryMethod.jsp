@@ -40,7 +40,6 @@
                 </form>
             </div>
             
-            
             <c:set var="iterator" value="0"/>
             
             <h2><b>INDIRIZZO DI SPEDIZIONE</b></h2>

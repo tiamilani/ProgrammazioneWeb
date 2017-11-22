@@ -7,14 +7,13 @@ function saveChanges(goTo)
             document.formSaveChanges.action="/ProgettoWeb/OrdineController?save=1&action=listOrders";
             break;
         case 1:
-            document.formSaveChanges.action="/ProgettoWeb/OrdineController?save=1&action=proceed";
+            document.formSaveChanges.action="/ProgettoWeb/OrdineController?save=1&action=delivery";
             break;
         case 2:
             document.formSaveChanges.action="/ProgettoWeb/OrdineController?save=2&action=payment";
             break;
         case 3:
-            alert("WELL DONE MY BOY");
-            document.formSaveChanges.action="/ProgettoWeb/OrdineController?save=0&action=finish";
+            document.formPayment.action="/ProgettoWeb/OrdineController?save=0&action=finish";
             break;
         case 4:
             

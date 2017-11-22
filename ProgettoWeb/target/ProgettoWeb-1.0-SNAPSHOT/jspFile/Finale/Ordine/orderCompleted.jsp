@@ -17,6 +17,7 @@
     
     <body>
         <meta http-equiv="refresh" content="10;URL=${pageContext.request.contextPath}/jspFile/Finale/Index/index.jsp">
+        
         <div class="container">
             <%@include file="../Header/NavBar/navBar.jsp" %>
             <hr/>
@@ -24,8 +25,9 @@
         
         <div class="container-fluid">
             <h2><b>Congratulazioni! Hai completato il tuo ordine!</b></h2>
-            <p>Il tuo ordine è stato completato con successo. A breve riceverai un mail di conferma 
-            con i dati del tuo ordine.</p>
+            
+            <p>A breve riceverai un mail di conferma con i dati del tuo ordine.</p>
+            <p>Potrai controllare l'ordine dalla pagina di gestione degli ordini nel tuo profilo</p>
             
             <p>Attendi, tra poco sarai reindirizzato alla pagina principale...</p>
         </div>

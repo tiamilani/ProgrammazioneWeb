@@ -18,8 +18,10 @@ import it.progettoWeb.java.database.Model.Ordine.ModelloListeOrdine;
 import it.progettoWeb.java.database.Model.Ordine.ModelloOrdine;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto;
+import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
 import it.progettoWeb.java.database.Model.indirizzo.ModelloListeIndirizzo;
 import it.progettoWeb.java.database.Model.tipoSpedizione.ModelloListeTipoSpedizione;
+import it.progettoWeb.java.database.Model.tipoSpedizione.ModelloTipoSpedizione;
 import it.progettoWeb.java.utility.pair.pair;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static jdk.nashorn.internal.objects.NativeMath.round;
 
 /**
  * 2017-10-10 14:50
@@ -104,6 +107,7 @@ public class OrdineController extends HttpServlet {
                 orders = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utenteSessione.getId(), 0));
                 request.getSession().removeAttribute("carrelloSessione");
                 request.getSession().setAttribute("carrelloSessione", orders);
+                request.getSession().setAttribute("utenteSessione", utenteSessione);
 
                 //Seleziona oggetti presenti negli ordini + la loro PRIMA immagine
                 List<pair<ModelloOggetto, ModelloImmagineOggetto>> objects = new ArrayList<>();
@@ -121,14 +125,12 @@ public class OrdineController extends HttpServlet {
                 }
 
                 request.setAttribute("objects", objects);
-                request.setAttribute("shops", negozi);
+                request.setAttribute("shops", negozi);                
                 
                 
-                
-                
-                
-                if (action.equalsIgnoreCase("delivery")) /*--- PREPARA CARRELLO+INDIRIZZI PER LA SELEZIONE DEL METODO DI SPEDIZIONE ---*/
+                if (action.equalsIgnoreCase("delivery"))
                 {
+                    /*--- PREPARA INDIRIZZI+SPEDIZIONI PER LA SELEZIONE DEL METODO DI SPEDIZIONE ---*/
                     forward = DELIVERY_METHOD;
 
                     List<ModelloListeTipoSpedizione> tipiSpedizione = new ArrayList<>();
@@ -142,16 +144,35 @@ public class OrdineController extends HttpServlet {
                     }
 
                     request.setAttribute("listaTipiSpedizione", tipiSpedizione);
-                    request.setAttribute("utenteSessione", utenteSessione);
 
                     ModelloListeIndirizzo indirizzi = new ModelloListeIndirizzo(daoIndirizzo.selectAddressByUserID(utenteSessione.getId()));
                     request.setAttribute("addrs", indirizzi);
                 }
                 else if (action.equalsIgnoreCase("payment"))
                 {
+                    /*--- PREPARA INDIRIZZO PER LA SELEZIONE DEL METODO DI PAGAMENTO ---*/
                     forward = PAYMENT_METHOD;
 
-
+                    ModelloIndirizzo indirizzo = daoIndirizzo.selectAddressByIdAddress(orders.get(0).getIdI());
+                    request.setAttribute("address", indirizzo);
+                    
+                    /*---Calcolo prezzo totale (prezzoOgg * quantitaOgg + prezzoSped)---*/
+                    double prezzoTot = 0;
+                    int nArticoli = 0;
+                    for (ModelloOrdine order : orders.getList())
+                    {                       
+                        prezzoTot += (order.getPrezzoDiAcquisto() * order.getQuantita());
+                        if(order.getIdS() != 0)
+                        {
+                            ModelloTipoSpedizione ts = daoTipoSpedizione.selectDeliveryTypesByIdS(order.getIdS()).get(0);
+                            prezzoTot += Math.ceil((double)order.getQuantita() / (double)ts.getNumeroMassimo()) * ts.getPrezzo();
+                        }
+                        
+                        nArticoli += order.getQuantita();
+                    }
+                    
+                    request.setAttribute("prezzoTot", (Math.round(prezzoTot * 100.0) / 100.0));
+                    request.setAttribute("nArticoli", nArticoli);
                 }
                 else if (action.equalsIgnoreCase("finish"))
                 {
@@ -188,10 +209,9 @@ public class OrdineController extends HttpServlet {
             String action = request.getParameter("action");
             String save = request.getParameter("save");
             
-            
-            /*--- QUI SI SALVANO LE MODIFICHE FATTE AL CARRELLO (QUANTITA' E RIMOZIONE OGGETTO) ---*/
             if(save.equalsIgnoreCase("1"))
             {
+                /*--- QUI SI SALVANO LE MODIFICHE FATTE AL CARRELLO (QUANTITA' E RIMOZIONE OGGETTO) ---*/
                 ModelloUtente utenteSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
                 int idUtente = utenteSessione.getId();
                 String identificatore;
@@ -232,43 +252,41 @@ public class OrdineController extends HttpServlet {
             else if(save.equalsIgnoreCase("2"))
             {
                 /*--- QUI SALVO L'INDIRIZZO DI SPEDIZIONE E IL METODO DI SPEDIZIONE ---*/
+                int nOrders = ((ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione")).getSize();
+                String identificatore;
                 
+                int idI = Integer.parseInt(request.getParameter("idI"));
+                
+                for(int i = 0; i < nOrders; i++)
+                {
+                    identificatore = "idS" + Integer.toString(i);
+                    int idS = Integer.parseInt(request.getParameter(identificatore));
+                    
+                    identificatore = "idOrdine" + Integer.toString(i);
+                    int idO = Integer.parseInt(request.getParameter(identificatore));
+                    
+                    daoOrdine.updateOrderIdI(idO, idI);
+                    
+                    if(idS == -1)
+                        daoOrdine.updateOrderIdS(idO, -1);
+                    else
+                        daoOrdine.updateOrderIdS(idO, idS);
+                }
             }
             
             if(action.equalsIgnoreCase("listOrders"))
             {
                 forward = "OrdineController?action=listOrders";
             }
-            else if (action.equalsIgnoreCase("proceed")) /*--- REINDIRIZZA A deliveryMethod.jsp ---*/
+            else if (action.equalsIgnoreCase("delivery")) /*--- REINDIRIZZA A deliveryMethod.jsp ---*/
             {
                 forward = "OrdineController?action=delivery";
             }
             else if (action.equalsIgnoreCase("payment")) /*--- REINDIRIZZA A paymentMethod.jsp ---*/
-            {
-                /*--- QUI SALVO L'INDIRIZZO DI SPEDIZIONE E IL METODO DI SPEDIZIONE ---*/
-                int idI = Integer.parseInt(request.getParameter("idI"));
-                System.out.println("ID ADDRESS = " + idI);
-                int nOrders = ((ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione")).getSize();
-                String identificatore;
-                
-                for(int i = 0; i < nOrders; i++)
-                {
-                    identificatore = "idS" + Integer.toString(i);
-                    System.out.println(request.getParameter(identificatore));
-                    int idS = Integer.parseInt(request.getParameter(identificatore));
-                    
-                    identificatore = "idOrdine" + Integer.toString(i);
-                    int idO = Integer.parseInt(request.getParameter(identificatore));
-                    System.out.println(request.getParameter(identificatore));
-                    
-                    System.out.println("iterator + ID ORDINE + ID SPEDIZIONE = " + i + " " + idO + " " + idS);
-                    
-                    //daoOrdine.updateOrderIdS(idO, idS);
-                }
-                
+            {   
                 forward = "OrdineController?action=payment";
             }
-            else if (action.equalsIgnoreCase("finish"))
+            else if (action.equalsIgnoreCase("finish")) /*--- REINDIRIZZA A orderCompleted.jsp ---*/
             {
                 forward = "OrdineController?action=finish";
             }

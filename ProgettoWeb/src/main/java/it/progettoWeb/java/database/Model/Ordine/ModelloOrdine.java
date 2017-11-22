@@ -58,6 +58,10 @@ public class ModelloOrdine {
      * Variabile utilizzata per identificare l'id della spedizione scelta per l'ordine
      */
     private int idS;
+    /**
+     * Variabile utilizzata per identificare l'id dell'indirizzo scelto per l'ordine
+     */
+    private int idI;
 
     /**
      * Funzione utilizzata per ottenere l'id dell'ordine 
@@ -221,7 +225,7 @@ public class ModelloOrdine {
 
     /**
      * Funzione utilizzata per ottenre l'id della spedizione a cui si fa riferimento
-     * @return 
+     * @return int id tipo spedizione
      */
     public int getIdS() {
         return idS;
@@ -233,5 +237,21 @@ public class ModelloOrdine {
      */
     public void setIdS(int idS) {
         this.idS = idS;
+    }
+    
+    /**
+     * Funzione utilizzata per ottenere l'id dell'indirizzo a cui si fa riferimento
+     * @return int id indirizzo spedizione
+     */
+    public int getIdI() {
+        return idI;
+    }
+    
+    /**
+     * Funzione utilizzata per settare l'id dell'indirizzo a cui si fa riferimento
+     * @param idI 
+     */
+    public void setIdI(int idI) {
+        this.idI = idI;
     }
 }
