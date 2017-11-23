@@ -83,73 +83,88 @@
             
             
             <h2><b>METODO DI SPEDIZIONE</b></h2>
-            <table width="100%" cellpadding="5">
-                <!-- Per ogni oggetto nel carrello si deve scegliere un metodo di spedizione
-                    - si seleziona tramite un radio button -->
-                
+            
+            <div>
                 <c:forEach items="${carrelloSessione.getList()}" var="order">
                     <c:forEach items="${objects}" var="object">
                         <c:if test="${order.getIdOggetto() eq object.getL().getId()}">
-                            <c:set var="sconto" value="${object.getL().getSconto()}"/>
-                            <c:set var="prezzo" value="${object.getL().getPrezzo()}"/>
-                            <c:set var="quantita" value="${order.getQuantita()}"/>
-                            <c:set var="spedizioniOggetto" value="${listaTipiSpedizione.get(iterator).getList()}"/>
-                            <c:set var="prezzoScontato" value="${prezzo - (prezzo * sconto / 100)}"/>
-                            
-                            <!-- Nome negozio da cui viene spedito il prodotto -->
-                            <tr><td>Spedito da <c:out value="${shops.get(iterator).getNomeNegozio()}"/></td></tr>
-                            <!-- Data di consegna prevista del prodotto -->
-                            <tr><td><h6 id="DCP${iterator}"/></td></tr>
-                            <tr>
-                                <!-- Immagine prodotto -->
-                                <td style="text-align: center"><img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png" alt="<c:out value="${object.getR().getSrc()}"/>"/></td>
-                                <!-- Descrizione prodotto -->
-                                <td>
-                                    <table>
-                                        <tr>
-                                            <!-- Nome prodotto -->
-                                            <td><c:out value="${object.getL().getNome()}" /></td>
-                                        </tr>
-                                            <!-- Prezzo del prodotto -->
-                                        <tr><td><span>EUR <fmt:formatNumber type = "number"  minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzoScontato}" /></span></td></tr>
-                                        <tr>
-                                            <!-- Quantita' prodotto nel carrello -->
-                                            <td>Quantita': <c:out value="${quantita}"/></td>
-                                        </tr>
-                                        <tr><button class="btn btn-outline-primary buttonSpace" type="button" onclick="removeObject(this)" data-idInput="${iterator}" data-pageId="01">Rimuovi</button></tr>
-                                    </table>
-                                </td>
-                                <td>
+                            <div>
+                                <c:set var="sconto" value="${object.getL().getSconto()}"/>
+                                <c:set var="prezzo" value="${object.getL().getPrezzo()}"/>
+                                <c:set var="quantita" value="${order.getQuantita()}"/>
+                                <c:set var="spedizioniOggetto" value="${listaTipiSpedizione.get(iterator).getList()}"/>
+                                <c:set var="prezzoScontato" value="${prezzo - (prezzo * sconto / 100)}"/>
+                                
+                                <hr size="3" width="100%" align="left"/>
+                                
+                                <!-- Nome negozio da cui viene spedito il prodotto -->
+                                <div class="row">
+                                    <span>Spedito da <c:out value="${shops.get(iterator).getNomeNegozio()}"/></span>
+                                </div>
+                                <!-- Data di consegna prevista del prodotto -->
+                                <div class="row">
+                                    <h6 id="DCP${iterator}"/>
+                                </div>
+                                
+                                <div class="row">
+                                    <!-- Immagine prodotto -->
+                                    <div class="col-2">
+                                        <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png" alt="<c:out value="${object.getR().getSrc()}"/>">
+                                    </div>
+                                    
+                                    <div class="col-4">
+                                        <!-- Nome prodotto -->
+                                        <div class="row">
+                                            <c:out value="${object.getL().getNome()}" />
+                                        </div>
+                                        <!-- Prezzo del prodotto -->
+                                        <div class="row">
+                                            <span>EUR <fmt:formatNumber type = "number"  minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzoScontato}" /></span>
+                                        </div>
+                                        <!-- Quantita' prodotto nel carrello -->
+                                        <div class="row">
+                                            <span>Quantita': <c:out value="${quantita}"/></span>
+                                        </div>
+                                        <div class="row">
+                                            <button class="btn btn-outline-primary buttonSpace" type="button" onclick="removeObject(this)" data-idInput="${iterator}" data-pageId="01">Rimuovi</button>
+                                        </div>
+                                    </div>
+                                    
                                     <!-- Selezione metodo di spedizione -->
-                                    <select id="${iterator}" onchange="changeDescription(this.id)">
-                                        <c:set var="iterator2" value="0"/>
-                                        <c:forEach items="${spedizioniOggetto}" var="spedizione">
-                                            <option id="option${iterator}${iterator2}" value="${iterator2}" data-idS="${spedizione.getIdS()}" data-nome="${spedizione.getNome()}" data-prezzoOgg="${prezzoScontato}" data-quantitaOgg="${quantita}" data-Prezzo="${spedizione.getPrezzo()}" data-Corriere="${spedizione.getCorriere()}" data-tempo="${spedizione.getTempoRichiesto()}" data-nMax="${spedizione.getNumeroMassimo()}">
-                                                <c:out value="${spedizione.getNome()}"/>
-                                            </option>
-                                            <c:set var="iterator2" value="${iterator2 + 1}"/>
-                                        </c:forEach>
-                                        <c:if test="${object.getL().getRitiroInNegozio() == 1}">
-                                            <option id="option${iterator}${iterator2}" value="${iterator2}" data-idS="-1" data-nome="RitiroInNegozio" data-prezzoOgg="${prezzoScontato}" data-quantitaOgg="${quantita}">
-                                                Ritiro in negozio
-                                            </option>
-                                        </c:if>
-                                    </select>
-                                </td>
-                                <td>
+                                    <div class="col-4">
+                                        <select id="${iterator}" onchange="changeDescription(this.id)">
+                                            <c:set var="iterator2" value="0"/>
+                                            <c:forEach items="${spedizioniOggetto}" var="spedizione">
+                                                <option id="option${iterator}${iterator2}" value="${iterator2}" data-idS="${spedizione.getIdS()}" data-nome="${spedizione.getNome()}" data-prezzoOgg="${prezzoScontato}" data-quantitaOgg="${quantita}" data-Prezzo="${spedizione.getPrezzo()}" data-Corriere="${spedizione.getCorriere()}" data-tempo="${spedizione.getTempoRichiesto()}" data-nMax="${spedizione.getNumeroMassimo()}">
+                                                    <c:out value="${spedizione.getNome()}"/>
+                                                </option>
+                                                <c:set var="iterator2" value="${iterator2 + 1}"/>
+                                            </c:forEach>
+                                            <c:if test="${object.getL().getRitiroInNegozio() == 1}">
+                                                <option id="option${iterator}${iterator2}" value="${iterator2}" data-idS="-1" data-nome="RitiroInNegozio" data-prezzoOgg="${prezzoScontato}" data-quantitaOgg="${quantita}">
+                                                    Ritiro in negozio
+                                                </option>
+                                            </c:if>
+                                        </select>
+                                    </div>
+                                    
                                     <!-- Descrizione metodo spedizione -->
-                                    <p id="pDesc${iterator}"/>
-                                </td>
-                            </tr>
+                                    <div class="col-2">
+                                        <p id="pDesc${iterator}"/>
+                                    </div>
+                                </div>
+                                   
                                 <!-- Prezzo del subtotale: PrezzoProdotto*Quantita + PrezzoSpedizione -->
-                            <tr><td><p id="pSubTot${iterator}" data-oldSubTot="0"/></td></tr>
-                            <c:set var="iterator" value="${iterator + 1}"/>
-                            
-                            <tr><td colspan="9"><hr size="3" width="100%" align="left"/></td></tr>
+                                <div class="row">
+                                    <p id="pSubTot${iterator}" data-oldSubTot="0"/>
+                                </div>
+                                
+                                <c:set var="iterator" value="${iterator + 1}"/>
+                            </div>
                         </c:if>
                     </c:forEach>
                 </c:forEach>
-            </table>
+            </div>
             
             <p id="pTot" data-oldTot="0"></p>
             <button class="btn btn-outline-primary buttonSpace" type="button" onclick="saveChanges(2)">Procedi col pagamento</button>
