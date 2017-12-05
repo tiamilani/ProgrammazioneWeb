@@ -52,88 +52,88 @@ function myFunction() {
             <c:forEach items="${listacategoriesessione.getList()}" var="cat">
                 <c:if test="${i == 0}">
                     <div class="row">
-                </c:if>
-                <div class="col-2">
-                    <c:url value="/CategoriaController" var="catUrl">
-                        <c:param name="id" value="${cat.getId()}" />
-                    </c:url>
-                    <a class="nav-link" href="${catUrl}"><c:out value="${cat.getNome()}"/></a>
-                </div>
-                <c:set var="i" value="${i+1}" />
-                <c:if test="${i == 6}">
-                    <c:set var="i" value="${0}" />
+                        </c:if>
+                        <div class="col-2">
+                            <c:url value="/CategoriaController" var="catUrl">
+                                <c:param name="id" value="${cat.getId()}" />
+                            </c:url>
+                            <a class="nav-link" href="${catUrl}"><c:out value="${cat.getNome()}"/></a>
+                        </div>
+                        <c:set var="i" value="${i+1}" />
+                        <c:if test="${i == 6}">
+                        <c:set var="i" value="${0}" />
                     </div>
                 </c:if>
             </c:forEach>
             <c:if test="${i != 0}">
-                </div>
-            </c:if>
+        </div>
+        </c:if>
+    </div>
+</div>
+
+<nav id="navbarFiltri" class="navbar navbar-light bg-white fixed-top navbar-expand-lg">
+    <div class="col-1">
+        <a class="navbar-brand" href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Index/index.jsp">
+          <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png" width="30" height="30" class="d-inline-block align-top" alt="IMG">
+          ShopEro
+        </a>
+    </div>
+    <div class="col-2">
+        <div class="row">
+            <div class="navbar-nav">
+                <button class="paddingNav btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#navbarToggleCategorie" aria-controls="navbarToggleCategorie" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="Small material-icons">arrow_drop_down</i>
+                    Categorie
+                </button>
+                <button class="paddingNav btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#navbarToggleFiltri" aria-controls="navbarToggleFiltri" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="Small material-icons">arrow_drop_down</i>
+                    Filtri
+                </button>
+            </div>
         </div>
     </div>
-    <nav id="navbarFiltri" class="navbar navbar-light bg-white fixed-top navbar-expand-lg">
-        <div class="col-1">
-            <a class="navbar-brand" href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Index/index.jsp">
-              <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png" width="30" height="30" class="d-inline-block align-top" alt="IMG">
-              ShopEro
-            </a>
-        </div>
-        <div class="col-2">
-            <div class="row">
-                <div class="navbar-nav">
-                    <button class="paddingNav btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#navbarToggleCategorie" aria-controls="navbarToggleCategorie" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="Small material-icons">arrow_drop_down</i>
-                        Categorie
-                    </button>
-                    <button class="paddingNav btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#navbarToggleFiltri" aria-controls="navbarToggleFiltri" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="Small material-icons">arrow_drop_down</i>
-                        Filtri
-                    </button>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-9 floatRight">
-            <div class="row">
-                <div class="col-8 float-right">
-                    <form class="form-inline float-right col-12" <%--action="${pageContext.request.contextPath}/searchObjectController"--%> id="form1" name="form1" method="GET">
-                            <div class="col-11">
-                                    <input class="form-control" id="expand" type="text" name="search" placeholder="Search..."/>
-                            </div>
-                            <div class="col-1">
-                                <input type='hidden' id = 'hiddenidCategoria' name = 'hiddenidCategoria' value='' />
-                                <input type='hidden' id = 'hiddenminPrice' name = 'hiddenminPrice' value='' />
-                                <input type='hidden' id = 'hiddenmaxPrice' name = 'hiddenmaxPrice' value='' />
-                                <input type='hidden' id = 'hiddennomeVenditore' name = 'hiddennomeVenditore' value='' />
-                                <input type='hidden' id = 'hiddennomeNegozio' name = 'hiddennomeNegozio' value='' />
-                                <input type='hidden' id = 'hiddencheckRitiroInNegozio' name = 'hiddencheckRitiroInNegozio' value='' />
-                                <input type='hidden' id = 'hiddencheckProdottiScontati' name = 'hiddencheckProdottiScontati' value='' />
-                                <input type='hidden' id = 'hiddenlatitudine' name = 'hiddenlatitudine' value='' />
-                                <input type='hidden' id = 'hiddenlongitudine' name = 'hiddenlongitudine' value='' />
-                                <input type='hidden' id = 'hiddenraggio' name = 'hiddenraggio' value='' />
-                                <input type='hidden' id = 'hiddenvalutazioneMinima' name = 'hiddenvalutazioneMinima' value='' />
-                                <button class="btn btn-outline-primary" type="submit" value="submit" onclick="myFunction()"><i class="Small material-icons">search</i></button>
-                            </div>
-                    </form>
-                </div>
-                <div class="col-4">
-                    <c:choose>
-                        <c:when test="${utente.getId() != -1}">
-                            <button  type="button" class="btn btn-outline-primary buttonSpace" data-toggle="modal"
-                                 data-target="#loginModal"><i class="Small material-icons">person</i> Account</button>
-                        </c:when>
-                        <c:otherwise>
-                            <button  type="button" class="btn btn-outline-primary buttonSpace" data-toggle="modal"
-                                 data-target="#loginModal"><i class="Small material-icons">person</i> Login</button>
-                            <button  type="button" class="btn btn-outline-success buttonSpace" data-toggle="modal"
-                                     data-target="#registerModal"><i class="Small material-icons">person_add</i> Registrati</button>
-                        </c:otherwise>
-                    </c:choose>
-                        <button  type="button" class="btn btn-outline-primary buttonSpace"><i class="Small material-icons">shopping_basket</i> carrello</button>
-                </div>
+    <div class="col-9 floatRight">
+        <div class="row">
+            <div class="col-8 float-right">
+                <form class="form-inline float-right col-12" <%--action="${pageContext.request.contextPath}/searchObjectController"--%> id="form1" name="form1" method="GET">
+                        <div class="col-11">
+                                <input class="form-control" id="expand" type="text" name="search" placeholder="Search..."/>
+                        </div>
+                        <div class="col-1">
+                            <input type='hidden' id = 'hiddenidCategoria' name = 'hiddenidCategoria' value='' />
+                            <input type='hidden' id = 'hiddenminPrice' name = 'hiddenminPrice' value='' />
+                            <input type='hidden' id = 'hiddenmaxPrice' name = 'hiddenmaxPrice' value='' />
+                            <input type='hidden' id = 'hiddennomeVenditore' name = 'hiddennomeVenditore' value='' />
+                            <input type='hidden' id = 'hiddennomeNegozio' name = 'hiddennomeNegozio' value='' />
+                            <input type='hidden' id = 'hiddencheckRitiroInNegozio' name = 'hiddencheckRitiroInNegozio' value='' />
+                            <input type='hidden' id = 'hiddencheckProdottiScontati' name = 'hiddencheckProdottiScontati' value='' />
+                            <input type='hidden' id = 'hiddenlatitudine' name = 'hiddenlatitudine' value='' />
+                            <input type='hidden' id = 'hiddenlongitudine' name = 'hiddenlongitudine' value='' />
+                            <input type='hidden' id = 'hiddenraggio' name = 'hiddenraggio' value='' />
+                            <input type='hidden' id = 'hiddenvalutazioneMinima' name = 'hiddenvalutazioneMinima' value='' />
+                            <button class="btn btn-outline-primary" type="submit" value="submit" onclick="myFunction()"><i class="Small material-icons">search</i></button>
+                        </div>
+                </form>
+            </div>
+            <div class="col-4">
+                <c:choose>
+                    <c:when test="${utente.getId() != -1}">
+                        <button  type="button" class="btn btn-outline-primary buttonSpace" data-toggle="modal"
+                             data-target="#loginModal"><i class="Small material-icons">person</i> Account</button>
+                    </c:when>
+                    <c:otherwise>
+                        <button  type="button" class="btn btn-outline-primary buttonSpace" data-toggle="modal"
+                             data-target="#loginModal"><i class="Small material-icons">person</i> Login</button>
+                        <button  type="button" class="btn btn-outline-success buttonSpace" data-toggle="modal"
+                                 data-target="#registerModal"><i class="Small material-icons">person_add</i> Registrati</button>
+                    </c:otherwise>
+                </c:choose>
+                    <button  type="button" class="btn btn-outline-primary buttonSpace"><i class="Small material-icons">shopping_basket</i> carrello</button>
             </div>
         </div>
-    </nav>
-</div>
+    </div>
+</nav>
 
 
 <%-- messo esternamente al resto in modo da non influenzare il suo autofocus da propriet� di posizionamento prima definite--%>
