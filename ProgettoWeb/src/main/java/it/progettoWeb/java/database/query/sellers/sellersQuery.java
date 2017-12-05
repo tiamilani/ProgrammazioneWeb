@@ -31,6 +31,12 @@ public class sellersQuery {
         return "SELECT * FROM Negozio WHERE idVenditore = " + idVenditore + ";";
     }
     
+    public static String selectNumberOfOrderForStore(int idVenditore, int idNegozio){
+        return "select COUNT(Ordine.idOggetto) as ordini "
+                + "from Ordine INNER JOIN ordiniRicevuti ON (Ordine.idOrdine = ordiniRicevuti.idO) "
+                + "where ordiniRicevuti.idV = "+idVenditore+" AND Ordine.idNegozio = "+idNegozio+";";
+    }
+    
     /**
      * @author fbrug
      * Ottenere la lista degli ordini ricevuti
@@ -40,6 +46,19 @@ public class sellersQuery {
     public static String selectOrdersBySellerID(int idVenditore)
     {
         return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + ";";
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere Recensione, Venditore
+     * @param idV Una stringa che rappresenta l'identificativo del venditore preso in considerazione
+     * @return elenco recensioni e venditore
+     */
+    public static String selectReviewUserBySeller(int idV)
+    {
+        return "SELECT RecensioneVenditore.*, Utente.* FROM "
+                + "RecensioneVenditore JOIN Utente ON RecensioneVenditore.idUtente=Utente.id "
+                + "WHERE RecensioneVenditore.idVenditore='" + idV + "';";
     }
           
     /**
@@ -136,11 +155,11 @@ public class sellersQuery {
      */
     public static String selectShopWithHigherSalesBySellerID(int idVenditore)
     {
-        return "SELECT idNegozio, COUNT(idOrdine) AS numeroVendite "
-                + "FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id "
-                + "WHERE idVenditore=" + idVenditore
-                + " GROUP BY idNegozio "
-                + "ORDER BY COUNT(idOrdine) DESC;";
+        return "select Negozio.*, COUNT(idOrdine) AS numeroVendite "
+                + "FROM Negozio JOIN Ordine ON (Ordine.idNegozio=Negozio.id) "
+                + "where Negozio.idVenditore="+idVenditore+" "
+                + "GROUP BY Negozio.id, Negozio.nomeNegozio, Negozio.valutazione, Negozio.attivo, Negozio.idI "
+                + "ORDER BY numeroVendite DESC;";
     }
           
     /**
@@ -151,11 +170,11 @@ public class sellersQuery {
      */
     public static String selectShopWithLowestSalesBySellerID(int idVenditore)
     {
-        return "SELECT idNegozio, COUNT(idOrdine) AS numeroVendite "
-                + "FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id "
-                + "WHERE idVenditore=" + idVenditore
-                + " GROUP BY idNegozio "
-                + "ORDER BY COUNT(idOrdine) ASC;";
+        return "select Negozio.*, COUNT(idOrdine) AS numeroVendite "
+                + "FROM Negozio JOIN Ordine ON (Ordine.idNegozio=Negozio.id) "
+                + "where Negozio.idVenditore="+idVenditore+" "
+                + "GROUP BY Negozio.id, Negozio.nomeNegozio, Negozio.valutazione, Negozio.attivo, Negozio.idI "
+                + "ORDER BY numeroVendite ASC;";
     }
           
     /**
@@ -258,6 +277,16 @@ public class sellersQuery {
     public static String selectShopByOpenDate(int idVenditore)
     {
         return "SELECT * FROM Negozio WHERE idVenditore=" + idVenditore + " ORDER BY dataApertura DESC;";
+    }
+    
+    public static String selectShopByNameup(int idVenditore)
+    {
+        return "SELECT * FROM Negozio WHERE idVenditore=" + idVenditore + " ORDER BY nomeNegozio;";
+    }
+    
+    public static String selectShopByNameDown(int idVenditore)
+    {
+        return "SELECT * FROM Negozio WHERE idVenditore=" + idVenditore + " ORDER BY nomeNegozio DESC;";
     }
           
     /**
@@ -617,5 +646,95 @@ public class sellersQuery {
     public static String deleteShopImage(int idNegozio, String imagePath)
     {
         return "DELETE FROM imageNegozio WHERE imageNegozio.idO = " + idNegozio + " AND imageNegozio.src = " + imagePath + ";";
+    }
+    
+    
+    
+    /*---2017-11-20---*/
+    
+    /**
+     * @author fbrug
+     * Seleziona gli ordini con lo stesso tipo di spedizione (in base all'idS)
+     * @param idS: intero rappresentante l'ID della spedzione associata all'ordine
+     * @return String: lista degli ordini
+     */
+    public static String selectOrderByIdS(int idS)
+    {
+        return "SELECT * FROM Ordine WHERE Ordine.idS = " + idS + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * Aggiorna il valore dell'idS dell'ordine selezionato
+     * @param idOrdine: intero rappresentante l'ID dell'ordine
+     * @param idS: intero rappresentante l'ID della spedizione associata all'ordine
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateOrderIdS(int idOrdine, int idS)
+    {
+        if(idS == -1) //Ritiro in negozio
+            return "UPDATE Ordine SET idS = NULL WHERE idOrdine = " + idOrdine + ";";
+        else
+            return "UPDATE Ordine SET idS = " + idS + " WHERE idOrdine = " + idOrdine + ";";
+    }
+    
+    
+    /*---2017-11-21---*/
+    
+    /**
+     * @author fbrug
+     * Seleziona gli ordini con lo stesso indirizzo spedizione (in base all'idI)
+     * @param idI: intero rappresentante l'ID dell'indirizzo associato all'ordine
+     * @return String: lista degli ordini
+     */
+    public static String selectOrderByIdI(int idI)
+    {
+        return "SELECT * FROM Ordine WHERE Ordine.idI = " + idI + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * Aggiorna il valore dell'idI dell'ordine selezionato
+     * @param idOrdine: intero rappresentante l'ID dell'ordine
+     * @param idI: intero rappresentante l'ID dell'indirizzo associato all'ordine
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateOrderIdI(int idOrdine, int idI)
+    {
+        return "UPDATE Ordine SET idI = " + idI + " WHERE idOrdine = " + idOrdine + ";";
+    }
+    
+    
+    /*---2017-12-04---*/
+    
+    /**
+     * @author fbrug
+     * Seleziona gli ordini con lo stesso ID ordine
+     * @param idOrdine: intero rappresentante l'ID dell'ordine
+     * @return String: lista degli ordini
+     */
+    public static String selectOrdersByIdOrder(int idOrdine)
+    {
+        return "SELECT * FROM Ordine WHERE Ordine.idOrdine = " + idOrdine + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * @param idUtente: intero rappresentante l'ID dell'utente
+     * @return String: lista dei carrelli
+     */
+    public static String selectCartByIdU(int idUtente)
+    {
+        return "SELECT * FROM Carrello WHERE Carrello.idUtente = " + idUtente + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * @param idordine: intero rappresentante l'ID dell'ordine
+     * @return String: lista dei carrelli
+     */
+    public static String selectCartByIdOrder(int idordine)
+    {
+        return "SELECT * FROM Carrello WHERE Carrello.idOrdine = " + idordine + ";";
     }
 }

@@ -32,7 +32,7 @@ public class genericsQuery {
     
     public static String selectRandomObjectsAndImages(int limit)
     {
-        return "SELECT Oggetto.*, imageOggetto.* FROM Oggetto JOIN imageOggetto ON Oggetto.id=imageOggetto.idO GROUP BY Oggetto.id ORDER BY RAND() LIMIT " + limit + ";";
+        return "SELECT Oggetto.*, imageOggetto.* FROM Oggetto JOIN imageOggetto ON Oggetto.id=imageOggetto.idO GROUP BY Oggetto.id,imageOggetto.src ORDER BY RAND() LIMIT " + limit + ";";
     }
     
     public static String selectObjectsImageSelledByStoreID(int idNegozio)

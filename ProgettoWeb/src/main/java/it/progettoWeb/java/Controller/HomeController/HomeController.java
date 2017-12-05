@@ -7,18 +7,28 @@ package it.progettoWeb.java.Controller.HomeController;
 
 import it.progettoWeb.java.database.Dao.Categoria.DaoCategoria;
 import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
+import it.progettoWeb.java.database.Dao.Ordine.DaoOrdine;
+import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
 import it.progettoWeb.java.database.Model.Categoria.ModelloCategoria;
 import it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
+import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
+import it.progettoWeb.java.database.Model.Ordine.ModelloListeOrdine;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
+import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto;
+import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
+import it.progettoWeb.java.utility.javaMail.SendEmail;
+import it.progettoWeb.java.utility.pair.pair;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -29,12 +39,16 @@ public class HomeController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static String HOME_PAGE = "/jspFile/Finale/Index/homePage.jsp";
     private DaoCategoria daoCat;
-    private DaoOggetto daoOgg;
+    private DaoOggetto daoOggetto;
+    private DaoUtente daoUtente;
+    private DaoOrdine daoOrdine;
 
     public HomeController() {
         super();
         daoCat = new DaoCategoria();
-        daoOgg = new DaoOggetto();
+        daoOggetto = new DaoOggetto();
+        daoUtente = new DaoUtente();
+        daoOrdine = new DaoOrdine();
     }
 
     /**
@@ -51,21 +65,109 @@ public class HomeController extends HttpServlet {
 
         String forward="";
         String action = request.getParameter("action");
-        request.getSession().invalidate();
 
-        if (action.equalsIgnoreCase("Inizializzazione")){
+        if (action.equalsIgnoreCase("Inizializzazione")){ 
             forward = HOME_PAGE;
             ModelloUtente utente = new ModelloUtente();
             utente.setId(-1);
+            
+            HttpSession session = request.getSession(false);
+            
+            Cookie[] cookies = request.getCookies();
+            
+            if(session != null) {
+                log("La sessione non è nulla");
+                ModelloUtente utenteInSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+                if(utenteInSessione == null || utenteInSessione.getId() == -1){
+                    log("Utente nullo o -1");
+                    if ((cookies != null) && (cookies.length > 0)) {
+                        log("Il cookie esiste");
+                        int idUtente=-1;
+
+                        for (Cookie cookie : cookies) {
+                            switch (cookie.getName()) {
+                                case "user":
+                                    if(cookie.getMaxAge() != 0)
+                                        idUtente = Integer.parseInt(cookie.getValue());
+                                        log("Il valore nel cookie è: " +idUtente+ "");
+                                    break;
+                            }
+                        }
+                        
+                        if(idUtente == -1){
+                            log("Il valore trovato è -1");
+                            request.getSession().setAttribute("utenteSessione", utente);
+                        }
+                        else {
+                            log("Il valore trovato è diverso da -1 setto l'utente corretto");
+                            ModelloUtente utenteSessione = daoUtente.getUserById(idUtente);
+                            request.getSession().setAttribute("utenteSessione", utenteSessione);
+                        }
+                    } 
+                    else {
+                        log("Cookie non trovato");
+                         request.getSession().setAttribute("utenteSessione", utente);
+                    }
+                }
+                else {
+                    log("Utente non nullo o -1");
+                }
+            } else {
+                log("La sessione è nulla");
+                if ((cookies != null) && (cookies.length > 0)) {
+                    int idUtente=-1;
+
+                    for (Cookie cookie : cookies) {
+                        switch (cookie.getName()) {
+                            case "user":
+                                if(cookie.getMaxAge() != 0)
+                                    idUtente = Integer.parseInt(cookie.getValue());
+                                break;
+                        }
+                    }
+                    if(idUtente == -1){
+                        request.getSession().setAttribute("utenteSessione", utente);       
+                    }
+                    else {
+                        ModelloUtente utenteSessione = daoUtente.getUserById(idUtente);
+                        request.getSession().setAttribute("utenteSessione", utenteSessione);
+                    }
+                } 
+                else {
+                     request.getSession().setAttribute("utenteSessione", utente);
+                }
+            }
+            
+            /*--- 2017-11-06 */
+            ModelloListeOrdine carrelloInSessione = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
+            if(carrelloInSessione == null || carrelloInSessione.getId() == -1)
+            {
+                ModelloUtente utenteInSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+                if(utenteInSessione.getId() == -1)
+                {
+                    request.getSession().setAttribute("carrelloSessione", new ModelloListeOrdine());
+                }
+                else
+                {
+                    ModelloListeOrdine carrello = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utenteInSessione.getId(), 0));
+                    carrello.setId(carrello.hashCode());
+                    request.getSession().removeAttribute("carrelloSessione");
+                    request.getSession().setAttribute("carrelloSessione", carrello);
+                }
+            }
+            /*---*/
+            
             ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCat.selectAllCategory());
-            request.getSession().setAttribute("utente", utente);
             request.getSession().setAttribute("listacategoriesessione", listaCategorie);
 
             //Richiedo oggetti per riempire la home page
-            ModelloListeOggetto oggetti = new ModelloListeOggetto(daoOgg.selectObjectLowerThanPrice(1000));
+            pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectRandomObjectsAndImage(12);
+            ModelloListeOggetto listaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
+            ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
+            request.setAttribute("ListaOggetti", listaOggetti);
+            request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
 
-            request.setAttribute("ListaOggetti", oggetti);
-        }
+            }
         else {
              //Qui va mostrata una pagina di errore
 

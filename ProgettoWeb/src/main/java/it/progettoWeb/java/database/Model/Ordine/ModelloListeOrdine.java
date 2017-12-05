@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class ModelloListeOrdine {
     private List<ModelloOrdine> lsitaOrdine;
+    private int idListaOrdine;
     
     public ModelloListeOrdine(){
         lsitaOrdine = new ArrayList<>();
@@ -33,5 +34,18 @@ public class ModelloListeOrdine {
     
     public List<ModelloOrdine> getList(){
         return lsitaOrdine;
+    }
+    
+    public int getId()
+    {
+        return idListaOrdine;
+    }
+    public void setId(int id)
+    {
+        idListaOrdine = id;
+    }
+    public int getSize()
+    {
+        return lsitaOrdine.size();
     }
 }

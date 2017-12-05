@@ -387,8 +387,8 @@ public class usersQuery {
      * @param idO Un intero che rappresenta l'identificativo dell'oggetto preso in considerazione
      * @return String: lista di foto
      */
-    public static String selectFirstPhotoObject(int idO){
-        return "SELECT * FROM imageOggetto WHERE imageOggetto.idO ="+idO+" LIMIT 1;";
+    public static String selectFirstPhotoObject(String idO){
+        return "SELECT * FROM imageOggetto WHERE imageOggetto.idO ='"+idO+"' LIMIT 1;";
     }
     
     /**
@@ -493,6 +493,20 @@ public class usersQuery {
     }
     
     /**
+     * @author fbrug
+     * Cambia la quantità di un prodotto nell'ordine
+     * @param idOr Un intero che rappresenta l'identificativo dell'ordine preso in considerazione
+     * @param idOg Una stringa che rappresenta l'identificativo dell'oggetto preso in considerazione
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param newQuantity Un intero rappresentate la nuova quantità dell'oggetto nell'ordine selezionato
+     */
+    public static String changeOrderQuantity(int idOr, String idOg, int idU, int newQuantity)
+    {
+        return "UPDATE progettoweb.Ordine SET quantita = " + newQuantity + " WHERE "
+                + "idOrdine = " + idOr + " AND idOggetto = '" + idOg + "' AND IDUTENTE = " + idU + ";";
+    }
+    
+    /**
      * @author Andrea
      * Aggiungi un oggetto agli ordini nella lista dei desideri
      * @param idOr Un intero che rappresenta l'identificativo dell'ordine preso in considerazione
@@ -516,13 +530,12 @@ public class usersQuery {
      * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param txt Una stringa contenente il testo della recensione
      * @param val Un intero indicante la valutazione della recensione
-     * @param data Un Datetime indicante la data di creazione della recensione
      * @param star Un intero indicante l'utilità della recensione
      */
-    public static String addReviewToSeller(int idV, int idU, String txt, int val, Date data, int star){
-        return "INSERT INTO progettoweb.RecensioneVenditore (id, idVenditore, "
-                + "idUtente, testo, valutazione, data, utilita) VALUES "
-                + "(NULL, "+idV+", "+idU+", '"+txt+"', "+val+", "+data+", "+star+");";
+    public static String addReviewToSeller(int idV, int idU, String txt, int val, int star){
+        return "INSERT INTO RecensioneVenditore (id, idVenditore, idUtente, testo, "
+                + "valutazione, data, utilita) VALUES (NULL, '" + idV + "', " + 
+                idU + ", '" + txt + "', " + val + ", CURRENT_TIMESTAMP, " + star + ");";
     }
     
     /**
@@ -532,13 +545,12 @@ public class usersQuery {
      * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param txt Una stringa contenente il testo della recensione
      * @param val Un intero indicante la valutazione della recensione
-     * @param data Un Datetime indicante la data di creazione della recensione
      * @param star Un intero indicante l'utilità della recensione
      */
-    public static String addReviewToStore(int idN, int idU, String txt, int val, Date data, int star){
-        return "INSERT INTO progettoweb.RecensioneNegozio (id, idNegozio, "
-                + "idUtente, testo, valutazione, data, utilita) VALUES "
-                + "(NULL, "+idN+", "+idU+", '"+txt+"', "+val+", "+data+", "+star+");";
+    public static String addReviewToStore(int idN, int idU, String txt, int val, int star){
+        return "INSERT INTO RecensioneNegozio (id, idNegozio, idUtente, testo, "
+                + "valutazione, data, utilita) VALUES (NULL, '" + idN + "', " + 
+                idU + ", '" + txt + "', " + val + ", CURRENT_TIMESTAMP, " + star + ");";
     }
     
     /**
@@ -551,10 +563,10 @@ public class usersQuery {
      * @param data Un Datetime indicante la data di creazione della recensione
      * @param star Un intero indicante l'utilità della recensione
      */
-    public static String addReviewToObject(String idO, int idU, String txt, int val, Date data, int star){
-        return "INSERT INTO progettoweb.RecensioneOggetto (id, idOggetto, "
-                + "idUtente, testo, valutazione, data, utilita) VALUES "
-                + "(NULL, '"+idO+"', "+idU+", '"+txt+"', "+val+", "+data+", "+star+");";
+    public static String addReviewToObject(String idO, int idU, String txt, int val, int star){
+        return "INSERT INTO RecensioneOggetto (id, idOggetto, idUtente, testo, "
+                + "valutazione, data, utilita) VALUES (NULL, '" + idO + "', " + 
+                idU + ", '" + txt + "', " + val + ", CURRENT_TIMESTAMP, " + star + ");";
     }
     
     /**
@@ -622,6 +634,27 @@ public class usersQuery {
                 + "VALUES (@IDI, "+idU+");";
     }
     
+    public static String insertAddress1(String stato, String regione, String provincia, String citta, String via, int nCivico, int interno, double lat, double lon){
+        return "INSERT INTO progettoweb.Indirizzo (idI, stato, regione, provincia, "
+                + "citta, via, nCivico, interno, latitudine, longitudine) VALUES "
+                + "(NULL, '"+stato+"', '"+regione+"', '"+provincia+"', '"+citta+"', '"+via+"', "+nCivico+", "+interno+", "+lat+", "+lon+"); ";
+    }
+    
+    public static String insertAddress2(){
+        return "SET @IDI = 1; ";
+    }
+    
+    public static String insertAddress3(String stato, String regione, String provincia, String citta, String via, int nCivico, int interno, double lat, double lon){
+        return "SELECT @IDI:=idI FROM Indirizzo WHERE stato ='"+stato+"' AND "
+                + "regione = '"+regione+"' AND provincia = '"+provincia+"' AND "
+                + "citta = '"+citta+"' AND via = '"+via+"' AND nCivico = "+nCivico+" AND interno = "+interno+"; ";
+    }
+    
+    public static String insertAddress4(int idI,int idU){
+        return "INSERT INTO progettoweb.IndirizzoUtente (idI, idU) "
+                + "VALUES ("+idI+", "+idU+");";
+    }
+    
     /**
      * @author Andrea
      * Eliminaree un proprio indirizzo
@@ -629,6 +662,16 @@ public class usersQuery {
      */
     public static String deleteAddress(int idI){
         return "DELETE FROM Indirizzo WHERE idI ="+idI+";";
+    }
+    
+    /**
+     * @author Andrea
+     * Eliminaree un proprio indirizzo utente
+     * @param idI Un intero che rappresenta l'identificativo dell'indirizzo preso in considerazione
+     * @param idU id utente
+     */
+    public static String deleteAddressUtente(int idI, int idU){
+        return "DELETE FROM Indirizzo WHERE idI ="+idI+" AND idU ="+idU+";";
     }
 }
 

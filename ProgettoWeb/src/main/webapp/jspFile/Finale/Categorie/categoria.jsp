@@ -11,7 +11,7 @@
 <html>
     <head>
         <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
-        <title>Oggetti Categoria</title>
+        <title>${categoria.getNome()}</title>
     </head>
     
     <body>
@@ -23,17 +23,14 @@
             <%@include file="../Header/NavBar/navBar.jsp" %>
         </div>
         
-        <div class="container" style="text-align: center">
-            <h1>CATEGORIA</h1>
-
+        <div class="container-fluid" style="margin-top: 1rem;">
             <!-- Stampo nome e descrizione categoria selezionata -->
-            <h2><c:out value="${categoria.getNome()}"/></h2>
-            <p><c:out value="${categoria.getDescrizione()}"/></p>            
+            <h1>${categoria.getNome()}</h1>
+            <p><c:out value="${categoria.getDescrizione()}"/></p>  
+            <%@include file="../Components/Liste/ListaOggetto/testListaOggetto.jsp" %>
         </div>
         
-        <div class="container-fluid">
-            <%@include file="../Components/Liste/ListaOggetto/testListaOggetto.jsp" %>
-            <hr>
+        <div class="container">
             <%@include file="../Footer/footer.jsp" %>
         </div>
     </body>

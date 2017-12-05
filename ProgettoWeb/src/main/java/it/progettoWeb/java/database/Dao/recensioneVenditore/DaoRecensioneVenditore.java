@@ -10,6 +10,8 @@ package it.progettoWeb.java.database.Dao.recensioneVenditore;
  * @author mattia
  */
 
+import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
+import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.Model.recensioneVenditore.ModelloRecensioneVenditore;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,6 +23,7 @@ import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.query.sellers.sellersQuery;
 import it.progettoWeb.java.database.query.users.usersQuery;
+import it.progettoWeb.java.utility.pair.pair;
 
 public class DaoRecensioneVenditore {
 
@@ -53,7 +56,7 @@ public class DaoRecensioneVenditore {
      * @param rs un resultset da cui ricavare un modello negozio
      * @return il modello negozio presente nel resultset
      */
-    private ModelloRecensioneVenditore getModelloFromRs(ResultSet rs)
+    public static ModelloRecensioneVenditore getModelloFromRs(ResultSet rs)
     {
         ModelloRecensioneVenditore RecensioneVenditore = new ModelloRecensioneVenditore();
         
@@ -91,7 +94,32 @@ public class DaoRecensioneVenditore {
         } catch(SQLException e) {}
         
         return recensioniV;
-    }   
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere pair Recensione, Venditore
+     * @param idV Un intero che rappresenta l'identificativo del venditore preso in considerazione
+     * @return pair<List<ModelloRecensioneVenditore>,List<ModelloUtente>> elenco recensioni e venditori
+     */
+    public pair<List<ModelloRecensioneVenditore>,List<ModelloUtente>> selectReviewUserBySeller(int idV) {
+        pair<List<ModelloRecensioneVenditore>,List<ModelloUtente>> res;
+        List<ModelloRecensioneVenditore> recensioni = new ArrayList<>();
+        List<ModelloUtente> venditori = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectReviewUserBySeller(idV));
+            
+            while (rs.next()) {
+                recensioni.add(DaoRecensioneVenditore.getModelloFromRs(rs));
+                venditori.add(DaoUtente.getModelloFromRs(rs));
+            }
+        } catch (SQLException e) { }
+        
+        res = new pair(recensioni, venditori);
+        return res;
+    }
     
     /**
      * @author Mattia
@@ -161,7 +189,7 @@ public class DaoRecensioneVenditore {
     public void addReviewToSeller(ModelloRecensioneVenditore recensione) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement(usersQuery.addReviewToSeller(recensione.getIdVenditore(), recensione.getIdUtente(), recensione.getTesto(), recensione.getValutazione(), recensione.getData(), recensione.getUtilita()));
+                    .prepareStatement(usersQuery.addReviewToSeller(recensione.getIdVenditore(), recensione.getIdUtente(), recensione.getTesto(), recensione.getValutazione(), recensione.getUtilita()));
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -171,13 +199,14 @@ public class DaoRecensioneVenditore {
     /**
      * @author Mattia
      * Ottenere un boolean se si ha recensito oppure no un venditore (se il count è 1 vuol dire di si)
-     * @param recensione oggetto recensione da inserire
+     * @param idV Un intero identificativo del venditore preso in considerazione
+     * @param idU Un intero identificativo dell'utente preso in considerazione
      * @return int NumRecensioni
      */
-    public int reviewOrNotSeller(ModelloRecensioneVenditore recensione) {
+    public int reviewOrNotSeller(int idV, int idU) {
         int numRecensioni = 0;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(usersQuery.reviewOrNotSeller(recensione.getIdVenditore(),recensione.getIdUtente()));
+            PreparedStatement preparedStatement = connection.prepareStatement(usersQuery.reviewOrNotSeller(idV, idU));
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {

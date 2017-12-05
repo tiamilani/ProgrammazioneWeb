@@ -26,6 +26,10 @@
             <%@include file="descrizione.jsp" %>
             <%@include file="mapNegozio.jsp" %>
             <%@include file="oggettiPresenti.jsp" %>
+            <c:if test="${utenteSessione.getId() > 0}">
+                <%@include file="insertReview.jsp" %>
+            </c:if>
+            <%@include file="recensioni.jsp" %>
             <%@include file="../Footer/footer.jsp" %>
         </div>
     </body>

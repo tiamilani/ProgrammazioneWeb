@@ -13,10 +13,6 @@
         <servlet-class>it.progettoWeb.java.Controller.UserController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RecensioneOggettoController</servlet-name>
-        <servlet-class>it.progettoWeb.java.Controller.RecensioneOggetto.RecensioneOggettoController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>HomeController</servlet-name>
         <servlet-class>it.progettoWeb.java.Controller.HomeController.HomeController</servlet-class>
     </servlet>
@@ -36,13 +32,17 @@
         <servlet-name>IndirizzoController</servlet-name>
         <servlet-class>it.progettoWeb.java.Controller.Indirizzo.IndirizzoController</servlet-class>
     </servlet>
+    <servlet>
+      <servlet-name>OrdineController</servlet-name>
+      <servlet-class>it.progettoWeb.java.Controller.Ordine.OrdineController</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>InserisciRecensioneController</servlet-name>
+      <servlet-class>it.progettoWeb.java.Controller.InserisciRecensione.InserisciRecensioneController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RecensioneOggettoController</servlet-name>
-        <url-pattern>/RecensioneOggettoController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
@@ -64,6 +64,22 @@
         <servlet-name>IndirizzoController</servlet-name>
         <url-pattern>/IndirizzoController</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrdineController</servlet-name>
+        <url-pattern>/OrdineController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InserisciRecensioneController</servlet-name>
+        <url-pattern>/InserisciRecensioneController</url-pattern>
+    </servlet-mapping>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/jspFile/Finale/Error/ricercaErrata.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/jspFile/Finale/Error/ricercaErrata.jsp</location>
+    </error-page>
     <jsp-config>
         <taglib>
             <taglib-uri>

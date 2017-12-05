@@ -3,7 +3,8 @@
     Created on : 27-set-2017, 20.48.38
     Author     : mattia
 --%>
-
+<%@page import="net.tanesha.recaptcha.ReCaptchaFactory"%>
+<%@page import="net.tanesha.recaptcha.ReCaptcha"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <script>
@@ -38,6 +39,7 @@ function myFunction() {
     form1.submit();
 }
 </script>
+
 <div class="pos-f-t">
     <div class="collapse" id="navbarToggleFiltri">
         <div class="bg-light p-4">
@@ -146,7 +148,7 @@ function myFunction() {
             <h4 class="modal-title">Creare un account</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
-          <form action="${pageContext.request.contextPath}/UserController?action=addUser" method="POST">
+          <form id="registrationForm" action="${pageContext.request.contextPath}/UserController?action=addUser" method="POST">
             <div class="modal-body">
                 <div>
                     <i class="large material-icons">person_outline</i>
@@ -173,11 +175,17 @@ function myFunction() {
                     <input class="col-10 modal-input" type="password" id="customerConfirmPassword" name="confirmPassword" required>
                     <label for="customerConfirmPassword">Ripeti la password</label>
                 </div>
-                    <p>Creando il tuo accont, accetti le nostro condizioni sulla privacy<p>
+                <%--<%
+                    ReCaptcha c = ReCaptchaFactory.newReCaptcha("6Le96jMUAAAAAC5kV0EuyDRuTXUColh5_HReQeCS", "6Le96jMUAAAAAGYR8rQmfOljKJPNIEnZnh8PEPTY", false);
+                    out.print(c.createRecaptchaHtml(null, null));
+                %>--%>
+                <div class="g-recaptcha" data-sitekey="6Le96jMUAAAAAC5kV0EuyDRuTXUColh5_HReQeCS"></div>
 
+                <p>Creando il tuo accont, accetti le nostro condizioni sulla privacy<p>
+                <div id="html_element"></div>
             </div>
             <div class="modal-footer">
-              <button type="submit" class="col-2 paddingNav btn btn-outline-primary">Crea il tuo account</button>
+              <button type="submit" class="col paddingNav btn btn-outline-primary">Crea il tuo account</button>
             </div>
           </form>
         </div>
