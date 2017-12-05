@@ -34,7 +34,6 @@
 ### Pagina dell'utente
 - modifica dell'avatar quindi upload delle immagini
 - controllo che l'utente non inserisca lo stesso indirizzo più volte
-- Gestione degli ordini già effettuati
 - se un utetne non venditore dare la possibilità di diventarlo
 - se utente venditore l'accesso alla pagina di gestione dei propri negozi
 - se utente amministratore avere accesso alla pagina di gestione delle richieste di assistenza

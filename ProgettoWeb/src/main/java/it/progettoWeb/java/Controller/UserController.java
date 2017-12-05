@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
 import it.progettoWeb.java.database.Dao.immagineOggetto.DaoImmagineOggetto;
 import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
+import it.progettoWeb.java.database.Dao.ordiniRicevuti.DaoOrdiniRicevuti;
 import it.progettoWeb.java.database.Dao.recensioneNegozio.DaoRecensioneNegozio;
 import it.progettoWeb.java.database.Dao.recensioneVenditore.DaoRecensioneVenditore;
 import it.progettoWeb.java.database.Model.Negozio.ModelloListeNegozio;
@@ -38,7 +39,9 @@ import it.progettoWeb.java.utility.tris.tris;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import it.progettoWeb.java.utility.VerifyRecaptcha;
+import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.servlet.http.Cookie;
 
 /**
@@ -56,6 +59,7 @@ public class UserController extends HttpServlet {
     private static String HOME_PAGE = "/jspFile/Finale/Index/index.jsp";
     private static String INFOORDERDONE= "/jspFile/Finale/Utente/infoOrdiniUtente.jsp";
     private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
+    private static String INFONEGOZI = "/jspFile/Finale/Utente/gestioneNegoziUtente.jsp";
     
     private DaoUtente daoUtente;
     private DaoRecensioneVenditore daoRecensioneV;
@@ -65,6 +69,7 @@ public class UserController extends HttpServlet {
     private DaoIndirizzo daoIndirizzo;
     private DaoOrdine daoOrdine;
     private DaoImmagineOggetto daoImgOggetto;
+    private DaoOrdiniRicevuti daoOrdiniRicevuti;
 
     public UserController() {
         super();
@@ -76,6 +81,7 @@ public class UserController extends HttpServlet {
         daoOggetto = new DaoOggetto();
         daoOrdine = new DaoOrdine();
         daoImgOggetto = new DaoImmagineOggetto();
+        daoOrdiniRicevuti = new DaoOrdiniRicevuti();
     }
 
     /**
@@ -261,6 +267,62 @@ public class UserController extends HttpServlet {
             request.setAttribute("listaOrdini", listaordini);
             request.setAttribute("order", order);
             forward = INFOORDERDONE;
+        }
+        else if(action.equalsIgnoreCase("gestisciNegozi")){
+            ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+            String order = request.getParameter("order");
+            String orderStore = request.getParameter("orderStore");
+            ModelloListeOrdine listaordini = new ModelloListeOrdine();
+            ModelloListeNegozio listanegozi = new ModelloListeNegozio();
+            List<Integer> numeroOrdiniNegozi = new ArrayList<>();
+            
+            if(order.equalsIgnoreCase("data")){
+                listaordini = new ModelloListeOrdine();
+            }
+            
+            if(orderStore.equalsIgnoreCase("dataup")){
+                
+                listanegozi = new ModelloListeNegozio(daoNegozio.selectShopByOpenDate(utente.getId()));              
+                
+            } else if (orderStore.equalsIgnoreCase("datadown")){
+                
+                List<ModelloNegozio> list;
+                list = daoNegozio.selectShopByOpenDate(utente.getId());
+                Collections.reverse(list);
+                listanegozi = new ModelloListeNegozio(list);
+                
+            } else if (orderStore.equalsIgnoreCase("nameup")){
+                
+                listanegozi = new ModelloListeNegozio(daoNegozio.selectShopByNameup(utente.getId()));
+                
+            } else if (orderStore.equalsIgnoreCase("namedown")){
+                
+                listanegozi = new ModelloListeNegozio(daoNegozio.selectShopByNameDown(utente.getId()));
+                
+            } else if (orderStore.equalsIgnoreCase("prodottivendutiup")){
+                
+                pair<List<ModelloNegozio>,List<Integer>> p = daoNegozio.selectShopWithHigherSalesBySellerID(utente.getId());
+                listanegozi = new ModelloListeNegozio(p.getL());
+                numeroOrdiniNegozi = p.getR();
+                
+            } else if (orderStore.equalsIgnoreCase("prodottivendutidown")){
+                
+                pair<List<ModelloNegozio>,List<Integer>> p = daoNegozio.selectShopWithLowestSalesBySellerID(utente.getId());
+                listanegozi = new ModelloListeNegozio(p.getL());
+                numeroOrdiniNegozi = p.getR();
+                
+            }
+            if(!orderStore.equalsIgnoreCase("prodottivendutiup") && !orderStore.equalsIgnoreCase("prodottivendutidown"))
+            for(int i = 0; i<listanegozi.getList().size(); i++){
+                numeroOrdiniNegozi.add(daoOrdiniRicevuti.selectNumberOfOrderForStore(utente.getId(), listanegozi.get(i).getId()));
+            }
+            
+            request.setAttribute("order", order);
+            request.setAttribute("orderStore", orderStore);
+            request.setAttribute("listaOrdini", listaordini);
+            request.setAttribute("listanegozi", listanegozi);
+            request.setAttribute("numeroOrdiniNegozi", numeroOrdiniNegozi);
+            forward = INFONEGOZI;
         }
         else if(action.equalsIgnoreCase("logout")){
             request.getSession().invalidate();
