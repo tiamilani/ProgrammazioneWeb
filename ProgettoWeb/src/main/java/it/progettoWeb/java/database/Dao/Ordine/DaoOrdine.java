@@ -542,4 +542,29 @@ public class DaoOrdine {
         } catch (SQLException e) {
         }
     }
+    
+    
+    /*---2017-12-04---*/
+    
+    /**
+     * @author fbrug
+     * Seleziona gli ordini con lo stesso ID ordine
+     * @param idOrdine: intero rappresentante l'ID dell'ordine
+     * @return 
+     */
+    public List<ModelloOrdine> selectOrdersByIdOrder(int idOrdine)
+    {
+        List<ModelloOrdine> ordini = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectOrdersByIdOrder(idOrdine));
+            
+            while(rs.next())
+                ordini.add(getModelloFromRs(rs));
+        } catch(SQLException e) {}
+        
+        return ordini;
+    }
 }

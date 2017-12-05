@@ -17,6 +17,7 @@ import it.progettoWeb.java.database.Model.Ordine.ModelloListeOrdine;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto;
 import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
+import it.progettoWeb.java.utility.javaMail.SendEmail;
 import it.progettoWeb.java.utility.pair.pair;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -65,7 +66,7 @@ public class HomeController extends HttpServlet {
         String forward="";
         String action = request.getParameter("action");
 
-        if (action.equalsIgnoreCase("Inizializzazione")){
+        if (action.equalsIgnoreCase("Inizializzazione")){ 
             forward = HOME_PAGE;
             ModelloUtente utente = new ModelloUtente();
             utente.setId(-1);

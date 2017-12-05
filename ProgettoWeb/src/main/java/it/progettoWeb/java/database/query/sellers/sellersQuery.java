@@ -687,4 +687,38 @@ public class sellersQuery {
     {
         return "UPDATE Ordine SET idI = " + idI + " WHERE idOrdine = " + idOrdine + ";";
     }
+    
+    
+    /*---2017-12-04---*/
+    
+    /**
+     * @author fbrug
+     * Seleziona gli ordini con lo stesso ID ordine
+     * @param idOrdine: intero rappresentante l'ID dell'ordine
+     * @return String: lista degli ordini
+     */
+    public static String selectOrdersByIdOrder(int idOrdine)
+    {
+        return "SELECT * FROM Ordine WHERE Ordine.idOrdine = " + idOrdine + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * @param idUtente: intero rappresentante l'ID dell'utente
+     * @return String: lista dei carrelli
+     */
+    public static String selectCartByIdU(int idUtente)
+    {
+        return "SELECT * FROM Carrello WHERE Carrello.idUtente = " + idUtente + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * @param idordine: intero rappresentante l'ID dell'ordine
+     * @return String: lista dei carrelli
+     */
+    public static String selectCartByIdOrder(int idordine)
+    {
+        return "SELECT * FROM Carrello WHERE Carrello.idOrdine = " + idordine + ";";
+    }
 }

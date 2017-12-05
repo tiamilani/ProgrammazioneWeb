@@ -22,6 +22,7 @@ import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
 import it.progettoWeb.java.database.Model.indirizzo.ModelloListeIndirizzo;
 import it.progettoWeb.java.database.Model.tipoSpedizione.ModelloListeTipoSpedizione;
 import it.progettoWeb.java.database.Model.tipoSpedizione.ModelloTipoSpedizione;
+import it.progettoWeb.java.utility.javaMail.SendEmail;
 import it.progettoWeb.java.utility.pair.pair;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ public class OrdineController extends HttpServlet {
     private static String DELIVERY_METHOD = "/jspFile/Finale/Ordine/deliveryMethod.jsp";
     private static String PAYMENT_METHOD = "/jspFile/Finale/Ordine/paymentMethod.jsp";
     private static String ORDER_COMPLETED = "/jspFile/Finale/Ordine/orderCompleted.jsp";
+    private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
     private DaoOrdine daoOrdine;
     private DaoOggetto daoOggetto;
     private DaoImmagineOggetto daoImmagineOggetto;
@@ -92,6 +94,7 @@ public class OrdineController extends HttpServlet {
             throws ServletException, IOException
     {
         String forward = HOME_PAGE;
+        forward = ERROR_PAGE; request.setAttribute("errore", "404 Pagina non trovata");
         
         try
         {
@@ -184,7 +187,7 @@ public class OrdineController extends HttpServlet {
             {
                 forward = LIST_ORDERS;
             }
-        } catch (NullPointerException e) { System.out.println(e.getMessage()); forward = HOME_PAGE; }
+        } catch (NullPointerException e) { System.out.println(e.getMessage()); forward = ERROR_PAGE; request.setAttribute("errore", "404 Pagina non trovata"); }
         
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
@@ -203,6 +206,7 @@ public class OrdineController extends HttpServlet {
             throws ServletException, IOException
     {
         String forward = HOME_PAGE;
+        forward = ERROR_PAGE; request.setAttribute("errore", "404 Pagina non trovata");
         
         try
         {
@@ -273,6 +277,15 @@ public class OrdineController extends HttpServlet {
                         daoOrdine.updateOrderIdS(idO, idS);
                 }
             }
+            else if(save.equalsIgnoreCase("3"))
+            {
+                /*--- QUI CAMBIO LO STATO DEGLI ORDINI NEL CARRELLO IN "PAGATI" E INVIO LA MAIL DI CONFERMA DELL'ORDINE---*/
+                //daoOrdine.changeOrderStatus(((ModelloUtente)request.getSession().getAttribute("utenteSessione")).getId(), 0, 1);
+                /*---2017-12-02---SendEmail.sendMail(((ModelloUtente)request.getSession().getAttribute("utenteSessione")).getMail(), 4);*/
+                /*---2017-12-05---*/SendEmail.orderCompleted(
+                        ((ModelloUtente)request.getSession().getAttribute("utenteSessione")).getMail(),                         
+                        ((ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione")).getId());
+            }
             
             if(action.equalsIgnoreCase("listOrders"))
             {
@@ -288,9 +301,9 @@ public class OrdineController extends HttpServlet {
             }
             else if (action.equalsIgnoreCase("finish")) /*--- REINDIRIZZA A orderCompleted.jsp ---*/
             {
-                forward = "OrdineController?action=finish";
+                forward = "OrdineController?action=finish";                
             }
-        } catch (NullPointerException e) { System.out.println(e.getMessage()); forward = HOME_PAGE; }
+        } catch (NullPointerException e) { System.out.println(e.getMessage()); forward = ERROR_PAGE; request.setAttribute("errore", "Si è verificato un problema interno al sistema."); }
         
         response.sendRedirect(forward);
     }

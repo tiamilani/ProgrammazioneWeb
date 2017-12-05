@@ -14,6 +14,7 @@ function saveChanges(goTo)
             break;
         case 3:
             document.formPayment.action="/ProgettoWeb/OrdineController?save=0&action=finish";
+            document.formPayment.submit();
             break;
         case 4:
             

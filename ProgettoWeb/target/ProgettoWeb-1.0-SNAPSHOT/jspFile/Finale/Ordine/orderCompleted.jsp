@@ -16,7 +16,7 @@
     <script src="http://localhost:8080/ProgettoWeb/jspFile/Finale/JS/Orders.js"></script>
     
     <body>
-        <meta http-equiv="refresh" content="10;URL=${pageContext.request.contextPath}/jspFile/Finale/Index/index.jsp">
+        <meta http-equiv="refresh" content="5;URL=${pageContext.request.contextPath}/jspFile/Finale/Index/index.jsp">
         
         <div class="container">
             <%@include file="../Header/NavBar/navBar.jsp" %>

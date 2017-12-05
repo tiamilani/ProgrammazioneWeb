@@ -32,11 +32,13 @@ it\progettoWeb\java\database\query\objectSellers\objectSellersQuery.class
 it\progettoWeb\java\database\query\marketsSellers\marketsSellersQuery.class
 it\progettoWeb\java\Controller\Oggetto\objectSelectedController.class
 it\progettoWeb\java\database\Model\tipoSpedizione\ModelloTipoSpedizione.class
+it\progettoWeb\java\utility\javaMail\SendEmail.class
 it\progettoWeb\java\Functions.class
 it\progettoWeb\java\database\query\objectsMarkets\objectMarketsQuery.class
 it\progettoWeb\java\utility\VerifyRecaptcha.class
 it\progettoWeb\java\database\Model\indirizzoUtente\ModelloIndirizzoUtente.class
 it\progettoWeb\java\database\query\admin\adminQuery.class
+it\progettoWeb\java\utility\javaMail\SendEmail$1.class
 it\progettoWeb\java\database\Model\indirizzo\ModelloIndirizzo.class
 it\progettoWeb\java\database\Dao\immagineNegozio\DaoImmagineNegozio.class
 it\progettoWeb\java\database\query\users\usersQuery.class

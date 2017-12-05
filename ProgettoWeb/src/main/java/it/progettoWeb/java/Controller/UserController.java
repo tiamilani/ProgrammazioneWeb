@@ -40,6 +40,7 @@ import it.progettoWeb.java.utility.tris.tris;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import it.progettoWeb.java.utility.VerifyRecaptcha;
+import it.progettoWeb.java.utility.javaMail.SendEmail;
 import javax.servlet.http.Cookie;
 
 /**
@@ -164,9 +165,17 @@ public class UserController extends HttpServlet {
                 request.setAttribute("errore", "La mail deve differire da quella precedente");
             }
             else{
+                String oldMail = utente.getMail();
                 utente.setMail(newEmail);
 
                 daoUtente.updateUserEmailByUserID(utente);
+                
+                
+                
+                System.out.println("PREEMAIL - Update Email");
+                /*---2017-12-02---SendEmail.sendMail(utente.getMail(), 1);*/
+                /*---2017-12-04---*/SendEmail.updateEmail(oldMail, newEmail);
+                System.out.println("EMAIL - Update Email");
             }
             response.sendRedirect("UserController?action=infoCurrentUser");
             return;
@@ -256,15 +265,6 @@ public class UserController extends HttpServlet {
                 ck.setMaxAge(-1);
                 response.addCookie(ck);//adding cookie in the response  
                 
-                /*
-                /*Creazione carrello in sessione*
-                ModelloListeOrdine carrello = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 0));
-                request.getSession().removeAttribute("carrelloSessione");
-                request.getSession().setAttribute("carrelloSessione", carrello);
-                
-                carrello.setId(carrello.hashCode());
-                */
-                /*--- 2017-11-06 Creazione carrello in sessione */
                 ModelloListeOrdine carrelloInSessione = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
                 if(carrelloInSessione.getSize() > 0)
                     for(ModelloOrdine ordine : carrelloInSessione.getList()) 
@@ -276,7 +276,6 @@ public class UserController extends HttpServlet {
                 ModelloListeOrdine carrello = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 0));
                 request.getSession().removeAttribute("carrelloSessione");
                 request.getSession().setAttribute("carrelloSessione", carrello);
-                /*---*/
             }
             forward = HOME_PAGE;
         }
@@ -308,6 +307,12 @@ public class UserController extends HttpServlet {
                     {
                         utente.setUtenteType(0);
                         daoUtente.addUser(utente);
+                        
+                        
+                        System.out.println("PREEMAIL - Add User " + utente.getMail());
+                        /*---2017-12-02---SendEmail.sendMail(utente.getMail(), 0);*/
+                        /*---2017-12-04---*/SendEmail.addUser(utente.getMail());
+                        System.out.println("EMAIL - Add User");
 
                         forward = HOME_PAGE;
                     }
@@ -335,6 +340,13 @@ public class UserController extends HttpServlet {
                 else {
                     utente.setPassword(newPassword);
                     daoUtente.updateUserPasswordByUserID(utente);
+                    
+                    
+                    System.out.println("PREEMAIL - Update Password");
+                    /*---2017-12-02---SendEmail.sendMail(utente.getMail(), 3);*/
+                    /*---2017-12-04---*/SendEmail.updatePassword(utente.getMail());
+                    System.out.println("EMAIL - Update Password");
+                    
                     response.sendRedirect("UserController?action=infoCurrentUser");
                     return;
                 }
@@ -345,10 +357,15 @@ public class UserController extends HttpServlet {
             ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
             utente.setUtenteType(1);
             daoUtente.updateUser(utente);
+            
+            
+            System.out.println("PREEMAIL - Become Seller");
+            /*---2017-12-02---SendEmail.sendMail(utente.getMail(), 4);*/
+            /*---2017-12-04---*/SendEmail.becomeSeller(utente.getMail());
+            System.out.println("EMAIL - Become Seller");
 
             forward = USERPAGE;
         }
-        
         
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
