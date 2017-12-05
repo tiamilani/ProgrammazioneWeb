@@ -29,6 +29,7 @@ import it.progettoWeb.java.database.query.objects.objectsQuery;
 import it.progettoWeb.java.database.query.sellers.sellersQuery;
 import it.progettoWeb.java.database.query.objectsMarkets.objectMarketsQuery;
 import it.progettoWeb.java.database.query.users.usersQuery;
+import it.progettoWeb.java.utility.pair.pair;
 import it.progettoWeb.java.utility.tris.tris;
 
 public class DaoNegozio {
@@ -294,9 +295,11 @@ public class DaoNegozio {
      * @param idVenditore: intero rappresentante l'ID del venditore
      * @return String: lista dei negozi
      */
-    public List<ModelloNegozio> selectShopWithHigherSalesBySellerID(int idVenditore)
+    public pair<List<ModelloNegozio>,List<Integer>> selectShopWithHigherSalesBySellerID(int idVenditore)
     {
+        pair<List<ModelloNegozio>,List<Integer>> result;
         List<ModelloNegozio> stores = new ArrayList<>();
+        List<Integer> ordini = new ArrayList<>();
         
         try
         {
@@ -306,11 +309,13 @@ public class DaoNegozio {
             while(rs.next())
             {
                 stores.add(getModelloFromRs(rs));
+                ordini.add(rs.getInt("numeroVendite"));
             }
         }
         catch (SQLException e) {}
         
-        return stores;
+        result = new pair<>(stores, ordini);
+        return result;
     }
     
     /**
@@ -319,9 +324,11 @@ public class DaoNegozio {
      * @param idVenditore: intero rappresentante l'ID del venditore
      * @return String: lista dei negozi
      */
-    public List<ModelloNegozio> selectShopWithLowestSalesBySellerID(int idVenditore)
+    public pair<List<ModelloNegozio>,List<Integer>> selectShopWithLowestSalesBySellerID(int idVenditore)
     {
+        pair<List<ModelloNegozio>,List<Integer>> result;
         List<ModelloNegozio> stores = new ArrayList<>();
+        List<Integer> ordini = new ArrayList<>();
         
         try
         {
@@ -331,11 +338,13 @@ public class DaoNegozio {
             while(rs.next())
             {
                 stores.add(getModelloFromRs(rs));
+                ordini.add(rs.getInt("numeroVendite"));
             }
         }
         catch (SQLException e) {}
         
-        return stores;
+        result = new pair<>(stores, ordini);
+        return result;
     }
     
     /**
@@ -487,6 +496,44 @@ public class DaoNegozio {
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sellersQuery.selectShopByOpenDate(idVenditore));
+            
+            while(rs.next())
+            {
+                stores.add(getModelloFromRs(rs));
+            }
+        }
+        catch (SQLException e) {}
+        
+        return stores;
+    }
+    
+    public List<ModelloNegozio> selectShopByNameup(int idVenditore)
+    {
+        List<ModelloNegozio> stores = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectShopByNameup(idVenditore));
+            
+            while(rs.next())
+            {
+                stores.add(getModelloFromRs(rs));
+            }
+        }
+        catch (SQLException e) {}
+        
+        return stores;
+    }
+    
+    public List<ModelloNegozio> selectShopByNameDown(int idVenditore)
+    {
+        List<ModelloNegozio> stores = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectShopByNameDown(idVenditore));
             
             while(rs.next())
             {

@@ -19,6 +19,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
+import it.progettoWeb.java.database.query.sellers.sellersQuery;
 
 public class DaoOrdiniRicevuti {
 
@@ -59,5 +60,21 @@ public class DaoOrdiniRicevuti {
         }
         
         return OrdineRicevuto;
+    }
+    
+    public int selectNumberOfOrderForStore(int idVenditore, int idNegozio)
+    {
+        int ordini = 0;
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectNumberOfOrderForStore(idVenditore, idNegozio));
+            
+            while(rs.next())
+                ordini = rs.getInt("ordini");
+        } catch(SQLException e) {}
+        
+        return ordini;
     }
 }
