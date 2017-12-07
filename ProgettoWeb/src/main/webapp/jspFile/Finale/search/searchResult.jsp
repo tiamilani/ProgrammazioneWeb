@@ -25,7 +25,7 @@
     </head>
     <body>
         <jsp:useBean id="ListaOggetti" class="it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto" scope="request" />
-        <%@include file="../Header/NavBar/navBar.jsp" %>
+        <%@include file="../Header/NavBar/newNavBar.jsp" %>
 
         <div class="container-fluid">
 

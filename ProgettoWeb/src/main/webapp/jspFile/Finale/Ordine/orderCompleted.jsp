@@ -19,7 +19,7 @@
         <meta http-equiv="refresh" content="5;URL=${pageContext.request.contextPath}/jspFile/Finale/Index/index.jsp">
         
         <div class="container">
-            <%@include file="../Header/NavBar/navBar.jsp" %>
+            <%@include file="../Header/NavBar/newNavBar.jsp" %>
             <hr/>
         </div>
         

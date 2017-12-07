@@ -20,7 +20,7 @@
     </head>
     <body>
         <div class="container">
-            <%@include file="../Header/NavBar/navBar.jsp" %>
+            <%@include file="../Header/NavBar/newNavBar.jsp" %>
         </div>
         <div class="container-fluid">
             <%@include file="descrizione.jsp" %>
