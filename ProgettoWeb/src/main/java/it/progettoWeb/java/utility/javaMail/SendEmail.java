@@ -233,7 +233,7 @@ public class SendEmail
             {
                 message.setSubject("Hai reimpostato la passowrd");
                 message.setText(
-                        "Salve + " + user.getNome() + ",\n"
+                        "Salve " + user.getNome() + ",\n"
                         + "La tua password per ShopEro è stata appena modificata.\n"
                         + "Se non sei stato tu a modificare la tua password, "
                         + "ti suggeriamo di contattare il servizio clienti (LINK) "

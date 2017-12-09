@@ -105,21 +105,22 @@ function myFunction() {
         </form>
         <div class="user">
             <c:choose>
-                <c:when test="${utente.getId() != -1}">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+                <c:when test="${utenteSessione.getId() != -1}">
+                    <button type="button" class="btn btn-primary"
+                            onclick="location.href='${pageContext.request.contextPath}/jspFile/Finale/Utente/utente.jsp'">
                         Account
                     </button>
                 </c:when>
                 <c:otherwise>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
-                        Account
+                        Log In
                     </button>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
                         Registrati
                     </button>
                 </c:otherwise>
             </c:choose>    
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
+            <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/OrdineController?action=listOrders'">
                 Carello
             </button>
         </div>
@@ -136,7 +137,7 @@ function myFunction() {
             <h4 class="modal-title">Creare un account</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
-          <form action="${pageContext.request.contextPath}/UserController?action=addUser" method="POST">
+          <form id="registrationForm" action="${pageContext.request.contextPath}/UserController?action=addUser" method="POST">
             <div class="modal-body">
                 <div>
                     <i class="large material-icons">person_outline</i>
