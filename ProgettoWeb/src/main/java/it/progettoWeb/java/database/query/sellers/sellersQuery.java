@@ -31,6 +31,12 @@ public class sellersQuery {
         return "SELECT * FROM Negozio WHERE idVenditore = " + idVenditore + ";";
     }
     
+    public static String selectNumberOfOrderForStore(int idVenditore, int idNegozio){
+        return "select COUNT(Ordine.idOggetto) as ordini "
+                + "from Ordine INNER JOIN ordiniRicevuti ON (Ordine.idOrdine = ordiniRicevuti.idO) "
+                + "where ordiniRicevuti.idV = "+idVenditore+" AND Ordine.idNegozio = "+idNegozio+";";
+    }
+    
     /**
      * @author fbrug
      * Ottenere la lista degli ordini ricevuti
@@ -149,11 +155,11 @@ public class sellersQuery {
      */
     public static String selectShopWithHigherSalesBySellerID(int idVenditore)
     {
-        return "SELECT idNegozio, COUNT(idOrdine) AS numeroVendite "
-                + "FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id "
-                + "WHERE idVenditore=" + idVenditore
-                + " GROUP BY idNegozio "
-                + "ORDER BY COUNT(idOrdine) DESC;";
+        return "select Negozio.*, COUNT(idOrdine) AS numeroVendite "
+                + "FROM Negozio JOIN Ordine ON (Ordine.idNegozio=Negozio.id) "
+                + "where Negozio.idVenditore="+idVenditore+" "
+                + "GROUP BY Negozio.id, Negozio.nomeNegozio, Negozio.valutazione, Negozio.attivo, Negozio.idI "
+                + "ORDER BY numeroVendite DESC;";
     }
           
     /**
@@ -164,11 +170,11 @@ public class sellersQuery {
      */
     public static String selectShopWithLowestSalesBySellerID(int idVenditore)
     {
-        return "SELECT idNegozio, COUNT(idOrdine) AS numeroVendite "
-                + "FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id "
-                + "WHERE idVenditore=" + idVenditore
-                + " GROUP BY idNegozio "
-                + "ORDER BY COUNT(idOrdine) ASC;";
+        return "select Negozio.*, COUNT(idOrdine) AS numeroVendite "
+                + "FROM Negozio JOIN Ordine ON (Ordine.idNegozio=Negozio.id) "
+                + "where Negozio.idVenditore="+idVenditore+" "
+                + "GROUP BY Negozio.id, Negozio.nomeNegozio, Negozio.valutazione, Negozio.attivo, Negozio.idI "
+                + "ORDER BY numeroVendite ASC;";
     }
           
     /**
@@ -271,6 +277,16 @@ public class sellersQuery {
     public static String selectShopByOpenDate(int idVenditore)
     {
         return "SELECT * FROM Negozio WHERE idVenditore=" + idVenditore + " ORDER BY dataApertura DESC;";
+    }
+    
+    public static String selectShopByNameup(int idVenditore)
+    {
+        return "SELECT * FROM Negozio WHERE idVenditore=" + idVenditore + " ORDER BY nomeNegozio;";
+    }
+    
+    public static String selectShopByNameDown(int idVenditore)
+    {
+        return "SELECT * FROM Negozio WHERE idVenditore=" + idVenditore + " ORDER BY nomeNegozio DESC;";
     }
           
     /**

@@ -1,34 +1,57 @@
-.navbar{
-    padding-left: 0%;
-    padding-right: 0%;
+.dropdown{
+    position: static;
 }
 
-.navbar-brand{
-    float: left;
-    margin-left: 3%;
+.navbar-collapse.collapse.show .dropdown{
+    display: inline-block;
 }
 
-.navbar-nav{
-    float: left;
+.navbar-collapse.collapsing .dropdown{
+    display: inline-block;
 }
 
-
-.paddingNav{
-    margin-left: 5%;
-    margin-right: 5%;
+.navbar-collapse.collapse.show form{
+    display: inline-block;
+    min-width: 200px;
 }
 
-.buttonSpace{
-    margin-left: 1%;
-    margin-right: 1%;
+.navbar-collapse.collapsing form{
+    display: inline-block;
+    min-width: 200px;
 }
 
-.floatRight{
-    float: right;
+.navbar-collapse.collapse.show .user{
+    display: inline-block;
+}
+
+.navbar-collapse.collapsing .user{
+    display: inline-block;
+}
+
+.dropdown-menu.show{
+    width: 100%;
+    display: table;
+    margin-top: 0;
+}
+
+.dropdown-item{
+    display: table-cell;
+}
+
+button{
+    margin-left: 5px;
+}
+
+input{
+    margin-left: 5px;
+}
+
+.find{
+    margin: 5px;
 }
 
 #expand{
-    width: 15%;
+    width: 40%;
     display: block;
     margin: 0 0 0 auto;
     -webkit-transition: width 0.1s ease-in-out;
@@ -37,6 +60,14 @@
 
 #expand:focus{
     width: 100%;
+}
+
+#nopad{
+    padding: .25rem;
+}
+
+.find{
+    min-width: 400px;
 }
 
 .modal-footer{

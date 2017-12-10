@@ -24,7 +24,7 @@
     </head>
     <body>
         <div class="container">
-            <%@include file="../Header/NavBar/navBar.jsp" %>
+            <%@include file="../Header/NavBar/newNavBar.jsp" %>
             <%@include file="../Components/Menu/fixedMenu.jsp" %>
         </div>
         <div class="container-fluid">

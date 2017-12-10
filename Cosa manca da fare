@@ -1,0 +1,127 @@
+# Programmazione web
+## FrontEnd
+
+### Home page
+- slide show con immagini random
+- se l'utente è loggato mostrare oggetti che potrebbero davvero piacergli guardando quelli che ha già comprato
+- navbar responsive
+- cifratura della password lato client prima di inviarla alla servlet sia per login che registrazione
+- bean in sessione del carrello al login le cose presenti nel bean andranno portate anche ne database
+- migliorare la visualizzazione della lista delle categorie
+- ricerca nella barra tramite string similarity
+- ricerca nella barra con i filtri
+- la voce carrello dovrà indicare il numero di oggetti presenti
+- la voce utente una volta effettuato il login dovrà mostrare l'avatar dell'utente
+
+### Descrizione oggetto
+- dare la possibilità al venditore di rispondere alle recensioni
+- sistema di upload delle immagini per le recensioni
+- migliorare il pannello di aggiunta al carrello con più informazioni (ad esempio se presente il ritiro a mano indicare l'indirizzo, o quanti giorni potrebbero servire per l'arrivo)
+
+### Descrizione negozio
+- dare la possibilità al venditore di risondere alle recensioni
+
+### Descrizione venditore
+- dare la possibilità al venditore di rispondere alle recensioni
+
+### Risultati di una ricerca
+- migliorare l'interfaccia
+
+### login
+- risolvere il bug di Damiano
+- fare il login da una qualsiasi pagina e tornarvici
+
+### Pagina dell'utente
+- modifica dell'avatar quindi upload delle immagini
+- controllo che l'utente non inserisca lo stesso indirizzo più volte
+- se un utetne non venditore dare la possibilità di diventarlo
+- se utente venditore l'accesso alla pagina di gestione dei propri negozi
+- se utente amministratore avere accesso alla pagina di gestione delle richieste di assistenza
+- poter effettuare richieste di assistenza
+- rimuovere bug all'uscita dell'utente
+
+### Pagina diventa un venditore
+pagna statica che mostrerà:
+- le caratteristiche per essere venditori
+- una dichiarazione di consenso
+- informazioni varie ed eventuali
+- pulsante bello grande con sritto diventa venditore, modale che chiede di confermare la scelta
+
+### Pagina di gestione dei propri negozi
+pagina dinamica separata in due parti
+- nella prima si vedranno tutti gli ultimi ordini ricevuti, i quali saranno filtrabili ed ordinabili secondo certe caratteristiche
+- nella seconda parte si vedrà la lista dei negozi controllati, vi saranno varie informazioni minimali, click sul negozio per aprire la gestione del negozio, anche qui filtri per ordinare e gestire i vari negozi e come vengono mostrati
+- pulsante aggiungi e rimuovi negozio ovviamente
+
+### Pagina di gestione del singolo negozio
+Pagina dinamica che mostrerà informazioni tipo:
+- tutte le info del negozio
+- ultimi prodotti venduti, quantità, entrate
+- Poi si avranno varie liste:
+ - la lista degli ordini che si stanno gestendo, e quelli già spediti con codice di tracking, ordini restituiti e quelli che dovranno andare in lavorazione, con pulsanti per cambiare lo stato di un ordine
+ - la lista dei prodotti presenti nel negozio con quantità prezzo ecc, tutto modificabile compresa l'aggiunta di sconti ecc, uno sconto però non potrà essere revocato quindi una volta selezionato apparirà un modale che chiederà conferma
+
+### Pagina per la gestione delle richieste di assistenza
+pagina utilizzabile solo dagli utenti amministratori, avranno:
+- lista delle richieste di assistenza portate a termine
+- lista delle richieste di assistenza da svolgere
+clicckando su una specifica richiesta di assistenza si accederà alla pagina della singola richiesta
+
+### Pagina singola richiesta
+se la richiesta è già stata chiusa:
+- mostra le info della richiesta e la decisione che è stata presa
+se la richiesta è ancora in corso:
+- mostrerà le informazioni ed in più darà la possibilità all'amministratore di prendere una decisione definitiva che andrà confermata con un modale
+
+### Pagina di richiesta di assistenza
+tutti gli utenti possono fare una richiesta di assistenza
+- la richeista dovrà comprendere tutte le informazioni necessarie, per il tipo di richiesta che può andare dalla richiesta di informazioni alla richiesta di rimborso
+- la richiesta poi verrà assegnata ad un amministratore
+- nella stessa pagina potrò anche vedere lo stato di una richiesta passata, clicckandoci sopra andrò alla pagina di singola richiesta su cui però non avrò alcun diritto di modifica, ma solo di visualizzazione
+
+### pagina del carrello
+- il carrello andrà gestito tramite bean di sessione
+- qui sarà permesso solo modificare le quantità degli oggetti
+- tabella rassiuntiva e dopo di che vi sarà il pulsante procedi con l'acquisto che porterà alla pagina di selezione dell'indirizzo di spedizione ed il metodo di spedizione
+
+### Metodo di spedizione
+- pagina che mostrerà una lista dei propri indirizzi e chiederà di selezionarne uno, sarà anche presente il pulsante per l'aggiunta di un indirizzo al momento
+- una seconda lista mostrerà per ogni oggetto le varie possibilità di spedizione e l'utente dovrà sceglierne una per ogni oggetto che intende ordinare
+- qui sarà ancora possibile rimuovere un oggetto ma non modificarne la quantità
+- sarà sempre presente un remainder anche minimale che mostrerà ciò che si ha nel carrello ed un subtotale
+- pulsante con "procedi al pagamento"
+
+### Pagina di pagamento
+- la pagina di pagamento dovrà riepilogare ciò che l'utente ha slezionato, ora non più modificabile ed il subtotale
+- una seconda parte della pagina dovrà mostrare le opzioni per il pagamento (num carta ecc ecc)
+- pulsante paga che porterà ad una pagina con scritto "Ordine effettuato, potrai controllare l'ordine dalla pagina di gestione degli ordini nel tuo profilo"
+
+### Error
+- mettere uno stile alla pagina di errore che mostra un messaggio specificato
+(La pagina esiste già)
+
+---
+
+## BackEnd
+
+### Servlet
+Creare ogni servlet che sarà necessaria per la gestione delle pagine
+- porre attenzione a come vanno fatti i passaggi di valori tra servlet->pagina e viceversa
+
+### DAO
+Controllare se la query di cui si ha bisogno non sia multipla, in caso dividerla (se non ci si ricorda come fare chiedere a mattia)
+Creare nuove funzioni se necessario
+
+### Query
+Creare le query necessarie se non già presenti
+
+### Email
+Inviare dal server email per tutto ciò che sarà necessario
+- iscrizione
+- cambio dati account
+- conferma pagamento ordine
+- invio dell'ordine
+ecc ecc
+
+### Gestione delle immagini
+Gestire le immagini in modo univoco, non importa quali esse siano, ci penserà il db a dividerle

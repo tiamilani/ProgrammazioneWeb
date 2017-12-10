@@ -138,7 +138,7 @@ function myFunction() {
 </div>
 
 
-<%-- messo esternamente al resto in modo da non influenzare il suo autofocus da propriet� di posizionamento prima definite--%>
+<%-- messo esternamente al resto in modo da non influenzare il suo autofocus da propriet? di posizionamento prima definite--%>
 <div id="registerModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 

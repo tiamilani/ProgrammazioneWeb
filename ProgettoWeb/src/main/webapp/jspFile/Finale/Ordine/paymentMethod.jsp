@@ -20,7 +20,7 @@
     
     <body>
         <div class="container">
-            <%@include file="../Header/NavBar/navBar.jsp" %>
+            <%@include file="../Header/NavBar/newNavBar.jsp" %>
             <hr/>
         </div>
         
