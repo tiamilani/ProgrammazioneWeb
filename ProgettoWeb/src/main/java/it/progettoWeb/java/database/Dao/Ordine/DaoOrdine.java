@@ -40,6 +40,7 @@ public class DaoOrdine {
     private static final String DATAORDINE="dataOrdine";
     private static final String PREZZODIACQUISTO="prezzoDiAcquisto";
     private static final String IDS="idS";
+    private static final String IDI="idI";
     
     /**
      * Variabile che gestisce la connessione con il db
@@ -75,6 +76,7 @@ public class DaoOrdine {
             Ordine.setDataOrdine(rs.getTimestamp(DATAORDINE));
             Ordine.setPrezzoDiAcquisto(rs.getDouble(PREZZODIACQUISTO));
             Ordine.setIdS(rs.getInt(IDS));
+            Ordine.setIdI(rs.getInt(IDI));
         } catch (SQLException e) {
         }
         
@@ -192,7 +194,7 @@ public class DaoOrdine {
      * @author fbrug
      * Ottenere la lista degli ordini in base al loro stato
      * @param idVenditore: intero rappresentante l'ID del venditore
-     * @param stato: intero rappresentante lo stato dell'ordine (0 = nel carrello, 1 = pagato, 2 = in lavorazione, 3 = spedito, 4 = consegnato = nella lista desideri)
+     * @param stato: intero rappresentante lo stato dell'ordine (0 = nel carrello, 1 = pagato, 2 = in lavorazione, 3 = spedito, 4 = consegnato, 5 = nella lista desideri)
      * @return String: lista degli ordini
      */
     public List<ModelloOrdine> selectOrderBySellerIDAndStatus(int idVenditore, int stato)
@@ -426,6 +428,24 @@ public class DaoOrdine {
     }
     
     /**
+     * @author fbrug
+     * @param idOr Un intero che rappresenta l'identificativo dell'ordine preso in considerazione
+     * @param idOg Una stringa che rappresenta l'identificativo dell'oggetto preso in considerazione
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param newQuantity Un intero rappresentate la nuova quantità dell'oggetto nell'ordine selezionato
+     */
+    public void changeOrderQuantity(int idOr, String idOg, int idU, int newQuantity)
+    {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(usersQuery.changeOrderQuantity(idOr, idOg, idU, newQuantity));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+        }
+    }
+    
+    /**
      * @author Mattia
      * Aggiungi un oggetto agli ordini nella lista dei desideri
      * @param oggetto ModelloOrdine che rappresenta l'oggetto da inserire
@@ -438,5 +458,113 @@ public class DaoOrdine {
 
         } catch (SQLException e) {
         }
+    }
+    
+    /*---2017-11-20---*/
+    
+    /**
+     * @author fbrug
+     * Seleziona gli ordini con lo stesso tipo di spedizione (in base all'idS)
+     * @param idS: intero rappresentante l'ID della spedzione associata all'ordine
+     * @return lista degli ordini
+     */
+    public List<ModelloOrdine> selectOrderByIdS(int idS)
+    {
+        List<ModelloOrdine> ordini = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectOrderByIdS(idS));
+            
+            while(rs.next())
+                ordini.add(getModelloFromRs(rs));
+        } catch(SQLException e) {}
+        
+        return ordini;
+    }
+    
+    /**
+     * @author fbrug
+     * Aggiorna il valore dell'idS dell'ordine selezionato
+     * @param idOrdine: intero rappresentante l'ID dell'ordine
+     * @param idS: intero rappresentante l'ID della spedizione associata all'ordine
+     */
+    public void updateOrderIdS(int idOrdine, int idS)
+    {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(sellersQuery.updateOrderIdS(idOrdine, idS));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+        }
+    }
+    
+    
+    /*---2017-11-21---*/
+    
+    /**
+     * @author fbrug
+     * Seleziona gli ordini con lo stesso indirizzo spedizione (in base all'idI)
+     * @param idI: intero rappresentante l'ID dell'indirizzo associato all'ordine
+     * @return lista degli ordini
+     */
+    public List<ModelloOrdine> selectOrderByIdI(int idI)
+    {
+        List<ModelloOrdine> ordini = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectOrderByIdI(idI));
+            
+            while(rs.next())
+                ordini.add(getModelloFromRs(rs));
+        } catch(SQLException e) {}
+        
+        return ordini;
+    }
+    
+    /**
+     * @author fbrug
+     * Aggiorna il valore dell'idI dell'ordine selezionato
+     * @param idOrdine: intero rappresentante l'ID dell'ordine
+     * @param idI: intero rappresentante l'ID dell'indirizzo associato all'ordine
+     */
+    public void updateOrderIdI(int idOrdine, int idI)
+    {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(sellersQuery.updateOrderIdI(idOrdine, idI));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+        }
+    }
+    
+    
+    /*---2017-12-04---*/
+    
+    /**
+     * @author fbrug
+     * Seleziona gli ordini con lo stesso ID ordine
+     * @param idOrdine: intero rappresentante l'ID dell'ordine
+     * @return 
+     */
+    public List<ModelloOrdine> selectOrdersByIdOrder(int idOrdine)
+    {
+        List<ModelloOrdine> ordini = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectOrdersByIdOrder(idOrdine));
+            
+            while(rs.next())
+                ordini.add(getModelloFromRs(rs));
+        } catch(SQLException e) {}
+        
+        return ordini;
     }
 }

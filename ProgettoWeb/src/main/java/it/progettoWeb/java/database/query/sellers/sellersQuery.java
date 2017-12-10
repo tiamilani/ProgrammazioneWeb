@@ -647,4 +647,94 @@ public class sellersQuery {
     {
         return "DELETE FROM imageNegozio WHERE imageNegozio.idO = " + idNegozio + " AND imageNegozio.src = " + imagePath + ";";
     }
+    
+    
+    
+    /*---2017-11-20---*/
+    
+    /**
+     * @author fbrug
+     * Seleziona gli ordini con lo stesso tipo di spedizione (in base all'idS)
+     * @param idS: intero rappresentante l'ID della spedzione associata all'ordine
+     * @return String: lista degli ordini
+     */
+    public static String selectOrderByIdS(int idS)
+    {
+        return "SELECT * FROM Ordine WHERE Ordine.idS = " + idS + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * Aggiorna il valore dell'idS dell'ordine selezionato
+     * @param idOrdine: intero rappresentante l'ID dell'ordine
+     * @param idS: intero rappresentante l'ID della spedizione associata all'ordine
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateOrderIdS(int idOrdine, int idS)
+    {
+        if(idS == -1) //Ritiro in negozio
+            return "UPDATE Ordine SET idS = NULL WHERE idOrdine = " + idOrdine + ";";
+        else
+            return "UPDATE Ordine SET idS = " + idS + " WHERE idOrdine = " + idOrdine + ";";
+    }
+    
+    
+    /*---2017-11-21---*/
+    
+    /**
+     * @author fbrug
+     * Seleziona gli ordini con lo stesso indirizzo spedizione (in base all'idI)
+     * @param idI: intero rappresentante l'ID dell'indirizzo associato all'ordine
+     * @return String: lista degli ordini
+     */
+    public static String selectOrderByIdI(int idI)
+    {
+        return "SELECT * FROM Ordine WHERE Ordine.idI = " + idI + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * Aggiorna il valore dell'idI dell'ordine selezionato
+     * @param idOrdine: intero rappresentante l'ID dell'ordine
+     * @param idI: intero rappresentante l'ID dell'indirizzo associato all'ordine
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateOrderIdI(int idOrdine, int idI)
+    {
+        return "UPDATE Ordine SET idI = " + idI + " WHERE idOrdine = " + idOrdine + ";";
+    }
+    
+    
+    /*---2017-12-04---*/
+    
+    /**
+     * @author fbrug
+     * Seleziona gli ordini con lo stesso ID ordine
+     * @param idOrdine: intero rappresentante l'ID dell'ordine
+     * @return String: lista degli ordini
+     */
+    public static String selectOrdersByIdOrder(int idOrdine)
+    {
+        return "SELECT * FROM Ordine WHERE Ordine.idOrdine = " + idOrdine + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * @param idUtente: intero rappresentante l'ID dell'utente
+     * @return String: lista dei carrelli
+     */
+    public static String selectCartByIdU(int idUtente)
+    {
+        return "SELECT * FROM Carrello WHERE Carrello.idUtente = " + idUtente + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * @param idordine: intero rappresentante l'ID dell'ordine
+     * @return String: lista dei carrelli
+     */
+    public static String selectCartByIdOrder(int idordine)
+    {
+        return "SELECT * FROM Carrello WHERE Carrello.idOrdine = " + idordine + ";";
+    }
 }

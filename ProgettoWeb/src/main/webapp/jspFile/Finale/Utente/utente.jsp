@@ -14,7 +14,7 @@
     </head>
     <body>
         <div class="container">
-            <%@include file="../Header/NavBar/navBar.jsp" %>
+            <%@include file="../Header/NavBar/newNavBar.jsp" %>
         </div>
         <div class="container-fluid">
             <div class="row">
@@ -37,7 +37,7 @@
                         <a href="${pageContext.request.contextPath}/UserController?action=gestisciNegozi&order=data&orderStore=dataup" method="GET" class="btn btn-outline-primary buttonSpace btn-block">Gestisci negozi</a>
                     </c:if>
                     <c:if test="${utenteSessione.getUtenteType() == 0}" >
-                        <a href="#" method="GET" class="btn btn-outline-primary buttonSpace btn-block">Diventa un venditore</a>
+                        <a href="${pageContext.request.contextPath}/jspFile/Finale/Utente/diventaVenditore.jsp" class="btn btn-outline-primary buttonSpace btn-block">Diventa un venditore</a>
                     </c:if>
                     <c:if test="${utenteSessione.getUtenteType() == 2}" >
                         <a href="#" method="GET" class="btn btn-outline-primary buttonSpace btn-block">Gestisci richieste di assistenza</a>

@@ -22,7 +22,7 @@
     
     <body>
         <div class="container">
-            <%@include file="../Header/NavBar/navBar.jsp" %>
+            <%@include file="../Header/NavBar/newNavBar.jsp" %>
         </div>
         
         <div class="container-fluid">
@@ -39,5 +39,28 @@
         <div class="container">
             <%@include file="../Footer/footer.jsp" %>
         </div>
+        
+        <!--- 2017-11-08 --->
+        <script type="text/javascript">
+            var nibirumail_advice_text = 'Questo sito usa i cookie per migliorare i servizi e analizzare il traffico. Navigando all\'interno del sito accetti l\'utilizzo dei cookie.\n\
+                Maggiori informazioni in Privacy Policy.\n\
+                <button type="button" onclick="location.href=\'http://localhost:8080/ProgettoWeb/jspFile/Finale/Policy/Privacy/privacyPolicy.jsp\'">Privacy Policy</button>\n\
+                <button type="button" href="javascript:;" class="nibirumail_agreement">ACCETTO</button>';
+                </script>
+        <script type="text/javascript" src="https://nibirumail.com/docs/scripts/nibirumail.cookie.min.js"></script>
+        
+        <!--
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    
+                    <a class="btn__close_c" href="javascript:r$('cookies').fadeOut('slow');"><img src="//d1qsjop7tycsfb.cloudfront.net/fileadmin/Img/cookies/btn_close_cookies.png"></a>
+                    <div class="text__cont">
+                        <p>Questo sito usa cookie, anche di terzi, per migliorare l’esperienza di navigazione e adeguare la pubblicità alle tue preferenze. Chiudendo questo banner o proseguendo nella navigazione acconsenti all’utilizzo di cookie.
+                            <a href="/banner-cookie/" class="btn">
+                                Informazioni e gestione consenso cookie.
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                -->
     </body>
 </html>

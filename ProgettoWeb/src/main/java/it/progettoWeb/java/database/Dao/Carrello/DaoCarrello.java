@@ -25,6 +25,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
+import it.progettoWeb.java.database.query.sellers.sellersQuery;
 
 public class DaoCarrello {
     /**
@@ -64,5 +65,52 @@ public class DaoCarrello {
         }
         
         return Carrello;
+    }
+    
+    
+    /*---2017-12-04---*/
+    
+    /**
+     * @author fbrug
+     * Seleziona i carrelli con lo stesso ID utente
+     * @param idUtente: intero rappresentante l'ID dell'ordine
+     * @return 
+     */
+    public List<ModelloCarrello> selectCartByIdU(int idUtente)
+    {
+        List<ModelloCarrello> ordini = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectCartByIdU(idUtente));
+            
+            while(rs.next())
+                ordini.add(getModelloFromRs(rs));
+        } catch(SQLException e) {}
+        
+        return ordini;
+    }
+    
+    /**
+     * @author fbrug
+     * Seleziona i carrelli con lo stesso ID ordine
+     * @param idOrdine: intero rappresentante l'ID dell'ordine
+     * @return 
+     */
+    public List<ModelloCarrello> selectCartByIdOrder(int idOrdine)
+    {
+        List<ModelloCarrello> ordini = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectCartByIdOrder(idOrdine));
+            
+            while(rs.next())
+                ordini.add(getModelloFromRs(rs));
+        } catch(SQLException e) {}
+        
+        return ordini;
     }
 }

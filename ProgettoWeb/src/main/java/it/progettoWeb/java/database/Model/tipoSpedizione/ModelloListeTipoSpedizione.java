@@ -5,10 +5,39 @@
  */
 package it.progettoWeb.java.database.Model.tipoSpedizione;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author mattia
  */
-public class ModelloListeTipoSpedizione {
+public class ModelloListeTipoSpedizione 
+{
+    private List<ModelloTipoSpedizione> listaTipoSpedizione;
     
+    public ModelloListeTipoSpedizione()
+    {
+        listaTipoSpedizione = new ArrayList<>();
+    }
+    
+    public ModelloListeTipoSpedizione(List<ModelloTipoSpedizione> existingList)
+    {
+        listaTipoSpedizione = existingList;
+    }
+    
+    public void add(ModelloTipoSpedizione tipoSpedizione)
+    {
+        listaTipoSpedizione.add(tipoSpedizione);
+    }
+    
+    public ModelloTipoSpedizione get(int index)
+    {
+        return listaTipoSpedizione.get(index);
+    }
+    
+    public List<ModelloTipoSpedizione> getList()
+    {
+        return listaTipoSpedizione;
+    }
 }

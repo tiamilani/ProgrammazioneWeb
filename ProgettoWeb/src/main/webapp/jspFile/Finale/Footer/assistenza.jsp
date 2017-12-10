@@ -41,7 +41,7 @@
     </head>
     <body>
         <div class="container-fluid">
-            <%@include file="../Header/NavBar/navBar.jsp" %>
+            <%@include file="../Header/NavBar/newNavBar.jsp" %>
 
             <h4>Benvenuto nella pagina di assistenza</h4>
             <br>

@@ -20,7 +20,7 @@
     
     <body>
         <div class="container-fluid">
-            <%@include file="../Header/NavBar/navBar.jsp" %>
+            <%@include file="../Header/NavBar/newNavBar.jsp" %>
             <hr>
             <div class="row justify-content-center">  
                 <div class="col-6 description">

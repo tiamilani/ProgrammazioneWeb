@@ -129,7 +129,8 @@ function myFunction() {
                                      data-target="#registerModal"><i class="Small material-icons">person_add</i> Registrati</button>
                         </c:otherwise>
                     </c:choose>
-                        <button  type="button" class="btn btn-outline-primary buttonSpace"><i class="Small material-icons">shopping_basket</i> carrello</button>
+                        <!--<button type="button" class="btn btn-outline-primary buttonSpace"><i class="Small material-icons">shopping_basket</i> carrello</button>-->
+                        <a  href="${pageContext.request.contextPath}/OrdineController?action=listOrders" class="btn btn-outline-primary buttonSpace"><i class="Small material-icons">shopping_basket</i> Carrello</a>
                 </div>
             </div>
         </div>
@@ -137,7 +138,7 @@ function myFunction() {
 </div>
 
 
-<%-- messo esternamente al resto in modo da non influenzare il suo autofocus da propriet� di posizionamento prima definite--%>
+<%-- messo esternamente al resto in modo da non influenzare il suo autofocus da propriet? di posizionamento prima definite--%>
 <div id="registerModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 

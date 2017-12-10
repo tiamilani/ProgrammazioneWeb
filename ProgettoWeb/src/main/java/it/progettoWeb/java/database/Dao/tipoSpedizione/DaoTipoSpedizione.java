@@ -19,6 +19,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
+import it.progettoWeb.java.database.query.deliveryType.deliveryTypeQuery;
 
 public class DaoTipoSpedizione {
 
@@ -31,6 +32,7 @@ public class DaoTipoSpedizione {
     private static final String PREZZO="Prezzo";
     private static final String CORRIERE="Corriere";
     private static final String TEMPORICHIESTO="tempoRichiesto";
+    private static final String NUMEROMASSIMO="numeroMassimo";
     
     /**
      * Variabile che gestisce la connessione con il db
@@ -46,9 +48,9 @@ public class DaoTipoSpedizione {
 
     /**
      * @author Mattia
-     * Funzione utilizzata per facilitare l'ottenimento dei modelli negozio da un result set
-     * @param rs un resultset da cui ricavare un modello negozio
-     * @return il modello negozio presente nel resultset
+     * Funzione utilizzata per facilitare l'ottenimento dei modelli tipoSpedizione da un result set
+     * @param rs un resultset da cui ricavare un modello tipoSpedizione
+     * @return il modello tipoSpedizione presente nel resultset
      */
     private ModelloTipoSpedizione getModelloFromRs(ResultSet rs)
     {
@@ -61,9 +63,76 @@ public class DaoTipoSpedizione {
             TipoSpedizione.setPrezzo(rs.getDouble(PREZZO));
             TipoSpedizione.setCorriere(rs.getString(CORRIERE));
             TipoSpedizione.setTempoRichiesto(rs.getInt(TEMPORICHIESTO));
+            TipoSpedizione.setNumeroMassimo(rs.getInt(NUMEROMASSIMO));
         } catch (SQLException e) {
         }
         
         return TipoSpedizione;
-    }   
+    }
+    
+    /**
+     * @author FBrug
+     * Ottenere la lista di tutti i tipi di spedizione in base all'ID Spedizione
+     * @param idS Intero rappresentante l'ID della spedizione
+     * @return String: lista tipi di spedizione
+     */
+    public List<ModelloTipoSpedizione> selectDeliveryTypesByIdS(int idS)
+    {
+        List<ModelloTipoSpedizione> types = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(deliveryTypeQuery.selectDeliveryTypeByIdS(idS));
+            while(rs.next())
+                types.add(getModelloFromRs(rs));
+        }
+        catch (SQLException e) { System.out.println(e.getMessage()); }
+        
+        return types;
+    }
+    
+    /**
+     * @author FBrug
+     * Ottenere la lista di tutti i tipi di spedizione in base all'ID Negozio
+     * @param idN Intero rappresentante l'ID del negozio
+     * @return String: lista tipi di spedizione
+     */
+    public List<ModelloTipoSpedizione> selectDeliveryTypesByIdN(int idN)
+    {
+        List<ModelloTipoSpedizione> types = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(deliveryTypeQuery.selectDeliveryTypeByIdN(idN));
+            while(rs.next())
+                types.add(getModelloFromRs(rs));
+        }
+        catch (SQLException e) { System.out.println(e.getMessage()); }
+        
+        return types;
+    }
+    
+    /**
+     * @author FBrug
+     * Ottenere la lista di tutti i tipi di spedizione in base all'ID Oggetto
+     * @param idO Intero rappresentante l'ID dell'oggetto
+     * @return String: lista tipi di spedizione
+     */
+    public List<ModelloTipoSpedizione> selectDeliveryTypesByIdO(String idO)
+    {
+        List<ModelloTipoSpedizione> types = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(deliveryTypeQuery.selectDeliveryTypeByIdO(idO));
+            while(rs.next())
+                types.add(getModelloFromRs(rs));
+        }
+        catch (SQLException e) { System.out.println(e.getMessage()); }
+        
+        return types;
+    }
 }

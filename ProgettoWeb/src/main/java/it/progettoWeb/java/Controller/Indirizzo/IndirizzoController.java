@@ -26,7 +26,7 @@ import javax.servlet.RequestDispatcher;
  * @author mattia
  */
 public class IndirizzoController extends HttpServlet {
-    
+
     private static final long serialVersionUID = 1L;
     private static String LIST_ADDRESS = "/jspFile/Finale/Utente/listAddress.jsp";
     private static String INSERT_OR_EDIT = "/jspFile/Finale/Utente/modificaDatiIndirizzo.jsp";
@@ -41,7 +41,7 @@ public class IndirizzoController extends HttpServlet {
         daoI = new DaoIndirizzo();
         daoIndirizzoUtente = new DaoIndirizzoUtente();
     }
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -53,7 +53,7 @@ public class IndirizzoController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     /**
@@ -73,27 +73,27 @@ public class IndirizzoController extends HttpServlet {
         if (action.equalsIgnoreCase("cancIndirizzo"))
         {
             int addrId = Integer.parseInt(request.getParameter("id"));
-            
+
             daoI.deleteAddress(addrId);
-            
+
             response.sendRedirect("UserController?action=infoCurrentUser");
             return;
-        } 
+        }
         else if (action.equalsIgnoreCase("edit"))
         {
             int addrId = Integer.parseInt(request.getParameter("addrId"));
             ModelloIndirizzo addr = daoI.selectAddressByIdAddress(addrId);
-            
+
             int userId = Integer.parseInt(request.getParameter("userId"));
             request.setAttribute("userId", userId);
-            
+
             forward = INSERT_OR_EDIT;
             request.setAttribute("addr", addr);
-        } 
+        }
         else if (action.equalsIgnoreCase("listAddress"))
         {
             int userId = Integer.parseInt(request.getParameter("userId"));
-            
+
             forward = LIST_ADDRESS;
             request.setAttribute("address", daoI.selectAddressByUserID(userId));
             request.setAttribute("userId", userId);
@@ -114,14 +114,14 @@ public class IndirizzoController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String forward="";
         String action = request.getParameter("action");
-        
+
         if(action.equalsIgnoreCase("addAddr")){
             ModelloIndirizzo indirizzo = new ModelloIndirizzo();
             ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
-            
+
             indirizzo.setStato("Italia");
             indirizzo.setRegione(request.getParameter("regione"));
             indirizzo.setProvincia(request.getParameter("provincia"));
@@ -129,40 +129,40 @@ public class IndirizzoController extends HttpServlet {
             indirizzo.setVia(request.getParameter("via"));
             indirizzo.setnCivico(Integer.parseInt(request.getParameter("nCivico")));
             indirizzo.setInterno(Integer.parseInt(request.getParameter("interno")));
-            
+
             indirizzo.setLatitudine(Double.parseDouble(request.getParameter("latitudine")));
             indirizzo.setLongitudine(Double.parseDouble(request.getParameter("longitudine")));
-            
+
             /*String[] LatLon = GoogleGeoCode(
                 indirizzo.getnCivico(),
                 indirizzo.getVia(),
                 indirizzo.getCitta(),
                 indirizzo.getProvincia());
-            
+
             if(LatLon[0]!=null){
                 indirizzo.setLatitudine(Double.parseDouble(LatLon[0]));
             } else {
                 indirizzo.setLatitudine(0.0);
             }
-            
+
             if(LatLon[1]!=null){
                 indirizzo.setLongitudine(Double.parseDouble(LatLon[1]));
             } else {
                 indirizzo.setLongitudine(0.0);
             }*/
-            
+
             //indirizzo.setLatitudine(5.0);
             //indirizzo.setLongitudine(5.0);
-            
+
             daoI.insertAddress(indirizzo,utente.getId());
-            
+
             //forward = ERROR_PAGE;
             //request.setAttribute("errore", usersQuery.insertAddress(indirizzo.getStato(),indirizzo.getRegione(),indirizzo.getProvincia(),indirizzo.getCitta(),indirizzo.getVia(),indirizzo.getnCivico(),indirizzo.getInterno(),indirizzo.getLatitudine(),indirizzo.getLongitudine(),utente.getId()));
-            
+
             response.sendRedirect("UserController?action=infoCurrentUser");
             return;
         }
-        
+
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
     }
@@ -177,7 +177,7 @@ public class IndirizzoController extends HttpServlet {
         return "Short description";
     }
 
-/*    
+/*
     private static final String GEO_CODE_SERVER = "http://maps.googleapis.com/maps/api/geocode/json?";
 
     private String[] GoogleGeoCode(int nCivico, String via, String citta, String provincia)
@@ -191,10 +191,10 @@ public class IndirizzoController extends HttpServlet {
 
         //System.out.println("Latitude: " + result[0]);
         //System.out.println("Longitude: " + result[1]);
-        
+
         return result;
     }
-    
+
     private static String getLocation(String code)
     {
         String address = buildUrl(code);
