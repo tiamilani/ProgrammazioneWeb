@@ -365,7 +365,7 @@ public class UserController extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             ModelloUtente utente = daoUtente.selectUserByEmailAndPassword(email, password);
-            
+            log("Utente trovato: " + utente.getId());
             if(utente.getId() > 0){
                 request.getSession().removeAttribute("utenteSessione");
                 request.getSession().setAttribute("utenteSessione", utente);
