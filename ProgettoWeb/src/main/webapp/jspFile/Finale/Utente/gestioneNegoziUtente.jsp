@@ -270,9 +270,9 @@
                                         </div>
                                         <div class="col-2">
                                             <form action="#" id="formGestisciNegozio" name="formGestisciNegozio" method="GET">
-                                                <input type="hidden" name="action" value="cancNegozio">
+                                                <input type="hidden" name="action" value="gestisciNegozio">
                                                 <input type="hidden" name="id" value="${negozio.getIdI()}">
-                                                <button type="submit" value="submit" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">close</i></button>
+                                                <button type="submit" value="submit" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">build</i></button>
                                             </form>
                                         </div>
                                         <div class="col-2">
@@ -317,9 +317,9 @@
                                         </div>
                                         <div class="col-2">
                                             <form action="#" id="formGestisciNegozio" name="formGestisciNegozio" method="GET">
-                                                <input type="hidden" name="action" value="cancNegozio">
+                                                <input type="hidden" name="action" value="gestisciNegozio">
                                                 <input type="hidden" name="id" value="${negozio.getIdI()}">
-                                                <button type="submit" value="submit" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">close</i></button>
+                                                <button type="submit" value="submit" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">build</i></button>
                                             </form>
                                         </div>
                                         <div class="col-2">

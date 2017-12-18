@@ -5,6 +5,7 @@
  */
 package it.progettoWeb.java.database.query.sellers;
 
+import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -451,16 +452,13 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Aggiungere un proprio negozio
-     * @param idVenditore: intero rappresentante l'ID del venditore, proprietario del nuovo negozio
-     * @param nomeNegozio: nome del nuovo negozio da inserire
-     * @param valutazioneNegozio: valutazione iniziale del nuovo negozio
-     * @param idI: intero rappresentante l'ID dell'indirizzo del nuovo negozio
+     * @param negozio: negozio da inserire
      * @return String: conferma avvenuta operazione
      */
-    public static String insertShop(int idVenditore, String nomeNegozio, double valutazioneNegozio, int idI)
+    public static String insertShop(ModelloNegozio negozio)
     {
-        return "INSERT INTO Negozio (idVenditore, nomeNegozio, valutazione, attivo, idI, dataApertura) "
-                + "VALUES (" + idVenditore + "," +  nomeNegozio + "," + valutazioneNegozio + ", '1' ," + idI + ", CURRENT_TIMESTAMP);";
+        return "INSERT INTO Negozio (idVenditore, nomeNegozio, valutazione, attivo, idI, dataApertura, linkSito, orarioNegozio) "
+                + "VALUES ('" + negozio.getIdVenditore() + "','" +  negozio.getNomeNegozio() + "',NULL, '1' ,'" + negozio.getIdI() + "', CURRENT_TIMESTAMP,'"+negozio.getLinkSito()+"','"+negozio.getOrarioNegozio()+"');";
     }
     
     /**
