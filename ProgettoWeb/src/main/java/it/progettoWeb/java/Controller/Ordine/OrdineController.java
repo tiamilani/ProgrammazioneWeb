@@ -281,7 +281,6 @@ public class OrdineController extends HttpServlet {
             {
                 /*--- QUI CAMBIO LO STATO DEGLI ORDINI NEL CARRELLO IN "PAGATI" E INVIO LA MAIL DI CONFERMA DELL'ORDINE---*/
                 //daoOrdine.changeOrderStatus(((ModelloUtente)request.getSession().getAttribute("utenteSessione")).getId(), 0, 1);
-                /*---2017-12-02---SendEmail.sendMail(((ModelloUtente)request.getSession().getAttribute("utenteSessione")).getMail(), 4);*/
                 /*---2017-12-05---*/SendEmail.orderCompleted(
                         ((ModelloUtente)request.getSession().getAttribute("utenteSessione")).getMail(),                         
                         ((ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione")).getId());

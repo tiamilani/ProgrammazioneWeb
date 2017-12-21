@@ -183,8 +183,7 @@ public class UserController extends HttpServlet {
 
 
                 System.out.println("PREEMAIL - Update Email");
-                /*---2017-12-02---SendEmail.sendMail(utente.getMail(), 1);*/
-                /*---2017-12-04---*/SendEmail.updateEmail(oldMail, newEmail);
+                SendEmail.updateEmail(oldMail, newEmail);
                 System.out.println("EMAIL - Update Email");
             }
             response.sendRedirect("UserController?action=infoCurrentUser");
