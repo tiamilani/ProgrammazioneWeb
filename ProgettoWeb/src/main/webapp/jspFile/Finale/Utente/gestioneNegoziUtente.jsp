@@ -234,7 +234,7 @@
                         <div class="col-6">
                             <form id="formOptionOrder" name="formOptionOrder" action="${pageContext.request.contextPath}/UserController" method="GET">
                                 <input type="hidden" id="action" name="action" value="gestisciNegozi">
-                                <input type="text" id="ricecaIdOrdine" name="ricecaNomeNegozio" placeholder="Nome negozio" required>
+                                <input type="text" id="ricecaNomeNegozio" name="ricecaNomeNegozio" placeholder="Nome negozio" required>
                             </form>
                         </div>
                     </div>
@@ -269,10 +269,18 @@
                                             </c:choose>
                                         </div>
                                         <div class="col-2">
-                                            <a href="#" method="GET" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">build</i></a>
+                                            <form action="#" id="formGestisciNegozio" name="formGestisciNegozio" method="GET">
+                                                <input type="hidden" name="action" value="gestisciNegozio">
+                                                <input type="hidden" name="id" value="${negozio.getIdI()}">
+                                                <button type="submit" value="submit" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">build</i></button>
+                                            </form>
                                         </div>
                                         <div class="col-2">
-                                            <a href="#" method="GET" class="btn btn-outline-danger buttonSpace btn-block"><i class="Small material-icons">close</i></a>
+                                            <form action="#" id="formCancNegozio" name="formCancNegozio" method="GET">
+                                                <input type="hidden" name="action" value="cancNegozio">
+                                                <input type="hidden" name="id" value="${negozio.getIdI()}">
+                                                <button type="submit" value="submit" class="btn btn-outline-danger buttonSpace btn-block"><i class="Small material-icons">close</i></button>
+                                            </form>
                                         </div>
                                     </div>
                                     <hr>
@@ -308,10 +316,18 @@
                                             </c:choose>
                                         </div>
                                         <div class="col-2">
-                                            <a href="#" method="GET" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">build</i></a>
+                                            <form action="#" id="formGestisciNegozio" name="formGestisciNegozio" method="GET">
+                                                <input type="hidden" name="action" value="gestisciNegozio">
+                                                <input type="hidden" name="id" value="${negozio.getIdI()}">
+                                                <button type="submit" value="submit" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">build</i></button>
+                                            </form>
                                         </div>
                                         <div class="col-2">
-                                            <a href="#" method="GET" class="btn btn-outline-danger buttonSpace btn-block"><i class="Small material-icons">close</i></a>
+                                            <form action="#" id="formCancNegozio" name="formCancNegozio" method="GET">
+                                                <input type="hidden" name="action" value="cancNegozio">
+                                                <input type="hidden" name="id" value="${negozio.getIdI()}">
+                                                <button type="submit" value="submit" class="btn btn-outline-danger buttonSpace btn-block"><i class="Small material-icons">close</i></button>
+                                            </form>
                                         </div>
                                     </div>
                                     <hr>
@@ -320,7 +336,7 @@
                         </c:otherwise>
                     </c:choose>
                     <div class="col-3">
-                        <a href="#" method="GET" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">add</i></a>
+                        <a href="jspFile/Finale/Utente/aggiungiNegozio.jsp" method="GET" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">add</i></a>
                     </div>
                 </div>
             </div>

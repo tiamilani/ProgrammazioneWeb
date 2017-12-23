@@ -15,7 +15,7 @@
            function showResult(result) {
                 document.addAddrForm.latitudine.value = result.geometry.location.lat();
                 document.addAddrForm.longitudine.value = result.geometry.location.lng();
-                
+                alert("lat: " + document.addAddrForm.latitudine.value);
                 addAddrForm.action = "${pageContext.request.contextPath}/IndirizzoController";
                 addAddrForm.submit();
             }
@@ -53,7 +53,7 @@
         <div class="container-fluid">
             <form>
                 <div class="row">
-                    <div class="float-sm-left">Aggiorna Email</div>
+                    <div class="float-sm-left">Aggiorna Email </div>
                     <div class="float-sm-right"> <c:out value="${utenteSessione.getMail()}" /></div>
                 </div>
             <div class="row">

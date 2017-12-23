@@ -624,19 +624,19 @@ public class DaoNegozio {
     /**
      * @author fbrug
      * Aggiungere un proprio negozio
-     * @param idVenditore: intero rappresentante l'ID del venditore, proprietario del nuovo negozio
-     * @param nomeNegozio: nome del nuovo negozio da inserire
-     * @param valutazioneNegozio: valutazione iniziale del nuovo negozio
-     * @param idI: intero rappresentante l'ID dell'indirizzo del nuovo negozio
+     * @param negozio: negozio da inserire
      */
-    public void insertShop(int idVenditore, String nomeNegozio, double valutazioneNegozio, int idI)
+    public String insertShop(ModelloNegozio negozio)
     {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.insertShop(idVenditore, nomeNegozio, valutazioneNegozio, idI));
+            statement.executeUpdate(sellersQuery.insertShop(negozio));
+            return "OK";
         }
-        catch (SQLException e) {}
+        catch (SQLException e) {
+            return e.toString();
+        }
     }
     
     /**
