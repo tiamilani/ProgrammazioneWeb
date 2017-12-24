@@ -329,8 +329,6 @@
             </c:choose>
         </div>
         
-        <div class="container">
-            <%@include file="../Footer/footer.jsp" %>
-        </div>
+        <%@include file="../Footer/footer.jsp" %>
     </body>
 </html>

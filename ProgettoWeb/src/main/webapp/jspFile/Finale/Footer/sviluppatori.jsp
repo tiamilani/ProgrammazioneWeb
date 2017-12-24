@@ -105,28 +105,28 @@
 
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATC6NxeSsKDBncZwJ4aDivvvs6_5iusSc&callback=createMapAboutUs" async defer></script>
             <script type="text/javascript">
-            var myCenter;
-            function createMapAboutUs() {
-                myCenter = new google.maps.LatLng(46.066993034254345, 11.149814128875732);
-                var mapCanvas = document.getElementById("mapObject");
+                var myCenter;
+                function createMapAboutUs() {
+                    myCenter = new google.maps.LatLng(46.066993034254345, 11.149814128875732);
+                    var mapCanvas = document.getElementById("mapObject");
 
-                var mapOptions = {
-                    center: myCenter,
-                    zoom: 16,
-                    mapType: google.maps.MapTypeId.ROADMAP
-                };
+                    var mapOptions = {
+                        center: myCenter,
+                        zoom: 16,
+                        mapType: google.maps.MapTypeId.ROADMAP
+                    };
 
-                var map = new google.maps.Map(mapCanvas, mapOptions);
+                    var map = new google.maps.Map(mapCanvas, mapOptions);
 
-                var marker = new google.maps.Marker({
-                    position: myCenter
-                });
+                    var marker = new google.maps.Marker({
+                        position: myCenter
+                    });
 
-                marker.setMap(map);
-            }
+                    marker.setMap(map);
+                }
             </script>    
                
-            <%@include file="../Footer/footer.jsp"%>
         </div>
+        <%@include file="../Footer/footer.jsp"%>
     </body>
 </html>

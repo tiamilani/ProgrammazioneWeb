@@ -15,6 +15,7 @@
 <jsp:useBean id="listaImmagini" class="it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto" scope="request" />
 <jsp:useBean id="listaOggetti" class="it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto" scope="request" />
 <jsp:useBean id="listaImmaginiOggetto" class="it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto" scope="request" />
+<jsp:useBean id="listaTipiSpedizione" class="it.progettoWeb.java.database.Model.tipoSpedizione.ModelloListeTipoSpedizione" scope="request" />
 
 <!DOCTYPE html>
 <html>
@@ -39,8 +40,6 @@
             </c:if>
             <%@include file="recensioni.jsp" %>
         </div>
-        <div class="container">
-            <%@include file="../Footer/footer.jsp" %>
-        </div>
+        <%@include file="../Footer/footer.jsp" %>
     </body>
 </html>

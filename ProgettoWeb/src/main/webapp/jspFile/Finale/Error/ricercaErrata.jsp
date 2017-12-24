@@ -26,9 +26,6 @@
             <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/404.png" alt="404 - Pagina non trovata">
         </div>
         
-        <div class="container">
-            <hr/>
-            <%@include file="../Footer/footer.jsp" %>
-        </div>
+        <%@include file="../Footer/footer.jsp" %>
     </body>
 </html>

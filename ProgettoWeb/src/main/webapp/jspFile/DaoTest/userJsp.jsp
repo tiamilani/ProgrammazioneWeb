@@ -99,10 +99,7 @@
             </form>
         </div>
                 
-        <div class="container">
-            <hr>
-            <%@include file="../Finale/Footer/footer.jsp" %>
-        </div>
+        <%@include file="../Finale/Footer/footer.jsp" %>
     </body>
 </html>
 

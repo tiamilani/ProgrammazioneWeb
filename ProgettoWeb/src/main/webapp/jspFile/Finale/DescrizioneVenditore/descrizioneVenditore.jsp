@@ -32,7 +32,7 @@
                 <%@include file="insertReview.jsp" %>
             </c:if>
             <%@include file="recensioni.jsp" %>
-            <%@include file="../Footer/footer.jsp" %>
         </div>
+        <%@include file="../Footer/footer.jsp" %>
     </body>
 </html>

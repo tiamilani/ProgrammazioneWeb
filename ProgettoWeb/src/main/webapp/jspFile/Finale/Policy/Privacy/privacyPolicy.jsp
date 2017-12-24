@@ -102,9 +102,6 @@
             </p>
         </div>
         
-        <div class="container">
-            <hr>
-            <%@include file="../../Footer/footer.jsp" %>
-        </div>
+        <%@include file="../../Footer/footer.jsp" %>
     </body>
 </html>
