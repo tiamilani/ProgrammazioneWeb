@@ -35,6 +35,7 @@ import java.sql.Date;
 import it.progettoWeb.java.database.query.objectsMarkets.objectMarketsQuery;
 import it.progettoWeb.java.database.query.users.usersQuery;
 import it.progettoWeb.java.utility.pair.pair;
+import static java.rmi.server.LogStream.log;
 import java.sql.PreparedStatement;
 
 public class DaoOggetto {

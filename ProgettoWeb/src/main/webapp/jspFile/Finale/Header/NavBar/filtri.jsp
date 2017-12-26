@@ -5,6 +5,52 @@
 --%>
 
 <form class="form-inline" name="filterForm">
+    <div class="form-group row filterRow">
+        <div class="col-lg-3 col-md-4">
+            <select>
+                <option selected>Categoria</option>
+                <c:forEach items="${listacategoriesessione.getList()}" var="cat">
+                  <option value="${cat.getId()}"><c:out value="${cat.getNome()}"/></option>
+                </c:forEach>
+            </select>
+        </div>
+
+        <div class="col-lg-3 col-md-4">
+            <input type="range" min="0" max="1000" value="500" class="slider">
+        </div>
+
+        <div class="col-lg-3 col-md-4">
+            <input type="text" name="filtroNomeVenditore" placeholder="Venditore">
+        </div>
+
+        <div class="col-lg-3 col-md-4">
+            <input type="text" name="filtroNomeNegozio" placeholder="Negozio">
+        </div>
+    </div>
+                
+    <div class="form-group row filterRow">
+        <div class="form-check col-lg-4 col-md-4">
+            <input class="form-check-input" name="filtroRitiroInNegozio" type="checkbox">Ritiro in negozio
+        </div>
+        
+        <div class="form-check col-lg-4 col-md-4">
+            <input class="form-check-input" name="filtroProdottiScontati" type="checkbox">Prodotti scontati
+        </div>
+        
+        <div class="form-control" col-lg-4 col-md-4>
+            <div class="rating">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+            </div>
+        </div>
+    </div>
+</form>
+
+<%--
+<form class="form-inline" name="filterForm">
     <div class="row filterRow ">
         <div class="col-auto dropdown">
             <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="filtroCategoria">
@@ -84,6 +130,7 @@
         </div>
     </div>
 </form>
+--%>
 
 <script>
  $('.dropdown-menu a').click(function(){

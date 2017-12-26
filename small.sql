@@ -161,7 +161,11 @@ CREATE TABLE IF NOT EXISTS `imageOggetto` (
 
 INSERT INTO `imageOggetto` (`src`, `idO`) VALUES
 ('imgOgg1', '1'),
-('imgOgg2', '2');
+('imgOgg2', '2'),
+('imgOgg3', '3'),
+('imgOgg4', '4'),
+('imgOgg5', '5'),
+('imgOgg6', '6');
 
 -- --------------------------------------------------------
 

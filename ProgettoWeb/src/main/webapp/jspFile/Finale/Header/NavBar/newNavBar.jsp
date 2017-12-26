@@ -49,7 +49,7 @@ function myFunction() {
     });
 </script>
 
-<nav class="navbar fixed-top navbar-default bg-light navbar-expand-lg" role="navigation">
+<nav class="navbar fixed-top navbar-default bg-light navbar-expand-lg" role="navigation" style="padding: 0 .5rem 0 .5rem;">
     <a class="navbar-brand" href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Index/index.jsp">
         <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png" width=30px height=30px class="d-inline-block align-top" alt="IMG">
         ShopEro
