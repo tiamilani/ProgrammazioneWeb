@@ -66,8 +66,20 @@
                 <c:when test="${order == 'data'}">
                     <h2>Ordini per data</h2>
                     <c:set var="i" scope="page" value="${0}" />
+                    <c:set var="idOrdine" scope="page" value="${listaOrdini.get(0).getIdOrdine()}" />
                     <c:forEach items="${listaOrdini.getList()}" var="ordine" >
                         <c:if test="${ordine.getStato() != 0 && ordine.getStato() != 5}">
+                            <c:if test="${idOrdine != ordine.getIdOrdine()}">
+                                <div class="row">
+                                    <div class="col-4 mx-auto">
+                                        <button type="button" class="btn btn-outline-primary btn-block" id="btnAssistenza<c:out value="${idOrdine}" />" data-toggle="modal" data-target="#">
+                                            Richiedi assistenza per l'ordine di id: <c:out value="${idOrdine}" />
+                                        </button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <c:set var="idOrdine" scope="page" value="${ordine.getIdOrdine()}" />
+                            </c:if>
                             <div class="row">
                                 <div class="col-1">
                                     <img src="${listaImmagini.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: 50px; height: 50px; object-fit: cover;">
@@ -118,16 +130,35 @@
                                     </c:choose>
                                 </div>
                             </div>
-                            <hr>
                         </c:if>
                         <c:set var="i" scope="page" value="${i+1}" />
                     </c:forEach>
+                    <div class="row">
+                        <div class="col-4 mx-auto">
+                            <button type="button" class="btn btn-outline-primary btn-block" id="btnAssistenza<c:out value="${listaOrdini.get(i-1).getIdOrdine()}" />" data-toggle="modal" data-target="#">
+                                Richiedi assistenza per l'ordine di id: <c:out value="${listaOrdini.get(i-1).getIdOrdine()}" />
+                            </button>
+                        </div>
+                    </div>
+                    <hr>
                 </c:when>
                     <c:when test="${order == 'tipo'}">
                         <h2>Ordini per tipo</h2>
                         <c:set var="i" scope="page" value="${0}" />
+                        <c:set var="idOrdine" scope="page" value="${listaOrdini.get(0).getIdOrdine()}" />
                         <c:forEach items="${listaOrdini.getList()}" var="ordine" >
                             <c:if test="${ordine.getStato() != 0 && ordine.getStato() != 5}">
+                                <c:if test="${idOrdine != ordine.getIdOrdine()}">
+                                    <div class="row">
+                                        <div class="col-4 mx-auto">
+                                            <button type="button" class="btn btn-outline-primary btn-block" id="btnAssistenza<c:out value="${idOrdine}" />" data-toggle="modal" data-target="#">
+                                                Richiedi assistenza per l'ordine di id: <c:out value="${idOrdine}" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <c:set var="idOrdine" scope="page" value="${ordine.getIdOrdine()}" />
+                                </c:if>
                                 <c:set var="orderType" scope="page" value="${0}" />
                                 <c:choose>
                                     <c:when test="${orderType != ordine.getStato() && ordine.getStato() == 1}">
@@ -205,12 +236,32 @@
                             </c:if>
                             <c:set var="i" scope="page" value="${i+1}" />
                         </c:forEach>
+                        <div class="row">
+                            <div class="col-4 mx-auto">
+                                <button type="button" class="btn btn-outline-primary btn-block" id="btnAssistenza<c:out value="${listaOrdini.get(i-1).getIdOrdine()}" />" data-toggle="modal" data-target="#">
+                                    Richiedi assistenza per l'ordine di id: <c:out value="${listaOrdini.get(i-1).getIdOrdine()}" />
+                                </button>
+                            </div>
+                        </div>
+                        <hr>
                     </c:when>
                     <c:when test="${order == 'lavorazione'}">
                         <h2>Ordini attualmente in lavorazione</h2>
                         <c:set var="i" scope="page" value="${0}" />
+                        <c:set var="idOrdine" scope="page" value="${listaOrdini.get(0).getIdOrdine()}" />
                         <c:forEach items="${listaOrdini.getList()}" var="ordine" >
                             <c:if test="${ordine.getStato() != 0 && ordine.getStato() != 5}">
+                                <c:if test="${idOrdine != ordine.getIdOrdine()}">
+                                    <div class="row">
+                                        <div class="col-4 mx-auto">
+                                            <button type="button" class="btn btn-outline-primary btn-block" id="btnAssistenza<c:out value="${idOrdine}" />" data-toggle="modal" data-target="#">
+                                                Richiedi assistenza per l'ordine di id: <c:out value="${idOrdine}" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <c:set var="idOrdine" scope="page" value="${ordine.getIdOrdine()}" />
+                                </c:if>
                                 <div class="row">
                                     <div class="col-1">
                                         <img src="${listaImmagini.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: 50px; height: 50px; object-fit: cover;">
@@ -265,12 +316,32 @@
                             </c:if>
                             <c:set var="i" scope="page" value="${i+1}" />
                         </c:forEach>
+                        <div class="row">
+                            <div class="col-4 mx-auto">
+                                <button type="button" class="btn btn-outline-primary btn-block" id="btnAssistenza<c:out value="${listaOrdini.get(i-1).getIdOrdine()}" />" data-toggle="modal" data-target="#">
+                                    Richiedi assistenza per l'ordine di id: <c:out value="${listaOrdini.get(i-1).getIdOrdine()}" />
+                                </button>
+                            </div>
+                        </div>
+                        <hr>
                     </c:when>
                     <c:when test="${order == 'spediti'}">
                         <h2>Ordini spediti</h2>
                         <c:set var="i" scope="page" value="${0}" />
+                        <c:set var="idOrdine" scope="page" value="${listaOrdini.get(0).getIdOrdine()}" />
                         <c:forEach items="${listaOrdini.getList()}" var="ordine" >
                             <c:if test="${ordine.getStato() != 0 && ordine.getStato() != 5}">
+                                <c:if test="${idOrdine != ordine.getIdOrdine()}">
+                                    <div class="row">
+                                        <div class="col-4 mx-auto">
+                                            <button type="button" class="btn btn-outline-primary btn-block" id="btnAssistenza<c:out value="${idOrdine}" />" data-toggle="modal" data-target="#">
+                                                Richiedi assistenza per l'ordine di id: <c:out value="${idOrdine}" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <c:set var="idOrdine" scope="page" value="${ordine.getIdOrdine()}" />
+                                </c:if>
                                 <div class="row">
                                     <div class="col-1">
                                         <img src="${listaImmagini.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: 50px; height: 50px; object-fit: cover;">
@@ -325,6 +396,14 @@
                             </c:if>
                             <c:set var="i" scope="page" value="${i+1}" />
                         </c:forEach>
+                        <div class="row">
+                            <div class="col-4 mx-auto">
+                                <button type="button" class="btn btn-outline-primary btn-block" id="btnAssistenza<c:out value="${listaOrdini.get(i-1).getIdOrdine()}" />" data-toggle="modal" data-target="#">
+                                    Richiedi assistenza per l'ordine di id: <c:out value="${listaOrdini.get(i-1).getIdOrdine()}" />
+                                </button>
+                            </div>
+                        </div>
+                        <hr>
                     </c:when>
             </c:choose>
         </div>
