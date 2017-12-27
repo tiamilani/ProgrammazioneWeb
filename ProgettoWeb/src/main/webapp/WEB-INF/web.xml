@@ -33,12 +33,12 @@
         <servlet-class>it.progettoWeb.java.Controller.Indirizzo.IndirizzoController</servlet-class>
     </servlet>
     <servlet>
-      <servlet-name>OrdineController</servlet-name>
-      <servlet-class>it.progettoWeb.java.Controller.Ordine.OrdineController</servlet-class>
+        <servlet-name>OrdineController</servlet-name>
+        <servlet-class>it.progettoWeb.java.Controller.Ordine.OrdineController</servlet-class>
     </servlet>
     <servlet>
-      <servlet-name>InserisciRecensioneController</servlet-name>
-      <servlet-class>it.progettoWeb.java.Controller.InserisciRecensione.InserisciRecensioneController</servlet-class>
+        <servlet-name>InserisciRecensioneController</servlet-name>
+        <servlet-class>it.progettoWeb.java.Controller.InserisciRecensione.InserisciRecensioneController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>NegozioController</servlet-name>

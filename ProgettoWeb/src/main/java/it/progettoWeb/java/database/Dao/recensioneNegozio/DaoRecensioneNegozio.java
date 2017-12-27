@@ -25,6 +25,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
+import it.progettoWeb.java.database.query.generics.genericsQuery;
 import it.progettoWeb.java.database.query.marketsSellers.marketsSellersQuery;
 import it.progettoWeb.java.database.query.users.usersQuery;
 import it.progettoWeb.java.utility.pair.pair;
@@ -97,6 +98,29 @@ public class DaoRecensioneNegozio {
         }
 
         return recensioni;
+    }
+    
+    /**
+     * @author andrea
+     * Ottenere una specifica recensioni dati i parametri identificativi
+     * @param idN Un intero che rappresenta il negozio della recensione da ricercare
+     * @param idU Un intero che rappresenta l'utente della recensione da ricercare
+     * @param testo Una stringa che rappresenta il testo della recensione da ricercare
+     * @param valutazione Un intero che rappresenta la valutazione della recensione da ricercare
+     * @return ModelloRecensioneOggetto
+     */
+    public ModelloRecensioneNegozio selectReviewsByData(int idN, int idU, String txt, int val) {
+        ModelloRecensioneNegozio recensione = new ModelloRecensioneNegozio();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.selectReviewsByDataN(idN, idU, txt, val));
+            while (rs.next()) {
+                recensione = (ModelloRecensioneNegozio) getModelloFromRs(rs);
+            }
+        } catch (SQLException e) { }
+
+        return recensione;
     }
     
     /**

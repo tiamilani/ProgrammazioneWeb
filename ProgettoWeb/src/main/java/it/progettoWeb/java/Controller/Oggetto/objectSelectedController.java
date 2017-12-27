@@ -7,13 +7,17 @@ package it.progettoWeb.java.Controller.Oggetto;
 
 import it.progettoWeb.java.database.Dao.Negozio.DaoNegozio;
 import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
+import it.progettoWeb.java.database.Dao.Ordine.DaoOrdine;
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
 import it.progettoWeb.java.database.Dao.immagineOggetto.DaoImmagineOggetto;
 import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
 import it.progettoWeb.java.database.Dao.recensioneOggetto.DaoRecensioneOggetto;
+import it.progettoWeb.java.database.Dao.tipoSpedizione.DaoTipoSpedizione;
 import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
+import it.progettoWeb.java.database.Model.Ordine.ModelloListeOrdine;
+import it.progettoWeb.java.database.Model.Ordine.ModelloOrdine;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto;
 import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
@@ -21,16 +25,22 @@ import it.progettoWeb.java.database.Model.immagineRecensione.ModelloListeImmagin
 import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
 import it.progettoWeb.java.database.Model.recensioneOggetto.ModelloListeRecensioneOggetto;
 import it.progettoWeb.java.database.Model.recensioneOggetto.ModelloRecensioneOggetto;
+import it.progettoWeb.java.database.Model.tipoSpedizione.ModelloListeTipoSpedizione;
 import it.progettoWeb.java.utility.pair.pair;
 import it.progettoWeb.java.utility.tris.tris;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.util.Enumeration;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.PageContext;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;  
 
 /**
  *
@@ -40,6 +50,7 @@ public class objectSelectedController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private static String HOME_PAGE = "/jspFile/Finale/DescrizioneOggetto/descrizioneOggetto.jsp";
+    private static String ERROR_PAGE = "/ProgettoWeb/jspFile/Finale/Error/ricercaErrata.jsp";
     private DaoNegozio daoNegozio;
     private DaoUtente daoUtente;
     private DaoRecensioneOggetto daoRecensione;
@@ -47,6 +58,8 @@ public class objectSelectedController extends HttpServlet {
     private DaoIndirizzo daoIndirizzo;
     private DaoImmagineOggetto daoImmagineOggetto;
     private DaoRecensioneOggetto daoRecensioneOggetto;
+    private DaoTipoSpedizione daoTipoSpedizione;
+    private DaoOrdine daoOrdine;
     
     public objectSelectedController() {
         super();
@@ -57,6 +70,8 @@ public class objectSelectedController extends HttpServlet {
         daoIndirizzo = new DaoIndirizzo();
         daoImmagineOggetto = new DaoImmagineOggetto();
         daoRecensioneOggetto = new DaoRecensioneOggetto();
+        daoTipoSpedizione = new DaoTipoSpedizione();
+        daoOrdine = new DaoOrdine();
     }
     
     /**
@@ -71,7 +86,7 @@ public class objectSelectedController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String forward=HOME_PAGE;
+        String forward = HOME_PAGE;
         String idOggetto = request.getParameter("idOggetto");
         
         ModelloOggetto oggetto = daoOggetto.getObjectById(idOggetto);
@@ -88,17 +103,19 @@ public class objectSelectedController extends HttpServlet {
         ModelloListeOggetto listaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
         ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
         
+        ModelloListeTipoSpedizione listaTipiSpedizione = new ModelloListeTipoSpedizione(daoTipoSpedizione.selectDeliveryTypesByIdO(idOggetto));
+        
         try {
             ModelloUtente utenteSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
-        
+            
             if(utenteSessione.getId() != -1)
             {
                 if(daoRecensioneOggetto.reviewOrNotObject(idOggetto, utenteSessione.getId()) > 0)
-                    request.setAttribute("utenteSessione", utenteSessione);
+                    request.setAttribute("canReviewsO", true);
+                else
+                    request.setAttribute("canReviewsO", false);
             }
         } catch (NullPointerException e) {}
-        
-        //request.setAttribute("utenteSessione", venditore);
         
         request.setAttribute("oggetto", oggetto);
         request.setAttribute("negozio", negozio);
@@ -109,6 +126,7 @@ public class objectSelectedController extends HttpServlet {
         request.setAttribute("listaOggetti", listaOggetti);
         request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
         request.setAttribute("recensioniUtenteImmagini", recensioniUtenteImmagini);
+        request.setAttribute("listaTipiSpedizione", listaTipiSpedizione);
         
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
@@ -140,7 +158,49 @@ public class objectSelectedController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String forward = "/ProgettoWeb/OrdineController?action=listOrders";
+        
+        try
+        {
+            String action = request.getParameter("action");
+            
+            ModelloUtente utenteSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+            ModelloListeOrdine carrello = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
+            int idUtente = utenteSessione.getId();
+        
+            if (action.equals("add")) {
+                ModelloOrdine addElemento = new ModelloOrdine();
+                addElemento.setStato(0);
+                addElemento.setDataOrdine(new Timestamp(System.currentTimeMillis()));
+                
+                String jsonString = request.getParameter("shipType");
+                
+                Object obj = JSONValue.parse(jsonString);  
+                JSONObject jsonObject = (JSONObject) obj;  
+
+                int quantita = Integer.parseInt(request.getParameter("numNow"));
+                double prezzo = Double.parseDouble(jsonObject.get("prezzo").toString());
+                int negozio = Integer.parseInt(jsonObject.get("negozio").toString());
+                String oggetto = (String) jsonObject.get("oggetto");
+                
+                addElemento.setIdNegozio(negozio);
+                addElemento.setIdOggetto(oggetto);
+                addElemento.setIdUtente(utenteSessione.getId());
+                addElemento.setPrezzoDiAcquisto(prezzo);
+                addElemento.setQuantita(quantita);
+                
+                carrello.add(addElemento);
+                request.setAttribute("carrelloSessione", carrello);
+                
+                if(idUtente != -1)
+                    daoOrdine.insertObjectInCart(addElemento);
+            }
+        } catch (NullPointerException e) {
+            forward = ERROR_PAGE;
+        }
+        
+        response.sendRedirect(forward);
     }
 
     /**

@@ -560,10 +560,9 @@ public class usersQuery {
      * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param txt Una stringa contenente il testo della recensione
      * @param val Un intero indicante la valutazione della recensione
-     * @param data Un Datetime indicante la data di creazione della recensione
      * @param star Un intero indicante l'utilità della recensione
      */
-    public static String addReviewToObject(String idO, int idU, String txt, int val, int star){
+    public static String addReviewToObject(String idO, int idU, String txt, int val, int star) {
         return "INSERT INTO RecensioneOggetto (id, idOggetto, idUtente, testo, "
                 + "valutazione, data, utilita) VALUES (NULL, '" + idO + "', " + 
                 idU + ", '" + txt + "', " + val + ", CURRENT_TIMESTAMP, " + star + ");";

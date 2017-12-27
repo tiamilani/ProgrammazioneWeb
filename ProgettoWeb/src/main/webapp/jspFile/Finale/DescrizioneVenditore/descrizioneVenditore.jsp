@@ -28,7 +28,7 @@
                 <%@include file="mapVenditore.jsp" %>
             </c:if>
             <%@include file="negoziCorrelati.jsp" %>
-            <c:if test="${utenteSessione.getId() > 0}">
+            <c:if test="${canReviewsN == true}">
                 <%@include file="insertReview.jsp" %>
             </c:if>
             <%@include file="recensioni.jsp" %>
