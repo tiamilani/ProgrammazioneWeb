@@ -82,86 +82,34 @@
                         <span class="col-4 item-left">Quantità:</span>
                         <input type="number" id="numNow" name="numNow" class="item-right col-6 form-control" min="1" max="${oggetto.getDisponibilita()}" value="1"/>
                     </div>
-                    <p class="lead"/>
-                    <div class="row">
-                        <select class="form-control col-12" id="shipType" name="shipType">
-                            <option disabled selected value="false"> -- spedizione -- </option>
-                            <c:forEach items="${listaTipiSpedizione.getList()}" var="ship">
-                                <option value='{"prezzo":"${ship.getPrezzo()}","negozio":"${oggetto.getIdNegozio()}","oggetto":"${oggetto.getId()}"}' data-value='{"nome":"${ship.getNome()}","prezzo":"${ship.getPrezzo()}","corriere":"${ship.getCorriere()}","tempo":"${ship.getTempoRichiesto()}"}'>
-                                    ${ship.getNome()}
-                                </option>
-                            </c:forEach>
-                        </select>
+                    <div class="row" style="display: none;">
+                        <input type="hidden" id="shipType" name="shipType" value='{"prezzo":"${oggetto.getPrezzo()}","negozio":"${oggetto.getIdNegozio()}","oggetto":"${oggetto.getId()}"}'/>
                     </div>
                     <p class="lead"/>
                     <div class="row" id="totNow">
                         <span class="col-4 item-left">Totale:</span>
-                        <span class="col-8 item-right text-primary" id="totNowElem"></span>
-                        <span class="col-4 item-left">Corriere:</span>
-                        <span class="col-8 item-right" id="shipCar"></span>
-                        <span class="col-4 item-left">Tempo:</span>
-                        <span class="col-8 item-right" id="shipTime"></span>
+                        <span class="col-8 item-right text-primary" id="totNowElem">${oggetto.getPrezzo()} Euro</span>
                         <a href="#" class="button col-12" id="addToCart">Acquista</a>
                     </div>
                 </form>
                 
-                <script>
-                    $(window).ready(function() {
-                        $('#totNow').hide();
-                    });
-                    
+                <script>                    
                     $('#addToCart').click(function() {
                         $('#addCartForm').submit();
                     });
-
-                    $('#shipType').change(function() {
-                        var costoTotale = ${oggetto.getPrezzo()};
-                        var sconto = ${oggetto.getSconto()};
-                        
-                        var numProdotti = parseInt($('#numNow').val());
-                        
-                        //var tipoSpedizione = $(this).find(":selected").data("value").nome;
-                        var costoSpedizione = $(this).find(":selected").data("value").prezzo;
-                        var corriereSpedizione = $(this).find(":selected").data("value").corriere;
-                        var tempoSpedizione = $(this).find(":selected").data("value").tempo;
-                        
-                        costoTotale *= numProdotti;
-                        
-                        if(sconto > 0)
-                            costoTotale -= (costoTotale * sconto) / 100;
-                        
-                        costoTotale += parseInt(costoSpedizione);
-                        
-                        $("#totNow").show();
-                        $('#totNowElem').text(costoTotale + " Euro");
-                        $('#shipCar').text(corriereSpedizione);
-                        $('#shipTime').text(tempoSpedizione + " giorni");
-                    });
                     
                     $('#numNow').change(function() {
-                        if($('#shipType').val() != "false") {
-                            var costoTotale = ${oggetto.getPrezzo()};
-                            var sconto = ${oggetto.getSconto()};
+                        var costoTotale = ${oggetto.getPrezzo()};
+                        var sconto = ${oggetto.getSconto()};
 
-                            var numProdotti = parseInt($('#numNow').val());
-                            
-                            //var tipoSpedizione = $(this).find(":selected").data("value").nome;
-                            var costoSpedizione = $('#shipType').find(":selected").data("value").prezzo;
-                            var corriereSpedizione = $('#shipType').find(":selected").data("value").corriere;
-                            var tempoSpedizione = $('#shipType').find(":selected").data("value").tempo;
-                            
-                            costoTotale *= numProdotti;
-                            
-                            if(sconto > 0)
-                                costoTotale -= (costoTotale * sconto) / 100;
+                        var numProdotti = parseInt($('#numNow').val());
 
-                            costoTotale += parseInt(costoSpedizione);
+                        costoTotale *= numProdotti;
 
-                            $("#totNow").show();
-                            $('#totNowElem').text(costoTotale + " Euro");
-                            $('#shipCar').text(corriereSpedizione);
-                            $('#shipTime').text(tempoSpedizione + " giorni");
-                        }
+                        if(sconto > 0)
+                            costoTotale -= (costoTotale * sconto) / 100;
+
+                        $('#totNowElem').text(costoTotale + " Euro");
                     });
                 </script>
             </div>

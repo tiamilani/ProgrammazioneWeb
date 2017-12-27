@@ -103,8 +103,6 @@ public class objectSelectedController extends HttpServlet {
         ModelloListeOggetto listaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
         ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
         
-        ModelloListeTipoSpedizione listaTipiSpedizione = new ModelloListeTipoSpedizione(daoTipoSpedizione.selectDeliveryTypesByIdO(idOggetto));
-        
         try {
             ModelloUtente utenteSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
             
@@ -126,7 +124,6 @@ public class objectSelectedController extends HttpServlet {
         request.setAttribute("listaOggetti", listaOggetti);
         request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
         request.setAttribute("recensioniUtenteImmagini", recensioniUtenteImmagini);
-        request.setAttribute("listaTipiSpedizione", listaTipiSpedizione);
         
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
@@ -186,7 +183,7 @@ public class objectSelectedController extends HttpServlet {
                 
                 addElemento.setIdNegozio(negozio);
                 addElemento.setIdOggetto(oggetto);
-                addElemento.setIdUtente(utenteSessione.getId());
+                addElemento.setIdUtente(idUtente);
                 addElemento.setPrezzoDiAcquisto(prezzo);
                 addElemento.setQuantita(quantita);
                 
