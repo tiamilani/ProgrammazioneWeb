@@ -141,15 +141,15 @@ public class UserController extends HttpServlet {
 
             try {
                 ModelloUtente utenteSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
-
+                
                 if(utenteSessione.getId() != -1)
                 {
                     if(daoRecensioneV.reviewOrNotSeller(idUtente, utenteSessione.getId()) > 0)
-                        request.setAttribute("utenteSessione", utenteSessione);
+                        request.setAttribute("canReviewsN", true);
+                    else
+                        request.setAttribute("canReviewsN", false);
                 }
             } catch (NullPointerException e) {}
-
-            //request.setAttribute("utenteSessione", recensioniVenditori.getR().get(0));
 
             request.setAttribute("venditore", venditore);
             request.setAttribute("recensioni", recensioni);
@@ -200,15 +200,15 @@ public class UserController extends HttpServlet {
 
             try {
                 ModelloUtente utenteSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
-
+                
                 if(utenteSessione.getId() != -1)
                 {
                     if(daoRecensioneN.reviewOrNotStore(idNegozio, utenteSessione.getId()) > 0)
-                        request.setAttribute("utenteSessione", utenteSessione);
+                        request.setAttribute("canReviewsS", true);
+                    else
+                        request.setAttribute("canReviewsS", false);
                 }
             } catch (NullPointerException e) {}
-
-            //request.setAttribute("utenteSessione", recensioniNegozi.getR().get(0));
 
             request.setAttribute("negozio", negozio);
             request.setAttribute("immagine", immagine);

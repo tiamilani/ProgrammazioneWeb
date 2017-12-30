@@ -5,39 +5,59 @@
  */
 package it.progettoWeb.java.Controller.InserisciRecensione;
 
+import it.progettoWeb.java.database.Dao.immagineRecensione.DaoImmagineRecensione;
 import it.progettoWeb.java.database.Dao.recensioneNegozio.DaoRecensioneNegozio;
 import it.progettoWeb.java.database.Dao.recensioneOggetto.DaoRecensioneOggetto;
 import it.progettoWeb.java.database.Dao.recensioneVenditore.DaoRecensioneVenditore;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
+import it.progettoWeb.java.database.Model.immagineRecensione.ModelloImmagineRecensione;
 import it.progettoWeb.java.database.Model.recensioneNegozio.ModelloRecensioneNegozio;
 import it.progettoWeb.java.database.Model.recensioneOggetto.ModelloRecensioneOggetto;
 import it.progettoWeb.java.database.Model.recensioneVenditore.ModelloRecensioneVenditore;
 import java.io.Console;
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+@WebServlet("/InserisciRecensioneController")
+@MultipartConfig(fileSizeThreshold = 1024*1024*2, // 2MB
+                 maxFileSize = 1024*1024*10,      // 10MB
+                 maxRequestSize = 1024*1024*50)   // 50MB
 
 /**
  *
- * @author mattia
+ * @author andreafadi
  */
 public class InserisciRecensioneController extends HttpServlet {
-
+    /**
+     * Name of the directory where uploaded files will be saved, relative to
+     * the web application directory.
+     */
+    private static final String SAVE_DIR = "uploadFiles";
     private static final long serialVersionUID = 1L;
     private DaoRecensioneOggetto daoRecensioneOggetto;
     private DaoRecensioneNegozio daoRecensioneNegozio;
     private DaoRecensioneVenditore daoRecensioneVenditore;
+    private DaoImmagineRecensione daoImmagineRecensione;
+    private List<String> imageSrcs = new ArrayList<String>();
     
     public InserisciRecensioneController(){
         super();
         daoRecensioneOggetto = new DaoRecensioneOggetto();
         daoRecensioneNegozio = new DaoRecensioneNegozio();
         daoRecensioneVenditore = new DaoRecensioneVenditore();
+        daoImmagineRecensione = new DaoImmagineRecensione();
     }
     
     /**
@@ -77,47 +97,125 @@ public class InserisciRecensioneController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String forward="";
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        String forward = "/jspFile/Finale/Index/index.jsp";
         String action = request.getParameter("action");
         
         if(action.equals("Oggetto")) {
+            int idUtente = Integer.parseInt(request.getParameter("utenteReview"));
+            String idOggetto = request.getParameter("oggettoReview");
+            String testoRecensione = request.getParameter("testoReview");
+            int valutazioneRecensione = Integer.parseInt(request.getParameter("valutazioneReview"));
+            
             ModelloRecensioneOggetto recensioneOggetto = new ModelloRecensioneOggetto();
-            recensioneOggetto.setIdUtente(Integer.parseInt(request.getParameter("utenteReview")));
-            recensioneOggetto.setIdOggetto(request.getParameter("oggettoReview"));
-            recensioneOggetto.setTesto(request.getParameter("testoReview"));
+            recensioneOggetto.setIdUtente(idUtente);
+            recensioneOggetto.setIdOggetto(idOggetto);
+            recensioneOggetto.setTesto(testoRecensione);
             recensioneOggetto.setUtilita(0);
-            recensioneOggetto.setValutazione(Integer.parseInt(request.getParameter("valutazioneReview")));
+            recensioneOggetto.setValutazione(valutazioneRecensione);
+            System.out.println(idUtente + " " + idOggetto + " " + testoRecensione + " " + valutazioneRecensione);
             daoRecensioneOggetto.addReviewToObject(recensioneOggetto);
             
-            forward = "/jspFile/Finale/Index/index.jsp";
+            if(getImages(request, response)) {
+                for (String src : imageSrcs) {
+                    ModelloImmagineRecensione immagineRecensione = new ModelloImmagineRecensione();
+                    immagineRecensione.setIdR(daoRecensioneOggetto.selectReviewsByData(idOggetto, idUtente, testoRecensione, valutazioneRecensione).getId());
+                    immagineRecensione.setSrc(src);
+                    daoImmagineRecensione.addImageReviewSet(immagineRecensione);
+                }
+            }
         }
         else if(action.equals("Negozio")) {
+            int idUtente = Integer.parseInt(request.getParameter("utenteReview"));
+            int idNegozio = Integer.parseInt(request.getParameter("negozioReview"));
+            String testoRecensione = request.getParameter("testoReview");
+            int valutazioneRecensione = Integer.parseInt(request.getParameter("valutazioneReview"));
+            
             ModelloRecensioneNegozio recensioneNegozio = new ModelloRecensioneNegozio();
-            recensioneNegozio.setIdUtente(Integer.parseInt(request.getParameter("utenteReview")));
-            recensioneNegozio.setIdNegozio(Integer.parseInt(request.getParameter("negozioReview")));
-            recensioneNegozio.setTesto(request.getParameter("testoReview"));
+            recensioneNegozio.setIdUtente(idUtente);
+            recensioneNegozio.setIdNegozio(idNegozio);
+            recensioneNegozio.setTesto(testoRecensione);
             recensioneNegozio.setUtilita(0);
-            recensioneNegozio.setValutazione(Integer.parseInt(request.getParameter("valutazioneReview")));
+            recensioneNegozio.setValutazione(valutazioneRecensione);
             daoRecensioneNegozio.addReviewToStore(recensioneNegozio);
             
-            forward = "/jspFile/Finale/Index/index.jsp";
+            if(getImages(request, response)) {
+                for (String src : imageSrcs) {
+                    ModelloImmagineRecensione immagineRecensione = new ModelloImmagineRecensione();
+                    immagineRecensione.setIdR(daoRecensioneNegozio.selectReviewsByData(idNegozio, idUtente, testoRecensione, valutazioneRecensione).getId());
+                    immagineRecensione.setSrc(src);
+                    daoImmagineRecensione.addImageReviewSet(immagineRecensione);
+                }
+            }
         }
         else if(action.equals("Venditore")) {
+            int idUtente = Integer.parseInt(request.getParameter("utenteReview"));
+            int idVenditore = Integer.parseInt(request.getParameter("venditoreReview"));
+            String testoRecensione = request.getParameter("testoReview");
+            int valutazioneRecensione = Integer.parseInt(request.getParameter("valutazioneReview"));
+            
             ModelloRecensioneVenditore recensioneVenditore = new ModelloRecensioneVenditore();
-            recensioneVenditore.setIdUtente(Integer.parseInt(request.getParameter("utenteReview")));
-            recensioneVenditore.setIdVenditore(Integer.parseInt(request.getParameter("venditoreReview")));
-            recensioneVenditore.setTesto(request.getParameter("testoReview"));
+            recensioneVenditore.setIdUtente(idUtente);
+            recensioneVenditore.setIdVenditore(idVenditore);
+            recensioneVenditore.setTesto(testoRecensione);
             recensioneVenditore.setUtilita(0);
-            recensioneVenditore.setValutazione(Integer.parseInt(request.getParameter("valutazioneReview")));
+            recensioneVenditore.setValutazione(valutazioneRecensione);
             daoRecensioneVenditore.addReviewToSeller(recensioneVenditore);
             
-            forward = "/jspFile/Finale/Index/index.jsp";
+            if(getImages(request, response)) {
+                for (String src : imageSrcs) {
+                    ModelloImmagineRecensione immagineRecensione = new ModelloImmagineRecensione();
+                    immagineRecensione.setIdR(daoRecensioneVenditore.selectReviewsByDataV(idVenditore, idUtente, testoRecensione, valutazioneRecensione).getId());
+                    immagineRecensione.setSrc(src);
+                    daoImmagineRecensione.addImageReviewSet(immagineRecensione);
+                }
+            }
         }
         
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
+    }
+    
+    /**
+     * Get uploaded images
+     */
+    private boolean getImages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String appPath = request.getServletContext().getRealPath("");
+        
+        String savePath = appPath + /*File.separator + */SAVE_DIR;
+         
+        File fileSaveDir = new File(savePath);
+        if (!fileSaveDir.exists()) {
+            fileSaveDir.mkdir();
+        }
+        
+        boolean imageSaved = false;
+        for (Part part : request.getParts()) {
+            String fileName = extractFileName(part);
+            if(!fileName.isEmpty()) {
+                fileName = new File(fileName).getName();
+                part.write(savePath + File.separator + fileName);
+                imageSrcs.add(savePath + File.separator + fileName);
+                imageSaved = true;
+            }
+        }
+        
+        return imageSaved;
+    }
+    
+    /**
+     * Extracts file name from HTTP header content-disposition
+     */
+    private String extractFileName(Part part) {
+        String contentDisp = part.getHeader("content-disposition");
+        String[] items = contentDisp.split(";");
+        for (String s : items) {
+            if (s.trim().startsWith("filename")) {
+                return s.substring(s.indexOf("=") + 2, s.length()-1);
+            }
+        }
+        return "";
     }
 
     /**

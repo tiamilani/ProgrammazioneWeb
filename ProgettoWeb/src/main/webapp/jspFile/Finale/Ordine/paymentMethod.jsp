@@ -131,9 +131,6 @@
             <button class="btn btn-outline-primary buttonSpace" type="button" onclick="saveChanges(3)">Paga adesso</button>
         </div>
         
-        <div class="container">
-            <hr>
-            <%@include file="../Footer/footer.jsp" %>
-        </div>
+        <%@include file="../Footer/footer.jsp" %>
     </body>
 </html>

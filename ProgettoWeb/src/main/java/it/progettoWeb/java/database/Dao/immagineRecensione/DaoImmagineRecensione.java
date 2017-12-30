@@ -22,6 +22,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
+import it.progettoWeb.java.database.query.generics.genericsQuery;
 import it.progettoWeb.java.database.query.objects.objectsQuery;
 import it.progettoWeb.java.database.query.users.usersQuery;
 import it.progettoWeb.java.utility.tris.tris;
@@ -63,6 +64,18 @@ public class DaoImmagineRecensione {
         }
         
         return ImmagineRecensione;
+    }
+    
+    /**
+     * @author andreafadi
+     * Inserire un nuovo set immagine-recensione
+     * @param setImageReview Un set di Immagine-Recensione
+     */
+    public void addImageReviewSet(ModelloImmagineRecensione setImageReview) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(genericsQuery.addImageReviewSet(setImageReview.getIdR(), setImageReview.getSrc()));
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) { System.out.println(e); }
     }
     
     /**
