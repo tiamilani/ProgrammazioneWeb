@@ -5,6 +5,7 @@
  */
 package it.progettoWeb.java.database.query.users;
     
+import it.progettoWeb.java.database.Model.Assistenza.ModelloAssistenza;
 import java.sql.Date;
 
 /**
@@ -270,6 +271,108 @@ public class usersQuery {
     public static String selectSpecifiedInfoSupport(int idA){
         return "SELECT * FROM Assistenza WHERE Assistenza.id ="+idA+";";
     }
+    
+    
+    
+    /*---2017-12-24---*/
+    /**
+     * @author fbrug
+     * Ottenere le richieste di assistenza in un determinato stato (0 = in corso, 1 = chiuse)
+     * @param stato Intero rappresentante lo stato della richiesta di assistenza
+     * @return String: lista di richieste di assistenza
+     */
+    public static String selectAssistanceByState(int stato)
+    {
+        return "SELECT * FROM Assistenza WHERE Assistenza.stato=" + stato + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere le richieste di assistenza in base all'ID dell'amministratore a cui sono state assegnate
+     * @param idAdmin Intero rappresentante l'ID dell'amministratore di cui si vogliono le richieste di assistenza assegnate
+     * @return String: lista di richieste di assistenza
+     */
+    public static String selectAssistanceByAdminId(int idAdmin)
+    {
+        return "SELECT * FROM Assistenza WHERE Assistenza.idAmministratore=" + idAdmin + ";"; 
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere le richieste di assistenza in base all'ID dell'amministratore a cui sono state assegnate e in un determinato stato (0 = in corso, 1 = chiuse)
+     * @param idAdmin Intero rappresentante l'ID dell'amministratore di cui si vogliono le richieste di assistenza assegnate
+     * @param stato Intero rappresentante lo stato della richiesta di assistenza
+     * @return String: lista di richieste di assistenza
+     */
+    public static String selectAssistanceByAdminIdAndState(int idAdmin, int stato)
+    {
+        return "SELECT * FROM Assistenza WHERE Assistenza.idAmministratore=" + idAdmin + " AND Assistenza.stato=" + stato + ";";
+    }
+    /*---*/
+    /*2017-12-25*/
+    
+    /**
+     * @author fbrug
+     * Update della soluzione adottata per la richiesta di assistenza selezionata
+     * @param idA Intero rappresentate l'ID della richiesta di assistenza selezionata
+     * @param solution String rappresentante la soluzione adottata per questa richiesta
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateAssistanceSolution(int idA, String solution)
+    {
+        return "UPDATE progettoweb.Assistenza SET soluzione ='"+solution+"' WHERE "
+                + "Assistenza.id ="+idA+";";
+    }
+    
+    /**
+     * @author fbrug
+     * Update della data di chiusura della richiesta di assistenza selezionata
+     * @param idA Intero rappresentate l'ID della richiesta di assistenza selezionata
+     * @param date String rappresentante la data di chiusura della richiesta
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateAssistanceCloseDate(int idA, String date)
+    {
+        return "UPDATE progettoweb.Assistenza SET dataChiusura ='"+date+"' WHERE "
+                + "Assistenza.id ="+idA+";";
+    }
+    
+    /**
+     * @author fbrug
+     * Update della data di chiusura della richiesta di assistenza selezionata
+     * @param idA Intero rappresentate l'ID della richiesta di assistenza selezionata
+     * @param state Intero che indica se la richiesta è aperta (0) o chiusa (1)
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateAssistanceState(int idA, int state)
+    {
+        return "UPDATE progettoweb.Assistenza SET stato ="+state+" WHERE "
+                + "Assistenza.id ="+idA+";";
+    }
+    
+    /**
+     * @author fbrug
+     * Update della richiesta di assistenza
+     * @param assistance ModelloAssistenza rappresentante la richiesta da modificare
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateAssistance(ModelloAssistenza assistance)
+    {
+        return "UPDATE progettoweb.Assistenza SET "
+                + "idUtente="+assistance.getIdUtente()+","
+                + "idVenditore="+assistance.getIdVenditore()+","
+                + "idAmministratore="+assistance.getIdAmministratore()+","
+                + "idOrdine="+assistance.getIdOrdine()+","
+                + "idOggetto='"+assistance.getIdOggetto()+"',"
+                + "stato="+assistance.getStato()+","
+                + "richiesta='"+assistance.getRichiesta()+"',"
+                + "soluzione='"+assistance.getSoluzione()+"',"
+                + "dataApertura='"+assistance.getDataApertura()+"',"
+                + "dataChiusura='"+assistance.getDataChiusura()+"' "
+                + "WHERE id="+assistance.getId()+";";
+    }
+    /*---*/
+    
     
     /**
      * @author Andrea
@@ -674,18 +777,3 @@ public class usersQuery {
         return "DELETE FROM Indirizzo WHERE idI ="+idI+" AND idU ="+idU+";";
     }
 }
-
-
-/*
-public static String insertAddress(String stato, String regione, String provincia, String citta, String via, int nCivico, int interno, double lat, double lon, int idU){
-        return "INSERT INTO Indirizzo (idI, stato, regione, provincia, "
-                + "citta, via, nCivico, interno, latitudine, longitudine) VALUES "
-                + "(NULL, '"+stato+"', '"+regione+"', '"+provincia+"', '"+citta+"', '"+via+"', "+nCivico+", "+interno+", "+lat+", "+lon+"); "
-                + "DECLARE @IDI int(11); SET @IDI = 1; "
-                + "SELECT @IDI=idI FROM Indirizzo WHERE stato ='"+stato+"' AND "
-                + "regione = '"+regione+"' AND provincia = '"+provincia+"' AND "
-                + "citta = '"+citta+"' AND via = '"+via+"' AND nCivico = "+nCivico+" AND interno = "+interno+"; "
-                + "INSERT INTO IndirizzoUtente (idI, idU) "
-                + "VALUES (@IDI, "+idU+");";
-    }
-*/

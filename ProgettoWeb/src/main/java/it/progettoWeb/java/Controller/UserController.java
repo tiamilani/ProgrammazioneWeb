@@ -179,12 +179,7 @@ public class UserController extends HttpServlet {
                 utente.setMail(newEmail);
 
                 daoUtente.updateUserEmailByUserID(utente);
-
-
-
-                System.out.println("PREEMAIL - Update Email");
                 SendEmail.updateEmail(oldMail, newEmail);
-                System.out.println("EMAIL - Update Email");
             }
             response.sendRedirect("UserController?action=infoCurrentUser");
             return;
@@ -396,6 +391,23 @@ public class UserController extends HttpServlet {
                 request.getSession().removeAttribute("carrelloSessione");
                 request.getSession().setAttribute("carrelloSessione", carrello);
             }
+            
+            /*---2017-12-24
+            try1
+            String backURL = request.getHeader("referer");
+            System.out.println("BACK-URL = " + backURL);
+            
+            backURL = backURL.substring(33);
+            System.out.println("BACK-URL = " + backURL);
+            
+            forward = backURL;
+            System.out.println("forward = " + forward);*/
+            /*try2
+            String backurl = request.getParameter("fromPage");
+            backurl = backurl.substring(12);
+            System.out.println("backurl = " + backurl);
+            forward = backurl;*/
+            
             forward = HOME_PAGE;
         }
         else if(action.equalsIgnoreCase("addUser")){
@@ -426,12 +438,7 @@ public class UserController extends HttpServlet {
                     {
                         utente.setUtenteType(0);
                         daoUtente.addUser(utente);
-
-
-                        System.out.println("PREEMAIL - Add User " + utente.getMail());
-                        /*---2017-12-02---SendEmail.sendMail(utente.getMail(), 0);*/
-                        /*---2017-12-04---*/SendEmail.addUser(utente.getMail());
-                        System.out.println("EMAIL - Add User");
+                        SendEmail.addUser(utente.getMail());
 
                         forward = HOME_PAGE;
                     }
@@ -459,12 +466,7 @@ public class UserController extends HttpServlet {
                 else {
                     utente.setPassword(newPassword);
                     daoUtente.updateUserPasswordByUserID(utente);
-
-
-                    System.out.println("PREEMAIL - Update Password");
-                    /*---2017-12-02---SendEmail.sendMail(utente.getMail(), 3);*/
-                    /*---2017-12-04---*/SendEmail.updatePassword(utente.getMail());
-                    System.out.println("EMAIL - Update Password");
+                    SendEmail.updatePassword(utente.getMail());
 
                     response.sendRedirect("UserController?action=infoCurrentUser");
                     return;
@@ -479,9 +481,7 @@ public class UserController extends HttpServlet {
 
 
             System.out.println("PREEMAIL - Become Seller");
-            /*---2017-12-02---SendEmail.sendMail(utente.getMail(), 4);*/
-            /*---2017-12-04---*/SendEmail.becomeSeller(utente.getMail());
-            System.out.println("EMAIL - Become Seller");
+            SendEmail.becomeSeller(utente.getMail());
 
             forward = USERPAGE;
         }

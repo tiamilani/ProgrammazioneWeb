@@ -46,11 +46,15 @@ public class ModelloAssistenza {
      */
     private int stato;
     /**
+     * Variabile utilizzata per identificare la richiesta/domanda posta nella richiesta di assistenza
+     */
+    private String richiesta;
+    /**
      * Variabile utilizzata per identificare la decisione che è stata presa dall'amministratore che ha gestito la richiesta
      */
     private String soluzione;
     /**
-     * Variabile utilizzata per identificare la data di apertura della Richiesta di assistenza
+     * Variabile utilizzata per identificare la data di apertura della richiesta di assistenza
      */
     private Date dataApertura;
     /**
@@ -168,6 +172,22 @@ public class ModelloAssistenza {
      */
     public void setStato(int stato) {
         this.stato = stato;
+    }
+    
+    /**
+     * Funzione che permette di ottenre la richiesta/domanda della richiesta di assistenza
+     * @return String soluzione
+     */
+    public String getRichiesta() {
+        return richiesta;
+    }
+
+    /**
+     * Funzione che permette di settare la richiesta/domanda della richiesta di assistenza
+     * @param richiesta  
+     */
+    public void setRichiesta(String richiesta) {
+        this.richiesta = richiesta;
     }
 
     /**

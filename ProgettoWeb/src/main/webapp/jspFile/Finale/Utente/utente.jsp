@@ -40,7 +40,7 @@
                         <a href="${pageContext.request.contextPath}/jspFile/Finale/Utente/diventaVenditore.jsp" class="btn btn-outline-primary buttonSpace btn-block">Diventa un venditore</a>
                     </c:if>
                     <c:if test="${utenteSessione.getUtenteType() == 2}" >
-                        <a href="#" method="GET" class="btn btn-outline-primary buttonSpace btn-block">Gestisci richieste di assistenza</a>
+                        <a href="${pageContext.request.contextPath}/AssistenzaController?action=listAssistances" method="GET" class="btn btn-outline-primary buttonSpace btn-block">Gestisci richieste di assistenza</a>
                     </c:if>
                     <a href="#" method="GET" class="btn btn-outline-primary buttonSpace btn-block">Assistenza</a>
                     <a  href="${pageContext.request.contextPath}/UserController?action=logout" method="POST" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">person</i> Logout</a>

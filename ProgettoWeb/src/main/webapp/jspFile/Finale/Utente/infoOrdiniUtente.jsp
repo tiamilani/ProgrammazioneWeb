@@ -118,6 +118,14 @@
                                     </c:choose>
                                 </div>
                             </div>
+                                
+                            <!--2017-12-26--->
+                            <div class="row">
+                                <div class="col-5">
+                                    <button class="btn btn-outline-primary buttonSpace" type="button" onclick="">RICHIEDI ASSISTENZA</button>
+                                </div>
+                            </div>
+                            <!---->
                             <hr>
                         </c:if>
                         <c:set var="i" scope="page" value="${i+1}" />
@@ -334,3 +342,22 @@
         </div>
     </body>
 </html>
+
+
+
+<div id="callAssistance" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title"><b>Scrivi la tua richiesta di assistenza</b></span>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form action="<c:out value="${pageContext.request.contextPath}"/>/AssistenzaController?action=createAssistance" method="POST">
+                <div class="modal-footer">
+                    <input class="col-10 modal-input" type="text" id="textAssistance" name="textAssistance" required>
+                    <button type="submit" class="col-2 paddingNav btn btn-outline-primary my-2 my-sm-0">INVIA</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
