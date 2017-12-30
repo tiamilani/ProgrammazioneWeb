@@ -67,7 +67,7 @@
                     <h2>Ordini per data</h2>
                     <c:set var="i" scope="page" value="${0}" />
                     <c:forEach items="${listaOrdini.getList()}" var="ordine" >
-                        <c:if test="${ordine.getStato() != 0 && ordine.getStato() != 5}">
+                            <c:if test="${ordine.getStato() != 0 && ordine.getStato() != 5}">
                             <div class="row">
                                 <div class="col-1">
                                     <img src="${listaImmagini.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: 50px; height: 50px; object-fit: cover;">
@@ -118,14 +118,18 @@
                                     </c:choose>
                                 </div>
                             </div>
-                                
-                            <!--2017-12-26--->
                             <div class="row">
-                                <div class="col-5">
-                                    <button class="btn btn-outline-primary buttonSpace" type="button" onclick="">RICHIEDI ASSISTENZA</button>
+                                <div class="col-4 mx-auto">
+                                    <form name="richiestaAssistenza" action="#" method="POST">
+                                        <input type="hidden" id="idOrdine" name="idOrdine" value="${ordine.getIdOrdine()}">
+                                        <input type="hidden" id="idOggetto" name="idOggetto" value="${ordine.getIdOggetto()}">
+                                        <input type="hidden" id="idNegozio" name="idNegozio" value="${ordine.getIdNegozio()}">
+                                        <button ction="submit" type="submit" class="btn btn-outline-primary btn-block">
+                                            Richiedi assistenza per questo oggetto
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
-                            <!---->
                             <hr>
                         </c:if>
                         <c:set var="i" scope="page" value="${i+1}" />
@@ -209,7 +213,19 @@
                                         </c:choose>
                                     </div>
                                 </div>
-                                <hr>
+                                <div class="row">
+                                <div class="col-4 mx-auto">
+                                    <form name="richiestaAssistenza" action="#" method="POST">
+                                        <input type="hidden" id="idOrdine" name="idOrdine" value="${ordine.getIdOrdine()}">
+                                        <input type="hidden" id="idOggetto" name="idOggetto" value="${ordine.getIdOggetto()}">
+                                        <input type="hidden" id="idNegozio" name="idNegozio" value="${ordine.getIdNegozio()}">
+                                        <button ction="submit" type="submit" class="btn btn-outline-primary btn-block">
+                                            Richiedi assistenza per questo oggetto
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <hr>
                             </c:if>
                             <c:set var="i" scope="page" value="${i+1}" />
                         </c:forEach>
@@ -269,7 +285,19 @@
                                         </c:choose>
                                     </div>
                                 </div>
-                                <hr>
+                                <div class="row">
+                                <div class="col-4 mx-auto">
+                                    <form name="richiestaAssistenza" action="#" method="POST">
+                                        <input type="hidden" id="idOrdine" name="idOrdine" value="${ordine.getIdOrdine()}">
+                                        <input type="hidden" id="idOggetto" name="idOggetto" value="${ordine.getIdOggetto()}">
+                                        <input type="hidden" id="idNegozio" name="idNegozio" value="${ordine.getIdNegozio()}">
+                                        <button ction="submit" type="submit" class="btn btn-outline-primary btn-block">
+                                            Richiedi assistenza per questo oggetto
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <hr>
                             </c:if>
                             <c:set var="i" scope="page" value="${i+1}" />
                         </c:forEach>
@@ -329,14 +357,26 @@
                                         </c:choose>
                                     </div>
                                 </div>
-                                <hr>
+                                <div class="row">
+                                <div class="col-4 mx-auto">
+                                    <form name="richiestaAssistenza" action="#" method="POST">
+                                        <input type="hidden" id="idOrdine" name="idOrdine" value="${ordine.getIdOrdine()}">
+                                        <input type="hidden" id="idOggetto" name="idOggetto" value="${ordine.getIdOggetto()}">
+                                        <input type="hidden" id="idNegozio" name="idNegozio" value="${ordine.getIdNegozio()}">
+                                        <button ction="submit" type="submit" class="btn btn-outline-primary btn-block">
+                                            Richiedi assistenza per questo oggetto
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <hr>
                             </c:if>
                             <c:set var="i" scope="page" value="${i+1}" />
                         </c:forEach>
                     </c:when>
             </c:choose>
         </div>
-        
+
         <%@include file="../Footer/footer.jsp" %>
     </body>
 </html>
