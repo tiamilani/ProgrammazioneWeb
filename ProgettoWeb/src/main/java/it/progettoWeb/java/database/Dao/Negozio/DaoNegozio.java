@@ -650,7 +650,7 @@ public class DaoNegozio {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.updateShopStatus(idNegozio, attivo));
+            statement.executeUpdate(sellersQuery.updateShopStatus(idNegozio, attivo));
         }
         catch (SQLException e) {}
     }
@@ -666,7 +666,7 @@ public class DaoNegozio {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.insertShopImage(idNegozio, imagePath));
+            statement.executeUpdate(sellersQuery.insertShopImage(idNegozio, imagePath));
         }
         catch (SQLException e) {}
     }
@@ -683,7 +683,7 @@ public class DaoNegozio {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.updateShopImage(idNegozio, oldImagePath, newImagePath));
+            statement.executeUpdate(sellersQuery.updateShopImage(idNegozio, oldImagePath, newImagePath));
         }
         catch (SQLException e) {}
     }
@@ -699,7 +699,7 @@ public class DaoNegozio {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.deleteShopImage(idNegozio, imagePath));
+            statement.executeUpdate(sellersQuery.deleteShopImage(idNegozio, imagePath));
         }
         catch (SQLException e) {}
     }

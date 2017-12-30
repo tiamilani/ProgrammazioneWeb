@@ -140,6 +140,13 @@ public class genericsQuery {
                + "(Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = " + idUtente + ");";
     }
     
+    public static String selectAddressLatLng(double lat, double lng)
+    {
+        return "SELECT * "
+               + "FROM Indirizzo "
+               + "WHERE latitudine="+lat+" and longitudine="+lng+";";
+    }
+    
     /**
      * @author fbrug
      * Ottenere i dati di un utente e l'indirizzo avendo mail e password
@@ -208,7 +215,8 @@ public class genericsQuery {
      */
     public static String selectStoreAddressImageByStoreID(int idNegozio)
     {
-        return "SELECT Negozio.*, Indirizzo.*, imageNegozio.* FROM Negozio JOIN Indirizzo ON Negozio.idI=Indirizzo.idI JOIN imageNegozio ON Negozio.id=imageNegozio.idN WHERE Negozio.id=" + idNegozio + " GROUP BY Negozio.id;";
+        //Update, rimosso group by Negozio.id, visto che la ricerca restituirà un risultato univoco dato dall'id del negozio non serve effettuare il group by che altrimenti dava errore sql
+        return "SELECT Negozio.*, Indirizzo.*, imageNegozio.* FROM Negozio JOIN Indirizzo ON Negozio.idI=Indirizzo.idI JOIN imageNegozio ON Negozio.id=imageNegozio.idN WHERE Negozio.id=" + idNegozio + ";";
     }
     
     /**

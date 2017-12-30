@@ -268,20 +268,33 @@
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
-                                        <div class="col-2">
-                                            <form action="#" id="formGestisciNegozio" name="formGestisciNegozio" method="GET">
-                                                <input type="hidden" name="action" value="gestisciNegozio">
-                                                <input type="hidden" name="id" value="${negozio.getIdI()}">
-                                                <button type="submit" value="submit" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">build</i></button>
-                                            </form>
-                                        </div>
-                                        <div class="col-2">
-                                            <form action="#" id="formCancNegozio" name="formCancNegozio" method="GET">
-                                                <input type="hidden" name="action" value="cancNegozio">
-                                                <input type="hidden" name="id" value="${negozio.getIdI()}">
-                                                <button type="submit" value="submit" class="btn btn-outline-danger buttonSpace btn-block"><i class="Small material-icons">close</i></button>
-                                            </form>
-                                        </div>
+                                        <c:choose>
+                                            <c:when test="${negozio.getAttivo() == 1}">
+                                                <div class="col-2">
+                                                    <form action="${pageContext.request.contextPath}/NegozioController" id="formGestisciNegozio" name="formGestisciNegozio" method="POST">
+                                                        <input type="hidden" name="action" value="gestisciNegozio">
+                                                        <input type="hidden" name="id" value="${negozio.getId()}">
+                                                        <button type="submit" value="submit" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">build</i></button>
+                                                    </form>
+                                                </div>
+                                                <div class="col-2">
+                                                    <form action="${pageContext.request.contextPath}/NegozioController" id="formCancNegozio" name="formCancNegozio" method="POST">
+                                                        <input type="hidden" name="action" value="cancNegozio">
+                                                        <input type="hidden" name="id" value="${negozio.getIdI()}">
+                                                        <button type="submit" value="submit" class="btn btn-outline-danger buttonSpace btn-block"><i class="Small material-icons">close</i></button>
+                                                    </form>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="col-4">
+                                                    <form action="${pageContext.request.contextPath}/NegozioController" id="formCancNegozio" name="formCancNegozio" method="POST">
+                                                        <input type="hidden" name="action" value="apriNegozio">
+                                                        <input type="hidden" name="id" value="${negozio.getIdI()}">
+                                                        <button type="submit" value="submit" class="btn btn-outline-success buttonSpace btn-block"><i class="Small material-icons">lock_open</i> Riapri</button>
+                                                    </form>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                     <hr>
                                 <c:set var="i" scope="page" value="${i+1}" />
@@ -315,20 +328,33 @@
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
-                                        <div class="col-2">
-                                            <form action="#" id="formGestisciNegozio" name="formGestisciNegozio" method="GET">
-                                                <input type="hidden" name="action" value="gestisciNegozio">
-                                                <input type="hidden" name="id" value="${negozio.getIdI()}">
-                                                <button type="submit" value="submit" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">build</i></button>
-                                            </form>
-                                        </div>
-                                        <div class="col-2">
-                                            <form action="#" id="formCancNegozio" name="formCancNegozio" method="GET">
-                                                <input type="hidden" name="action" value="cancNegozio">
-                                                <input type="hidden" name="id" value="${negozio.getIdI()}">
-                                                <button type="submit" value="submit" class="btn btn-outline-danger buttonSpace btn-block"><i class="Small material-icons">close</i></button>
-                                            </form>
-                                        </div>
+                                        <c:choose>
+                                            <c:when test="${negozio.getAttivo() == 1}">
+                                                <div class="col-2">
+                                                    <form action="${pageContext.request.contextPath}/NegozioController" id="formGestisciNegozio" name="formGestisciNegozio" method="POST">
+                                                        <input type="hidden" name="action" value="gestisciNegozio">
+                                                        <input type="hidden" name="id" value="${negozio.getId()}">
+                                                        <button type="submit" value="submit" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">build</i></button>
+                                                    </form>
+                                                </div>
+                                                <div class="col-2">
+                                                    <form action="${pageContext.request.contextPath}/NegozioController" id="formCancNegozio" name="formCancNegozio" method="POST">
+                                                        <input type="hidden" name="action" value="cancNegozio">
+                                                        <input type="hidden" name="id" value="${negozio.getIdI()}">
+                                                        <button type="submit" value="submit" class="btn btn-outline-danger buttonSpace btn-block"><i class="Small material-icons">close</i></button>
+                                                    </form>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="col-4">
+                                                    <form action="${pageContext.request.contextPath}/NegozioController" id="formCancNegozio" name="formCancNegozio" method="POST">
+                                                        <input type="hidden" name="action" value="apriNegozio">
+                                                        <input type="hidden" name="id" value="${negozio.getIdI()}">
+                                                        <button type="submit" value="submit" class="btn btn-outline-success buttonSpace btn-block"><i class="Small material-icons">lock_open</i> Riapri</button>
+                                                    </form>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                     <hr>
                                 <c:set var="i" scope="page" value="${i+1}" />

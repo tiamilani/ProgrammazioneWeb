@@ -616,8 +616,7 @@ public class sellersQuery {
      */
     public static String insertShopImage(int idNegozio, String imagePath)
     {
-        return "INSERT INTO imageNegozio (src, idN) "
-                + "SELECT " + imagePath + ", Negozio.id FROM Negozio WHERE Negozio.id = " + idNegozio + ";";
+        return "INSERT INTO imageNegozio (src, idN) values ('"+imagePath+"',"+idNegozio+");";
     }
     
     /**

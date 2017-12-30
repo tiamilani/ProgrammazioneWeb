@@ -97,6 +97,20 @@ public class DaoIndirizzo {
         return addreses;
     }
     
+    public List<ModelloIndirizzo> selectAddressLatLng(double lat, double lng) {
+        List<ModelloIndirizzo> addreses = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.selectAddressLatLng(lat,lng));
+            while (rs.next()) {
+                addreses.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return addreses;
+    }
+    
     public ModelloIndirizzo selectAddressByIdAddress(int addressId) {
         ModelloIndirizzo address = new ModelloIndirizzo();
         try {

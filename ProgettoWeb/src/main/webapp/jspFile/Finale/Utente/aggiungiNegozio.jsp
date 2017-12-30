@@ -61,16 +61,17 @@
                 <hr>
                     <h2>Dati principali del negozio</h2>
                     <p>Qui dovrai inserire i dati principali del tuo negozio, questi dati saranno quelli che lo renderanno disponibile agli utenti</p>
+                    <p>Attenzione: i dati non saranno modificabili</p>
                 </div>
             </div>
             <div class="row">
-                <form class="col-12" id="nuovoNegozio" name="nuovoNegozio" onsubmit="return localizza()">
+                <form class="col-12" id="nuovoNegozio" name="nuovoNegozio" onsubmit="return localizza()" method="POST">
                     <input type="hidden" name="action" value="addNegozio">
                     <div class="col-12">
                         <p>Nome del nuovo negozio:</p>
                     </div>
                     <div class="col-12">
-                        <input type="text" class="form-control" id="nomeNegozio" name="nomeNegozio" placeholder="Nome">
+                        <input type="text" class="form-control" id="nomeNegozio" name="nomeNegozio" placeholder="Nome" required>
                     </div>
                     <div class="col-12">
                         <p>Inserisci i dati relativi all'inidirizzo:</p>
