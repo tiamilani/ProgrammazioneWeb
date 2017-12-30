@@ -4,6 +4,12 @@ function openAssistance(elem)
     document.location.href='/ProgettoWeb/AssistenzaController?action=resolve&id=' + index;
 };
 
+function details(elem)
+{
+    var index = elem.getAttribute("data-idA");
+    document.location.href='/ProgettoWeb/AssistenzaController?action=details&id=' + index;
+};
+
 function saveChangesAssistance(wtd)
 {
     if(wtd == 0)

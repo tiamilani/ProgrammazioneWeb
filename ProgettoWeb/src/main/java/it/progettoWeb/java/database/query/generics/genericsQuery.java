@@ -240,7 +240,7 @@ public class genericsQuery {
     
     /**
      * @author fbrug
-     * Ottenere gli utenti amministratori ordinati per numero di richieste
+     * Ottenere gli utenti amministratori ordinati per numero di richieste (decrescente)
      * @return String: elenco utenti amministratori
      */
     public static String selectAdministratorByNumerOfRequests()
@@ -248,6 +248,22 @@ public class genericsQuery {
         return "SELECT DISTINCT COUNT(A2.idAmministratore) as contatore, A1.idAmministratore as id "
                + "FROM Assistenza A1 "
                + "LEFT JOIN Assistenza A2 ON (A1.idAmministratore = A2.idAmministratore) "
+               + "GROUP BY A1.id "
+               + "ORDER BY contatore DESC;";
+    }
+    
+    
+    /**
+     * @author fbrug
+     * Ottenere gli utenti amministratori ordinati per numero di richieste in corso (decrescente)
+     * @return String: elenco utenti amministratori
+     */
+    public static String selectAdministratorByNumerOfPendingRequests()
+    {
+        return "SELECT DISTINCT COUNT(A2.idAmministratore) as contatore, A1.idAmministratore as id "
+               + "FROM Assistenza A1 "
+               + "LEFT JOIN Assistenza A2 ON (A1.idAmministratore = A2.idAmministratore) "
+               + "WHERE A1.stato=0 "
                + "GROUP BY A1.id "
                + "ORDER BY contatore DESC;";
     }

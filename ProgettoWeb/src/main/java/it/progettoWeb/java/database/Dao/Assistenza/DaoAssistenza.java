@@ -166,7 +166,7 @@ public class DaoAssistenza {
      * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @return List<ModelloAssistenza> lista di richieste di assistenza
      */
-    public List<ModelloAssistenza> selectReviewsStores(int idU) {
+    public List<ModelloAssistenza> selectUserAssistances(int idU) {
         List<ModelloAssistenza> richieste = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
@@ -283,7 +283,7 @@ public class DaoAssistenza {
 
         return richieste;
     }
-    /*---*/
+    
     /*2017-12-25*/
     
     /**
@@ -356,5 +356,23 @@ public class DaoAssistenza {
             System.out.println("ERROR: " + e.getMessage());
         }
     }
-    /*---*/
+    
+    /*2017-12-25*/
+    
+    /**
+     * @author fbrug
+     * Aggiunta di una richiesta di assistenza
+     * @param assistance ModelloAssistenza rappresentante la richiesta di assistenza da aggiungere
+     */
+    public void insertAssistance(ModelloAssistenza assistance)
+    {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(usersQuery.insertAssistance(assistance));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
+    }
 }

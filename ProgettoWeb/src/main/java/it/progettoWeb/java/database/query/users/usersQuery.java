@@ -308,7 +308,7 @@ public class usersQuery {
     {
         return "SELECT * FROM Assistenza WHERE Assistenza.idAmministratore=" + idAdmin + " AND Assistenza.stato=" + stato + ";";
     }
-    /*---*/
+    
     /*2017-12-25*/
     
     /**
@@ -370,6 +370,27 @@ public class usersQuery {
                 + "dataApertura='"+assistance.getDataApertura()+"',"
                 + "dataChiusura='"+assistance.getDataChiusura()+"' "
                 + "WHERE id="+assistance.getId()+";";
+    }
+    
+    /*2017-12-30*/
+    
+    /**
+     * @author fbrug
+     * Aggiunta di una richiesta di assistenza
+     * @param assistance ModelloAssistenza rappresentante la richiesta di assistenza da aggiungere
+     * @return String: conferma avvenuta operazione
+     */
+    public static String insertAssistance(ModelloAssistenza assistance)
+    {
+        return "INSERT INTO assistenza "
+                + "(idUtente, idVenditore, idAmministratore, idOrdine, idOggetto, richiesta) "
+                + "VALUES ("
+                + assistance.getIdUtente() + ", "
+                + assistance.getIdVenditore()+ ", "
+                + assistance.getIdAmministratore()+ ", "
+                + assistance.getIdOrdine()+ ", '"
+                + assistance.getIdOggetto()+ "', '"
+                + assistance.getRichiesta()+ "')";
     }
     /*---*/
     

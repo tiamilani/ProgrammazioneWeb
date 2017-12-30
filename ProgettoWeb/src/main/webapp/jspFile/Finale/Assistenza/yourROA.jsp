@@ -1,6 +1,6 @@
 <%-- 
-    Document   : assistanceManagement
-    Created on : Dec 24, 2017, 10:31:00 PM
+    Document   : yourROA
+    Created on : Dec 30, 2017, 6:39:21 PM
     Author     : FBrug
 --%>
 
@@ -15,7 +15,13 @@
         <title>Assistance Management</title>
     </head>
     
-    <script src="http://localhost:8080/ProgettoWeb/jspFile/Finale/JS/Assistances.js"></script>
+    <script>
+        function details(elem)
+        {
+            var index = elem.getAttribute("data-idA");
+            document.location.href='/ProgettoWeb/AssistenzaController?action=details&id=' + index;
+        };
+    </script>
     
     <body>
         <div class="container">
@@ -24,7 +30,7 @@
         </div>
             
         <div class="container-fluid">
-            <h2><b>GESTIONE ASSISTENZE</b></h2>
+            <h2><b>LE TUE RICHIESTE DI ASSISTENZA</b></h2>
             
             <div>
                 <h3><b>Assistenze in attesa di risposta</b></h3>
@@ -39,7 +45,7 @@
                             <span><b>Data apertura</b></span>
                         </div>
                         <div class="col-2">
-                            <span><b>Richiedente</b></span>
+                            <span><b>Oggetto</b></span>
                         </div>
                         <div class="col-6">
                             <span><b>Anteprima richiesta</b></span>
@@ -57,7 +63,7 @@
                                 <c:out value="${fn:substring(assAperta.getL().getRichiesta(), 0, 200)}"/> ...
                             </div>
                             <div class="col-2">
-                                <button class="btn btn-outline-primary buttonSpace" type="button" data-idA="${assAperta.getL().getId()}" onclick="openAssistance(this)">RISOLVI</button>
+                                <button class="btn btn-outline-primary buttonSpace" type="button" data-idA="${assAperta.getL().getId()}" onclick="details(this)">DETTAGLI</button>
                             </div>
                         </div>
                     </c:forEach>
@@ -80,7 +86,7 @@
                             <span><b>Data chiusura</b></span>
                         </div>
                         <div class="col-2">
-                            <span><b>Richiedente</b></span>
+                            <span><b>Oggetto</b></span>
                         </div>
                         <div class="col-2">
                             <span><b>Anteprima richiesta</b></span>
@@ -107,7 +113,7 @@
                                 <c:out value="${fn:substring(assChiusa.getL().getSoluzione(), 0, 20)}"/> ...
                             </div>
                             <div class="col-2">
-                                <button class="btn btn-outline-primary buttonSpace" type="button" data-idA="${assChiusa.getL().getId()}" onclick="openAssistance(this)">VISUALIZZA</button>
+                                <button class="btn btn-outline-primary buttonSpace" type="button" data-idA="${assChiusa.getL().getId()}" onclick="details(this)">DETTAGLI</button>
                             </div>
                         </div>
                     </c:forEach>
@@ -121,3 +127,4 @@
         </div>
     </body>
 </html>
+
