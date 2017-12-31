@@ -114,7 +114,9 @@ public class DaoAssistenza {
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(adminQuery.numberRequestOfAssistance(id));
-            numRichieste=rs.getInt("numRichieste");
+            while(rs.next()){ 
+                numRichieste = rs.getInt("numRichieste");
+            }
         } catch (SQLException e) {
         }
         
@@ -133,7 +135,9 @@ public class DaoAssistenza {
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(adminQuery.numberRequestOfAssistanceInAState(stato));
-            numRichieste=rs.getInt("numRichieste");
+            while(rs.next()){ 
+                numRichieste = rs.getInt("numRichieste");
+            }
         } catch (SQLException e) {
         }
         
@@ -153,8 +157,11 @@ public class DaoAssistenza {
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(adminQuery.numberRequestOfAssistanceInAStateOfSpecificAdministrator(stato,id));
-            numRichieste=rs.getInt("numRichieste");
+            while(rs.next()){ 
+                numRichieste = rs.getInt("numRichieste");
+            }
         } catch (SQLException e) {
+            System.out.println(e.toString());
         }
         
         return numRichieste;

@@ -142,7 +142,7 @@ public class AssistenzaController extends HttpServlet
                 }
                 else
                 {
-                    if(action.equalsIgnoreCase("listAssistances"))
+                    if(action.equalsIgnoreCase("showAssistances"))
                     {
                         forward = YOUR_ROA;
                         
