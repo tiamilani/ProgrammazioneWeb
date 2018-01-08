@@ -41,6 +41,7 @@ public class NegozioController extends HttpServlet {
     private static String USERPAGE = "/jspFile/Finale/Utente/utente.jsp";
     private static String SHOPPAGE = "/jspFile/Finale/Utente/gestioneSingoloNegozio.jsp";
     private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
+    private static String ADDSHOPPAGE = "/jspFile/Finale/Utente/aggiungiNegozio.jsp";
     
     private DaoNegozio daoNegozio;
     private DaoIndirizzo daoIndirizzo;
@@ -136,8 +137,9 @@ public class NegozioController extends HttpServlet {
             negozio.setId(listaNegozi.get(0).getId());
             
             daoNegozio.insertShopImage(negozio.getId(), "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png");
+            request.setAttribute("negozioInserito", 0);
             
-            forward = USERPAGE;
+            forward = ADDSHOPPAGE;
         }
         else if(action.equalsIgnoreCase("cancNegozio")){
             int idNegozio = Integer.parseInt(request.getParameter("id"));
@@ -209,6 +211,7 @@ public class NegozioController extends HttpServlet {
             request.setAttribute("indirizzo", trisNegozioIndirizzoImmagine.getC());
             request.setAttribute("immagine", trisNegozioIndirizzoImmagine.getR());
             request.setAttribute("categorie", listaCategorie);
+            request.setAttribute("oggettoInserito", 0);
             forward = SHOPPAGE;
         }
         else {

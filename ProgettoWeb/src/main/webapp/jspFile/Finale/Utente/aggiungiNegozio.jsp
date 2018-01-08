@@ -64,6 +64,20 @@
                     <p>Attenzione: i dati non saranno modificabili</p>
                 </div>
             </div>
+            <c:choose>
+                <c:when test="${negozioInserito == 0}">
+                    <div class="alert alert-success">
+                        <strong>Successo!</strong> negozio inserito con successo.
+                    </div>
+                </c:when>
+                <c:when test="${negozioInserito == 1}">
+                    <div class="alert alert-danger">
+                        <strong>Attenzione!</strong> negozio non inserito.
+                    </div>
+                </c:when>
+                <c:otherwise>
+                </c:otherwise>
+            </c:choose>
             <div class="row">
                 <form class="col-12" id="nuovoNegozio" name="nuovoNegozio" onsubmit="return localizza()" method="POST">
                     <input type="hidden" name="action" value="addNegozio">

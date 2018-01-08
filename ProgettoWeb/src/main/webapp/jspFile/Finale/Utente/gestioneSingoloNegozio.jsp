@@ -32,6 +32,20 @@
                 </div>
             </div>
             <hr>
+            <c:choose>
+                <c:when test="${oggettoInserito == 0}">
+                    <div class="alert alert-success">
+                        <strong>Successo!</strong> oggetto inserito con successo.
+                    </div>
+                </c:when>
+                <c:when test="${oggettoInserito == 1}">
+                    <div class="alert alert-danger">
+                        <strong>Attenzione!</strong> oggetto non inserito.
+                    </div>
+                </c:when>
+                <c:otherwise>
+                </c:otherwise>
+            </c:choose>
             <div class="row">
                 <div class="col-12">
                     <h2>Aggiungi oggetto</h2>
