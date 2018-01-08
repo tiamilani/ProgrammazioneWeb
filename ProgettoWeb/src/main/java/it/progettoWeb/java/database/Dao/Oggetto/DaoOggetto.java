@@ -5594,14 +5594,14 @@ public class DaoOggetto {
      * @param dataFineSconto: indica la data in cui terminerà lo sconto applicato all'oggetto
      * @param idCategoria: intero rappresentante l'ID della categoria di cui l'oggetto fa parte
      */
-    public void insertObject(int idNegozio, String nomeOggetto, double prezzoOggetto, 
+    public void insertObject(String id,int idNegozio, String nomeOggetto,String nomeDownCase, double prezzoOggetto, 
             String descrizioneOggetto, int ritiroInNegozio, int disponibilita, int statoDisponibilita, 
             double sconto, Date dataFineSconto, int idCategoria)
     {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.insertObject(idNegozio, nomeOggetto, prezzoOggetto, descrizioneOggetto, 
+            statement.executeUpdate(sellersQuery.insertObject(id,idNegozio, nomeOggetto,nomeDownCase, prezzoOggetto, descrizioneOggetto, 
                     ritiroInNegozio, disponibilita, statoDisponibilita, sconto, dataFineSconto, idCategoria));
         } catch(SQLException e) {}
     }
@@ -5660,12 +5660,12 @@ public class DaoOggetto {
      * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui inserire l'immagine
      * @param imagePath: il path della nuova immagine
      */
-    public void insertObjectImage(int idOggetto, String imagePath)
+    public void insertObjectImage(String idOggetto, String imagePath)
     {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.insertObjectImage(idOggetto, imagePath));
+            statement.executeUpdate(sellersQuery.insertObjectImage(idOggetto, imagePath));
         }
         catch (SQLException e) {}
     }

@@ -5,18 +5,25 @@
  */
 package it.progettoWeb.java.Controller.NegozioController;
 
+import it.progettoWeb.java.database.Dao.Categoria.DaoCategoria;
 import it.progettoWeb.java.database.Dao.Negozio.DaoNegozio;
 import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
 import it.progettoWeb.java.database.Dao.immagineNegozio.DaoImmagineNegozio;
+import it.progettoWeb.java.database.Dao.immagineOggetto.DaoImmagineOggetto;
 import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
 import it.progettoWeb.java.database.Dao.ordiniRicevuti.DaoOrdiniRicevuti;
+import it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria;
 import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
+import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.Model.immagineNegozio.ModelloImmagineNegozio;
 import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
 import it.progettoWeb.java.utility.tris.tris;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -37,11 +44,17 @@ public class NegozioController extends HttpServlet {
     
     private DaoNegozio daoNegozio;
     private DaoIndirizzo daoIndirizzo;
+    private DaoCategoria daoCategoria;
+    private DaoOggetto daoOggetto;
+    private DaoImmagineOggetto daoImmagineOggetto;
     
     public NegozioController() {
         super();
         daoIndirizzo = new DaoIndirizzo();
         daoNegozio = new DaoNegozio();
+        daoCategoria = new DaoCategoria();
+        daoOggetto = new DaoOggetto();
+        daoImmagineOggetto = new DaoImmagineOggetto();
     }
 
     /**
@@ -96,8 +109,6 @@ public class NegozioController extends HttpServlet {
                 log("IdI possibile: " + tuttiNegozi.get(i).getIdI());
             }
             
-            log("IDI INDIRIZZO: " + indirizzo.getIdI());
-            
             ModelloNegozio negozio = new ModelloNegozio();
             negozio.setIdVenditore(utente.getId());
             negozio.setNomeNegozio(request.getParameter("nomeNegozio"));
@@ -121,16 +132,10 @@ public class NegozioController extends HttpServlet {
             
             daoNegozio.insertShop(negozio);
             
-            log("SHOP INSERITO");
-            
             List<ModelloNegozio> listaNegozi = daoNegozio.selectShopByOpenDate(utente.getId());
             negozio.setId(listaNegozi.get(0).getId());
             
-            log("LISTA DI NEGOZIO TROVATA, id: " + negozio.getId());
-            
             daoNegozio.insertShopImage(negozio.getId(), "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png");
-            
-            log("IMMAGINE SHOP INSERITA");
             
             forward = USERPAGE;
         }
@@ -147,10 +152,63 @@ public class NegozioController extends HttpServlet {
         else if(action.equalsIgnoreCase("gestisciNegozio")){
             int idNegozio = Integer.parseInt(request.getParameter("id"));
             tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> trisNegozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(idNegozio);
+            ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCategoria.selectAllCategory());
             
             request.setAttribute("negozio", trisNegozioIndirizzoImmagine.getL());
             request.setAttribute("indirizzo", trisNegozioIndirizzoImmagine.getC());
             request.setAttribute("immagine", trisNegozioIndirizzoImmagine.getR());
+            request.setAttribute("categorie", listaCategorie);
+            forward = SHOPPAGE;
+        }
+        else if(action.equalsIgnoreCase("addObject")){
+            
+            ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+            ModelloOggetto newObject = new ModelloOggetto();
+            
+            newObject.setCategoria(Integer.parseInt(request.getParameter("selectCategoria")));
+            newObject.setDisponibilita(Integer.parseInt(request.getParameter("disponibilita")));
+            newObject.setDescrizione(request.getParameter("descrizione"));
+            newObject.setIdNegozio(Integer.parseInt(request.getParameter("idNegozio")));
+            newObject.setNome(request.getParameter("nomeOggetto"));
+            newObject.setNomeDownCase(newObject.getNome().toLowerCase());
+            newObject.setPrezzo(Double.parseDouble(request.getParameter("prezzo")));
+            newObject.setStatoDisponibilita(0);
+            newObject.setRitiroInNegozio((request.getParameter("ritironegozio") == null) ? 0 : 1);
+            if(request.getParameter("scontoAttivo") != null){
+                newObject.setSconto(Integer.parseInt(request.getParameter("percentualeSconto")));
+                newObject.setDataFineSconto(Date.valueOf(request.getParameter("dataFineSconto")));
+            } else {
+                newObject.setSconto(0);
+                newObject.setDateToNull();
+            }
+            
+            String original = newObject.getNome() + String.valueOf(newObject.getIdNegozio());
+            String converted = "";
+            try{
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                md.update(original.getBytes());
+                byte[] digest = md.digest();
+                StringBuffer sb = new StringBuffer();
+                for (byte b : digest) {
+                        sb.append(String.format("%02x", b & 0xff));
+                }
+                converted = sb.toString();
+            } catch(NoSuchAlgorithmException e){
+                
+            }
+
+            newObject.setId(converted);
+            daoOggetto.insertObject(newObject.getId(),newObject.getIdNegozio(), newObject.getNome(),newObject.getNomeDownCase(), newObject.getPrezzo(), newObject.getDescrizione(), newObject.getRitiroInNegozio(), newObject.getDisponibilita(), newObject.getStatoDisponibilita(), newObject.getSconto(), newObject.getDataFineSconto(), newObject.getCategoria());
+            daoOggetto.insertObjectImage(newObject.getId(),"http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png");
+            daoCategoria.increaseCategory(newObject.getCategoria());
+            
+            tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> trisNegozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(Integer.parseInt(request.getParameter("idNegozio")));
+            ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCategoria.selectAllCategory());
+            
+            request.setAttribute("negozio", trisNegozioIndirizzoImmagine.getL());
+            request.setAttribute("indirizzo", trisNegozioIndirizzoImmagine.getC());
+            request.setAttribute("immagine", trisNegozioIndirizzoImmagine.getR());
+            request.setAttribute("categorie", listaCategorie);
             forward = SHOPPAGE;
         }
         else {

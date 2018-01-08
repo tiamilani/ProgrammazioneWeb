@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.query.generics.genericsQuery;
+import it.progettoWeb.java.database.query.sellers.sellersQuery;
 
 /**
  *
@@ -109,5 +110,13 @@ public class DaoCategoria {
         }
 
         return categoria;
+    }
+
+    public void increaseCategory(int categoria) {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sellersQuery.increaseCategory(categoria));
+        } catch(SQLException e) {}
     }
 }

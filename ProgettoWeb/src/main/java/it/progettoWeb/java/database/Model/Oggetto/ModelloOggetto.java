@@ -5,7 +5,7 @@
  */
 package it.progettoWeb.java.database.Model.Oggetto;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Classe utilizzata per gestire il modello Oggetto
@@ -62,6 +62,10 @@ public class ModelloOggetto {
      */
     private int categoria;
 
+    public void setDateToNull(){
+        dataFineSconto = null;
+    }
+    
     /**
      * Funzione utilizzata per ottenre l'id dell'oggetto
      * @return String id

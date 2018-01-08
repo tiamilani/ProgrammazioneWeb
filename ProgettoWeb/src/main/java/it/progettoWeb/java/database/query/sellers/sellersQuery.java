@@ -512,25 +512,47 @@ public class sellersQuery {
      * @param idCategoria: intero rappresentante l'ID della categoria di cui l'oggetto fa parte
      * @return String: conferma avvenuta operazione
      */
-    public static String insertObject(int idNegozio, String nomeOggetto, double prezzoOggetto, 
+    public static String insertObject(String id,int idNegozio, String nomeOggetto,String nomeDownCase, double prezzoOggetto, 
             String descrizioneOggetto, int ritiroInNegozio, int disponibilita, int statoDisponibilita, 
             double sconto, Date dataFineSconto, int idCategoria)
     {
-        return "INSERT INTO Oggetto "
-                + "(idNegozio, nome, prezzo, descrizione, ritiroInNegozio, disponibilita, "
-                + "statoDisponibilita, sconto, dataFineSconto, categoria) "
-                + "VALUES ("
-                + idNegozio
-                + ", " + nomeOggetto
-                + ", " + prezzoOggetto
-                + ", " + descrizioneOggetto
-                + ", " + ritiroInNegozio
-                + ", " + disponibilita
-                + ", " + statoDisponibilita
-                + ", " + sconto
-                + ", " + dataFineSconto
-                + ", " + idCategoria
-                + ");";
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        if(dataFineSconto != null)
+            return "INSERT INTO Oggetto "
+                    + "(id, idNegozio, nome,nomeDownCase, prezzo, descrizione, ritiroInNegozio, disponibilita, "
+                    + "statoDisponibilita, sconto, dataFineSconto, categoria) "
+                    + "VALUES ("
+                    + "'"+id+"'"
+                    + ", " + idNegozio
+                    + ", '" + nomeOggetto + "'"
+                    + ", '" + nomeDownCase + "'"
+                    + ", " + prezzoOggetto
+                    + ", '" + descrizioneOggetto+"'"
+                    + ", " + ritiroInNegozio
+                    + ", " + disponibilita
+                    + ", " + statoDisponibilita
+                    + ", " + sconto
+                    + ", '" + sdf.format(dataFineSconto) + "'"
+                    + ", " + idCategoria
+                    + ");";
+        else
+            return "INSERT INTO Oggetto "
+                    + "(id, idNegozio, nome,nomeDownCase, prezzo, descrizione, ritiroInNegozio, disponibilita, "
+                    + "statoDisponibilita, sconto, dataFineSconto, categoria) "
+                    + "VALUES ("
+                    + "'"+id+"'"
+                    + ", " + idNegozio
+                    + ", '" + nomeOggetto + "'"
+                    + ", '" + nomeDownCase + "'"
+                    + ", " + prezzoOggetto
+                    + ", '" + descrizioneOggetto+"'"
+                    + ", " + ritiroInNegozio
+                    + ", " + disponibilita
+                    + ", " + statoDisponibilita
+                    + ", " + sconto
+                    + ", " + dataFineSconto
+                    + ", " + idCategoria
+                    + ");";
     }
     
     /**
@@ -575,10 +597,10 @@ public class sellersQuery {
      * @param imagePath: il path della nuova immagine
      * @return String: conferma avvenuta operazione
      */
-    public static String insertObjectImage(int idOggetto, String imagePath)
+    public static String insertObjectImage(String idOggetto, String imagePath)
     {
         return "INSERT INTO imageOggetto (src, idO) "
-                + "SELECT " + imagePath + ", Oggetto.id FROM Oggetto WHERE Oggetto.id = " + idOggetto + ";";
+                + "SELECT '" + imagePath + "', Oggetto.id FROM Oggetto WHERE Oggetto.id = '" + idOggetto + "';";
     }
     
     /**
@@ -733,5 +755,9 @@ public class sellersQuery {
     public static String selectCartByIdOrder(int idordine)
     {
         return "SELECT * FROM Carrello WHERE Carrello.idOrdine = " + idordine + ";";
+    }
+
+    public static String increaseCategory(int categoria) {
+        return "update Categoria set oggettiPresenti = oggettiPresenti+1 where id = "+categoria+";";
     }
 }
