@@ -15,6 +15,7 @@ import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
 import it.progettoWeb.java.database.Dao.ordiniRicevuti.DaoOrdiniRicevuti;
 import it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria;
 import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
+import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.Model.immagineNegozio.ModelloImmagineNegozio;
@@ -155,11 +156,13 @@ public class NegozioController extends HttpServlet {
             int idNegozio = Integer.parseInt(request.getParameter("id"));
             tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> trisNegozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(idNegozio);
             ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCategoria.selectAllCategory());
+            ModelloListeOggetto listaOggetti = new ModelloListeOggetto(daoOggetto.selectObjectByShop(trisNegozioIndirizzoImmagine.getL().getId()));
             
             request.setAttribute("negozio", trisNegozioIndirizzoImmagine.getL());
             request.setAttribute("indirizzo", trisNegozioIndirizzoImmagine.getC());
             request.setAttribute("immagine", trisNegozioIndirizzoImmagine.getR());
             request.setAttribute("categorie", listaCategorie);
+            request.setAttribute("listaOggeti", listaOggetti);
             forward = SHOPPAGE;
         }
         else if(action.equalsIgnoreCase("addObject")){
@@ -169,12 +172,12 @@ public class NegozioController extends HttpServlet {
             
             newObject.setCategoria(Integer.parseInt(request.getParameter("selectCategoria")));
             newObject.setDisponibilita(Integer.parseInt(request.getParameter("disponibilita")));
+            newObject.setStatoDisponibilita(Integer.parseInt(request.getParameter("selectDisponibilita")));
             newObject.setDescrizione(request.getParameter("descrizione"));
             newObject.setIdNegozio(Integer.parseInt(request.getParameter("idNegozio")));
             newObject.setNome(request.getParameter("nomeOggetto"));
             newObject.setNomeDownCase(newObject.getNome().toLowerCase());
             newObject.setPrezzo(Double.parseDouble(request.getParameter("prezzo")));
-            newObject.setStatoDisponibilita(0);
             newObject.setRitiroInNegozio((request.getParameter("ritironegozio") == null) ? 0 : 1);
             if(request.getParameter("scontoAttivo") != null){
                 newObject.setSconto(Integer.parseInt(request.getParameter("percentualeSconto")));
@@ -206,11 +209,13 @@ public class NegozioController extends HttpServlet {
             
             tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> trisNegozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(Integer.parseInt(request.getParameter("idNegozio")));
             ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCategoria.selectAllCategory());
+            ModelloListeOggetto listaOggetti = new ModelloListeOggetto(daoOggetto.selectObjectByShop(trisNegozioIndirizzoImmagine.getL().getId()));
             
             request.setAttribute("negozio", trisNegozioIndirizzoImmagine.getL());
             request.setAttribute("indirizzo", trisNegozioIndirizzoImmagine.getC());
             request.setAttribute("immagine", trisNegozioIndirizzoImmagine.getR());
             request.setAttribute("categorie", listaCategorie);
+            request.setAttribute("listaOggeti", listaOggetti);
             request.setAttribute("oggettoInserito", 0);
             forward = SHOPPAGE;
         }
