@@ -5609,15 +5609,14 @@ public class DaoOggetto {
     /**
      * @author fbrug
      * Rimuovere un oggetto da un proprio negozio
-     * @param idNegozio: intero rapprensentante l'ID del negozio in cui eliminare l'oggetto
      * @return String: conferma avvenuta operazione
      */
-    public void deleteObject(int idNegozio)
+    public void deleteObject(String idOggetto)
     {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.deleteObject(idNegozio));
+            statement.executeUpdate(sellersQuery.deleteObject(idOggetto));
         }
         catch (SQLException e) {}
     }
@@ -5693,12 +5692,12 @@ public class DaoOggetto {
      * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui rimuovere l'immagine
      * @param imagePath: il path dell'immagine da rimuovere
      */
-    public void deleteObjectImage(int idOggetto, String imagePath)
+    public void deleteObjectImage(String idOggetto, String imagePath)
     {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.deleteObjectImage(idOggetto, imagePath));
+            statement.executeUpdate(sellersQuery.deleteObjectImage(idOggetto, imagePath));
         }
         catch (SQLException e) {}
     }
@@ -8289,5 +8288,13 @@ public class DaoOggetto {
         }
         
         return Objects;
+    }
+
+    public void updateObject(ModelloOggetto object, String previusId) {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sellersQuery.updateObject(object, previusId));
+        } catch(SQLException e) {}
     }
 }

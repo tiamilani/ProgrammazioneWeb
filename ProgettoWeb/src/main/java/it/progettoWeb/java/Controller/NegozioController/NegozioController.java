@@ -219,6 +219,138 @@ public class NegozioController extends HttpServlet {
             request.setAttribute("oggettoInserito", 0);
             forward = SHOPPAGE;
         }
+        else if(action.equalsIgnoreCase("modifyObject")){
+            ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+            ModelloOggetto object = new ModelloOggetto();
+            
+            object.setId(request.getParameter("modifyObject"));
+            if(object.getId().equals("0")){
+                request.setAttribute("oggettoModificato", 2);
+            }
+            else {
+                
+                object = daoOggetto.getObjectById(object.getId());
+                if(Integer.parseInt(request.getParameter("modifyCategoria")) != 0){
+                   if(Integer.parseInt(request.getParameter("modifyCategoria")) != object.getCategoria()){
+                       daoCategoria.decraseCategory(object.getCategoria());
+                       object.setCategoria(Integer.parseInt(request.getParameter("modifyCategoria")));
+                       daoCategoria.increaseCategory(object.getCategoria());
+                   } 
+                }
+                
+                if(Integer.parseInt(request.getParameter("modifyDisponibilita")) != -1){
+                    if(Integer.parseInt(request.getParameter("modifyDisponibilita")) >= 0){
+                        object.setDisponibilita(Integer.parseInt(request.getParameter("modifyDisponibilita")));
+                    } else {
+                        object.setDisponibilita(0);
+                    }
+                }
+                
+                if(Integer.parseInt(request.getParameter("modifySelectDisponibilita")) != -1) {
+                    object.setStatoDisponibilita(Integer.parseInt(request.getParameter("modifySelectDisponibilita")));
+                }
+                
+                String descrizione = request.getParameter("modifyDescrizione");
+                if(!descrizione.isEmpty()){
+                    object.setDescrizione(request.getParameter("modifyDescrizione"));
+                }
+                
+                String nome = request.getParameter("mdifynomeOggetto");
+                if(!nome.isEmpty()){
+                    object.setNome(request.getParameter("mdifynomeOggetto"));
+                    object.setNomeDownCase(object.getNome().toLowerCase());
+                }
+                
+                String prezzo = request.getParameter("modifyPrezzo");
+                if(!prezzo.isEmpty()){
+                    object.setPrezzo(Double.parseDouble(request.getParameter("modifyPrezzo")));
+                }
+                
+                if(Integer.parseInt(request.getParameter("modifyRitiroInNegozio")) != -1){
+                    object.setRitiroInNegozio((request.getParameter("modifyRitiroInNegozio") == null) ? 0 : 1);
+                }
+                
+                if(object.getSconto() == 0){
+                    if(request.getParameter("modifyScontoAttivo") != null){
+                        object.setSconto(Integer.parseInt(request.getParameter("modifyPercentualeSconto")));
+                        object.setDataFineSconto(Date.valueOf(request.getParameter("modifyDataFineSconto")));
+                    } else {
+                        object.setSconto(0);
+                        object.setDateToNull();
+                    }
+                }
+
+                String original = object.getNome() + String.valueOf(object.getIdNegozio());
+                String converted = "";
+                try{
+                    MessageDigest md = MessageDigest.getInstance("MD5");
+                    md.update(original.getBytes());
+                    byte[] digest = md.digest();
+                    StringBuffer sb = new StringBuffer();
+                    for (byte b : digest) {
+                            sb.append(String.format("%02x", b & 0xff));
+                    }
+                    converted = sb.toString();
+                } catch(NoSuchAlgorithmException e){
+
+                }
+
+                String previusId = object.getId();
+                object.setId(converted);
+                
+                daoOggetto.updateObject(object,previusId);
+                daoOggetto.deleteObjectImage(previusId, "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png");
+                daoOggetto.insertObjectImage(object.getId(), "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png");
+                
+                request.setAttribute("oggettoModificato", 0);
+            }
+            
+            tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> trisNegozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(Integer.parseInt(request.getParameter("idNegozio")));
+            ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCategoria.selectAllCategory());
+            ModelloListeOggetto listaOggetti = new ModelloListeOggetto(daoOggetto.selectObjectByShop(trisNegozioIndirizzoImmagine.getL().getId()));
+
+            request.setAttribute("negozio", trisNegozioIndirizzoImmagine.getL());
+            request.setAttribute("indirizzo", trisNegozioIndirizzoImmagine.getC());
+            request.setAttribute("immagine", trisNegozioIndirizzoImmagine.getR());
+            request.setAttribute("categorie", listaCategorie);
+            request.setAttribute("listaOggeti", listaOggetti);
+            forward = SHOPPAGE;
+        }
+        else if(action.equalsIgnoreCase("deleteObject")){
+            ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+            ModelloOggetto object = new ModelloOggetto();
+            object.setId(request.getParameter("modifyObject"));
+            
+            if(object.getId().equals("0")){
+                request.setAttribute("oggettoModificato", 2);
+            } else {
+                object = daoOggetto.getObjectById(object.getId());
+                
+                String nomeScritto = request.getParameter("modifyDelete");
+                if(!nomeScritto.isEmpty()){
+                    if(nomeScritto.equals(object.getNome())){
+                        daoOggetto.deleteObjectImage(object.getId(), "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png");
+                        daoOggetto.deleteObject(object.getId());
+                        request.setAttribute("oggettoModificato", 5); 
+                    } else {
+                        request.setAttribute("oggettoModificato", 4); 
+                    }
+                } else {
+                    request.setAttribute("oggettoModificato", 3); 
+                }
+            }
+            
+            tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> trisNegozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(Integer.parseInt(request.getParameter("idNegozio")));
+            ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCategoria.selectAllCategory());
+            ModelloListeOggetto listaOggetti = new ModelloListeOggetto(daoOggetto.selectObjectByShop(trisNegozioIndirizzoImmagine.getL().getId()));
+
+            request.setAttribute("negozio", trisNegozioIndirizzoImmagine.getL());
+            request.setAttribute("indirizzo", trisNegozioIndirizzoImmagine.getC());
+            request.setAttribute("immagine", trisNegozioIndirizzoImmagine.getR());
+            request.setAttribute("categorie", listaCategorie);
+            request.setAttribute("listaOggeti", listaOggetti);
+            forward = SHOPPAGE;
+        }
         else {
             log("ACTION NON TROVATA");
             

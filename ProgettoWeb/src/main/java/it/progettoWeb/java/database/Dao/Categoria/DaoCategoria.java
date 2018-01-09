@@ -119,4 +119,12 @@ public class DaoCategoria {
             statement.executeUpdate(sellersQuery.increaseCategory(categoria));
         } catch(SQLException e) {}
     }
+
+    public void decraseCategory(int categoria) {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sellersQuery.decraseCategory(categoria));
+        } catch(SQLException e) {}
+    }
 }

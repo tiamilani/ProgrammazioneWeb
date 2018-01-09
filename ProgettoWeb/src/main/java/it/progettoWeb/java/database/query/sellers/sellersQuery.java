@@ -6,6 +6,7 @@
 package it.progettoWeb.java.database.query.sellers;
 
 import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
+import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -557,13 +558,47 @@ public class sellersQuery {
     
     /**
      * @author fbrug
-     * Rimuovere un oggetto da un proprio negozio
-     * @param idNegozio: intero rapprensentante l'ID del negozio in cui eliminare l'oggetto
-     * @return String: conferma avvenuta operazione
+     * Rimuovere un oggetto
+     * @param idOggetto: stringa rapprensentante l'ID dell'oggetto da eliminare
+     * @return String: query
      */
-    public static String deleteObject(int idNegozio)
+    public static String deleteObject(String idOggetto)
     {
-        return "DELETE FROM Oggetto WHERE id=" + idNegozio + ";";
+        return "DELETE FROM Oggetto WHERE id='" + idOggetto + "';";
+    }
+    
+    public static String updateObject(ModelloOggetto oggetto,String oldId){
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        if(oggetto.getDataFineSconto() != null)
+            return "UPDATE Oggetto SET "
+                    + "id='"+oggetto.getId()+"'"
+                    + ",idNegozio=" + oggetto.getIdNegozio()
+                    + ",nome='" + oggetto.getNome() + "'"
+                    + ",nomeDownCase='" + oggetto.getNomeDownCase() + "'"
+                    + ",prezzo=" + oggetto.getPrezzo()
+                    + ",descrizione='" + oggetto.getDescrizione()+"'"
+                    + ",ritiroInNegozio=" + oggetto.getRitiroInNegozio()
+                    + ",disponibilita=" + oggetto.getDisponibilita()
+                    + ",statoDisponibilita=" + oggetto.getStatoDisponibilita()
+                    + ",sconto=" + oggetto.getSconto()
+                    + ",dataFineSconto='" + sdf.format(oggetto.getDataFineSconto()) + "'"
+                    + ",categoria=" + oggetto.getCategoria()
+                    + " WHERE id='" + oldId + "';";
+        else
+            return "UPDATE Oggetto SET "
+                    + "id='"+oggetto.getId()+"'"
+                    + ",idNegozio=" + oggetto.getIdNegozio()
+                    + ",nome='" + oggetto.getNome() + "'"
+                    + ",nomeDownCase='" + oggetto.getNomeDownCase() + "'"
+                    + ",prezzo=" + oggetto.getPrezzo()
+                    + ",descrizione='" + oggetto.getDescrizione()+"'"
+                    + ",ritiroInNegozio=" + oggetto.getRitiroInNegozio()
+                    + ",disponibilita=" + oggetto.getDisponibilita()
+                    + ",statoDisponibilita=" + oggetto.getStatoDisponibilita()
+                    + ",sconto=" + oggetto.getSconto()
+                    + ",dataFineSconto=" + oggetto.getDataFineSconto()
+                    + ",categoria=" + oggetto.getCategoria()
+                    + " WHERE id='" + oldId + "';";
     }
     
     /**
@@ -620,11 +655,11 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Rimuovere l'immagine di un determinato oggetto
-     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui rimuovere l'immagine
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui rimuovere l'immagine
      * @param imagePath: il path dell'immagine da rimuovere
      * @return String: conferma avvenuta operazione
      */
-    public static String deleteObjectImage(int idOggetto, String imagePath)
+    public static String deleteObjectImage(String idOggetto, String imagePath)
     {
         return "DELETE FROM imageOggetto WHERE imageOggetto.idO = " + idOggetto + " AND imageOggetto.src = " + imagePath + ";";
     }
@@ -759,5 +794,9 @@ public class sellersQuery {
 
     public static String increaseCategory(int categoria) {
         return "update Categoria set oggettiPresenti = oggettiPresenti+1 where id = "+categoria+";";
+    }
+
+    public static String decraseCategory(int categoria) {
+        return "update Categoria set oggettiPresenti = oggettiPresenti-1 where id = "+categoria+";";
     }
 }

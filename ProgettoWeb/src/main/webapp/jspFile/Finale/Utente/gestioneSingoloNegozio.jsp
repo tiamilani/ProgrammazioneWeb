@@ -12,6 +12,12 @@
         <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/form.css">
         <title><c:out value="${utenteSessione.getNome()}" /> Gestione Negozio</title>
+        <script type="text/javascript">
+            function elimina() {
+                document.modificaOggetto.action.value = "deleteObject";
+                modificaOggetto.submit();
+            }
+        </script>
     </head>
     <body>
         <div class="container">
@@ -50,6 +56,7 @@
                 <div class="col-12">
                     <h2>Aggiungi oggetto</h2>
                     <p>Qui puoi aggiungere un oggetto a quelli già in vendita nel tuo negozio</p>
+                    <p>Ricorda che se viene attivato un periodo di sconto non è cancellabile</p>
                 </div>
             </div>
             <div class="row">
@@ -157,6 +164,26 @@
                         <strong>Attenzione!</strong> modifica al catalogo non apportata a causa di un errore.
                     </div>
                 </c:when>
+                <c:when test="${oggettoModificato == 2}">
+                    <div class="alert alert-warning">
+                        <strong>Attenzione!</strong> Devi prima selezionare un oggetto da modificare tra quelli disponibili.
+                    </div>
+                </c:when>
+                <c:when test="${oggettoModificato == 3}">
+                    <div class="alert alert-warning">
+                        <strong>Attenzione!</strong> Devi scrivere il nome dell'oggetto he vuoi eliminare nella textbox specifica
+                    </div>
+                </c:when>
+                <c:when test="${oggettoModificato == 4}">
+                    <div class="alert alert-danger">
+                        <strong>Errore!</strong> Il nome da te inserito non corrisponde a quello dell'oggetto
+                    </div>
+                </c:when>
+                <c:when test="${oggettoModificato == 5}">
+                    <div class="alert alert-success">
+                        <strong>Successo!</strong> Operazione di eliminazione portata a termine con successo
+                    </div>
+                </c:when>
                 <c:otherwise>
                 </c:otherwise>
             </c:choose>
@@ -165,6 +192,7 @@
                     <h2>Modifica/eliminazione oggetto</h2>
                     <p>Qui puoi modificare un oggetto in ogni sua parte, apportare uno sconto ad un determinato oggetto, eliminare un oggetto, ma per poter eliminare l'oggetto dovrai inserire il nome dell'oggetto nuovamente per confermare la tua volontà ad eliminarlo</p>
                     <p>Non serva tu inserisca tutte le parti di un oggetto, puoi modificare anche solo una parte delle informazioni dell'oggetto, le altre verranno mantenute invariate</p>
+                    <p>Ricorda che se viene attivato un periodo di sconto non è cancellabile</p>
                 </div>
             </div>
             <div class="row">
@@ -227,8 +255,11 @@
                             <input type="text" class="form-control" id="modifyPrezzo" name="modifyPrezzo" placeholder="299$">
                         </div>
                         <div class="col-4">
-                            <input type="checkbox" class="form-check-input" id="modifyRitironegozio" name="modifyRitironegozio">
-                            Prodotto con ritiro in negozio
+                            <select class="form-control" id="modifyRitiroInNegozio" name="modifyRitiroInNegozio">
+                                <option value="-1">Non modificare il ritiro in negozio</option>
+                                <option value="0">Ritiro in negozio NON disponibile</option>
+                                <option value="1">Ritiro in negozio Disponibile</option>
+                            </select>
                         </div>
                         <div class="col-1">
                             Disponibilit&aacute;:
@@ -281,7 +312,7 @@
                             <input type="text" class="form-control" id="modifyDelete" name="modifyDelete" placeholder="Nome oggetto">
                         </div>
                         <div class="col-4">
-                            <button action="submit" type="submit" class="btn btn-outline-danger btn-block" id="btnDelete">Elimina oggetto</button>
+                            <button action="submit" type="submit" class="btn btn-outline-danger btn-block" id="btnDelete" onclick="elimina()">Elimina oggetto</button>
                         </div>
                     </div>
                 </form>
