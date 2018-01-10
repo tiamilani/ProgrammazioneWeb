@@ -43,6 +43,8 @@ public class NegozioController extends HttpServlet {
     private static String SHOPPAGE = "/jspFile/Finale/Utente/gestioneSingoloNegozio.jsp";
     private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
     private static String ADDSHOPPAGE = "/jspFile/Finale/Utente/aggiungiNegozio.jsp";
+    private static String ADDOBJECT = "jspFile/Finale/Utente/aggiungiOggetto.jsp";
+    private static String MODFICAOGGETTO = "jspFile/Finale/Utente/modificaOggetto.jsp";
     
     private DaoNegozio daoNegozio;
     private DaoIndirizzo daoIndirizzo;
@@ -70,6 +72,65 @@ public class NegozioController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String forward="";
+        String action = request.getParameter("action");
+        
+        if (action.equalsIgnoreCase("richiestaPaginaDiAggiuntaOggetto")) {
+            ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCategoria.selectAllCategory());
+            request.setAttribute("categorie", listaCategorie);
+            forward = ADDOBJECT;
+        }
+        else if(action.equals("richiestaPaginaDiModificaOggetto")){
+            ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCategoria.selectAllCategory());
+            request.setAttribute("categorie", listaCategorie);
+            
+            String idOggetto = request.getParameter("id");
+            ModelloOggetto object = object = daoOggetto.getObjectById(idOggetto);
+            request.setAttribute("oggetto", object);
+            forward = MODFICAOGGETTO;
+        }
+        else if(action.equalsIgnoreCase("deleteObject")){
+            ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+            ModelloOggetto object = new ModelloOggetto();
+            object.setId(request.getParameter("modifyObject"));
+
+            object = daoOggetto.getObjectById(object.getId());
+            log("Id dell'oggetto selezionato: " + object.getId() + " Nome dell'oggetto selezionato: " + object.getNome());
+
+            String nomeScritto = request.getParameter("modifyDelete");
+            if(!nomeScritto.isEmpty()){
+                if(nomeScritto.equals(object.getNome())){
+                    daoOggetto.deleteObjectImage(object.getId(), "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png");
+                    daoOggetto.deleteObject(object.getId());
+                    request.setAttribute("oggettoModificato", 5); 
+                } else {
+                    log("Nome oggetto: " + object.getNome() + " Nome inserito: " + nomeScritto);
+                    request.setAttribute("oggettoModificato", 4); 
+                }
+            } else {
+                request.setAttribute("oggettoModificato", 3); 
+            }
+            
+            tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> trisNegozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(Integer.parseInt(request.getParameter("idNegozio")));
+            ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCategoria.selectAllCategory());
+            ModelloListeOggetto listaOggetti = new ModelloListeOggetto(daoOggetto.selectObjectByShop(trisNegozioIndirizzoImmagine.getL().getId()));
+
+            request.setAttribute("negozio", trisNegozioIndirizzoImmagine.getL());
+            request.setAttribute("indirizzo", trisNegozioIndirizzoImmagine.getC());
+            request.setAttribute("immagine", trisNegozioIndirizzoImmagine.getR());
+            request.setAttribute("categorie", listaCategorie);
+            request.setAttribute("listaOggeti", listaOggetti);
+            forward = SHOPPAGE;
+        }
+        else {
+            log("ACTION NON TROVATA");
+            
+            forward = ERROR_PAGE;
+            request.setAttribute("errore", "Comando non trovato");
+        }
+
+        RequestDispatcher view = request.getRequestDispatcher(forward);
+        view.forward(request, response);
     }
 
     /**
@@ -158,7 +219,9 @@ public class NegozioController extends HttpServlet {
             ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCategoria.selectAllCategory());
             ModelloListeOggetto listaOggetti = new ModelloListeOggetto(daoOggetto.selectObjectByShop(trisNegozioIndirizzoImmagine.getL().getId()));
             
-            request.setAttribute("negozio", trisNegozioIndirizzoImmagine.getL());
+    
+            request.getSession().removeAttribute("negozio");
+            request.getSession().setAttribute("negozio", trisNegozioIndirizzoImmagine.getL());
             request.setAttribute("indirizzo", trisNegozioIndirizzoImmagine.getC());
             request.setAttribute("immagine", trisNegozioIndirizzoImmagine.getR());
             request.setAttribute("categorie", listaCategorie);
@@ -303,41 +366,6 @@ public class NegozioController extends HttpServlet {
                 daoOggetto.insertObjectImage(object.getId(), "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png");
                 
                 request.setAttribute("oggettoModificato", 0);
-            }
-            
-            tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> trisNegozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(Integer.parseInt(request.getParameter("idNegozio")));
-            ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCategoria.selectAllCategory());
-            ModelloListeOggetto listaOggetti = new ModelloListeOggetto(daoOggetto.selectObjectByShop(trisNegozioIndirizzoImmagine.getL().getId()));
-
-            request.setAttribute("negozio", trisNegozioIndirizzoImmagine.getL());
-            request.setAttribute("indirizzo", trisNegozioIndirizzoImmagine.getC());
-            request.setAttribute("immagine", trisNegozioIndirizzoImmagine.getR());
-            request.setAttribute("categorie", listaCategorie);
-            request.setAttribute("listaOggeti", listaOggetti);
-            forward = SHOPPAGE;
-        }
-        else if(action.equalsIgnoreCase("deleteObject")){
-            ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
-            ModelloOggetto object = new ModelloOggetto();
-            object.setId(request.getParameter("modifyObject"));
-            
-            if(object.getId().equals("0")){
-                request.setAttribute("oggettoModificato", 2);
-            } else {
-                object = daoOggetto.getObjectById(object.getId());
-                
-                String nomeScritto = request.getParameter("modifyDelete");
-                if(!nomeScritto.isEmpty()){
-                    if(nomeScritto.equals(object.getNome())){
-                        daoOggetto.deleteObjectImage(object.getId(), "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png");
-                        daoOggetto.deleteObject(object.getId());
-                        request.setAttribute("oggettoModificato", 5); 
-                    } else {
-                        request.setAttribute("oggettoModificato", 4); 
-                    }
-                } else {
-                    request.setAttribute("oggettoModificato", 3); 
-                }
             }
             
             tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> trisNegozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(Integer.parseInt(request.getParameter("idNegozio")));
