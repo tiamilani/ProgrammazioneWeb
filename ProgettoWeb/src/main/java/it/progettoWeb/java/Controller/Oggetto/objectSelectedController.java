@@ -108,10 +108,14 @@ public class objectSelectedController extends HttpServlet {
             
             if(utenteSessione.getId() != -1)
             {
-                if(daoRecensioneOggetto.reviewOrNotObject(idOggetto, utenteSessione.getId()) > 0)
+                if(daoRecensioneOggetto.reviewOrNotObject(idOggetto, utenteSessione.getId()) > 0) {
                     request.setAttribute("canReviewsO", true);
-                else
+                    request.setAttribute("canUploadImages", true);
+                }
+                else {
                     request.setAttribute("canReviewsO", false);
+                    request.setAttribute("canUploadImages", false);
+                }
             }
         } catch (NullPointerException e) {}
         

@@ -9,17 +9,13 @@ import it.progettoWeb.java.database.Dao.immagineRecensione.DaoImmagineRecensione
 import it.progettoWeb.java.database.Dao.recensioneNegozio.DaoRecensioneNegozio;
 import it.progettoWeb.java.database.Dao.recensioneOggetto.DaoRecensioneOggetto;
 import it.progettoWeb.java.database.Dao.recensioneVenditore.DaoRecensioneVenditore;
-import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
-import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.Model.immagineRecensione.ModelloImmagineRecensione;
 import it.progettoWeb.java.database.Model.recensioneNegozio.ModelloRecensioneNegozio;
 import it.progettoWeb.java.database.Model.recensioneOggetto.ModelloRecensioneOggetto;
 import it.progettoWeb.java.database.Model.recensioneVenditore.ModelloRecensioneVenditore;
-import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -114,7 +110,6 @@ public class InserisciRecensioneController extends HttpServlet {
             recensioneOggetto.setTesto(testoRecensione);
             recensioneOggetto.setUtilita(0);
             recensioneOggetto.setValutazione(valutazioneRecensione);
-            System.out.println(idUtente + " " + idOggetto + " " + testoRecensione + " " + valutazioneRecensione);
             daoRecensioneOggetto.addReviewToObject(recensioneOggetto);
             
             if(getImages(request, response)) {
@@ -139,15 +134,6 @@ public class InserisciRecensioneController extends HttpServlet {
             recensioneNegozio.setUtilita(0);
             recensioneNegozio.setValutazione(valutazioneRecensione);
             daoRecensioneNegozio.addReviewToStore(recensioneNegozio);
-            
-            if(getImages(request, response)) {
-                for (String src : imageSrcs) {
-                    ModelloImmagineRecensione immagineRecensione = new ModelloImmagineRecensione();
-                    immagineRecensione.setIdR(daoRecensioneNegozio.selectReviewsByData(idNegozio, idUtente, testoRecensione, valutazioneRecensione).getId());
-                    immagineRecensione.setSrc(src);
-                    daoImmagineRecensione.addImageReviewSet(immagineRecensione);
-                }
-            }
         }
         else if(action.equals("Venditore")) {
             int idUtente = Integer.parseInt(request.getParameter("utenteReview"));
@@ -162,15 +148,6 @@ public class InserisciRecensioneController extends HttpServlet {
             recensioneVenditore.setUtilita(0);
             recensioneVenditore.setValutazione(valutazioneRecensione);
             daoRecensioneVenditore.addReviewToSeller(recensioneVenditore);
-            
-            if(getImages(request, response)) {
-                for (String src : imageSrcs) {
-                    ModelloImmagineRecensione immagineRecensione = new ModelloImmagineRecensione();
-                    immagineRecensione.setIdR(daoRecensioneVenditore.selectReviewsByDataV(idVenditore, idUtente, testoRecensione, valutazioneRecensione).getId());
-                    immagineRecensione.setSrc(src);
-                    daoImmagineRecensione.addImageReviewSet(immagineRecensione);
-                }
-            }
         }
         
         RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -182,9 +159,8 @@ public class InserisciRecensioneController extends HttpServlet {
      */
     private boolean getImages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String appPath = request.getServletContext().getRealPath("");
-        
-        String savePath = appPath + /*File.separator + */SAVE_DIR;
-         
+        appPath = appPath.substring(0, (appPath.indexOf("Tomcat") + 6)) + File.separator;
+        String savePath = appPath + SAVE_DIR;
         File fileSaveDir = new File(savePath);
         if (!fileSaveDir.exists()) {
             fileSaveDir.mkdir();
@@ -195,6 +171,7 @@ public class InserisciRecensioneController extends HttpServlet {
             String fileName = extractFileName(part);
             if(!fileName.isEmpty()) {
                 fileName = new File(fileName).getName();
+                System.out.println(savePath + File.separator + fileName);
                 part.write(savePath + File.separator + fileName);
                 imageSrcs.add(savePath + File.separator + fileName);
                 imageSaved = true;
