@@ -33,7 +33,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import static jdk.nashorn.internal.objects.NativeMath.round;
 
 /**
  * 2017-10-10 14:50
@@ -56,7 +55,7 @@ public class OrdineController extends HttpServlet {
     
     /**
      * Costruttore della classe OrdineController
-     */
+    */
     public OrdineController()
     {
         super();
@@ -131,7 +130,6 @@ public class OrdineController extends HttpServlet {
                 request.setAttribute("objects", objects);
                 request.setAttribute("shops", negozi);                
                 
-                
                 if (action.equalsIgnoreCase("delivery"))
                 {
                     /*--- PREPARA INDIRIZZI+SPEDIZIONI PER LA SELEZIONE DEL METODO DI SPEDIZIONE ---*/
@@ -188,7 +186,7 @@ public class OrdineController extends HttpServlet {
             {
                 forward = LIST_ORDERS;
             }
-        } catch (NullPointerException e) { System.out.println(e.getMessage()); forward = ERROR_PAGE; request.setAttribute("errore", "404 Pagina non trovata"); }
+        } catch (NullPointerException e) { System.out.println("error message = " + e.getMessage()); forward = ERROR_PAGE; request.setAttribute("errore", "404 Pagina non trovata"); }
         
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
@@ -213,6 +211,9 @@ public class OrdineController extends HttpServlet {
         {
             String action = request.getParameter("action");
             String save = request.getParameter("save");
+            
+            System.out.println("action = " + action);
+            System.out.println("save = " + save);
             
             if(save.equalsIgnoreCase("1"))
             {
@@ -280,11 +281,13 @@ public class OrdineController extends HttpServlet {
             }
             else if(save.equalsIgnoreCase("3"))
             {
+                System.out.println("dentro finish");
                 /*--- QUI CAMBIO LO STATO DEGLI ORDINI NEL CARRELLO IN "PAGATI" E INVIO LA MAIL DI CONFERMA DELL'ORDINE---*/
-                //daoOrdine.changeOrderStatus(((ModelloUtente)request.getSession().getAttribute("utenteSessione")).getId(), 0, 1);
+                daoOrdine.changeOrderStatus(((ModelloUtente)request.getSession().getAttribute("utenteSessione")).getId(), 0, 1);
                 /*---2017-12-05---*/SendEmail.orderCompleted(
                         ((ModelloUtente)request.getSession().getAttribute("utenteSessione")).getMail(),                         
-                        ((ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione")).getId());
+                        (((ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione")).get(0)).getIdOrdine());
+                System.out.println("fatto finish");
             }
             
             if(action.equalsIgnoreCase("listOrders"))

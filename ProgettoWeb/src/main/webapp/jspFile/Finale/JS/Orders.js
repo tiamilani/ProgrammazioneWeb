@@ -13,11 +13,9 @@ function saveChanges(goTo)
             document.formSaveChanges.action="/ProgettoWeb/OrdineController?save=2&action=payment";
             break;
         case 3:
-            document.formPayment.action="/ProgettoWeb/OrdineController?save=0&action=finish";
+            document.formPayment.action="/ProgettoWeb/OrdineController?save=3&action=finish";
             document.formPayment.submit();
             break;
-        case 4:
-            
     }
     document.formSaveChanges.submit();
 };

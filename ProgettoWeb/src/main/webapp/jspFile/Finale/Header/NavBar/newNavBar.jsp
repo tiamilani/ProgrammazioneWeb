@@ -212,6 +212,9 @@ function myFunction() {
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
             <form action="${pageContext.request.contextPath}/UserController?action=selectUser" method="POST">
+                <div style="display: none">
+                    <input type="text" id="fromPage" name="fromPage" value="${pageContext.request.requestURI}"/>
+                </div>
             <div class="modal-body">
                 <div>
                     <i class="large material-icons">email</i>
