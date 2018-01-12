@@ -7,6 +7,7 @@ package it.progettoWeb.java.database.query.sellers;
 
 import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
+import it.progettoWeb.java.database.Model.Ordine.ModelloOrdine;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -490,12 +491,11 @@ public class sellersQuery {
      * @author fbrug
      * Aggiungere ad un ordine spedito il codice di tracking
      * @param codiceTracking: nuovo codice usato per il tracking dell'ordine
-     * @param idOrdine: intero rappresentante l'ID dell'ordine da ricercare
      * @return String: conferma avvenuta operazione
      */
-    public static String updateOrderTracking(int idOrdine, String codiceTracking)
+    public static String updateOrderTracking(ModelloOrdine ordine, String codiceTracking)
     {
-        return "UPDATE Ordine SET codiceTracking=" + codiceTracking + " WHERE idOrdine=" + idOrdine + ";";
+        return "UPDATE Ordine SET codiceTracking='" + codiceTracking + "' WHERE idOrdine=" + ordine.getIdOrdine() + " AND idOggetto = '"+ordine.getIdOggetto()+"';";
     }
     
     /**
@@ -798,5 +798,23 @@ public class sellersQuery {
 
     public static String decraseCategory(int categoria) {
         return "update Categoria set oggettiPresenti = oggettiPresenti-1 where id = "+categoria+";";
+    }
+
+    public static String selectNewestToOldestOrdersByShopId(int idNegozio) {
+        return "SELECT * FROM Ordine WHERE Ordine.idNegozio = " + idNegozio + " ORDER BY dataOrdine DESC;";
+    }
+
+    public static String selectOrdersByIdOrderIdOggetto(String idOrdine, String idOggetto) {
+        return "SELECT * FROM Ordine WHERE Ordine.idOrdine = " + idOrdine + " AND Ordine.idOggetto = '"+idOggetto+"';";
+    }
+
+    public static String selectOrderRecivedBySellerIdShopId(int idVenditore, int idNegozio) {
+        return "select Ordine.* "
+                + "from Ordine INNER JOIN ordiniRicevuti ON (Ordine.idOrdine = ordiniRicevuti.idO) "
+                + "where ordiniRicevuti.idV = "+idVenditore+" AND Ordine.idNegozio = "+idNegozio+" ORDER BY Ordine.dataOrdine DESC;";
+    }
+
+    public static String updateOrderDataArrivoPrevista(ModelloOrdine ordine, String dt) {
+        return "UPDATE Ordine SET dataArrivoPresunta = '" + dt + "' WHERE idOrdine = " + ordine.getIdOrdine() + " AND idOggetto = '"+ordine.getIdOggetto()+"';";
     }
 }

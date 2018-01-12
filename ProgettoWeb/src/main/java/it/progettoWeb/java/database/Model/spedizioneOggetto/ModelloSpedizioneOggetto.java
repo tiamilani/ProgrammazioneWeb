@@ -19,7 +19,7 @@ public class ModelloSpedizioneOggetto {
      * Variabile utilizzata per idetificare l'oggetto associato alla spedizione
      */
     private String idO;
-
+    
     /**
      * Funzione utilizzata per ottenre l'id della spedizione
      * @return int idS

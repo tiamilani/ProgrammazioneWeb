@@ -23,7 +23,7 @@ public class deliveryTypeQuery
      */
     public static String selectAllDeliveryTypes()
     {
-        return "SELECT * FROM tipospedizione";
+        return "SELECT * FROM tipoSpedizione";
     }
     
     /**
@@ -34,7 +34,7 @@ public class deliveryTypeQuery
      */
     public static String selectDeliveryTypeByIdS(int idS)
     {
-        return "SELECT * FROM tipospedizione WHERE idS="+idS+"";
+        return "SELECT * FROM tipoSpedizione WHERE idS="+idS+"";
     }
     
     /**
@@ -45,7 +45,7 @@ public class deliveryTypeQuery
      */
     public static String selectDeliveryTypeByIdN(int idN)
     {
-        return "SELECT * FROM tipospedizione WHERE idN="+idN+"";
+        return "SELECT * FROM tipoSpedizione WHERE idN="+idN+"";
     }
     
     /**
@@ -56,7 +56,7 @@ public class deliveryTypeQuery
      */
     public static String selectDeliveryTypeByIdO(String idO)
     {
-        return "SELECT tipospedizione.* FROM tipospedizione INNER JOIN spedizioneoggetto ON "
-                + "(spedizioneoggetto.idO = '" +idO+ "' AND tipospedizione.idS = spedizioneoggetto.idS)";
+        return "SELECT tipoSpedizione.* FROM tipoSpedizione INNER JOIN spedizioneoggetto ON "
+                + "(spedizioneoggetto.idO = '" +idO+ "' AND tipoSpedizione.idS = spedizioneoggetto.idS)";
     }
 }

@@ -10,6 +10,7 @@ package it.progettoWeb.java.database.Dao.ordiniRicevuti;
  * @author mattia
  */
 
+import it.progettoWeb.java.database.Model.Ordine.ModelloOrdine;
 import it.progettoWeb.java.database.Model.ordiniRicevuti.ModelloOrdiniRicevuti;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

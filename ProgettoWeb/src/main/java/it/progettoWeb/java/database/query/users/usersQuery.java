@@ -5,6 +5,7 @@
  */
 package it.progettoWeb.java.database.query.users;
     
+import it.progettoWeb.java.database.Model.Ordine.ModelloOrdine;
 import java.sql.Date;
 
 /**
@@ -483,13 +484,12 @@ public class usersQuery {
     /**
      * @author Andrea
      * Cambia lo stato degli ordini da from a to
-     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param from Un intero che rappresenta lo stato degli ordini da selezionare
      * @param to Un intero che rappresenta lo stato da impostare agli ordini selezionati
      */
-    public static String changeOrderStatus(int idU, int from, int to){
+    public static String changeOrderStatus(ModelloOrdine ordine, int from, int to){
         return "UPDATE progettoweb.Ordine SET stato ="+to+" WHERE "
-                + "Ordine.stato ="+from+" AND Ordine.idUtente ="+idU+";";
+                + "Ordine.stato ="+from+" AND Ordine.idOrdine ="+ordine.getIdOrdine()+" AND Ordine.idOggetto = '"+ordine.getIdOggetto()+"';";
     }
     
     /**
