@@ -100,6 +100,7 @@ function changeQuantity(elem)
    elem.setAttribute("data-oldvalueQuantita", newQuantita.toString());
 
    document.getElementById("quantita"+elem.id).value = newQuantita.toString();
+   document.getElementById("quantita"+elem.id).setAttribute("value", newQuantita.toString());
 };
 
 //--- Modifica il testo di un <p> in base al tipo di spedizione selezionata

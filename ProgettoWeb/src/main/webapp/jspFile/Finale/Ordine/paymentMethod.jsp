@@ -59,7 +59,7 @@
             <hr/>
             
             <h4><b>Seleziona il metodo di pagamento:</b></h4>
-            <form method="POST" id="formPayment" name="formPayment">
+            <form method="POST" id="formPayment" name="formPayment" action="/ProgettoWeb/OrdineController?save=3&action=finish">
                 <div class="row">
                     <div class="col-12">
                         <p>
@@ -77,11 +77,11 @@
                         <p>Codice di controllo</p>
                     </div>
                     <div class="col-6">
-                        <p><input type="tetx" id="nameCard" name="nameTitCard"/></p>
-                        <p><input type="tetx" id="surnameCard" name="surnameCard"/></p>
-                        <p><input type="tetx" id="numCard" name="numCard" type="tel" maxlength="19" onkeypress="checkInputText(event, this)"/></p>
+                        <p><input type="tetx" id="nameCard" name="nameTitCard" required/></p>
+                        <p><input type="tetx" id="surnameCard" name="surnameCard" required/></p>
+                        <p><input type="tetx" id="numCard" name="numCard" type="tel" maxlength="19" onkeypress="checkInputText(event, this)" required/></p>
                         <p>
-                            <select id="expCard_Month" name="expCard_Month">
+                            <select id="expCard_Month" name="expCard_Month" required>
                                 <option value="">mm</option>
                                 <option value="01">01</option>
                                 <option value="02">02</option>
@@ -96,7 +96,7 @@
                                 <option value="11">11</option>
                                 <option value="12">12</option>
                             </select>
-                            <select id="expCard_Year" name="expCard_Year">
+                            <select id="expCard_Year" name="expCard_Year" required>
                                 <option value="">yyyy</option>
                                 <option value="17">2017</option>
                                 <option value="18">2018</option>
@@ -115,20 +115,20 @@
                                 <option value="31">2031</option>
                             </select>
                         </p>
-                        <p><input type="tetx" id="checkCard" name="checkCard" onkeypress="checkInputText(event, this)"/> <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/cvv.png" alt="imgCVV"></p>
+                        <p><input type="tetx" id="checkCard" name="checkCard" maxlength="5" onkeypress="checkInputText(event, this)" required/><img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/cvv.png" alt="imgCVV"></p>
                     </div>
                 </div>
-                <div class="row">
+                <!--<div class="row">
                     <div class="col-12">
                         <p>
                             <input type="radio" id="rbtnPaypal" name="rbtnPay" checked="checked" type="tel" maxlength="4"><b> PayPal </b>
                             <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/PayPal.png" alt="imgPayPal">
                         </p>
                     </div>
-                </div>
+                </div>-->
             </form>
             
-            <button class="btn btn-outline-primary buttonSpace" type="button" onclick="saveChanges(3)">Paga adesso</button>
+            <button form="formPayment" class="btn btn-outline-primary buttonSpace" type="submit">Paga adesso</button> <!--onclick="saveChanges(3)"-->
         </div>
         
         <%@include file="../Footer/footer.jsp" %>

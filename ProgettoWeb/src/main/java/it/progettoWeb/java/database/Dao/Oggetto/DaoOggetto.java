@@ -5625,10 +5625,10 @@ public class DaoOggetto {
     /**
      * @author fbrug
      * Modificare il prezzo di un oggetto di un proprio negozio
-     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui modificare il prezzo
      * @param prezzoOggetto: il nuovo prezzo dell'oggetto
      */
-    public void updateObjectPrice(int idOggetto, double prezzoOggetto)
+    public void updateObjectPrice(String idOggetto, double prezzoOggetto)
     {
         try
         {
@@ -5641,10 +5641,10 @@ public class DaoOggetto {
     /**
      * @author fbrug
      * Modificare lo sconto di un oggetto
-     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui modificare il prezzo
      * @param sconto: il nuovo sconto applicato all'oggetto
      */
-    public void updateObjectDiscount(int idOggetto, double sconto)
+    public void updateObjectDiscount(String idOggetto, double sconto)
     {
         try
         {
@@ -5657,10 +5657,10 @@ public class DaoOggetto {
     /**
      * @author fbrug
      * Aggiungere una immagine del profilo di un utente
-     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui inserire l'immagine
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui inserire l'immagine
      * @param imagePath: il path della nuova immagine
      */
-    public void insertObjectImage(int idOggetto, String imagePath)
+    public void insertObjectImage(String idOggetto, String imagePath)
     {
         try
         {
@@ -5673,11 +5673,11 @@ public class DaoOggetto {
     /**
      * @author fbrug
      * Modificare l'immagine del profilo di un oggetto con un determinato ID oggetto
-     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui cambiare l'immagine
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui cambiare l'immagine
      * @param oldImagePath: il path dell'immagine da modificare
      * @param newImagePath: il path della nuova immagine
      */
-    public void updateObjectImage(int idOggetto, String oldImagePath, String newImagePath)
+    public void updateObjectImage(String idOggetto, String oldImagePath, String newImagePath)
     {
         try
         {
@@ -5687,13 +5687,29 @@ public class DaoOggetto {
         catch (SQLException e) {}
     }
     
+     /**
+     * @author fbrug
+     * Modificare la quantita' di un oggetto
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param newQuantity: intero rappresentante la nuova quantita' disponibile per l'oggetto in questione
+     */
+    public void updateObjectQuantity(String idOggetto, int newQuantity)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(sellersQuery.updateObjectQuantity(idOggetto, newQuantity));
+        }
+        catch (SQLException e) {}
+    }
+    
     /**
      * @author fbrug
      * Rimuovere l'immagine di un determinato oggetto
-     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui rimuovere l'immagine
+     * @param idOggetto: string rappresentante l'ID dell'oggetto a cui rimuovere l'immagine
      * @param imagePath: il path dell'immagine da rimuovere
      */
-    public void deleteObjectImage(int idOggetto, String imagePath)
+    public void deleteObjectImage(String idOggetto, String imagePath)
     {
         try
         {

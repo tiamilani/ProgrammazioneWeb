@@ -547,62 +547,75 @@ public class sellersQuery {
     /**
      * @author fbrug
      * Modificare il prezzo di un oggetto di un proprio negozio
-     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui modificare il prezzo
      * @param prezzoOggetto: il nuovo prezzo dell'oggetto
      * @return String: conferma avvenuta operazione
      */
-    public static String updateObjectPrice(int idOggetto, double prezzoOggetto)
+    public static String updateObjectPrice(String idOggetto, double prezzoOggetto)
     {
-        return "UPDATE Oggetto SET prezzo=" + prezzoOggetto + " WHERE id=" + idOggetto + ";";
+        return "UPDATE Oggetto SET prezzo=" + prezzoOggetto + " WHERE id='" + idOggetto + "';";
     }
     
     /**
      * @author fbrug
      * Modificare lo sconto di un oggetto
-     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui modificare il prezzo
      * @param sconto: il nuovo sconto applicato all'oggetto
      * @return String: conferma avvenuta operazione
      */
-    public static String updateObjectDiscount(int idOggetto, double sconto)
+    public static String updateObjectDiscount(String idOggetto, double sconto)
     {
-        return "UPDATE Oggetto SET sconto=" + sconto + " WHERE id=" + idOggetto + ";";
+        return "UPDATE Oggetto SET sconto=" + sconto + " WHERE id='" + idOggetto + "';";
     }
     
     /**
      * @author fbrug
+     * Modificare la quantita' di un oggetto
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param newQuantity: intero rappresentante la nuova quantita' disponibile per l'oggetto in questione
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateObjectQuantity(String idOggetto, int newQuantity)
+    {
+        return "UPDATE Oggetto SET disponibilita="+ newQuantity + " WHERE id='" + idOggetto + "';";
+    }
+    
+    
+    /**
+     * @author fbrug
      * Aggiungere una immagine del profilo di un oggetto
-     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui inserire l'immagine
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui inserire l'immagine
      * @param imagePath: il path della nuova immagine
      * @return String: conferma avvenuta operazione
      */
-    public static String insertObjectImage(int idOggetto, String imagePath)
+    public static String insertObjectImage(String idOggetto, String imagePath)
     {
         return "INSERT INTO imageOggetto (src, idO) "
-                + "SELECT " + imagePath + ", Oggetto.id FROM Oggetto WHERE Oggetto.id = " + idOggetto + ";";
+                + "SELECT " + imagePath + ", Oggetto.id FROM Oggetto WHERE Oggetto.id = '" + idOggetto + "';";
     }
     
     /**
      * @author fbrug
      * Modificare l'immagine del profilo di un oggetto con un determinato ID oggetto
-     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui cambiare l'immagine
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui cambiare l'immagine
      * @param oldImagePath: il path dell'immagine da modificare
      * @param newImagePath: il path della nuova immagine
      * @return String: conferma avvenuta operazione
      */
-    public static String updateObjectImage(int idOggetto, String oldImagePath, String newImagePath)
+    public static String updateObjectImage(String idOggetto, String oldImagePath, String newImagePath)
     {
         return "UPDATE imageOggetto SET imageOggetto.src = " + newImagePath + " "
-                + "WHERE imageOggetto.idO = " + idOggetto + " AND imageOggetto.src = " + oldImagePath + ";";
+                + "WHERE imageOggetto.idO = '" + idOggetto + "' AND imageOggetto.src = " + oldImagePath + ";";
     }
     
     /**
      * @author fbrug
      * Rimuovere l'immagine di un determinato oggetto
-     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui rimuovere l'immagine
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui rimuovere l'immagine
      * @param imagePath: il path dell'immagine da rimuovere
      * @return String: conferma avvenuta operazione
      */
-    public static String deleteObjectImage(int idOggetto, String imagePath)
+    public static String deleteObjectImage(String idOggetto, String imagePath)
     {
         return "DELETE FROM imageOggetto WHERE imageOggetto.idO = " + idOggetto + " AND imageOggetto.src = " + imagePath + ";";
     }
@@ -734,5 +747,20 @@ public class sellersQuery {
     public static String selectCartByIdOrder(int idordine)
     {
         return "SELECT * FROM Carrello WHERE Carrello.idOrdine = " + idordine + ";";
+    }
+    
+    
+    /*---2018-01-12---*/
+    
+    /**
+     * @author fbrug
+     * Aggiunge un elemento nella tabella OrdiniRicevuti
+     * @param idOrdine: intero rappresentante l'ID dell'ordine da aggiungere
+     * @param idVenditore: intero rappresentane l'ID del venditore (utente) da aggiungere
+     * @return String: conferma avvenuta operazione
+     */
+    public static String addOrdineRicevuto(int idOrdine, int idVenditore)
+    {
+        return "INSERT INTO ordiniricevuti(idO, idV, data) VALUES (" + idOrdine + "," + idVenditore + ",CURRENT_TIMESTAMP)";
     }
 }
