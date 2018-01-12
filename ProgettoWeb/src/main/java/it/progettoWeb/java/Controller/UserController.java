@@ -151,7 +151,8 @@ public class UserController extends HttpServlet {
                         request.setAttribute("canReviewsN", false);
                 }
             } catch (NullPointerException e) {}
-
+            
+            request.setAttribute("canUploadImages", false);
             request.setAttribute("venditore", venditore);
             request.setAttribute("recensioni", recensioni);
             request.setAttribute("listaNegozi", listaNegozi);
@@ -210,7 +211,8 @@ public class UserController extends HttpServlet {
                         request.setAttribute("canReviewsS", false);
                 }
             } catch (NullPointerException e) {}
-
+            
+            request.setAttribute("canUploadImages", false);
             request.setAttribute("negozio", negozio);
             request.setAttribute("immagine", immagine);
             request.setAttribute("indirizzo", indirizzo);

@@ -80,12 +80,15 @@
                 <label class="star star-1" for="star-1"></label>
             </div>
         </div>
-        <div class="form-group">
-            <label class="distance" for="file">Carica delle immagini per una recensione migliore!</label>
-            <input type="file" class="form-control-file" id="file" name="file" accept="image/*" multiple>
-        </div>
+        <c:if test="${canUploadImages == true}">
+            <div class="form-group">
+                <label class="distance" for="file">Carica delle immagini per una recensione migliore!</label>
+                <input type="file" class="form-control-file" id="file" name="file" accept="image/*" multiple>
+            </div>
+        </c:if>
         <input type="hidden" id="utenteReview" name="utenteReview" value="${utenteSessione.getId()}"/>
         <input type="hidden" id="oggettoReview" name="oggettoReview" value="${oggetto.getId()}"/>
         <input type="submit" class="btn btn-primary" value="Inserisci"/>
     </form>
 </div>
+        
