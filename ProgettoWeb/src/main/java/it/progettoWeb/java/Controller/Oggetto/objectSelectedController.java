@@ -203,6 +203,10 @@ public class objectSelectedController extends HttpServlet {
                     addElemento.setIdUtente(idUtente);
                     addElemento.setPrezzoDiAcquisto(prezzo);
                     addElemento.setQuantita(quantita);
+                    
+                    if(carrello.getSize() > 0)
+                        addElemento.setIdOrdine(carrello.get(0).getIdOrdine());
+                    
                     carrello.add(addElemento);
                     
                     if(idUtente != -1)
