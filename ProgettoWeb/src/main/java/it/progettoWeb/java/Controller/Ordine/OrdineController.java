@@ -329,7 +329,7 @@ public class OrdineController extends HttpServlet {
                 /*---2018-01-12---*/
                 Set<Integer> idVenditori = new LinkedHashSet<>();
                 
-                
+                System.out.println("fa che vada");
                 //Diminuisco la disponibilità di ciascun prodotto
                 //nel mentre salvo la lista dei venditori ai quali ho comprato uno o più oggetti
                 for(ModelloOrdine order : carrelloSessione.getList())
@@ -339,12 +339,14 @@ public class OrdineController extends HttpServlet {
                     daoOggetto.updateObjectQuantity(order.getIdOggetto(), ((daoOggetto.getObjectById(order.getIdOggetto())).getDisponibilita() - order.getQuantita()));
                 }
                 
+                System.out.println("per ora ok");
+                
                 
                 //Aggiungo righe alla tabella ordiniRicevuti
                 for(int idV : idVenditori)
-                {
                     daoOrdiniRicevuti.addOrdineRicevuto(carrelloSessione.get(0).getIdOrdine(), idV);
-                }
+                
+                System.out.println("fatto!");
             }
             
             if(action.equalsIgnoreCase("listOrders"))
