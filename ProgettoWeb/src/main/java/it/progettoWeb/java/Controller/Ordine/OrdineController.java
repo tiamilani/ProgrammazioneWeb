@@ -319,7 +319,9 @@ public class OrdineController extends HttpServlet {
                 
                 System.out.println("dentro finish");
                 /*--- QUI CAMBIO LO STATO DEGLI ORDINI NEL CARRELLO IN "PAGATI" E INVIO LA MAIL DI CONFERMA DELL'ORDINE---*/
-                daoOrdine.changeOrderStatus(((ModelloUtente)request.getSession().getAttribute("utenteSessione")).getId(), 0, 1);
+                for(ModelloOrdine ordine : carrelloSessione.getList()){
+                    daoOrdine.changeOrderStatus(ordine, 0, 1);
+                }
                 SendEmail.orderCompleted(
                         ((ModelloUtente)request.getSession().getAttribute("utenteSessione")).getMail(),                         
                         (carrelloSessione.get(0)).getIdOrdine());
