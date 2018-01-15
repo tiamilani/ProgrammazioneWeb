@@ -144,6 +144,41 @@ public class NegozioController extends HttpServlet {
             request.setAttribute("listaTipiSpedizione", listaTipiSpedizione);
             forward = SHOPPAGE;
         }
+        else if(action.equalsIgnoreCase("deleteSpedizione")){
+            int idNegozio = ((ModelloNegozio)request.getSession().getAttribute("negozio")).getId();
+            ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+            ModelloTipoSpedizione spedizione = new ModelloTipoSpedizione();
+            spedizione.setIdS(Integer.parseInt(request.getParameter("modifySpedizione")));
+            
+            spedizione = daoTipoSpedizione.selectDeliveryTypesByIdS(spedizione.getIdS()).get(0);
+
+            String nomeScritto = request.getParameter("modifyDelete");
+            if(!nomeScritto.isEmpty()){
+                if(nomeScritto.equals(spedizione.getNome())){
+                    daoTipoSpedizione.deleteSpedizione(spedizione.getIdS());
+                    request.setAttribute("spedizioneModificata", 3); 
+                } else {
+                    request.setAttribute("spedizioneModificata", 2); 
+                }
+            } else {
+                request.setAttribute("spedizioneModificata", 1); 
+            }
+            
+            tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> trisNegozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(idNegozio);
+            ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCategoria.selectAllCategory());
+            ModelloListeOggetto listaOggetti = new ModelloListeOggetto(daoOggetto.selectObjectByShop(trisNegozioIndirizzoImmagine.getL().getId()));
+            ModelloListeOrdine listaOrdini = new ModelloListeOrdine(daoOrdine.selectOrderRecivedBySellerIdShopIDNewstToOldes(utente.getId(),idNegozio));
+            ModelloListeTipoSpedizione listaTipiSpedizione = new ModelloListeTipoSpedizione(daoTipoSpedizione.selectDeliveryTypesByIdN(idNegozio));
+            
+            request.setAttribute("negozio", trisNegozioIndirizzoImmagine.getL());
+            request.setAttribute("indirizzo", trisNegozioIndirizzoImmagine.getC());
+            request.setAttribute("immagine", trisNegozioIndirizzoImmagine.getR());
+            request.setAttribute("categorie", listaCategorie);
+            request.setAttribute("listaOggeti", listaOggetti);
+            request.setAttribute("listaOrdini", listaOrdini);
+            request.setAttribute("listaTipiSpedizione", listaTipiSpedizione);
+            forward = SHOPPAGE;
+        }
         else if(action.equalsIgnoreCase("richiestaPaginaDiModificaOrdine")){
             String idOrdine = request.getParameter("idOrdine");
             String idOggetto = request.getParameter("idOggetto");
@@ -234,7 +269,7 @@ public class NegozioController extends HttpServlet {
         else if(action.equalsIgnoreCase("richiestaPaginaDiModificaTipoSpedizione")){
             int idS = Integer.parseInt(request.getParameter("id"));
             ModelloTipoSpedizione tipoSpedizione = daoTipoSpedizione.selectDeliveryTypesByIdS(idS).get(0);
-            request.setAttribute("listaOrdini", tipoSpedizione);
+            request.setAttribute("spedizione", tipoSpedizione);
             forward = MODIFYTIPOSPEDIZIONE;
         }
         else {
@@ -320,6 +355,7 @@ public class NegozioController extends HttpServlet {
         }
         else if(action.equalsIgnoreCase("cancNegozio")){
             int idNegozio = Integer.parseInt(request.getParameter("id"));
+            log("AGGIORNAMENTO NEGOZIO, id negozio: " + idNegozio);
             daoNegozio.updateShopStatus(idNegozio,0);
             forward = USERPAGE;
         }
@@ -490,6 +526,122 @@ public class NegozioController extends HttpServlet {
                 daoOggetto.insertObjectImage(object.getId(), "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png");
                 
                 request.setAttribute("oggettoModificato", 0);
+            }
+            
+            tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> trisNegozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(idNegozio);
+            ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCategoria.selectAllCategory());
+            ModelloListeOggetto listaOggetti = new ModelloListeOggetto(daoOggetto.selectObjectByShop(trisNegozioIndirizzoImmagine.getL().getId()));
+            ModelloListeOrdine listaOrdini = new ModelloListeOrdine(daoOrdine.selectOrderRecivedBySellerIdShopIDNewstToOldes(utente.getId(),idNegozio));
+            ModelloListeTipoSpedizione listaTipiSpedizione = new ModelloListeTipoSpedizione(daoTipoSpedizione.selectDeliveryTypesByIdN(idNegozio));
+            
+            request.setAttribute("negozio", trisNegozioIndirizzoImmagine.getL());
+            request.setAttribute("indirizzo", trisNegozioIndirizzoImmagine.getC());
+            request.setAttribute("immagine", trisNegozioIndirizzoImmagine.getR());
+            request.setAttribute("categorie", listaCategorie);
+            request.setAttribute("listaOggeti", listaOggetti);
+            request.setAttribute("listaOrdini", listaOrdini);
+            request.setAttribute("listaTipiSpedizione", listaTipiSpedizione);
+            forward = SHOPPAGE;
+        }
+        else if(action.equalsIgnoreCase("modifyTipoSpedizione")){
+            ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+            ModelloTipoSpedizione spedizione = new ModelloTipoSpedizione();
+            int idNegozio = ((ModelloNegozio)request.getSession().getAttribute("negozio")).getId();
+            
+            spedizione.setIdS(Integer.parseInt(request.getParameter("modifyTipoSpedizione")));
+            
+            spedizione = daoTipoSpedizione.selectDeliveryTypesByIdS(spedizione.getIdS()).get(0);
+            
+            String nome = request.getParameter("mdifyNomeSpedizione");
+            if(!nome.isEmpty()){
+                spedizione.setNome(request.getParameter("mdifyNomeSpedizione"));
+            }
+            
+            String prezzo = request.getParameter("mdifyPrezzoSpedizione");
+            if(!prezzo.isEmpty()){
+                spedizione.setPrezzo(Double.parseDouble(request.getParameter("mdifyPrezzoSpedizione")));
+            }
+            
+            String corriere = request.getParameter("mdifyCorriereSpedizione");
+            if(!corriere.isEmpty()){
+                spedizione.setCorriere(request.getParameter("mdifyCorriereSpedizione"));
+            }
+            
+            int tempoRichiesto = (Integer.parseInt(request.getParameter("modifyGiorniConsegna")));
+            if(tempoRichiesto>0){
+                spedizione.setTempoRichiesto(tempoRichiesto);
+            }
+            
+            int numeroMassimo = (Integer.parseInt(request.getParameter("modifyNumeroMassimo")));
+            if(numeroMassimo>0){
+                spedizione.setNumeroMassimo(numeroMassimo);
+            }
+            
+            daoTipoSpedizione.updateSpedizione(spedizione);
+            
+            request.setAttribute("spedizioneModificata", 0);
+            
+            tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> trisNegozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(idNegozio);
+            ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCategoria.selectAllCategory());
+            ModelloListeOggetto listaOggetti = new ModelloListeOggetto(daoOggetto.selectObjectByShop(trisNegozioIndirizzoImmagine.getL().getId()));
+            ModelloListeOrdine listaOrdini = new ModelloListeOrdine(daoOrdine.selectOrderRecivedBySellerIdShopIDNewstToOldes(utente.getId(),idNegozio));
+            ModelloListeTipoSpedizione listaTipiSpedizione = new ModelloListeTipoSpedizione(daoTipoSpedizione.selectDeliveryTypesByIdN(idNegozio));
+            
+            request.setAttribute("negozio", trisNegozioIndirizzoImmagine.getL());
+            request.setAttribute("indirizzo", trisNegozioIndirizzoImmagine.getC());
+            request.setAttribute("immagine", trisNegozioIndirizzoImmagine.getR());
+            request.setAttribute("categorie", listaCategorie);
+            request.setAttribute("listaOggeti", listaOggetti);
+            request.setAttribute("listaOrdini", listaOrdini);
+            request.setAttribute("listaTipiSpedizione", listaTipiSpedizione);
+            forward = SHOPPAGE;
+        }
+        else if(action.equalsIgnoreCase("addTipoSpedizione")){
+            ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+            ModelloTipoSpedizione spedizione = new ModelloTipoSpedizione();
+            int idNegozio = ((ModelloNegozio)request.getSession().getAttribute("negozio")).getId();
+            
+            spedizione.setIdN(idNegozio);
+            
+            request.setAttribute("aggiungiSepdizione", 0);
+            
+            String nome = request.getParameter("nomeSpedizione");
+            if(!nome.isEmpty()){
+                spedizione.setNome(request.getParameter("nomeSpedizione"));
+            } else {
+                request.setAttribute("aggiungiSepdizione", 1);
+            }
+            
+            String prezzo = request.getParameter("prezzoSpedizione");
+            if(!prezzo.isEmpty()){
+                spedizione.setPrezzo(Double.parseDouble(request.getParameter("prezzoSpedizione")));
+            } else {
+                request.setAttribute("aggiungiSepdizione", 1);
+            }
+            
+            String corriere = request.getParameter("corriereSpedizione");
+            if(!corriere.isEmpty()){
+                spedizione.setCorriere(request.getParameter("corriereSpedizione"));
+            } else {
+                request.setAttribute("aggiungiSepdizione", 1);
+            }
+            
+            int tempoRichiesto = (Integer.parseInt(request.getParameter("giorniConsegna")));
+            if(tempoRichiesto>0){
+                spedizione.setTempoRichiesto(tempoRichiesto);
+            } else {
+                request.setAttribute("aggiungiSepdizione", 1);
+            }
+            
+            int numeroMassimo = (Integer.parseInt(request.getParameter("numeroMassimo")));
+            if(numeroMassimo>0){
+                spedizione.setNumeroMassimo(numeroMassimo);
+            } else {
+                request.setAttribute("aggiungiSepdizione", 1);
+            }
+            
+            if((int)request.getAttribute("aggiungiSepdizione") == 0){
+                daoTipoSpedizione.addSpedizione(spedizione);
             }
             
             tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> trisNegozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(idNegozio);

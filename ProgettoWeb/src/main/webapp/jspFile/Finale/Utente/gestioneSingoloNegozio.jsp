@@ -44,6 +44,36 @@
                         <strong>Successo!</strong> Operazione di modifca dell'ordine portata a termine con successo
                     </div>
                 </c:when>
+                <c:when test="${spedizioneModificata == 0}">
+                    <div class="alert alert-success">
+                        <strong>Successo!</strong> Operazione di modifca della spedizione portata a termine con successo
+                    </div>
+                </c:when>
+                <c:when test="${spedizioneModificata == 1}">
+                    <div class="alert alert-warning">
+                        <strong>Attenzione!</strong> Devi scrivere il nome della spedizione che vuoi eliminare nella textbox specifica
+                    </div>
+                </c:when>
+                <c:when test="${spedizioneModificata == 2}">
+                    <div class="alert alert-danger">
+                        <strong>Errore!</strong> Il nome da te inserito non corrisponde a quello della spedizione
+                    </div>
+                </c:when>
+                <c:when test="${spedizioneModificata == 3}">
+                    <div class="alert alert-success">
+                        <strong>Successo!</strong> Operazione di eliminazione portata a termine con successo
+                    </div>
+                </c:when>
+                <c:when test="${aggiungiSepdizione == 0}">
+                    <div class="alert alert-success">
+                        <strong>Successo!</strong> Operazione di modifca della spedizione portata a termine con successo
+                    </div>
+                </c:when>
+                <c:when test="${aggiungiSepdizione == 1}">
+                    <div class="alert alert-warning">
+                        <strong>Attenzione!</strong> Devi scrivere il nome della spedizione che vuoi eliminare nella textbox specifica
+                    </div>
+                </c:when>
                 <c:otherwise>
                 </c:otherwise>
             </c:choose>
@@ -281,38 +311,38 @@
                                 <a href="${pageContext.request.contextPath}/NegozioController?action=richiestaPaginaDiModificaTipoSpedizione&id=<c:out value="${spedizione.getIdS()}" />" method="GET" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">build</i></a>
                             </div>
                             <div class="col-2">
-                                <button type="button" class="btn btn-outline-danger buttonSpace btn-block" data-toggle="modal" data-target="#deleteItemModal<c:out value="${oggetto.getId()}" />">
+                                <button type="button" class="btn btn-outline-danger buttonSpace btn-block" data-toggle="modal" data-target="#deleteSpedizioneModal<c:out value="${spedizione.getIdS()}" />">
                                     <i class="Small material-icons">close</i>
                                 </button>
-                                <div id="deleteItemModal<c:out value="${oggetto.getId()}" />" class="modal fade" role="dialog">
+                                <div id="deleteSpedizioneModal<c:out value="${spedizione.getIdS()}" />" class="modal fade" role="dialog">
                                     <div class="modal-dialog">
 
                                         <!-- Modal content-->
                                         <div class="modal-content">
                                           <div class="modal-header">
-                                            <h4 class="modal-title">Eliminazione oggetto</h4>
+                                            <h4 class="modal-title">Eliminazione spedizione</h4>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                           </div>
                                             <div class="row">
                                                 <div class="col-2"></div>
                                                 <div class="col-8">
-                                                    <p>Per eliminare l'oggetto inserisci il nome dell'oggetto che vuoi eliminare per confermare la tua volontà di eliminarlo</p>
+                                                    <p>Per eliminare questa spedizione inserisci il suo nome come conferma della tua volontà, se vi sono ancora ordini in corso che richiedono questo metodo di spedizione esso non verrà eliminato</p>
                                                 </div>
                                                 <div class="col-2"></div>
                                             </div>
                                             <form action="${pageContext.request.contextPath}/NegozioController" method="GET">
-                                                <input type="hidden" name="action" value="deleteObject">
+                                                <input type="hidden" name="action" value="deleteSpedizione">
                                                 <input type="hidden" name="idNegozio" value="${negozio.getId()}">
-                                                <input type="hidden" name="modifyObject" value="<c:out value="${oggetto.getId()}" />">
+                                                <input type="hidden" name="modifySpedizione" value="<c:out value="${spedizione.getIdS()}" />">
                                                 <div class="modal-body">
                                                     <div>
                                                         <input class="col-10 modal-input" type="text" id="modifyDelete" name="modifyDelete" required>
-                                                        <label for="modifyDelete">Nome oggetto da eliminare</label>
+                                                        <label for="modifyDelete">Nome spedizione da eliminare</label>
                                                     </div>
 
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button action="submit" type="submit" class="col-4 paddingNav btn btn-outline-danger btn-block my-2 my-sm-0" id="btnDelete">Elimina oggetto</button>
+                                                    <button action="submit" type="submit" class="col-4 paddingNav btn btn-outline-danger btn-block my-2 my-sm-0" id="btnDelete">Elimina spedizione</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -323,7 +353,7 @@
                     </div>
                 </c:forEach>
                 <div class="col-3">
-                    <a href="${pageContext.request.contextPath}/NegozioController?action=richiestaPaginaDiAggiuntaOggetto" method="GET" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">add</i></a>
+                    <a href="jspFile/Finale/Utente/aggiungiTipoSpedizione.jsp" method="GET" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">add</i></a>
                 </div>
             </div>
         </div>

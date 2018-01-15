@@ -5,6 +5,8 @@
  */
 package it.progettoWeb.java.database.query.deliveryType;
 
+import it.progettoWeb.java.database.Model.tipoSpedizione.ModelloTipoSpedizione;
+
 /**
  *
  * @author FBrug
@@ -58,5 +60,19 @@ public class deliveryTypeQuery
     {
         return "SELECT tipoSpedizione.* FROM tipoSpedizione INNER JOIN spedizioneoggetto ON "
                 + "(spedizioneoggetto.idO = '" +idO+ "' AND tipoSpedizione.idS = spedizioneoggetto.idS)";
+    }
+
+    public static String updateSpedizione(ModelloTipoSpedizione spedizione) {
+        return "UPDATE tipoSpedizione SET Nome='"+spedizione.getNome()+"', prezzo="+spedizione.getPrezzo()+", Corriere='"+spedizione.getCorriere()+"', "
+                + "tempoRichiesto="+spedizione.getTempoRichiesto()+", numeroMassimo="+spedizione.getNumeroMassimo()+"   WHERE idS=1;";
+    }
+
+    public static String deleteSpedizione(int idS) {
+        return "DELETE FROM tipoSpedizione WHERE idS=" + idS + ";";
+    }
+
+    public static String insertObject(ModelloTipoSpedizione spedizione) {
+        return "INSERT INTO tipoSpedizione (idN,Nome,Prezzo,Corriere,tempoRichiesto,numeroMassimo) "
+                + "VALUES ("+spedizione.getIdN()+",'"+spedizione.getNome()+"',"+spedizione.getPrezzo()+",'"+spedizione.getCorriere()+"',"+spedizione.getTempoRichiesto()+","+spedizione.getNumeroMassimo()+");";
     }
 }
