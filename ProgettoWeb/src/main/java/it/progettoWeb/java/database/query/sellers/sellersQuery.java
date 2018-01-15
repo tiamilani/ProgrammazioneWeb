@@ -19,10 +19,10 @@ public class sellersQuery {
     public static String hello() {
         return "Hello from" + sellersQuery.class.toString();
     }
-    
+
     /*--- LAST UPDATE -> 2017-09-17 ---*/
-    
-    
+
+
     /**
      * @author fbrug
      * Ottenere la lista dei propri negozi
@@ -33,13 +33,13 @@ public class sellersQuery {
     {
         return "SELECT * FROM Negozio WHERE idVenditore = " + idVenditore + ";";
     }
-    
+
     public static String selectNumberOfOrderForStore(int idVenditore, int idNegozio){
         return "select COUNT(Ordine.idOggetto) as ordini "
                 + "from Ordine INNER JOIN ordiniRicevuti ON (Ordine.idOrdine = ordiniRicevuti.idO) "
                 + "where ordiniRicevuti.idV = "+idVenditore+" AND Ordine.idNegozio = "+idNegozio+";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista degli ordini ricevuti
@@ -50,7 +50,7 @@ public class sellersQuery {
     {
         return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + ";";
     }
-    
+
     /**
      * @author andrea
      * Ottenere Recensione, Venditore
@@ -63,7 +63,7 @@ public class sellersQuery {
                 + "RecensioneVenditore JOIN Utente ON RecensioneVenditore.idUtente=Utente.id "
                 + "WHERE RecensioneVenditore.idVenditore='" + idV + "';";
     }
-          
+
     /**
      * @author fbrug
      * Ottenere la lista degli ordini ricevuti dal più nuovo al più vecchio
@@ -74,9 +74,9 @@ public class sellersQuery {
     {
         return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " ORDER BY dataOrdine DESC;";
     }
-    
-    
-    
+
+
+
     /**
      * @author fbrug
      * Ottenere la lista degli ordini in base al loro stato
@@ -88,7 +88,7 @@ public class sellersQuery {
     {
         return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND stato=" + stato + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista degli ordini ricevuti in un determinato giorno
@@ -100,7 +100,7 @@ public class sellersQuery {
     {
         return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND dataOrdine=" + dataOrdine + ";";
     }
-          
+
     /**
      * @author fbrug
      * Ottenere la lista degli ordini ricevuti nella settimana corrente
@@ -112,7 +112,7 @@ public class sellersQuery {
     {
         return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND WEEK(dataOrdine)=WEEK(" + dataOrdine + ");";
     }
-          
+
     /**
      * @author fbrug
      * Ottenere la lista degli ordini ricevuti nel mese corrente
@@ -124,7 +124,7 @@ public class sellersQuery {
     {
         return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND MONTH(dataOrdine)=MONTH(" + dataOrdine + ");";
     }
-          
+
     /**
      * @author fbrug
      * Ottenere la lista degli ordini ricevuti nell'anno corrente
@@ -136,7 +136,7 @@ public class sellersQuery {
     {
         return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND YEAR(dataOrdine)=YEAR(" + dataOrdine + ");";
     }
-          
+
     /**
      * @author fbrug
      * Ottenere la lista dei propri negozi con anche il numero di vendite
@@ -149,7 +149,7 @@ public class sellersQuery {
                 + "FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id "
                 + "WHERE idVenditore=" + idVenditore + " GROUP BY idNegozio;";
     }
-          
+
     /**
      * @author fbrug
      * Ottenere la lista dei propri negozi ordinati per vendite maggiori
@@ -164,7 +164,7 @@ public class sellersQuery {
                 + "GROUP BY Negozio.id, Negozio.nomeNegozio, Negozio.valutazione, Negozio.attivo, Negozio.idI "
                 + "ORDER BY numeroVendite DESC;";
     }
-          
+
     /**
      * @author fbrug
      * Ottenere la lista dei propri negozi per vendite minori
@@ -179,7 +179,7 @@ public class sellersQuery {
                 + "GROUP BY Negozio.id, Negozio.nomeNegozio, Negozio.valutazione, Negozio.attivo, Negozio.idI "
                 + "ORDER BY numeroVendite ASC;";
     }
-          
+
     /**
      * @author fbrug
      * Ottenere la lista dei propri negozi con vendite inferiori ad un certo valore
@@ -195,7 +195,7 @@ public class sellersQuery {
                 + " GROUP BY idNegozio"
                 + " HAVING COUNT(idOrdine)<" + valore + ";";
     }
-          
+
     /**
      * @author fbrug
      * Ottenere la lista dei propri negozi con vendite superiori ad un certo valore
@@ -211,7 +211,7 @@ public class sellersQuery {
                 + " GROUP BY idNegozio"
                 + " HAVING COUNT(idOrdine)>" + valore + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista dei negozi che vendono prodotti di una certa categoria
@@ -228,7 +228,7 @@ public class sellersQuery {
                 + "JOIN Utente ON Utente.id=Negozio.idVenditore "
                 + "WHERE idVenditore=" + idVenditore + " AND attivo=" + attivo + " AND Categoria.id=" + idCategoria + ";";
     }
-          
+
     /**
      * @author fbrug
      * Ottenere la lista dei negozi che vendono prodotti di una certa categoria ordinate da quello con più vendite
@@ -244,12 +244,12 @@ public class sellersQuery {
                 + "FROM ((Oggetto JOIN Negozio ON Negozio.id = Oggetto.idNegozio) "
                 + "JOIN Utente ON Utente.id = Negozio.idVenditore) "
                 + "JOIN Ordine ON Ordine.idNegozio = Negozio.id "
-                + "WHERE idVenditore = " + idVenditore + " AND attivo = " + attivo 
+                + "WHERE idVenditore = " + idVenditore + " AND attivo = " + attivo
                 + " AND Categoria.id = " + idCategoria + " AND Oggetto.categoria = " + categoriaOggetto
                 + " AND Ordine.stato BETWEEN 1 AND 4 GROUP BY Negozio.id "
                 + "ORDER BY COUNT(Ordine.idOrdine) DESC;";
     }
-          
+
     /**
      * @author fbrug
      * Ottenere la lista dei negozi che vendono prodotti di una certa categoria ordinate da quello con meno vendite
@@ -265,12 +265,12 @@ public class sellersQuery {
                 + "FROM ((Oggetto JOIN Negozio ON Negozio.id = Oggetto.idNegozio) "
                 + "JOIN Utente ON Utente.id = Negozio.idVenditore) "
                 + "JOIN Ordine ON Ordine.idNegozio = Negozio.id "
-                + "WHERE idVenditore = " + idVenditore + " AND attivo = " + attivo 
+                + "WHERE idVenditore = " + idVenditore + " AND attivo = " + attivo
                 + " AND Categoria.id = " + idCategoria + " AND Oggetto.categoria = " + categoriaOggetto
                 + " AND Ordine.stato BETWEEN 1 AND 4 GROUP BY Negozio.id "
                 + "ORDER BY COUNT(Ordine.idOrdine) DESC;";
     }
-          
+
     /**
      * @author fbrug
      * Ottenere la lista dei propri negozi ordinati per data di apertura
@@ -281,17 +281,17 @@ public class sellersQuery {
     {
         return "SELECT * FROM Negozio WHERE idVenditore=" + idVenditore + " ORDER BY dataApertura DESC;";
     }
-    
+
     public static String selectShopByNameup(int idVenditore)
     {
         return "SELECT * FROM Negozio WHERE idVenditore=" + idVenditore + " ORDER BY nomeNegozio;";
     }
-    
+
     public static String selectShopByNameDown(int idVenditore)
     {
         return "SELECT * FROM Negozio WHERE idVenditore=" + idVenditore + " ORDER BY nomeNegozio DESC;";
     }
-          
+
     /**
      * @author fbrug
      * Ottenere la lista dei propri negozi ordinati per fatturato
@@ -307,7 +307,7 @@ public class sellersQuery {
                 + " AND Ordine.stato BETWEEN 1 AND 4 "
                 + "GROUP BY Negozio.id ORDER BY fatturato DESC;";
     }
-          
+
     /**
      * @author fbrug
      * Ottenere i dati di un negozio
@@ -319,7 +319,7 @@ public class sellersQuery {
     {
         return "SELECT * FROM Negozio WHERE idVenditore=" + idVenditore + " AND id=" + idNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere i dati delle vendite di un determinato negozio
@@ -330,7 +330,7 @@ public class sellersQuery {
     {
         return "SELECT * FROM Ordine WHERE Ordine.idNegozio = " + idNegozio + "AND Ordine.stato BETWEEN 1 AND 4;";
     }
-          
+
     /**
      * @author fbrug
      * Ottenere i dati di vendita di un determinato negozio in una determinata categoria
@@ -344,7 +344,7 @@ public class sellersQuery {
                 + "WHERE Ordine.idNegozio = " + idNegozio
                 + " AND Ordine.stato BETWEEN 1 AND 4 AND Oggetto.categoria = " + idCategoria + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere le richieste di assistenza in cui si è stati citati
@@ -356,7 +356,7 @@ public class sellersQuery {
         return "SELECT * FROM Utente JOIN Assistenza ON Utente.id=Assistenza.idVenditore "
                 + "WHERE idVenditore=" + idVenditore + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista dei prodotti venduti raggruppati per categoria e negozio
@@ -370,7 +370,7 @@ public class sellersQuery {
                 + "WHERE idVenditore=" + idVenditore + " AND stato=4 "
                 + "GROUP BY idNegozio ASC, Categoria.nome ASC;";
     }
-          
+
     /**
      * @author fbrug
      * Ottenere la lista dei prodotti venduti in una determinata categoria raggruppati per negozio
@@ -385,7 +385,7 @@ public class sellersQuery {
                 + "WHERE idVenditore=" + idVenditore + " AND stato=4 AND Categoria.nome=" + nomeCategoria
                 + " GROUP BY idNegozio ASC;";
     }
-          
+
     /**
      * @author fbrug
      * Ottenere la lista dei prodotti venduti ordinati per valutazioni
@@ -399,7 +399,7 @@ public class sellersQuery {
                 + "WHERE idVenditore=" + idVenditore + " AND stato=4 "
                 + "ORDER BY AVG(RecensioneOggetto.valutazione) DESC;";
     }
-          
+
     /**
      * @author fbrug
      * Ottenere la lista dei propri negozi ordinati per recensioni
@@ -410,7 +410,7 @@ public class sellersQuery {
     {
         return "SELECT * FROM Negozio WHERE idVenditore=" + idVenditore + " ORDER BY valutazione DESC;";
     }
-          
+
     /**
      * @author fbrug
      * Ottenere la lista dei proprio prodotti in sconto raggruppati per categoria e negozio
@@ -424,7 +424,7 @@ public class sellersQuery {
                 + "WHERE idVenditore=" + idVenditore + " AND sconto>0 "
                 + "GROUP BY Categoria.nome ASC, idNegozio ASC;";
     }
-          
+
     /**
      * @author fbrug
      * Ottenere la lista dei proprio prodotti in sconto raggruppati per categoria e negozio ordinati per scadenza più vicina dello sconto
@@ -439,7 +439,7 @@ public class sellersQuery {
                 + "GROUP BY Categoria.nome ASC, idNegozio ASC "
                 + "ORDER BY dataFineSconto ASC;";
     }
-          
+
     /**
      * @author fbrug
      * Ottenere la lista delle recensioni ricevute
@@ -450,7 +450,7 @@ public class sellersQuery {
     {
         return "SELECT * FROM RecensioneVenditore WHERE idVenditore=" + idVenditore + ";";
     }
-    
+
     /**
      * @author fbrug
      * Aggiungere un proprio negozio
@@ -462,7 +462,7 @@ public class sellersQuery {
         return "INSERT INTO Negozio (idVenditore, nomeNegozio, valutazione, attivo, idI, dataApertura, linkSito, orarioNegozio) "
                 + "VALUES ('" + negozio.getIdVenditore() + "','" +  negozio.getNomeNegozio() + "',NULL, '1' ,'" + negozio.getIdI() + "', CURRENT_TIMESTAMP,'"+negozio.getLinkSito()+"','"+negozio.getOrarioNegozio()+"');";
     }
-    
+
     /**
      * @author fbrug
      * Chiudere un proprio negozio (cambiare il suo stato)
@@ -474,7 +474,7 @@ public class sellersQuery {
     {
         return "UPDATE Negozio SET attivo=" + attivo + " WHERE id=" + idNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Modificare lo stato di un ordine
@@ -486,7 +486,7 @@ public class sellersQuery {
     {
         return "UPDATE Ordine SET stato=" + nuovoStato + " WHERE idOrdine=" + idOrdine + ";";
     }
-    
+
     /**
      * @author fbrug
      * Aggiungere ad un ordine spedito il codice di tracking
@@ -497,7 +497,7 @@ public class sellersQuery {
     {
         return "UPDATE Ordine SET codiceTracking='" + codiceTracking + "' WHERE idOrdine=" + ordine.getIdOrdine() + " AND idOggetto = '"+ordine.getIdOggetto()+"';";
     }
-    
+
     /**
      * @author fbrug
      * Aggiungere un prodotto (OGGETTO) ad un proprio negozio
@@ -513,8 +513,8 @@ public class sellersQuery {
      * @param idCategoria: intero rappresentante l'ID della categoria di cui l'oggetto fa parte
      * @return String: conferma avvenuta operazione
      */
-    public static String insertObject(String id,int idNegozio, String nomeOggetto,String nomeDownCase, double prezzoOggetto, 
-            String descrizioneOggetto, int ritiroInNegozio, int disponibilita, int statoDisponibilita, 
+    public static String insertObject(String id,int idNegozio, String nomeOggetto,String nomeDownCase, double prezzoOggetto,
+            String descrizioneOggetto, int ritiroInNegozio, int disponibilita, int statoDisponibilita,
             double sconto, Date dataFineSconto, int idCategoria)
     {
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
@@ -555,7 +555,7 @@ public class sellersQuery {
                     + ", " + idCategoria
                     + ");";
     }
-    
+
     /**
      * @author fbrug
      * Rimuovere un oggetto
@@ -566,7 +566,7 @@ public class sellersQuery {
     {
         return "DELETE FROM Oggetto WHERE id='" + idOggetto + "';";
     }
-    
+
     public static String updateObject(ModelloOggetto oggetto,String oldId){
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
         if(oggetto.getDataFineSconto() != null)
@@ -600,35 +600,48 @@ public class sellersQuery {
                     + ",categoria=" + oggetto.getCategoria()
                     + " WHERE id='" + oldId + "';";
     }
-    
+
     /**
      * @author fbrug
      * Modificare il prezzo di un oggetto di un proprio negozio
-     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui modificare il prezzo
      * @param prezzoOggetto: il nuovo prezzo dell'oggetto
      * @return String: conferma avvenuta operazione
      */
-    public static String updateObjectPrice(int idOggetto, double prezzoOggetto)
+    public static String updateObjectPrice(String idOggetto, double prezzoOggetto)
     {
-        return "UPDATE Oggetto SET prezzo=" + prezzoOggetto + " WHERE id=" + idOggetto + ";";
+        return "UPDATE Oggetto SET prezzo=" + prezzoOggetto + " WHERE id='" + idOggetto + "';";
     }
-    
+
     /**
      * @author fbrug
      * Modificare lo sconto di un oggetto
-     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui modificare il prezzo
      * @param sconto: il nuovo sconto applicato all'oggetto
      * @return String: conferma avvenuta operazione
      */
-    public static String updateObjectDiscount(int idOggetto, double sconto)
+    public static String updateObjectDiscount(String idOggetto, double sconto)
     {
-        return "UPDATE Oggetto SET sconto=" + sconto + " WHERE id=" + idOggetto + ";";
+        return "UPDATE Oggetto SET sconto=" + sconto + " WHERE id='" + idOggetto + "';";
     }
-    
+
+    /**
+     * @author fbrug
+     * Modificare la quantita' di un oggetto
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param newQuantity: intero rappresentante la nuova quantita' disponibile per l'oggetto in questione
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateObjectQuantity(String idOggetto, int newQuantity)
+    {
+        return "UPDATE Oggetto SET disponibilita="+ newQuantity + " WHERE id='" + idOggetto + "';";
+    }
+
+
     /**
      * @author fbrug
      * Aggiungere una immagine del profilo di un oggetto
-     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui inserire l'immagine
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui inserire l'immagine
      * @param imagePath: il path della nuova immagine
      * @return String: conferma avvenuta operazione
      */
@@ -637,21 +650,21 @@ public class sellersQuery {
         return "INSERT INTO imageOggetto (src, idO) "
                 + "SELECT '" + imagePath + "', Oggetto.id FROM Oggetto WHERE Oggetto.id = '" + idOggetto + "';";
     }
-    
+
     /**
      * @author fbrug
      * Modificare l'immagine del profilo di un oggetto con un determinato ID oggetto
-     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui cambiare l'immagine
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui cambiare l'immagine
      * @param oldImagePath: il path dell'immagine da modificare
      * @param newImagePath: il path della nuova immagine
      * @return String: conferma avvenuta operazione
      */
-    public static String updateObjectImage(int idOggetto, String oldImagePath, String newImagePath)
+    public static String updateObjectImage(String idOggetto, String oldImagePath, String newImagePath)
     {
         return "UPDATE imageOggetto SET imageOggetto.src = " + newImagePath + " "
-                + "WHERE imageOggetto.idO = " + idOggetto + " AND imageOggetto.src = " + oldImagePath + ";";
+                + "WHERE imageOggetto.idO = '" + idOggetto + "' AND imageOggetto.src = " + oldImagePath + ";";
     }
-    
+
     /**
      * @author fbrug
      * Rimuovere l'immagine di un determinato oggetto
@@ -663,7 +676,7 @@ public class sellersQuery {
     {
         return "DELETE FROM imageOggetto WHERE imageOggetto.idO = " + idOggetto + " AND imageOggetto.src = " + imagePath + ";";
     }
-    
+
     /**
      * @author fbrug
      * Aggiungere una immagine del profilo di un negozio
@@ -675,7 +688,7 @@ public class sellersQuery {
     {
         return "INSERT INTO imageNegozio (src, idN) values ('"+imagePath+"',"+idNegozio+");";
     }
-    
+
     /**
      * @author fbrug
      * Modificare l'immagine del profilo di un negozio con un determinato ID negozio
@@ -689,7 +702,7 @@ public class sellersQuery {
         return "UPDATE imageNegozio SET imageNegozio.src = " + newImagePath + " "
                 + "WHERE imageNegozio.idO = " + idNegozio + " AND imageNegozio.src = " + oldImagePath + ";";
     }
-    
+
     /**
      * @author fbrug
      * Rimuovere l'immagine di un determinato negozio
@@ -701,11 +714,11 @@ public class sellersQuery {
     {
         return "DELETE FROM imageNegozio WHERE imageNegozio.idO = " + idNegozio + " AND imageNegozio.src = " + imagePath + ";";
     }
-    
-    
-    
+
+
+
     /*---2017-11-20---*/
-    
+
     /**
      * @author fbrug
      * Seleziona gli ordini con lo stesso tipo di spedizione (in base all'idS)
@@ -716,7 +729,7 @@ public class sellersQuery {
     {
         return "SELECT * FROM Ordine WHERE Ordine.idS = " + idS + ";";
     }
-    
+
     /**
      * @author fbrug
      * Aggiorna il valore dell'idS dell'ordine selezionato
@@ -731,10 +744,10 @@ public class sellersQuery {
         else
             return "UPDATE Ordine SET idS = " + idS + " WHERE idOrdine = " + idOrdine + ";";
     }
-    
-    
+
+
     /*---2017-11-21---*/
-    
+
     /**
      * @author fbrug
      * Seleziona gli ordini con lo stesso indirizzo spedizione (in base all'idI)
@@ -745,7 +758,7 @@ public class sellersQuery {
     {
         return "SELECT * FROM Ordine WHERE Ordine.idI = " + idI + ";";
     }
-    
+
     /**
      * @author fbrug
      * Aggiorna il valore dell'idI dell'ordine selezionato
@@ -757,10 +770,10 @@ public class sellersQuery {
     {
         return "UPDATE Ordine SET idI = " + idI + " WHERE idOrdine = " + idOrdine + ";";
     }
-    
-    
+
+
     /*---2017-12-04---*/
-    
+
     /**
      * @author fbrug
      * Seleziona gli ordini con lo stesso ID ordine
@@ -771,7 +784,7 @@ public class sellersQuery {
     {
         return "SELECT * FROM Ordine WHERE Ordine.idOrdine = " + idOrdine + ";";
     }
-    
+
     /**
      * @author fbrug
      * @param idUtente: intero rappresentante l'ID dell'utente
@@ -781,7 +794,7 @@ public class sellersQuery {
     {
         return "SELECT * FROM Carrello WHERE Carrello.idUtente = " + idUtente + ";";
     }
-    
+
     /**
      * @author fbrug
      * @param idordine: intero rappresentante l'ID dell'ordine
@@ -816,5 +829,20 @@ public class sellersQuery {
 
     public static String updateOrderDataArrivoPrevista(ModelloOrdine ordine, String dt) {
         return "UPDATE Ordine SET dataArrivoPresunta = '" + dt + "' WHERE idOrdine = " + ordine.getIdOrdine() + " AND idOggetto = '"+ordine.getIdOggetto()+"';";
+    }
+
+
+    /*---2018-01-12---*/
+
+    /**
+     * @author fbrug
+     * Aggiunge un elemento nella tabella OrdiniRicevuti
+     * @param idOrdine: intero rappresentante l'ID dell'ordine da aggiungere
+     * @param idVenditore: intero rappresentane l'ID del venditore (utente) da aggiungere
+     * @return String: conferma avvenuta operazione
+     */
+    public static String addOrdineRicevuto(int idOrdine, int idVenditore)
+    {
+        return "INSERT INTO ordiniricevuti(idO, idV, data) VALUES (" + idOrdine + "," + idVenditore + ",CURRENT_TIMESTAMP)";
     }
 }

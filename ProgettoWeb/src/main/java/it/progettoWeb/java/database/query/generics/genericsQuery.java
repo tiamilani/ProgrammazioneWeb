@@ -45,6 +45,19 @@ public class genericsQuery {
         return "SELECT * FROM Indirizzo WHERE idI = " + idAddress + ";";
     }
     
+    
+    /**
+     * @author andreafadi
+     * Inserire una nuova associazione Recensione-Immagine
+     * @param idR Identificativo della recensione da collegare
+     * @param src Identificativo del percorso dell'immagine da collegare
+     * @return String: conferma avvenuta operazione
+     */
+    public static String addImageReviewSet(int idR, String src)
+    {
+        return "INSERT INTO imageRecensione (src,idR) values ('" + src + "'," + idR + ");";
+    }
+    
     /**
      * @author Mattia
      * @return String: categoria singola
@@ -235,7 +248,7 @@ public class genericsQuery {
     
     /**
      * @author fbrug
-     * Ottenere gli utenti amministratori ordinati per numero di richieste
+     * Ottenere gli utenti amministratori ordinati per numero di richieste (decrescente)
      * @return String: elenco utenti amministratori
      */
     public static String selectAdministratorByNumerOfRequests()
@@ -243,6 +256,22 @@ public class genericsQuery {
         return "SELECT DISTINCT COUNT(A2.idAmministratore) as contatore, A1.idAmministratore as id "
                + "FROM Assistenza A1 "
                + "LEFT JOIN Assistenza A2 ON (A1.idAmministratore = A2.idAmministratore) "
+               + "GROUP BY A1.id "
+               + "ORDER BY contatore DESC;";
+    }
+    
+    
+    /**
+     * @author fbrug
+     * Ottenere gli utenti amministratori ordinati per numero di richieste in corso (decrescente)
+     * @return String: elenco utenti amministratori
+     */
+    public static String selectAdministratorByNumerOfPendingRequests()
+    {
+        return "SELECT DISTINCT COUNT(A2.idAmministratore) as contatore, A1.idAmministratore as id "
+               + "FROM Assistenza A1 "
+               + "LEFT JOIN Assistenza A2 ON (A1.idAmministratore = A2.idAmministratore) "
+               + "WHERE A1.stato=0 "
                + "GROUP BY A1.id "
                + "ORDER BY contatore DESC;";
     }
@@ -346,5 +375,44 @@ public class genericsQuery {
      */
     public static String selectReviewsObjects(String idO) {
         return "SELECT * FROM RecensioneOggetto WHERE idOggetto = '" + idO + "';";
+    }
+    
+    /**
+     * Ottenere una specifica recensioni dati i parametri identificativi
+     * @param idO Una stringa che rappresenta l'oggetto della recensione da ricercare
+     * @param idU Un intero che rappresenta l'utente della recensione da ricercare
+     * @param testo Una stringa che rappresenta il testo della recensione da ricercare
+     * @param valutazione Un intero che rappresenta la valutazione della recensione da ricercare
+     * @return ModelloRecensioneOggetto
+     */
+    public static String selectReviewsByDataO(String idO, int idUtente, String testo, int valutazione) {
+        return "SELECT * FROM RecensioneOggetto WHERE idOggetto = '" + idO + "' AND "
+                + "idUtente=" + idUtente + " AND testo='" + testo + "' AND valutazione=" + valutazione + ";";
+    }
+    
+    /**
+     * Ottenere una specifica recensioni dati i parametri identificativi
+     * @param idN Un intero che rappresenta il negozio della recensione da ricercare
+     * @param idU Un intero che rappresenta l'utente della recensione da ricercare
+     * @param testo Una stringa che rappresenta il testo della recensione da ricercare
+     * @param valutazione Un intero che rappresenta la valutazione della recensione da ricercare
+     * @return ModelloRecensioneOggetto
+     */
+    public static String selectReviewsByDataN(int idN, int idUtente, String testo, int valutazione) {
+        return "SELECT * FROM RecensioneNegozio WHERE idNegozio = '" + idN + "' AND "
+                + "idUtente=" + idUtente + " AND testo='" + testo + "' AND valutazione=" + valutazione + ";";
+    }
+    
+    /**
+     * Ottenere una specifica recensioni dati i parametri identificativi
+     * @param idV Un intero che rappresenta il venditore della recensione da ricercare
+     * @param idU Un intero che rappresenta l'utente della recensione da ricercare
+     * @param testo Una stringa che rappresenta il testo della recensione da ricercare
+     * @param valutazione Un intero che rappresenta la valutazione della recensione da ricercare
+     * @return ModelloRecensioneOggetto
+     */
+    public static String selectReviewsByDataV(int idV, int idUtente, String testo, int valutazione) {
+        return "SELECT * FROM RecensioneVenditore WHERE idVenditore = '" + idV + "' AND "
+                + "idUtente=" + idUtente + " AND testo='" + testo + "' AND valutazione=" + valutazione + ";";
     }
 }

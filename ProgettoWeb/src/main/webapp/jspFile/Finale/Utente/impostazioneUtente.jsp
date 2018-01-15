@@ -108,9 +108,7 @@
             <button class="btn btn-outline-primary buttonSpace" type="submit" value="submit" data-toggle="modal"
                              data-target="#addAddrModal">addIndirizzo</button>
         </div>
-        <div class="container">
-            <%@include file="../Footer/footer.jsp" %>
-        </div>
+        <%@include file="../Footer/footer.jsp" %>
     </body>
 </html>
 

@@ -30,7 +30,7 @@ public class adminQuery {
      * @return La stringa che rappresenta la query
      */
     public static String numberRequestOfAssistanceInAState(int stato){
-        return "SELECT COUNT (id) AS numRichieste FROM Assistenza WHERE stato = "+stato+";";
+        return "SELECT COUNT(id) AS numRichieste FROM Assistenza WHERE stato = "+stato+";";
     }
     
     /**
@@ -41,6 +41,6 @@ public class adminQuery {
      * @return La stringa che rappresenta la query
      */
     public static String numberRequestOfAssistanceInAStateOfSpecificAdministrator(int stato,int id){
-        return "SELECT COUNT (id) AS numRichieste FROM Assistenza WHERE stato = "+stato+" AND idAmministratore="+id+";";
+        return "SELECT COUNT(id) AS numRichieste FROM Assistenza WHERE stato = "+stato+" AND idAmministratore="+id+";";
     }
 }

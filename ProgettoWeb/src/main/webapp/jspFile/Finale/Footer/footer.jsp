@@ -4,22 +4,17 @@
     Author     : mattia
 --%>
 
-<footer class="footer footer-fixed-bottom">
-    <div class="row justify-content-center">
-        <div class="col-2">
-            <a href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Footer/sviluppatori.jsp">Chi siamo</a>
-        </div>
-        <div class="col-2">
-            <a href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Footer/sviluppatori.jsp#findUs">Dove siamo</a>
-        </div>
-        <div class="col-2">
-            <a href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Policy/Privacy/privacyPolicy.jsp">Privacy policies</a>
-        </div>
-        <div class="col-2">
-            <a href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Policy/Regolamento/condizioniGeneraliDiVendita.jsp">Condizioni Generali di Vendita</a>
-        </div>
-        <div class="col-2">
-            <a href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Footer/assistenza.jsp">Assistenza</a>
-        </div>
+<style>
+    .col-2:hover, .col-3:hover {
+        background-color: lightgray;
+    }
+</style>
+
+<footer class="footer">
+    <div class="row text-center">
+        <a class="col-3" href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Footer/sviluppatori.jsp">Chi siamo</a>
+        <a class="col-2" href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Footer/sviluppatori.jsp#findUs">Dove siamo</a>
+        <a class="col-2" href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Policy/Privacy/privacyPolicy.jsp">Privacy policies</a>
+        <a class="col-2" href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Policy/Regolamento/condizioniGeneraliDiVendita.jsp">Condizioni Generali di Vendita</a>
     </div>
 </footer>

@@ -14,6 +14,7 @@
 <html>
     <jsp:useBean id="listacategoriesessione" class="it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria" scope="session" />
     <%--<jsp:useBean id="utenteSessione" class="it.progettoWeb.java.database.Model.Utente.ModelloUtente" scope="session" />--%>
+    <jsp:useBean id="listaOggetti" class="it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto" scope="request" />
     <jsp:useBean id="listaImmaginiOggetto" class="it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto" scope="request" />
     <head>
         <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
@@ -31,14 +32,12 @@
             <div class="row rowListaOggetto">
                 <h2>Oggetti che potrebbero piacerti</h2>
             </div>
-            <%--<img src="${listaImmaginiOggetto.get(0).getSrc()}" alt="NO IMMAGINE" />--%>
+            
             <c:set var="limitColum" value="${4}" scope="page" />
             <%@include file="../Components/Liste/ListaOggetto/testListaOggetto.jsp" %>
         </div>
         
-        <div class="container">
-            <%@include file="../Footer/footer.jsp" %>
-        </div>
+        <%@include file="../Footer/footer.jsp" %>
         
         <!--- 2017-11-08 --->
         <script type="text/javascript">

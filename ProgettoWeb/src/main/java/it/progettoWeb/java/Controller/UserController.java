@@ -45,6 +45,7 @@ import javax.servlet.http.Cookie;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 
 /**
  *
@@ -141,16 +142,17 @@ public class UserController extends HttpServlet {
 
             try {
                 ModelloUtente utenteSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
-
+                
                 if(utenteSessione.getId() != -1)
                 {
                     if(daoRecensioneV.reviewOrNotSeller(idUtente, utenteSessione.getId()) > 0)
-                        request.setAttribute("utenteSessione", utenteSessione);
+                        request.setAttribute("canReviewsN", true);
+                    else
+                        request.setAttribute("canReviewsN", false);
                 }
             } catch (NullPointerException e) {}
-
-            //request.setAttribute("utenteSessione", recensioniVenditori.getR().get(0));
-
+            
+            request.setAttribute("canUploadImages", false);
             request.setAttribute("venditore", venditore);
             request.setAttribute("recensioni", recensioni);
             request.setAttribute("listaNegozi", listaNegozi);
@@ -179,13 +181,7 @@ public class UserController extends HttpServlet {
                 utente.setMail(newEmail);
 
                 daoUtente.updateUserEmailByUserID(utente);
-
-
-
-                System.out.println("PREEMAIL - Update Email");
-                /*---2017-12-02---SendEmail.sendMail(utente.getMail(), 1);*/
-                /*---2017-12-04---*/SendEmail.updateEmail(oldMail, newEmail);
-                System.out.println("EMAIL - Update Email");
+                SendEmail.updateEmail(oldMail, newEmail);
             }
             response.sendRedirect("UserController?action=infoCurrentUser");
             return;
@@ -206,16 +202,17 @@ public class UserController extends HttpServlet {
 
             try {
                 ModelloUtente utenteSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
-
+                
                 if(utenteSessione.getId() != -1)
                 {
                     if(daoRecensioneN.reviewOrNotStore(idNegozio, utenteSessione.getId()) > 0)
-                        request.setAttribute("utenteSessione", utenteSessione);
+                        request.setAttribute("canReviewsS", true);
+                    else
+                        request.setAttribute("canReviewsS", false);
                 }
             } catch (NullPointerException e) {}
-
-            //request.setAttribute("utenteSessione", recensioniNegozi.getR().get(0));
-
+            
+            request.setAttribute("canUploadImages", false);
             request.setAttribute("negozio", negozio);
             request.setAttribute("immagine", immagine);
             request.setAttribute("indirizzo", indirizzo);
@@ -368,7 +365,7 @@ public class UserController extends HttpServlet {
             throws ServletException, IOException {
 
 
-        String forward="";
+        String forward = HOME_PAGE;
         String action = request.getParameter("action");
 
         if (action.equalsIgnoreCase("selectUser")){
@@ -384,20 +381,36 @@ public class UserController extends HttpServlet {
                 Cookie ck=new Cookie("user",String.valueOf(utente.getId()));//creating cookie object
                 ck.setMaxAge(-1);
                 response.addCookie(ck);//adding cookie in the response
+                
+                try
+                {
+                    ModelloListeOrdine carrelloInSessione = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
 
-                ModelloListeOrdine carrelloInSessione = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
-                if(carrelloInSessione.getSize() > 0)
-                    for(ModelloOrdine ordine : carrelloInSessione.getList())
-                    {
-                        ordine.setIdUtente(utente.getId());
-                        daoOrdine.insertObjectInCart(ordine);
-                    }
+                    for(ModelloOrdine ordineInCU : (daoOrdine.selectOrdersComplete(utente.getId(), 0)))
+                        for(Iterator<ModelloOrdine> iterator = carrelloInSessione.getList().iterator(); iterator.hasNext();)
+                        {
+                            ModelloOrdine ordineInCIS = iterator.next();
+                            if(ordineInCIS.getIdOggetto().equalsIgnoreCase(ordineInCU.getIdOggetto()))
+                            {
+                                daoOrdine.changeOrderQuantity(
+                                        ordineInCU.getIdOrdine(), 
+                                        ordineInCU.getIdOggetto(), 
+                                        ordineInCU.getIdUtente(), 
+                                        (ordineInCU.getQuantita() + ordineInCIS.getQuantita()));
+                                
+                                iterator.remove();
+                            }
+                        }
 
-                ModelloListeOrdine carrello = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 0));
-                request.getSession().removeAttribute("carrelloSessione");
-                request.getSession().setAttribute("carrelloSessione", carrello);
+                    for(ModelloOrdine ordineInCIS : carrelloInSessione.getList())
+                        daoOrdine.insertObjectInCart(ordineInCIS);
+
+                    carrelloInSessione = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 0));
+                    request.getSession().removeAttribute("carrelloSessione");
+                    request.getSession().setAttribute("carrelloSessione", carrelloInSessione);
+                }
+                catch (Exception e) { System.out.println("error message = " + e.toString()); forward = ERROR_PAGE; request.setAttribute("errore", "404 Pagina non trovata"); }
             }
-            forward = HOME_PAGE;
         }
         else if(action.equalsIgnoreCase("addUser")){
 
@@ -427,12 +440,7 @@ public class UserController extends HttpServlet {
                     {
                         utente.setUtenteType(0);
                         daoUtente.addUser(utente);
-
-
-                        System.out.println("PREEMAIL - Add User " + utente.getMail());
-                        /*---2017-12-02---SendEmail.sendMail(utente.getMail(), 0);*/
-                        /*---2017-12-04---*/SendEmail.addUser(utente.getMail());
-                        System.out.println("EMAIL - Add User");
+                        SendEmail.addUser(utente.getMail());
 
                         forward = HOME_PAGE;
                     }
@@ -460,12 +468,7 @@ public class UserController extends HttpServlet {
                 else {
                     utente.setPassword(newPassword);
                     daoUtente.updateUserPasswordByUserID(utente);
-
-
-                    System.out.println("PREEMAIL - Update Password");
-                    /*---2017-12-02---SendEmail.sendMail(utente.getMail(), 3);*/
-                    /*---2017-12-04---*/SendEmail.updatePassword(utente.getMail());
-                    System.out.println("EMAIL - Update Password");
+                    SendEmail.updatePassword(utente.getMail());
 
                     response.sendRedirect("UserController?action=infoCurrentUser");
                     return;
@@ -480,9 +483,7 @@ public class UserController extends HttpServlet {
 
 
             System.out.println("PREEMAIL - Become Seller");
-            /*---2017-12-02---SendEmail.sendMail(utente.getMail(), 4);*/
-            /*---2017-12-04---*/SendEmail.becomeSeller(utente.getMail());
-            System.out.println("EMAIL - Become Seller");
+            SendEmail.becomeSeller(utente.getMail());
 
             forward = USERPAGE;
         }

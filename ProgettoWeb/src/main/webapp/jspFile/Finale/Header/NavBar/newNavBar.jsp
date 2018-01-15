@@ -48,6 +48,28 @@ function myFunction() {
         }
     });
 </script>
+<style>
+    .dropdown-menu.show {
+        width: 100%;
+        display: inline;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .jumbotron {
+        margin: 0;
+        height: 100%;
+    }
+    
+    #del1 {
+        padding: 0;
+        margin: 0;
+    }
+    
+    .col-2:hover {
+        background-color: lightgray;
+    }
+</style>
 
 <nav class="navbar fixed-top navbar-default bg-light navbar-expand-lg" role="navigation">
     <a class="navbar-brand" href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Index/index.jsp">
@@ -61,27 +83,31 @@ function myFunction() {
         <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" id="category" type="button" data-toggle="dropdown">Categorie</button>
             <div class="dropdown-menu">
-                <h4>Categorie</h4>
-                <c:set var="i" value="${0}" />
-                <c:forEach items="${listacategoriesessione.getList()}" var="cat">
-                    <c:if test="${i == 0}">
-                        <div class="row">
-                    </c:if>
-                            <div class="col-2">
-                                <c:url value="/CategoriaController" var="catUrl">
-                                    <c:param name="id" value="${cat.getId()}" />
-                                </c:url>
-                                <a class="nav-link" href="${catUrl}"><c:out value="${cat.getNome()}"/></a>
-                            </div>
-                            <c:set var="i" value="${i+1}" />
-                            <c:if test="${i == 6}">
-                                <c:set var="i" value="${0}" />
-                                </div>
+                <div class="jumbotron">
+                    <div class="container" id="del1">
+                        <h1 class="display-3">Categorie</h1>
+                        <c:set var="i" value="${0}" />
+                        <c:forEach items="${listacategoriesessione.getList()}" var="cat">
+                            <c:if test="${i == 0}">
+                                <div class="row">
                             </c:if>
-                </c:forEach>
-                <c:if test="${i != 0}">
+                                    <div class="col-2" style="border-radius: 1rem;">
+                                        <c:url value="/CategoriaController" var="catUrl">
+                                            <c:param name="id" value="${cat.getId()}" />
+                                        </c:url>
+                                        <a class="nav-link" href="${catUrl}"><c:out value="${cat.getNome()}"/></a>
+                                    </div>
+                                    <c:set var="i" value="${i+1}" />
+                                    <c:if test="${i == 6}">
+                                        <c:set var="i" value="${0}" />
+                                        </div>
+                                    </c:if>
+                        </c:forEach>
+                        <c:if test="${i != 0}">
+                            </div>
+                        </c:if>
                     </div>
-                </c:if>
+                </div>
             </div>
         </div>
         <div class="dropdown">
@@ -98,7 +124,7 @@ function myFunction() {
                 <div class="find">
                     <input class="form-control" id="expand" type="text" placeholder="Search">
                 </div>
-                <button type="submit" class="btn btn-default" id="nopad">
+                <button type="submit" class="btn btn-default btn-lg" id="nopad">
                     <i class="material-icons">search</i>
                 </button>
             </div>
@@ -186,6 +212,9 @@ function myFunction() {
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
             <form action="${pageContext.request.contextPath}/UserController?action=selectUser" method="POST">
+                <div style="display: none">
+                    <input type="text" id="fromPage" name="fromPage" value="${pageContext.request.requestURI}"/>
+                </div>
             <div class="modal-body">
                 <div>
                     <i class="large material-icons">email</i>

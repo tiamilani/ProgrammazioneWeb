@@ -14,7 +14,7 @@
     </head>
     <body>
         <div class="container">
-            <%@include file="../../Header/NavBar/navBar.jsp" %>
+            <%@include file="../../Header/NavBar/newNavBar.jsp" %>
             <hr/>
         </div>
             
@@ -166,9 +166,6 @@
             </ol>
         </div>
             
-        <div class="container">
-            <hr>
-            <%@include file="../../Footer/footer.jsp" %>
-        </div>
+        <%@include file="../../Footer/footer.jsp" %>
     </body>
 </html>

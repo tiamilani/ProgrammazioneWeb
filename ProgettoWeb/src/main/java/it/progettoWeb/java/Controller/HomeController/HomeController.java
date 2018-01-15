@@ -164,10 +164,9 @@ public class HomeController extends HttpServlet {
             pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectRandomObjectsAndImage(12);
             ModelloListeOggetto listaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
             ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
-            request.setAttribute("ListaOggetti", listaOggetti);
+            request.setAttribute("listaOggetti", listaOggetti);
             request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
-
-            }
+        }
         else {
              //Qui va mostrata una pagina di errore
 

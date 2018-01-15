@@ -170,9 +170,6 @@
             <button class="btn btn-outline-primary buttonSpace" type="button" onclick="saveChanges(2)">Procedi col pagamento</button>
         </div>
             
-        <div class="container">
-            <hr>
-            <%@include file="../Footer/footer.jsp" %>
-        </div>
+        <%@include file="../Footer/footer.jsp" %>
     </body>
 </html>

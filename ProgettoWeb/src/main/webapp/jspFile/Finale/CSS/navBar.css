@@ -58,7 +58,7 @@ input{
     transition: width 0.2s ease-in-out;
 }
 
-#expand:focus{
+#expand:hover {
     width: 100%;
 }
 

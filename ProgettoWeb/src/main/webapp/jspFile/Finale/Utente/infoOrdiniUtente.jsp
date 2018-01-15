@@ -120,11 +120,11 @@
                             </div>
                             <div class="row">
                                 <div class="col-4 mx-auto">
-                                    <form name="richiestaAssistenza" action="#" method="POST">
+                                    <form id="richiestaAssistenza" name="richiestaAssistenza" action="${pageContext.request.contextPath}/AssistenzaController?action=createAssistance" method="POST">
                                         <input type="hidden" id="idOrdine" name="idOrdine" value="${ordine.getIdOrdine()}">
                                         <input type="hidden" id="idOggetto" name="idOggetto" value="${ordine.getIdOggetto()}">
                                         <input type="hidden" id="idNegozio" name="idNegozio" value="${ordine.getIdNegozio()}">
-                                        <button ction="submit" type="submit" class="btn btn-outline-primary btn-block">
+                                        <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" dclass="btn btn-outline-primary btn-block" data-target="#callAssistance">
                                             Richiedi assistenza per questo oggetto
                                         </button>
                                     </form>
@@ -215,11 +215,11 @@
                                 </div>
                                 <div class="row">
                                 <div class="col-4 mx-auto">
-                                    <form name="richiestaAssistenza" action="#" method="POST">
+                                    <form id="richiestaAssistenza" name="richiestaAssistenza" action="${pageContext.request.contextPath}/AssistenzaController?action=createAssistance" method="POST">
                                         <input type="hidden" id="idOrdine" name="idOrdine" value="${ordine.getIdOrdine()}">
                                         <input type="hidden" id="idOggetto" name="idOggetto" value="${ordine.getIdOggetto()}">
                                         <input type="hidden" id="idNegozio" name="idNegozio" value="${ordine.getIdNegozio()}">
-                                        <button ction="submit" type="submit" class="btn btn-outline-primary btn-block">
+                                        <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" dclass="btn btn-outline-primary btn-block" data-target="#callAssistance">
                                             Richiedi assistenza per questo oggetto
                                         </button>
                                     </form>
@@ -287,11 +287,11 @@
                                 </div>
                                 <div class="row">
                                 <div class="col-4 mx-auto">
-                                    <form name="richiestaAssistenza" action="#" method="POST">
+                                    <form id="richiestaAssistenza" name="richiestaAssistenza" action="${pageContext.request.contextPath}/AssistenzaController?action=createAssistance" method="POST">
                                         <input type="hidden" id="idOrdine" name="idOrdine" value="${ordine.getIdOrdine()}">
                                         <input type="hidden" id="idOggetto" name="idOggetto" value="${ordine.getIdOggetto()}">
                                         <input type="hidden" id="idNegozio" name="idNegozio" value="${ordine.getIdNegozio()}">
-                                        <button ction="submit" type="submit" class="btn btn-outline-primary btn-block">
+                                        <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" dclass="btn btn-outline-primary btn-block" data-target="#callAssistance">
                                             Richiedi assistenza per questo oggetto
                                         </button>
                                     </form>
@@ -359,11 +359,11 @@
                                 </div>
                                 <div class="row">
                                 <div class="col-4 mx-auto">
-                                    <form name="richiestaAssistenza" action="#" method="POST">
+                                    <form id="richiestaAssistenza" name="richiestaAssistenza" action="${pageContext.request.contextPath}/AssistenzaController?action=createAssistance" method="POST">
                                         <input type="hidden" id="idOrdine" name="idOrdine" value="${ordine.getIdOrdine()}">
                                         <input type="hidden" id="idOggetto" name="idOggetto" value="${ordine.getIdOggetto()}">
                                         <input type="hidden" id="idNegozio" name="idNegozio" value="${ordine.getIdNegozio()}">
-                                        <button ction="submit" type="submit" class="btn btn-outline-primary btn-block">
+                                        <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" dclass="btn btn-outline-primary btn-block" data-target="#callAssistance">
                                             Richiedi assistenza per questo oggetto
                                         </button>
                                     </form>
@@ -376,9 +376,25 @@
                     </c:when>
             </c:choose>
         </div>
-        
-        <div class="container">
-            <%@include file="../Footer/footer.jsp" %>
-        </div>
+
+        <%@include file="../Footer/footer.jsp" %>
     </body>
 </html>
+
+
+<div id="callAssistance" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title"><b>Scrivi la tua richiesta di assistenza</b></span>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <textarea cols="50" rows="5" form="richiestaAssistenza" id="testoAssistenza" name="testoAssistenza" required></textarea>
+            </div>
+            <div class="modal-footer">
+                <button form="richiestaAssistenza" type="submit" class="col-5 paddingNav btn btn-outline-primary my-2 my-sm-0">INVIA RICHIESTA</button>
+            </div>
+        </div>
+    </div>
+</div>
