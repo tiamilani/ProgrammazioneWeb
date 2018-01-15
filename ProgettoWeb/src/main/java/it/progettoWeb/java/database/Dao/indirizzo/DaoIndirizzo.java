@@ -200,4 +200,22 @@ public class DaoIndirizzo {
         } catch (SQLException e) {
         }
     }
+
+    public boolean addressExists(ModelloIndirizzo indirizzo, int idU) {
+        int indirizzi = 0;
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.selectNumberOfAddress(indirizzo,idU));
+            
+            while(rs.next())
+                indirizzi = rs.getInt("numIndirizzi");
+        } catch(SQLException e) {}
+        
+        if(indirizzi == 0)
+            return false;
+        else
+            return true;
+    }
 }

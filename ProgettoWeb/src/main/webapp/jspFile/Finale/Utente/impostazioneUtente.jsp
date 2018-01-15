@@ -125,42 +125,42 @@
                 <input type="hidden" name="action" value="addAddr">
                 <div class="modal-body">
                     <div>
+                        <p>regione</p>
                         <i class="large material-icons">person_outline</i>
                         <input class="col-10 modal-input" type="text" id="regione" name="regione" required>
-                        <label for="regione">regione</label>
                     </div>
                     <div>
+                        <p>Provincia</p>
                         <i class="large material-icons">person_outline</i>
                         <input class="col-10 modal-input" type="text" id="provincia" name="provincia" required>
-                        <label for="provincia">Provincia</label>
                     </div>
                     <div>
+                        <p>Citt&agrave;</p>
                         <i class="large material-icons">person_outline</i>
                         <input class="col-10 modal-input" type="text" id="citta" name="citta" required>
-                        <label for="citta">Citt&agrave;</label>
                     </div>
                     <div>
+                        <p>Via</p>
                         <i class="large material-icons">person_outline</i>
                         <input class="col-10 modal-input" type="text" id="via" name="via" required>
-                        <label for="via">Via</label>
                     </div>
                     <div>
+                        <p>N. Civico</p>
                         <i class="large material-icons">person_outline</i>
                         <input class="col-10 modal-input" type="text" id="nCivico" name="nCivico" required>
-                        <label for="nCivico">N. Civico</label>
                     </div>
                     <div>
+                        <p>Interno</p>
                         <i class="large material-icons">person_outline</i>
                         <input class="col-10 modal-input" type="text" id="interno" name="interno" required>
-                        <label for="nCivico">Interno</label>
                     </div>
                     <div style="display: none;">
                         <input class="col-10 modal-input" type="text" id="latitudine" name="latitudine" required>
-                        <label for="latitudine">Latitudine</label>
+                        <p>Latitudine</p>
                     </div>
                     <div style="display: none;">
                         <input class="col-10 modal-input" type="text" id="longitudine" name="longitudine" required>
-                        <label for="longitudine">longitudine</label>
+                        <p>longitudine</p>
                     </div>
                     <%--<button class="col paddingNav btn btn-outline-primary" onclick="localizza()">Calcola</button>--%>
                     <p>Gli indirizzi vengono considerati automaticamente in Italia<p>

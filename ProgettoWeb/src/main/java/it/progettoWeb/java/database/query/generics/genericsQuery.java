@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package it.progettoWeb.java.database.query.generics;
+
+import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
+
 /**
  *
  * @author mattia
@@ -414,5 +417,17 @@ public class genericsQuery {
     public static String selectReviewsByDataV(int idV, int idUtente, String testo, int valutazione) {
         return "SELECT * FROM RecensioneVenditore WHERE idVenditore = '" + idV + "' AND "
                 + "idUtente=" + idUtente + " AND testo='" + testo + "' AND valutazione=" + valutazione + ";";
+    }
+
+    public static String selectNumberOfAddress(ModelloIndirizzo indirizzo, int idU) {
+        return "select COUNT(idI) AS numIndirizzi "
+                + "from Indirizzo NATURAL JOIN IndirizzoUtente "
+                + "WHERE stato='"+indirizzo.getStato()+"' AND "
+                + "regione='"+indirizzo.getRegione()+"' AND "
+                + "provincia='"+indirizzo.getProvincia()+"' AND "
+                + "citta='"+indirizzo.getCitta()+"' AND "
+                + "via='"+indirizzo.getVia()+"' AND "
+                + "nCivico="+indirizzo.getnCivico()+" AND "
+                + "idU="+idU+";";
     }
 }
