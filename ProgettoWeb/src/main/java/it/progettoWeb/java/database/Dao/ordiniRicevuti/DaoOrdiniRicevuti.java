@@ -10,6 +10,7 @@ package it.progettoWeb.java.database.Dao.ordiniRicevuti;
  * @author mattia
  */
 
+import it.progettoWeb.java.database.Model.Ordine.ModelloOrdine;
 import it.progettoWeb.java.database.Model.ordiniRicevuti.ModelloOrdiniRicevuti;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -76,5 +77,25 @@ public class DaoOrdiniRicevuti {
         } catch(SQLException e) {}
         
         return ordini;
+    }
+    
+    /*---2018-01-12---*/
+    
+    /**
+     * @author fbrug
+     * Aggiunge un elemento nella tabella OrdiniRicevuti
+     * @param idOrdine: intero rappresentante l'ID dell'ordine da aggiungere
+     * @param idVenditore: intero rappresentane l'ID del venditore (utente) da aggiungere
+     */
+    public void addOrdineRicevuto(int idOrdine, int idVenditore)
+    {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(sellersQuery.addOrdineRicevuto(idOrdine, idVenditore));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("ERRORE = " + e.toString());
+        }
     }
 }

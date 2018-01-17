@@ -19,135 +19,7 @@
         </div>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-6">
-                    <h1>Ordini ricevuti</h1>
-                    <div class="row">
-                        <div class="col-6">
-                            <p>Ordina per: </p>
-                        </div>
-                        <div class="col-6">
-                            <p>Cerca codice ordine:</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <form id="formOptionOrder" name="formOptionOrder" action="${pageContext.request.contextPath}/UserController" method="GET">
-                                <input type="hidden" id="action" name="action" value="gestisciNegozi">
-                                <input type="hidden" id="orderStore" name="orderStore" value="${orderStore}">
-                                <div class="row">
-                                    <c:choose>
-                                        <c:when test="${order == 'data'}">
-                                            <select id="order" name="order" class="form-control" id="exampleFormControlSelect1" onchange="this.form.submit()">
-                                                <option value="data" selected="selected">Per data</option>
-                                                <option value="tipo">Per tipo</option>
-                                                <option value="pagato">Pagamento ricevuto</option>
-                                                <option value="lavorazione">In lavorazione</option>
-                                                <option value="spediti">Spediti</option>
-                                            </select>
-                                        </c:when>
-                                        <c:when test="${order == 'tipo'}">
-                                            <select id="order" name="order" class="form-control" id="exampleFormControlSelect1" onchange="this.form.submit()">
-                                                <option value="data">Per data</option>
-                                                <option value="tipo" selected="selected">Per tipo</option>
-                                                <option value="pagato">Pagamento ricevuto</option>
-                                                <option value="lavorazione">In lavorazione</option>
-                                                <option value="spediti">Spediti</option>
-                                            </select>
-                                        </c:when>
-                                        <c:when test="${order == 'pagato'}">
-                                            <select id="order" name="order" class="form-control" id="exampleFormControlSelect1" onchange="this.form.submit()">
-                                                <option value="data">Per data</option>
-                                                <option value="tipo">Per tipo</option>
-                                                <option value="pagato" selected="selected">Pagamento ricevuto</option>
-                                                <option value="lavorazione">In lavorazione</option>
-                                                <option value="spediti">Spediti</option>
-                                            </select>
-                                        </c:when>
-                                        <c:when test="${order == 'lavorazione'}">
-                                            <select id="order" name="order" class="form-control" id="exampleFormControlSelect1" onchange="this.form.submit()">
-                                                <option value="data">Per data</option>
-                                                <option value="tipo">Per tipo</option>
-                                                <option value="pagato">Pagamento ricevuto</option>
-                                                <option value="lavorazione" selected="selected">In lavorazione</option>
-                                                <option value="spediti">Spediti</option>
-                                            </select>
-                                        </c:when>
-                                        <c:when test="${order == 'spediti'}">
-                                            <select id="order" name="order" class="form-control" id="exampleFormControlSelect1" onchange="this.form.submit()">
-                                                <option value="data">Per data</option>
-                                                <option value="tipo">Per tipo</option>
-                                                <option value="pagato">Pagamento ricevuto</option>
-                                                <option value="lavorazione">In lavorazione</option>
-                                                <option value="spediti" selected="selected">Spediti</option>
-                                            </select>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <h2>No order selected</h2>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-6">
-                            <form id="formOptionOrder" name="formOptionOrder" action="${pageContext.request.contextPath}/UserController" method="GET">
-                                <input type="hidden" id="action" name="action" value="gestisciNegozi">
-                                <input type="text" id="ricecaIdOrdine" name="ricecaIdOrdine" placeholder="Id ordine" required>
-                            </form>
-                        </div>
-                    </div>
-                    <hr>
-                    <c:choose>
-                        <c:when test="${order == 'data'}">
-                            <h2>Ordini per data</h2>
-                            <c:set var="i" scope="page" value="${0}" />
-                            <%--<c:forEach items="${listaOrdini.getList()}" var="ordine" >--%>
-                                    <div class="row">
-                                        <div class="col-2">
-                                            <p>Oggetto:<br></p>
-                                            Iphone
-                                        </div>
-                                        <div class="col-2">
-                                            <p>Compratore: </p>
-                                            un coglione
-                                        </div>
-                                        <div class="col-2">
-                                            <p>Acquistato il:</p>
-                                            ieri
-                                        </div>
-                                        <div class="col-2">
-                                            <p>Importo:</p>
-                                            40000
-                                        </div>
-                                        <div class="col-2">
-                                            <p>Stato attuale:</p>
-                                            pagamento ricevuto
-                                            <%--<c:choose>
-                                                <c:when test="${ordine.getStato() == 1}">
-                                                    <p>Pagamento ricevuto</p>
-                                                </c:when>
-                                                <c:when test="${ordine.getStato() == 2}">
-                                                    <p>Ordine in lavorazione</p>
-                                                </c:when>
-                                                <c:when test="${ordine.getStato() == 3}">
-                                                    <p><b>Ordine spedito</b></p>
-                                                    <p>Tracking: <c:out value="${ordine.getCodiceTracking()}" /></p>
-                                                </c:when>
-                                                <c:when test="${ordine.getStato() == 4}">
-                                                    <p>Ordine ricevuto</p>
-                                                </c:when>
-                                            </c:choose>--%>
-                                        </div>
-                                        <div class="col-2">
-                                            <a href="#" method="GET" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">build</i></a>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                <%--<c:set var="i" scope="page" value="${i+1}" />
-                            </c:forEach>--%>
-                        </c:when>
-                    </c:choose>
-                </div>
-                <div class="col-6">
+                <div class="col-12">
                     <h1>Negozi</h1>
                     <div class="row">
                         <div class="col-6">
@@ -268,20 +140,33 @@
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
-                                        <div class="col-2">
-                                            <form action="#" id="formGestisciNegozio" name="formGestisciNegozio" method="GET">
-                                                <input type="hidden" name="action" value="gestisciNegozio">
-                                                <input type="hidden" name="id" value="${negozio.getIdI()}">
-                                                <button type="submit" value="submit" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">build</i></button>
-                                            </form>
-                                        </div>
-                                        <div class="col-2">
-                                            <form action="#" id="formCancNegozio" name="formCancNegozio" method="GET">
-                                                <input type="hidden" name="action" value="cancNegozio">
-                                                <input type="hidden" name="id" value="${negozio.getIdI()}">
-                                                <button type="submit" value="submit" class="btn btn-outline-danger buttonSpace btn-block"><i class="Small material-icons">close</i></button>
-                                            </form>
-                                        </div>
+                                        <c:choose>
+                                            <c:when test="${negozio.getAttivo() == 1}">
+                                                <div class="col-2">
+                                                    <form action="${pageContext.request.contextPath}/NegozioController" id="formGestisciNegozio" name="formGestisciNegozio" method="POST">
+                                                        <input type="hidden" name="action" value="gestisciNegozio">
+                                                        <input type="hidden" name="id" value="${negozio.getId()}">
+                                                        <button type="submit" value="submit" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">build</i></button>
+                                                    </form>
+                                                </div>
+                                                <div class="col-2">
+                                                    <form action="${pageContext.request.contextPath}/NegozioController" id="formCancNegozio" name="formCancNegozio" method="POST">
+                                                        <input type="hidden" name="action" value="cancNegozio">
+                                                        <input type="hidden" name="id" value="${negozio.getId()}">
+                                                        <button type="submit" value="submit" class="btn btn-outline-danger buttonSpace btn-block"><i class="Small material-icons">close</i></button>
+                                                    </form>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="col-4">
+                                                    <form action="${pageContext.request.contextPath}/NegozioController" id="formCancNegozio" name="formCancNegozio" method="POST">
+                                                        <input type="hidden" name="action" value="apriNegozio">
+                                                        <input type="hidden" name="id" value="${negozio.getId()}">
+                                                        <button type="submit" value="submit" class="btn btn-outline-success buttonSpace btn-block"><i class="Small material-icons">lock_open</i> Riapri</button>
+                                                    </form>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                     <hr>
                                 <c:set var="i" scope="page" value="${i+1}" />
@@ -315,20 +200,33 @@
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
-                                        <div class="col-2">
-                                            <form action="#" id="formGestisciNegozio" name="formGestisciNegozio" method="GET">
-                                                <input type="hidden" name="action" value="gestisciNegozio">
-                                                <input type="hidden" name="id" value="${negozio.getIdI()}">
-                                                <button type="submit" value="submit" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">build</i></button>
-                                            </form>
-                                        </div>
-                                        <div class="col-2">
-                                            <form action="#" id="formCancNegozio" name="formCancNegozio" method="GET">
-                                                <input type="hidden" name="action" value="cancNegozio">
-                                                <input type="hidden" name="id" value="${negozio.getIdI()}">
-                                                <button type="submit" value="submit" class="btn btn-outline-danger buttonSpace btn-block"><i class="Small material-icons">close</i></button>
-                                            </form>
-                                        </div>
+                                        <c:choose>
+                                            <c:when test="${negozio.getAttivo() == 1}">
+                                                <div class="col-2">
+                                                    <form action="${pageContext.request.contextPath}/NegozioController" id="formGestisciNegozio" name="formGestisciNegozio" method="POST">
+                                                        <input type="hidden" name="action" value="gestisciNegozio">
+                                                        <input type="hidden" name="id" value="${negozio.getId()}">
+                                                        <button type="submit" value="submit" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">build</i></button>
+                                                    </form>
+                                                </div>
+                                                <div class="col-2">
+                                                    <form action="${pageContext.request.contextPath}/NegozioController" id="formCancNegozio" name="formCancNegozio" method="POST">
+                                                        <input type="hidden" name="action" value="cancNegozio">
+                                                        <input type="hidden" name="id" value="${negozio.getId()}">
+                                                        <button type="submit" value="submit" class="btn btn-outline-danger buttonSpace btn-block"><i class="Small material-icons">close</i></button>
+                                                    </form>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="col-4">
+                                                    <form action="${pageContext.request.contextPath}/NegozioController" id="formCancNegozio" name="formCancNegozio" method="POST">
+                                                        <input type="hidden" name="action" value="apriNegozio">
+                                                        <input type="hidden" name="id" value="${negozio.getId()}">
+                                                        <button type="submit" value="submit" class="btn btn-outline-success buttonSpace btn-block"><i class="Small material-icons">lock_open</i> Riapri</button>
+                                                    </form>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                     <hr>
                                 <c:set var="i" scope="page" value="${i+1}" />

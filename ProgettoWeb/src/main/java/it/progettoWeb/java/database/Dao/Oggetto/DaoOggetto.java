@@ -5594,14 +5594,14 @@ public class DaoOggetto {
      * @param dataFineSconto: indica la data in cui terminerà lo sconto applicato all'oggetto
      * @param idCategoria: intero rappresentante l'ID della categoria di cui l'oggetto fa parte
      */
-    public void insertObject(int idNegozio, String nomeOggetto, double prezzoOggetto, 
+    public void insertObject(String id,int idNegozio, String nomeOggetto,String nomeDownCase, double prezzoOggetto, 
             String descrizioneOggetto, int ritiroInNegozio, int disponibilita, int statoDisponibilita, 
             double sconto, Date dataFineSconto, int idCategoria)
     {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.insertObject(idNegozio, nomeOggetto, prezzoOggetto, descrizioneOggetto, 
+            statement.executeUpdate(sellersQuery.insertObject(id,idNegozio, nomeOggetto,nomeDownCase, prezzoOggetto, descrizioneOggetto, 
                     ritiroInNegozio, disponibilita, statoDisponibilita, sconto, dataFineSconto, idCategoria));
         } catch(SQLException e) {}
     }
@@ -5609,15 +5609,14 @@ public class DaoOggetto {
     /**
      * @author fbrug
      * Rimuovere un oggetto da un proprio negozio
-     * @param idNegozio: intero rapprensentante l'ID del negozio in cui eliminare l'oggetto
      * @return String: conferma avvenuta operazione
      */
-    public void deleteObject(int idNegozio)
+    public void deleteObject(String idOggetto)
     {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.deleteObject(idNegozio));
+            statement.executeUpdate(sellersQuery.deleteObject(idOggetto));
         }
         catch (SQLException e) {}
     }
@@ -5625,10 +5624,10 @@ public class DaoOggetto {
     /**
      * @author fbrug
      * Modificare il prezzo di un oggetto di un proprio negozio
-     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui modificare il prezzo
      * @param prezzoOggetto: il nuovo prezzo dell'oggetto
      */
-    public void updateObjectPrice(int idOggetto, double prezzoOggetto)
+    public void updateObjectPrice(String idOggetto, double prezzoOggetto)
     {
         try
         {
@@ -5641,10 +5640,10 @@ public class DaoOggetto {
     /**
      * @author fbrug
      * Modificare lo sconto di un oggetto
-     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui modificare il prezzo
      * @param sconto: il nuovo sconto applicato all'oggetto
      */
-    public void updateObjectDiscount(int idOggetto, double sconto)
+    public void updateObjectDiscount(String idOggetto, double sconto)
     {
         try
         {
@@ -5657,15 +5656,15 @@ public class DaoOggetto {
     /**
      * @author fbrug
      * Aggiungere una immagine del profilo di un utente
-     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui inserire l'immagine
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui inserire l'immagine
      * @param imagePath: il path della nuova immagine
      */
-    public void insertObjectImage(int idOggetto, String imagePath)
+    public void insertObjectImage(String idOggetto, String imagePath)
     {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.insertObjectImage(idOggetto, imagePath));
+            statement.executeUpdate(sellersQuery.insertObjectImage(idOggetto, imagePath));
         }
         catch (SQLException e) {}
     }
@@ -5673,11 +5672,11 @@ public class DaoOggetto {
     /**
      * @author fbrug
      * Modificare l'immagine del profilo di un oggetto con un determinato ID oggetto
-     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui cambiare l'immagine
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui cambiare l'immagine
      * @param oldImagePath: il path dell'immagine da modificare
      * @param newImagePath: il path della nuova immagine
      */
-    public void updateObjectImage(int idOggetto, String oldImagePath, String newImagePath)
+    public void updateObjectImage(String idOggetto, String oldImagePath, String newImagePath)
     {
         try
         {
@@ -5687,18 +5686,34 @@ public class DaoOggetto {
         catch (SQLException e) {}
     }
     
-    /**
+     /**
      * @author fbrug
-     * Rimuovere l'immagine di un determinato oggetto
-     * @param idOggetto: intero rappresentante l'ID dell'oggetto a cui rimuovere l'immagine
-     * @param imagePath: il path dell'immagine da rimuovere
+     * Modificare la quantita' di un oggetto
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param newQuantity: intero rappresentante la nuova quantita' disponibile per l'oggetto in questione
      */
-    public void deleteObjectImage(int idOggetto, String imagePath)
+    public void updateObjectQuantity(String idOggetto, int newQuantity)
     {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.deleteObjectImage(idOggetto, imagePath));
+            statement.executeQuery(sellersQuery.updateObjectQuantity(idOggetto, newQuantity));
+        }
+        catch (SQLException e) {}
+    }
+    
+    /**
+     * @author fbrug
+     * Rimuovere l'immagine di un determinato oggetto
+     * @param idOggetto: string rappresentante l'ID dell'oggetto a cui rimuovere l'immagine
+     * @param imagePath: il path dell'immagine da rimuovere
+     */
+    public void deleteObjectImage(String idOggetto, String imagePath)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sellersQuery.deleteObjectImage(idOggetto, imagePath));
         }
         catch (SQLException e) {}
     }
@@ -8289,5 +8304,13 @@ public class DaoOggetto {
         }
         
         return Objects;
+    }
+
+    public void updateObject(ModelloOggetto object, String previusId) {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sellersQuery.updateObject(object, previusId));
+        } catch(SQLException e) {}
     }
 }

@@ -171,9 +171,6 @@ public class objectSelectedController extends HttpServlet {
             int idUtente = utenteSessione.getId();
         
             if (action.equals("add")) {
-                ModelloOrdine addElemento = new ModelloOrdine();
-                addElemento.setStato(0);
-                addElemento.setDataOrdine(new Timestamp(System.currentTimeMillis()));
                 
                 String jsonString = request.getParameter("shipType");
                 
@@ -185,17 +182,44 @@ public class objectSelectedController extends HttpServlet {
                 int negozio = Integer.parseInt(jsonObject.get("negozio").toString());
                 String oggetto = (String) jsonObject.get("oggetto");
                 
-                addElemento.setIdNegozio(negozio);
-                addElemento.setIdOggetto(oggetto);
-                addElemento.setIdUtente(idUtente);
-                addElemento.setPrezzoDiAcquisto(prezzo);
-                addElemento.setQuantita(quantita);
+                boolean alreadyInCart = false;
+                for(ModelloOrdine ordine : carrello.getList())
+                    if(ordine.getIdOggetto().equalsIgnoreCase(oggetto))
+                    {
+                        if(idUtente != -1)
+                            daoOrdine.changeOrderQuantity(ordine.getIdOrdine(), oggetto, ordine.getIdUtente(), (ordine.getQuantita() + quantita));
+                        
+                        carrello.getList().remove(ordine);
+                        ordine.setQuantita(ordine.getQuantita() + quantita);
+                        carrello.add(ordine);
+                        alreadyInCart = true;
+                        break;
+                    }
                 
-                carrello.add(addElemento);
+                if(!alreadyInCart)
+                {
+                    ModelloOrdine addElemento = new ModelloOrdine();
+                    
+                    addElemento.setStato(0);
+                    addElemento.setDataOrdine(new Timestamp(System.currentTimeMillis()));
+                    addElemento.setIdNegozio(negozio);
+                    addElemento.setIdOggetto(oggetto);
+                    addElemento.setIdUtente(idUtente);
+                    addElemento.setPrezzoDiAcquisto(prezzo);
+                    addElemento.setQuantita(quantita);
+                    
+                    if(carrello.getSize() > 0)
+                        addElemento.setIdOrdine(carrello.get(0).getIdOrdine());
+                    
+                    carrello.add(addElemento);
+                    
+                    if(idUtente != -1)
+                        daoOrdine.insertObjectInCart(addElemento);
+                }
+                
+                request.getSession().removeAttribute("carrelloSessione");
                 request.setAttribute("carrelloSessione", carrello);
-                
-                if(idUtente != -1)
-                    daoOrdine.insertObjectInCart(addElemento);
+                request.getSession().setAttribute("carrelloSessione", carrello);
             }
         } catch (NullPointerException e) {
             forward = ERROR_PAGE;

@@ -45,6 +45,7 @@ import javax.servlet.http.Cookie;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 
 /**
  *
@@ -364,7 +365,7 @@ public class UserController extends HttpServlet {
             throws ServletException, IOException {
 
 
-        String forward="";
+        String forward = HOME_PAGE;
         String action = request.getParameter("action");
 
         if (action.equalsIgnoreCase("selectUser")){
@@ -380,37 +381,36 @@ public class UserController extends HttpServlet {
                 Cookie ck=new Cookie("user",String.valueOf(utente.getId()));//creating cookie object
                 ck.setMaxAge(-1);
                 response.addCookie(ck);//adding cookie in the response
+                
+                try
+                {
+                    ModelloListeOrdine carrelloInSessione = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
 
-                ModelloListeOrdine carrelloInSessione = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
-                if(carrelloInSessione.getSize() > 0)
-                    for(ModelloOrdine ordine : carrelloInSessione.getList())
-                    {
-                        ordine.setIdUtente(utente.getId());
-                        daoOrdine.insertObjectInCart(ordine);
-                    }
+                    for(ModelloOrdine ordineInCU : (daoOrdine.selectOrdersComplete(utente.getId(), 0)))
+                        for(Iterator<ModelloOrdine> iterator = carrelloInSessione.getList().iterator(); iterator.hasNext();)
+                        {
+                            ModelloOrdine ordineInCIS = iterator.next();
+                            if(ordineInCIS.getIdOggetto().equalsIgnoreCase(ordineInCU.getIdOggetto()))
+                            {
+                                daoOrdine.changeOrderQuantity(
+                                        ordineInCU.getIdOrdine(), 
+                                        ordineInCU.getIdOggetto(), 
+                                        ordineInCU.getIdUtente(), 
+                                        (ordineInCU.getQuantita() + ordineInCIS.getQuantita()));
+                                
+                                iterator.remove();
+                            }
+                        }
 
-                ModelloListeOrdine carrello = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 0));
-                request.getSession().removeAttribute("carrelloSessione");
-                request.getSession().setAttribute("carrelloSessione", carrello);
+                    for(ModelloOrdine ordineInCIS : carrelloInSessione.getList())
+                        daoOrdine.insertObjectInCart(ordineInCIS);
+
+                    carrelloInSessione = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 0));
+                    request.getSession().removeAttribute("carrelloSessione");
+                    request.getSession().setAttribute("carrelloSessione", carrelloInSessione);
+                }
+                catch (Exception e) { System.out.println("error message = " + e.toString()); forward = ERROR_PAGE; request.setAttribute("errore", "404 Pagina non trovata"); }
             }
-            
-            /*---2017-12-24
-            try1
-            String backURL = request.getHeader("referer");
-            System.out.println("BACK-URL = " + backURL);
-            
-            backURL = backURL.substring(33);
-            System.out.println("BACK-URL = " + backURL);
-            
-            forward = backURL;
-            System.out.println("forward = " + forward);*/
-            /*try2
-            String backurl = request.getParameter("fromPage");
-            backurl = backurl.substring(12);
-            System.out.println("backurl = " + backurl);
-            forward = backurl;*/
-            
-            forward = HOME_PAGE;
         }
         else if(action.equalsIgnoreCase("addUser")){
 

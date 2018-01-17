@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package it.progettoWeb.java.database.query.generics;
+
+import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
+
 /**
  *
  * @author mattia
@@ -153,6 +156,13 @@ public class genericsQuery {
                + "(Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = " + idUtente + ");";
     }
     
+    public static String selectAddressLatLng(double lat, double lng)
+    {
+        return "SELECT * "
+               + "FROM Indirizzo "
+               + "WHERE latitudine="+lat+" and longitudine="+lng+";";
+    }
+    
     /**
      * @author fbrug
      * Ottenere i dati di un utente e l'indirizzo avendo mail e password
@@ -221,7 +231,8 @@ public class genericsQuery {
      */
     public static String selectStoreAddressImageByStoreID(int idNegozio)
     {
-        return "SELECT Negozio.*, Indirizzo.*, imageNegozio.* FROM Negozio JOIN Indirizzo ON Negozio.idI=Indirizzo.idI JOIN imageNegozio ON Negozio.id=imageNegozio.idN WHERE Negozio.id=" + idNegozio + " GROUP BY Negozio.id;";
+        //Update, rimosso group by Negozio.id, visto che la ricerca restituirà un risultato univoco dato dall'id del negozio non serve effettuare il group by che altrimenti dava errore sql
+        return "SELECT Negozio.*, Indirizzo.*, imageNegozio.* FROM Negozio JOIN Indirizzo ON Negozio.idI=Indirizzo.idI JOIN imageNegozio ON Negozio.id=imageNegozio.idN WHERE Negozio.id=" + idNegozio + ";";
     }
     
     /**
@@ -406,5 +417,17 @@ public class genericsQuery {
     public static String selectReviewsByDataV(int idV, int idUtente, String testo, int valutazione) {
         return "SELECT * FROM RecensioneVenditore WHERE idVenditore = '" + idV + "' AND "
                 + "idUtente=" + idUtente + " AND testo='" + testo + "' AND valutazione=" + valutazione + ";";
+    }
+
+    public static String selectNumberOfAddress(ModelloIndirizzo indirizzo, int idU) {
+        return "select COUNT(idI) AS numIndirizzi "
+                + "from Indirizzo NATURAL JOIN IndirizzoUtente "
+                + "WHERE stato='"+indirizzo.getStato()+"' AND "
+                + "regione='"+indirizzo.getRegione()+"' AND "
+                + "provincia='"+indirizzo.getProvincia()+"' AND "
+                + "citta='"+indirizzo.getCitta()+"' AND "
+                + "via='"+indirizzo.getVia()+"' AND "
+                + "nCivico="+indirizzo.getnCivico()+" AND "
+                + "idU="+idU+";";
     }
 }

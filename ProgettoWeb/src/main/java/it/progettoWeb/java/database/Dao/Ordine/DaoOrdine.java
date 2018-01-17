@@ -327,6 +327,22 @@ public class DaoOrdine {
         return ordini;
     }
     
+    public List<ModelloOrdine> selectOrderRecivedBySellerIdShopIDNewstToOldes(int idVenditore,int idNegozio)
+    {
+        List<ModelloOrdine> ordini = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectOrderRecivedBySellerIdShopId(idVenditore,idNegozio));
+            
+            while(rs.next())
+                ordini.add(getModelloFromRs(rs));
+        } catch(SQLException e) {}
+        
+        return ordini;
+    }
+    
     /**
      * @author fbrug
      * Ottenere i dati di vendita di un determinato negozio in una determinata categoria
@@ -369,14 +385,13 @@ public class DaoOrdine {
      * @author fbrug
      * Aggiungere ad un ordine spedito il codice di tracking
      * @param codiceTracking: nuovo codice usato per il tracking dell'ordine
-     * @param idOrdine: intero rappresentante l'ID dell'ordine da ricercare
      */
-    public void updateOrderTracking(int idOrdine, String codiceTracking)
+    public void updateOrderTracking(ModelloOrdine ordine, String codiceTracking)
     {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.updateOrderTracking(idOrdine, codiceTracking));
+            statement.executeUpdate(sellersQuery.updateOrderTracking(ordine, codiceTracking));
         } catch(SQLException e) {}
     }
 
@@ -413,14 +428,13 @@ public class DaoOrdine {
     /**
      * @author Mattia
      * Cambia lo stato degli ordini da from a to
-     * @param idUtente Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param from Un intero che rappresenta lo stato degli ordini da selezionare
      * @param to Un intero che rappresenta lo stato da impostare agli ordini selezionati
      */
-    public void changeOrderStatus(int idUtente, int from, int to) {
+    public void changeOrderStatus(ModelloOrdine ordine, int from, int to) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement(usersQuery.changeOrderStatus(idUtente, from, to));
+                    .prepareStatement(usersQuery.changeOrderStatus(ordine, from, to));
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -566,5 +580,28 @@ public class DaoOrdine {
         } catch(SQLException e) {}
         
         return ordini;
+    }
+
+    public ModelloOrdine selectOrdersByIdOrderIdOggetto(String idOrdine, String idOggetto) {
+        ModelloOrdine ordine = new ModelloOrdine();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectOrdersByIdOrderIdOggetto(idOrdine,idOggetto));
+            
+            while(rs.next())
+                ordine = getModelloFromRs(rs);
+        } catch(SQLException e) {}
+        
+        return ordine;
+    }
+
+    public void updateOrderDataArrivoPresunta(ModelloOrdine ordine, String dt) {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sellersQuery.updateOrderDataArrivoPrevista(ordine, dt));
+        } catch(SQLException e) {}
     }
 }
