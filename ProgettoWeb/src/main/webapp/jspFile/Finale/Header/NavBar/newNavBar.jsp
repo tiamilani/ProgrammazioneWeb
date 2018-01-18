@@ -190,6 +190,7 @@ function myFunction() {
                     <input class="col-10 modal-input" type="password" id="customerConfirmPassword" name="confirmPassword" required>
                     <label for="customerConfirmPassword">Ripeti la password</label>
                 </div>
+                <div class="g-recaptcha" data-sitekey="6Le96jMUAAAAAC5kV0EuyDRuTXUColh5_HReQeCS"></div>
                     <p>Creando il tuo accont, accetti le nostro condizioni sulla privacy<p>
 
             </div>
