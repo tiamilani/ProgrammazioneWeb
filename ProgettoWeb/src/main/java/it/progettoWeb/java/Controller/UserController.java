@@ -173,8 +173,7 @@ public class UserController extends HttpServlet {
             String newEmail = (String)request.getParameter("changeEmail");
 
             if(utente.getMail().equalsIgnoreCase(newEmail)){
-                forward=ERROR_PAGE;
-                request.setAttribute("errore", "La mail deve differire da quella precedente");
+                request.setAttribute("aggiornamentoEmail", 1);
             }
             else{
                 String oldMail = utente.getMail();
@@ -182,9 +181,12 @@ public class UserController extends HttpServlet {
 
                 daoUtente.updateUserEmailByUserID(utente);
                 SendEmail.updateEmail(oldMail, newEmail);
+                request.setAttribute("aggiornamentoEmail", 0);
             }
-            response.sendRedirect("UserController?action=infoCurrentUser");
-            return;
+            ModelloListeIndirizzo listaIndirizzi = new ModelloListeIndirizzo(daoIndirizzo.selectAddressByUserID(utente.getId()));
+
+            request.setAttribute("listaIndirizzi", listaIndirizzi);
+            forward = GESTIONEUTENTE;
         }
         else if(action.equals("DescrizioneNegozio")){
             int idNegozio = Integer.parseInt(request.getParameter("idNegozio"));
@@ -457,23 +459,28 @@ public class UserController extends HttpServlet {
             ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
 
             if(!newPassword.equals(newConfirmedPassword)){
-                forward=ERROR_PAGE;
-                request.setAttribute("errore", "La conferma della password non è uguale alla password");
+                forward=GESTIONEUTENTE;
+                request.setAttribute("resetPassword", 1);
             }
             else {
                 if(utente.getPassword().equals(newPassword)){
-                    forward=ERROR_PAGE;
-                    request.setAttribute("errore", "La nuova password non può essere uguale a quella vecchia");
+                    forward=GESTIONEUTENTE;
+                    request.setAttribute("resetPassword", 1);
                 }
                 else {
                     utente.setPassword(newPassword);
                     daoUtente.updateUserPasswordByUserID(utente);
                     SendEmail.updatePassword(utente.getMail());
 
-                    response.sendRedirect("UserController?action=infoCurrentUser");
-                    return;
+                    forward = GESTIONEUTENTE;
+                    
+                    request.setAttribute("resetPassword", 0);
                 }
             }
+            
+            ModelloListeIndirizzo listaIndirizzi = new ModelloListeIndirizzo(daoIndirizzo.selectAddressByUserID(utente.getId()));
+
+            request.setAttribute("listaIndirizzi", listaIndirizzi);
         }
         else if(action.equalsIgnoreCase("becomeSeller"))
         {

@@ -119,7 +119,7 @@
                                 <div class="col-8">
                                     <p>
                                         Inserisci il codice di tracking se noto, altrimenti lascia vuoto, non sarà più modificabile
-                                        <input type="text" class="form-control" id="codiceTracking" name="codiceTracking" placeholder="Track this">
+                                        <input type="text" class="form-control" id="codiceTracking" name="codiceTracking" maxlength="40" placeholder="Track this">
                                     </p>
                                 </div>
                                 <div class="col-4">

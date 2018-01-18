@@ -32,7 +32,7 @@
                     <div class="row">
                         <div class="col-4">
                             <p>Nome della spedizione</p>
-                            <input type="text" class="form-control" id="nomeSpedizione" name="nomeSpedizione" placeholder="Spedizione standard" required>
+                            <input type="text" class="form-control" id="nomeSpedizione" name="nomeSpedizione" maxlength="50" placeholder="Spedizione standard" required>
                         </div>
                         <div class="col-4">
                             <p>Prezzo della spedizione</p>
@@ -40,7 +40,7 @@
                         </div>
                         <div class="col-4">
                             <p>Corriere che effettuer&aacute; la consegna</p>
-                            <input type="text" class="form-control" id="corriereSpedizione" name="corriereSpedizione" placeholder="Corriere" required>
+                            <input type="text" class="form-control" id="corriereSpedizione" name="corriereSpedizione" maxlength="50" placeholder="Corriere" required>
                         </div>
                     </div>
                     <div class="row">

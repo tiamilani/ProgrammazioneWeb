@@ -36,7 +36,7 @@
                                     <p>Nome del nuovo oggetto</p>
                                 </div>
                                 <div class="col-10">
-                                    <input type="text" class="form-control" id="nomeOggetto" name="nomeOggetto" placeholder="Nome" required>
+                                    <input type="text" class="form-control" id="nomeOggetto" name="nomeOggetto" maxlength="500" placeholder="Nome" required>
                                 </div>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                             <p>Inserisci una descrizione dell'oggetto, sarà poi visualizzata dagli utenti quindi attento a ciò che scrivi</p>
                         </div>
                         <div class="col-12">
-                            <textarea class="form-control" id="descrizione" name="descrizione" rows="3"></textarea>
+                            <textarea class="form-control" id="descrizione" name="descrizione" maxlength="2500" rows="3"></textarea>
                         </div>
                     </div>
                     <div class="row">
