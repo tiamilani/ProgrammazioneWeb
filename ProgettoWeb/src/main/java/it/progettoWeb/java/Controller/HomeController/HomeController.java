@@ -106,7 +106,7 @@ public class HomeController extends HttpServlet {
                     } 
                     else {
                         log("Cookie non trovato");
-                         request.getSession().setAttribute("utenteSessione", utente);
+                        request.getSession().setAttribute("utenteSessione", utente);
                     }
                 }
                 else {

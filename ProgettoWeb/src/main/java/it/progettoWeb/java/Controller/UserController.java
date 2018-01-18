@@ -336,10 +336,19 @@ public class UserController extends HttpServlet {
         else if(action.equalsIgnoreCase("logout")){
             request.getSession().invalidate();
 
-            Cookie ck=new Cookie("user","");//creating cookie object
-            ck.setValue("-1");
-            ck.setMaxAge(0);
-            response.addCookie(ck);//adding cookie in the response
+            if (request.getCookies() != null) {
+                for (Cookie cookie : request.getCookies()) {
+                    if (cookie.getName().equals("user")) {
+                        cookie.setValue("-1");
+                        response.addCookie(cookie);
+                    }
+                }
+            }
+            
+            //Cookie ck=new Cookie("user","");//creating cookie object
+            //ck.setValue("-1");
+            //ck.setMaxAge(0);
+            //response.addCookie(ck);//adding cookie in the response
 
 
             forward = HOME_PAGE;
