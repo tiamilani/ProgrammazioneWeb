@@ -422,6 +422,9 @@ public class UserController extends HttpServlet {
                 }
                 catch (Exception e) { System.out.println("error message = " + e.toString()); forward = ERROR_PAGE; request.setAttribute("errore", "404 Pagina non trovata"); }
             }
+            else {
+                request.setAttribute("utenteLoginError", 1);
+            }
         }
         else if(action.equalsIgnoreCase("addUser")){
 
@@ -437,15 +440,15 @@ public class UserController extends HttpServlet {
                 String confirmPassword = request.getParameter("confirmPassword");
 
                 if(!utente.getPassword().equals(confirmPassword)){
-                    forward=ERROR_PAGE;
-                    request.setAttribute("errore", "La conferma della password non è uguale alla password");
+                    forward = HOME_PAGE;
+                    request.setAttribute("addUser", 3);
                 }
                 else
                 {
                     ModelloUtente userAlreadyExists = daoUtente.selectUserByEmail(utente.getMail());
                     if(userAlreadyExists.getId()>0){
-                        forward=ERROR_PAGE;
-                        request.setAttribute("errore", "Esiste già un utente con questa email");
+                        forward = HOME_PAGE;
+                        request.setAttribute("addUser", 2);
                     }
                     else
                     {
@@ -454,11 +457,12 @@ public class UserController extends HttpServlet {
                         SendEmail.addUser(utente.getMail());
 
                         forward = HOME_PAGE;
+                        request.setAttribute("addUser", 0);
                     }
                 }
             } else {
-                forward=ERROR_PAGE;
-                request.setAttribute("errore", "Captcha errato");
+                forward = HOME_PAGE;
+                request.setAttribute("addUser", 1);
             }
         }
         else if(action.equalsIgnoreCase("updatePassword")){
