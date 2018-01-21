@@ -134,7 +134,7 @@ function myFunction() {
                 <c:when test="${utenteSessione.getId() != -1}">
                     <button type="button" class="btn btn-primary"
                             onclick="location.href='${pageContext.request.contextPath}/jspFile/Finale/Utente/utente.jsp'">
-                        Account
+                        ${utenteSessione.getNome()} ${utenteSessione.getCognome()}
                     </button>
                 </c:when>
                 <c:otherwise>
@@ -148,6 +148,7 @@ function myFunction() {
             </c:choose>    
             <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/OrdineController?action=listOrders'">
                 Carello
+                <span class="badge badge-light">${carrelloSessione.getSize()}</span>
             </button>
         </div>
     </div>
