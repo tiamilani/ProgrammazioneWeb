@@ -313,7 +313,6 @@ public class OrdineController extends HttpServlet {
                         ((ModelloUtente)request.getSession().getAttribute("utenteSessione")).getMail(),                         
                         (carrelloSessione.get(0)).getIdOrdine());                
                 
-                /*---2018-01-12---*/
                 Set<Integer> idVenditori = new LinkedHashSet<>();
                 
                 //Diminuisco la disponibilità di ciascun prodotto
