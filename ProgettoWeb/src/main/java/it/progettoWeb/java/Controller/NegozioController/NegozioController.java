@@ -118,7 +118,7 @@ public class NegozioController extends HttpServlet {
             String nomeScritto = request.getParameter("modifyDelete");
             if(!nomeScritto.isEmpty()){
                 if(nomeScritto.equals(object.getNome())){
-                    daoOggetto.deleteObjectImage(object.getId(), "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png");
+                    daoOggetto.deleteObjectImage(object.getId(), "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png");
                     daoOggetto.deleteObject(object.getId());
                     request.setAttribute("oggettoModificato", 5); 
                 } else {
@@ -348,7 +348,7 @@ public class NegozioController extends HttpServlet {
             List<ModelloNegozio> listaNegozi = daoNegozio.selectShopByOpenDate(utente.getId());
             negozio.setId(listaNegozi.get(0).getId());
             
-            daoNegozio.insertShopImage(negozio.getId(), "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png");
+            daoNegozio.insertShopImage(negozio.getId(), "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/imageNegozio.png");
             request.setAttribute("negozioInserito", 0);
             
             forward = ADDSHOPPAGE;
@@ -422,7 +422,7 @@ public class NegozioController extends HttpServlet {
 
             newObject.setId(converted);
             daoOggetto.insertObject(newObject.getId(),newObject.getIdNegozio(), newObject.getNome(),newObject.getNomeDownCase(), newObject.getPrezzo(), newObject.getDescrizione(), newObject.getRitiroInNegozio(), newObject.getDisponibilita(), newObject.getStatoDisponibilita(), newObject.getSconto(), newObject.getDataFineSconto(), newObject.getCategoria());
-            daoOggetto.insertObjectImage(newObject.getId(),"http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png");
+            daoOggetto.insertObjectImage(newObject.getId(),"http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png");
             daoCategoria.increaseCategory(newObject.getCategoria());
             
             tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> trisNegozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(Integer.parseInt(request.getParameter("idNegozio")));
@@ -522,8 +522,8 @@ public class NegozioController extends HttpServlet {
                 object.setId(converted);
                 
                 daoOggetto.updateObject(object,previusId);
-                daoOggetto.deleteObjectImage(previusId, "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png");
-                daoOggetto.insertObjectImage(object.getId(), "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png");
+                daoOggetto.deleteObjectImage(previusId, "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png");
+                daoOggetto.insertObjectImage(object.getId(), "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png");
                 
                 request.setAttribute("oggettoModificato", 0);
             }

@@ -437,7 +437,7 @@ public class UserController extends HttpServlet {
                 utente.setCognome(request.getParameter("cognome"));
                 utente.setMail(request.getParameter("email"));
                 utente.setPassword(request.getParameter("password"));
-                utente.setAvatar("http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png");
+                utente.setAvatar("http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png");
                 String confirmPassword = request.getParameter("confirmPassword");
 
                 if(!utente.getPassword().equals(confirmPassword)){
