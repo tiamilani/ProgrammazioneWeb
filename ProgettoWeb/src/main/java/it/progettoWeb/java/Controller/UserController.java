@@ -230,6 +230,13 @@ public class UserController extends HttpServlet {
 
             if(order.equalsIgnoreCase("data")){
                 listaordini = new ModelloListeOrdine(daoOrdine.selectOrders(utente.getId()));
+                
+                for(int i=0; i<listaordini.getSize(); i++){
+                    if(listaordini.get(i).getStato() == 0){
+                        listaordini.getList().remove(i);
+                        i--;
+                    }
+                }
             } else if(order.equalsIgnoreCase("tipo")){
                 ModelloListeOrdine listaOrdiniPagati = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 1));
                 ModelloListeOrdine listaOrdiniInLavorazione = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 2));
