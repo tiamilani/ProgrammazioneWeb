@@ -31,6 +31,8 @@ public class IndirizzoController extends HttpServlet {
     private static String LIST_ADDRESS = "/jspFile/Finale/Utente/listAddress.jsp";
     private static String INSERT_OR_EDIT = "/jspFile/Finale/Utente/modificaDatiIndirizzo.jsp";
     private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
+    private static String GESTIONEUTENTE ="/jspFile/Finale/Utente/impostazioneUtente.jsp";
+    
     private DaoUtente daoU;
     private DaoIndirizzo daoI;
     private DaoIndirizzoUtente daoIndirizzoUtente;
@@ -135,11 +137,18 @@ public class IndirizzoController extends HttpServlet {
 
             boolean indirizzoEsistente = daoI.addressExists(indirizzo,utente.getId());
             
-            if(!indirizzoEsistente)
+            if(!indirizzoEsistente){
                 daoI.insertAddress(indirizzo,utente.getId());
+                request.setAttribute("aggiuntaIndirizzo", 0);
+            } else {
+                request.setAttribute("aggiuntaIndirizzo", 1);
+            }
 
-            response.sendRedirect("UserController?action=infoCurrentUser");
-            return;
+            forward = GESTIONEUTENTE;
+            
+            ModelloListeIndirizzo listaIndirizzi = new ModelloListeIndirizzo(daoI.selectAddressByUserID(utente.getId()));
+
+            request.setAttribute("listaIndirizzi", listaIndirizzi);
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);

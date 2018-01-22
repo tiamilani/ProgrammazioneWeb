@@ -173,8 +173,7 @@ public class UserController extends HttpServlet {
             String newEmail = (String)request.getParameter("changeEmail");
 
             if(utente.getMail().equalsIgnoreCase(newEmail)){
-                forward=ERROR_PAGE;
-                request.setAttribute("errore", "La mail deve differire da quella precedente");
+                request.setAttribute("aggiornamentoEmail", 1);
             }
             else{
                 String oldMail = utente.getMail();
@@ -182,9 +181,12 @@ public class UserController extends HttpServlet {
 
                 daoUtente.updateUserEmailByUserID(utente);
                 SendEmail.updateEmail(oldMail, newEmail);
+                request.setAttribute("aggiornamentoEmail", 0);
             }
-            response.sendRedirect("UserController?action=infoCurrentUser");
-            return;
+            ModelloListeIndirizzo listaIndirizzi = new ModelloListeIndirizzo(daoIndirizzo.selectAddressByUserID(utente.getId()));
+
+            request.setAttribute("listaIndirizzi", listaIndirizzi);
+            forward = GESTIONEUTENTE;
         }
         else if(action.equals("DescrizioneNegozio")){
             int idNegozio = Integer.parseInt(request.getParameter("idNegozio"));
@@ -334,10 +336,19 @@ public class UserController extends HttpServlet {
         else if(action.equalsIgnoreCase("logout")){
             request.getSession().invalidate();
 
-            Cookie ck=new Cookie("user","");//creating cookie object
-            ck.setValue("-1");
-            ck.setMaxAge(0);
-            response.addCookie(ck);//adding cookie in the response
+            if (request.getCookies() != null) {
+                for (Cookie cookie : request.getCookies()) {
+                    if (cookie.getName().equals("user")) {
+                        cookie.setValue("-1");
+                        response.addCookie(cookie);
+                    }
+                }
+            }
+            
+            //Cookie ck=new Cookie("user","");//creating cookie object
+            //ck.setValue("-1");
+            //ck.setMaxAge(0);
+            //response.addCookie(ck);//adding cookie in the response
 
 
             forward = HOME_PAGE;
@@ -411,6 +422,9 @@ public class UserController extends HttpServlet {
                 }
                 catch (Exception e) { System.out.println("error message = " + e.toString()); forward = ERROR_PAGE; request.setAttribute("errore", "404 Pagina non trovata"); }
             }
+            else {
+                request.setAttribute("utenteLoginError", 1);
+            }
         }
         else if(action.equalsIgnoreCase("addUser")){
 
@@ -423,18 +437,19 @@ public class UserController extends HttpServlet {
                 utente.setCognome(request.getParameter("cognome"));
                 utente.setMail(request.getParameter("email"));
                 utente.setPassword(request.getParameter("password"));
+                utente.setAvatar("http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png");
                 String confirmPassword = request.getParameter("confirmPassword");
 
                 if(!utente.getPassword().equals(confirmPassword)){
-                    forward=ERROR_PAGE;
-                    request.setAttribute("errore", "La conferma della password non è uguale alla password");
+                    forward = HOME_PAGE;
+                    request.setAttribute("addUser", 3);
                 }
                 else
                 {
                     ModelloUtente userAlreadyExists = daoUtente.selectUserByEmail(utente.getMail());
                     if(userAlreadyExists.getId()>0){
-                        forward=ERROR_PAGE;
-                        request.setAttribute("errore", "Esiste già un utente con questa email");
+                        forward = HOME_PAGE;
+                        request.setAttribute("addUser", 2);
                     }
                     else
                     {
@@ -443,11 +458,12 @@ public class UserController extends HttpServlet {
                         SendEmail.addUser(utente.getMail());
 
                         forward = HOME_PAGE;
+                        request.setAttribute("addUser", 0);
                     }
                 }
             } else {
-                forward=ERROR_PAGE;
-                request.setAttribute("errore", "Captcha errato");
+                forward = HOME_PAGE;
+                request.setAttribute("addUser", 1);
             }
         }
         else if(action.equalsIgnoreCase("updatePassword")){
@@ -457,23 +473,28 @@ public class UserController extends HttpServlet {
             ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
 
             if(!newPassword.equals(newConfirmedPassword)){
-                forward=ERROR_PAGE;
-                request.setAttribute("errore", "La conferma della password non è uguale alla password");
+                forward=GESTIONEUTENTE;
+                request.setAttribute("resetPassword", 1);
             }
             else {
                 if(utente.getPassword().equals(newPassword)){
-                    forward=ERROR_PAGE;
-                    request.setAttribute("errore", "La nuova password non può essere uguale a quella vecchia");
+                    forward=GESTIONEUTENTE;
+                    request.setAttribute("resetPassword", 1);
                 }
                 else {
                     utente.setPassword(newPassword);
                     daoUtente.updateUserPasswordByUserID(utente);
                     SendEmail.updatePassword(utente.getMail());
 
-                    response.sendRedirect("UserController?action=infoCurrentUser");
-                    return;
+                    forward = GESTIONEUTENTE;
+                    
+                    request.setAttribute("resetPassword", 0);
                 }
             }
+            
+            ModelloListeIndirizzo listaIndirizzi = new ModelloListeIndirizzo(daoIndirizzo.selectAddressByUserID(utente.getId()));
+
+            request.setAttribute("listaIndirizzi", listaIndirizzi);
         }
         else if(action.equalsIgnoreCase("becomeSeller"))
         {

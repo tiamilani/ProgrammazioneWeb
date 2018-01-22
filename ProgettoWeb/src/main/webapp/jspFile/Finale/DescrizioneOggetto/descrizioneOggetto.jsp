@@ -33,10 +33,10 @@
                 <%@include file="mapOggetto.jsp" %>
             </c:if>
             <%@include file="oggettiCorrelati.jsp" %>
-            <c:if test="${canReviewsO == true}">
+            <%--<c:if test="${canReviewsO == true}">
                 <%@include file="insertReview.jsp" %>
             </c:if>
-            <%@include file="recensioni.jsp" %>
+            <%@include file="recensioni.jsp" %> --%>
         </div>
         <%@include file="../Footer/footer.jsp" %>
     </body>

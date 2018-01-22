@@ -38,7 +38,7 @@
                                     <p>Nuovo nome per l'oggetto</p>
                                 </div>
                                 <div class="col-10">
-                                    <input type="text" class="form-control" id="mdifynomeOggetto" name="mdifynomeOggetto" value="${oggetto.getNome()}" required>
+                                    <input type="text" class="form-control" id="mdifynomeOggetto" name="mdifynomeOggetto" maxlength="500" value="${oggetto.getNome()}" required>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                             <p>Inserisci una descrizione dell'oggetto, sarà poi visualizzata dagli utenti quindi attento a ciò che scrivi</p>
                         </div>
                         <div class="col-12">
-                            <textarea class="form-control" id="modifyDescrizione" name="modifyDescrizione" rows="3" required>${oggetto.getDescrizione()}</textarea>
+                            <textarea class="form-control" id="modifyDescrizione" name="modifyDescrizione" maxlength="2500" rows="3" required>${oggetto.getDescrizione()}</textarea>
                         </div>
                     </div>
                     <div class="row">
