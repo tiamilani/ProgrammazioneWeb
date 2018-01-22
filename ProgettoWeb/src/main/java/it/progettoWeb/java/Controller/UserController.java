@@ -480,9 +480,7 @@ public class UserController extends HttpServlet {
             ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
             utente.setUtenteType(1);
             daoUtente.updateUser(utente);
-
-
-            System.out.println("PREEMAIL - Become Seller");
+            
             SendEmail.becomeSeller(utente.getMail());
 
             forward = USERPAGE;

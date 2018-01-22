@@ -48,6 +48,10 @@
         <servlet-name>AssistenzaController</servlet-name>
         <servlet-class>it.progettoWeb.java.Controller.Assistenza.AssistenzaController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OrdineController2</servlet-name>
+        <servlet-class>it.progettoWeb.java.Controller.Ordine.OrdineController_1</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>AssistenzaController</servlet-name>
         <url-pattern>/AssistenzaController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrdineController2</servlet-name>
+        <url-pattern>/OrdineController2</url-pattern>
     </servlet-mapping>
     <error-page>
         <error-code>404</error-code>

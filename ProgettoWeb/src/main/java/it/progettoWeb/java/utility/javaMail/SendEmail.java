@@ -48,8 +48,8 @@ public class SendEmail
         }
         catch (MessagingException ex)
         {
-            System.out.println(ex.getMessage());
-            sendError(userEmail, ex.getMessage());
+            System.out.println(ex.toString());
+            sendError(userEmail, ex.toString());
             return null;
         }
     }
@@ -78,7 +78,7 @@ public class SendEmail
         }
         catch (MessagingException ex)
         {
-            System.out.println("ERROR MAIL: " + ex.getMessage());
+            System.out.println("ERROR MAIL: " + ex.toString());
         }
     }
     
@@ -96,8 +96,8 @@ public class SendEmail
         }
         catch (MessagingException ex)
         {
-            System.out.println(ex.getMessage());
-            sendError(userEmail, ex.getMessage());
+            System.out.println(ex.toString());
+            sendError(userEmail, ex.toString());
         }
     }
     
@@ -129,8 +129,8 @@ public class SendEmail
         }
         catch (MessagingException ex)
         {
-            System.out.println(ex.getMessage());
-            sendError(userEmail, ex.getMessage());
+            System.out.println(ex.toString());
+            sendError(userEmail, ex.toString());
         }
     }
     
@@ -180,8 +180,8 @@ public class SendEmail
         }
         catch (MessagingException ex)
         {
-            System.out.println(ex.getMessage());
-            sendError(newEmail, ex.getMessage());
+            System.out.println(ex.toString());
+            sendError(newEmail, ex.toString());
         }
     }
     
@@ -213,8 +213,8 @@ public class SendEmail
         }
         catch (MessagingException ex)
         {
-            System.out.println(ex.getMessage());
-            sendError(userEmail, ex.getMessage());
+            System.out.println(ex.toString());
+            sendError(userEmail, ex.toString());
         }
     }
     
@@ -244,8 +244,8 @@ public class SendEmail
         }
         catch (MessagingException ex)
         {
-            System.out.println(ex.getMessage());
-            sendError(userEmail, ex.getMessage());
+            System.out.println(ex.toString());
+            sendError(userEmail, ex.toString());
         }
     }
     
@@ -276,8 +276,8 @@ public class SendEmail
         }
         catch (MessagingException ex)
         {
-            System.out.println(ex.getMessage());
-            sendError(userEmail, ex.getMessage());
+            System.out.println(ex.toString());
+            sendError(userEmail, ex.toString());
         }
     }
     
@@ -309,8 +309,8 @@ public class SendEmail
         }
         catch (MessagingException ex)
         {
-            System.out.println(ex.getMessage());
-            sendError(userEmail, ex.getMessage());
+            System.out.println(ex.toString());
+            sendError(userEmail, ex.toString());
         }
     }   
 }
