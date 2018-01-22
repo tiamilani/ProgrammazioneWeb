@@ -80,17 +80,26 @@
                     <p class="lead"/>
                     <div class="row">
                         <span class="col-4 item-left">Quantità:</span>
-                        <input type="number" id="numNow" name="numNow" class="item-right col-6 form-control" min="1" max="${oggetto.getDisponibilita()}" value="1"/>
+                        <c:choose>
+                            <c:when test="${oggetto.getDisponibilita() > 0}">
+                                <input type="number" id="numNow" name="numNow" class="item-right col-6 form-control" min="1" max="${oggetto.getDisponibilita()}" value="1"/>
+                            </c:when>
+                            <c:otherwise>
+                                <span class="col-8 item-right text-danger" id="numNow" name="numNow">ESAURITO</span>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
-                    <div class="row" style="display: none;">
-                        <input type="hidden" id="shipType" name="shipType" value='{"prezzo":"${oggetto.getPrezzo()}","negozio":"${oggetto.getIdNegozio()}","oggetto":"${oggetto.getId()}"}'/>
-                    </div>
-                    <p class="lead"/>
-                    <div class="row" id="totNow">
-                        <span class="col-4 item-left">Totale:</span>
-                        <span class="col-8 item-right text-primary" id="totNowElem">${oggetto.getPrezzo()} Euro</span>
-                        <a href="#" class="button col-12" id="addToCart">Acquista</a>
-                    </div>
+                    <c:if test="${oggetto.getDisponibilita() > 0}">
+                        <div class="row" style="display: none;">
+                            <input type="hidden" id="shipType" name="shipType" value='{"prezzo":"${oggetto.getPrezzo()}","negozio":"${oggetto.getIdNegozio()}","oggetto":"${oggetto.getId()}"}'/>
+                        </div>
+                        <p class="lead"/>
+                        <div class="row" id="totNow">
+                            <span class="col-4 item-left">Totale:</span>
+                            <span class="col-8 item-right text-primary" id="totNowElem">${oggetto.getPrezzo()} Euro</span>
+                            <a href="#" class="button col-12" id="addToCart">Acquista</a>
+                        </div>
+                    </c:if>
                 </form>
                 
                 <script>                    
