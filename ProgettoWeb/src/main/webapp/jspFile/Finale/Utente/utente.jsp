@@ -19,7 +19,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-3">
-                    <img src="${utenteSessione.getAvatar()}" alt="Immagine utente" style="max-height: 200px; max-width: 200px;"/>
+                    <img src="${utenteSessione.getAvatar()}" alt="Errore nel caricamento dell'immagine dell'utente" style="max-height: 200px; max-width: 200px;"/>
                 </div>
                 <div class="col-6">
                     <h2>Ciao <c:out value="${utenteSessione.getNome()}" /></h2>
