@@ -162,7 +162,7 @@
                 </div>
                 <hr>
                 <div class="col-12">
-                    <table id="tabellaOggetti" class="display cell-border hover order-column row-border stripe" width="100%" cellspacing="0">
+                    <table id="tabellaOggetti" class="table table-striped table-bordered" width="100%" cellspacing="0">
                          <thead>
                             <tr>
                                 <th>Nome</th>
