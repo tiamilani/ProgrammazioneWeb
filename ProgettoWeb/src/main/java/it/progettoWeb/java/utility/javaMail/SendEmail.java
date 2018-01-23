@@ -48,6 +48,7 @@ public class SendEmail
         }
         catch (MessagingException ex)
         {
+            System.out.println("Errore nella funzione preProcessing");
             System.out.println(ex.getMessage());
             sendError(userEmail, ex.getMessage());
             return null;
@@ -78,7 +79,9 @@ public class SendEmail
         }
         catch (MessagingException ex)
         {
+            System.out.println("Errore nella funzione sendError");
             System.out.println("ERROR MAIL: " + ex.getMessage());
+            System.out.println(ex.toString());
         }
     }
     
@@ -96,7 +99,9 @@ public class SendEmail
         }
         catch (MessagingException ex)
         {
+            System.out.println("Errore nella funzione sendEmail");
             System.out.println(ex.getMessage());
+            System.out.println(ex.toString());
             sendError(userEmail, ex.getMessage());
         }
     }
@@ -188,31 +193,36 @@ public class SendEmail
     /**
      * Invia un'email all'utente che ha effettuato una richiesta di "password dimenticata"
      * @param userEmail: email dell'utente a cui inviare la mail
+     * @param link: link da inserire nella mail
      */
-    public static void passwordForget(String userEmail)
+    public static void passwordForget(String userEmail, String link)
     {
         try
         {
             ModelloUtente user = daoUtente.selectUserByEmail(userEmail);
             Message message = preProcessing(userEmail);
+            System.out.println(user.getNome());
             
-            if(message != null)
+            if(message != null && user.getNome() != null)
             {
                 message.setSubject("Reimposta la password di ShopEro");
                 message.setText(
                         "Salve " + user.getNome() + ",\n"
                         + "Vogliamo aiutarti a reimpostare la tua password\n"
                         + "Clicca il link seguente per reimpostare la password. "
-                        + "Sarà valido solo per 24 ore.\n"
-                        + "LINK" + "\n\n"
+                        + "Sarà valido solo per 2 ore.\n"
+                        + link + "\n\n"
                         + "Se non desideri reimpostare la password o se non hai richiesto tale modifica, puoi ignorare questa email. "
                         + "Nessun altro utente può modificare la tua password.");
 
                 sendEmail(userEmail, message);
+            }else{
+                System.out.println("Indirizzo email non registrato nel sito -> email non inviata");
             }
         }
         catch (MessagingException ex)
         {
+            System.out.println("Errore nella funzione passwordForget");
             System.out.println(ex.getMessage());
             sendError(userEmail, ex.getMessage());
         }

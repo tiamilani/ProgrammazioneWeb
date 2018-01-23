@@ -659,7 +659,7 @@ CREATE TABLE IF NOT EXISTS `Utente` (
 `id` int(11) NOT NULL,
   `nome` varchar(255) NOT NULL,
   `cognome` varchar(255) NOT NULL,
-  `mail` varchar(255) NOT NULL,
+  `mail` varchar(255) UNIQUE NOT NULL,
   `password` varchar(255) NOT NULL,
   `avatar` varchar(255) DEFAULT NULL,
   `valutazione` double DEFAULT NULL,

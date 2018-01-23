@@ -8291,4 +8291,75 @@ public class DaoOggetto {
         
         return Objects;
     }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti di una ricerca
+     * @param name
+     * @return List<ModelloOggetto> lista di oggetti ottenuti dalla ricerca
+     */
+    public List<ModelloOggetto> selectObjectByQuery(String name, String categoria, String venditore, String negozio, double minPrice, double maxPrice, boolean sconto, boolean ritiro) {
+      List<ModelloOggetto> Objects = new ArrayList<>();
+
+        try {
+            boolean shop = false;
+            boolean seller = false;
+            Statement statement = connection.createStatement();
+            String query = "SELECT * FROM Oggetto";
+            
+            if(negozio != null && negozio.length() > 0){
+                query = query + " INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id)";
+                shop = true;
+            }
+            if(venditore != null && venditore.length() > 0 && !shop){
+                query = query + " INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id) INNER JOIN Utente ON (Negozio.idVenditore = Utente.id)";
+                seller = true;
+            }else if(venditore != null && venditore.length() > 0){
+                query = query + " INNER JOIN Utente ON (Negozio.idVenditore = Utente.id)";
+            }
+            if(shop){
+                query = query + " WHERE Negozio.nomeNegozio LIKE '%" + negozio + "%'";
+            }
+            if(seller){
+                if(shop){
+                    query = query + " AND Utente.nome LIKE '%" + venditore + "%'";
+                }else{
+                    query = query + " WHERE Utente.nome LIKE '%" + venditore + "%'";
+                }
+            }
+            
+            // se sono state aggiunte cose prima scrivo AND, altrimenti WHERE
+            if(shop || seller){
+                query = query + " AND nomeDownCase LIKE '%" + name + "%'";
+            }else{
+                query = query + " WHERE nomeDownCase LIKE '%" + name + "%'";
+            } 
+            if(!categoria.equals("Categoria")){
+                query = query + " AND categoria = " + categoria;
+            }
+            if(minPrice > 0 && maxPrice < 1000){
+                query = query + " AND prezzo BETWEEN " + minPrice + " AND " + maxPrice;
+            }else if(minPrice > 0){
+                query = query + " AND prezzo > " + minPrice;
+            }else if(maxPrice < 1000){
+                query = query + " AND prezzo < " + maxPrice;
+            }
+            if(sconto){
+                query = query + " AND sconto <> 0";
+            }
+            if(ritiro){
+                query = query + " AND ritiroInNegozio = 1";
+            }
+            
+            query = query + ";";
+            
+            System.out.println(query);
+            
+            ResultSet rs = statement.executeQuery(query);
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+      return Objects;
+    }
 }

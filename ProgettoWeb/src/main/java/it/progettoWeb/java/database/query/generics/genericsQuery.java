@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package it.progettoWeb.java.database.query.generics;
+
+import java.security.Key;
+
 /**
  *
  * @author mattia
@@ -338,5 +341,24 @@ public class genericsQuery {
      */
     public static String selectReviewsObjects(String idO) {
         return "SELECT * FROM RecensioneOggetto WHERE idOggetto = '" + idO + "';";
+    }
+    
+    /**
+     * @author Damiano
+     * @param token: il token inviato al'utente
+     * @return la query che permette di ottenere la chiave di cifratura del token
+     */
+    public static String getPasswordAuthenticationKey(String token){
+        return "SELECT chiave FROM RecuperoPassword WHERE token = '" + token + "';";
+    }
+    
+    /**
+     * @author Damiano
+     * @param token: il token inviato al'utente
+     * @param key: la chiave utilizzata per cifrare il token assegnato all'utente
+     * @return la query che permette di ottenere la chiave di cifratura del token
+     */
+    public static String setPasswordAuthenticationKey(String token, String key){
+        return "INSERT INTO RecuperoPassword(token, chiave) VALUES ('" + token + "', '" + key + "');";
     }
 }

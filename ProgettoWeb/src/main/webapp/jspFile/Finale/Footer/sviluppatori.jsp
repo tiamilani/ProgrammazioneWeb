@@ -12,7 +12,6 @@
         <title>ShopEro Developer</title>
         <link rel="stylesheet" href="sviluppatori.css">
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script> 
@@ -21,7 +20,6 @@
     <body>
         <div class="container-fluid">
             <%@include file="../Header/NavBar/newNavBar.jsp" %>
-            <hr>
             <div class="row justify-content-center">  
                 <div class="col-6 description">
                     <h1>Ciao</h1>
@@ -91,14 +89,13 @@
                 </div>
             </div>
 
-            
             <div>
                 <div class="row justify-content-center">  
                     <div class="col-6 description">
                         <h1 id="findUs">Dove Trovarci</h1>
                     </div>
                 </div>
-                <div class="row justify-content-around">
+                <div class="row justify-content-center">
                     <div id="mapObject" style="height: 400px; width: 600px"></div>
                 </div>
             </div>
@@ -126,7 +123,9 @@
             }
             </script>    
                
-            <%@include file="../Footer/footer.jsp"%>
         </div>
+            
+        <%@include file="../Footer/footer.jsp"%>
+        
     </body>
 </html>

@@ -17,13 +17,26 @@
     <jsp:useBean id="listaImmaginiOggetto" class="it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto" scope="request" />
     <head>
         <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
-        <title>ShopEro</title>
+        <title>ShopHero</title>
     </head>
     
     <body>
         <div class="container">
             <%@include file="../Header/NavBar/newNavBar.jsp" %>
         </div>
+        
+        <c:choose>
+            <c:when test="${changedPassword == true}">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>Successo!</strong> Operazione di modifca della passwprd portata a termine con successo
+                </div>
+            </c:when>
+            <c:otherwise>
+            </c:otherwise>
+        </c:choose>
         
         <div class="container-fluid">
             <%@include file="../Components/Carosello/slideShow.jsp" %>
@@ -36,9 +49,8 @@
             <%@include file="../Components/Liste/ListaOggetto/testListaOggetto.jsp" %>
         </div>
         
-        <div class="container">
-            <%@include file="../Footer/footer.jsp" %>
-        </div>
+        
+        <%@include file="../Footer/footer.jsp" %>
         
         <!--- 2017-11-08 --->
         <script type="text/javascript">
