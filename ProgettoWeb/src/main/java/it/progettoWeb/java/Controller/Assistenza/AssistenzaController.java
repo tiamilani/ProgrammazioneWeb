@@ -246,7 +246,8 @@ public class AssistenzaController extends HttpServlet
             }
             else if(action.equalsIgnoreCase("createAssistance"))
             {
-                int idUtenteRichiedente = ((ModelloUtente)request.getSession().getAttribute("utenteSessione")).getId();
+                ModelloUtente utenteRichiedente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+                int idUtenteRichiedente = utenteRichiedente.getId();
                 int idOrdine = Integer.parseInt(request.getParameter("idOrdine"));
                 int idNegozio = Integer.parseInt(request.getParameter("idNegozio"));
                 int idVenditore = (daoNegozio.getStoreById(idNegozio)).getIdVenditore();
@@ -263,7 +264,10 @@ public class AssistenzaController extends HttpServlet
                 
                 daoAssistenza.insertAssistance(assistance);
                 
-                forward = "AssistenzaController?action=listAssistances";
+                if(utenteRichiedente.getUtenteType() == 2)
+                    forward = "AssistenzaController?action=listAssistances";
+                else
+                    forward = "AssistenzaController?action=showAssistances";
             }
         }
         catch (Exception e) 

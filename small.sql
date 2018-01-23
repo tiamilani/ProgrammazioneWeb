@@ -32,6 +32,7 @@ CREATE TABLE `Assistenza` (
   `idOrdine` int(11) DEFAULT NULL,
   `idOggetto` varchar(32) DEFAULT NULL,
   `stato` int(11) DEFAULT '0',
+  `richiesta` varchar(2500) NOT NULL,
   `soluzione` varchar(2500) DEFAULT NULL,
   `dataApertura` datetime NOT NULL,
   `dataChiusura` datetime DEFAULT NULL,
@@ -55,7 +56,7 @@ CREATE TABLE `Assistenza` (
 
 LOCK TABLES `Assistenza` WRITE;
 /*!40000 ALTER TABLE `Assistenza` DISABLE KEYS */;
-INSERT INTO `Assistenza` VALUES (1,3,1,5,1,'1',0,NULL,'2017-10-07 19:13:20',NULL),(2,4,NULL,5,NULL,'4',1,'I soldi sono stati restituiti al cliente','2017-09-21 12:10:01','2017-10-01 09:08:22'),(3,3,2,5,NULL,'5',1,'La descrizione dell\'articolo era corretta, nessun rimborso','2017-03-01 00:24:13','2017-03-05 14:51:12'),(4,3,NULL,5,NULL,'2',0,NULL,'2016-12-21 00:00:00',NULL);
+INSERT INTO `Assistenza` VALUES (1,3,1,5,1,'1',0,'Non va', NULL,'2017-10-07 19:13:20',NULL),(2,4,NULL,5,NULL,'4',1,'Il prodotto non è conforme alla descrizone','I soldi sono stati restituiti al cliente','2017-09-21 12:10:01','2017-10-01 09:08:22'),(3,3,2,5,NULL,'5',1,'Il prodotto non è conforme alla descrizone','La descrizione dell\'articolo era corretta, nessun rimborso','2017-03-01 00:24:13','2017-03-05 14:51:12'),(4,3,NULL,5,NULL,'2',0,'Non mi piace',NULL,'2016-12-21 00:00:00',NULL);
 /*!40000 ALTER TABLE `Assistenza` ENABLE KEYS */;
 UNLOCK TABLES;
 
