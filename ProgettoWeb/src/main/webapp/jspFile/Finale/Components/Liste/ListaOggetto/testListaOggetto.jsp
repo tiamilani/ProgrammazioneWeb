@@ -11,11 +11,11 @@
     </c:if>
     <%@include file="../../Oggetto/oggetto.jsp" %>
     <c:set var ="iterator" scope="page" value="${iterator + 1}"/>
-    <c:if test ="${limitColum == 0 && i>0}">
+    <c:if test ="${i%limitColum == 0 && i>0}">
         <c:set var ="iterator" scope="page" value="${0}"/>
         </div>
     </c:if>
 </c:forEach>
-<c:if test ="${iterator>0}">
+<c:if test ="${iterator>=0}">
     </div>
 </c:if>
