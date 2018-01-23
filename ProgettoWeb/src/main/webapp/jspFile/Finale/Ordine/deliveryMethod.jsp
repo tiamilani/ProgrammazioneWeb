@@ -109,7 +109,7 @@
                                 <div class="row">
                                     <!-- Immagine prodotto -->
                                     <div class="col-2">
-                                        <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png" alt="<c:out value="${object.getR().getSrc()}"/>">
+                                        <img src="<c:out value="${object.getR().getSrc()}"/>" alt="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png">
                                     </div>
                                     
                                     <div class="col-4">

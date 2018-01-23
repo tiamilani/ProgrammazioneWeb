@@ -49,8 +49,8 @@ public class SendEmail
         catch (MessagingException ex)
         {
             System.out.println("Errore nella funzione preProcessing");
-            System.out.println(ex.getMessage());
-            sendError(userEmail, ex.getMessage());
+            System.out.println(ex.toString());
+            sendError(userEmail, ex.toString());
             return null;
         }
     }
