@@ -626,17 +626,17 @@ public class DaoNegozio {
      * Aggiungere un proprio negozio
      * @param negozio: negozio da inserire
      */
-    public String insertShop(ModelloNegozio negozio)
+    public boolean insertShop(ModelloNegozio negozio)
     {
         try
         {
             Statement statement = connection.createStatement();
             statement.executeUpdate(sellersQuery.insertShop(negozio));
-            return "OK";
         }
         catch (SQLException e) {
-            return e.toString();
+            return false;
         }
+        return true;
     }
     
     /**

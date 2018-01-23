@@ -28,7 +28,6 @@
                     <c:if test="${utenteSessione.getUtenteType() == 1}">
                         <p>La tua valutazione: ${utenteSessione.getValutazione()}</p>
                     </c:if>
-                    <p>Altre info...</p>
                 </div>
                 <div class="col-3">
                     <a href="${pageContext.request.contextPath}/UserController?action=infoCurrentUser" method="GET" class="btn btn-outline-primary buttonSpace btn-block">Impostazione account</a>

@@ -89,6 +89,7 @@ public class NegozioController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String forward="";
         String action = request.getParameter("action");
         
@@ -296,6 +297,7 @@ public class NegozioController extends HttpServlet {
             throws ServletException, IOException {
         String forward="";
         String action = request.getParameter("action");
+        request.setCharacterEncoding("UTF-8");
         
         if (action.equalsIgnoreCase("addNegozio")) {
             ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
@@ -343,13 +345,16 @@ public class NegozioController extends HttpServlet {
             
             negozio.setOrarioNegozio(orario);
             
-            daoNegozio.insertShop(negozio);
-            
-            List<ModelloNegozio> listaNegozi = daoNegozio.selectShopByOpenDate(utente.getId());
-            negozio.setId(listaNegozi.get(0).getId());
-            
-            daoNegozio.insertShopImage(negozio.getId(), "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/imageNegozio.png");
-            request.setAttribute("negozioInserito", 0);
+            boolean negozioInserito =daoNegozio.insertShop(negozio);
+            if(negozioInserito){
+                List<ModelloNegozio> listaNegozi = daoNegozio.selectShopByOpenDate(utente.getId());
+                negozio.setId(listaNegozi.get(0).getId());
+
+                daoNegozio.insertShopImage(negozio.getId(), "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/imageNegozio.png");
+                request.setAttribute("negozioInserito", 0);
+            } else {
+                request.setAttribute("negozioInserito", 1);
+            }
             
             forward = ADDSHOPPAGE;
         }
@@ -421,9 +426,14 @@ public class NegozioController extends HttpServlet {
             }
 
             newObject.setId(converted);
-            daoOggetto.insertObject(newObject.getId(),newObject.getIdNegozio(), newObject.getNome(),newObject.getNomeDownCase(), newObject.getPrezzo(), newObject.getDescrizione(), newObject.getRitiroInNegozio(), newObject.getDisponibilita(), newObject.getStatoDisponibilita(), newObject.getSconto(), newObject.getDataFineSconto(), newObject.getCategoria());
-            daoOggetto.insertObjectImage(newObject.getId(),"http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png");
-            daoCategoria.increaseCategory(newObject.getCategoria());
+            boolean inserimentoAvvenuto = daoOggetto.insertObject(newObject.getId(),newObject.getIdNegozio(), newObject.getNome(),newObject.getNomeDownCase(), newObject.getPrezzo(), newObject.getDescrizione(), newObject.getRitiroInNegozio(), newObject.getDisponibilita(), newObject.getStatoDisponibilita(), newObject.getSconto(), newObject.getDataFineSconto(), newObject.getCategoria());
+            if(inserimentoAvvenuto){
+                daoOggetto.insertObjectImage(newObject.getId(),"http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png");
+                daoCategoria.increaseCategory(newObject.getCategoria());
+                request.setAttribute("oggettoInserito", 0);
+            } else {
+                request.setAttribute("oggettoInserito", 1);
+            }
             
             tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> trisNegozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(Integer.parseInt(request.getParameter("idNegozio")));
             ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCategoria.selectAllCategory());
@@ -436,7 +446,6 @@ public class NegozioController extends HttpServlet {
             request.setAttribute("immagine", trisNegozioIndirizzoImmagine.getR());
             request.setAttribute("categorie", listaCategorie);
             request.setAttribute("listaOggeti", listaOggetti);
-            request.setAttribute("oggettoInserito", 0);
             request.setAttribute("listaOrdini", listaOrdini);
             request.setAttribute("listaTipiSpedizione", listaTipiSpedizione);
             forward = SHOPPAGE;

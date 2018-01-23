@@ -331,6 +331,7 @@
                 <div class="col-12">
                     <h2>Lista dei metodi di spedizione</h2>
                     <p>Questi sono i metodi di spedizione attualmente disponibili per questo negozio, da qui puoi aggiungerne o rimuoverne</p>
+                    <p>Ricordati di inserire almeno un metodo di spedizione, altrimenti per gli utenti non sar&aacute; possibile portare a termine nessun acquisto</p>
                 </div>
                 <hr>
                 <div class="col-12">

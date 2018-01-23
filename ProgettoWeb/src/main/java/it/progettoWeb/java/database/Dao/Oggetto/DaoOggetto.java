@@ -5595,7 +5595,7 @@ public class DaoOggetto {
      * @param dataFineSconto: indica la data in cui terminerà lo sconto applicato all'oggetto
      * @param idCategoria: intero rappresentante l'ID della categoria di cui l'oggetto fa parte
      */
-    public void insertObject(String id,int idNegozio, String nomeOggetto,String nomeDownCase, double prezzoOggetto,
+    public boolean insertObject(String id,int idNegozio, String nomeOggetto,String nomeDownCase, double prezzoOggetto,
             String descrizioneOggetto, int ritiroInNegozio, int disponibilita, int statoDisponibilita,
             double sconto, Date dataFineSconto, int idCategoria)
     {
@@ -5604,7 +5604,10 @@ public class DaoOggetto {
             Statement statement = connection.createStatement();
             statement.executeUpdate(sellersQuery.insertObject(id,idNegozio, nomeOggetto,nomeDownCase, prezzoOggetto, descrizioneOggetto,
                     ritiroInNegozio, disponibilita, statoDisponibilita, sconto, dataFineSconto, idCategoria));
-        } catch(SQLException e) {}
+        } catch(SQLException e) {
+            return false;
+        }
+        return true;
     }
 
     /**

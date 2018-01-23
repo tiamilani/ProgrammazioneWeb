@@ -92,7 +92,7 @@ function myFunction() {
 
 <nav class="navbar fixed-top navbar-default bg-light navbar-expand-lg row no-gutters" role="navigation" style="padding: 0 .5rem 0 .5rem;">
     <a class="navbar-brand" href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Index/index.jsp">
-        <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/shopero_small.jpg" height=40px class="d-inline-block align-top" alt="IMG">
+        <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/shopero_small.png" height=40px class="d-inline-block align-top" alt="IMG">
     </a>
     <button class="navbar-toggler navbar-toggler-right" id="visible" type="button" data-toggle="collapse" data-target="#collapse-menu" aria-controls="collapse-menu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="Small material-icons">dehaze</span>
