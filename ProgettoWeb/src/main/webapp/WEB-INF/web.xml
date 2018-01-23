@@ -44,6 +44,14 @@
         <servlet-class>it.progettoWeb.java.Controller.InserisciRecensione.InserisciRecensioneController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>PasswordReset</servlet-name>
+        <servlet-class>it.progettoWeb.java.Controller.HomeController.PasswordReset</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PasswordResetRequest</servlet-name>
+        <servlet-class>it.progettoWeb.java.Controller.HomeController.PasswordResetRequest</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>NegozioController</servlet-name>
         <servlet-class>it.progettoWeb.java.Controller.NegozioController.NegozioController</servlet-class>
     </servlet>
@@ -86,6 +94,14 @@
     <servlet-mapping>
         <servlet-name>InserisciRecensioneController</servlet-name>
         <url-pattern>/InserisciRecensioneController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PasswordReset</servlet-name>
+        <url-pattern>/PasswordReset</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PasswordResetRequest</servlet-name>
+        <url-pattern>/PasswordResetRequest</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>NegozioController</servlet-name>

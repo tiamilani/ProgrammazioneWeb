@@ -2,11 +2,11 @@
     position: static;
 }
 
-.navbar-collapse.collapse.show .dropdown{
+.navbar-collapse.collapse.show .twodrop .dropdown{
     display: inline-block;
 }
 
-.navbar-collapse.collapsing .dropdown{
+.navbar-collapse.collapsing .twodrop .dropdown{
     display: inline-block;
 }
 
@@ -38,16 +38,18 @@
     display: table-cell;
 }
 
-button{
-    margin-left: 5px;
-}
-
 input{
     margin-left: 5px;
 }
 
 .find{
     margin: 5px;
+    width: 80%;
+  }
+
+div.form-group{
+  width: 100%;
+  margin-top: 0;
 }
 
 #expand{
@@ -58,16 +60,12 @@ input{
     transition: width 0.2s ease-in-out;
 }
 
-#expand:hover {
-    width: 100%;
+#expand:focus{
+    width: 90%;
 }
 
 #nopad{
     padding: .25rem;
-}
-
-.find{
-    min-width: 400px;
 }
 
 .modal-footer{
@@ -75,7 +73,7 @@ input{
     justify-content: center;
 }
 
-label{
+.modal-label{
     font-size: 14px;
     font-weight: 700;
     margin-left: 44px;
@@ -111,4 +109,31 @@ input:focus{
     border-left: none;
     border-top: none;
     border-bottom: 1px solid gainsboro;
+}
+
+.user{
+    width: 100%;
+    float: right;
+}
+
+.nav-button{
+    background-color: inherit;
+    border: none;
+}
+
+nav{
+    min-height: 48px;
+}
+
+.dropdown-toggle{
+    display: block;
+    margin: auto;
+}
+
+.modal button{
+    width: 100%;
+}
+
+.color{
+    color: orange;
 }
