@@ -11,6 +11,7 @@
     div.stars {
         width: auto;
         display: inline-block;
+        margin: auto;
     }
     input.star {display: none; }
     label { top: 0; margin: 0; padding: 0;}
@@ -160,8 +161,8 @@
             </center>
         </div>
         
-        <div class="form-control" col-lg-4 col-md-4>
-            <div class="form-group" style="align-content: center">
+        <div class="form-control col-lg-4 col-md-4">
+            <div class="form-group">
                 <div class="stars">
                     <input class="star star-5" id="star-5" type="radio" name="valutazioneReview" value="5"/>
                     <label class="star star-5" for="star-5"></label>

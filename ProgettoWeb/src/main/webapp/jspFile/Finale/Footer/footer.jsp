@@ -5,7 +5,7 @@
 --%>
 
 <div class="container-fluid" id="footer-container">
-    <footer class="footer footer-fixed-bottom bg-light" id='footer-container'>
+    <footer class="footer footer-fixed-bottom bg-light" id='footer'>
         <center>
                 <div class="col-9 row no-gutters footer-head">
                     <div class="footer-head col-4">Vieni a conoscerci</div>
