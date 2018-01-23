@@ -79,6 +79,7 @@
                             </div>
                         </c:when>
                         <c:otherwise>
+                            <p>Ho trovato <c:out value="${listaOrdini.getList().size()}" /> ordini</p>
                             <c:set var="i" scope="page" value="${0}" />
                             <c:forEach items="${listaOrdini.getList()}" var="ordine" >
                                     <c:if test="${ordine.getStato() != 0 && ordine.getStato() != 5}">

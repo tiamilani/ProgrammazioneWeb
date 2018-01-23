@@ -11,9 +11,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="../Header/Head/GestioneNegoziHeader/gestioneNegozioHeader.jsp" %>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
         <title>Negozi <c:out value="${utenteSessione.getNome()}" /></title>
     </head>
-    <body>
+    <body style="padding-bottom: 0rem;">
         <div class="container">
             <%@include file="../Header/NavBar/newNavBar.jsp" %>
         </div>

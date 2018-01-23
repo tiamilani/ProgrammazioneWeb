@@ -230,6 +230,13 @@ public class UserController extends HttpServlet {
 
             if(order.equalsIgnoreCase("data")){
                 listaordini = new ModelloListeOrdine(daoOrdine.selectOrders(utente.getId()));
+                
+                for(int i=0; i<listaordini.getSize(); i++){
+                    if(listaordini.get(i).getStato() == 0){
+                        listaordini.getList().remove(i);
+                        i--;
+                    }
+                }
             } else if(order.equalsIgnoreCase("tipo")){
                 ModelloListeOrdine listaOrdiniPagati = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 1));
                 ModelloListeOrdine listaOrdiniInLavorazione = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 2));
@@ -437,7 +444,7 @@ public class UserController extends HttpServlet {
                 utente.setCognome(request.getParameter("cognome"));
                 utente.setMail(request.getParameter("email"));
                 utente.setPassword(request.getParameter("password"));
-                utente.setAvatar("http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png");
+                utente.setAvatar("http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png");
                 String confirmPassword = request.getParameter("confirmPassword");
 
                 if(!utente.getPassword().equals(confirmPassword)){

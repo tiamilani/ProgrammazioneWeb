@@ -39,7 +39,6 @@
 
         <div class="container">
             <%@include file="../Header/NavBar/newNavBar.jsp" %>
-            <hr/>
         </div>
         
         <div class="container-fluid">

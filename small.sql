@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `progettoweb` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `progettoweb`;
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.21, for Linux (x86_64)
 --
--- Host: localhost    Database: progettoweb
+-- Host: 127.0.0.1    Database: progettoweb
 -- ------------------------------------------------------
--- Server version	5.7.19-log
+-- Server version	5.7.21-0ubuntu0.17.10.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -18,13 +18,13 @@ USE `progettoweb`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `assistenza`
+-- Table structure for table `Assistenza`
 --
 
-DROP TABLE IF EXISTS `assistenza`;
+DROP TABLE IF EXISTS `Assistenza`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `assistenza` (
+CREATE TABLE `Assistenza` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idUtente` int(11) NOT NULL,
   `idVenditore` int(11) DEFAULT NULL,
@@ -41,59 +41,59 @@ CREATE TABLE `assistenza` (
   KEY `idAmministratore` (`idAmministratore`),
   KEY `idOrdine` (`idOrdine`),
   KEY `idOggetto` (`idOggetto`),
-  CONSTRAINT `Assistenza_ibfk_1` FOREIGN KEY (`idUtente`) REFERENCES `utente` (`id`) ON DELETE NO ACTION,
-  CONSTRAINT `Assistenza_ibfk_2` FOREIGN KEY (`idVenditore`) REFERENCES `utente` (`id`) ON DELETE NO ACTION,
-  CONSTRAINT `Assistenza_ibfk_3` FOREIGN KEY (`idAmministratore`) REFERENCES `utente` (`id`) ON DELETE NO ACTION,
-  CONSTRAINT `Assistenza_ibfk_4` FOREIGN KEY (`idOrdine`) REFERENCES `ordine` (`idOrdine`) ON DELETE SET NULL,
-  CONSTRAINT `Assistenza_ibfk_5` FOREIGN KEY (`idOggetto`) REFERENCES `oggetto` (`id`) ON DELETE NO ACTION
+  CONSTRAINT `Assistenza_ibfk_1` FOREIGN KEY (`idUtente`) REFERENCES `Utente` (`id`) ON DELETE NO ACTION,
+  CONSTRAINT `Assistenza_ibfk_2` FOREIGN KEY (`idVenditore`) REFERENCES `Utente` (`id`) ON DELETE NO ACTION,
+  CONSTRAINT `Assistenza_ibfk_3` FOREIGN KEY (`idAmministratore`) REFERENCES `Utente` (`id`) ON DELETE NO ACTION,
+  CONSTRAINT `Assistenza_ibfk_4` FOREIGN KEY (`idOrdine`) REFERENCES `Ordine` (`idOrdine`) ON DELETE SET NULL,
+  CONSTRAINT `Assistenza_ibfk_5` FOREIGN KEY (`idOggetto`) REFERENCES `Oggetto` (`id`) ON DELETE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `assistenza`
+-- Dumping data for table `Assistenza`
 --
 
-LOCK TABLES `assistenza` WRITE;
-/*!40000 ALTER TABLE `assistenza` DISABLE KEYS */;
-INSERT INTO `assistenza` VALUES (1,3,1,5,1,'1',0,NULL,'2017-10-07 19:13:20',NULL),(2,4,NULL,5,NULL,'4',1,'I soldi sono stati restituiti al cliente','2017-09-21 12:10:01','2017-10-01 09:08:22'),(3,3,2,5,NULL,'5',1,'La descrizione dell\'articolo era corretta, nessun rimborso','2017-03-01 00:24:13','2017-03-05 14:51:12'),(4,3,NULL,5,NULL,'2',0,NULL,'2016-12-21 00:00:00',NULL);
-/*!40000 ALTER TABLE `assistenza` ENABLE KEYS */;
+LOCK TABLES `Assistenza` WRITE;
+/*!40000 ALTER TABLE `Assistenza` DISABLE KEYS */;
+INSERT INTO `Assistenza` VALUES (1,3,1,5,1,'1',0,NULL,'2017-10-07 19:13:20',NULL),(2,4,NULL,5,NULL,'4',1,'I soldi sono stati restituiti al cliente','2017-09-21 12:10:01','2017-10-01 09:08:22'),(3,3,2,5,NULL,'5',1,'La descrizione dell\'articolo era corretta, nessun rimborso','2017-03-01 00:24:13','2017-03-05 14:51:12'),(4,3,NULL,5,NULL,'2',0,NULL,'2016-12-21 00:00:00',NULL);
+/*!40000 ALTER TABLE `Assistenza` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `carrello`
+-- Table structure for table `Carrello`
 --
 
-DROP TABLE IF EXISTS `carrello`;
+DROP TABLE IF EXISTS `Carrello`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `carrello` (
+CREATE TABLE `Carrello` (
   `idUtente` int(11) NOT NULL,
   `idOrdine` int(11) NOT NULL,
   `subTotal` double NOT NULL DEFAULT '0',
   PRIMARY KEY (`idUtente`),
   KEY `idOrdine` (`idOrdine`),
-  CONSTRAINT `Carrello_ibfk_1` FOREIGN KEY (`idUtente`) REFERENCES `utente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `Carrello_ibfk_1` FOREIGN KEY (`idUtente`) REFERENCES `Utente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `carrello`
+-- Dumping data for table `Carrello`
 --
 
-LOCK TABLES `carrello` WRITE;
-/*!40000 ALTER TABLE `carrello` DISABLE KEYS */;
-INSERT INTO `carrello` VALUES (4,5,998);
-/*!40000 ALTER TABLE `carrello` ENABLE KEYS */;
+LOCK TABLES `Carrello` WRITE;
+/*!40000 ALTER TABLE `Carrello` DISABLE KEYS */;
+INSERT INTO `Carrello` VALUES (2,0,499),(4,5,998);
+/*!40000 ALTER TABLE `Carrello` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `categoria`
+-- Table structure for table `Categoria`
 --
 
-DROP TABLE IF EXISTS `categoria`;
+DROP TABLE IF EXISTS `Categoria`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `categoria` (
+CREATE TABLE `Categoria` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
   `sottoCategoria` varchar(50) DEFAULT NULL,
@@ -104,128 +104,23 @@ CREATE TABLE `categoria` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `categoria`
+-- Dumping data for table `Categoria`
 --
 
-LOCK TABLES `categoria` WRITE;
-/*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-INSERT INTO `categoria` VALUES (1,'Elettronica',NULL,'Materiale Elettronico',3),(2,'Casa',NULL,'Materiale per Casa e Cucina',1),(3,'Abbigliamento',NULL,'il mondo dei vestiti',0),(4,'Alimentari',NULL,'Ne trovi per tutti i tuoi gusti',0),(5,'Auto e Moto',NULL,'Il mondo dei motori ai tuoi piedi',0),(6,'Bellezza',NULL,'Coccolati con questi prodotti',0),(7,'Cancelleria e Ufficio',NULL,'Tutto quello che vorrai avere sulla tua scrivania',0),(8,'CD e Vinili',NULL,'Lasciati trasportare in un mondo di note',0),(9,'Fai da te',NULL,'Costruisci il mondo intorno a te',0),(10,'Film e TV',NULL,'Non cambiare canale, resta sincronizzato sulle offerte',0),(11,'Giardino e giardinaggio',NULL,'Rendi il tuo giardino uno spettacolo',0),(12,'Giochi e giocattoli',NULL,'Divertiti come non mai',0),(13,'Gioielli',NULL,'Rendi prezioso il tuo corpo',0),(14,'Fatto a mano',NULL,'Guarda come potremo sorprenderti',0),(15,'Illuminazione',NULL,'Rendi luminosa la tua strada',0),(16,'Industria e scienza',NULL,'Esplora il mondo con un occhio scientifico',0),(17,'Informatica',NULL,'Gioca lavora o divertiti con tutte le ultime tecnologie uscite in commercio',0),(18,'Libri',NULL,'Entra in un nuovo mondo fatto di fantasia',0),(19,'Moda',NULL,'Fatti travolgere dalle ultime creazioni',0),(20,'Orologi',NULL,'Rendi ogni secondo speciale',0),(21,'Prima infanzia',NULL,'Il tuo bambino ha bisogno di te! Usa solo prodotti di prima scelta',0),(22,'Prodotti per animali',NULL,'Fai gustare al tuo animale qualcosa creato appositamente per lui',0),(23,'Salute',NULL,'Prenditi cura di te stesso',0),(24,'Scarpe e borse',NULL,'L\'accessorio giusto al momento giusto',0),(25,'Software',NULL,'Il meglio per il tuo computer',0),(26,'Sport e tempo libero',NULL,'Dai la giusta importanza ai tuoi hobby',0),(27,'Strumenti musicali e dj',NULL,'Solo il meglio per i musicisti di oggi e domani',0),(28,'Valigeria',NULL,'Non lasciare niente a casa ',0),(29,'Videogiochi',NULL,'Gustati i migliori titoli del momento',0);
-/*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
+LOCK TABLES `Categoria` WRITE;
+/*!40000 ALTER TABLE `Categoria` DISABLE KEYS */;
+INSERT INTO `Categoria` VALUES (1,'Elettronica',NULL,'Materiale Elettronico',8),(2,'Casa',NULL,'Materiale per Casa e Cucina',2),(3,'Abbigliamento',NULL,'il mondo dei vestiti',1),(4,'Alimentari',NULL,'Ne trovi per tutti i tuoi gusti',2),(5,'Auto e Moto',NULL,'Il mondo dei motori ai tuoi piedi',2),(6,'Bellezza',NULL,'Coccolati con questi prodotti',2),(7,'Cancelleria e Ufficio',NULL,'Tutto quello che vorrai avere sulla tua scrivania',0),(8,'CD e Vinili',NULL,'Lasciati trasportare in un mondo di note',0),(9,'Fai da te',NULL,'Costruisci il mondo intorno a te',1),(10,'Film e TV',NULL,'Non cambiare canale, resta sincronizzato sulle offerte',1),(11,'Giardino e giardinaggio',NULL,'Rendi il tuo giardino uno spettacolo',2),(12,'Giochi e giocattoli',NULL,'Divertiti come non mai',0),(13,'Gioielli',NULL,'Rendi prezioso il tuo corpo',0),(14,'Fatto a mano',NULL,'Guarda come potremo sorprenderti',0),(15,'Illuminazione',NULL,'Rendi luminosa la tua strada',0),(16,'Industria e scienza',NULL,'Esplora il mondo con un occhio scientifico',0),(17,'Informatica',NULL,'Gioca lavora o divertiti con tutte le ultime tecnologie uscite in commercio',0),(18,'Libri',NULL,'Entra in un nuovo mondo fatto di fantasia',0),(19,'Moda',NULL,'Fatti travolgere dalle ultime creazioni',0),(20,'Orologi',NULL,'Rendi ogni secondo speciale',0),(21,'Prima infanzia',NULL,'Il tuo bambino ha bisogno di te! Usa solo prodotti di prima scelta',0),(22,'Prodotti per animali',NULL,'Fai gustare al tuo animale qualcosa creato appositamente per lui',0),(23,'Salute',NULL,'Prenditi cura di te stesso',0),(24,'Scarpe e borse',NULL,'L\'accessorio giusto al momento giusto',0),(25,'Software',NULL,'Il meglio per il tuo computer',0),(26,'Sport e tempo libero',NULL,'Dai la giusta importanza ai tuoi hobby',0),(27,'Strumenti musicali e dj',NULL,'Solo il meglio per i musicisti di oggi e domani',0),(28,'Valigeria',NULL,'Non lasciare niente a casa ',0),(29,'Videogiochi',NULL,'Gustati i migliori titoli del momento',0);
+/*!40000 ALTER TABLE `Categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `imagenegozio`
+-- Table structure for table `Indirizzo`
 --
 
-DROP TABLE IF EXISTS `imagenegozio`;
+DROP TABLE IF EXISTS `Indirizzo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `imagenegozio` (
-  `src` varchar(150) NOT NULL,
-  `idN` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`src`,`idN`),
-  KEY `idN` (`idN`),
-  CONSTRAINT `imageNegozio_ibfk_2` FOREIGN KEY (`idN`) REFERENCES `negozio` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `imagenegozio`
---
-
-LOCK TABLES `imagenegozio` WRITE;
-/*!40000 ALTER TABLE `imagenegozio` DISABLE KEYS */;
-INSERT INTO `imagenegozio` VALUES ('http://localhost:8080/progettoWeb/jspFile/Finale/Img/square.png',1),('http://localhost:8080/progettoWeb/jspFile/Finale/Img/square.png',2),('http://localhost:8080/progettoWeb/jspFile/Finale/Img/square.png',3);
-/*!40000 ALTER TABLE `imagenegozio` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `imageoggetto`
---
-
-DROP TABLE IF EXISTS `imageoggetto`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `imageoggetto` (
-  `src` varchar(150) NOT NULL,
-  `idO` varchar(32) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`src`,`idO`),
-  KEY `idO` (`idO`),
-  CONSTRAINT `imageOggetto_ibfk_2` FOREIGN KEY (`idO`) REFERENCES `oggetto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `imageoggetto`
---
-
-LOCK TABLES `imageoggetto` WRITE;
-/*!40000 ALTER TABLE `imageoggetto` DISABLE KEYS */;
-INSERT INTO `imageoggetto` VALUES ('imgOgg1','1'),('imgOgg2','2'),('imgOgg3','3'),('imgOgg4','4'),('imgOgg5','5'),('imgOgg6','6');
-/*!40000 ALTER TABLE `imageoggetto` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `imagerecensione`
---
-
-DROP TABLE IF EXISTS `imagerecensione`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `imagerecensione` (
-  `src` varchar(150) NOT NULL,
-  `idR` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`src`,`idR`),
-  KEY `idR` (`idR`),
-  CONSTRAINT `imageRecensione_ibfk_2` FOREIGN KEY (`idR`) REFERENCES `recensioneoggetto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `imagerecensione`
---
-
-LOCK TABLES `imagerecensione` WRITE;
-/*!40000 ALTER TABLE `imagerecensione` DISABLE KEYS */;
-INSERT INTO `imagerecensione` VALUES ('http://localhost:8080/progettoWeb/jspFile/Finale/Img/square.png',1);
-/*!40000 ALTER TABLE `imagerecensione` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `imageutente`
---
-
-DROP TABLE IF EXISTS `imageutente`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `imageutente` (
-  `src` varchar(150) NOT NULL DEFAULT '',
-  `idU` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`src`,`idU`),
-  KEY `idI` (`src`),
-  KEY `idU` (`idU`),
-  CONSTRAINT `imageUtente_ibfk_2` FOREIGN KEY (`idU`) REFERENCES `utente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `imageutente`
---
-
-LOCK TABLES `imageutente` WRITE;
-/*!40000 ALTER TABLE `imageutente` DISABLE KEYS */;
-INSERT INTO `imageutente` VALUES ('http://localhost:8080/progettoWeb/jspFile/Finale/Img/square.png',3),('http://localhost:8080/progettoWeb/jspFile/Finale/Img/square.png',4);
-/*!40000 ALTER TABLE `imageutente` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `indirizzo`
---
-
-DROP TABLE IF EXISTS `indirizzo`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `indirizzo` (
+CREATE TABLE `Indirizzo` (
   `idI` int(11) NOT NULL AUTO_INCREMENT,
   `stato` varchar(255) NOT NULL,
   `regione` varchar(255) NOT NULL,
@@ -237,54 +132,54 @@ CREATE TABLE `indirizzo` (
   `latitudine` double DEFAULT NULL,
   `longitudine` double DEFAULT NULL,
   PRIMARY KEY (`idI`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `indirizzo`
+-- Dumping data for table `Indirizzo`
 --
 
-LOCK TABLES `indirizzo` WRITE;
-/*!40000 ALTER TABLE `indirizzo` DISABLE KEYS */;
-INSERT INTO `indirizzo` VALUES (1,'Italia','Lombardia','Milano','Milano','Via Valassina',27,2,45.5005692,9.187734699999965),(2,'Italia','Lombardia','Milano','Milano','Via Orti',3,NULL,45.4549309,9.198682800000029),(3,'Italia','Trentino Alto Adige','Trento','Trento','Corso 3 Novembre 1918',102,15,46.0608004,11.124980899999969),(4,'Italia','Piemonte','Torino','Torino','Corso 3 Novembre 1918',102,15,45.07489349999999,7.652501499999971),(5,'Italia','Veneto','Treviso','Treviso','Piazza dei Signori',3,NULL,45.6654873,12.245583500000066),(6,'Italia','Trentino Alto Adige','Trento','Trento','Via Brennero',282,NULL,46.0884487,11.117878099999984),(7,'Italia','Piemonte','Torino','Collegno','Viale Svezia',1,NULL,45.097961,7.581563999999958),(8,'Italia','Veneto','Milano','Milano','Piazza del Duomo',1,NULL,45.465043,9.191806000000042);
-/*!40000 ALTER TABLE `indirizzo` ENABLE KEYS */;
+LOCK TABLES `Indirizzo` WRITE;
+/*!40000 ALTER TABLE `Indirizzo` DISABLE KEYS */;
+INSERT INTO `Indirizzo` VALUES (1,'Italia','Lombardia','Milano','Milano','Via Valassina',27,2,45.5005692,9.187734699999965),(2,'Italia','Lombardia','Milano','Milano','Via Orti',3,NULL,45.4549309,9.198682800000029),(3,'Italia','Trentino Alto Adige','Trento','Trento','Corso 3 Novembre 1918',102,15,46.0608004,11.124980899999969),(4,'Italia','Piemonte','Torino','Torino','Corso 3 Novembre 1918',102,15,45.07489349999999,7.652501499999971),(5,'Italia','Veneto','Treviso','Treviso','Piazza dei Signori',3,NULL,45.6654873,12.245583500000066),(6,'Italia','Trentino Alto Adige','Trento','Trento','Via Brennero',282,NULL,46.0884487,11.117878099999984),(7,'Italia','Piemonte','Torino','Collegno','Viale Svezia',1,NULL,45.097961,7.581563999999958),(8,'Italia','Veneto','Milano','Milano','Piazza del Duomo',1,NULL,45.465043,9.191806000000042),(14,'Italia','Veneto','Vicenza','Bassano del grappa','Via rovereto',26,-1,45.764622,11.725791999999956),(15,'Italia','Veneto','Vicenza','Bassano del grappa','Via rovereto',26,-1,45.764622,11.725791999999956),(16,'Italia','Veneto','Vicenza','Bassano del grappa','Via rovereto',12,-1,45.765,11.725549999999998),(27,'Italia','Veneto','Vicenza','Bassano del grappa','Via rovereto',12,-1,45.765,11.725549999999998),(28,'Italia','Veneto','Vicenza','Bassano del grappa','Via rovereto',33,-1,45.7648889,11.725838100000033),(29,'Italia','Veneto','VI','Bassano del grappa','via roma',30,-1,45.7659708,11.73488240000006),(30,'Italia','Veneto','Vicenza','Bassano del grappa','via roma',12,-1,45.7666101,11.734447899999964),(31,'Italia','Veneto','Vi','Bassano del grappa','Via rovereto',26,2,45.764622,11.725791999999956),(32,'Italia','Veneto','Vicenza','Bassano del grappa','Via rovereto',26,-1,45.764622,11.725791999999956);
+/*!40000 ALTER TABLE `Indirizzo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `indirizzoutente`
+-- Table structure for table `IndirizzoUtente`
 --
 
-DROP TABLE IF EXISTS `indirizzoutente`;
+DROP TABLE IF EXISTS `IndirizzoUtente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `indirizzoutente` (
+CREATE TABLE `IndirizzoUtente` (
   `idI` int(11) NOT NULL,
   `idU` int(11) NOT NULL,
   PRIMARY KEY (`idI`,`idU`),
   KEY `idU` (`idU`),
-  CONSTRAINT `IndirizzoUtente_ibfk_1` FOREIGN KEY (`idU`) REFERENCES `utente` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `IndirizzoUtente_ibfk_2` FOREIGN KEY (`idI`) REFERENCES `indirizzo` (`idI`) ON DELETE CASCADE
+  CONSTRAINT `IndirizzoUtente_ibfk_1` FOREIGN KEY (`idU`) REFERENCES `Utente` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `IndirizzoUtente_ibfk_2` FOREIGN KEY (`idI`) REFERENCES `Indirizzo` (`idI`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `indirizzoutente`
+-- Dumping data for table `IndirizzoUtente`
 --
 
-LOCK TABLES `indirizzoutente` WRITE;
-/*!40000 ALTER TABLE `indirizzoutente` DISABLE KEYS */;
-INSERT INTO `indirizzoutente` VALUES (2,1),(4,2),(5,3),(3,4),(1,5);
-/*!40000 ALTER TABLE `indirizzoutente` ENABLE KEYS */;
+LOCK TABLES `IndirizzoUtente` WRITE;
+/*!40000 ALTER TABLE `IndirizzoUtente` DISABLE KEYS */;
+INSERT INTO `IndirizzoUtente` VALUES (2,1),(4,2),(31,2),(5,3),(3,4),(1,5);
+/*!40000 ALTER TABLE `IndirizzoUtente` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `negozio`
+-- Table structure for table `Negozio`
 --
 
-DROP TABLE IF EXISTS `negozio`;
+DROP TABLE IF EXISTS `Negozio`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `negozio` (
+CREATE TABLE `Negozio` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idVenditore` int(11) NOT NULL,
   `nomeNegozio` varchar(255) NOT NULL,
@@ -297,29 +192,29 @@ CREATE TABLE `negozio` (
   PRIMARY KEY (`id`,`idI`),
   KEY `idI` (`idI`),
   KEY `idNegozioIndex` (`idVenditore`) USING HASH,
-  CONSTRAINT `Negozio_ibfk_1` FOREIGN KEY (`idVenditore`) REFERENCES `utente` (`id`) ON DELETE NO ACTION,
-  CONSTRAINT `Negozio_ibfk_2` FOREIGN KEY (`idI`) REFERENCES `indirizzo` (`idI`) ON DELETE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  CONSTRAINT `Negozio_ibfk_1` FOREIGN KEY (`idVenditore`) REFERENCES `Utente` (`id`) ON DELETE NO ACTION,
+  CONSTRAINT `Negozio_ibfk_2` FOREIGN KEY (`idI`) REFERENCES `Indirizzo` (`idI`) ON DELETE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `negozio`
+-- Dumping data for table `Negozio`
 --
 
-LOCK TABLES `negozio` WRITE;
-/*!40000 ALTER TABLE `negozio` DISABLE KEYS */;
-INSERT INTO `negozio` VALUES (1,2,'Mediaworld',NULL,1,6,'2017-06-25 13:30:15',NULL,'Lunedi: 8:00 - 19:00, Martedi: 8:00 - 19:00, Mercoledi: 8:00 - 19:00, Giovedi: 8:00 - 19:00, Venerdi: 8:00 - 19:00, Sabato: 8:00 - 19:00, Domenica: Chiuso'),(2,2,'Unieuro',NULL,1,8,'2016-01-01 07:00:00',NULL,'Lunedi: 8:00 - 22:00, Martedi: 8:00 - 22:00, Mercoledi: 8:00 - 22:00, Giovedi: 8:00 - 22:00, Venerdi: 8:00 - 22:00, Sabato: 9:00 - 22:00, Domenica: 10:00 - 20:00'),(3,1,'Ikea',8,0,7,'2017-07-20 14:02:41',NULL,'Lunedi: 8:00 - 19:00, Martedi: 8:00 - 19:00, Mercoledi: 8:00 - 19:00, Giovedi: 8:00 - 19:00, Venerdi: 8:00 - 19:00, Sabato: 8:00 - 19:00, Domenica: Chiuso');
-/*!40000 ALTER TABLE `negozio` ENABLE KEYS */;
+LOCK TABLES `Negozio` WRITE;
+/*!40000 ALTER TABLE `Negozio` DISABLE KEYS */;
+INSERT INTO `Negozio` VALUES (1,2,'Mediaworld',NULL,1,6,'2017-06-25 13:30:15',NULL,'Lunedi: 8:00 - 19:00, Martedi: 8:00 - 19:00, Mercoledi: 8:00 - 19:00, Giovedi: 8:00 - 19:00, Venerdi: 8:00 - 19:00, Sabato: 8:00 - 19:00, Domenica: Chiuso'),(2,2,'Unieuro',NULL,1,8,'2016-01-01 07:00:00',NULL,'Lunedi: 8:00 - 22:00, Martedi: 8:00 - 22:00, Mercoledi: 8:00 - 22:00, Giovedi: 8:00 - 22:00, Venerdi: 8:00 - 22:00, Sabato: 9:00 - 22:00, Domenica: 10:00 - 20:00'),(3,1,'Ikea',8,0,7,'2017-07-20 14:02:41',NULL,'Lunedi: 8:00 - 19:00, Martedi: 8:00 - 19:00, Mercoledi: 8:00 - 19:00, Giovedi: 8:00 - 19:00, Venerdi: 8:00 - 19:00, Sabato: 8:00 - 19:00, Domenica: Chiuso'),(4,2,'Negozio stravagante',NULL,1,4,'2017-12-28 10:12:34','www.negoziostrano.com','Lunedì: Chiuso Martedì: Chiuso Mercoledì: Chiuso Giovedì: Chiuso Venerdì: Chiuso Sabato: Chiuso Domenica: Chiuso '),(14,2,'bhobho',NULL,1,28,'2017-12-30 11:48:35','www.bhooooo.com','Lunedì: Chiuso , Martedì: Chiuso , Mercoledì: Chiuso , Giovedì: Chiuso , Venerdì: Chiuso , Sabato: Chiuso , Domenica: Chiuso '),(15,2,'Altro negozio di prova',NULL,0,29,'2018-01-08 21:06:07','www.altronegozio.it','Lunedì: Chiuso , Martedì: Chiuso , Mercoledì: Chiuso , Giovedì: Chiuso , Venerdì: Chiuso , Sabato: Chiuso , Domenica: Chiuso '),(16,2,'test finale aggiunta negozio',NULL,1,30,'2018-01-15 07:19:57','WWW.link.IT','Lunedì: Chiuso , Martedì: Chiuso , Mercoledì: Chiuso , Giovedì: Chiuso , Venerdì: Chiuso , Sabato: Chiuso , Domenica: Chiuso '),(17,2,'negozio di prova per url',NULL,1,32,'2018-01-17 14:33:03','http://www.linkDiProva.it','Lunedì: ciao - ciao , Martedì: Chiuso , Mercoledì: Chiuso , Giovedì: Chiuso , Venerdì: Chiuso , Sabato: Chiuso , Domenica: Chiuso ');
+/*!40000 ALTER TABLE `Negozio` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `oggetto`
+-- Table structure for table `Oggetto`
 --
 
-DROP TABLE IF EXISTS `oggetto`;
+DROP TABLE IF EXISTS `Oggetto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `oggetto` (
+CREATE TABLE `Oggetto` (
   `id` varchar(32) NOT NULL,
   `idNegozio` int(11) NOT NULL,
   `nome` varchar(500) NOT NULL,
@@ -335,19 +230,19 @@ CREATE TABLE `oggetto` (
   PRIMARY KEY (`id`),
   KEY `idNegozio` (`idNegozio`),
   KEY `idOggettoIndex` (`categoria`) USING HASH,
-  CONSTRAINT `Oggetto_ibfk_1` FOREIGN KEY (`idNegozio`) REFERENCES `negozio` (`id`) ON DELETE NO ACTION,
-  CONSTRAINT `Oggetto_ibfk_2` FOREIGN KEY (`categoria`) REFERENCES `categoria` (`id`) ON DELETE NO ACTION
+  CONSTRAINT `Oggetto_ibfk_1` FOREIGN KEY (`idNegozio`) REFERENCES `Negozio` (`id`) ON DELETE NO ACTION,
+  CONSTRAINT `Oggetto_ibfk_2` FOREIGN KEY (`categoria`) REFERENCES `Categoria` (`id`) ON DELETE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `oggetto`
+-- Dumping data for table `Oggetto`
 --
 
-LOCK TABLES `oggetto` WRITE;
-/*!40000 ALTER TABLE `oggetto` DISABLE KEYS */;
-INSERT INTO `oggetto` VALUES ('1',1,'iPhone SE','iphone se',259.99,'iPhone SE 16GB Bianco',0,23,0,15,'2017-12-30',1),('2',2,'HTC U11','htc u11',499,'HTC U11 32GB Bianco',0,6,0,0,NULL,1),('3',2,'Huawei P10 Lite','huawei p10 lite',260,'Huawei P10 Lite 32GB Nero',0,1,0,0,NULL,1),('4',3,'Pentola Acciaio Inossidabile','pentola acciaio inossidabile',50,'Pentola Acciaio Inossidabile, insdistrutibile!',1,45,0,0,NULL,2),('5',1,'Earpods','earpods',29,'Auricolari wire apple',1,65,1,0,NULL,1),('6',1,'Huawei P10 Lite','huawei p10 lite',289,'Huawei P10 Lite 32GB Nero',0,1,0,0,NULL,1),('7',1,'HTC U11','htc u11',469,'HTC U11 32GB Bianco',1,25,0,0,NULL,1);
-/*!40000 ALTER TABLE `oggetto` ENABLE KEYS */;
+LOCK TABLES `Oggetto` WRITE;
+/*!40000 ALTER TABLE `Oggetto` DISABLE KEYS */;
+INSERT INTO `Oggetto` VALUES ('1',1,'iPhone SE','iphone se',259.99,'iPhone SE 16GB Bianco',0,23,0,15,'2017-12-30',1),('1be10aca451d221ba5de0253367a9e15',15,'oggetto tanto tanto brutto','oggetto tanto tanto brutto',1000,'questo Ã???Ã??Ã?Â¨ il mio miglior oggetto eheheh',1,20,0,50,'2018-01-24',5),('2',2,'HTC U11','htc u11',499,'HTC U11 32GB Bianco',0,6,0,0,NULL,1),('3',2,'Huawei P10 Lite','huawei p10 lite',260,'Huawei P10 Lite 32GB Nero',0,1,0,0,NULL,1),('3f6d28c6f3f3b2cafe5f2e3edd15549e',14,'oggetto scontato','oggetto scontato',124,'asdasdsad',1,10,0,25,'2018-01-19',1),('4',3,'Pentola Acciaio Inossidabile','pentola acciaio inossidabile',50,'Pentola Acciaio Inossidabile, insdistrutibile!',1,45,0,0,NULL,2),('42228bcaf44bf0148efcf2b8d1bb34c9',16,'secondo oggetto finale','secondo oggetto finale',280,'cavoli questo Ã?Â¨ un oggetto finale asdads',1,9,0,10,'2019-02-14',1),('43d478f6d437e62c5934639233409aec',15,'ammazza che brutto','ammazza che brutto',1987,'daoksldjlaskdnadja',1,9,0,10,'2018-01-23',1),('5',1,'Earpods','earpods',29,'Auricolari wire apple',1,65,1,0,NULL,1),('6',1,'Huawei P10 Lite','huawei p10 lite',289,'Huawei P10 Lite 32GB Nero',0,1,0,0,NULL,1),('6b52e737c308ee43a04f0499cd65cc59',14,'nome di un oggetto','nome di un oggetto',123,'questa Ã¨ la descrizione',1,120,0,0,NULL,1),('6db88cf5ed7ba32f94737ac8fbf5c35a',14,'oggetto di prova','oggetto di prova',999,'descrizione di prova',1,12,0,0,NULL,4),('7',1,'HTC U11','htc u11',469,'HTC U11 32GB Bianco',1,25,0,0,NULL,1),('726f8395b1a69285e0c052224b5b20e1',15,'oggettoooooooo','oggettoooooooo',124,'sdasdasdasds',1,10,0,0,NULL,5),('82a1a8d6d127d42889049af26c6da39d',14,'oggetto strano','oggetto strano',1234,'questo Ã¨ uno strano oggetto',1,12,0,20,'2018-01-12',1),('af39ab03be7a4124c0315c4292c7ec94',14,'asdasdasd','asdasdasd',123,'sweqweqwedsadasdasdasdqew',1,10,0,0,NULL,1),('ciao',14,'ciao','asdadkmasldnasjkndasdnasd',200,'dasjkdnasknm dasdbaskjdnalskndasd asd asldnasd  asijdkasjnd',1,1,0,0,NULL,1),('ciaociao',1,'nuovo nome oggetto','nuovo nome oggetto',987,'descrizione oggetto aggiornato',0,20,0,0,NULL,7),('dasdasda',1,'adasd','dasda',12,'gtgrfe',1,10,0,0,NULL,1),('dassadasddasda',1,'adasd','dasda',12,'gtgrfe',1,10,0,50,'2018-01-12',1),('e05ada816498ee538369327195ed87cc',14,'non ho un nome','non ho un nome',1234,'dasdasdads',1,123,0,0,NULL,6),('e2777a27bc774a720aba4d0745be9de2',16,'Oggetto test finale','oggetto test finale',180,'Descrizione di un oggetto test finale',1,10,1,0,NULL,3),('f3af9859dfa7ec25eeb8d8a8b8d31431',14,'nome casuale','nome casuale',989,'questa Ã¨ una descrizione completamente casuale',1,12,0,50,'2018-01-26',9);
+/*!40000 ALTER TABLE `Oggetto` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -384,13 +279,13 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
--- Table structure for table `ordine`
+-- Table structure for table `Ordine`
 --
 
-DROP TABLE IF EXISTS `ordine`;
+DROP TABLE IF EXISTS `Ordine`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ordine` (
+CREATE TABLE `Ordine` (
   `idOrdine` int(11) NOT NULL AUTO_INCREMENT,
   `idOggetto` varchar(32) NOT NULL,
   `idNegozio` int(11) NOT NULL,
@@ -402,26 +297,27 @@ CREATE TABLE `ordine` (
   `dataOrdine` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `prezzoDiAcquisto` double DEFAULT NULL,
   `idS` int(11) DEFAULT NULL,
+  `idI` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`idOrdine`,`idOggetto`,`idUtente`),
   KEY `idOggetto` (`idOggetto`),
   KEY `idNegozio` (`idNegozio`),
   KEY `idUtente` (`idUtente`),
   KEY `idS` (`idS`),
-  CONSTRAINT `Ordine_ibfk_1` FOREIGN KEY (`idOggetto`) REFERENCES `oggetto` (`id`) ON DELETE NO ACTION,
-  CONSTRAINT `Ordine_ibfk_2` FOREIGN KEY (`idNegozio`) REFERENCES `negozio` (`id`) ON DELETE NO ACTION,
-  CONSTRAINT `Ordine_ibfk_3` FOREIGN KEY (`idUtente`) REFERENCES `utente` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `nomeSensato3` FOREIGN KEY (`idS`) REFERENCES `tipospedizione` (`idS`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  CONSTRAINT `Ordine_ibfk_1` FOREIGN KEY (`idOggetto`) REFERENCES `Oggetto` (`id`) ON DELETE NO ACTION,
+  CONSTRAINT `Ordine_ibfk_2` FOREIGN KEY (`idNegozio`) REFERENCES `Negozio` (`id`) ON DELETE NO ACTION,
+  CONSTRAINT `Ordine_ibfk_3` FOREIGN KEY (`idUtente`) REFERENCES `Utente` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `nomeSensato3` FOREIGN KEY (`idS`) REFERENCES `tipoSpedizione` (`idS`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ordine`
+-- Dumping data for table `Ordine`
 --
 
-LOCK TABLES `ordine` WRITE;
-/*!40000 ALTER TABLE `ordine` DISABLE KEYS */;
-INSERT INTO `ordine` VALUES (1,'1',1,3,3,1,NULL,NULL,'2017-10-01 19:13:20',300,NULL),(1,'6',1,3,1,2,NULL,NULL,'2017-10-01 19:13:20',319,NULL),(1,'7',1,3,1,1,NULL,NULL,'2017-10-01 19:13:20',450,NULL),(2,'2',2,4,1,1,NULL,NULL,'2017-07-23 09:27:52',200,NULL),(3,'3',2,3,2,1,NULL,NULL,'2017-07-25 07:53:01',100,NULL),(4,'4',3,4,2,1,NULL,NULL,'2017-07-25 07:58:55',50,NULL),(5,'2',2,4,0,2,NULL,NULL,'2017-10-07 09:06:44',998,NULL);
-/*!40000 ALTER TABLE `ordine` ENABLE KEYS */;
+LOCK TABLES `Ordine` WRITE;
+/*!40000 ALTER TABLE `Ordine` DISABLE KEYS */;
+INSERT INTO `Ordine` VALUES (1,'1',1,3,1,1,NULL,NULL,'2017-10-01 19:13:20',300,NULL,1),(1,'6',1,3,1,2,'il codice di tracking: stocazzo','2018-01-15','2017-10-01 19:13:20',319,NULL,1),(1,'7',1,3,1,1,NULL,NULL,'2017-10-01 19:13:20',450,NULL,1),(2,'2',2,4,1,1,NULL,NULL,'2017-07-23 09:27:52',200,NULL,1),(3,'3',2,3,2,1,NULL,NULL,'2017-07-25 07:53:01',100,NULL,1),(4,'4',3,4,2,1,NULL,NULL,'2017-07-25 07:58:55',50,NULL,1),(5,'2',2,4,0,2,NULL,NULL,'2017-10-07 09:06:44',998,NULL,1),(6,'1',1,5,2,5,'htftxgfhjfrtxdhn','2018-01-18','2018-01-12 14:46:43',300,2,1),(7,'1',1,5,3,4,'Codice trackantissimo','2018-01-18','2018-01-15 07:39:27',300,2,1),(8,'43d478f6d437e62c5934639233409aec',15,2,1,1,NULL,NULL,'2018-01-22 10:30:40',1788.3,NULL,4),(8,'6db88cf5ed7ba32f94737ac8fbf5c35a',14,2,1,1,NULL,NULL,'2018-01-22 10:30:57',999,NULL,4),(9,'82a1a8d6d127d42889049af26c6da39d',14,2,1,3,NULL,NULL,'2018-01-22 20:43:23',987.2,NULL,31),(10,'2',2,2,0,1,NULL,NULL,'2018-01-23 07:47:04',499,NULL,1);
+/*!40000 ALTER TABLE `Ordine` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -525,41 +421,13 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
--- Table structure for table `ordiniricevuti`
+-- Table structure for table `RecensioneNegozio`
 --
 
-DROP TABLE IF EXISTS `ordiniricevuti`;
+DROP TABLE IF EXISTS `RecensioneNegozio`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ordiniricevuti` (
-  `idO` int(11) NOT NULL,
-  `idV` int(11) NOT NULL,
-  `data` datetime NOT NULL,
-  PRIMARY KEY (`idO`,`idV`),
-  KEY `idV` (`idV`),
-  CONSTRAINT `ordiniRicevuti_ibfk_1` FOREIGN KEY (`idO`) REFERENCES `ordine` (`idOrdine`),
-  CONSTRAINT `ordiniRicevuti_ibfk_2` FOREIGN KEY (`idV`) REFERENCES `utente` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `ordiniricevuti`
---
-
-LOCK TABLES `ordiniricevuti` WRITE;
-/*!40000 ALTER TABLE `ordiniricevuti` DISABLE KEYS */;
-INSERT INTO `ordiniricevuti` VALUES (1,2,'2017-10-01 19:13:20');
-/*!40000 ALTER TABLE `ordiniricevuti` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `recensionenegozio`
---
-
-DROP TABLE IF EXISTS `recensionenegozio`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `recensionenegozio` (
+CREATE TABLE `RecensioneNegozio` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idNegozio` int(11) NOT NULL,
   `idUtente` int(11) NOT NULL,
@@ -570,29 +438,29 @@ CREATE TABLE `recensionenegozio` (
   PRIMARY KEY (`id`),
   KEY `idUtente` (`idUtente`),
   KEY `idRecNegIndex` (`idNegozio`) USING HASH,
-  CONSTRAINT `RecensioneNegozio_ibfk_1` FOREIGN KEY (`idNegozio`) REFERENCES `negozio` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `RecensioneNegozio_ibfk_2` FOREIGN KEY (`idUtente`) REFERENCES `utente` (`id`) ON DELETE NO ACTION
+  CONSTRAINT `RecensioneNegozio_ibfk_1` FOREIGN KEY (`idNegozio`) REFERENCES `Negozio` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `RecensioneNegozio_ibfk_2` FOREIGN KEY (`idUtente`) REFERENCES `Utente` (`id`) ON DELETE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `recensionenegozio`
+-- Dumping data for table `RecensioneNegozio`
 --
 
-LOCK TABLES `recensionenegozio` WRITE;
-/*!40000 ALTER TABLE `recensionenegozio` DISABLE KEYS */;
-INSERT INTO `recensionenegozio` VALUES (1,1,4,'Bel negozio, personale qualificato',5,'2017-09-14 00:00:00',NULL),(2,2,3,'Bel negozio, alla moda, consigliato!',5,'2017-09-11 00:00:00',NULL),(3,3,4,'tutto molto bello',4,'2017-08-19 00:00:00',0);
-/*!40000 ALTER TABLE `recensionenegozio` ENABLE KEYS */;
+LOCK TABLES `RecensioneNegozio` WRITE;
+/*!40000 ALTER TABLE `RecensioneNegozio` DISABLE KEYS */;
+INSERT INTO `RecensioneNegozio` VALUES (1,1,4,'Bel negozio, personale qualificato',5,'2017-09-14 00:00:00',NULL),(2,2,3,'Bel negozio, alla moda, consigliato!',5,'2017-09-11 00:00:00',NULL),(3,3,4,'tutto molto bello',4,'2017-08-19 00:00:00',0);
+/*!40000 ALTER TABLE `RecensioneNegozio` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `recensioneoggetto`
+-- Table structure for table `RecensioneOggetto`
 --
 
-DROP TABLE IF EXISTS `recensioneoggetto`;
+DROP TABLE IF EXISTS `RecensioneOggetto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `recensioneoggetto` (
+CREATE TABLE `RecensioneOggetto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idOggetto` varchar(32) NOT NULL,
   `idUtente` int(11) NOT NULL,
@@ -603,29 +471,29 @@ CREATE TABLE `recensioneoggetto` (
   PRIMARY KEY (`id`),
   KEY `idUtente` (`idUtente`),
   KEY `idRecOggIndex` (`idOggetto`) USING HASH,
-  CONSTRAINT `RecensioneOggetto_ibfk_1` FOREIGN KEY (`idOggetto`) REFERENCES `oggetto` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `RecensioneOggetto_ibfk_2` FOREIGN KEY (`idUtente`) REFERENCES `utente` (`id`) ON DELETE NO ACTION
+  CONSTRAINT `RecensioneOggetto_ibfk_1` FOREIGN KEY (`idOggetto`) REFERENCES `Oggetto` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `RecensioneOggetto_ibfk_2` FOREIGN KEY (`idUtente`) REFERENCES `Utente` (`id`) ON DELETE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `recensioneoggetto`
+-- Dumping data for table `RecensioneOggetto`
 --
 
-LOCK TABLES `recensioneoggetto` WRITE;
-/*!40000 ALTER TABLE `recensioneoggetto` DISABLE KEYS */;
-INSERT INTO `recensioneoggetto` VALUES (1,'1',1,'Bene ma non benissimo, si vede che è una cinesata',2,'2017-07-14 00:00:00',4),(2,'5',1,'Ad Andrea Fadi piace questo elemento',5,'2017-07-25 08:21:56',12),(3,'3',2,'Era scritto motosega e invece è un telefono',1,'2017-07-25 11:18:35',3);
-/*!40000 ALTER TABLE `recensioneoggetto` ENABLE KEYS */;
+LOCK TABLES `RecensioneOggetto` WRITE;
+/*!40000 ALTER TABLE `RecensioneOggetto` DISABLE KEYS */;
+INSERT INTO `RecensioneOggetto` VALUES (1,'1',1,'Bene ma non benissimo, si vede che è una cinesata',2,'2017-07-14 00:00:00',4),(2,'5',1,'Ad Andrea Fadi piace questo elemento',5,'2017-07-25 08:21:56',12),(3,'3',2,'Era scritto motosega e invece è un telefono',1,'2017-07-25 11:18:35',3);
+/*!40000 ALTER TABLE `RecensioneOggetto` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `recensionevenditore`
+-- Table structure for table `RecensioneVenditore`
 --
 
-DROP TABLE IF EXISTS `recensionevenditore`;
+DROP TABLE IF EXISTS `RecensioneVenditore`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `recensionevenditore` (
+CREATE TABLE `RecensioneVenditore` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idVenditore` int(11) NOT NULL,
   `idUtente` int(11) NOT NULL,
@@ -636,19 +504,319 @@ CREATE TABLE `recensionevenditore` (
   PRIMARY KEY (`id`),
   KEY `idUtente` (`idUtente`),
   KEY `idRecVenIndex` (`idVenditore`) USING HASH,
-  CONSTRAINT `RecensioneVenditore_ibfk_1` FOREIGN KEY (`idVenditore`) REFERENCES `utente` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `RecensioneVenditore_ibfk_2` FOREIGN KEY (`idUtente`) REFERENCES `utente` (`id`) ON DELETE NO ACTION
+  CONSTRAINT `RecensioneVenditore_ibfk_1` FOREIGN KEY (`idVenditore`) REFERENCES `Utente` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `RecensioneVenditore_ibfk_2` FOREIGN KEY (`idUtente`) REFERENCES `Utente` (`id`) ON DELETE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `recensionevenditore`
+-- Dumping data for table `RecensioneVenditore`
 --
 
-LOCK TABLES `recensionevenditore` WRITE;
-/*!40000 ALTER TABLE `recensionevenditore` DISABLE KEYS */;
-INSERT INTO `recensionevenditore` VALUES (1,2,4,'tutto arrivato in tempo, imballo fatto con cazzi di gomma',4,'2017-07-19 00:00:00',4);
-/*!40000 ALTER TABLE `recensionevenditore` ENABLE KEYS */;
+LOCK TABLES `RecensioneVenditore` WRITE;
+/*!40000 ALTER TABLE `RecensioneVenditore` DISABLE KEYS */;
+INSERT INTO `RecensioneVenditore` VALUES (1,2,4,'tutto arrivato in tempo, imballo fatto con cazzi di gomma',4,'2017-07-19 00:00:00',4);
+/*!40000 ALTER TABLE `RecensioneVenditore` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `RispostaNegozio`
+--
+
+DROP TABLE IF EXISTS `RispostaNegozio`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `RispostaNegozio` (
+  `idRecensione` int(11) NOT NULL,
+  `testo` varchar(2500) NOT NULL,
+  `data` datetime NOT NULL,
+  PRIMARY KEY (`idRecensione`),
+  CONSTRAINT `RispostaNegozio_ibfk_1` FOREIGN KEY (`idRecensione`) REFERENCES `RecensioneNegozio` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `RispostaNegozio`
+--
+
+LOCK TABLES `RispostaNegozio` WRITE;
+/*!40000 ALTER TABLE `RispostaNegozio` DISABLE KEYS */;
+/*!40000 ALTER TABLE `RispostaNegozio` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `RispostaOggetto`
+--
+
+DROP TABLE IF EXISTS `RispostaOggetto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `RispostaOggetto` (
+  `idRecensione` int(11) NOT NULL,
+  `testo` varchar(2500) NOT NULL,
+  `data` datetime NOT NULL,
+  PRIMARY KEY (`idRecensione`),
+  CONSTRAINT `RispostaOggetto_ibfk_1` FOREIGN KEY (`idRecensione`) REFERENCES `RecensioneOggetto` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `RispostaOggetto`
+--
+
+LOCK TABLES `RispostaOggetto` WRITE;
+/*!40000 ALTER TABLE `RispostaOggetto` DISABLE KEYS */;
+INSERT INTO `RispostaOggetto` VALUES (1,'Ci scusiamo, stiamo lavorando per assumere cinesi a basso costo che facciano cinesate che non sembrino cinesate, cordiali saluti, ToMare','2017-07-30 00:00:00');
+/*!40000 ALTER TABLE `RispostaOggetto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `RispostaVenditore`
+--
+
+DROP TABLE IF EXISTS `RispostaVenditore`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `RispostaVenditore` (
+  `idRecensione` int(11) NOT NULL,
+  `testo` varchar(2500) NOT NULL,
+  `data` datetime NOT NULL,
+  PRIMARY KEY (`idRecensione`),
+  CONSTRAINT `RispostaVenditore_ibfk_1` FOREIGN KEY (`idRecensione`) REFERENCES `RecensioneVenditore` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `RispostaVenditore`
+--
+
+LOCK TABLES `RispostaVenditore` WRITE;
+/*!40000 ALTER TABLE `RispostaVenditore` DISABLE KEYS */;
+/*!40000 ALTER TABLE `RispostaVenditore` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Utente`
+--
+
+DROP TABLE IF EXISTS `Utente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Utente` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(255) NOT NULL,
+  `cognome` varchar(255) NOT NULL,
+  `mail` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `valutazione` double DEFAULT NULL,
+  `UtenteType` int(11) NOT NULL DEFAULT '0',
+  `emailConfermata` bit(1) NOT NULL DEFAULT b'0',
+  PRIMARY KEY (`id`),
+  KEY `idUtenteIndex` (`id`,`UtenteType`) USING HASH
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Utente`
+--
+
+LOCK TABLES `Utente` WRITE;
+/*!40000 ALTER TABLE `Utente` DISABLE KEYS */;
+INSERT INTO `Utente` VALUES (1,'Paolo','Rossi','paolored@gmail.com','386e2e60f03df908eaf7a70b928685ef','http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png',NULL,1,'\0'),(2,'Giorgio','Ugolini','giorgiougo@libero.it','cazzo','http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png',NULL,1,'\0'),(3,'Andrea','Colombo','andrea.uccello@tiscali.it','3be747e3b8bffd2759019b0b337cc37e','http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png',NULL,0,'\0'),(4,'Fabio','Basilio','fabiob75@outlook.com','d240445b5f0c9b2fd37b7b75f820d156','http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png',NULL,0,'\0'),(5,'Luigi','Di Prima','luigilostesso@libero.it','a8778577393eed9e801cbeb1c5ca22b3','http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png',NULL,2,'\0'),(6,'ugo','ciccio','ugo@ciccio.it','ciao','http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png',0,0,'\0'),(7,'cavolo','banana','banana@cavolo.it','ciao','http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png',0,0,'\0'),(8,'cavolo','ciccio','asdads@it','ciao','http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png',0,0,'\0');
+/*!40000 ALTER TABLE `Utente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `categoria`
+--
+
+DROP TABLE IF EXISTS `categoria`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categoria` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(50) NOT NULL,
+  `sottoCategoria` varchar(50) DEFAULT NULL,
+  `descrizione` varchar(500) NOT NULL,
+  `oggettiPresenti` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categoria`
+--
+
+LOCK TABLES `categoria` WRITE;
+/*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
+INSERT INTO `categoria` VALUES (1,'Elettronica',NULL,'Materiale Elettronico',3),(2,'Casa',NULL,'Materiale per Casa e Cucina',1),(3,'Abbigliamento',NULL,'il mondo dei vestiti',0),(4,'Alimentari',NULL,'Ne trovi per tutti i tuoi gusti',0),(5,'Auto e Moto',NULL,'Il mondo dei motori ai tuoi piedi',0),(6,'Bellezza',NULL,'Coccolati con questi prodotti',0),(7,'Cancelleria e Ufficio',NULL,'Tutto quello che vorrai avere sulla tua scrivania',0),(8,'CD e Vinili',NULL,'Lasciati trasportare in un mondo di note',0),(9,'Fai da te',NULL,'Costruisci il mondo intorno a te',0),(10,'Film e TV',NULL,'Non cambiare canale, resta sincronizzato sulle offerte',0),(11,'Giardino e giardinaggio',NULL,'Rendi il tuo giardino uno spettacolo',0),(12,'Giochi e giocattoli',NULL,'Divertiti come non mai',0),(13,'Gioielli',NULL,'Rendi prezioso il tuo corpo',0),(14,'Fatto a mano',NULL,'Guarda come potremo sorprenderti',0),(15,'Illuminazione',NULL,'Rendi luminosa la tua strada',0),(16,'Industria e scienza',NULL,'Esplora il mondo con un occhio scientifico',0),(17,'Informatica',NULL,'Gioca lavora o divertiti con tutte le ultime tecnologie uscite in commercio',0),(18,'Libri',NULL,'Entra in un nuovo mondo fatto di fantasia',0),(19,'Moda',NULL,'Fatti travolgere dalle ultime creazioni',0),(20,'Orologi',NULL,'Rendi ogni secondo speciale',0),(21,'Prima infanzia',NULL,'Il tuo bambino ha bisogno di te! Usa solo prodotti di prima scelta',0),(22,'Prodotti per animali',NULL,'Fai gustare al tuo animale qualcosa creato appositamente per lui',0),(23,'Salute',NULL,'Prenditi cura di te stesso',0),(24,'Scarpe e borse',NULL,'L\'accessorio giusto al momento giusto',0),(25,'Software',NULL,'Il meglio per il tuo computer',0),(26,'Sport e tempo libero',NULL,'Dai la giusta importanza ai tuoi hobby',0),(27,'Strumenti musicali e dj',NULL,'Solo il meglio per i musicisti di oggi e domani',0),(28,'Valigeria',NULL,'Non lasciare niente a casa ',0),(29,'Videogiochi',NULL,'Gustati i migliori titoli del momento',0);
+/*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `imageNegozio`
+--
+
+DROP TABLE IF EXISTS `imageNegozio`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `imageNegozio` (
+  `src` varchar(150) NOT NULL,
+  `idN` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`src`,`idN`),
+  KEY `idN` (`idN`),
+  CONSTRAINT `imageNegozio_ibfk_2` FOREIGN KEY (`idN`) REFERENCES `Negozio` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `imageNegozio`
+--
+
+LOCK TABLES `imageNegozio` WRITE;
+/*!40000 ALTER TABLE `imageNegozio` DISABLE KEYS */;
+INSERT INTO `imageNegozio` VALUES ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/imageNegozio.png',1),('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/imageNegozio.png',2),('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/imageNegozio.png',3),('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/imageNegozio.png',4),('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/imageNegozio.png',14),('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/imageNegozio.png',15),('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/imageNegozio.png',16),('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/imageNegozio.png',17);
+/*!40000 ALTER TABLE `imageNegozio` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `imageOggetto`
+--
+
+DROP TABLE IF EXISTS `imageOggetto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `imageOggetto` (
+  `src` varchar(150) NOT NULL,
+  `idO` varchar(32) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`src`,`idO`),
+  KEY `idO` (`idO`),
+  CONSTRAINT `imageOggetto_ibfk_2` FOREIGN KEY (`idO`) REFERENCES `Oggetto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `imageOggetto`
+--
+
+LOCK TABLES `imageOggetto` WRITE;
+/*!40000 ALTER TABLE `imageOggetto` DISABLE KEYS */;
+INSERT INTO `imageOggetto` VALUES ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png','1'),('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png','1be10aca451d221ba5de0253367a9e15'),('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png','2'),('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png','3f6d28c6f3f3b2cafe5f2e3edd15549e'),('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png','42228bcaf44bf0148efcf2b8d1bb34c9'),('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png','43d478f6d437e62c5934639233409aec'),('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png','6db88cf5ed7ba32f94737ac8fbf5c35a'),('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png','726f8395b1a69285e0c052224b5b20e1'),('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png','82a1a8d6d127d42889049af26c6da39d'),('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png','ciao'),('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png','ciaociao'),('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png','e05ada816498ee538369327195ed87cc'),('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png','e2777a27bc774a720aba4d0745be9de2'),('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png','f3af9859dfa7ec25eeb8d8a8b8d31431');
+/*!40000 ALTER TABLE `imageOggetto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `imageRecensione`
+--
+
+DROP TABLE IF EXISTS `imageRecensione`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `imageRecensione` (
+  `src` varchar(150) NOT NULL,
+  `idR` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`src`,`idR`),
+  KEY `idR` (`idR`),
+  CONSTRAINT `imageRecensione_ibfk_2` FOREIGN KEY (`idR`) REFERENCES `RecensioneOggetto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `imageRecensione`
+--
+
+LOCK TABLES `imageRecensione` WRITE;
+/*!40000 ALTER TABLE `imageRecensione` DISABLE KEYS */;
+INSERT INTO `imageRecensione` VALUES ('http://localhost:8080/progettoWeb/jspFile/Finale/Img/square.png',1);
+/*!40000 ALTER TABLE `imageRecensione` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `imageUtente`
+--
+
+DROP TABLE IF EXISTS `imageUtente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `imageUtente` (
+  `src` varchar(150) NOT NULL DEFAULT '',
+  `idU` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`src`,`idU`),
+  KEY `idI` (`src`),
+  KEY `idU` (`idU`),
+  CONSTRAINT `imageUtente_ibfk_2` FOREIGN KEY (`idU`) REFERENCES `Utente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `imageUtente`
+--
+
+LOCK TABLES `imageUtente` WRITE;
+/*!40000 ALTER TABLE `imageUtente` DISABLE KEYS */;
+INSERT INTO `imageUtente` VALUES ('http://localhost:8080/progettoWeb/jspFile/Finale/Img/square.png',3),('http://localhost:8080/progettoWeb/jspFile/Finale/Img/square.png',4);
+/*!40000 ALTER TABLE `imageUtente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `indirizzo`
+--
+
+DROP TABLE IF EXISTS `indirizzo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `indirizzo` (
+  `idI` int(11) NOT NULL AUTO_INCREMENT,
+  `stato` varchar(255) NOT NULL,
+  `regione` varchar(255) NOT NULL,
+  `provincia` varchar(255) NOT NULL,
+  `citta` varchar(255) NOT NULL,
+  `via` varchar(255) NOT NULL,
+  `nCivico` int(11) NOT NULL,
+  `interno` int(11) DEFAULT NULL,
+  `latitudine` double DEFAULT NULL,
+  `longitudine` double DEFAULT NULL,
+  PRIMARY KEY (`idI`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `indirizzo`
+--
+
+LOCK TABLES `indirizzo` WRITE;
+/*!40000 ALTER TABLE `indirizzo` DISABLE KEYS */;
+INSERT INTO `indirizzo` VALUES (1,'Italia','Lombardia','Milano','Milano','Via Valassina',27,2,45.5005692,9.187734699999965),(2,'Italia','Lombardia','Milano','Milano','Via Orti',3,NULL,45.4549309,9.198682800000029),(3,'Italia','Trentino Alto Adige','Trento','Trento','Corso 3 Novembre 1918',102,15,46.0608004,11.124980899999969),(4,'Italia','Piemonte','Torino','Torino','Corso 3 Novembre 1918',102,15,45.07489349999999,7.652501499999971),(5,'Italia','Veneto','Treviso','Treviso','Piazza dei Signori',3,NULL,45.6654873,12.245583500000066),(6,'Italia','Trentino Alto Adige','Trento','Trento','Via Brennero',282,NULL,46.0884487,11.117878099999984),(7,'Italia','Piemonte','Torino','Collegno','Viale Svezia',1,NULL,45.097961,7.581563999999958),(8,'Italia','Veneto','Milano','Milano','Piazza del Duomo',1,NULL,45.465043,9.191806000000042);
+/*!40000 ALTER TABLE `indirizzo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ordiniRicevuti`
+--
+
+DROP TABLE IF EXISTS `ordiniRicevuti`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ordiniRicevuti` (
+  `idO` int(11) NOT NULL,
+  `idV` int(11) NOT NULL,
+  `data` datetime NOT NULL,
+  PRIMARY KEY (`idO`,`idV`),
+  KEY `idV` (`idV`),
+  CONSTRAINT `ordiniRicevuti_ibfk_1` FOREIGN KEY (`idO`) REFERENCES `Ordine` (`idOrdine`),
+  CONSTRAINT `ordiniRicevuti_ibfk_2` FOREIGN KEY (`idV`) REFERENCES `Utente` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ordiniRicevuti`
+--
+
+LOCK TABLES `ordiniRicevuti` WRITE;
+/*!40000 ALTER TABLE `ordiniRicevuti` DISABLE KEYS */;
+INSERT INTO `ordiniRicevuti` VALUES (1,2,'2017-10-01 19:13:20'),(6,2,'2018-01-15 08:30:10'),(7,2,'2018-01-15 08:43:44');
+/*!40000 ALTER TABLE `ordiniRicevuti` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -675,135 +843,61 @@ INSERT INTO `recuperopassword` VALUES ('eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkc2FydG9
 UNLOCK TABLES;
 
 --
--- Table structure for table `rispostanegozio`
+-- Table structure for table `spedizioneOggetto`
 --
 
-DROP TABLE IF EXISTS `rispostanegozio`;
+DROP TABLE IF EXISTS `spedizioneOggetto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `rispostanegozio` (
-  `idRecensione` int(11) NOT NULL,
-  `testo` varchar(2500) NOT NULL,
-  `data` datetime NOT NULL,
-  PRIMARY KEY (`idRecensione`),
-  CONSTRAINT `RispostaNegozio_ibfk_1` FOREIGN KEY (`idRecensione`) REFERENCES `recensionenegozio` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `rispostanegozio`
---
-
-LOCK TABLES `rispostanegozio` WRITE;
-/*!40000 ALTER TABLE `rispostanegozio` DISABLE KEYS */;
-/*!40000 ALTER TABLE `rispostanegozio` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `rispostaoggetto`
---
-
-DROP TABLE IF EXISTS `rispostaoggetto`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `rispostaoggetto` (
-  `idRecensione` int(11) NOT NULL,
-  `testo` varchar(2500) NOT NULL,
-  `data` datetime NOT NULL,
-  PRIMARY KEY (`idRecensione`),
-  CONSTRAINT `RispostaOggetto_ibfk_1` FOREIGN KEY (`idRecensione`) REFERENCES `recensioneoggetto` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `rispostaoggetto`
---
-
-LOCK TABLES `rispostaoggetto` WRITE;
-/*!40000 ALTER TABLE `rispostaoggetto` DISABLE KEYS */;
-INSERT INTO `rispostaoggetto` VALUES (1,'Ci scusiamo, stiamo lavorando per assumere cinesi a basso costo che facciano cinesate che non sembrino cinesate, cordiali saluti, ToMare','2017-07-30 00:00:00');
-/*!40000 ALTER TABLE `rispostaoggetto` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `rispostavenditore`
---
-
-DROP TABLE IF EXISTS `rispostavenditore`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `rispostavenditore` (
-  `idRecensione` int(11) NOT NULL,
-  `testo` varchar(2500) NOT NULL,
-  `data` datetime NOT NULL,
-  PRIMARY KEY (`idRecensione`),
-  CONSTRAINT `RispostaVenditore_ibfk_1` FOREIGN KEY (`idRecensione`) REFERENCES `recensionevenditore` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `rispostavenditore`
---
-
-LOCK TABLES `rispostavenditore` WRITE;
-/*!40000 ALTER TABLE `rispostavenditore` DISABLE KEYS */;
-/*!40000 ALTER TABLE `rispostavenditore` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `spedizioneoggetto`
---
-
-DROP TABLE IF EXISTS `spedizioneoggetto`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `spedizioneoggetto` (
+CREATE TABLE `spedizioneOggetto` (
   `idS` int(11) NOT NULL,
   `idO` varchar(32) NOT NULL,
-  PRIMARY KEY (`idS`,`idO`),
+  `idOrdine` int(11) NOT NULL,
+  PRIMARY KEY (`idS`,`idO`,`idOrdine`),
   KEY `nomeSensato` (`idO`),
-  CONSTRAINT `nomeSensato` FOREIGN KEY (`idO`) REFERENCES `oggetto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `nomeSensatoAgain` FOREIGN KEY (`idS`) REFERENCES `tipospedizione` (`idS`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `nomeSensato` FOREIGN KEY (`idO`) REFERENCES `Oggetto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `nomeSensatoAgain` FOREIGN KEY (`idS`) REFERENCES `tipoSpedizione` (`idS`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `spedizioneoggetto`
+-- Dumping data for table `spedizioneOggetto`
 --
 
-LOCK TABLES `spedizioneoggetto` WRITE;
-/*!40000 ALTER TABLE `spedizioneoggetto` DISABLE KEYS */;
-/*!40000 ALTER TABLE `spedizioneoggetto` ENABLE KEYS */;
+LOCK TABLES `spedizioneOggetto` WRITE;
+/*!40000 ALTER TABLE `spedizioneOggetto` DISABLE KEYS */;
+/*!40000 ALTER TABLE `spedizioneOggetto` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tipospedizione`
+-- Table structure for table `tipoSpedizione`
 --
 
-DROP TABLE IF EXISTS `tipospedizione`;
+DROP TABLE IF EXISTS `tipoSpedizione`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tipospedizione` (
+CREATE TABLE `tipoSpedizione` (
   `idS` int(11) NOT NULL AUTO_INCREMENT,
   `idN` int(11) NOT NULL,
   `Nome` varchar(50) NOT NULL,
   `Prezzo` double NOT NULL,
   `Corriere` varchar(50) NOT NULL,
   `tempoRichiesto` int(11) NOT NULL,
+  `numeroMassimo` int(11) NOT NULL DEFAULT '5',
   PRIMARY KEY (`idS`,`idN`),
   KEY `negozioSpedizione` (`idN`),
-  CONSTRAINT `negozioSpedizione` FOREIGN KEY (`idN`) REFERENCES `negozio` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+  CONSTRAINT `negozioSpedizione` FOREIGN KEY (`idN`) REFERENCES `Negozio` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tipospedizione`
+-- Dumping data for table `tipoSpedizione`
 --
 
-LOCK TABLES `tipospedizione` WRITE;
-/*!40000 ALTER TABLE `tipospedizione` DISABLE KEYS */;
-INSERT INTO `tipospedizione` VALUES (1,1,'Spedizione Standard',8,'Bartolini',3),(2,1,'Spedizione Veloce',15,'GLS',3),(3,1,'Spedizione su Appuntamento',65,'DHL',3),(4,2,'Spedizione Standard',6,'SGA',10),(5,2,'Spedizione Veloce',5,'DHL',10),(7,3,'Spedizione Standard',7,'Non specificato',2),(8,3,'Spedizione Veloce',15,'Non specificato',2),(9,3,'Spedizione Express',45,'Non specificato',2),(10,3,'Spedizione su Appuntamento',60,'SGA',2);
-/*!40000 ALTER TABLE `tipospedizione` ENABLE KEYS */;
+LOCK TABLES `tipoSpedizione` WRITE;
+/*!40000 ALTER TABLE `tipoSpedizione` DISABLE KEYS */;
+INSERT INTO `tipoSpedizione` VALUES (2,1,'Spedizione Veloce',15,'GLS',3,5),(3,1,'Spedizione su Appuntamento',65,'DHL',3,5),(4,2,'Spedizione Standard',6,'SGA',10,5),(5,2,'Spedizione Veloce',5,'DHL',10,5),(7,3,'Spedizione Standard',7,'Non specificato',2,5),(8,3,'Spedizione Veloce',15,'Non specificato',2,5),(9,3,'Spedizione Express',45,'Non specificato',2,5),(10,3,'Spedizione su Appuntamento',60,'SGA',2,5),(11,1,'Spedizione standard',8,'Bartolini',4,5),(12,1,'SPedizionasda',12,'brt',5,5),(13,16,'spedizione poco sicura',2,'poste super italiane',4,5);
+/*!40000 ALTER TABLE `tipoSpedizione` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -876,4 +970,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-23 11:46:23
+-- Dump completed on 2018-01-23 13:49:46
