@@ -383,6 +383,24 @@ public class DaoUtente {
     
     /**
      * @author Mattia
+     * Ottenere gli utenti amministratori ordinati per numero di richieste in corso (decrescente)
+     */
+    public List<ModelloUtente> selectAdministratorByNumerOfPendingRequests() {
+        List<ModelloUtente> users = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.selectAdministratorByNumerOfPendingRequests());
+            while (rs.next()) {
+                users.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return users;
+    }
+    
+    /**
+     * @author Mattia
      * Modificare mail utente
      * @param ModelloUtente user
      */

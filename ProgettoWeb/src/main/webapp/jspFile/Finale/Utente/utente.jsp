@@ -19,7 +19,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-3">
-                    <img src="${utenteSessione.getAvatar()}" alt="Immagine utente" style="max-height: 200px; max-width: 200px;"/>
+                    <img src="${utenteSessione.getAvatar()}" alt="Errore nel caricamento dell'immagine dell'utente" style="max-height: 200px; max-width: 200px;"/>
                 </div>
                 <div class="col-6">
                     <h2>Ciao <c:out value="${utenteSessione.getNome()}" /></h2>
@@ -40,15 +40,13 @@
                         <a href="${pageContext.request.contextPath}/jspFile/Finale/Utente/diventaVenditore.jsp" class="btn btn-outline-primary buttonSpace btn-block">Diventa un venditore</a>
                     </c:if>
                     <c:if test="${utenteSessione.getUtenteType() == 2}" >
-                        <a href="#" method="GET" class="btn btn-outline-primary buttonSpace btn-block">Gestisci richieste di assistenza</a>
+                        <a href="${pageContext.request.contextPath}/AssistenzaController?action=listAssistances" method="GET" class="btn btn-outline-primary buttonSpace btn-block">Gestisci richieste di assistenza</a>
                     </c:if>
-                    <a href="#" method="GET" class="btn btn-outline-primary buttonSpace btn-block">Assistenza</a>
+                    <a href="${pageContext.request.contextPath}/AssistenzaController?action=showAssistances" method="GET" class="btn btn-outline-primary buttonSpace btn-block">Assistenza</a>
                     <a  href="${pageContext.request.contextPath}/UserController?action=logout" method="POST" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">person</i> Logout</a>
                 </div>
         </div>
         
-        <div class="container">
-            <%@include file="../Footer/footer.jsp" %>
-        </div>
+        <%@include file="../Footer/footer.jsp" %>
     </body>
 </html>

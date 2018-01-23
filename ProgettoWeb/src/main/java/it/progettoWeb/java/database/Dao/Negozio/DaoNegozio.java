@@ -624,19 +624,19 @@ public class DaoNegozio {
     /**
      * @author fbrug
      * Aggiungere un proprio negozio
-     * @param idVenditore: intero rappresentante l'ID del venditore, proprietario del nuovo negozio
-     * @param nomeNegozio: nome del nuovo negozio da inserire
-     * @param valutazioneNegozio: valutazione iniziale del nuovo negozio
-     * @param idI: intero rappresentante l'ID dell'indirizzo del nuovo negozio
+     * @param negozio: negozio da inserire
      */
-    public void insertShop(int idVenditore, String nomeNegozio, double valutazioneNegozio, int idI)
+    public String insertShop(ModelloNegozio negozio)
     {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.insertShop(idVenditore, nomeNegozio, valutazioneNegozio, idI));
+            statement.executeUpdate(sellersQuery.insertShop(negozio));
+            return "OK";
         }
-        catch (SQLException e) {}
+        catch (SQLException e) {
+            return e.toString();
+        }
     }
     
     /**
@@ -650,7 +650,7 @@ public class DaoNegozio {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.updateShopStatus(idNegozio, attivo));
+            statement.executeUpdate(sellersQuery.updateShopStatus(idNegozio, attivo));
         }
         catch (SQLException e) {}
     }
@@ -666,7 +666,7 @@ public class DaoNegozio {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.insertShopImage(idNegozio, imagePath));
+            statement.executeUpdate(sellersQuery.insertShopImage(idNegozio, imagePath));
         }
         catch (SQLException e) {}
     }
@@ -683,7 +683,7 @@ public class DaoNegozio {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.updateShopImage(idNegozio, oldImagePath, newImagePath));
+            statement.executeUpdate(sellersQuery.updateShopImage(idNegozio, oldImagePath, newImagePath));
         }
         catch (SQLException e) {}
     }
@@ -699,7 +699,7 @@ public class DaoNegozio {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.deleteShopImage(idNegozio, imagePath));
+            statement.executeUpdate(sellersQuery.deleteShopImage(idNegozio, imagePath));
         }
         catch (SQLException e) {}
     }

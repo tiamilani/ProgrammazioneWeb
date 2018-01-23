@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : sviluppatori.jsp
     Created on : 4-ott-2017, 15.32.58
     Author     : damiano
@@ -14,13 +14,13 @@
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script> 
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     </head>
-    
+
     <body>
         <div class="container-fluid">
             <%@include file="../Header/NavBar/newNavBar.jsp" %>
-            <div class="row justify-content-center">  
+            <div class="row justify-content-center">
                 <div class="col-6 description">
                     <h1>Ciao</h1>
                     <p>
@@ -90,7 +90,7 @@
             </div>
 
             <div>
-                <div class="row justify-content-center">  
+                <div class="row justify-content-center">
                     <div class="col-6 description">
                         <h1 id="findUs">Dove Trovarci</h1>
                     </div>
@@ -102,30 +102,30 @@
 
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATC6NxeSsKDBncZwJ4aDivvvs6_5iusSc&callback=createMapAboutUs" async defer></script>
             <script type="text/javascript">
-            var myCenter;
-            function createMapAboutUs() {
-                myCenter = new google.maps.LatLng(46.066993034254345, 11.149814128875732);
-                var mapCanvas = document.getElementById("mapObject");
+                var myCenter;
+                function createMapAboutUs() {
+                    myCenter = new google.maps.LatLng(46.066993034254345, 11.149814128875732);
+                    var mapCanvas = document.getElementById("mapObject");
 
-                var mapOptions = {
-                    center: myCenter,
-                    zoom: 16,
-                    mapType: google.maps.MapTypeId.ROADMAP
-                };
+                    var mapOptions = {
+                        center: myCenter,
+                        zoom: 16,
+                        mapType: google.maps.MapTypeId.ROADMAP
+                    };
 
-                var map = new google.maps.Map(mapCanvas, mapOptions);
+                    var map = new google.maps.Map(mapCanvas, mapOptions);
 
-                var marker = new google.maps.Marker({
-                    position: myCenter
-                });
+                    var marker = new google.maps.Marker({
+                        position: myCenter
+                    });
 
-                marker.setMap(map);
-            }
-            </script>    
-               
+                    marker.setMap(map);
+                }
+            </script>
+
         </div>
-            
+
         <%@include file="../Footer/footer.jsp"%>
-        
+
     </body>
 </html>

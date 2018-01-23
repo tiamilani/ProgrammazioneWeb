@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package it.progettoWeb.java.database.query.users;
-    
+
+import it.progettoWeb.java.database.Model.Ordine.ModelloOrdine;
+import it.progettoWeb.java.database.Model.Assistenza.ModelloAssistenza;
 import java.sql.Date;
 
 /**
@@ -16,19 +18,19 @@ public class usersQuery {
     public static String hello() {
         return "Hello from " + usersQuery.class.toString();
     }
-    
+
     // OTHER QUERY
     //Slezionare tutti gli utenti senza distinzioni
     public static String selectAllUsers(){
         return "SELECT * FROM Utente";
     }
-    
+
     //Seleziono un utente dall'id
     public static String selectUserById(int id){
         return "SELECT * FROM Utente WHERE id='"+id+"'";
     }
-    
-    
+
+
     // ottenere la lista dei negozi di un venditore specificando l'id del venditore
     public static String listaNegoziVenditore(String idV){
         return "SELECT * FROM Negozio WHERE idVenditore = '"+idV+"';";
@@ -50,23 +52,23 @@ public class usersQuery {
     public static String listaNegoziVenditorePlusImage(String nome,String cognome) {
         return "SELECT Negozio.*, imageNegozio.src FROM Negozio INNER JOIN Utente ON (Utente.nome = '"+nome+"' AND Utente.cognome = '"+cognome+"' AND Utente.UtenteType = 1 AND Negozio.idVenditore = Utente.id)LEFT JOIN imageNegozio ON (Negozio.id = imageNegozio.idN);";
     }
-    
+
     public static String inserisciUtente(String nome,String cognome,String mail,String password,String avatar,double valutazione,int UtenteType,boolean emailConfermata){
         return "insert into Utente(nome, cognome, mail, password, avatar, valutazione, UtenteType, emailConfermata) values ("+
                 "'"+nome+"',"+
                 "'"+cognome+"',"+
                 "'"+mail+"',"+
                 "'"+password+"',"+
-                ""+avatar+","+
+                "'"+avatar+"',"+
                 ""+valutazione+","+
                 ""+UtenteType+","+
                 ""+emailConfermata+");";
     }
-    
+
     public static String eliminaUtente(int id){
         return "DELETE FROM Utente WHERE id="+id+";";
     }
-    
+
     public static String updateUtente(int id,String nome,String cognome,String mail,String password,String avatar,double valutazione,int UtenteType,boolean emailConfermata){
         return "update Utente set "+
                 "nome='"+nome+"',"+
@@ -79,7 +81,7 @@ public class usersQuery {
                 "emailConfermata="+emailConfermata+""
                 + " WHERE id="+id+";";
     }
-    
+
     // QUERY UTENTE
     /**
      * @author Andrea
@@ -90,7 +92,7 @@ public class usersQuery {
     public static String selectOrders(int idU){
         return "SELECT * FROM Ordine WHERE Ordine.idUtente ="+idU+" ORDER BY Ordine.dataOrdine DESC;";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere la lista degli ordini con richieste specifiche per l'ordine
@@ -101,7 +103,7 @@ public class usersQuery {
     public static String selectOrdersComplete(int idU, int orderStatus){
         return "SELECT * FROM Ordine WHERE Ordine.idUtente = "+idU+" AND Ordine.stato = "+orderStatus+" ORDER BY Ordine.dataOrdine DESC;";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere la lista dei negozi da cui ho acquistato
@@ -113,7 +115,7 @@ public class usersQuery {
                 + "(Ordine.idUtente ="+idU+" AND Negozio.id = Ordine.idNegozio "
                 + "AND Ordine.stato <> 0 AND Ordine.stato <> 5) GROUP BY Negozio.id;";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere la lista dei negozi da cui ho acquistato e la loro prima foto
@@ -126,7 +128,7 @@ public class usersQuery {
                 + "AND Ordine.stato <> 0 AND Ordine.stato <> 5) LEFT JOIN "
                 + "imageNegozio ON (Negozio.id = imageNegozio.idN) GROUP BY Negozio.id;";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere la lista dei negozi da cui ho acquistato con i dati dell'oggetto acquistato, la prima foto del negozio e la prima dell'oggetto
@@ -143,7 +145,7 @@ public class usersQuery {
                 + "Oggetto.id) LEFT JOIN imageOggetto ON (Oggetto.id = "
                 + "imageOggetto.idO) GROUP BY Oggetto.id;";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere il carrello (La lista degli ordini che sono nel carrello)
@@ -154,7 +156,7 @@ public class usersQuery {
         return "SELECT Ordine.*, Carrello.subtotale FROM Carrello, Ordine WHERE "
                 + "Carrello.idUtente ="+idU+" AND Ordine.idOrdine = Carrello.idOrdine;";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere le proprie recensioni di oggetti
@@ -164,7 +166,7 @@ public class usersQuery {
     public static String selectReviewsObjects(int idU){
         return "SELECT * FROM RecensioneOggetto WHERE idUtente ="+idU+";";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere le proprie recensioni di negozi
@@ -174,7 +176,7 @@ public class usersQuery {
     public static String selectReviewsStores(int idU){
         return "SELECT * FROM RecensioneNegozio WHERE idUtente ="+idU+";";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere le proprie recensioni di venditori
@@ -184,7 +186,7 @@ public class usersQuery {
     public static String selectReviewsSellers(int idU){
         return "SELECT * FROM RecensioneVenditore WHERE idUtente ="+idU+";";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere le risposte alle proprie recensioni di oggetti
@@ -196,7 +198,7 @@ public class usersQuery {
                 + "WHERE RecensioneOggetto.idUtente ="+idU+" AND "
                 + "RispostaOggetto.idRecensione = RecensioneOggetto.id;";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere le risposte alle proprie recensioni di negozi
@@ -208,7 +210,7 @@ public class usersQuery {
                 + "WHERE RecensioneNegozio.idUtente ="+idU+" AND "
                 + "RispostaNegozio.idRecensione = RecensioneNegozio.id;";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere le risposte alle proprie recensioni di venditori
@@ -220,7 +222,7 @@ public class usersQuery {
                 + "WHERE RecensioneVenditore.idUtente ="+idU+" AND "
                 + "RispostaVenditore.idRecensione = RecensioneVenditore.id;";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere tutte le recensioni di un oggetto
@@ -230,7 +232,7 @@ public class usersQuery {
     public static String selectAllReviewsObjects(int idO){
         return "SELECT * FROM RecensioneOggetto WHERE idOggetto ="+idO+";";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere tutte le recensioni di un negozio
@@ -240,7 +242,7 @@ public class usersQuery {
     public static String selectAllReviewsStores(int idN){
         return "SELECT * FROM RecensioneNegozio WHERE idNegozio ="+idN+";";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere tutte le recensioni di un venditore
@@ -250,7 +252,7 @@ public class usersQuery {
     public static String selectAllReviewsSellers(int idV){
         return "SELECT * FROM RecensioneVenditore WHERE idVenditore ="+idV+";";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere la lista delle richieste di assistenza fatte da uno specifico utente
@@ -260,7 +262,7 @@ public class usersQuery {
     public static String selectAskSupport(int idU){
         return "SELECT * FROM Assistenza WHERE Assistenza.idUtente ="+idU+";";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere i dettagli di una determinata richiesta di assistenza
@@ -270,7 +272,130 @@ public class usersQuery {
     public static String selectSpecifiedInfoSupport(int idA){
         return "SELECT * FROM Assistenza WHERE Assistenza.id ="+idA+";";
     }
-    
+
+
+
+    /*---2017-12-24---*/
+    /**
+     * @author fbrug
+     * Ottenere le richieste di assistenza in un determinato stato (0 = in corso, 1 = chiuse)
+     * @param stato Intero rappresentante lo stato della richiesta di assistenza
+     * @return String: lista di richieste di assistenza
+     */
+    public static String selectAssistanceByState(int stato)
+    {
+        return "SELECT * FROM Assistenza WHERE Assistenza.stato=" + stato + ";";
+    }
+
+    /**
+     * @author fbrug
+     * Ottenere le richieste di assistenza in base all'ID dell'amministratore a cui sono state assegnate
+     * @param idAdmin Intero rappresentante l'ID dell'amministratore di cui si vogliono le richieste di assistenza assegnate
+     * @return String: lista di richieste di assistenza
+     */
+    public static String selectAssistanceByAdminId(int idAdmin)
+    {
+        return "SELECT * FROM Assistenza WHERE Assistenza.idAmministratore=" + idAdmin + ";";
+    }
+
+    /**
+     * @author fbrug
+     * Ottenere le richieste di assistenza in base all'ID dell'amministratore a cui sono state assegnate e in un determinato stato (0 = in corso, 1 = chiuse)
+     * @param idAdmin Intero rappresentante l'ID dell'amministratore di cui si vogliono le richieste di assistenza assegnate
+     * @param stato Intero rappresentante lo stato della richiesta di assistenza
+     * @return String: lista di richieste di assistenza
+     */
+    public static String selectAssistanceByAdminIdAndState(int idAdmin, int stato)
+    {
+        return "SELECT * FROM Assistenza WHERE Assistenza.idAmministratore=" + idAdmin + " AND Assistenza.stato=" + stato + ";";
+    }
+
+    /*2017-12-25*/
+
+    /**
+     * @author fbrug
+     * Update della soluzione adottata per la richiesta di assistenza selezionata
+     * @param idA Intero rappresentate l'ID della richiesta di assistenza selezionata
+     * @param solution String rappresentante la soluzione adottata per questa richiesta
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateAssistanceSolution(int idA, String solution)
+    {
+        return "UPDATE progettoweb.Assistenza SET soluzione ='"+solution+"' WHERE "
+                + "Assistenza.id ="+idA+";";
+    }
+
+    /**
+     * @author fbrug
+     * Update della data di chiusura della richiesta di assistenza selezionata
+     * @param idA Intero rappresentate l'ID della richiesta di assistenza selezionata
+     * @param date String rappresentante la data di chiusura della richiesta
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateAssistanceCloseDate(int idA, String date)
+    {
+        return "UPDATE progettoweb.Assistenza SET dataChiusura ='"+date+"' WHERE "
+                + "Assistenza.id ="+idA+";";
+    }
+
+    /**
+     * @author fbrug
+     * Update della data di chiusura della richiesta di assistenza selezionata
+     * @param idA Intero rappresentate l'ID della richiesta di assistenza selezionata
+     * @param state Intero che indica se la richiesta è aperta (0) o chiusa (1)
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateAssistanceState(int idA, int state)
+    {
+        return "UPDATE progettoweb.Assistenza SET stato ="+state+" WHERE "
+                + "Assistenza.id ="+idA+";";
+    }
+
+    /**
+     * @author fbrug
+     * Update della richiesta di assistenza
+     * @param assistance ModelloAssistenza rappresentante la richiesta da modificare
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateAssistance(ModelloAssistenza assistance)
+    {
+        return "UPDATE progettoweb.Assistenza SET "
+                + "idUtente="+assistance.getIdUtente()+","
+                + "idVenditore="+assistance.getIdVenditore()+","
+                + "idAmministratore="+assistance.getIdAmministratore()+","
+                + "idOrdine="+assistance.getIdOrdine()+","
+                + "idOggetto='"+assistance.getIdOggetto()+"',"
+                + "stato="+assistance.getStato()+","
+                + "richiesta='"+assistance.getRichiesta()+"',"
+                + "soluzione='"+assistance.getSoluzione()+"',"
+                + "dataApertura='"+assistance.getDataApertura()+"',"
+                + "dataChiusura='"+assistance.getDataChiusura()+"' "
+                + "WHERE id="+assistance.getId()+";";
+    }
+
+    /*2017-12-30*/
+
+    /**
+     * @author fbrug
+     * Aggiunta di una richiesta di assistenza
+     * @param assistance ModelloAssistenza rappresentante la richiesta di assistenza da aggiungere
+     * @return String: conferma avvenuta operazione
+     */
+    public static String insertAssistance(ModelloAssistenza assistance)
+    {
+        return "INSERT INTO assistenza "
+                + "(idUtente, idVenditore, idAmministratore, idOrdine, idOggetto, richiesta) "
+                + "VALUES ("
+                + assistance.getIdUtente() + ", "
+                + assistance.getIdVenditore()+ ", "
+                + assistance.getIdAmministratore()+ ", "
+                + assistance.getIdOrdine()+ ", '"
+                + assistance.getIdOggetto()+ "', '"
+                + assistance.getRichiesta()+ "')";
+    }
+    /*---*/
+
+
     /**
      * @author Andrea
      * Ottenere la lista dei prodotti nella stessa fascia di prezzo e categoria di quelli già acquistati
@@ -288,7 +413,7 @@ public class usersQuery {
                 + "(Oggetto.prezzo*Oggetto.sconto)/100) BETWEEN "
                 + "IDUInteressi_"+idU+".prezzoMassimo AND IDUInteressi_"+idU+".prezzoMinimo;";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere la lista di assistenze che hanno a che fare con un ordine
@@ -298,7 +423,7 @@ public class usersQuery {
     public static String selectSupportOfOrder(int idO){
         return "SELECT * FROM Assistenza WHERE Assistenza.idOrdine ="+idO+";";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere la lista delle proprie recensioni Oggetti dalla più utile
@@ -310,7 +435,7 @@ public class usersQuery {
                 + "RecensioneOggetto.idUtente ="+idU+" ORDER BY "
                 + "RecensioneOggetto.utilita DESC;";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere la lista delle proprie recensioni Oggetti dalla meno utile
@@ -322,7 +447,7 @@ public class usersQuery {
                 + "RecensioneOggetto.idUtente ="+idU+" ORDER BY "
                 + "RecensioneOggetto.utilita ASC;";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere la lista delle proprie recensioni Negozio dalla più utile
@@ -334,7 +459,7 @@ public class usersQuery {
                 + "RecensioneNegozio.idUtente ="+idU+" ORDER BY "
                 + "RecensioneNegozio.utilita DESC;";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere la lista delle proprie recensioni Negozio dalla meno utile
@@ -346,7 +471,7 @@ public class usersQuery {
                 + "RecensioneNegozio.idUtente ="+idU+" ORDER BY "
                 + "RecensioneNegozio.utilita ASC;";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere la lista delle proprie recensioni Venditore dalla più utile
@@ -358,7 +483,7 @@ public class usersQuery {
                 + "RecensioneVenditore.idUtente ="+idU+" ORDER BY "
                 + "RecensioneVenditore.utilita DESC;";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere la lista delle proprie recensioni Venditore dalla meno utile
@@ -370,7 +495,7 @@ public class usersQuery {
                 + "RecensioneVenditore.idUtente ="+idU+" ORDER BY "
                 + "RecensioneVenditore.utilita ASC;";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere la lista delle immagini di un oggetto
@@ -380,7 +505,7 @@ public class usersQuery {
     public static String selectPhotoObject(String idO){
         return "SELECT * FROM imageOggetto WHERE imageOggetto.idO ='"+idO+"';";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere solo la prima immagine di un oggetto
@@ -390,7 +515,7 @@ public class usersQuery {
     public static String selectFirstPhotoObject(String idO){
         return "SELECT * FROM imageOggetto WHERE imageOggetto.idO ='"+idO+"' LIMIT 1;";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere la lista delle immagini di un negozio
@@ -400,7 +525,7 @@ public class usersQuery {
     public static String selectPhotoStore(int idN){
         return "SELECT * FROM imageNegozio WHERE imageNegozio.idN ="+idN+";";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere solo la prima immagine di un negozio
@@ -410,7 +535,7 @@ public class usersQuery {
     public static String selectFirstPhotoStore(int idN){
         return "SELECT * FROM imageNegozio WHERE imageNegozio.idN ="+idN+" LIMIT 1;";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere la lista delle immagini di una recensione
@@ -420,7 +545,7 @@ public class usersQuery {
     public static String selectPhotoReview(int idR){
         return "SELECT * FROM imageRecensione WHERE imageRecensione.idR ="+idR+";";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere solo la prima immagine di una recensione
@@ -430,7 +555,7 @@ public class usersQuery {
     public static String selectFirstPhotoReview(int idR){
         return "SELECT * FROM imageRecensione WHERE imageRecensione.idR ="+idR+" LIMIT 1;";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere la lista delle immagini di un utente
@@ -440,7 +565,7 @@ public class usersQuery {
     public static String selectPhotoUser(int idU){
         return "SELECT * FROM imageUtente WHERE imageUtente.idU ="+idU+";";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere solo la prima immagine di un utente
@@ -450,7 +575,7 @@ public class usersQuery {
     public static String selectFirstPhotoUser(int idU){
         return "SELECT * FROM imageUtente WHERE imageUtente.idU ="+idU+" LIMIT 1;";
     }
-    
+
     /**
      * @author Andrea
      * Aggiungi un oggetto agli ordini nel carrello
@@ -467,7 +592,7 @@ public class usersQuery {
             + "(Oggetto.prezzo - (Oggetto.prezzo*Oggetto.sconto)/100) FROM "
             + "Oggetto WHERE Oggetto.id ='"+idO+"';";
     }
-    
+
     /**
      * @author Andrea
      * Rimuovere un ordine (oggetto) dal carrello
@@ -479,19 +604,18 @@ public class usersQuery {
         return "DELETE FROM Ordine WHERE idOrdine ="+idOr+" AND "
                 + "idOggetto ='"+idOg+"' AND IDUTENTE ="+idU+";";
     }
-    
+
     /**
      * @author Andrea
      * Cambia lo stato degli ordini da from a to
-     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param from Un intero che rappresenta lo stato degli ordini da selezionare
      * @param to Un intero che rappresenta lo stato da impostare agli ordini selezionati
      */
-    public static String changeOrderStatus(int idU, int from, int to){
+    public static String changeOrderStatus(ModelloOrdine ordine, int from, int to){
         return "UPDATE progettoweb.Ordine SET stato ="+to+" WHERE "
-                + "Ordine.stato ="+from+" AND Ordine.idUtente ="+idU+";";
+                + "Ordine.stato ="+from+" AND Ordine.idOrdine ="+ordine.getIdOrdine()+" AND Ordine.idOggetto = '"+ordine.getIdOggetto()+"';";
     }
-    
+
     /**
      * @author fbrug
      * Cambia la quantità di un prodotto nell'ordine
@@ -505,7 +629,7 @@ public class usersQuery {
         return "UPDATE progettoweb.Ordine SET quantita = " + newQuantity + " WHERE "
                 + "idOrdine = " + idOr + " AND idOggetto = '" + idOg + "' AND IDUTENTE = " + idU + ";";
     }
-    
+
     /**
      * @author Andrea
      * Aggiungi un oggetto agli ordini nella lista dei desideri
@@ -522,7 +646,7 @@ public class usersQuery {
                 + "(Oggetto.prezzo - (Oggetto.prezzo*Oggetto.sconto)/100) FROM "
                 + "Oggetto WHERE Oggetto.id ='"+idO+"';";
     }
-    
+
     /**
      * @author Andrea
      * Aggiungi una recensione ad un determinato venditore
@@ -534,10 +658,10 @@ public class usersQuery {
      */
     public static String addReviewToSeller(int idV, int idU, String txt, int val, int star){
         return "INSERT INTO RecensioneVenditore (id, idVenditore, idUtente, testo, "
-                + "valutazione, data, utilita) VALUES (NULL, '" + idV + "', " + 
+                + "valutazione, data, utilita) VALUES (NULL, '" + idV + "', " +
                 idU + ", '" + txt + "', " + val + ", CURRENT_TIMESTAMP, " + star + ");";
     }
-    
+
     /**
      * @author Andrea
      * Aggiungi una recensione ad un determinato negozio
@@ -549,10 +673,10 @@ public class usersQuery {
      */
     public static String addReviewToStore(int idN, int idU, String txt, int val, int star){
         return "INSERT INTO RecensioneNegozio (id, idNegozio, idUtente, testo, "
-                + "valutazione, data, utilita) VALUES (NULL, '" + idN + "', " + 
+                + "valutazione, data, utilita) VALUES (NULL, '" + idN + "', " +
                 idU + ", '" + txt + "', " + val + ", CURRENT_TIMESTAMP, " + star + ");";
     }
-    
+
     /**
      * @author Andrea
      * Aggiungi una recensione ad un determinato oggetto
@@ -560,15 +684,14 @@ public class usersQuery {
      * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @param txt Una stringa contenente il testo della recensione
      * @param val Un intero indicante la valutazione della recensione
-     * @param data Un Datetime indicante la data di creazione della recensione
      * @param star Un intero indicante l'utilità della recensione
      */
-    public static String addReviewToObject(String idO, int idU, String txt, int val, int star){
+    public static String addReviewToObject(String idO, int idU, String txt, int val, int star) {
         return "INSERT INTO RecensioneOggetto (id, idOggetto, idUtente, testo, "
-                + "valutazione, data, utilita) VALUES (NULL, '" + idO + "', " + 
+                + "valutazione, data, utilita) VALUES (NULL, '" + idO + "', " +
                 idU + ", '" + txt + "', " + val + ", CURRENT_TIMESTAMP, " + star + ");";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere un boolean se si ha recensito oppure no un venditore (se il count è 1 vuol dire di si)
@@ -581,7 +704,7 @@ public class usersQuery {
                 + "WHERE RecensioneVenditore.idVenditore ="+idV+" AND "
                 + "RecensioneVenditore.idUtente ="+idU+";";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere un boolean se si ha recensito oppure no un negozio (se il count è 1 vuol dire di si)
@@ -594,7 +717,7 @@ public class usersQuery {
                 + "WHERE RecensioneNegozio.idNegozio ="+idN+" AND "
                 + "RecensioneNegozio.idUtente ="+idU+";";
     }
-    
+
     /**
      * @author Andrea
      * Ottenere un boolean se si ha recensito oppure no un oggetto (se il count è 1 vuol dire di si)
@@ -607,7 +730,7 @@ public class usersQuery {
                 + "RecensioneOggetto.idOggetto ='"+idO+"' AND "
                 + "RecensioneOggetto.idUtente ="+idU+";";
     }
-    
+
     /**
      * @author Andrea
      * Aggiungere un proprio indirizzo
@@ -633,28 +756,28 @@ public class usersQuery {
                 + "INSERT INTO progettoweb.IndirizzoUtente (idI, idU) "
                 + "VALUES (@IDI, "+idU+");";
     }
-    
+
     public static String insertAddress1(String stato, String regione, String provincia, String citta, String via, int nCivico, int interno, double lat, double lon){
         return "INSERT INTO progettoweb.Indirizzo (idI, stato, regione, provincia, "
                 + "citta, via, nCivico, interno, latitudine, longitudine) VALUES "
                 + "(NULL, '"+stato+"', '"+regione+"', '"+provincia+"', '"+citta+"', '"+via+"', "+nCivico+", "+interno+", "+lat+", "+lon+"); ";
     }
-    
+
     public static String insertAddress2(){
         return "SET @IDI = 1; ";
     }
-    
+
     public static String insertAddress3(String stato, String regione, String provincia, String citta, String via, int nCivico, int interno, double lat, double lon){
         return "SELECT @IDI:=idI FROM Indirizzo WHERE stato ='"+stato+"' AND "
                 + "regione = '"+regione+"' AND provincia = '"+provincia+"' AND "
                 + "citta = '"+citta+"' AND via = '"+via+"' AND nCivico = "+nCivico+" AND interno = "+interno+"; ";
     }
-    
+
     public static String insertAddress4(int idI,int idU){
         return "INSERT INTO progettoweb.IndirizzoUtente (idI, idU) "
                 + "VALUES ("+idI+", "+idU+");";
     }
-    
+
     /**
      * @author Andrea
      * Eliminaree un proprio indirizzo
@@ -663,7 +786,7 @@ public class usersQuery {
     public static String deleteAddress(int idI){
         return "DELETE FROM Indirizzo WHERE idI ="+idI+";";
     }
-    
+
     /**
      * @author Andrea
      * Eliminaree un proprio indirizzo utente
@@ -674,18 +797,3 @@ public class usersQuery {
         return "DELETE FROM Indirizzo WHERE idI ="+idI+" AND idU ="+idU+";";
     }
 }
-
-
-/*
-public static String insertAddress(String stato, String regione, String provincia, String citta, String via, int nCivico, int interno, double lat, double lon, int idU){
-        return "INSERT INTO Indirizzo (idI, stato, regione, provincia, "
-                + "citta, via, nCivico, interno, latitudine, longitudine) VALUES "
-                + "(NULL, '"+stato+"', '"+regione+"', '"+provincia+"', '"+citta+"', '"+via+"', "+nCivico+", "+interno+", "+lat+", "+lon+"); "
-                + "DECLARE @IDI int(11); SET @IDI = 1; "
-                + "SELECT @IDI=idI FROM Indirizzo WHERE stato ='"+stato+"' AND "
-                + "regione = '"+regione+"' AND provincia = '"+provincia+"' AND "
-                + "citta = '"+citta+"' AND via = '"+via+"' AND nCivico = "+nCivico+" AND interno = "+interno+"; "
-                + "INSERT INTO IndirizzoUtente (idI, idU) "
-                + "VALUES (@IDI, "+idU+");";
-    }
-*/

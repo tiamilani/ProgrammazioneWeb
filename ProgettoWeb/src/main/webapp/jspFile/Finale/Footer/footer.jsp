@@ -33,7 +33,7 @@
     $(document).ready(function(){
         var altezza = $('body').height();
         var schermo = $(window).height();
-        
+
         if (altezza >= schermo){
             $('#footer').css({position: "relative"});
         }else{

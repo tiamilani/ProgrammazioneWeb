@@ -5,8 +5,8 @@
 --%>
 
 <c:set var ="iterator" scope="page" value="${0}"/>
-<c:forEach var="i" begin="${0}" end="${ListaOggetti.getList().size()-1}" step="1">
-    <c:if test ="${(limitColum == 1 && i!=1) || i==0}">
+<c:forEach var="i" begin="${0}" end="${listaOggetti.getList().size()-1}" step="1">
+    <c:if test ="${(i%limitColum == 1 && i!=1) || i==0}">
         <div class="card-group">
     </c:if>
     <%@include file="../../Oggetto/oggetto.jsp" %>

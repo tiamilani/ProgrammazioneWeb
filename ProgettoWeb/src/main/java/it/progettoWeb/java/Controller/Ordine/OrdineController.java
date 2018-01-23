@@ -11,6 +11,7 @@ import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
 import it.progettoWeb.java.database.Dao.Ordine.DaoOrdine;
 import it.progettoWeb.java.database.Dao.immagineOggetto.DaoImmagineOggetto;
 import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
+import it.progettoWeb.java.database.Dao.ordiniRicevuti.DaoOrdiniRicevuti;
 import it.progettoWeb.java.database.Dao.tipoSpedizione.DaoTipoSpedizione;
 import it.progettoWeb.java.database.Model.Negozio.ModelloListeNegozio;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
@@ -26,13 +27,14 @@ import it.progettoWeb.java.utility.javaMail.SendEmail;
 import it.progettoWeb.java.utility.pair.pair;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import static jdk.nashorn.internal.objects.NativeMath.round;
 
 /**
  * 2017-10-10 14:50
@@ -51,11 +53,12 @@ public class OrdineController extends HttpServlet {
     private DaoNegozio daoNegozio;
     private DaoTipoSpedizione daoTipoSpedizione;
     private DaoIndirizzo daoIndirizzo;
+    private DaoOrdiniRicevuti daoOrdiniRicevuti;
     
     
     /**
      * Costruttore della classe OrdineController
-     */
+    */
     public OrdineController()
     {
         super();
@@ -65,6 +68,7 @@ public class OrdineController extends HttpServlet {
         daoNegozio = new DaoNegozio();
         daoTipoSpedizione = new DaoTipoSpedizione();
         daoIndirizzo = new DaoIndirizzo();
+        daoOrdiniRicevuti = new DaoOrdiniRicevuti();
     }
 
     /**
@@ -103,14 +107,18 @@ public class OrdineController extends HttpServlet {
             /*--- PARTE IN COMUNE (PREPARA IL CARRELLO E LE IMMAGINI DEGLI OGGETTI) ---*/
             ModelloUtente utenteSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
             ModelloListeOrdine orders = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
-            int carrelloId = orders.getId();
-
+            int utenteSessioneID = utenteSessione.getId();
+            
             if(orders.getSize() > 0)
             {
-                orders = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utenteSessione.getId(), 0));
+                if(utenteSessioneID != -1)
+                {
+                    orders = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utenteSessioneID, 0));
+                    request.getSession().setAttribute("utenteSessione", utenteSessione);
+                }
+                
                 request.getSession().removeAttribute("carrelloSessione");
                 request.getSession().setAttribute("carrelloSessione", orders);
-                request.getSession().setAttribute("utenteSessione", utenteSessione);
 
                 //Seleziona oggetti presenti negli ordini + la loro PRIMA immagine
                 List<pair<ModelloOggetto, ModelloImmagineOggetto>> objects = new ArrayList<>();
@@ -121,65 +129,68 @@ public class OrdineController extends HttpServlet {
 
                 for (ModelloOrdine order : orders.getList())
                 {
-                    idOggetto = order.getIdOggetto();            
+                    idOggetto = order.getIdOggetto();
                     objects.add(new pair<>(daoOggetto.getObjectById(idOggetto), daoImmagineOggetto.selectFirstPhotoObject(idOggetto)));
                     
                     negozi.add(daoNegozio.getStoreById(order.getIdNegozio()));
                 }
 
                 request.setAttribute("objects", objects);
-                request.setAttribute("shops", negozi);                
+                request.setAttribute("shops", negozi);
+                request.setAttribute("utenteSessioneID", utenteSessioneID);
                 
-                
-                if (action.equalsIgnoreCase("delivery"))
+                if(utenteSessioneID != -1)
                 {
-                    /*--- PREPARA INDIRIZZI+SPEDIZIONI PER LA SELEZIONE DEL METODO DI SPEDIZIONE ---*/
-                    forward = DELIVERY_METHOD;
-
-                    List<ModelloListeTipoSpedizione> tipiSpedizione = new ArrayList<>();
-
-                    for (ModelloOrdine order : orders.getList())
+                    if (action.equalsIgnoreCase("delivery"))
                     {
-                        //Recupero TipoSpedizione in base all'ID dell'oggetto
-                        ModelloListeTipoSpedizione tipiSpedizioneOggetto = new ModelloListeTipoSpedizione(daoTipoSpedizione.selectDeliveryTypesByIdO(order.getIdOggetto()));
+                        /*--- PREPARA INDIRIZZI+SPEDIZIONI PER LA SELEZIONE DEL METODO DI SPEDIZIONE ---*/
+                        forward = DELIVERY_METHOD;
 
-                        tipiSpedizione.add(tipiSpedizioneOggetto);
-                    }
+                        List<ModelloListeTipoSpedizione> tipiSpedizione = new ArrayList<>();
 
-                    request.setAttribute("listaTipiSpedizione", tipiSpedizione);
-
-                    ModelloListeIndirizzo indirizzi = new ModelloListeIndirizzo(daoIndirizzo.selectAddressByUserID(utenteSessione.getId()));
-                    request.setAttribute("addrs", indirizzi);
-                }
-                else if (action.equalsIgnoreCase("payment"))
-                {
-                    /*--- PREPARA INDIRIZZO PER LA SELEZIONE DEL METODO DI PAGAMENTO ---*/
-                    forward = PAYMENT_METHOD;
-
-                    ModelloIndirizzo indirizzo = daoIndirizzo.selectAddressByIdAddress(orders.get(0).getIdI());
-                    request.setAttribute("address", indirizzo);
-                    
-                    /*---Calcolo prezzo totale (prezzoOgg * quantitaOgg + prezzoSped)---*/
-                    double prezzoTot = 0;
-                    int nArticoli = 0;
-                    for (ModelloOrdine order : orders.getList())
-                    {                       
-                        prezzoTot += (order.getPrezzoDiAcquisto() * order.getQuantita());
-                        if(order.getIdS() != 0)
+                        for (ModelloOrdine order : orders.getList())
                         {
-                            ModelloTipoSpedizione ts = daoTipoSpedizione.selectDeliveryTypesByIdS(order.getIdS()).get(0);
-                            prezzoTot += Math.ceil((double)order.getQuantita() / (double)ts.getNumeroMassimo()) * ts.getPrezzo();
+                            //Recupero TipoSpedizione in base all'ID dell'oggetto
+                            ModelloListeTipoSpedizione tipiSpedizioneOggetto = new ModelloListeTipoSpedizione(daoTipoSpedizione.selectDeliveryTypesByIdO(order.getIdOggetto()));
+
+                            tipiSpedizione.add(tipiSpedizioneOggetto);
                         }
-                        
-                        nArticoli += order.getQuantita();
+
+                        request.setAttribute("listaTipiSpedizione", tipiSpedizione);
+
+                        ModelloListeIndirizzo indirizzi = new ModelloListeIndirizzo(daoIndirizzo.selectAddressByUserID(utenteSessione.getId()));
+                        request.setAttribute("addrs", indirizzi);
                     }
-                    
-                    request.setAttribute("prezzoTot", (Math.round(prezzoTot * 100.0) / 100.0));
-                    request.setAttribute("nArticoli", nArticoli);
-                }
-                else if (action.equalsIgnoreCase("finish"))
-                {
-                    forward = ORDER_COMPLETED;
+                    else if (action.equalsIgnoreCase("payment"))
+                    {
+                        /*--- PREPARA INDIRIZZO PER LA SELEZIONE DEL METODO DI PAGAMENTO ---*/
+                        forward = PAYMENT_METHOD;
+
+                        ModelloIndirizzo indirizzo = daoIndirizzo.selectAddressByIdAddress(orders.get(0).getIdI());
+                        request.setAttribute("address", indirizzo);
+
+                        /*---Calcolo prezzo totale (prezzoOgg * quantitaOgg + prezzoSped)---*/
+                        double prezzoTot = 0;
+                        int nArticoli = 0;
+                        for (ModelloOrdine order : orders.getList())
+                        {                       
+                            prezzoTot += (order.getPrezzoDiAcquisto() * order.getQuantita());
+                            if(order.getIdS() != 0)
+                            {
+                                ModelloTipoSpedizione ts = daoTipoSpedizione.selectDeliveryTypesByIdS(order.getIdS()).get(0);
+                                prezzoTot += Math.ceil((double)order.getQuantita() / (double)ts.getNumeroMassimo()) * ts.getPrezzo();
+                            }
+
+                            nArticoli += order.getQuantita();
+                        }
+
+                        request.setAttribute("prezzoTot", (Math.round(prezzoTot * 100.0) / 100.0));
+                        request.setAttribute("nArticoli", nArticoli);
+                    }
+                    else if (action.equalsIgnoreCase("finish"))
+                    {
+                        forward = ORDER_COMPLETED;
+                    }
                 }
             }
             
@@ -187,7 +198,7 @@ public class OrdineController extends HttpServlet {
             {
                 forward = LIST_ORDERS;
             }
-        } catch (NullPointerException e) { System.out.println(e.getMessage()); forward = ERROR_PAGE; request.setAttribute("errore", "404 Pagina non trovata"); }
+        } catch (Exception e) { System.out.println("error message = " + e.toString()); forward = ERROR_PAGE; request.setAttribute("errore", "404 Pagina non trovata"); }
         
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
@@ -221,20 +232,23 @@ public class OrdineController extends HttpServlet {
                 String identificatore;
 
                 //Ricavo il numero di ordini presenti nel carrello
-                int nOrders = ((ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione")).getSize();
+                ModelloListeOrdine carrelloSessione = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
 
-                for(int i = 0; i < nOrders; i++)
+                for(int i = 0; i < carrelloSessione.getList().size(); i++)
                 {
                     //Ricavo idOrdine, idOggetto, nuovaQuantita
                     identificatore = "idOrdine" + Integer.toString(i);
                     int idOrdine = Integer.parseInt(request.getParameter(identificatore));
+                    System.out.println(idOrdine);
 
                     identificatore = "idOggetto" + Integer.toString(i);
                     String idOggetto = request.getParameter(identificatore);
-
+                    System.out.println(idOggetto);
+                    
                     identificatore = "quantita" + Integer.toString(i);
                     int newQuantita = Integer.parseInt(request.getParameter(identificatore));
-
+                    System.out.println(newQuantita);
+                    
                     if(newQuantita == 0)
                     {
                         //Ricavo l'oggetto corrispondente ai parametri ricevuti
@@ -242,14 +256,23 @@ public class OrdineController extends HttpServlet {
                         ord.setIdOrdine(idOrdine);
                         ord.setIdOggetto(idOggetto);
                         ord.setIdUtente(idUtente);
-
-                        //Elimino l'ordine dalla tabella ORDINE
-                        daoOrdine.removeObjectInCart(ord);
+                        
+                        if(idUtente != -1) //Elimino l'ordine dalla tabella ORDINE
+                            daoOrdine.removeObjectInCart(ord);
+                        else
+                            carrelloSessione.getList().remove(ord);
                     }
                     else
                     {
-                        //Faccio l'update dell'ordine
-                        daoOrdine.changeOrderQuantity(idOrdine, idOggetto, idUtente, newQuantita);
+                        if(idUtente != -1) //Faccio l'update dell'ordine
+                            daoOrdine.changeOrderQuantity(idOrdine, idOggetto, idUtente, newQuantita);
+                        else
+                        {
+                            ModelloOrdine ord = carrelloSessione.get(i);
+                            ord.setQuantita(newQuantita);
+                            carrelloSessione.getList().remove(ord);
+                            carrelloSessione.getList().add(ord);
+                        }
                     }
                 }
             }
@@ -279,12 +302,32 @@ public class OrdineController extends HttpServlet {
             }
             else if(save.equalsIgnoreCase("3"))
             {
+                //Ricavo il numero di ordini presenti nel carrello
+                ModelloListeOrdine carrelloSessione = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
+                
                 /*--- QUI CAMBIO LO STATO DEGLI ORDINI NEL CARRELLO IN "PAGATI" E INVIO LA MAIL DI CONFERMA DELL'ORDINE---*/
-                //daoOrdine.changeOrderStatus(((ModelloUtente)request.getSession().getAttribute("utenteSessione")).getId(), 0, 1);
-                /*---2017-12-02---SendEmail.sendMail(((ModelloUtente)request.getSession().getAttribute("utenteSessione")).getMail(), 4);*/
-                /*---2017-12-05---*/SendEmail.orderCompleted(
+                for(ModelloOrdine ordine : carrelloSessione.getList()){
+                    daoOrdine.changeOrderStatus(ordine, 0, 1);
+                }
+                SendEmail.orderCompleted(
                         ((ModelloUtente)request.getSession().getAttribute("utenteSessione")).getMail(),                         
-                        ((ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione")).getId());
+                        (carrelloSessione.get(0)).getIdOrdine());                
+                
+                /*---2018-01-12---*/
+                Set<Integer> idVenditori = new LinkedHashSet<>();
+                
+                //Diminuisco la disponibilità di ciascun prodotto
+                //nel mentre salvo la lista dei venditori ai quali ho comprato uno o più oggetti
+                for(ModelloOrdine order : carrelloSessione.getList())
+                {
+                    idVenditori.add(daoNegozio.getStoreById(order.getIdNegozio()).getIdVenditore());
+                    
+                    daoOggetto.updateObjectQuantity(order.getIdOggetto(), ((daoOggetto.getObjectById(order.getIdOggetto())).getDisponibilita() - order.getQuantita()));
+                }
+                
+                //Aggiungo righe alla tabella ordiniRicevuti
+                for(int idV : idVenditori)
+                    daoOrdiniRicevuti.addOrdineRicevuto(carrelloSessione.get(0).getIdOrdine(), idV);
             }
             
             if(action.equalsIgnoreCase("listOrders"))
@@ -303,7 +346,7 @@ public class OrdineController extends HttpServlet {
             {
                 forward = "OrdineController?action=finish";                
             }
-        } catch (NullPointerException e) { System.out.println(e.getMessage()); forward = ERROR_PAGE; request.setAttribute("errore", "Si è verificato un problema interno al sistema."); }
+        } catch (NullPointerException e) { System.out.println(e.toString()); forward = ERROR_PAGE; request.setAttribute("errore", "Si è verificato un problema interno al sistema."); }
         
         response.sendRedirect(forward);
     }

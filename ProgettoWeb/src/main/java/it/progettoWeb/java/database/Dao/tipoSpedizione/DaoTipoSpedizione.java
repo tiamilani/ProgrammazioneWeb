@@ -87,7 +87,7 @@ public class DaoTipoSpedizione {
             while(rs.next())
                 types.add(getModelloFromRs(rs));
         }
-        catch (SQLException e) { System.out.println(e.getMessage()); }
+        catch (SQLException e) { System.out.println(e.toString()); }
         
         return types;
     }
@@ -109,7 +109,7 @@ public class DaoTipoSpedizione {
             while(rs.next())
                 types.add(getModelloFromRs(rs));
         }
-        catch (SQLException e) { System.out.println(e.getMessage()); }
+        catch (SQLException e) { System.out.println(e.toString()); }
         
         return types;
     }
@@ -131,8 +131,33 @@ public class DaoTipoSpedizione {
             while(rs.next())
                 types.add(getModelloFromRs(rs));
         }
-        catch (SQLException e) { System.out.println(e.getMessage()); }
+        catch (SQLException e) { System.out.println(e.toString()); }
         
         return types;
+    }
+
+    public void updateSpedizione(ModelloTipoSpedizione spedizione) {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(deliveryTypeQuery.updateSpedizione(spedizione));
+        } catch(SQLException e) {}
+    }
+
+    public void deleteSpedizione(int idS) {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(deliveryTypeQuery.deleteSpedizione(idS));
+        }
+        catch (SQLException e) {}
+    }
+
+    public void addSpedizione(ModelloTipoSpedizione spedizione) {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(deliveryTypeQuery.insertObject(spedizione));
+        } catch(SQLException e) {}
     }
 }

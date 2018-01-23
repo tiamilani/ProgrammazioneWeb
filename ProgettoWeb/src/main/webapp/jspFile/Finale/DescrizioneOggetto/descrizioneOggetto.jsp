@@ -25,7 +25,6 @@
     <body>
         <div class="container">
             <%@include file="../Header/NavBar/newNavBar.jsp" %>
-            <%@include file="../Components/Menu/fixedMenu.jsp" %>
         </div>
         <div class="container-fluid">
             <%@include file="fotoOggetto.jsp" %>
@@ -34,13 +33,11 @@
                 <%@include file="mapOggetto.jsp" %>
             </c:if>
             <%@include file="oggettiCorrelati.jsp" %>
-            <c:if test="${utenteSessione.getId() > 0}">
+            <%--<c:if test="${canReviewsO == true}">
                 <%@include file="insertReview.jsp" %>
             </c:if>
-            <%@include file="recensioni.jsp" %>
+            <%@include file="recensioni.jsp" %> --%>
         </div>
-        <div class="container">
-            <%@include file="../Footer/footer.jsp" %>
-        </div>
+        <%@include file="../Footer/footer.jsp" %>
     </body>
 </html>

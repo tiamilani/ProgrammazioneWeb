@@ -31,6 +31,8 @@ public class IndirizzoController extends HttpServlet {
     private static String LIST_ADDRESS = "/jspFile/Finale/Utente/listAddress.jsp";
     private static String INSERT_OR_EDIT = "/jspFile/Finale/Utente/modificaDatiIndirizzo.jsp";
     private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
+    private static String GESTIONEUTENTE ="/jspFile/Finale/Utente/impostazioneUtente.jsp";
+    
     private DaoUtente daoU;
     private DaoIndirizzo daoI;
     private DaoIndirizzoUtente daoIndirizzoUtente;
@@ -133,34 +135,20 @@ public class IndirizzoController extends HttpServlet {
             indirizzo.setLatitudine(Double.parseDouble(request.getParameter("latitudine")));
             indirizzo.setLongitudine(Double.parseDouble(request.getParameter("longitudine")));
 
-            /*String[] LatLon = GoogleGeoCode(
-                indirizzo.getnCivico(),
-                indirizzo.getVia(),
-                indirizzo.getCitta(),
-                indirizzo.getProvincia());
-
-            if(LatLon[0]!=null){
-                indirizzo.setLatitudine(Double.parseDouble(LatLon[0]));
+            boolean indirizzoEsistente = daoI.addressExists(indirizzo,utente.getId());
+            
+            if(!indirizzoEsistente){
+                daoI.insertAddress(indirizzo,utente.getId());
+                request.setAttribute("aggiuntaIndirizzo", 0);
             } else {
-                indirizzo.setLatitudine(0.0);
+                request.setAttribute("aggiuntaIndirizzo", 1);
             }
 
-            if(LatLon[1]!=null){
-                indirizzo.setLongitudine(Double.parseDouble(LatLon[1]));
-            } else {
-                indirizzo.setLongitudine(0.0);
-            }*/
+            forward = GESTIONEUTENTE;
+            
+            ModelloListeIndirizzo listaIndirizzi = new ModelloListeIndirizzo(daoI.selectAddressByUserID(utente.getId()));
 
-            //indirizzo.setLatitudine(5.0);
-            //indirizzo.setLongitudine(5.0);
-
-            daoI.insertAddress(indirizzo,utente.getId());
-
-            //forward = ERROR_PAGE;
-            //request.setAttribute("errore", usersQuery.insertAddress(indirizzo.getStato(),indirizzo.getRegione(),indirizzo.getProvincia(),indirizzo.getCitta(),indirizzo.getVia(),indirizzo.getnCivico(),indirizzo.getInterno(),indirizzo.getLatitudine(),indirizzo.getLongitudine(),utente.getId()));
-
-            response.sendRedirect("UserController?action=infoCurrentUser");
-            return;
+            request.setAttribute("listaIndirizzi", listaIndirizzi);
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -176,116 +164,4 @@ public class IndirizzoController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }
-
-/*
-    private static final String GEO_CODE_SERVER = "http://maps.googleapis.com/maps/api/geocode/json?";
-
-    private String[] GoogleGeoCode(int nCivico, String via, String citta, String provincia)
-    {
-        String code = "33, Via Passeggiata Archeologica, Agrigento, AG";
-        //String code = nCivico + "," + via + "," + citta + "," + provincia;
-
-        String response = getLocation(code);
-
-        String[] result = parseLocation(response);
-
-        //System.out.println("Latitude: " + result[0]);
-        //System.out.println("Longitude: " + result[1]);
-
-        return result;
-    }
-
-    private static String getLocation(String code)
-    {
-        String address = buildUrl(code);
-
-        String content = null;
-
-        try
-        {
-            URL url = new URL(address);
-
-            InputStream stream = url.openStream();
-
-            try
-            {
-                int available = stream.available();
-
-                byte[] bytes = new byte[available];
-
-                stream.read(bytes);
-
-                content = new String(bytes);
-            }
-            finally
-            {
-                stream.close();
-            }
-
-            return (String) content.toString();
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static String buildUrl(String code)
-    {
-        StringBuilder builder = new StringBuilder();
-
-        builder.append(GEO_CODE_SERVER);
-
-        builder.append("address=");
-        builder.append(code.replaceAll(" ", "+"));
-        builder.append("&sensor=false");
-
-        return builder.toString();
-    }
-
-    private static String[] parseLocation(String response)
-    {
-        // Look for location using brute force.
-        // There are much nicer ways to do this, e.g. with Google's JSON library: Gson
-        //     https://sites.google.com/site/gson/gson-user-guide
-
-        String[] lines = response.split("\n");
-
-        String lat = null;
-        String lng = null;
-
-        for (int i = 0; i < lines.length; i++)
-        {
-            if ("\"location\" : {".equals(lines[i].trim()))
-            {
-                lat = getOrdinate(lines[i+1]);
-                lng = getOrdinate(lines[i+2]);
-                break;
-            }
-        }
-
-        return new String[] {lat, lng};
-    }
-
-    private static String getOrdinate(String s)
-    {
-        String[] split = s.trim().split(" ");
-
-        if (split.length < 1)
-        {
-            return null;
-        }
-
-        String ord = split[split.length - 1];
-
-        if (ord.endsWith(","))
-        {
-            ord = ord.substring(0, ord.length() - 1);
-        }
-
-        // Check that the result is a valid double
-        Double.parseDouble(ord);
-
-        return ord;
-    } */
 }

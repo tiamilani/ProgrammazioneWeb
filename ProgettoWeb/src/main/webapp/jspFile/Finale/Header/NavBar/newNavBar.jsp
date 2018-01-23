@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : newNavBar
     Created on : 14-ott-2017, 19.22.22
     Author     : damiano
@@ -16,9 +16,9 @@ function myFunction() {
     var rangeValue = $('#double-slider').attr('value');
     var valutazioneMinima = calcStar();
     console.log(valutazioneMinima);
-        
-    
-    
+
+
+
     /*
     var latitudine = document.forms["filterForm"].elements[7].value;
     var longitudine = document.forms["filterForm"].elements[8].value;
@@ -57,7 +57,7 @@ function myFunction() {
             return "1";
         }else return 0;
     };
-    
+
     $(window).resize(function(){
         if($("nav").width() > 942){
             console.log($("nav").width());
@@ -67,6 +67,28 @@ function myFunction() {
         }
     });
 </script>
+<style>
+    .dropdown-menu.show {
+        width: 100%;
+        display: inline;
+        margin: 0;
+        padding: 0;
+    }
+
+    .jumbotron {
+        margin: 0;
+        height: 100%;
+    }
+
+    #del1 {
+        padding: 0;
+        margin: 0;
+    }
+
+    .col-2:hover {
+        background-color: lightgray;
+    }
+</style>
 
 <nav class="navbar fixed-top navbar-default bg-light navbar-expand-lg row no-gutters" role="navigation" style="padding: 0 .5rem 0 .5rem;">
     <a class="navbar-brand" href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Index/index.jsp">
@@ -75,32 +97,36 @@ function myFunction() {
     <button class="navbar-toggler navbar-toggler-right" id="visible" type="button" data-toggle="collapse" data-target="#collapse-menu" aria-controls="collapse-menu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="Small material-icons">dehaze</span>
     </button>
-    
+
     <div class="collapse navbar-collapse row no-gutters" id="collapse-menu">
         <div class="dropdown col-xl-1 col-lg-2 col-md-12 col-sm-12">
             <button class="btn nav-button dropdown-toggle" id="category" type="button" data-toggle="dropdown">Categorie</button>
             <div class="dropdown-menu">
-                <h4>Categorie</h4>
-                <c:set var="i" value="${0}" />
-                <c:forEach items="${listacategoriesessione.getList()}" var="cat">
-                    <c:if test="${i == 0}">
-                        <div class="row">
-                    </c:if>
-                            <div class="dropdown-item col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                                <c:url value="/CategoriaController" var="catUrl">
-                                    <c:param name="id" value="${cat.getId()}" />
-                                </c:url>
-                                <a class="nav-link" href="${catUrl}"><c:out value="${cat.getNome()}"/></a>
-                            </div>
-                            <c:set var="i" value="${i+1}" />
-                            <c:if test="${i == 6}">
-                                <c:set var="i" value="${0}" />
-                                </div>
+                <div class="jumbotron">
+                    <div class="container" id="del1">
+                        <h1 class="display-3">Categorie</h1>
+                        <c:set var="i" value="${0}" />
+                        <c:forEach items="${listacategoriesessione.getList()}" var="cat">
+                            <c:if test="${i == 0}">
+                                <div class="row">
                             </c:if>
-                </c:forEach>
-                <c:if test="${i != 0}">
+                                    <div class="col-2" style="border-radius: 1rem;">
+                                        <c:url value="/CategoriaController" var="catUrl">
+                                            <c:param name="id" value="${cat.getId()}" />
+                                        </c:url>
+                                        <a class="nav-link" href="${catUrl}"><c:out value="${cat.getNome()}"/></a>
+                                    </div>
+                                    <c:set var="i" value="${i+1}" />
+                                    <c:if test="${i == 6}">
+                                        <c:set var="i" value="${0}" />
+                                        </div>
+                                    </c:if>
+                        </c:forEach>
+                        <c:if test="${i != 0}">
+                            </div>
+                        </c:if>
                     </div>
-                </c:if>
+                </div>
             </div>
         </div>
         <div class="dropdown col-xl-1 col-lg-1 col-md-12 col-sm-12">
@@ -115,7 +141,7 @@ function myFunction() {
         <form class="navbar-form form-inline col-md-12 col-sm-12 col-xl-7 col-lg-6 row no-gutters" autocomplete="on" id="form1" name="form1" method="GET">
             <div class="form-group">
                 <div class="find col-10">
-                    <input class="form-control" id="expand" type="text" placeholder="Search" autocomplete="on" name="search"> 
+                    <input class="form-control" id="expand" type="text" placeholder="Search" autocomplete="on" name="search">
                 </div>
                 <button type="submit" class="btn btn-default col-1" id="nopad" onclick="myFunction()">
                     <i class="material-icons">search</i>
@@ -145,14 +171,14 @@ function myFunction() {
                         Registrati
                     </button>
                 </c:otherwise>
-            </c:choose>    
+            </c:choose>
             <button type="button" class="btn nav-button col-xl-4 col-lg-3 col-md-12 col-sm-12" onclick="location.href='${pageContext.request.contextPath}/OrdineController?action=listOrders'">
                 Carello
             </button>
         </div>
     </div>
 </nav>
-            
+
 <%-- messo esternamente al resto in modo da non influenzare il suo autofocus da propriet� di posizionamento prima definite--%>
 <div id="registerModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -190,6 +216,7 @@ function myFunction() {
                     <input class="col-10 modal-input" type="password" id="customerConfirmPassword" name="confirmPassword" required>
                     <label class="modal-label" for="customerConfirmPassword">Ripeti la password</label>
                 </div>
+                <div class="g-recaptcha" data-sitekey="6Le96jMUAAAAAC5kV0EuyDRuTXUColh5_HReQeCS"></div>
                     <p>Creando il tuo accont, accetti le nostro condizioni sulla privacy<p>
 
             </div>
@@ -212,6 +239,9 @@ function myFunction() {
             <button type="button" class="close col-1" data-dismiss="modal">&times;</button>
           </div>
             <form action="${pageContext.request.contextPath}/UserController?action=selectUser" method="POST">
+                <div style="display: none">
+                    <input type="text" id="fromPage" name="fromPage" value="${pageContext.request.requestURI}"/>
+                </div>
             <div class="modal-body">
                 <div>
                     <i class="large material-icons">email</i>
@@ -223,7 +253,7 @@ function myFunction() {
                     <input class="col-10 modal-input" type="password" id="password" name="password" required>
                     <label class="modal-label" for="customerPassword">Password</label>
                 </div>
-                <center>    
+                <center>
                     <a href="" data-toggle="modal" data-target="#passwordModal" data-dismiss="modal">Hai dimenticato la password?</a>
                 </center>
 
@@ -236,7 +266,7 @@ function myFunction() {
 
     </div>
 </div>
-                
+
 <div id="passwordModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 

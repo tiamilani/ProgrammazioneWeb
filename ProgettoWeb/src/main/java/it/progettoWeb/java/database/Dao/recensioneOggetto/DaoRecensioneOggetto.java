@@ -101,6 +101,29 @@ public class DaoRecensioneOggetto {
     
     /**
      * @author andrea
+     * Ottenere una specifica recensioni dati i parametri identificativi
+     * @param idO Una stringa che rappresenta l'oggetto della recensione da ricercare
+     * @param idU Un intero che rappresenta l'utente della recensione da ricercare
+     * @param testo Una stringa che rappresenta il testo della recensione da ricercare
+     * @param valutazione Un intero che rappresenta la valutazione della recensione da ricercare
+     * @return ModelloRecensioneOggetto
+     */
+    public ModelloRecensioneOggetto selectReviewsByData(String idO, int idU, String txt, int val) {
+        ModelloRecensioneOggetto recensione = new ModelloRecensioneOggetto();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.selectReviewsByDataO(idO, idU, txt, val));
+            while (rs.next()) {
+                recensione = (ModelloRecensioneOggetto) getModelloFromRs(rs);
+            }
+        } catch (SQLException e) { }
+
+        return recensione;
+    }
+    
+    /**
+     * @author andrea
      * Ottenere trio Recensione, Immagini, Utente
      * @param idO Una stringa che rappresenta l'identificativo dell'oggetto preso in considerazione
      * @return tris<List<ModelloListeImmagineRecensione>,List<ModelloListeImmagini>, List<ModelloUtente>> elenco recensioni, immagini e utente
@@ -209,12 +232,9 @@ public class DaoRecensioneOggetto {
      */
     public void addReviewToObject(ModelloRecensioneOggetto recensione) {
         try {
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement(usersQuery.addReviewToObject(recensione.getIdOggetto(), recensione.getIdUtente(), recensione.getTesto(), recensione.getValutazione(), recensione.getUtilita()));
+            PreparedStatement preparedStatement = connection.prepareStatement(usersQuery.addReviewToObject(recensione.getIdOggetto(), recensione.getIdUtente(), recensione.getTesto(), recensione.getValutazione(), recensione.getUtilita()));
             preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-        }
+        } catch (SQLException e) { }
     }
     
     /**

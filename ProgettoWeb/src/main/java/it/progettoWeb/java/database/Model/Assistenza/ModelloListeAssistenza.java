@@ -34,4 +34,9 @@ public class ModelloListeAssistenza {
     public List<ModelloAssistenza> getList(){
         return listaAssistenza;
     }
+    
+    public int getSize()
+    {
+        return listaAssistenza.size();
+    }
 }
