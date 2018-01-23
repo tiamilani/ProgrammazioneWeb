@@ -30,15 +30,20 @@
         <div class="container-fluid">
 
             <div class="summary">
-                <p>Risultati in <%=  request.getParameter("hiddenidCategoria")%> per: <%=  request.getParameter("search")%><p>
-                <p>Nome venditore:<%=  request.getAttribute("ListaOggetti") %></p>
+                <p>Risultati in per: <%=  request.getParameter("search")%></p>
+                <p>Categoria selezionata: <%= request.getParameter("hiddenidCategoria")%></p>
+                <p>Nome venditore: <%= request.getParameter("hiddennomeVenditore")%></p>
+                <p>Nome negozio: <%= request.getParameter("hiddennomeNegozio")%></p>
+                <p>Ritiro in negozio: <%= request.getParameter("hiddencheckRitiroInNegozio")%></p>
+                <p>Prodotti scontati: <%= request.getParameter("hiddencheckProdottiScontati")%></p>
+                <p>Range di prezzo: <%= request.getParameter("hiddenPriceRange")%></p>
+                <p>Valutazione minima: <%= request.getParameter("hiddenvalutazioneMinima")%></p>
+                
+                
 
-                <%
-                    ModelloListeOggetto trovati = (ModelloListeOggetto)request.getAttribute("ListaOggetti");
-                    System.out.println(trovati.getList().size());
-                %>
+                <c:out value="${ListaOggetti.getList().size()}" /> 
 
-                <%@include file="../Components/Liste/ListaOggetto/testListaOggetto.jsp" %>
+                <!-- %@include file="../Components/Liste/ListaOggetto/testListaOggetto.jsp" --%>
                 <%@include file="../Footer/footer.jsp" %>
             </div>
         </div>

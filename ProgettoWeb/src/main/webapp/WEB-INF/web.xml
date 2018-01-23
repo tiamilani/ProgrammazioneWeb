@@ -44,12 +44,24 @@
         <servlet-class>it.progettoWeb.java.Controller.InserisciRecensione.InserisciRecensioneController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>PasswordReset</servlet-name>
+        <servlet-class>it.progettoWeb.java.Controller.HomeController.PasswordReset</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PasswordResetRequest</servlet-name>
+        <servlet-class>it.progettoWeb.java.Controller.HomeController.PasswordResetRequest</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>NegozioController</servlet-name>
         <servlet-class>it.progettoWeb.java.Controller.NegozioController.NegozioController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AssistenzaController</servlet-name>
         <servlet-class>it.progettoWeb.java.Controller.Assistenza.AssistenzaController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrdineController2</servlet-name>
+        <servlet-class>it.progettoWeb.java.Controller.Ordine.OrdineController_1</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
@@ -84,12 +96,24 @@
         <url-pattern>/InserisciRecensioneController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>PasswordReset</servlet-name>
+        <url-pattern>/PasswordReset</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PasswordResetRequest</servlet-name>
+        <url-pattern>/PasswordResetRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>NegozioController</servlet-name>
         <url-pattern>/NegozioController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AssistenzaController</servlet-name>
         <url-pattern>/AssistenzaController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrdineController2</servlet-name>
+        <url-pattern>/OrdineController2</url-pattern>
     </servlet-mapping>
     <error-page>
         <error-code>404</error-code>

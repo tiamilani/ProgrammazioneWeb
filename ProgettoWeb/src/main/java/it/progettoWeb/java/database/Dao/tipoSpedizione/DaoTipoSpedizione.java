@@ -87,7 +87,7 @@ public class DaoTipoSpedizione {
             while(rs.next())
                 types.add(getModelloFromRs(rs));
         }
-        catch (SQLException e) { System.out.println(e.getMessage()); }
+        catch (SQLException e) { System.out.println(e.toString()); }
         
         return types;
     }
@@ -109,7 +109,7 @@ public class DaoTipoSpedizione {
             while(rs.next())
                 types.add(getModelloFromRs(rs));
         }
-        catch (SQLException e) { System.out.println(e.getMessage()); }
+        catch (SQLException e) { System.out.println(e.toString()); }
         
         return types;
     }
@@ -131,7 +131,7 @@ public class DaoTipoSpedizione {
             while(rs.next())
                 types.add(getModelloFromRs(rs));
         }
-        catch (SQLException e) { System.out.println(e.getMessage()); }
+        catch (SQLException e) { System.out.println(e.toString()); }
         
         return types;
     }

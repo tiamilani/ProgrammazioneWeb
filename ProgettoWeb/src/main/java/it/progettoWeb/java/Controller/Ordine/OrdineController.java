@@ -26,7 +26,6 @@ import it.progettoWeb.java.database.Model.tipoSpedizione.ModelloTipoSpedizione;
 import it.progettoWeb.java.utility.javaMail.SendEmail;
 import it.progettoWeb.java.utility.pair.pair;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -222,12 +221,8 @@ public class OrdineController extends HttpServlet {
         
         try
         {
-            System.out.println("---------");
             String action = request.getParameter("action");
             String save = request.getParameter("save");
-            
-            System.out.println("action = " + action);
-            System.out.println("save = " + save);
             
             if(save.equalsIgnoreCase("1"))
             {
@@ -235,8 +230,6 @@ public class OrdineController extends HttpServlet {
                 ModelloUtente utenteSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
                 int idUtente = utenteSessione.getId();
                 String identificatore;
-                
-                System.out.println("idU = " + idUtente);
 
                 //Ricavo il numero di ordini presenti nel carrello
                 ModelloListeOrdine carrelloSessione = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
@@ -268,8 +261,6 @@ public class OrdineController extends HttpServlet {
                             daoOrdine.removeObjectInCart(ord);
                         else
                             carrelloSessione.getList().remove(ord);
-                        
-                        System.out.println("rimosso");
                     }
                     else
                     {
@@ -282,8 +273,6 @@ public class OrdineController extends HttpServlet {
                             carrelloSessione.getList().remove(ord);
                             carrelloSessione.getList().add(ord);
                         }
-                        
-                        System.out.println("cambio quantita");
                     }
                 }
             }
@@ -316,22 +305,17 @@ public class OrdineController extends HttpServlet {
                 //Ricavo il numero di ordini presenti nel carrello
                 ModelloListeOrdine carrelloSessione = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
                 
-                
-                System.out.println("dentro finish");
                 /*--- QUI CAMBIO LO STATO DEGLI ORDINI NEL CARRELLO IN "PAGATI" E INVIO LA MAIL DI CONFERMA DELL'ORDINE---*/
                 for(ModelloOrdine ordine : carrelloSessione.getList()){
                     daoOrdine.changeOrderStatus(ordine, 0, 1);
                 }
                 SendEmail.orderCompleted(
                         ((ModelloUtente)request.getSession().getAttribute("utenteSessione")).getMail(),                         
-                        (carrelloSessione.get(0)).getIdOrdine());
-                System.out.println("fatto finish");
-                
+                        (carrelloSessione.get(0)).getIdOrdine());                
                 
                 /*---2018-01-12---*/
                 Set<Integer> idVenditori = new LinkedHashSet<>();
                 
-                System.out.println("fa che vada");
                 //Diminuisco la disponibilità di ciascun prodotto
                 //nel mentre salvo la lista dei venditori ai quali ho comprato uno o più oggetti
                 for(ModelloOrdine order : carrelloSessione.getList())
@@ -341,14 +325,9 @@ public class OrdineController extends HttpServlet {
                     daoOggetto.updateObjectQuantity(order.getIdOggetto(), ((daoOggetto.getObjectById(order.getIdOggetto())).getDisponibilita() - order.getQuantita()));
                 }
                 
-                System.out.println("per ora ok");
-                
-                
                 //Aggiungo righe alla tabella ordiniRicevuti
                 for(int idV : idVenditori)
                     daoOrdiniRicevuti.addOrdineRicevuto(carrelloSessione.get(0).getIdOrdine(), idV);
-                
-                System.out.println("fatto!");
             }
             
             if(action.equalsIgnoreCase("listOrders"))

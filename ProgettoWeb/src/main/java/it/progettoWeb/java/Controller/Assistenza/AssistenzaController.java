@@ -194,9 +194,9 @@ public class AssistenzaController extends HttpServlet
         }
         catch (Exception e) 
         {
-            System.out.println("error message = " + e.getMessage());
+            System.out.println("error message = " + e.toString());
             forward = ERROR_PAGE;
-            request.setAttribute("ECCEZIONE", e.getMessage());
+            request.setAttribute("ECCEZIONE", e.toString());
         }
         
         RequestDispatcher view = request.getRequestDispatcher(forward);

@@ -31,6 +31,9 @@ import it.progettoWeb.java.database.query.generics.genericsQuery;
 import it.progettoWeb.java.database.query.users.usersQuery;
 import it.progettoWeb.java.utility.pair.pair;
 import it.progettoWeb.java.utility.tris.tris;
+import java.security.Key;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DaoUtente {
     /**
@@ -423,6 +426,38 @@ public class DaoUtente {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
+        }
+    }
+    
+    /**
+     * @author Damiano
+     * @param token: il token inviato all'utente
+     * @return la chiave con cui abbiamo creato il token
+     */
+    public String getKey(String token){
+        try{
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.getPasswordAuthenticationKey(token));
+            if(rs.next()){
+                return rs.getString("chiave");
+            }
+            else return ("ERROR");
+        } catch (SQLException ex) {
+        }
+        return "ERROR";
+    }
+    
+    /**
+     * @author Damiano
+     * @param token: il token inviato all'utente
+     */
+    public void setKey(String token, String key){
+        try{
+            System.out.println("Sto cercando di inserire la chiave");
+            PreparedStatement preparedStatement = connection.prepareStatement(genericsQuery.setPasswordAuthenticationKey(token, key));
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
         }
     }
     

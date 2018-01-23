@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : newNavBar
     Created on : 14-ott-2017, 19.22.22
     Author     : damiano
@@ -9,28 +9,34 @@
 <script>
 function myFunction() {
     var idCategoria = document.forms["filterForm"].elements[0].value;
-    var minPrice = document.forms["filterForm"].elements[1].value;
-    var maxPrice = document.forms["filterForm"].elements[2].value;
-    var nomeVenditore = document.forms["filterForm"].elements[3].value;
-    var nomeNegozio = document.forms["filterForm"].elements[4].value;
-    var checkRitiroInNegozio = document.forms["filterForm"].elements[5].checked;
-    var checkProdottiScontati = document.forms["filterForm"].elements[6].checked;
+    var nomeVenditore = document.forms["filterForm"].elements[1].value;
+    var nomeNegozio = document.forms["filterForm"].elements[2].value;
+    var checkRitiroInNegozio = document.forms["filterForm"].elements[3].checked;
+    var checkProdottiScontati = document.forms["filterForm"].elements[4].checked;
+    var rangeValue = $('#double-slider').attr('value');
+    var valutazioneMinima = calcStar();
+    console.log(valutazioneMinima);
+
+
+
+    /*
     var latitudine = document.forms["filterForm"].elements[7].value;
     var longitudine = document.forms["filterForm"].elements[8].value;
     var raggio = document.forms["filterForm"].elements[9].value;
-    var valutazioneMinima = document.forms["filterForm"].elements[10].value;
+    */
 
     document.form1.hiddenidCategoria.value = String(idCategoria);
-    document.form1.hiddenminPrice.value = String(minPrice);
-    document.form1.hiddenmaxPrice.value = String(maxPrice);
     document.form1.hiddennomeVenditore.value = String(nomeVenditore);
     document.form1.hiddennomeNegozio.value = String(nomeNegozio);
     document.form1.hiddencheckRitiroInNegozio.value = String(checkRitiroInNegozio);
     document.form1.hiddencheckProdottiScontati.value = String(checkProdottiScontati);
+    document.form1.hiddenPriceRange.value = String(rangeValue);
+    document.form1.hiddenvalutazioneMinima.value = String(valutazioneMinima);
+        /*
     document.form1.hiddenlatitudine.value = String(latitudine);
     document.form1.hiddenlongitudine.value = String(longitudine);
     document.form1.hiddenraggio.value = String(raggio);
-    document.form1.hiddenvalutazioneMinima.value = String(valutazioneMinima);
+    */
 
     //alert('idCategoria: '+ idCategoria +' minPrice: '+ minPrice +' maxPrice: '+ maxPrice +' nomeVenditore: '+ nomeVenditore +' nomeNegozio: '+ nomeNegozio +' checkRitiroInNegozio: '+ checkRitiroInNegozio +' checkProdottiScontati: '+ checkProdottiScontati +' latitudine: '+ latitudine +' longitudine: '+ longitudine +' raggio: '+ raggio +' valutazioneMinima: ' + valutazioneMinima + '')
 
@@ -38,10 +44,23 @@ function myFunction() {
     form1.submit();
 }
 
-    
-    
+    function calcStar(){
+        if(document.getElementById('star-5').checked){
+            return "5";
+        }else if(document.getElementById('star-4').checked){
+            return "4";
+        }else if(document.getElementById('star-3').checked){
+            return "3";
+        }else if(document.getElementById('star-2').checked){
+            return "2";
+        }else if(document.getElementById('star-1').checked){
+            return "1";
+        }else return 0;
+    };
+
     $(window).resize(function(){
         if($("nav").width() > 942){
+            console.log($("nav").width());
             $("#visible").attr("aria-expanded", "false");
             $("#visible").addClass("collapsed");
             $("#collapse-menu").removeClass("show");
@@ -55,33 +74,33 @@ function myFunction() {
         margin: 0;
         padding: 0;
     }
-    
+
     .jumbotron {
         margin: 0;
         height: 100%;
     }
-    
+
     #del1 {
         padding: 0;
         margin: 0;
     }
-    
+
     .col-2:hover {
         background-color: lightgray;
     }
 </style>
 
-<nav class="navbar fixed-top navbar-default bg-light navbar-expand-lg" role="navigation">
+<nav class="navbar fixed-top navbar-default bg-light navbar-expand-lg row no-gutters" role="navigation" style="padding: 0 .5rem 0 .5rem;">
     <a class="navbar-brand" href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Index/index.jsp">
-        <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png" width=30px height=30px class="d-inline-block align-top" alt="IMG">
-        ShopEro
+        <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/shopero_small.jpg" height=40px class="d-inline-block align-top" alt="IMG">
     </a>
     <button class="navbar-toggler navbar-toggler-right" id="visible" type="button" data-toggle="collapse" data-target="#collapse-menu" aria-controls="collapse-menu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="Small material-icons">dehaze</span>
     </button>
-    <div class="navbar-collapse collapse" id="collapse-menu">
-        <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" id="category" type="button" data-toggle="dropdown">Categorie</button>
+
+    <div class="collapse navbar-collapse row no-gutters" id="collapse-menu">
+        <div class="dropdown col-xl-1 col-lg-2 col-md-12 col-sm-12">
+            <button class="btn nav-button dropdown-toggle" id="category" type="button" data-toggle="dropdown">Categorie</button>
             <div class="dropdown-menu">
                 <div class="jumbotron">
                     <div class="container" id="del1">
@@ -110,8 +129,8 @@ function myFunction() {
                 </div>
             </div>
         </div>
-        <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filtri</button>
+        <div class="dropdown col-xl-1 col-lg-1 col-md-12 col-sm-12">
+            <button class="btn nav-button dropdown-toggle" type="button" data-toggle="dropdown">Filtri</button>
             <div class="dropdown-menu">
                 <div class="bg-light p-4">
                     <h4>Filtri</h4>
@@ -119,83 +138,90 @@ function myFunction() {
                 </div>
             </div>
         </div>
-        <form class="navbar-form form-inline mx-auto">
+        <form class="navbar-form form-inline col-md-12 col-sm-12 col-xl-7 col-lg-6 row no-gutters" autocomplete="on" id="form1" name="form1" method="GET">
             <div class="form-group">
-                <div class="find">
-                    <input class="form-control" id="expand" type="text" placeholder="Search">
+                <div class="find col-10">
+                    <input class="form-control" id="expand" type="text" placeholder="Search" autocomplete="on" name="search">
                 </div>
-                <button type="submit" class="btn btn-default btn-lg" id="nopad">
+                <button type="submit" class="btn btn-default col-1" id="nopad" onclick="myFunction()">
                     <i class="material-icons">search</i>
                 </button>
+                <input type='hidden' id = 'hiddenidCategoria' name = 'hiddenidCategoria' value='' />
+                <input type='hidden' id = 'hiddennomeVenditore' name = 'hiddennomeVenditore' value='' />
+                <input type='hidden' id = 'hiddennomeNegozio' name = 'hiddennomeNegozio' value='' />
+                <input type='hidden' id = 'hiddencheckRitiroInNegozio' name = 'hiddencheckRitiroInNegozio' value='' />
+                <input type='hidden' id = 'hiddencheckProdottiScontati' name = 'hiddencheckProdottiScontati' value='' />
+                <input type="hidden" id = 'hiddenPriceRange' name = 'hiddenPriceRange' value='' />
+                <input type='hidden' id = 'hiddenvalutazioneMinima' name = 'hiddenvalutazioneMinima' value='' />
             </div>
         </form>
-        <div class="user">
+        <div class="user d-flex justify-content-between row no-gutters col-xl-3 col-lg-3">
             <c:choose>
                 <c:when test="${utenteSessione.getId() != -1}">
-                    <button type="button" class="btn btn-primary"
+                    <button type="button" class="btn nav-button col-xl-4 col-lg-9 col-md-12 col-sm-12"
                             onclick="location.href='${pageContext.request.contextPath}/jspFile/Finale/Utente/utente.jsp'">
                         Account
                     </button>
                 </c:when>
                 <c:otherwise>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+                    <button type="button" class="btn nav-button col-xl-3 col-lg-4 col-md-12 col-sm-12" data-toggle="modal" data-target="#loginModal">
                         Log In
                     </button>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
+                    <button type="button" class="btn nav-button col-xl-4 col-lg-5 col-md-12 col-sm-12" data-toggle="modal" data-target="#registerModal">
                         Registrati
                     </button>
                 </c:otherwise>
-            </c:choose>    
-            <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/OrdineController?action=listOrders'">
+            </c:choose>
+            <button type="button" class="btn nav-button col-xl-4 col-lg-3 col-md-12 col-sm-12" onclick="location.href='${pageContext.request.contextPath}/OrdineController?action=listOrders'">
                 Carello
             </button>
         </div>
     </div>
 </nav>
-            
+
 <%-- messo esternamente al resto in modo da non influenzare il suo autofocus da propriet� di posizionamento prima definite--%>
 <div id="registerModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
         <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Creare un account</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <div class="modal-header row no-gutters">
+            <h4 class="modal-title col-11">Creare un account</h4>
+            <button type="button" class="close col-1" data-dismiss="modal">&times;</button>
           </div>
           <form id="registrationForm" action="${pageContext.request.contextPath}/UserController?action=addUser" method="POST">
             <div class="modal-body">
                 <div>
                     <i class="large material-icons">person_outline</i>
                     <input class="col-10 modal-input" type="text" id="customerName" name="nome" required>
-                    <label for="customerName">Nome</label>
+                    <label class="modal-label" for="customerName">Nome</label>
                 </div>
                 <div>
                     <i class="large material-icons">group</i>
                     <input class="col-10 modal-input" type="text" id="customerSurname" name="cognome" required>
-                    <label for="customerSurname">Cognome</label>
+                    <label class="modal-label" for="customerSurname">Cognome</label>
                 </div>
                 <div>
                     <i class="large material-icons">email</i>
-                    <input class="col-10 modal-input" type="text" id="customerEmail" name="email" required>
-                    <label for="customerEmail">E-mail</label>
+                    <input class="col-10 modal-input" type="email" id="customerEmail" name="email" required>
+                    <label class="modal-label" for="customerEmail">E-mail</label>
                 </div>
                 <div>
                     <i class="large material-icons">lock_outline</i>
                     <input class="col-10 modal-input" type="password" id="customerPassword" name="password" required>
-                    <label for="customerPassword">Password</label>
+                    <label class="modal-label" for="customerPassword">Password</label>
                 </div>
                 <div>
                     <i class="large material-icons">lock_outline</i>
                     <input class="col-10 modal-input" type="password" id="customerConfirmPassword" name="confirmPassword" required>
-                    <label for="customerConfirmPassword">Ripeti la password</label>
+                    <label class="modal-label" for="customerConfirmPassword">Ripeti la password</label>
                 </div>
                 <div class="g-recaptcha" data-sitekey="6Le96jMUAAAAAC5kV0EuyDRuTXUColh5_HReQeCS"></div>
                     <p>Creando il tuo accont, accetti le nostro condizioni sulla privacy<p>
 
             </div>
             <div class="modal-footer">
-              <button type="submit" class="col-2 paddingNav btn btn-outline-primary">Crea il tuo account</button>
+              <button type="submit" class="col-12 paddingNav btn btn-outline-primary">Crea il tuo account</button>
             </div>
           </form>
         </div>
@@ -208,9 +234,9 @@ function myFunction() {
 
         <!-- Modal content-->
         <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Login</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <div class="modal-header row no-gutters">
+            <h4 class="modal-title col-11">Login</h4>
+            <button type="button" class="close col-1" data-dismiss="modal">&times;</button>
           </div>
             <form action="${pageContext.request.contextPath}/UserController?action=selectUser" method="POST">
                 <div style="display: none">
@@ -219,19 +245,48 @@ function myFunction() {
             <div class="modal-body">
                 <div>
                     <i class="large material-icons">email</i>
-                    <input class="col-10 modal-input" type="text" id="email" name="email" required>
-                    <label for="customerEmail">E-mail</label>
+                    <input class="col-10 modal-input" type="email" id="email" name="email" required>
+                    <label class="modal-label" for="customerEmail">E-mail</label>
                 </div>
                 <div>
                     <i class="large material-icons">lock_outline</i>
                     <input class="col-10 modal-input" type="password" id="password" name="password" required>
-                    <label for="customerPassword">Password</label>
+                    <label class="modal-label" for="customerPassword">Password</label>
                 </div>
-                    <a href="#">Password dimenticata</a>
+                <center>
+                    <a href="" data-toggle="modal" data-target="#passwordModal" data-dismiss="modal">Hai dimenticato la password?</a>
+                </center>
 
             </div>
             <div class="modal-footer">
-              <button type="submit" class="col-2 paddingNav btn btn-outline-primary my-2 my-sm-0">Login</button>
+              <button type="submit" class="col-12 paddingNav btn btn-outline-primary my-2 my-sm-0">Login</button>
+            </div>
+          </form>
+        </div>
+
+    </div>
+</div>
+
+<div id="passwordModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header row no-gutters">
+            <h4 class="modal-title col-11">Recupero Password</h4>
+            <button type="button" class="close col-1" data-dismiss="modal">&times;</button>
+          </div>
+            <form action="${pageContext.request.contextPath}/PasswordReset" method="POST">
+            <div class="modal-body">
+                <div>
+                    <i class="large material-icons">email</i>
+                    <input class="col-10 modal-input" type="text" id="resetting-email" name="resetting-email" required>
+                    <label class="modal-label" for="customerEmail">E-mail</label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="col-12 paddingNav btn btn-outline-primary my-2 my-sm-0">Recupera password</button>
             </div>
           </form>
         </div>

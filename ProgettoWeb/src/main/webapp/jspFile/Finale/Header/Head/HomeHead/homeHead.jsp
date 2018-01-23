@@ -8,10 +8,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
     <link rel='stylesheet' href="http://getbootstrap.com/docs/4.0/examples/carousel/carousel.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/navBar.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/reset.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/slideShow.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/oggetto.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/filtri.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/footer.css">
+    
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/filtriLargeContainer.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -22,29 +25,64 @@
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/cr-1.4.1/r-2.2.1/rg-1.0.2/datatables.min.css"/>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/cr-1.4.1/r-2.2.1/rg-1.0.2/datatables.min.js"></script>
-
 <script>
     $(document).ready(function(){
       $('#registerModal input').focus(function(){
           $(this).next('label').addClass('moveUp');
+          $(this).prev('i').addClass('color');
       });
     });
 
     $(document).ready(function(){
       $('#registerModal input').on('focusout', function() {
           if(!$(this).val()) $(this).next('label').removeClass('moveUp');
+          if(!$(this).val()) $(this).prev('i').removeClass('color');
       });
     });
 
     $(document).ready(function(){
       $('#loginModal input').focus(function(){
           $(this).next('label').addClass('moveUp');
+          $(this).prev('i').addClass('color');
       });
     });
 
     $(document).ready(function(){
       $('#loginModal input').on('focusout', function() {
           if(!$(this).val()) $(this).next('label').removeClass('moveUp');
+          if(!$(this).val()) $(this).prev('i').removeClass('color');
+      });
+    });
+    
+    $(document).ready(function(){
+      $('#passwordModal input').focus(function(){
+          $(this).next('label').addClass('moveUp');
+          $(this).prev('i').addClass('color');
+      });
+    });
+
+    $(document).ready(function(){
+      $('#passwordModal input').on('focusout', function() {
+          if(!$(this).val()) $(this).next('label').removeClass('moveUp');
+          if(!$(this).val()) $(this).prev('i').removeClass('color');
+      });
+    });
+    
+    $(document).ready(function(){
+      $('.text-input').focus(function(){
+          $(this).next('label').addClass('moveUp');
+      });
+    });
+    
+    $(document).ready(function(){
+      $('.text-input').on('focusout', function() {
+          if(!$(this).val()) $(this).next('label').removeClass('moveUp');
       });
     });
 </script>
+
+<style>
+    body{
+        padding-bottom: 0;
+    }
+</style>
