@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/oggetto.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/filtri.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/footer.css">
+    
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/filtriLargeContainer.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
