@@ -53,6 +53,24 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
+                    <c:choose>
+                        <c:when test="${negozioInserito == 0}">
+                            <div class="alert alert-success alert-dismissable ">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Successo!</strong> negozio inserito con successo.
+                            </div>
+                        </c:when>
+                        <c:when test="${negozioInserito == 1}">
+                            <div class="alert alert-danger alert-dismissable ">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Attenzione!</strong> negozio non inserito.
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+                <div class="col-12">
                     <h1>Aggiungi un negozio</h1>
                     <p>Aggiungendo un negozio migliori le tue possbilità di vendita, ma attento, i tuoi utenti e noi di shopero ci aspettiamo che tu sia sempre leale corretto e sincero</p>
                     <p>Una volta aggiunto il tuo negozio potrai gestirlo ed aggiungervi gli oggetti che sono in vendita dalla pagina "Gestisci negozi" presente nel tuo account</p> 
@@ -64,20 +82,6 @@
                     <p>Attenzione: i dati non saranno modificabili</p>
                 </div>
             </div>
-            <c:choose>
-                <c:when test="${negozioInserito == 0}">
-                    <div class="alert alert-success">
-                        <strong>Successo!</strong> negozio inserito con successo.
-                    </div>
-                </c:when>
-                <c:when test="${negozioInserito == 1}">
-                    <div class="alert alert-danger">
-                        <strong>Attenzione!</strong> negozio non inserito.
-                    </div>
-                </c:when>
-                <c:otherwise>
-                </c:otherwise>
-            </c:choose>
             <div class="row">
                 <form class="col-12" id="nuovoNegozio" name="nuovoNegozio" onsubmit="return localizza()" method="POST">
                     <input type="hidden" name="action" value="addNegozio">
@@ -85,29 +89,29 @@
                         <p>Nome del nuovo negozio:</p>
                     </div>
                     <div class="col-12">
-                        <input type="text" class="form-control" id="nomeNegozio" name="nomeNegozio" placeholder="Nome" required>
+                        <input type="text" class="form-control" id="nomeNegozio" name="nomeNegozio" placeholder="Nome" maxlength="255" required>
                     </div>
                     <div class="col-12">
                         <p>Inserisci i dati relativi all'inidirizzo:</p>
                     </div>
                     <div class="row">
                         <div class="col-4">
-                            <input class="form-control" type="text" id="regione" name="regione" placeholder="Regione" required>
+                            <input class="form-control" type="text" id="regione" name="regione" placeholder="Regione" maxlength="255" required>
                         </div>
                         <div class="col-4">
-                            <input class="form-control" type="text" id="provincia" name="provincia" placeholder="Provincia" required>
+                            <input class="form-control" type="text" id="provincia" name="provincia" placeholder="Provincia" maxlength="255" required>
                         </div>
                         <div class="col-4">
-                            <input class="form-control" type="text" id="citta" name="citta" placeholder="Città" required>
+                            <input class="form-control" type="text" id="citta" name="citta" placeholder="Città" maxlength="255" required>
                         </div>
                         <div class="col-8">
-                            <input class="form-control" type="text" id="via" name="via" placeholder="Via" required>
+                            <input class="form-control" type="text" id="via" name="via" placeholder="Via" maxlength="255" required>
                         </div>
                         <div class="col-1">
                             <p>N. civico</p>
                         </div>
                         <div class="col-3">
-                            <input class="form-control" type="number" id="nCivico" name="nCivico" value="12" required>
+                            <input class="form-control" type="number" id="nCivico" min="1" name="nCivico" value="12" required>
                         </div>
                         <input class="form-control" type="hidden" id="interno" name="interno" value="-1" required>
                         <input class="form-control" type="hidden" id="latitudine" name="latitudine" required>
@@ -117,7 +121,7 @@
                         <p>Se possiedi il sito del negozio inserisci pure il link qui sotto, verrà mostrato agli utenti che visiteranno la pagina del negozio</p>
                     </div>
                     <div class="col-12">
-                        <input type="text" class="form-control" id="linkNegozio" name="linkNegozio" placeholder="http://www.link.com">
+                        <input type="url" class="form-control" id="linkNegozio" name="linkNegozio" maxlength="150" placeholder="http://www.link.com">
                     </div>
                     <div class="col-12">
                         <p>Ora gentilmente inserisci gli orari ed i giorni di apertura del tuo negozio, in modo che gli utenti che vorranno venire a ritirare gli oggetti in negozio possano conoscerli</p>
@@ -141,10 +145,10 @@
                             <p>Luned&iacute;</p>
                         </div>
                         <div class="col-4">
-                            <input type="tyme" class="form-control" id="orarioAperturaNegozioLunedi" name="orarioAperturaNegozioLunedi" placeholder="00:00:00">
+                            <input type="time" class="form-control" id="orarioAperturaNegozioLunedi" name="orarioAperturaNegozioLunedi">
                         </div>
                         <div class="col-4">
-                            <input type="tyme" class="form-control" id="orarioChiusuraNegozioLunedi" name="orarioChiusuraNegozioLunedi" placeholder="00:00:00">
+                            <input type="time" class="form-control" id="orarioChiusuraNegozioLunedi" name="orarioChiusuraNegozioLunedi">
                         </div>
                         <div class="col-3">
                             <input type="checkbox" class="form-check-input" id="chiusoLunedi" name="chiusoLunedi">
@@ -154,10 +158,10 @@
                             <p>Marted&iacute;</p>
                         </div>
                         <div class="col-4">
-                            <input type="tyme" class="form-control" id="orarioAperturaNegozioMartedi" name="orarioAperturaNegozioMartedi" placeholder="00:00:00">
+                            <input type="time" class="form-control" id="orarioAperturaNegozioMartedi" name="orarioAperturaNegozioMartedi">
                         </div>
                         <div class="col-4">
-                            <input type="tyme" class="form-control" id="orarioChiusuraNegozioMartedi" name="orarioChiusuraNegozioMartedi" placeholder="00:00:00">
+                            <input type="time" class="form-control" id="orarioChiusuraNegozioMartedi" name="orarioChiusuraNegozioMartedi">
                         </div>
                         <div class="col-3">
                             <input type="checkbox" class="form-check-input" id="chiusoMartedi" name="chiusoMartedi">
@@ -167,10 +171,10 @@
                             <p>Mercoled&iacute;</p>
                         </div>
                         <div class="col-4">
-                            <input type="tyme" class="form-control" id="orarioAperturaNegozioMercoledi" name="orarioAperturaNegozioMercoledi" placeholder="00:00:00">
+                            <input type="time" class="form-control" id="orarioAperturaNegozioMercoledi" name="orarioAperturaNegozioMercoledi">
                         </div>
                         <div class="col-4">
-                            <input type="tyme" class="form-control" id="orarioChiusuraNegozioMercoledi" name="orarioChiusuraNegozioMercoledi" placeholder="00:00:00">
+                            <input type="time" class="form-control" id="orarioChiusuraNegozioMercoledi" name="orarioChiusuraNegozioMercoledi">
                         </div>
                         <div class="col-3">
                             <input type="checkbox" class="form-check-input" id="chiusoMercoledi" name="chiusoMercoledi">
@@ -180,10 +184,10 @@
                             <p>Gioed&iacute;</p>
                         </div>
                         <div class="col-4">
-                            <input type="tyme" class="form-control" id="orarioAperturaNegozioGiovedi" name="orarioAperturaNegozioGiovedi" placeholder="00:00:00">
+                            <input type="time" class="form-control" id="orarioAperturaNegozioGiovedi" name="orarioAperturaNegozioGiovedi">
                         </div>
                         <div class="col-4">
-                            <input type="tyme" class="form-control" id="orarioChiusuraNegozioGiovedi" name="orarioChiusuraNegozioGiovedi" placeholder="00:00:00">
+                            <input type="time" class="form-control" id="orarioChiusuraNegozioGiovedi" name="orarioChiusuraNegozioGiovedi">
                         </div>
                         <div class="col-3">
                             <input type="checkbox" class="form-check-input" id="chiusoGiovedi" name="chiusoGiovedi">
@@ -193,10 +197,10 @@
                             <p>Venerd&iacute;</p>
                         </div>
                         <div class="col-4">
-                            <input type="tyme" class="form-control" id="orarioAperturaNegozioVenerdi" name="orarioAperturaNegozioVenerdi" placeholder="00:00:00">
+                            <input type="time" class="form-control" id="orarioAperturaNegozioVenerdi" name="orarioAperturaNegozioVenerdi">
                         </div>
                         <div class="col-4">
-                            <input type="tyme" class="form-control" id="orarioChiusuraNegozioVenerdi" name="orarioChiusuraNegozioVenerdi" placeholder="00:00:00">
+                            <input type="time" class="form-control" id="orarioChiusuraNegozioVenerdi" name="orarioChiusuraNegozioVenerdi">
                         </div>
                         <div class="col-3">
                             <input type="checkbox" class="form-check-input" id="chiusoVenerdi" name="chiusoVenerdi">
@@ -206,10 +210,10 @@
                             <p>Sabato</p>
                         </div>
                         <div class="col-4">
-                            <input type="tyme" class="form-control" id="orarioAperturaNegozioSabato" name="orarioAperturaNegozioSabato" placeholder="00:00:00">
+                            <input type="time" class="form-control" id="orarioAperturaNegozioSabato" name="orarioAperturaNegozioSabato">
                         </div>
                         <div class="col-4">
-                            <input type="tyme" class="form-control" id="orarioChiusuraNegozioSabato" name="orarioChiusuraNegozioSabato" placeholder="00:00:00">
+                            <input type="time" class="form-control" id="orarioChiusuraNegozioSabato" name="orarioChiusuraNegozioSabato">
                         </div>
                         <div class="col-3">
                             <input type="checkbox" class="form-check-input" id="chiusoSabato" name="chiusoSabato">
@@ -219,10 +223,10 @@
                             <p>Domenica</p>
                         </div>
                         <div class="col-4">
-                            <input type="tyme" class="form-control" id="orarioAperturaNegozioDomenica" name="orarioAperturaNegozioDomenica" placeholder="00:00:00">
+                            <input type="time" class="form-control" id="orarioAperturaNegozioDomenica" name="orarioAperturaNegozioDomenica">
                         </div>
                         <div class="col-4">
-                            <input type="tyme" class="form-control" id="orarioChiusuraNegozioDomenica" name="orarioChiusuraNegozioDomenica" placeholder="00:00:00">
+                            <input type="time" class="form-control" id="orarioChiusuraNegozioDomenica" name="orarioChiusuraNegozioDomenica">
                         </div>
                         <div class="col-3">
                             <input type="checkbox" class="form-check-input" id="chiusoDomenica" name="chiusoDomenica">

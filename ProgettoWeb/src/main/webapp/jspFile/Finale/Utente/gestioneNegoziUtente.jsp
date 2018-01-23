@@ -11,9 +11,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="../Header/Head/GestioneNegoziHeader/gestioneNegozioHeader.jsp" %>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
         <title>Negozi <c:out value="${utenteSessione.getNome()}" /></title>
     </head>
-    <body>
+    <body style="padding-bottom: 0rem;">
         <div class="container">
             <%@include file="../Header/NavBar/newNavBar.jsp" %>
         </div>
@@ -24,9 +25,6 @@
                     <div class="row">
                         <div class="col-6">
                             <p>Ordina per: </p>
-                        </div>
-                        <div class="col-6">
-                            <p>Cerca negozio per nome:</p>
                         </div>
                     </div>
                     <div class="row">
@@ -101,12 +99,6 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="col-6">
-                            <form id="formOptionOrder" name="formOptionOrder" action="${pageContext.request.contextPath}/UserController" method="GET">
-                                <input type="hidden" id="action" name="action" value="gestisciNegozi">
-                                <input type="text" id="ricecaNomeNegozio" name="ricecaNomeNegozio" placeholder="Nome negozio" required>
                             </form>
                         </div>
                     </div>

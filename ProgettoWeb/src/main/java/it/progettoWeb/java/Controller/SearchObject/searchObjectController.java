@@ -44,30 +44,35 @@ public class searchObjectController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String forward=SEARCH_PAGE;
+        String forward = SEARCH_PAGE;
         String error = "";
 
-        String search = "", categoria = "", nomeVenditore = "", nomeNegozio = "";
-        int minPrice = 0, maxPrice = 0, valutazioneMinima = 0;
+        String search = "", categoria = "", nomeVenditore = "", nomeNegozio = "", range = "";
+        int valutazioneMinima = 0;
         boolean checkRitiroInNegozio = false, checkProdottiScontati = false;
-        double latitudine = 0, longitudine = 0, raggio = 0;
+        double latitudine = 0, longitudine = 0, raggio = 0, minPrice = 0, maxPrice = 1000;
 
-        search = request.getParameter("search");
+        search = request.getParameter("search").toLowerCase();
         categoria = request.getParameter("hiddenidCategoria");
-        minPrice = ((request.getParameter("hiddenminPrice") == null || "".equals(request.getParameter("hiddenminPrice"))) ? 0 : Integer.parseInt(request.getParameter("hiddenminPrice")));
-        maxPrice = ((request.getParameter("hiddenmaxPrice") == null || "".equals(request.getParameter("hiddenmaxPrice"))) ? 0 : Integer.parseInt(request.getParameter("hiddenmaxPrice")));
-        nomeVenditore = ((request.getParameter("hiddennomeVenditore") == null || "".equals(request.getParameter("hiddennomeVenditore"))) ? "" : request.getParameter("hiddennomeVenditore"));
-        nomeNegozio = ((request.getParameter("hiddennomeNegozio") == null || "".equals(request.getParameter("hiddennomeNegozio"))) ? "" : request.getParameter("hiddennomeNegozio"));
-        checkRitiroInNegozio =  ((request.getParameter("hiddencheckRitiroInNegozio") == null) ? false : Boolean.getBoolean(request.getParameter("hiddencheckRitiroInNegozio")));
-        checkProdottiScontati = ((request.getParameter("hiddencheckProdottiScontati") == null) ? false : Boolean.getBoolean(request.getParameter("hiddencheckProdottiScontati")));
-        latitudine = ((request.getParameter("hiddenlatitudine") == null || "".equals(request.getParameter("hiddenlatitudine"))) ? 0 : Double.parseDouble(request.getParameter("hiddenlatitudine")));
+        nomeVenditore = request.getParameter("hiddennomeVenditore").trim();
+        nomeNegozio = request.getParameter("hiddennomeNegozio").trim();
+        checkRitiroInNegozio =  Boolean.valueOf(request.getParameter("hiddencheckRitiroInNegozio").trim());
+        checkProdottiScontati = Boolean.valueOf(request.getParameter("hiddencheckProdottiScontati").trim());
+        range = (request.getParameter("hiddenPriceRange"));
+        valutazioneMinima = ((request.getParameter("hiddenvalutazioneMinima") == null || "".equals(request.getParameter("hiddenvalutazioneMinima")) || "Choose...".equals(request.getParameter("hiddenvalutazioneMinima"))) ? 0 : Integer.parseInt(request.getParameter("hiddenvalutazioneMinima")));
+        /*latitudine = ((request.getParameter("hiddenlatitudine") == null || "".equals(request.getParameter("hiddenlatitudine"))) ? 0 : Double.parseDouble(request.getParameter("hiddenlatitudine")));
         longitudine = ((request.getParameter("hiddenlongitudine") == null || "".equals(request.getParameter("hiddenlongitudine"))) ? 0 : Double.parseDouble(request.getParameter("hiddenlongitudine")));
         raggio = ((request.getParameter("hiddenraggio") == null || "".equals(request.getParameter("hiddenraggio"))) ? 0 : Double.parseDouble(request.getParameter("hiddenraggio")));
-        valutazioneMinima = ((request.getParameter("hiddenvalutazioneMinima") == null || "".equals(request.getParameter("hiddenvalutazioneMinima")) || "Choose...".equals(request.getParameter("hiddenvalutazioneMinima"))) ? 0 : Integer.parseInt(request.getParameter("hiddenvalutazioneMinima")));
+        */
 
+        
+        String[] rangeSplitted = range.split(",");
+        minPrice = Double.parseDouble(rangeSplitted[0]);
+        maxPrice = Double.parseDouble(rangeSplitted[1]);
+        
         search = search.trim().replaceAll(" +", " ");
 
-        System.out.println(nomeVenditore);
+        //System.out.println(nomeVenditore);
 
         if(search.length() < 3) {
             forward = ERROR_PAGE;
@@ -77,9 +82,10 @@ public class searchObjectController extends HttpServlet {
             RequestDispatcher view = request.getRequestDispatcher(forward);
             view.forward(request, response);
         }
-
-        ModelloListeOggetto listaOggetti = new ModelloListeOggetto(dao.selectObjectByName(search.toLowerCase()));
+        
+        ModelloListeOggetto listaOggetti = new ModelloListeOggetto(dao.selectObjectByQuery(search.toLowerCase(), categoria, nomeVenditore, nomeNegozio, minPrice, maxPrice, checkProdottiScontati, checkRitiroInNegozio));
         request.setAttribute("ListaOggetti", listaOggetti);
+        System.out.println(listaOggetti.getList().size());
 
         /*
         String test = search;

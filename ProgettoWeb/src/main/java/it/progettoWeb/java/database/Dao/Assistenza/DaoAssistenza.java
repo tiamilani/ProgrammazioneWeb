@@ -307,7 +307,7 @@ public class DaoAssistenza {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("ERROR: " + e.getMessage());
+            System.out.println("ERROR: " + e.toString());
         }
     }
     
@@ -325,7 +325,7 @@ public class DaoAssistenza {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("ERROR: " + e.getMessage());
+            System.out.println("ERROR: " + e.toString());
         }
     }
     
@@ -343,7 +343,7 @@ public class DaoAssistenza {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("ERROR: " + e.getMessage());
+            System.out.println("ERROR: " + e.toString());
         }
     }
     
@@ -360,7 +360,7 @@ public class DaoAssistenza {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("ERROR: " + e.getMessage());
+            System.out.println("ERROR: " + e.toString());
         }
     }
     
@@ -379,7 +379,7 @@ public class DaoAssistenza {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("ERROR: " + e.getMessage());
+            System.out.println("ERROR: " + e.toString());
         }
     }
 }

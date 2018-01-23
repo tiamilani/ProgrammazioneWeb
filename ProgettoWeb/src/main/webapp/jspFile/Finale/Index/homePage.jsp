@@ -18,27 +18,73 @@
     <jsp:useBean id="listaImmaginiOggetto" class="it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto" scope="request" />
     <head>
         <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
-        <title>ShopEro</title>
+        <title>ShopHero</title>
     </head>
-    
+
     <body>
         <div class="container">
             <%@include file="../Header/NavBar/newNavBar.jsp" %>
         </div>
-        
+
+        <c:choose>
+            <c:when test="${changedPassword == true}">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>Successo!</strong> Operazione di modifca della passwprd portata a termine con successo
+                </div>
+            </c:when>
+            <c:otherwise>
+            </c:otherwise>
+        </c:choose>
+
         <div class="container-fluid">
+            <c:choose>
+                <c:when test="${utenteLoginError == 1}">
+                    <div class="alert alert-warning alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Attenzione!</strong> Email o password non riconosciuti
+                    </div>
+                </c:when>
+                <c:when test="${addUser == 0}">
+                    <div class="alert alert-success alert-dismissable ">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Complimenti!</strong> Ti sei registrato con successo su ShopEro :)
+                    </div>
+                </c:when>
+                <c:when test="${addUser == 1}">
+                    <div class="alert alert-danger alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Errore!</strong> Per poter creare un account devi compilare correttamente il captcha
+                    </div>
+                </c:when>
+                <c:when test="${addUser == 2}">
+                    <div class="alert alert-warning alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Attenzione!</strong> Email già utilizzata da un altro account
+                    </div>
+                </c:when>
+                <c:when test="${addUser == 3}">
+                    <div class="alert alert-warning alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Attenzione!</strong> La password e la conferma della password devono corrispondere
+                    </div>
+                </c:when>
+                <c:otherwise>
+                </c:otherwise>
+            </c:choose>
             <%@include file="../Components/Carosello/slideShow.jsp" %>
-            
+
             <div class="row rowListaOggetto">
                 <h2>Oggetti che potrebbero piacerti</h2>
             </div>
-            
+
             <c:set var="limitColum" value="${4}" scope="page" />
             <%@include file="../Components/Liste/ListaOggetto/testListaOggetto.jsp" %>
         </div>
         
         <%@include file="../Footer/footer.jsp" %>
-        
         <!--- 2017-11-08 --->
         <script type="text/javascript">
             var nibirumail_advice_text = 'Questo sito usa i cookie per migliorare i servizi e analizzare il traffico. Navigando all\'interno del sito accetti l\'utilizzo dei cookie.\n\
@@ -47,10 +93,10 @@
                 <button type="button" href="javascript:;" class="nibirumail_agreement">ACCETTO</button>';
                 </script>
         <script type="text/javascript" src="https://nibirumail.com/docs/scripts/nibirumail.cookie.min.js"></script>
-        
+
         <!--
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    
+
                     <a class="btn__close_c" href="javascript:r$('cookies').fadeOut('slow');"><img src="//d1qsjop7tycsfb.cloudfront.net/fileadmin/Img/cookies/btn_close_cookies.png"></a>
                     <div class="text__cont">
                         <p>Questo sito usa cookie, anche di terzi, per migliorare l’esperienza di navigazione e adeguare la pubblicità alle tue preferenze. Chiudendo questo banner o proseguendo nella navigazione acconsenti all’utilizzo di cookie.

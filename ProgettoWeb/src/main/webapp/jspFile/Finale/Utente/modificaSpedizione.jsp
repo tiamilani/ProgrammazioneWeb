@@ -34,7 +34,7 @@
                     <div class="row">
                         <div class="col-4">
                             <p>Modifca il nome attuale della spedizione</p>
-                            <input type="text" class="form-control" id="mdifyNomeSpedizione" name="mdifyNomeSpedizione" value="${spedizione.getNome()}" required>
+                            <input type="text" class="form-control" id="mdifyNomeSpedizione" name="mdifyNomeSpedizione" maxlength="50" value="${spedizione.getNome()}" required>
                         </div>
                         <div class="col-4">
                             <p>Modifica il prezzo attuale della spedizione</p>
@@ -42,7 +42,7 @@
                         </div>
                         <div class="col-4">
                             <p>Modifca il nome del corriere che effettuer&aacute; la consegna</p>
-                            <input type="text" class="form-control" id="mdifyCorriereSpedizione" name="mdifyCorriereSpedizione" value="${spedizione.getCorriere()}" required>
+                            <input type="text" class="form-control" id="mdifyCorriereSpedizione" name="mdifyCorriereSpedizione" maxlength="50" value="${spedizione.getCorriere()}" required>
                         </div>
                     </div>
                     <div class="row">

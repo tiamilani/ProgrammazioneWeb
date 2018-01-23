@@ -17,13 +17,6 @@
     </head>
     
     <script src="http://localhost:8080/ProgettoWeb/jspFile/Finale/JS/Orders.js"></script>
-    <script>
-        window.onbeforeunload = function(event)
-        {
-            saveChanges(0);
-            event.returnValue = true;
-        };
-    </script>
     
     <body>
         <c:set var="iterator" value="0"/>
@@ -46,7 +39,6 @@
 
         <div class="container">
             <%@include file="../Header/NavBar/newNavBar.jsp" %>
-            <hr/>
         </div>
         
         <div class="container-fluid">
@@ -135,6 +127,7 @@
                 <hr size="3" width="100%" align="left"/>
                 <p id="lblResultCart" style="text-align: left" data-oldvaluePrezzo="${prezzoTot}" data-oldvalueOggetti="${nOggetti}"><b>Prezzo provvisorio (<c:out value="${nOggetti}"/> articoli): EUR <fmt:formatNumber type = "number" minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzoTot}"/></b></p>
                 
+                <button class="btn btn-outline-primary buttonSpace" type="button" onclick="saveChanges(0)">Salva modifiche al carrello</button>
                 <c:if test="${utenteSessioneID == -1}">
                     <p>Devi essere registrato per poter procedere all'acquisto.</p>
                 </c:if>

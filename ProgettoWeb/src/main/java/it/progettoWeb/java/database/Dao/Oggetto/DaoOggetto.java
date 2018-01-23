@@ -35,6 +35,7 @@ import java.sql.Date;
 import it.progettoWeb.java.database.query.objectsMarkets.objectMarketsQuery;
 import it.progettoWeb.java.database.query.users.usersQuery;
 import it.progettoWeb.java.utility.pair.pair;
+import static java.rmi.server.LogStream.log;
 import java.sql.PreparedStatement;
 
 public class DaoOggetto {
@@ -96,8 +97,8 @@ public class DaoOggetto {
         return Object;
     }
 
-    
-    
+
+
     /**
      * @author Mattia
      * Funzione utilizzata per ottenre la lista degli oggetti di un utente venditore partendo dall'id
@@ -140,7 +141,7 @@ public class DaoOggetto {
 
         return Objects;
     }
-    
+
     public List<ModelloOggetto> selectRandomObjects(int limit) {
         List<ModelloOggetto> Objects = new ArrayList<>();
 
@@ -155,7 +156,7 @@ public class DaoOggetto {
 
         return Objects;
     }
-    
+
     /**
      * @author andrea
      * Ottenere coppia Oggetto, Immagine
@@ -179,7 +180,7 @@ public class DaoOggetto {
         res = new pair(oggetti, immagini);
         return res;
     }
-    
+
     /**
      * @author andrea
      * Ottenere coppia Oggetto, Immagine
@@ -218,7 +219,7 @@ public class DaoOggetto {
 
         return oggetto;
     }
-    
+
     /**
      * @author Mattia
      * Ottenere la lista di oggetti con un certo prezzo minimo dei negozi di un determinato venditore
@@ -942,7 +943,7 @@ public class DaoOggetto {
         } catch (SQLException e) {}
       return Objects;
     }
-      
+
      /**
      * @author Mattia
      * Ottenere la lista dei prodotti nella stessa fascia di prezzo e categoria di quelli già acquistati
@@ -980,7 +981,7 @@ public class DaoOggetto {
         } catch (SQLException e) {}
       return Objects;
     }
-      
+
      /**
      * @author Mattia
      * ottenere la lista di oggetti di un determinato negozio
@@ -1022,7 +1023,7 @@ public class DaoOggetto {
 
         return Objects;
     }
-  
+
      /**
      * @author Mattia
      * ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio
@@ -5466,9 +5467,9 @@ public class DaoOggetto {
 
         return Objects;
     }
-    
-    
-    
+
+
+
     /**
      * @author fbrug
      * Ottenere la lista dei prodotti venduti raggruppati per categoria e negozio
@@ -5478,19 +5479,19 @@ public class DaoOggetto {
     public List<ModelloOggetto> selectObjectSaledGroupByCategoryAndShop(int idVenditore)
     {
         List<ModelloOggetto> oggetti = new ArrayList<>();
-        
+
         try
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sellersQuery.selectObjectSaledGroupByCategoryAndShop(idVenditore));
-            
+
             while(rs.next())
                 oggetti.add(getModelloFromRs(rs));
         } catch(SQLException e) {}
-        
+
         return oggetti;
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista dei prodotti venduti in una determinata categoria raggruppati per negozio
@@ -5501,19 +5502,19 @@ public class DaoOggetto {
     public List<ModelloOggetto> selectObjectSaledGroupByShop(int idVenditore, String nomeCategoria)
     {
         List<ModelloOggetto> oggetti = new ArrayList<>();
-        
+
         try
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sellersQuery.selectObjectSaledGroupByShop(idVenditore, nomeCategoria));
-            
+
             while(rs.next())
                 oggetti.add(getModelloFromRs(rs));
         } catch(SQLException e) {}
-        
+
         return oggetti;
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista dei prodotti venduti ordinati per valutazioni
@@ -5523,19 +5524,19 @@ public class DaoOggetto {
     public List<ModelloOggetto> selectObjectSaledOrderedByRating(int idVenditore)
     {
         List<ModelloOggetto> oggetti = new ArrayList<>();
-        
+
         try
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sellersQuery.selectObjectSaledOrderedByRating(idVenditore));
-            
+
             while(rs.next())
                 oggetti.add(getModelloFromRs(rs));
         } catch(SQLException e) {}
-        
+
         return oggetti;
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista dei proprio prodotti in sconto raggruppati per categoria e negozio
@@ -5545,19 +5546,19 @@ public class DaoOggetto {
     public List<ModelloOggetto> selectObjectDiscountedGroupByShopAndCategory(int idVenditore)
     {
         List<ModelloOggetto> oggetti = new ArrayList<>();
-        
+
         try
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sellersQuery.selectObjectDiscountedGroupByShopAndCategory(idVenditore));
-            
+
             while(rs.next())
                 oggetti.add(getModelloFromRs(rs));
         } catch(SQLException e) {}
-        
+
         return oggetti;
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista dei proprio prodotti in sconto raggruppati per categoria e negozio ordinati per scadenza più vicina dello sconto
@@ -5567,19 +5568,19 @@ public class DaoOggetto {
     public List<ModelloOggetto> selectObjectsDiscountedGrupByShopAndCategoryOrderedByDeadline(int idVenditore)
     {
         List<ModelloOggetto> oggetti = new ArrayList<>();
-        
+
         try
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sellersQuery.selectObjectsDiscountedGrupByShopAndCategoryOrderedByDeadline(idVenditore));
-            
+
             while(rs.next())
                 oggetti.add(getModelloFromRs(rs));
         } catch(SQLException e) {}
-        
+
         return oggetti;
     }
-    
+
     /**
      * @author fbrug
      * Aggiungere un prodotto (OGGETTO) ad un proprio negozio
@@ -5594,18 +5595,18 @@ public class DaoOggetto {
      * @param dataFineSconto: indica la data in cui terminerà lo sconto applicato all'oggetto
      * @param idCategoria: intero rappresentante l'ID della categoria di cui l'oggetto fa parte
      */
-    public void insertObject(String id,int idNegozio, String nomeOggetto,String nomeDownCase, double prezzoOggetto, 
-            String descrizioneOggetto, int ritiroInNegozio, int disponibilita, int statoDisponibilita, 
+    public void insertObject(String id,int idNegozio, String nomeOggetto,String nomeDownCase, double prezzoOggetto,
+            String descrizioneOggetto, int ritiroInNegozio, int disponibilita, int statoDisponibilita,
             double sconto, Date dataFineSconto, int idCategoria)
     {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeUpdate(sellersQuery.insertObject(id,idNegozio, nomeOggetto,nomeDownCase, prezzoOggetto, descrizioneOggetto, 
+            statement.executeUpdate(sellersQuery.insertObject(id,idNegozio, nomeOggetto,nomeDownCase, prezzoOggetto, descrizioneOggetto,
                     ritiroInNegozio, disponibilita, statoDisponibilita, sconto, dataFineSconto, idCategoria));
         } catch(SQLException e) {}
     }
-    
+
     /**
      * @author fbrug
      * Rimuovere un oggetto da un proprio negozio
@@ -5620,7 +5621,7 @@ public class DaoOggetto {
         }
         catch (SQLException e) {}
     }
-       
+
     /**
      * @author fbrug
      * Modificare il prezzo di un oggetto di un proprio negozio
@@ -5636,7 +5637,7 @@ public class DaoOggetto {
         }
         catch (SQLException e) {}
     }
-    
+
     /**
      * @author fbrug
      * Modificare lo sconto di un oggetto
@@ -5652,7 +5653,7 @@ public class DaoOggetto {
         }
         catch (SQLException e) {}
     }
-    
+
     /**
      * @author fbrug
      * Aggiungere una immagine del profilo di un utente
@@ -5668,7 +5669,7 @@ public class DaoOggetto {
         }
         catch (SQLException e) {}
     }
-    
+
     /**
      * @author fbrug
      * Modificare l'immagine del profilo di un oggetto con un determinato ID oggetto
@@ -5685,7 +5686,7 @@ public class DaoOggetto {
         }
         catch (SQLException e) {}
     }
-    
+
      /**
      * @author fbrug
      * Modificare la quantita' di un oggetto
@@ -5701,7 +5702,7 @@ public class DaoOggetto {
         }
         catch (SQLException e) {}
     }
-    
+
     /**
      * @author fbrug
      * Rimuovere l'immagine di un determinato oggetto
@@ -5717,7 +5718,7 @@ public class DaoOggetto {
         }
         catch (SQLException e) {}
     }
-    
+
     /**
      * @author Damiano
      * Funzione utilizzata per ottenre la lista degli oggetti di un utente venditore partendo dall'id
@@ -5728,7 +5729,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInShopBySellerSpecific(int id, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInShopBySellerSpecific(id, ritiro));
@@ -5737,10 +5738,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Funzione utilizzata per ottenre la lista degli oggetti in sconto di un utente venditore partendo dall'id
@@ -5749,7 +5750,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInShopBySellerOnDiscount(int id) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInShopBySellerOnDiscount(id));
@@ -5758,10 +5759,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Funzione utilizzata per ottenre la lista degli oggetti in sconto di un utente venditore partendo dall'id
@@ -5772,7 +5773,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInShopBySellerSpecificOnDiscount(int id, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInShopBySellerSpecificOnDiscount(id, ritiro));
@@ -5781,10 +5782,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti che contengono una stringa nel nome nei negozi di un determinato venditore
@@ -5796,7 +5797,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithStringInShopBySellerSpecific(int id, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithStringInShopBySellerSpecific(id, pattern, ritiro));
@@ -5805,10 +5806,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto che contengono una stringa nel nome nei negozi di un determinato venditore
@@ -5818,7 +5819,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithStringInShopBySellerOnDiscount(int id, String pattern) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithStringInShopBySellerOnDiscount(id, pattern));
@@ -5827,10 +5828,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto che contengono una stringa nel nome nei negozi di un determinato venditore
@@ -5842,7 +5843,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithStringInShopBySellerSpecificOnDiscount(int id, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithStringInShopBySellerSpecificOnDiscount(id, pattern, ritiro));
@@ -5851,10 +5852,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti di una categoria nei negozi di un determinato venditore
@@ -5864,7 +5865,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> selectSellerObjectsSpecifiedSellerAndCategory(int id, int cat) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjectsSpecifiedSellerAndCategory(id, cat));
@@ -5873,10 +5874,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti di una categoria nei negozi di un determinato venditore
@@ -5888,7 +5889,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryInShopBySellerSpecific(int id, int cat, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryInShopBySellerSpecific(id, cat, ritiro));
@@ -5897,10 +5898,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto di una categoria nei negozi di un determinato venditore
@@ -5911,7 +5912,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryInShopBySellerOnDiscount(int id, int cat) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryInShopBySellerOnDiscount(id, cat));
@@ -5920,10 +5921,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto di una categoria nei negozi di un determinato venditore
@@ -5935,7 +5936,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryInShopBySellerSpecificOnDiscount(int id, int cat, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryInShopBySellerSpecificOnDiscount(id, cat, ritiro));
@@ -5944,10 +5945,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti di una categoria nei negozi di un determinato venditore con una stringa nel nome
@@ -5958,7 +5959,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithStringInShopBySeller(int id, int cat, String pattern) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithStringInShopBySeller(id, cat, pattern));
@@ -5967,10 +5968,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti di una categoria nei negozi di un determinato venditore con una stringa nel nome e
@@ -5983,7 +5984,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithStringInShopBySellerSpecific(int id, int cat, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithStringInShopBySellerSpecific(id, cat, pattern, ritiro));
@@ -5992,10 +5993,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto di una categoria nei negozi di un determinato venditore con una stringa nel nome
@@ -6006,7 +6007,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithStringInShopBySellerOnDiscount(int id, int cat, String pattern) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithStringInShopBySellerOnDiscount(id, cat, pattern));
@@ -6015,10 +6016,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto di una categoria nei negozi di un determinato venditore con una stringa nel nome e
@@ -6031,7 +6032,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithStringInShopBySellerSpecificOnDiscount(int id, int cat, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithStringInShopBySellerSpecificOnDiscount(id, cat, pattern, ritiro));
@@ -6040,10 +6041,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo massimo nei negozi di un determinato venditore
@@ -6055,7 +6056,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceHigherThanBySellerSpecific(int id, int priceMin, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceHigherThanBySellerSpecific(id, priceMin, ritiro));
@@ -6064,10 +6065,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo massimo nei negozi di un determinato venditore
@@ -6077,7 +6078,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceHigherThanBySellerOnDiscount(int id, int priceMin) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceHigherThanBySellerOnDiscount(id, priceMin));
@@ -6086,10 +6087,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo massimo nei negozi di un determinato venditore
@@ -6101,7 +6102,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceHigherThanBySellerSpecificOnDiscount(int id, int priceMin, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceHigherThanBySellerSpecificOnDiscount(id, priceMin, ritiro));
@@ -6110,10 +6111,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo massimo nei negozi di un determinato venditore
@@ -6125,7 +6126,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceLowerThanBySellerSpecific(int id, int priceMax, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceLowerThanBySellerSpecific(id, priceMax, ritiro));
@@ -6134,10 +6135,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo massimo nei negozi di un determinato venditore
@@ -6147,7 +6148,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceLowerThanBySellerOnDiscount(int id, int priceMax) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceLowerThanBySellerOnDiscount(id, priceMax));
@@ -6156,10 +6157,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo massimo nei negozi di un determinato venditore
@@ -6171,7 +6172,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceLowerThanBySellerSpecificOnDiscount(int id, int priceMax, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceLowerThanBySellerSpecificOnDiscount(id, priceMax, ritiro));
@@ -6180,10 +6181,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo nei negozi di un determinato venditore
@@ -6196,7 +6197,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceBetweenRangeBySellerSpecific(int id, int priceMin, int priceMax, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceBetweenRangeBySellerSpecific(id, priceMin, priceMax, ritiro));
@@ -6205,10 +6206,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo nei negozi di un determinato venditore
@@ -6219,7 +6220,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceBetweenRangeBySellerOnDiscount(int id, int priceMin, int priceMax) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceBetweenRangeBySellerOnDiscount(id, priceMin, priceMax));
@@ -6228,10 +6229,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo nei negozi di un determinato venditore
@@ -6244,7 +6245,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceBetweenRangeBySellerSpecificOnDiscount(int id, int priceMin, int priceMax, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceBetweenRangeBySellerSpecificOnDiscount(id, priceMin, priceMax, ritiro));
@@ -6253,10 +6254,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria nei negozi di un determinato venditore
@@ -6269,7 +6270,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceHigherThanBySellerSpecific(int id, int priceMin, int cat, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceHigherThanBySellerSpecific(id, priceMin, cat, ritiro));
@@ -6278,10 +6279,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo in una certa categoria nei negozi di un determinato venditore
@@ -6292,7 +6293,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceHigherThanBySellerOnDiscount(int id, int priceMin, int cat) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceHigherThanBySellerOnDiscount(id, priceMin, cat));
@@ -6301,10 +6302,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo in una certa categoria nei negozi di un determinato venditore
@@ -6317,7 +6318,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceHigherThanBySellerSpecificOnDiscount(int id, int priceMin, int cat, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceHigherThanBySellerSpecificOnDiscount(id, priceMin, cat, ritiro));
@@ -6326,10 +6327,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore
@@ -6342,7 +6343,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceLowerThanBySellerSpecific(int id, int priceMax, int cat, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceLowerThanBySellerSpecific(id, priceMax, cat, ritiro));
@@ -6351,10 +6352,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore
@@ -6365,7 +6366,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceLowerThanBySellerOnDiscount(int id, int priceMax, int cat) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceLowerThanBySellerOnDiscount(id,priceMax,cat));
@@ -6374,10 +6375,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore
@@ -6390,7 +6391,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceLowerThanBySellerSpecificOnDiscount(int id, int priceMax, int cat, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceLowerThanBySellerSpecificOnDiscount(id, priceMax, cat, ritiro));
@@ -6399,10 +6400,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore
@@ -6416,7 +6417,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceBetweenRangeBySellerSpecific(int id, int priceMin, int priceMax, int cat, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceBetweenRangeBySellerSpecific(id, priceMin, priceMax, cat, ritiro));
@@ -6425,10 +6426,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
         /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore
@@ -6440,7 +6441,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceBetweenRangeBySellerOnDiscount(int id, int priceMin, int priceMax, int cat) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceBetweenRangeBySellerOnDiscount(id, priceMin, priceMax, cat));
@@ -6449,10 +6450,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore
@@ -6466,7 +6467,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceBetweenRangeBySellerSpecificOnDiscount(int id, int priceMin, int priceMax, int cat, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceBetweenRangeBySellerSpecificOnDiscount(id, priceMin, priceMax, cat, ritiro));
@@ -6475,10 +6476,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome nei negozi di un determinato venditore
@@ -6491,7 +6492,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceHigherThanWithStringBySellerSpecific(int id, int priceMin, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceHigherThanWithStringBySellerSpecific(id, priceMin, pattern, ritiro));
@@ -6500,10 +6501,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo con una certa stringa nel nome nei negozi di un determinato venditore
@@ -6514,7 +6515,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceHigherThanWithStringBySellerOnDiscount(int id, int priceMin, String pattern) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceHigherThanWithStringBySellerOnDiscount(id, priceMin, pattern));
@@ -6523,10 +6524,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo con una certa stringa nel nome nei negozi di un determinato venditore
@@ -6539,7 +6540,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceHigherThanWithStringBySellerSpecificOnDiscount(int id, int priceMin, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceHigherThanWithStringBySellerSpecificOnDiscount(id, priceMin, pattern, ritiro));
@@ -6548,11 +6549,11 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
 
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome nei negozi di un determinato venditore
@@ -6565,7 +6566,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceLowerThanWithStringBySellerSpecific(int id, int priceMax, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceLowerThanWithStringBySellerSpecific(id, priceMax, pattern, ritiro));
@@ -6574,10 +6575,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo massimo con una certa stringa nel nome nei negozi di un determinato venditore
@@ -6588,7 +6589,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceLowerThanWithStringBySellerOnDiscount(int id, int priceMax, String pattern) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceLowerThanWithStringBySellerOnDiscount(id, priceMax, pattern));
@@ -6597,10 +6598,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo massimo con una certa stringa nel nome nei negozi di un determinato venditore
@@ -6613,7 +6614,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceLowerThanWithStringBySellerSpecificOnDiscount(int id, int priceMax, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceLowerThanWithStringBySellerSpecificOnDiscount(id, priceMax, pattern, ritiro));
@@ -6622,10 +6623,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome nei negozi di un determinato venditore
@@ -6639,7 +6640,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceBetweenRangeWithStringBySellerSpecific(int id, int priceMin, int priceMax, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceBetweenRangeWithStringBySellerSpecific(id, priceMin, priceMax, pattern, ritiro));
@@ -6648,10 +6649,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome nei negozi di un determinato venditore
@@ -6663,7 +6664,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceBetweenRangeWithStringBySellerOnDiscount(int id, int priceMin, int priceMax, String pattern) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceBetweenRangeWithStringBySellerOnDiscount(id, priceMin, priceMax, pattern));
@@ -6672,10 +6673,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome nei negozi di un determinato venditore
@@ -6689,7 +6690,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceBetweenRangeWithStringBySellerSpecificOnDiscount(int id, int priceMin, int priceMax, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceBetweenRangeWithStringBySellerSpecificOnDiscount(id, priceMin, priceMax, pattern, ritiro));
@@ -6698,10 +6699,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
@@ -6715,7 +6716,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceHigherThanWithStringbySellerSpecific(int id, int priceMin, int cat, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceHigherThanWithStringbySellerSpecific(id, priceMin, cat, pattern, ritiro));
@@ -6724,10 +6725,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
@@ -6739,7 +6740,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceHigherThanWithStringbySellerOnDiscount(int id, int priceMin, int cat, String pattern) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceHigherThanWithStringbySellerOnDiscount(id, priceMin, cat, pattern));
@@ -6748,10 +6749,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
@@ -6765,7 +6766,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceHigherThanWithStringbySellerSpecificOnDiscount(int id, int priceMin, int cat, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceHigherThanWithStringbySellerSpecificOnDiscount(id, priceMin, cat, pattern, ritiro));
@@ -6774,10 +6775,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-  
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
@@ -6791,7 +6792,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceLowerThanWithStringbySellerSpecific(int id, int priceMax, int cat, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceLowerThanWithStringbySellerSpecific(id, priceMax, cat, pattern, ritiro));
@@ -6800,10 +6801,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
@@ -6815,7 +6816,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceLowerThanWithStringbySellerOnDiscount(int id, int priceMax, int cat, String pattern) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceLowerThanWithStringbySellerOnDiscount(id, priceMax, cat, pattern));
@@ -6824,10 +6825,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
@@ -6841,7 +6842,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceLowerThanWithStringbySellerSpecificOnDiscount(int id, int priceMax, int cat, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceLowerThanWithStringbySellerSpecificOnDiscount(id, priceMax, cat, pattern, ritiro));
@@ -6850,11 +6851,11 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
-    
+
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
@@ -6869,7 +6870,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceBetweenRangeWithStringbySellerSpecific(int id, int priceMin, int priceMax, int cat, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceBetweenRangeWithStringbySellerSpecific(id, cat, priceMin, priceMax, pattern, ritiro));
@@ -6878,11 +6879,11 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
-    
+
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
@@ -6895,7 +6896,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceBetweenRangeWithStringbySellerOnDiscount(int id, int priceMin, int priceMax, int cat, String pattern) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceBetweenRangeWithStringbySellerOnDiscount(id, cat, priceMin, priceMax, pattern));
@@ -6904,11 +6905,11 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
-    
+
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore
@@ -6923,7 +6924,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceBetweenRangeWithStringbySellerSpecificOnDiscount(int id, int priceMin, int priceMax, int cat, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceBetweenRangeWithStringbySellerSpecificOnDiscount(id, cat, priceMin, priceMax, pattern, ritiro));
@@ -6932,11 +6933,11 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
-    
+
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti di negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -6951,7 +6952,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsbySellerNearbySpecific(int idU, int id, double lat, double lon, double rad, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsbySellerNearbySpecific(idU, lat, lon, rad, id, ritiro));
@@ -6960,10 +6961,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto di negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -6976,7 +6977,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsbySellerNearbyOnDiscount(int idU, int id, double lat, double lon, double rad) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsbySellerNearbyOnDiscount(idU, lat, lon, rad, id));
@@ -6985,10 +6986,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto di negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7003,7 +7004,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsbySellerNearbySpecificOnDiscount(int idU, int id, double lat, double lon, double rad, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsbySellerNearbySpecificOnDiscount(idU, lat, lon, rad, id, ritiro));
@@ -7012,11 +7013,11 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
-    
+
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti che contengono una stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7032,7 +7033,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithStringbySellerNearbySpecific(int idU, int id, double lat, double lon, double rad, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithStringbySellerNearbySpecific(idU, lat, lon, rad, id, pattern, ritiro));
@@ -7041,10 +7042,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto che contengono una stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7058,7 +7059,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithStringbySellerNearbyOnDiscount(int idU, int id, double lat, double lon, double rad, String pattern) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithStringbySellerNearbyOnDiscount(idU, lat, lon, rad, id, pattern));
@@ -7067,10 +7068,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto che contengono una stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7086,7 +7087,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithStringbySellerNearbySpecificOnDiscount(int idU, int id, double lat, double lon, double rad, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithStringbySellerNearbySpecificOnDiscount(idU, lat, lon, rad, id, pattern, ritiro));
@@ -7095,11 +7096,11 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
-    
+
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti di una categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7115,7 +7116,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategorybySellerNearbySpecific(int idU, int id, double lat, double lon, double rad, int cat, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategorybySellerNearbySpecific(idU, lat, lon, rad, id, cat, ritiro));
@@ -7124,10 +7125,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto di una categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7141,7 +7142,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategorybySellerNearbyOnDiscount(int idU, int id, double lat, double lon, double rad, int cat) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategorybySellerNearbyOnDiscount(idU, lat, lon, rad, id, cat));
@@ -7150,10 +7151,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto di una categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7169,7 +7170,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategorybySellerNearbySpecificOnDiscount(int idU, int id, double lat, double lon, double rad, int cat, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategorybySellerNearbySpecificOnDiscount(idU, lat, lon, rad, id, cat, ritiro));
@@ -7178,10 +7179,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti di una categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7198,7 +7199,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithStringbySellerNearbySpecific(int idU, int id, double lat, double lon, double rad, int cat, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithStringbySellerNearbySpecific(idU, lat, lon, rad, id, cat, pattern, ritiro));
@@ -7207,10 +7208,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto di una categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7225,7 +7226,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithStringbySellerNearbyOnDiscount(int idU, int id, double lat, double lon, double rad, int cat, String pattern) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithStringbySellerNearbyOnDiscount(idU, lat, lon, rad, id, cat, pattern));
@@ -7234,10 +7235,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto di una categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7254,7 +7255,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithStringbySellerNearbySpecificOnDiscount(int idU, int id, double lat, double lon, double rad, int cat, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithStringbySellerNearbySpecificOnDiscount(idU, lat, lon, rad, id, cat, pattern, ritiro));
@@ -7263,11 +7264,11 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
-    
+
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo minimo nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7283,7 +7284,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceHigherThanbySellerNearbySpecific(int idU, int id, double lat, double lon, double rad, int priceMin, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceHigherThanbySellerNearbySpecific(idU, lat, lon, rad, id, priceMin, ritiro));
@@ -7292,10 +7293,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7309,7 +7310,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceHigherThanbySellerNearbyOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMin) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceHigherThanbySellerNearbyOnDiscount(idU, lat, lon, rad, id, priceMin));
@@ -7318,10 +7319,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7337,7 +7338,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceHigherThanbySellerNearbySpecificOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMin, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceHigherThanbySellerNearbySpecificOnDiscount(idU, lat, lon, rad, id, priceMin, ritiro));
@@ -7346,11 +7347,11 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
-    
+
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo massimo nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7366,7 +7367,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceLowerThanbySellerNearbySpecific(int idU, int id, double lat, double lon, double rad, int priceMax, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceLowerThanbySellerNearbySpecific(idU, lat, lon, rad, id, priceMax, ritiro));
@@ -7375,10 +7376,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo massimo nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7392,7 +7393,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceLowerThanbySellerNearbyOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMax) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceLowerThanbySellerNearbyOnDiscount(idU, lat, lon, rad, id, priceMax));
@@ -7401,10 +7402,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo massimo nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7420,7 +7421,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceLowerThanbySellerNearbySpecificOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMax, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceLowerThanbySellerNearbySpecificOnDiscount(idU, lat, lon, rad, id, priceMax, ritiro));
@@ -7429,11 +7430,11 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
-    
+
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7450,7 +7451,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceBetweenRangebySellerNearbySpecific(int idU, int id, double lat, double lon, double rad, int priceMin, int priceMax, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceBetweenRangebySellerNearbySpecific(idU, lat, lon, rad, id, priceMin, priceMax, ritiro));
@@ -7459,10 +7460,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7477,7 +7478,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceBetweenRangebySellerNearbyOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMin, int priceMax) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceBetweenRangebySellerNearbyOnDiscount(idU, lat, lon, rad, id, priceMin, priceMax));
@@ -7486,10 +7487,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7506,7 +7507,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceBetweenRangebySellerNearbySpecificOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMin, int priceMax, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceBetweenRangebySellerNearbySpecificOnDiscount(idU, lat, lon, rad, id, priceMin, priceMax, ritiro));
@@ -7515,10 +7516,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7535,7 +7536,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceHigherThanbySellerNearbySpecific(int idU, int id, double lat, double lon, double rad, int priceMin, int cat, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceHigherThanbySellerNearbySpecific(idU, lat, lon, rad, id, priceMin, cat, ritiro));
@@ -7544,10 +7545,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo in una certa categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7562,7 +7563,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceHigherThanbySellerNearbyOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMin, int cat) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceHigherThanbySellerNearbyOnDiscount(idU, lat, lon, rad, id, priceMin, cat));
@@ -7571,10 +7572,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo in una certa categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7591,7 +7592,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceHigherThanbySellerNearbySpecificOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMin, int cat, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceHigherThanbySellerNearbySpecificOnDiscount(idU, lat, lon, rad, id, priceMin, cat, ritiro));
@@ -7600,10 +7601,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7620,7 +7621,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceLowerThanbySellerNearbySpecific(int idU, int id, double lat, double lon, double rad, int priceMax, int cat, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceLowerThanbySellerNearbySpecific(idU, lat, lon, rad, id, priceMax, cat, ritiro));
@@ -7629,10 +7630,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7647,7 +7648,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceLowerThanbySellerNearbyOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMax, int cat) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceLowerThanbySellerNearbyOnDiscount(idU, lat, lon, rad, id, priceMax,cat));
@@ -7656,10 +7657,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7676,7 +7677,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceLowerThanbySellerNearbySpecificOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMax, int cat, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceLowerThanbySellerNearbySpecificOnDiscount(idU, lat, lon, rad, id, priceMax, cat, ritiro));
@@ -7685,11 +7686,11 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
-    
+
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7707,7 +7708,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceBetweenRangebySellerNearbySpecific(int idU, int id, double lat, double lon, double rad, int priceMin, int priceMax, int cat, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceBetweenRangebySellerNearbySpecific(idU, lat, lon, rad, id, priceMin, priceMax, cat, ritiro));
@@ -7716,10 +7717,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7735,7 +7736,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceBetweenRangebySellerNearbyOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMin, int priceMax, int cat) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceBetweenRangebySellerNearbyOnDiscount(idU, lat, lon, rad, id, priceMin, priceMax, cat));
@@ -7744,10 +7745,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7765,7 +7766,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceBetweenRangebySellerNearbySpecificOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMin, int priceMax, int cat, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceBetweenRangebySellerNearbySpecificOnDiscount(idU, lat, lon, rad, id, priceMin, priceMax, cat, ritiro));
@@ -7774,10 +7775,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7794,7 +7795,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceHigherThanWithStringbySellerNearbySpecific(int idU, int id, double lat, double lon, double rad, int priceMin, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceHigherThanWithStringbySellerNearbySpecific(idU, lat, lon, rad, id, priceMin, pattern, ritiro));
@@ -7803,10 +7804,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7821,7 +7822,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceHigherThanWithStringbySellerNearbyOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMin, String pattern) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceHigherThanWithStringbySellerNearbyOnDiscount(idU, lat, lon, rad, id, priceMin, pattern));
@@ -7830,10 +7831,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7850,7 +7851,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceHigherThanWithStringbySellerNearbySpecificOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMin, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceHigherThanWithStringbySellerNearbySpecificOnDiscount(idU, lat, lon, rad, id, priceMin, pattern, ritiro));
@@ -7859,11 +7860,11 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
-    
+
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7880,7 +7881,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceLowerThanWithStringbySellerNearbySpecific(int idU, int id, double lat, double lon, double rad, int priceMax, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceLowerThanWithStringbySellerNearbySpecific(idU, lat, lon, rad, id, priceMax, pattern, ritiro));
@@ -7889,10 +7890,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7907,7 +7908,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceLowerThanWithStringbySellerNearbyOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMax, String pattern) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceLowerThanWithStringbySellerNearbyOnDiscount(idU, lat, lon, rad, id, priceMax, pattern));
@@ -7916,10 +7917,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo massimo in una certa categoria nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7936,7 +7937,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceLowerThanWithStringbySellerNearbySpecificOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMax, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceLowerThanWithStringbySellerNearbySpecificOnDiscount(idU, lat, lon, rad, id, priceMax, pattern, ritiro));
@@ -7945,11 +7946,11 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
-    
+
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7967,7 +7968,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceBetweenRangeWithStringbySellerNearbySpecific(int idU, int id, double lat, double lon, double rad, int priceMin, int priceMax, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceBetweenRangeWithStringbySellerNearbySpecific(idU, lat, lon, rad, id, priceMin, priceMax, pattern, ritiro));
@@ -7976,10 +7977,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -7995,7 +7996,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceBetweenRangeWithStringbySellerNearbyOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMin, int priceMax, String pattern) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceBetweenRangeWithStringbySellerNearbyOnDiscount(idU, lat, lon, rad, id, priceMin, priceMax, pattern));
@@ -8004,10 +8005,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti  in sconto con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -8025,7 +8026,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsWithPriceBetweenRangeWithStringbySellerNearbySpecificOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMin, int priceMax, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsWithPriceBetweenRangeWithStringbySellerNearbySpecificOnDiscount(idU, lat, lon, rad, id, priceMin, priceMax, pattern, ritiro));
@@ -8034,11 +8035,11 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
-    
+
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -8056,7 +8057,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceHigherThanWithStringbySellerNearbySpecific(int idU, int id, double lat, double lon, double rad, int priceMin, int cat, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceHigherThanWithStringbySellerNearbySpecific(idU, lat, lon, rad, id, cat, priceMin, pattern, ritiro));
@@ -8065,10 +8066,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -8084,7 +8085,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceHigherThanWithStringbySellerNearbyOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMin, int cat, String pattern) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceHigherThanWithStringbySellerNearbyOnDiscount(idU, lat, lon, rad, id, cat, priceMin, pattern));
@@ -8093,10 +8094,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -8114,7 +8115,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceHigherThanWithStringbySellerNearbySpecificOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMin, int cat, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceHigherThanWithStringbySellerNearbySpecificOnDiscount(idU, lat, lon, rad, id, cat, priceMin, pattern, ritiro));
@@ -8123,11 +8124,11 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
-    
+
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -8144,7 +8145,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceLowerThanWithStringbySellerNearbySpecific(int idU, int id, double lat, double lon, double rad, int priceMax, int cat, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceLowerThanWithStringbySellerNearbySpecific(idU, lat, lon, rad, id, cat, priceMax, pattern, ritiro));
@@ -8153,10 +8154,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -8172,7 +8173,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceLowerThanWithStringbySellerNearbyOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMax, int cat, String pattern) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceLowerThanWithStringbySellerNearbyOnDiscount(idU, lat, lon, rad, id, cat, priceMax, pattern));
@@ -8181,10 +8182,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -8201,7 +8202,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceLowerThanWithStringbySellerNearbySpecificOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMax, int cat, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceLowerThanWithStringbySellerNearbySpecificOnDiscount(idU, lat, lon, rad, id, cat, priceMax, pattern, ritiro));
@@ -8210,11 +8211,11 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
-    
+
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -8233,7 +8234,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceBetweenRangeWithStringbySellerNearbySpecific(int idU, int id, double lat, double lon, double rad, int priceMin, int priceMax, int cat, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceBetweenRangeWithStringbySellerNearbySpecific(idU, lat, lon, rad, id, cat, priceMin, priceMax, pattern, ritiro));
@@ -8242,10 +8243,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -8262,7 +8263,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceBetweenRangeWithStringbySellerNearbyOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMin, int priceMax, int cat, String pattern) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceBetweenRangeWithStringbySellerNearbyOnDiscount(idU, lat, lon, rad, id, cat, priceMin, priceMax, pattern));
@@ -8271,10 +8272,10 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti in sconto con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome nei negozi di un determinato venditore data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -8293,7 +8294,7 @@ public class DaoOggetto {
      */
     public List<ModelloOggetto> itemsInCategoryWithPriceBetweenRangeWithStringbySellerNearbySpecificOnDiscount(int idU, int id, double lat, double lon, double rad, int priceMin, int priceMax, int cat, String pattern, int ritiro) {
         List<ModelloOggetto> Objects = new ArrayList<>();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(marketsSellersQuery.itemsInCategoryWithPriceBetweenRangeWithStringbySellerNearbySpecificOnDiscount(idU, lat, lon, rad, id, cat, priceMin, priceMax, pattern, ritiro));
@@ -8302,8 +8303,79 @@ public class DaoOggetto {
             }
         } catch (SQLException e) {
         }
-        
+
         return Objects;
+    }
+
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti di una ricerca
+     * @param name
+     * @return List<ModelloOggetto> lista di oggetti ottenuti dalla ricerca
+     */
+    public List<ModelloOggetto> selectObjectByQuery(String name, String categoria, String venditore, String negozio, double minPrice, double maxPrice, boolean sconto, boolean ritiro) {
+      List<ModelloOggetto> Objects = new ArrayList<>();
+
+        try {
+            boolean shop = false;
+            boolean seller = false;
+            Statement statement = connection.createStatement();
+            String query = "SELECT * FROM Oggetto";
+
+            if(negozio != null && negozio.length() > 0){
+                query = query + " INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id)";
+                shop = true;
+            }
+            if(venditore != null && venditore.length() > 0 && !shop){
+                query = query + " INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id) INNER JOIN Utente ON (Negozio.idVenditore = Utente.id)";
+                seller = true;
+            }else if(venditore != null && venditore.length() > 0){
+                query = query + " INNER JOIN Utente ON (Negozio.idVenditore = Utente.id)";
+            }
+            if(shop){
+                query = query + " WHERE Negozio.nomeNegozio LIKE '%" + negozio + "%'";
+            }
+            if(seller){
+                if(shop){
+                    query = query + " AND Utente.nome LIKE '%" + venditore + "%'";
+                }else{
+                    query = query + " WHERE Utente.nome LIKE '%" + venditore + "%'";
+                }
+            }
+
+            // se sono state aggiunte cose prima scrivo AND, altrimenti WHERE
+            if(shop || seller){
+                query = query + " AND nomeDownCase LIKE '%" + name + "%'";
+            }else{
+                query = query + " WHERE nomeDownCase LIKE '%" + name + "%'";
+            }
+            if(!categoria.equals("Categoria")){
+                query = query + " AND categoria = " + categoria;
+            }
+            if(minPrice > 0 && maxPrice < 1000){
+                query = query + " AND prezzo BETWEEN " + minPrice + " AND " + maxPrice;
+            }else if(minPrice > 0){
+                query = query + " AND prezzo > " + minPrice;
+            }else if(maxPrice < 1000){
+                query = query + " AND prezzo < " + maxPrice;
+            }
+            if(sconto){
+                query = query + " AND sconto <> 0";
+            }
+            if(ritiro){
+                query = query + " AND ritiroInNegozio = 1";
+            }
+
+            query = query + ";";
+
+            System.out.println(query);
+
+            ResultSet rs = statement.executeQuery(query);
+            while (rs.next()) {
+                Objects.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {}
+      return Objects;
     }
 
     public void updateObject(ModelloOggetto object, String previusId) {

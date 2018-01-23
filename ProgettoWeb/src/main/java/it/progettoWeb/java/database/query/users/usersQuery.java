@@ -59,7 +59,7 @@ public class usersQuery {
                 "'"+cognome+"',"+
                 "'"+mail+"',"+
                 "'"+password+"',"+
-                ""+avatar+","+
+                "'"+avatar+"',"+
                 ""+valutazione+","+
                 ""+UtenteType+","+
                 ""+emailConfermata+");";

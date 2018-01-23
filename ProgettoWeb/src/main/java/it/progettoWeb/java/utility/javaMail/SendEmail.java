@@ -16,7 +16,7 @@ public class SendEmail
     private static final DaoUtente daoUtente = new DaoUtente();
     private static final String shopEroMail = "shoperoweb@gmail.com";
     private static final String shopEroPass = "u!l937Ik00[.";
-    
+
     /**
      * Preparazione Properties e Sessione utilizzate per inviare la mail
      * @param userEmail: email dell'utente a cui inviare la mail
@@ -39,21 +39,22 @@ public class SendEmail
                             return new PasswordAuthentication(shopEroMail, shopEroPass);
                         }
                     });
-            
+
             Message message = new MimeMessage(session);
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(userEmail));
             message.setFrom(new InternetAddress(shopEroMail));
-            
+
             return message;
         }
         catch (MessagingException ex)
         {
+            System.out.println("Errore nella funzione preProcessing");
             System.out.println(ex.getMessage());
             sendError(userEmail, ex.getMessage());
             return null;
         }
     }
-    
+
     /**
      * Invia una mail a shoperoweb@gmail.com contenente il messaggio di errore provocato
      * durante l'invio di una mail all'utente
@@ -71,17 +72,19 @@ public class SendEmail
                     + "USER MAIL = " + userEmail + ";\n"
                     + "EXEPTION MESSAGE = " + exceptionMessage + ";\n\n"
                     + "Now have fun with that ;)");
-            
+
             Transport.send(messageError);
             System.out.println("Messaggio d'errore inviato");
             System.out.println(exceptionMessage);
         }
         catch (MessagingException ex)
         {
+            System.out.println("Errore nella funzione sendError");
             System.out.println("ERROR MAIL: " + ex.getMessage());
+            System.out.println(ex.toString());
         }
     }
-    
+
     /**
      * Invia l'email all'utente specificato
      * @param userEmail: email dell'utente a cui inviare la mail
@@ -96,11 +99,13 @@ public class SendEmail
         }
         catch (MessagingException ex)
         {
+            System.out.println("Errore nella funzione sendEmail");
             System.out.println(ex.getMessage());
+            System.out.println(ex.toString());
             sendError(userEmail, ex.getMessage());
         }
     }
-    
+
     /**
      * Invia un'email al nuovo utente appena registrato
      * @param userEmail: email dell'utente a cui inviare la mail
@@ -111,7 +116,7 @@ public class SendEmail
         {
             ModelloUtente user = daoUtente.selectUserByEmail(userEmail);
             Message message = preProcessing(userEmail);
-            
+
             if(message != null)
             {
                 message.setSubject("Registrazione su ShopEro");
@@ -129,11 +134,11 @@ public class SendEmail
         }
         catch (MessagingException ex)
         {
-            System.out.println(ex.getMessage());
-            sendError(userEmail, ex.getMessage());
+            System.out.println(ex.toString());
+            sendError(userEmail, ex.toString());
         }
     }
-    
+
     /**
      * Invia un'email all'utente che ha cambiato il proprio indirizzo email
      * @param oldEmail: vecchia email dell'utente
@@ -145,7 +150,7 @@ public class SendEmail
         {
             ModelloUtente user = daoUtente.selectUserByEmail(newEmail);
             Message message = preProcessing(newEmail);
-            
+
             if(message != null)
             {
                 message.setSubject("Modifica indirizzo Email");
@@ -157,12 +162,12 @@ public class SendEmail
                         + "ti suggeriamo di contattare il servizio clienti (LINK) "
                         + "o di reimpostare la password (LINK)\n\n"
                         + "Buona giornata!");
-                
+
                 sendEmail(newEmail, message);
             }
-            
+
             message = preProcessing(oldEmail);
-            
+
             if(message != null)
             {
                 message.setSubject("Modifica indirizzo Email");
@@ -174,50 +179,55 @@ public class SendEmail
                         + "ti suggeriamo di contattare il servizio clienti (LINK) "
                         + "o di reimpostare la password (LINK)\n\n"
                         + "Buona giornata!");
-                
+
                 sendEmail(oldEmail, message);
             }
         }
         catch (MessagingException ex)
         {
-            System.out.println(ex.getMessage());
-            sendError(newEmail, ex.getMessage());
+            System.out.println(ex.toString());
+            sendError(newEmail, ex.toString());
         }
     }
-    
+
     /**
      * Invia un'email all'utente che ha effettuato una richiesta di "password dimenticata"
      * @param userEmail: email dell'utente a cui inviare la mail
+     * @param link: link da inserire nella mail
      */
-    public static void passwordForget(String userEmail)
+    public static void passwordForget(String userEmail, String link)
     {
         try
         {
             ModelloUtente user = daoUtente.selectUserByEmail(userEmail);
             Message message = preProcessing(userEmail);
-            
-            if(message != null)
+            System.out.println(user.getNome());
+
+            if(message != null && user.getNome() != null)
             {
                 message.setSubject("Reimposta la password di ShopEro");
                 message.setText(
                         "Salve " + user.getNome() + ",\n"
                         + "Vogliamo aiutarti a reimpostare la tua password\n"
                         + "Clicca il link seguente per reimpostare la password. "
-                        + "Sarà valido solo per 24 ore.\n"
-                        + "LINK" + "\n\n"
+                        + "Sarà valido solo per 2 ore.\n"
+                        + link + "\n\n"
                         + "Se non desideri reimpostare la password o se non hai richiesto tale modifica, puoi ignorare questa email. "
                         + "Nessun altro utente può modificare la tua password.");
 
                 sendEmail(userEmail, message);
+            }else{
+                System.out.println("Indirizzo email non registrato nel sito -> email non inviata");
             }
         }
         catch (MessagingException ex)
         {
+            System.out.println("Errore nella funzione passwordForget");
             System.out.println(ex.getMessage());
             sendError(userEmail, ex.getMessage());
         }
     }
-    
+
     /**
      * Invia un'email all'utente che ha appena modificato la sua passord
      * @param userEmail: email dell'utente a cui inviare la mail
@@ -228,7 +238,7 @@ public class SendEmail
         {
             ModelloUtente user = daoUtente.selectUserByEmail(userEmail);
             Message message = preProcessing(userEmail);
-            
+
             if(message != null)
             {
                 message.setSubject("Hai reimpostato la passowrd");
@@ -244,11 +254,11 @@ public class SendEmail
         }
         catch (MessagingException ex)
         {
-            System.out.println(ex.getMessage());
-            sendError(userEmail, ex.getMessage());
+            System.out.println(ex.toString());
+            sendError(userEmail, ex.toString());
         }
     }
-    
+
     /**
      * Invia un'email all'utente che è appena diventato un venditore
      * @param userEmail: email dell'utente a cui inviare la mail
@@ -259,7 +269,7 @@ public class SendEmail
         {
             ModelloUtente user = daoUtente.selectUserByEmail(userEmail);
             Message message = preProcessing(userEmail);
-            
+
             if(message != null)
             {
                 message.setSubject("Benvenuto nel mondo dei venditori");
@@ -276,11 +286,11 @@ public class SendEmail
         }
         catch (MessagingException ex)
         {
-            System.out.println(ex.getMessage());
-            sendError(userEmail, ex.getMessage());
+            System.out.println(ex.toString());
+            sendError(userEmail, ex.toString());
         }
     }
-    
+
     /**
      * Invia un'email all'utente che ha appena completato un ordine
      * @param userEmail: email dell'utente a cui inviare la mail
@@ -292,7 +302,7 @@ public class SendEmail
         {
             ModelloUtente user = daoUtente.selectUserByEmail(userEmail);
             Message message = preProcessing(userEmail);
-            
+
             if(message != null)
             {
                 message.setSubject("ShopEro - Informazioni dell'ordine [" + indexOrder + "]");
@@ -303,18 +313,18 @@ public class SendEmail
                         + "Potrai visionare il tuo ordine nella sezione apposita del tuo account.\n"
                         + "Inoltre, appena il venditore effettuerà la spedizione, ti sarà possibile tracciare "
                         + "il tuo ordine tramite codice tracking fornito dal venditore stesso.");
-                
+
                 sendEmail(userEmail, message);
             }
         }
         catch (MessagingException ex)
         {
-            System.out.println(ex.getMessage());
-            sendError(userEmail, ex.getMessage());
+            System.out.println(ex.toString());
+            sendError(userEmail, ex.toString());
         }
-    }   
+    }
 }
-    
+
 /*
 ### Email
 Inviare dal server email per tutto ciò che sarà necessario
