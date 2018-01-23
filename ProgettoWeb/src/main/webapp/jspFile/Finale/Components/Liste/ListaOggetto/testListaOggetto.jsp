@@ -16,6 +16,6 @@
         </div>
     </c:if>
 </c:forEach>
-<c:if test ="${iterator>0}">
+<c:if test ="${iterator>=0}">
     </div>
 </c:if>

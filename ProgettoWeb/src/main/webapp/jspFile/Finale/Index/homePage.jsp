@@ -83,9 +83,8 @@
             <c:set var="limitColum" value="${4}" scope="page" />
             <%@include file="../Components/Liste/ListaOggetto/testListaOggetto.jsp" %>
         </div>
-
+        
         <%@include file="../Footer/footer.jsp" %>
-
         <!--- 2017-11-08 --->
         <script type="text/javascript">
             var nibirumail_advice_text = 'Questo sito usa i cookie per migliorare i servizi e analizzare il traffico. Navigando all\'interno del sito accetti l\'utilizzo dei cookie.\n\
