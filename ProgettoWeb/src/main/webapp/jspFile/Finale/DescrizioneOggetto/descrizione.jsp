@@ -55,6 +55,12 @@
                             <c:param name="idUtente" value="${venditore.getId()}" />
                         </c:url>
                         <a href="${sellerUrl}">${venditore.getCognome()} ${venditore.getNome()}</a>
+                         - 
+                        <c:url value="/UserController" var="storeUrl">
+                            <c:param name="action" value="DescrizioneNegozio" />
+                            <c:param name="idNegozio" value="${negozio.getId()}" />
+                        </c:url>
+                        <a href="${storeUrl}">${negozio.getNomeNegozio()}</a>
                     </h5>
                 </div>
             </div>

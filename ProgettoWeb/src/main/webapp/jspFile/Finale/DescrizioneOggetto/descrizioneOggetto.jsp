@@ -36,7 +36,9 @@
             <c:if test="${canReviewsO == true}">
                 <%@include file="insertReview.jsp" %>
             </c:if>
-            <%@include file="recensioni.jsp" %>
+            <c:if test="${recensioniUtenteImmagini.getL().size() > 0}">
+                <%@include file="recensioni.jsp" %>
+            </c:if>
         </div>
         <%@include file="../Footer/footer.jsp" %>
     </body>

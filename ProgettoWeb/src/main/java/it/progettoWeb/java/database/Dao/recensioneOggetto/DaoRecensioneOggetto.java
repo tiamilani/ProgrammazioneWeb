@@ -258,4 +258,26 @@ public class DaoRecensioneOggetto {
 
         return numRecensioni;
     }
+    
+    /**
+     * @author andrea
+     * Ottenere un boolean se si ha acquistato oppure no un oggetto (se il count è 1 vuol dire di si)
+     * @param idOggetto oggetto di cui si vuole fare la ricerca
+     * @param idUtente utente di cui si vuole fare la ricerca
+     * @return int NumAcquisti
+     */
+    public int buyOrNotObject(String idOggetto, int idUtente) {
+        int numRecensioni = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(usersQuery.buyOrNotObject(idOggetto, idUtente));
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                numRecensioni = rs.getInt("counter");
+            }
+        } catch (SQLException e) {
+        }
+
+        return numRecensioni;
+    }
 }

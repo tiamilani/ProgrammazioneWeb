@@ -145,7 +145,7 @@ public class UserController extends HttpServlet {
                 
                 if(utenteSessione.getId() != -1)
                 {
-                    if(daoRecensioneV.reviewOrNotSeller(idUtente, utenteSessione.getId()) > 0)
+                    if(daoRecensioneV.buyOrNotFromSeller(idUtente, utenteSessione.getId()) > 0)
                         request.setAttribute("canReviewsN", true);
                     else
                         request.setAttribute("canReviewsN", false);
@@ -205,7 +205,7 @@ public class UserController extends HttpServlet {
                 
                 if(utenteSessione.getId() != -1)
                 {
-                    if(daoRecensioneN.reviewOrNotStore(idNegozio, utenteSessione.getId()) > 0)
+                    if(daoRecensioneN.buyOrNotFromStore(idNegozio, utenteSessione.getId()) > 0)
                         request.setAttribute("canReviewsS", true);
                     else
                         request.setAttribute("canReviewsS", false);

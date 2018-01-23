@@ -132,8 +132,7 @@ function myFunction() {
         <div class="user">
             <c:choose>
                 <c:when test="${utenteSessione.getId() != -1}">
-                    <button type="button" class="btn btn-primary"
-                            onclick="location.href='${pageContext.request.contextPath}/jspFile/Finale/Utente/utente.jsp'">
+                    <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/jspFile/Finale/Utente/utente.jsp'">
                         ${utenteSessione.getNome()} ${utenteSessione.getCognome()}
                     </button>
                 </c:when>

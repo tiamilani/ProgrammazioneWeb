@@ -687,9 +687,12 @@ public class usersQuery {
      * @param star Un intero indicante l'utilità della recensione
      */
     public static String addReviewToObject(String idO, int idU, String txt, int val, int star) {
-        return "INSERT INTO RecensioneOggetto (id, idOggetto, idUtente, testo, "
+        String tmp = "INSERT INTO RecensioneOggetto (id, idOggetto, idUtente, testo, "
                 + "valutazione, data, utilita) VALUES (NULL, '" + idO + "', " +
                 idU + ", '" + txt + "', " + val + ", CURRENT_TIMESTAMP, " + star + ");";
+        
+        System.out.println(tmp);
+        return tmp;
     }
 
     /**
@@ -703,6 +706,18 @@ public class usersQuery {
         return "SELECT COUNT(idVenditore) AS counter FROM RecensioneVenditore "
                 + "WHERE RecensioneVenditore.idVenditore ="+idV+" AND "
                 + "RecensioneVenditore.idUtente ="+idU+";";
+    }
+    
+    /**
+     * @author Andrea
+     * Ottenere un boolean se si ha acquistato oppure no da un venditore (se il count è 1 vuol dire di si)
+     * @param idV Un intero che rappresenta l'identificativo del venditore preso in considerazione
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return String: booleano indicante se si ha acquistato o no da un venditore
+     */
+    public static String buyOrNotFromSeller(int idV, int idU){
+        return "SELECT COUNT(*) as counter FROM Negozio WHERE idVenditore="+idV+" AND id IN (SELECT idNegozio FROM Ordine "
+                + "WHERE Ordine.idUtente ="+idU+" AND Ordine.stato=4)";
     }
 
     /**
@@ -729,6 +744,32 @@ public class usersQuery {
         return "SELECT COUNT(idOggetto) AS counter FROM RecensioneOggetto WHERE "
                 + "RecensioneOggetto.idOggetto ='"+idO+"' AND "
                 + "RecensioneOggetto.idUtente ="+idU+";";
+    }
+    
+    /**
+     * @author Andrea
+     * Ottenere un boolean se si ha acquistato oppure no un oggetto (se il count è 1 vuol dire di si)
+     * @param idO Una Stringa che rappresenta l'identificativo dell'oggetto preso in considerazione
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return String: booleano indicante se si ha recensito o no un oggetto
+     */
+    public static String buyOrNotObject(String idO, int idU){
+        return "SELECT COUNT(idOggetto) AS counter FROM Ordine WHERE "
+                + "Ordine.idOggetto ='"+idO+"' AND "
+                + "Ordine.idUtente ="+idU+" AND Ordine.stato=4;";
+    }
+    
+    /**
+     * @author Andrea
+     * Ottenere un boolean se si ha acquistato oppure no da un negozio (se il count è 1 vuol dire di si)
+     * @param idN Un intero che rappresenta l'identificativo del negozio preso in considerazione
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return String: booleano indicante se si ha acquistato o no da un negozio
+     */
+    public static String buyOrNotFromStore(int idN, int idU){
+        return "SELECT COUNT(idNegozio) AS counter FROM Ordine "
+                + "WHERE Ordine.idNegozio ="+idN+" AND "
+                + "Ordine.idUtente ="+idU+" AND Ordine.stato=4;";
     }
 
     /**

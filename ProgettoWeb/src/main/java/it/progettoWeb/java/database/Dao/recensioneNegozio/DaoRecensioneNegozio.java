@@ -224,4 +224,26 @@ public class DaoRecensioneNegozio {
 
         return numRecensioni;
     }
+    
+    /**
+     * @author andrea
+     * Ottenere un boolean se si ha acquistato oppure no da un negozio (se il count è 1 vuol dire di si)
+     * @param idN Un intero che rappresenta l'identificativo del negozio preso in considerazione
+     * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @return int booleano indicante se si ha acquistato o no da un negozio
+     */
+    public int buyOrNotFromStore(int idN, int idU) {
+        int numRecensioni = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(usersQuery.buyOrNotFromStore(idN, idU));
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                numRecensioni = rs.getInt("counter");
+            }
+        } catch (SQLException e) {
+        }
+
+        return numRecensioni;
+    }
 }

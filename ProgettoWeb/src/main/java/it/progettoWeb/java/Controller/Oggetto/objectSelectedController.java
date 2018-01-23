@@ -108,7 +108,7 @@ public class objectSelectedController extends HttpServlet {
             
             if(utenteSessione.getId() != -1)
             {
-                if(daoRecensioneOggetto.reviewOrNotObject(idOggetto, utenteSessione.getId()) > 0) {
+                if(daoRecensioneOggetto.buyOrNotObject(idOggetto, utenteSessione.getId()) > 0) {
                     request.setAttribute("canReviewsO", true);
                     request.setAttribute("canUploadImages", true);
                 }
