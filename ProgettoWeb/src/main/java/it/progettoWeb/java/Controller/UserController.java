@@ -384,6 +384,7 @@ public class UserController extends HttpServlet {
 
 
         String forward = HOME_PAGE;
+        boolean redirect = false;
         String action = request.getParameter("action");
 
         if (action.equalsIgnoreCase("selectUser")){
@@ -399,6 +400,20 @@ public class UserController extends HttpServlet {
                 Cookie ck=new Cookie("user",String.valueOf(utente.getId()));//creating cookie object
                 ck.setMaxAge(-1);
                 response.addCookie(ck);//adding cookie in the response
+                
+                forward = request.getHeader("referer");
+                log("forward: " + forward);
+                if(forward.equals("http://localhost:8080/ProgettoWeb/UserController?action=addUser") || forward.equals("http://localhost:8080/ProgettoWeb/UserController?action=logout"))
+                {
+                    redirect = false;
+                    forward = HOME_PAGE;
+                    log("Il forword è a home page: " + forward);
+                }
+                else
+                {
+                    redirect = true;
+                }
+                log("forward: " + forward);
                 
                 try
                 {
@@ -427,7 +442,12 @@ public class UserController extends HttpServlet {
                     request.getSession().removeAttribute("carrelloSessione");
                     request.getSession().setAttribute("carrelloSessione", carrelloInSessione);
                 }
-                catch (Exception e) { System.out.println("error message = " + e.toString()); forward = ERROR_PAGE; request.setAttribute("errore", "404 Pagina non trovata"); }
+                catch (Exception e) { 
+                    System.out.println("error message = " + e.toString()); 
+                    forward = ERROR_PAGE; 
+                    redirect = false;
+                    request.setAttribute("errore", "404 Pagina non trovata"); 
+                }
             }
             else {
                 request.setAttribute("utenteLoginError", 1);
@@ -514,8 +534,12 @@ public class UserController extends HttpServlet {
             forward = USERPAGE;
         }
 
-        RequestDispatcher view = request.getRequestDispatcher(forward);
-        view.forward(request, response);
+        if(!redirect){
+            RequestDispatcher view = request.getRequestDispatcher(forward);
+            view.forward(request, response);
+        }
+        else
+            response.sendRedirect(forward);
     }
 
     /**

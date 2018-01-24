@@ -27,6 +27,7 @@ import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
 import it.progettoWeb.java.database.Model.ordiniRicevuti.ModelloListeOrdiniRicevuti;
 import it.progettoWeb.java.database.Model.tipoSpedizione.ModelloListeTipoSpedizione;
 import it.progettoWeb.java.database.Model.tipoSpedizione.ModelloTipoSpedizione;
+import it.progettoWeb.java.utility.javaMail.SendEmail;
 import it.progettoWeb.java.utility.tris.tris;
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -198,7 +199,9 @@ public class NegozioController extends HttpServlet {
             String idOrdine = request.getParameter("idOrdine");
             String idOggetto = request.getParameter("idOggetto");
             ModelloOrdine ordine = daoOrdine.selectOrdersByIdOrderIdOggetto(idOrdine,idOggetto);
+            ModelloOggetto oggetto = daoOggetto.getObjectById(idOggetto);
             ModelloTipoSpedizione tipoSpedizione = daoTipoSpedizione.selectDeliveryTypesByIdS(ordine.getIdS()).get(0);
+            ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
             
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Calendar c = Calendar.getInstance();
@@ -208,9 +211,9 @@ public class NegozioController extends HttpServlet {
             
             //daoOrdine.updateOrderDataArrivoPresunta(ordine,dt);
             daoOrdine.changeOrderStatus(ordine, ordine.getStato(), 2);
+            SendEmail.ordineInLavorazione(utente.getMail(),ordine,oggetto);
             
             int idNegozio = ((ModelloNegozio)request.getSession().getAttribute("negozio")).getId();
-            ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
             
             tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> trisNegozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(idNegozio);
             ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCategoria.selectAllCategory());
@@ -232,8 +235,10 @@ public class NegozioController extends HttpServlet {
             String idOrdine = request.getParameter("idOrdine");
             String idOggetto = request.getParameter("idOggetto");
             ModelloOrdine ordine = daoOrdine.selectOrdersByIdOrderIdOggetto(idOrdine,idOggetto);
+            ModelloOggetto oggetto = daoOggetto.getObjectById(idOggetto);
             ModelloTipoSpedizione tipoSpedizione = daoTipoSpedizione.selectDeliveryTypesByIdS(ordine.getIdS()).get(0);
             daoOrdine.changeOrderStatus(ordine, ordine.getStato(), 3);
+            ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
             
             String tracking = request.getParameter("codiceTracking");
             if(!tracking.isEmpty()){
@@ -247,9 +252,9 @@ public class NegozioController extends HttpServlet {
             ordine.setDataArrivoPresunta(c.getTime());
             
             daoOrdine.updateOrderDataArrivoPresunta(ordine,dt);
+            SendEmail.ordineSpedito(utente.getMail(),ordine,oggetto);
             
             int idNegozio = ((ModelloNegozio)request.getSession().getAttribute("negozio")).getId();
-            ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
             
             tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> trisNegozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(idNegozio);
             ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCategoria.selectAllCategory());

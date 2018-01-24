@@ -1,6 +1,8 @@
 package it.progettoWeb.java.utility.javaMail;
 
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
+import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
+import it.progettoWeb.java.database.Model.Ordine.ModelloOrdine;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import java.util.Properties;
 import javax.mail.Message;
@@ -313,6 +315,72 @@ public class SendEmail
                         + "Potrai visionare il tuo ordine nella sezione apposita del tuo account.\n"
                         + "Inoltre, appena il venditore effettuerà la spedizione, ti sarà possibile tracciare "
                         + "il tuo ordine tramite codice tracking fornito dal venditore stesso.");
+
+                sendEmail(userEmail, message);
+            }
+        }
+        catch (MessagingException ex)
+        {
+            System.out.println(ex.toString());
+            sendError(userEmail, ex.toString());
+        }
+    }
+
+    public static void ordineInLavorazione(String userEmail, ModelloOrdine ordine, ModelloOggetto oggetto) {
+        try
+        {
+            ModelloUtente user = daoUtente.selectUserByEmail(userEmail);
+            Message message = preProcessing(userEmail);
+
+            if(message != null)
+            {
+                message.setSubject("ShopEro - Ordine in lavorazione :D [" + ordine.getIdOrdine()+ "]");
+                message.setText(
+                        "Salve " + user.getNome() + ",\n"
+                        + "Ci teniamo a comunicarti che il tuo ordine è ora in lavorazione.\n"
+                        + "L'ordine in questione è il seguente: \n"
+                        + "idOrdine: " + ordine.getIdOrdine()+ ".\n"
+                        + "L'idOggeto: "+ordine.getIdOggetto()+"\n"
+                        + "Oggetto: "+oggetto.getNome()+"\n"
+                        + "Acquistato il: "+ordine.getDataOrdine().toString()+"\n"
+                        + "Potrai visionare il tuo ordine nella sezione apposita del tuo account.\n"
+                        + "Inoltre, appena il venditore effettuerà la spedizione, ti sarà possibile tracciare "
+                        + "il tuo ordine tramite codice tracking fornito dal venditore stesso.\n"
+                        + "Per qualsiasi necessita non esitare a rivolgerti al servizio di assistenza");
+
+                sendEmail(userEmail, message);
+            }
+        }
+        catch (MessagingException ex)
+        {
+            System.out.println(ex.toString());
+            sendError(userEmail, ex.toString());
+        }
+    }
+    
+    public static void ordineSpedito(String userEmail, ModelloOrdine ordine, ModelloOggetto oggetto) {
+        try
+        {
+            ModelloUtente user = daoUtente.selectUserByEmail(userEmail);
+            Message message = preProcessing(userEmail);
+
+            if(message != null)
+            {
+                message.setSubject("ShopEro - Ordine spedito :D [" + ordine.getIdOrdine() + "]");
+                message.setText(
+                        "Salve " + user.getNome() + ",\n"
+                        + "Ci teniamo a comunicarti che il tuo ordine è stato spedito.\n"
+                        + "L'ordine in questione è il seguente: \n"
+                        + "idOrdine: " + ordine.getIdOrdine()+ ".\n"
+                        + "L'idOggeto: "+ordine.getIdOggetto()+"\n"
+                        + "Oggetto: "+oggetto.getNome()+"\n"
+                        + "Acquistato il: "+ordine.getDataOrdine().toString()+"\n"
+                        + "Codice di tracking fornito dal venditore: "+ordine.getCodiceTracking()+""
+                        + "Data di arrivo presunta: "+ordine.getDataArrivoPresunta().toString()+""
+                        + "Potrai visionare il tuo ordine nella sezione apposita del tuo account.\n"
+                        + "Inoltre, appena il venditore effettuerà la spedizione, ti sarà possibile tracciare "
+                        + "il tuo ordine tramite codice tracking fornito dal venditore stesso.\n"
+                        + "Per qualsiasi necessita non esitare a rivolgerti al servizio di assistenza");
 
                 sendEmail(userEmail, message);
             }

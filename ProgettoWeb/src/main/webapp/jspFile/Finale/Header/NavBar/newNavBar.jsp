@@ -158,7 +158,7 @@ function myFunction() {
         <div class="user d-flex justify-content-between row no-gutters col-xl-3 col-lg-3">
             <c:choose>
                 <c:when test="${utenteSessione.getId() != -1}">
-                    <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/jspFile/Finale/Utente/utente.jsp'">
+                    <button type="button" class="btn nav-button col-xl-8 col-lg-9 col-md-12 col-sm-12" onclick="location.href='${pageContext.request.contextPath}/jspFile/Finale/Utente/utente.jsp'">
                         ${utenteSessione.getNome()} ${utenteSessione.getCognome()}
                     </button>
                 </c:when>
