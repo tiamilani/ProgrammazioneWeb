@@ -329,8 +329,8 @@ public class UserController extends HttpServlet {
 
             }
             if(!orderStore.equalsIgnoreCase("prodottivendutiup") && !orderStore.equalsIgnoreCase("prodottivendutidown"))
-            for(int i = 0; i<listanegozi.getList().size(); i++){
-                numeroOrdiniNegozi.add(daoOrdiniRicevuti.selectNumberOfOrderForStore(utente.getId(), listanegozi.get(i).getId()));
+                for(int i = 0; i<listanegozi.getList().size(); i++){
+                    numeroOrdiniNegozi.add(daoOrdiniRicevuti.selectNumberOfOrderForStore(utente.getId(), listanegozi.get(i).getId()));
             }
 
             request.setAttribute("order", order);

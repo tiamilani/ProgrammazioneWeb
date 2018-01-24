@@ -5615,14 +5615,17 @@ public class DaoOggetto {
      * Rimuovere un oggetto da un proprio negozio
      * @return String: conferma avvenuta operazione
      */
-    public void deleteObject(String idOggetto)
+    public boolean deleteObject(String idOggetto)
     {
         try
         {
             Statement statement = connection.createStatement();
             statement.executeUpdate(sellersQuery.deleteObject(idOggetto));
         }
-        catch (SQLException e) {}
+        catch (SQLException e) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -8381,11 +8384,14 @@ public class DaoOggetto {
       return Objects;
     }
 
-    public void updateObject(ModelloOggetto object, String previusId) {
+    public boolean updateObject(ModelloOggetto object, String previusId) {
         try
         {
             Statement statement = connection.createStatement();
             statement.executeUpdate(sellersQuery.updateObject(object, previusId));
-        } catch(SQLException e) {}
+        } catch(SQLException e) {
+            return false;
+        }
+        return true;
     }
 }

@@ -136,28 +136,37 @@ public class DaoTipoSpedizione {
         return types;
     }
 
-    public void updateSpedizione(ModelloTipoSpedizione spedizione) {
+    public boolean updateSpedizione(ModelloTipoSpedizione spedizione) {
         try
         {
             Statement statement = connection.createStatement();
             statement.executeUpdate(deliveryTypeQuery.updateSpedizione(spedizione));
-        } catch(SQLException e) {}
+        } catch(SQLException e) {
+            return false;
+        }
+        return true;
     }
 
-    public void deleteSpedizione(int idS) {
+    public boolean deleteSpedizione(int idS) {
         try
         {
             Statement statement = connection.createStatement();
             statement.executeUpdate(deliveryTypeQuery.deleteSpedizione(idS));
         }
-        catch (SQLException e) {}
+        catch (SQLException e) {
+            return false;
+        }
+        return true;
     }
 
-    public void addSpedizione(ModelloTipoSpedizione spedizione) {
+    public boolean addSpedizione(ModelloTipoSpedizione spedizione) {
         try
         {
             Statement statement = connection.createStatement();
             statement.executeUpdate(deliveryTypeQuery.insertObject(spedizione));
-        } catch(SQLException e) {}
+        } catch(SQLException e) {
+            return false;
+        }
+        return true;
     }
 }

@@ -29,6 +29,22 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
+                    <c:choose>
+                        <c:when test="${impossibileChiudereNegozio == 1}">
+                            <div class="alert alert-danger alert-dismissable ">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Attenzione!</strong> impossibile chiudere il negozio.
+                            </div>
+                        </c:when>
+                        <c:when test="${impossibileAprireNegozio == 1}">
+                            <div class="alert alert-danger alert-dismissable ">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Attenzione!</strong> impossibile chiudere il negozio.
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                        </c:otherwise>
+                    </c:choose>
                     <h1>Negozi</h1>
                     <p>
                         <c:out value="Questa è la lista dei tuoi negozi attuali." /><br>

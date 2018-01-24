@@ -64,7 +64,7 @@ public class deliveryTypeQuery
 
     public static String updateSpedizione(ModelloTipoSpedizione spedizione) {
         return "UPDATE tipoSpedizione SET Nome='"+spedizione.getNome()+"', prezzo="+spedizione.getPrezzo()+", Corriere='"+spedizione.getCorriere()+"', "
-                + "tempoRichiesto="+spedizione.getTempoRichiesto()+", numeroMassimo="+spedizione.getNumeroMassimo()+"   WHERE idS=1;";
+                + "tempoRichiesto="+spedizione.getTempoRichiesto()+", numeroMassimo="+spedizione.getNumeroMassimo()+"   WHERE idS="+spedizione.getIdS()+";";
     }
 
     public static String deleteSpedizione(int idS) {

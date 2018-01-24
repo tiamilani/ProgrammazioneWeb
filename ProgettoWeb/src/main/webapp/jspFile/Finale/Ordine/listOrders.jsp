@@ -42,7 +42,6 @@
         </div>
         
         <div class="container-fluid">
-            
             <c:set var="iterator" value="0"/>
             
             <h2><b>CARRELLO</b></h2>

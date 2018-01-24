@@ -89,6 +89,12 @@
                         <strong>Successo!</strong> Operazione di eliminazione portata a termine con successo
                     </div>
                 </c:when>
+                <c:when test="${spedizioneModificata == 4}">
+                    <div class="alert alert-warning alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Attenzione!</strong> Impossibile modificare la spedizione a causa di un errore
+                    </div>
+                </c:when>
                 <c:when test="${aggiungiSepdizione == 0}">
                     <div class="alert alert-success alert-dismissable">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -148,6 +154,12 @@
                             <div class="alert alert-danger alert-dismissable">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                 <strong>Errore!</strong> Il nome da te inserito non corrisponde a quello dell'oggetto
+                            </div>
+                        </c:when>
+                        <c:when test="${oggettoModificato == 6}">
+                            <div class="alert alert-danger alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Errore!</strong> Impossibile eliminare l'oggetto
                             </div>
                         </c:when>
                         <c:when test="${oggettoModificato == 5}">

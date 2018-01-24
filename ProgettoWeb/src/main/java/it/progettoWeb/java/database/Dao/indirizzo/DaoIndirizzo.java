@@ -143,14 +143,16 @@ public class DaoIndirizzo {
         return "ok";
     }
     
-    public void insertAddress(ModelloIndirizzo address){
+    public boolean insertAddress(ModelloIndirizzo address){
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement(usersQuery.insertAddress1(address.getStato(),address.getRegione(),address.getProvincia(),address.getCitta(),address.getVia(),address.getnCivico(),address.getInterno(),address.getLatitudine(),address.getLongitudine()));
             preparedStatement.executeUpdate();
             
         } catch (SQLException e) {
+            return false;
         }
+        return true;
     }
     
     /**
