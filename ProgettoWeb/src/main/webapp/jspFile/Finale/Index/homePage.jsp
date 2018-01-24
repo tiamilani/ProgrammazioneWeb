@@ -74,7 +74,7 @@
                 <c:otherwise>
                 </c:otherwise>
             </c:choose>
-            <%@include file="../Components/Carosello/slideShow.jsp" %>
+            <%@include file="../DescrizioneOggetto/oggettiCorrelati.jsp" %>
 
             <div class="row rowListaOggetto">
                 <h2>Oggetti che potrebbero piacerti</h2>

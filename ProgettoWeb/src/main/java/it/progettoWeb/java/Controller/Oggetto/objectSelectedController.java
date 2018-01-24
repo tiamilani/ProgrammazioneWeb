@@ -160,7 +160,7 @@ public class objectSelectedController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String forward = "/ProgettoWeb/OrdineController?action=listOrders";
+        String forward = "/ProgettoWeb/objectSelectedController?idOggetto=";
         
         try
         {
@@ -181,6 +181,8 @@ public class objectSelectedController extends HttpServlet {
                 double prezzo = Double.parseDouble(jsonObject.get("prezzo").toString());
                 int negozio = Integer.parseInt(jsonObject.get("negozio").toString());
                 String oggetto = (String) jsonObject.get("oggetto");
+                
+                forward += oggetto;
                 
                 boolean alreadyInCart = false;
                 for(ModelloOrdine ordine : carrello.getList())
