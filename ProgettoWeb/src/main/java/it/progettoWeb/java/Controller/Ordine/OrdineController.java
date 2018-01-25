@@ -47,6 +47,12 @@ public class OrdineController extends HttpServlet {
     private static String PAYMENT_METHOD = "/jspFile/Finale/Ordine/paymentMethod.jsp";
     private static String ORDER_COMPLETED = "/jspFile/Finale/Ordine/orderCompleted.jsp";
     private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
+    
+    private static String CONTROLLER_LIST_ORDERS = "OrdineController?action=listOrders";
+    private static String CONTROLLER_DELIVERY_METHOD = "OrdineController?action=delivery";
+    private static String CONTROLLER_PAYMENT_METHOD = "OrdineController?action=payment";
+    private static String CONTROLLER_ORDER_COMPLETED = "OrdineController?action=finish";
+    
     private DaoOrdine daoOrdine;
     private DaoOggetto daoOggetto;
     private DaoImmagineOggetto daoImmagineOggetto;
@@ -54,6 +60,8 @@ public class OrdineController extends HttpServlet {
     private DaoTipoSpedizione daoTipoSpedizione;
     private DaoIndirizzo daoIndirizzo;
     private DaoOrdiniRicevuti daoOrdiniRicevuti;
+    
+    private boolean showError;
     
     
     /**
@@ -69,6 +77,8 @@ public class OrdineController extends HttpServlet {
         daoTipoSpedizione = new DaoTipoSpedizione();
         daoIndirizzo = new DaoIndirizzo();
         daoOrdiniRicevuti = new DaoOrdiniRicevuti();
+        
+        showError = false;
     }
 
     /**
@@ -177,7 +187,7 @@ public class OrdineController extends HttpServlet {
                             prezzoTot += (order.getPrezzoDiAcquisto() * order.getQuantita());
                             if(order.getIdS() != 0)
                             {
-                                ModelloTipoSpedizione ts = daoTipoSpedizione.selectDeliveryTypesByIdS(order.getIdS()).get(0);
+                                ModelloTipoSpedizione ts = (daoTipoSpedizione.selectDeliveryTypesByIdS(order.getIdS())).get(0);
                                 prezzoTot += Math.ceil((double)order.getQuantita() / (double)ts.getNumeroMassimo()) * ts.getPrezzo();
                             }
 
@@ -197,8 +207,14 @@ public class OrdineController extends HttpServlet {
             if(action.equalsIgnoreCase("listOrders"))
             {
                 forward = LIST_ORDERS;
+                
+                if(showError)
+                {
+                    request.setAttribute("erroreQuantita", "Alcuni oggetti nel carrello superano la quantita' massima disponibile.");
+                    showError = false;
+                }
             }
-        } catch (Exception e) { System.out.println("error message = " + e.toString()); forward = ERROR_PAGE; request.setAttribute("errore", "404 Pagina non trovata"); }
+        } catch (Exception e) { System.out.println(getServletName() + " error message = " + e.toString()); forward = ERROR_PAGE; request.setAttribute("errore", "404 Pagina non trovata"); }
         
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
@@ -224,6 +240,9 @@ public class OrdineController extends HttpServlet {
             String action = request.getParameter("action");
             String save = request.getParameter("save");
             
+            //Ricavo il carrello
+            ModelloListeOrdine carrelloSessione = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
+            
             if(save.equalsIgnoreCase("1"))
             {
                 /*--- QUI SI SALVANO LE MODIFICHE FATTE AL CARRELLO (QUANTITA' E RIMOZIONE OGGETTO) ---*/
@@ -231,23 +250,17 @@ public class OrdineController extends HttpServlet {
                 int idUtente = utenteSessione.getId();
                 String identificatore;
 
-                //Ricavo il numero di ordini presenti nel carrello
-                ModelloListeOrdine carrelloSessione = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
-
                 for(int i = 0; i < carrelloSessione.getList().size(); i++)
                 {
                     //Ricavo idOrdine, idOggetto, nuovaQuantita
                     identificatore = "idOrdine" + Integer.toString(i);
                     int idOrdine = Integer.parseInt(request.getParameter(identificatore));
-                    System.out.println(idOrdine);
 
                     identificatore = "idOggetto" + Integer.toString(i);
                     String idOggetto = request.getParameter(identificatore);
-                    System.out.println(idOggetto);
                     
                     identificatore = "quantita" + Integer.toString(i);
                     int newQuantita = Integer.parseInt(request.getParameter(identificatore));
-                    System.out.println(newQuantita);
                     
                     if(newQuantita == 0)
                     {
@@ -275,81 +288,96 @@ public class OrdineController extends HttpServlet {
                         }
                     }
                 }
+                
+                if(overQuantity(carrelloSessione))
+                {
+                    action = "listOrders";
+                    showError = true;
+                }
             }
             else if(save.equalsIgnoreCase("2"))
             {
-                /*--- QUI SALVO L'INDIRIZZO DI SPEDIZIONE E IL METODO DI SPEDIZIONE ---*/
-                int nOrders = ((ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione")).getSize();
-                String identificatore;
-                
-                int idI = Integer.parseInt(request.getParameter("idI"));
-                
-                for(int i = 0; i < nOrders; i++)
+                //Controllo che le quantità richieste per singolo oggetto siano presenti
+                if(!overQuantity(carrelloSessione))
                 {
-                    identificatore = "idS" + Integer.toString(i);
-                    int idS = Integer.parseInt(request.getParameter(identificatore));
-                    
-                    identificatore = "idOrdine" + Integer.toString(i);
-                    int idO = Integer.parseInt(request.getParameter(identificatore));
-                    
-                    daoOrdine.updateOrderIdI(idO, idI);
-                    
-                    if(idS == -1)
-                        daoOrdine.updateOrderIdS(idO, -1);
-                    else
-                        daoOrdine.updateOrderIdS(idO, idS);
+                    /*--- QUI SALVO L'INDIRIZZO DI SPEDIZIONE E IL METODO DI SPEDIZIONE ---*/
+                    String identificatore;
+
+                    int idI = Integer.parseInt(request.getParameter("idI"));
+
+                    for(int i = 0; i < carrelloSessione.getSize(); i++)
+                    {
+                        identificatore = "idS" + Integer.toString(i);
+                        int idS = Integer.parseInt(request.getParameter(identificatore));
+
+                        identificatore = "idOrdine" + Integer.toString(i);
+                        int idO = Integer.parseInt(request.getParameter(identificatore));
+
+                        daoOrdine.updateOrderIdI(idO, idI);
+                        daoOrdine.updateOrderIdS(idO, idS); //idS==0 -> ritiro in negozio
+                    }
+                }
+                else
+                {
+                    action = "listOrders";
+                    showError = true;
                 }
             }
             else if(save.equalsIgnoreCase("3"))
             {
-                //Ricavo il numero di ordini presenti nel carrello
-                ModelloListeOrdine carrelloSessione = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
-                
-                /*--- QUI CAMBIO LO STATO DEGLI ORDINI NEL CARRELLO IN "PAGATI" E INVIO LA MAIL DI CONFERMA DELL'ORDINE---*/
-                for(ModelloOrdine ordine : carrelloSessione.getList()){
-                    daoOrdine.changeOrderStatus(ordine, 0, 1);
-                }
-                SendEmail.orderCompleted(
-                        ((ModelloUtente)request.getSession().getAttribute("utenteSessione")).getMail(),                         
-                        (carrelloSessione.get(0)).getIdOrdine());                
-                
-                Set<Integer> idVenditori = new LinkedHashSet<>();
-                
-                //Diminuisco la disponibilità di ciascun prodotto
-                //nel mentre salvo la lista dei venditori ai quali ho comprato uno o più oggetti
-                for(ModelloOrdine order : carrelloSessione.getList())
+                //Controllo che le quantità richieste per singolo oggetto siano presenti
+                if(!overQuantity(carrelloSessione))
                 {
-                    idVenditori.add(daoNegozio.getStoreById(order.getIdNegozio()).getIdVenditore());
-                    
-                    daoOggetto.updateObjectQuantity(order.getIdOggetto(), ((daoOggetto.getObjectById(order.getIdOggetto())).getDisponibilita() - order.getQuantita()));
+                    Set<Integer> idVenditori = new LinkedHashSet<>();
+
+                    /*--- QUI CAMBIO LO STATO DEGLI ORDINI NEL CARRELLO IN "PAGATI" E INVIO LA MAIL DI CONFERMA DELL'ORDINE---*/
+                    //Diminuisco la disponibilità di ciascun prodotto
+                    //nel mentre salvo la lista dei venditori ai quali ho comprato uno o più oggetti
+                    for(ModelloOrdine order : carrelloSessione.getList())
+                    {
+                        daoOrdine.changeOrderStatus(order, 0, 1);
+
+                        idVenditori.add(daoNegozio.getStoreById(order.getIdNegozio()).getIdVenditore());
+
+                        daoOggetto.updateObjectQuantity(order.getIdOggetto(), ((daoOggetto.getObjectById(order.getIdOggetto())).getDisponibilita() - order.getQuantita()));
+                    }
+
+                    //Aggiungo righe alla tabella ordiniRicevuti
+                    for(int idV : idVenditori)
+                        daoOrdiniRicevuti.addOrdineRicevuto(carrelloSessione.get(0).getIdOrdine(), idV);
+
+                    SendEmail.orderCompleted(
+                            ((ModelloUtente)request.getSession().getAttribute("utenteSessione")).getMail(),                         
+                            (carrelloSessione.get(0)).getIdOrdine());
                 }
-                
-                //Aggiungo righe alla tabella ordiniRicevuti
-                for(int idV : idVenditori)
-                    daoOrdiniRicevuti.addOrdineRicevuto(carrelloSessione.get(0).getIdOrdine(), idV);
+                else
+                {
+                    action = "listOrders";
+                    showError = true;
+                }
             }
             
             if(action.equalsIgnoreCase("listOrders"))
             {
-                forward = "OrdineController?action=listOrders";
+                forward = CONTROLLER_LIST_ORDERS;
             }
             else if (action.equalsIgnoreCase("delivery")) /*--- REINDIRIZZA A deliveryMethod.jsp ---*/
             {
-                forward = "OrdineController?action=delivery";
+                forward = CONTROLLER_DELIVERY_METHOD;
             }
             else if (action.equalsIgnoreCase("payment")) /*--- REINDIRIZZA A paymentMethod.jsp ---*/
             {   
-                forward = "OrdineController?action=payment";
+                forward = CONTROLLER_PAYMENT_METHOD;
             }
             else if (action.equalsIgnoreCase("finish")) /*--- REINDIRIZZA A orderCompleted.jsp ---*/
             {
-                forward = "OrdineController?action=finish";                
+                forward = CONTROLLER_ORDER_COMPLETED;
             }
         } catch (NullPointerException e) { System.out.println(e.toString()); forward = ERROR_PAGE; request.setAttribute("errore", "Si è verificato un problema interno al sistema."); }
         
         response.sendRedirect(forward);
     }
-
+    
     /**
      * Returns a short description of the servlet.
      *
@@ -359,5 +387,16 @@ public class OrdineController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    
+    
+    private boolean overQuantity(ModelloListeOrdine carrelloSessione)
+    {
+        for(ModelloOrdine ordine : carrelloSessione.getList())
+            if(ordine.getQuantita() > (daoOggetto.getObjectById(ordine.getIdOggetto())).getDisponibilita())
+                return true;
+            
+        return false;
+    }
 
 }

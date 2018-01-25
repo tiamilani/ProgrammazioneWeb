@@ -427,7 +427,7 @@ public class UserController extends HttpServlet {
                     request.getSession().removeAttribute("carrelloSessione");
                     request.getSession().setAttribute("carrelloSessione", carrelloInSessione);
                 }
-                catch (Exception e) { System.out.println("error message = " + e.toString()); forward = ERROR_PAGE; request.setAttribute("errore", "404 Pagina non trovata"); }
+                catch (Exception e) { System.out.println(getServletName() + " error message = " + e.toString()); forward = ERROR_PAGE; request.setAttribute("errore", "404 Pagina non trovata"); }
             }
             else {
                 request.setAttribute("utenteLoginError", 1);
