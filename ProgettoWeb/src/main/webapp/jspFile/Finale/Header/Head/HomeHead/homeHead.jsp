@@ -24,6 +24,7 @@
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/cr-1.4.1/r-2.2.1/rg-1.0.2/datatables.min.css"/>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/cr-1.4.1/r-2.2.1/rg-1.0.2/datatables.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/btnColor.css" >
 <script>
     $(document).ready(function(){
       $('#registerModal input').focus(function(){
