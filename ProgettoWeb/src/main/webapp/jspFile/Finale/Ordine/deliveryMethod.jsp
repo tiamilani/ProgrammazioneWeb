@@ -109,7 +109,7 @@
                                 <div class="row">
                                     <!-- Immagine prodotto -->
                                     <div class="col-2">
-                                        <img src="<c:out value="${object.getR().getSrc()}"/>" alt="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png">
+                                        <img style="width: 100px; height: 100px; object-fit: cover;" src="<c:out value="${object.getR().getSrc()}"/>" alt="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png">
                                     </div>
                                     
                                     <div class="col-4">
@@ -119,7 +119,7 @@
                                         </div>
                                         <!-- Prezzo del prodotto -->
                                         <div class="row">
-                                            <span>EUR <fmt:formatNumber type = "number"  minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzoScontato}" /></span>
+                                            <span>&euro; <fmt:formatNumber type = "number"  minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzoScontato}" /></span>
                                         </div>
                                         <!-- Quantita' prodotto nel carrello -->
                                         <div class="row">
@@ -141,7 +141,7 @@
                                                 <c:set var="iterator2" value="${iterator2 + 1}"/>
                                             </c:forEach>
                                             <c:if test="${object.getL().getRitiroInNegozio() == 1}">
-                                                <option id="option${iterator}${iterator2}" value="${iterator2}" data-idS="-1" data-nome="RitiroInNegozio" data-prezzoOgg="${prezzoScontato}" data-quantitaOgg="${quantita}">
+                                                <option id="option${iterator}${iterator2}" value="${iterator2}" data-idS="0" data-nome="RitiroInNegozio" data-prezzoOgg="${prezzoScontato}" data-quantitaOgg="${quantita}">
                                                     Ritiro in negozio
                                                 </option>
                                             </c:if>

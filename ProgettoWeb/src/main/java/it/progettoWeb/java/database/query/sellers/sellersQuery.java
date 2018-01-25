@@ -739,10 +739,7 @@ public class sellersQuery {
      */
     public static String updateOrderIdS(int idOrdine, int idS)
     {
-        if(idS == -1) //Ritiro in negozio
-            return "UPDATE Ordine SET idS = NULL WHERE idOrdine = " + idOrdine + ";";
-        else
-            return "UPDATE Ordine SET idS = " + idS + " WHERE idOrdine = " + idOrdine + ";";
+        return "UPDATE Ordine SET idS = " + idS + " WHERE idOrdine = " + idOrdine + ";";
     }
 
 

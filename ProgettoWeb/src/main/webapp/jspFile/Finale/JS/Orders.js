@@ -63,8 +63,8 @@ function changeQuantity(elem)
     var oldQuantita = parseInt(elem.getAttribute("data-oldvalueQuantita"));
     var newQuantita = parseInt(elem.value);
     var prezzoOggetto = 0;
-    var oldPrezzoTotale = (parseFloat(document.getElementById("lblResultCart").getAttribute("data-oldvaluePrezzo"))).toFixed(2);
-    var oldNumeroArticoli = parseFloat(document.getElementById("lblResultCart").getAttribute("data-oldvalueOggetti"));
+    var oldPrezzoTotale = (parseDouble(document.getElementById("lblResultCart").getAttribute("data-oldvaluePrezzo"))).toFixed(2);
+    var oldNumeroArticoli = parseDouble(document.getElementById("lblResultCart").getAttribute("data-oldvalueOggetti"));
     var newPrezzoTotale = 0;
     var newNumeroArticoli = 0;
     var disponibilitaProdotto = parseInt(document.getElementById("lblDisponibilita"+elem.id).getAttribute("data-disponibilita"));
@@ -78,20 +78,20 @@ function changeQuantity(elem)
 
     //Ottengo il prezzo dell'oggetto
     if(document.getElementById("lblPrezzo"+elem.id) == null)
-        prezzoOggetto = (parseFloat(document.getElementById("lblPrezzoScontato"+elem.id).innerHTML.replace(',', '.'))).toFixed(2);
+        prezzoOggetto = (parseDouble(document.getElementById("lblPrezzoScontato"+elem.id).innerHTML.replace(',', '.'))).toFixed(2);
     else
-        prezzoOggetto = (parseFloat(document.getElementById("lblPrezzo"+elem.id).innerHTML.replace(',', '.'))).toFixed(2);
+        prezzoOggetto = (parseDouble(document.getElementById("lblPrezzo"+elem.id).innerHTML.replace(',', '.'))).toFixed(2);
 
    //Ottengo il prezzo dell'oggetto e il vecchio prezzo totale
-   prezzoOggetto = parseFloat(prezzoOggetto);
-   oldPrezzoTotale = parseFloat(oldPrezzoTotale);
+   prezzoOggetto = parseDouble(prezzoOggetto);
+   oldPrezzoTotale = parseDouble(oldPrezzoTotale);
 
    //Calcolo il nuovo prezzo totale e il nuovo numero di articoli
    newPrezzoTotale = (oldPrezzoTotale + prezzoOggetto * (newQuantita - oldQuantita));
    newNumeroArticoli = oldNumeroArticoli + (newQuantita - oldQuantita);
 
    //Stampo il nuovo numero di articoli e il nuovo prezzo totale
-   var newText = "<b>Prezzo provvisorio (" + newNumeroArticoli + " articoli): EUR " + newPrezzoTotale.toFixed(2);
+   var newText = "<b>Prezzo provvisorio (" + newNumeroArticoli + " articoli): &euro; " + newPrezzoTotale.toFixed(2);
    document.getElementById("lblResultCart").innerHTML = newText;
 
    //Setto i vari attriuti (dei vari elementi utilizzati nel processo) con i nuovi valori
@@ -113,8 +113,8 @@ function changeDescription(id)
     var nome = document.getElementById(index).getAttribute("data-nome");
     var newSubTot;
     var newTot;
-    var oldSubTot = parseFloat(document.getElementById("pSubTot"+firstIndex).getAttribute("data-oldSubTot"));
-    var oldTot = parseFloat(document.getElementById("pTot").getAttribute("data-oldTot"));
+    var oldSubTot = parseDouble(document.getElementById("pSubTot"+firstIndex).getAttribute("data-oldSubTot"));
+    var oldTot = parseDouble(document.getElementById("pTot").getAttribute("data-oldTot"));
     
     if(nome === "RitiroInNegozio")
     {
@@ -136,7 +136,7 @@ function changeDescription(id)
 
         document.getElementById("DCP"+firstIndex).innerHTML = "Data consegna prevista " + addDays(parseInt(tempo));
 
-        document.getElementById("pDesc"+firstIndex).innerHTML = nome + "<br>Prezzo: EUR " + prezzo+
+        document.getElementById("pDesc"+firstIndex).innerHTML = nome + "<br>Prezzo: &euro; " + prezzo+
                 "<br>Corriere: " + corriere + "<br>Tempo stimato di consegna: " + tempo + " giorni";
 
         newSubTot = (prezzoOgg * quantitaOgg + (Math.ceil(quantitaOgg / nMax) * prezzo));
@@ -144,10 +144,10 @@ function changeDescription(id)
     
     newTot = (oldTot - oldSubTot + newSubTot);
     
-    document.getElementById("pSubTot"+firstIndex).innerHTML = "Subtotale: EUR " + (newSubTot.toFixed(2));
+    document.getElementById("pSubTot"+firstIndex).innerHTML = "Subtotale: &euro; " + (newSubTot.toFixed(2));
     document.getElementById("pSubTot"+firstIndex).setAttribute("data-oldSubTot", newSubTot.toFixed(2));
     
-    document.getElementById("pTot").innerHTML = "<b>Totale: EUR " + newTot.toFixed(2) + "</b>";
+    document.getElementById("pTot").innerHTML = "<b>Totale: &euro; " + newTot.toFixed(2) + "</b>";
     document.getElementById("pTot").setAttribute("data-oldTot", newTot.toFixed(2));
     
     

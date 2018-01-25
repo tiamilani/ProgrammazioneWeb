@@ -194,7 +194,7 @@ public class AssistenzaController extends HttpServlet
         }
         catch (Exception e) 
         {
-            System.out.println("error message = " + e.toString());
+            System.out.println(getServletName() + " error message = " + e.toString());
             forward = ERROR_PAGE;
             request.setAttribute("ECCEZIONE", e.toString());
         }
@@ -272,7 +272,7 @@ public class AssistenzaController extends HttpServlet
         }
         catch (Exception e) 
         {
-            System.out.println("error message = " + e.toString());
+            System.out.println(getServletName() + " error message = " + e.toString());
             forward = ERROR_PAGE;
             request.setAttribute("ECCEZIONE", e.toString());
         }
