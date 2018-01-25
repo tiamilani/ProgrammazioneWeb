@@ -1,4 +1,0 @@
-INSERT INTO negozio (`id`, `idVenditore`, `nomeNegozio`, `valutazione`, `attivo`, `idI`, `dataApertura`, `linkSito`, `orarioNegozio`) VALUES
-(1, 2, 'Mediaworld', NULL, 1, 6, '2017-06-25 13:30:15', NULL, "Lunedi: 8:00 - 19:00, Martedi: 8:00 - 19:00, Mercoledi: 8:00 - 19:00, Giovedi: 8:00 - 19:00, Venerdi: 8:00 - 19:00, Sabato: 8:00 - 19:00, Domenica: Chiuso"), --
-(2, 2, 'Unieuro', NULL, 1, 8, '2016-01-01 07:00:00', NULL, "Lunedi: 8:00 - 22:00, Martedi: 8:00 - 22:00, Mercoledi: 8:00 - 22:00, Giovedi: 8:00 - 22:00, Venerdi: 8:00 - 22:00, Sabato: 9:00 - 22:00, Domenica: 10:00 - 20:00"), --
-(3, 1, 'Ikea', 8, 0, 7, '2017-07-20 14:02:41', NULL, 'Lunedi: 8:00 - 19:00, Martedi: 8:00 - 19:00, Mercoledi: 8:00 - 19:00, Giovedi: 8:00 - 19:00, Venerdi: 8:00 - 19:00, Sabato: 8:00 - 19:00, Domenica: Chiuso'); --
