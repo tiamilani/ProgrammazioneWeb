@@ -122,11 +122,11 @@
                 
                 <div class="row">
                     <div class="col-3">
-                        <span>Testo della soluzione</span>
+                        <span>Testo della soluzione (max 2500 caratteri)</span>
                     </div>
                     <div class="col-9">
                         <c:if test="${assistenza.getStato() == 0}">
-                            <textarea cols="100" rows="5" name="solution" form="formSaveChanges"><c:out value="${assistenza.getSoluzione()}"/></textarea>
+                            <textarea cols="100" rows="5" maxlength="2500" name="solution" form="formSaveChanges"><c:out value="${assistenza.getSoluzione()}"/></textarea>
                         </c:if>
                         <c:if test="${assistenza.getStato() == 1}">
                             <textarea cols="100" rows="5" disabled><c:out value="${assistenza.getSoluzione()}"/></textarea>
