@@ -92,7 +92,7 @@ function myFunction() {
 
 <nav class="navbar fixed-top navbar-default bg-light navbar-expand-lg row no-gutters" role="navigation" style="padding: 0 .5rem 0 .5rem;">
     <a class="navbar-brand" href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Index/index.jsp">
-        <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/shopero_small.jpg" height=40px class="d-inline-block align-top" alt="IMG">
+        <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/shopero_small.png" height=40px class="d-inline-block align-top" alt="IMG">
     </a>
     <button class="navbar-toggler navbar-toggler-right" id="visible" type="button" data-toggle="collapse" data-target="#collapse-menu" aria-controls="collapse-menu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="Small material-icons">dehaze</span>
@@ -158,7 +158,7 @@ function myFunction() {
         <div class="user d-flex justify-content-between row no-gutters col-xl-3 col-lg-3">
             <c:choose>
                 <c:when test="${utenteSessione.getId() != -1}">
-                    <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/jspFile/Finale/Utente/utente.jsp'">
+                    <button type="button" class="btn nav-button col-xl-8 col-lg-9 col-md-12 col-sm-12" onclick="location.href='${pageContext.request.contextPath}/jspFile/Finale/Utente/utente.jsp'">
                         ${utenteSessione.getNome()} ${utenteSessione.getCognome()}
                     </button>
                 </c:when>

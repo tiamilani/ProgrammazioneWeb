@@ -142,7 +142,7 @@ public class UserController extends HttpServlet {
 
             try {
                 ModelloUtente utenteSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
-                
+
                 if(utenteSessione.getId() != -1)
                 {
                     if(daoRecensioneV.buyOrNotFromSeller(idUtente, utenteSessione.getId()) > 0)
@@ -151,7 +151,7 @@ public class UserController extends HttpServlet {
                         request.setAttribute("canReviewsN", false);
                 }
             } catch (NullPointerException e) {}
-            
+
             request.setAttribute("canUploadImages", false);
             request.setAttribute("venditore", venditore);
             request.setAttribute("recensioni", recensioni);
@@ -204,7 +204,7 @@ public class UserController extends HttpServlet {
 
             try {
                 ModelloUtente utenteSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
-                
+
                 if(utenteSessione.getId() != -1)
                 {
                     if(daoRecensioneN.buyOrNotFromStore(idNegozio, utenteSessione.getId()) > 0)
@@ -213,7 +213,7 @@ public class UserController extends HttpServlet {
                         request.setAttribute("canReviewsS", false);
                 }
             } catch (NullPointerException e) {}
-            
+
             request.setAttribute("canUploadImages", false);
             request.setAttribute("negozio", negozio);
             request.setAttribute("immagine", immagine);
@@ -230,7 +230,7 @@ public class UserController extends HttpServlet {
 
             if(order.equalsIgnoreCase("data")){
                 listaordini = new ModelloListeOrdine(daoOrdine.selectOrders(utente.getId()));
-                
+
                 for(int i=0; i<listaordini.getSize(); i++){
                     if(listaordini.get(i).getStato() == 0){
                         listaordini.getList().remove(i);
@@ -329,8 +329,8 @@ public class UserController extends HttpServlet {
 
             }
             if(!orderStore.equalsIgnoreCase("prodottivendutiup") && !orderStore.equalsIgnoreCase("prodottivendutidown"))
-            for(int i = 0; i<listanegozi.getList().size(); i++){
-                numeroOrdiniNegozi.add(daoOrdiniRicevuti.selectNumberOfOrderForStore(utente.getId(), listanegozi.get(i).getId()));
+                for(int i = 0; i<listanegozi.getList().size(); i++){
+                    numeroOrdiniNegozi.add(daoOrdiniRicevuti.selectNumberOfOrderForStore(utente.getId(), listanegozi.get(i).getId()));
             }
 
             request.setAttribute("order", order);
@@ -351,7 +351,7 @@ public class UserController extends HttpServlet {
                     }
                 }
             }
-            
+
             //Cookie ck=new Cookie("user","");//creating cookie object
             //ck.setValue("-1");
             //ck.setMaxAge(0);
@@ -384,6 +384,7 @@ public class UserController extends HttpServlet {
 
 
         String forward = HOME_PAGE;
+        boolean redirect = false;
         String action = request.getParameter("action");
 
         if (action.equalsIgnoreCase("selectUser")){
@@ -399,7 +400,21 @@ public class UserController extends HttpServlet {
                 Cookie ck=new Cookie("user",String.valueOf(utente.getId()));//creating cookie object
                 ck.setMaxAge(-1);
                 response.addCookie(ck);//adding cookie in the response
-                
+
+                forward = request.getHeader("referer");
+                log("forward: " + forward);
+                if(forward.equals("http://localhost:8080/ProgettoWeb/UserController?action=addUser") || forward.equals("http://localhost:8080/ProgettoWeb/UserController?action=logout"))
+                {
+                    redirect = false;
+                    forward = HOME_PAGE;
+                    log("Il forword è a home page: " + forward);
+                }
+                else
+                {
+                    redirect = true;
+                }
+                log("forward: " + forward);
+
                 try
                 {
                     ModelloListeOrdine carrelloInSessione = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
@@ -411,11 +426,11 @@ public class UserController extends HttpServlet {
                             if(ordineInCIS.getIdOggetto().equalsIgnoreCase(ordineInCU.getIdOggetto()))
                             {
                                 daoOrdine.changeOrderQuantity(
-                                        ordineInCU.getIdOrdine(), 
-                                        ordineInCU.getIdOggetto(), 
-                                        ordineInCU.getIdUtente(), 
+                                        ordineInCU.getIdOrdine(),
+                                        ordineInCU.getIdOggetto(),
+                                        ordineInCU.getIdUtente(),
                                         (ordineInCU.getQuantita() + ordineInCIS.getQuantita()));
-                                
+
                                 iterator.remove();
                             }
                         }
@@ -427,7 +442,12 @@ public class UserController extends HttpServlet {
                     request.getSession().removeAttribute("carrelloSessione");
                     request.getSession().setAttribute("carrelloSessione", carrelloInSessione);
                 }
-                catch (Exception e) { System.out.println(getServletName() + " error message = " + e.toString()); forward = ERROR_PAGE; request.setAttribute("errore", "404 Pagina non trovata"); }
+                catch (Exception e) {
+                    System.out.println("error message = " + e.toString());
+                    forward = ERROR_PAGE;
+                    redirect = false;
+                    request.setAttribute("errore", "404 Pagina non trovata");
+                }
             }
             else {
                 request.setAttribute("utenteLoginError", 1);
@@ -494,11 +514,11 @@ public class UserController extends HttpServlet {
                     SendEmail.updatePassword(utente.getMail());
 
                     forward = GESTIONEUTENTE;
-                    
+
                     request.setAttribute("resetPassword", 0);
                 }
             }
-            
+
             ModelloListeIndirizzo listaIndirizzi = new ModelloListeIndirizzo(daoIndirizzo.selectAddressByUserID(utente.getId()));
 
             request.setAttribute("listaIndirizzi", listaIndirizzi);
@@ -508,14 +528,18 @@ public class UserController extends HttpServlet {
             ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
             utente.setUtenteType(1);
             daoUtente.updateUser(utente);
-            
+
             SendEmail.becomeSeller(utente.getMail());
 
             forward = USERPAGE;
         }
 
-        RequestDispatcher view = request.getRequestDispatcher(forward);
-        view.forward(request, response);
+        if(!redirect){
+            RequestDispatcher view = request.getRequestDispatcher(forward);
+            view.forward(request, response);
+        }
+        else
+            response.sendRedirect(forward);
     }
 
     /**

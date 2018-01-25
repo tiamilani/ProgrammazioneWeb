@@ -85,17 +85,17 @@
                     </c:if>
                     <p class="lead"/>
                     <div class="row">
-                        <span class="col-4 item-left">Quantità:</span>
+                        <span class="col-4 item-left">Quantità: (Max ${oggetto.getDisponibilita()})</span>
                         <c:choose>
-                            <c:when test="${oggetto.getDisponibilita() > 0}">
+                            <c:when test="${(oggetto.getDisponibilita() > 0) and (negozio.getAttivo() == 1)}">
                                 <input type="number" id="numNow" name="numNow" class="item-right col-6 form-control" min="1" max="${oggetto.getDisponibilita()}" value="1"/>
                             </c:when>
                             <c:otherwise>
-                                <span class="col-8 item-right text-danger" id="numNow" name="numNow">ESAURITO</span>
+                                <span class="col-8 item-right text-danger" id="numNow" name="numNow">ESAURITO<br/>NON DISPONIBILE</span>
                             </c:otherwise>
                         </c:choose>
                     </div>
-                    <c:if test="${oggetto.getDisponibilita() > 0}">
+                    <c:if test="${(oggetto.getDisponibilita() > 0) and (negozio.getAttivo() == 1)}">
                         <div class="row" style="display: none;">
                             <input type="hidden" id="shipType" name="shipType" value='{"prezzo":"${oggetto.getPrezzo()}","negozio":"${oggetto.getIdNegozio()}","oggetto":"${oggetto.getId()}"}'/>
                         </div>
@@ -110,7 +110,12 @@
                 
                 <script>                    
                     $('#addToCart').click(function() {
-                        $('#addCartForm').submit();
+                        if(parseInt($('#numNow').val()) <= ${oggetto.getDisponibilita()}) {
+                            alert("Articolo inserito nel carrello!");
+                            $('#addCartForm').submit();
+                        }
+                        else
+                            alert("Non puoi acquistarne più di " + ${oggetto.getDisponibilita()} + "!");
                     });
                     
                     $('#numNow').change(function() {
