@@ -5,6 +5,7 @@ from geopy.geocoders import Nominatim
 from random import *
 import pymysql
 import time
+import datetime
 
 def generateUtenti(rit):
     MAXU = int(input('Quanti Utenti? '))
@@ -699,6 +700,156 @@ def generaAssociazioniImmagini2():
     return queryS
 
 
+def checkObjects():
+    fileO = input('Nome del file Oggetti: ')
+
+    with open(fileO) as f:
+        content = f.readlines()
+
+    content = [ x.strip() for x in content ]
+    D = {}
+
+    for x in content:
+        array = x.split(',')
+        idOggetto = array[0]
+        idOggetto = idOggetto[1:].strip()
+        nomeOggetto = array[3].strip().replace('\'','')
+
+        if isinstance(D.get(nomeOggetto), list):
+            D[nomeOggetto].append(idOggetto)
+        else:
+            D[nomeOggetto] = [ idOggetto ]
+
+    return D
+
+
+def generaROggetti(dbO):
+    dbR = {}
+    #for x in associat:
+    #    print(str(x) + "\t->\t" + str(associat.get(x)))
+
+    fileO = input('Nome del file RecensioniOggetto: ')
+
+    queryO = "INSERT INTO RecensioneOggetto (id, idOggetto, idUtente, testo, valutazione, data, utilita) VALUES\n"
+
+    with open(fileO) as f:
+        content = f.readlines()
+
+    content = [ x.strip() for x in content ]
+
+    for x in content:
+        #time.sleep( 10 )
+        array = x.split('§')
+        print(array)
+
+        nomeOggetto = array[0].strip().lower()
+        url = array[1].strip()
+
+        session = requests.Session()
+        response = session.get(url)
+        soup = BeautifulSoup(response.content, "html.parser")
+        soup = soup.find("div", class_="review-views")
+
+        time.sleep( 2 )
+        #print(soup)
+
+        for i in soup.find_all("div", class_="review"):
+            w=0
+
+            for j in i.div.find_all("div", class_="a-row"):
+                if w <= 4:
+                    if w is 0:
+                        stelle = j.a.i.span.next_element
+                        stelle = stelle.replace('.0',',0')
+
+                        stelle = stelle.split(',')
+                        stelle = int(stelle[0].strip())
+
+                    if w is 3:
+                        testo = j.span.get_text().strip().replace('\'',' ')
+
+                    w+=1
+                else:
+                    break
+
+            if isinstance(dbR.get(stelle), list):
+                dbR[stelle].append(testo)
+            else:
+                dbR[stelle] = [ testo ]
+
+        #for x in dbO:
+        #    print(str(x) + "\t->\t" + str(dbO.get(x)))
+
+        iCasuale = []
+        for x in dbR:
+            iCasuale.append(x)
+
+        indice=1
+        for w in dbO:
+            if w == nomeOggetto:
+                if len(dbO.get(w)) < 4:
+                    for t in range(int(len(dbO.get(w)))):
+                        iCasualeS = randint(0, len(iCasuale)-1)
+                        now = datetime.datetime.now()
+                        queryO += "(" + str(indice) + "," + dbO.get(w)[randint(0, len(dbO.get(w))-1)] + "," + str(randint(21, 220)) + ",'" + dbR.get(iCasuale[iCasualeS])[randint(0, len(dbR.get(iCasuale[iCasualeS]))-1)] + "'," + str(iCasuale[iCasualeS]) + ",'" + str(now.strftime("%Y-%m-%d")) + "'," + str(iCasuale[iCasualeS]) + "),\n"
+                        indice+=1
+                else:
+                    for t in range(int(len(dbO.get(w))/4)):
+                        iCasualeS = randint(0, len(iCasuale)-1)
+                        now = datetime.datetime.now()
+                        queryO += "(" + str(indice) + "," + dbO.get(w)[randint(0, len(dbO.get(w))-1)] + "," + str(randint(21, 220)) + ",'" + dbR.get(iCasuale[iCasualeS])[randint(0, len(dbR.get(iCasuale[iCasualeS]))-1)] + "'," + str(iCasuale[iCasualeS]) + ",'" + str(now.strftime("%Y-%m-%d")) + "'," + str(iCasuale[iCasualeS]) + "),\n"
+                        indice+=1
+
+    queryO = queryO[:-2]
+    queryO += ';'
+
+    return queryO
+
+
+def generaRVenditori():
+    dbV = {}
+    fileV = 'listReviewV' #input('Nome del file RecensioniOggetto: ')
+
+    queryV = "INSERT INTO RecensioneVenditore (id, idVenditore, idUtente, testo, valutazione, data, utilita) VALUES\n"
+
+    with open(fileV) as f:
+        content = f.readlines()
+
+    content = [ x.strip() for x in content ]
+    reviews = []
+
+    numIndice=1
+    for x in content:
+        print(x)
+        session = requests.Session()
+        response = session.get(x)
+        soup = BeautifulSoup(response.content, "html.parser")
+        soup = soup.find("table", class_="FbOuterYukon")
+
+        time.sleep( 2 )
+        #print(soup)
+
+        #soup = soup.tbody
+
+        lineNum=0
+        for i in soup.find_all("tr"):
+            if lineNum%2 != 0:
+                reviews.append(i.td.next_element.next_element.string.strip().replace('\'',' '))
+            lineNum+=1
+
+    for v in range(1, 1000):
+        valut = randint(0, 5)
+        now = datetime.datetime.now()
+        queryV += "(" + str(numIndice) + "," + str(randint(21, 220)) + "," + str(randint(1, 20)) + ",'" + reviews[randint(0, len(reviews)-1)] + "'," + str(valut) + ",'" + str(now.strftime("%Y-%m-%d")) + "'," + str(valut) + "),\n"
+        numIndice+=1
+
+    queryV = queryV[:-2]
+    queryV += ';'
+
+    return queryV
+
+
+
 menuT = {
     0   :   'Creazione utenti',
     1   :   'Creazione utenti e inserimento db',
@@ -707,7 +858,9 @@ menuT = {
     4   :   'Crea associazioni',
     5   :   'Associa Immagine-Negozio',
     6   :   'Crea oggetti',
-    7   :   'Associa Immagine-Oggetto'
+    7   :   'Associa Immagine-Oggetto',
+    8   :   'Crea recensioni Oggetto',
+    9   :   'Crea recensioni Venditore'
 }
 
 for i in menuT:
@@ -731,3 +884,7 @@ elif menuC is 6:
     print(generaTupleOggetti(checkStore()))
 elif menuC is 7:
     print(generaAssociazioniImmagini2())
+elif menuC is 8:
+    print(generaROggetti(checkObjects()))
+elif menuC is 9:
+    print(generaRVenditori())
