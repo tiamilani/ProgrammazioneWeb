@@ -388,7 +388,7 @@ public class UserController extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action.equalsIgnoreCase("selectUser")){
-
+            log("SELECT USER");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             ModelloUtente utente = daoUtente.selectUserByEmailAndPassword(email, password);
@@ -450,6 +450,7 @@ public class UserController extends HttpServlet {
                 }
             }
             else {
+                log("Utente non trovato");
                 request.setAttribute("utenteLoginError", 1);
             }
         }
