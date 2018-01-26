@@ -71,6 +71,24 @@
                     </c:choose>
                 </div>
                 <div class="col-12">
+                    <c:choose>
+                        <c:when test="${aggiungiSepdizione == 0}">
+                            <div class="alert alert-success alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Successo!</strong> Operazione di modifca della spedizione portata a termine con successo
+                            </div>
+                        </c:when>
+                        <c:when test="${aggiungiSepdizione == 1}">
+                            <div class="alert alert-warning alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Attenzione!</strong> Devi scrivere il nome della spedizione che vuoi eliminare nella textbox specifica
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+                <div class="col-12">
                     <h1>Aggiungi un negozio</h1>
                     <p>Aggiungendo un negozio migliori le tue possbilità di vendita, ma attento, i tuoi utenti e noi di shopero ci aspettiamo che tu sia sempre leale corretto e sincero</p>
                     <p>Una volta aggiunto il tuo negozio potrai gestirlo ed aggiungervi gli oggetti che sono in vendita dalla pagina "Gestisci negozi" presente nel tuo account</p> 
@@ -231,6 +249,35 @@
                         <div class="col-3">
                             <input type="checkbox" class="form-check-input" id="chiusoDomenica" name="chiusoDomenica">
                             Chiuso
+                        </div>
+                    </div>
+                    
+                    <div class="col-12">
+                        <h2>Metodo di spedizione</h2>
+                        <p>Devi obbligatoriamente inserire un metodo di spedizione adesso, altrimenti gli utenti non sapranno come farsi mandare i tuoi oggetti</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <p>Nome della spedizione</p>
+                            <input type="text" class="form-control" id="nomeSpedizione" name="nomeSpedizione" maxlength="50" placeholder="Spedizione standard" required>
+                        </div>
+                        <div class="col-4">
+                            <p>Prezzo della spedizione</p>
+                            <input type="text" class="form-control" id="prezzoSpedizione" name="prezzoSpedizione" placeholder="10.0" required>
+                        </div>
+                        <div class="col-4">
+                            <p>Corriere che effettuer&aacute; la consegna</p>
+                            <input type="text" class="form-control" id="corriereSpedizione" name="corriereSpedizione" maxlength="50" placeholder="Corriere" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <p>Giorni lavorativi per la consegna</p>
+                            <input class="form-control" type="number" id="giorniConsegna" name="giorniConsegna" value="5" required>
+                        </div>
+                        <div class="col-8">
+                            <p>Numero massimo di oggetti presenti per singola spedizione, oltre questa soglia verranno applicate nuovamente le spese di spedizione all'ordine</p>
+                            <input class="form-control" type="number" id="numeroMassimo" name="numeroMassimo" value="5" required>
                         </div>
                     </div>
                     

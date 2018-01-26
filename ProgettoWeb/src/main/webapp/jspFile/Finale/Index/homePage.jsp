@@ -42,7 +42,7 @@
         <div class="container-fluid">
             <%@include file="../label/labelUserLogin.jsp" %>
             <%@include file="../label/labelUserRegistration.jsp" %>
-            <%@include file="../Components/Carosello/slideShow.jsp" %>
+            <%@include file="../DescrizioneOggetto/oggettiCorrelati.jsp" %>
 
             <div class="row rowListaOggetto">
                 <h2>Oggetti che potrebbero piacerti</h2>

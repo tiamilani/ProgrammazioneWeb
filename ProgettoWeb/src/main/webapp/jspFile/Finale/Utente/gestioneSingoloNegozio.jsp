@@ -95,6 +95,12 @@
                         <strong>Attenzione!</strong> Impossibile modificare la spedizione a causa di un errore
                     </div>
                 </c:when>
+                <c:when test="${spedizioneModificata == 5}">
+                    <div class="alert alert-warning alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Attenzione!</strong> Impossibile eliminare il metodo di spedizione, devi sempre avere almeno 1 metodo di spedizione
+                    </div>
+                </c:when>
                 <c:when test="${aggiungiSepdizione == 0}">
                     <div class="alert alert-success alert-dismissable">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -227,7 +233,7 @@
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                   </div>
                                                     <div class="row">
-                                                        <div class="col-2"></div>
+                                                        <div class="col-1"></div>
                                                         <div class="col-8">
                                                             <p>Per eliminare l'oggetto inserisci il nome dell'oggetto che vuoi eliminare per confermare la tua volontà di eliminarlo</p>
                                                         </div>
@@ -239,8 +245,7 @@
                                                         <input type="hidden" name="modifyObject" value="<c:out value="${oggetto.getId()}" />">
                                                         <div class="modal-body">
                                                             <div>
-                                                                <input class="col-10 modal-input" type="text" id="modifyDelete" name="modifyDelete" required>
-                                                                <label for="modifyDelete">Nome oggetto da eliminare</label>
+                                                                <input class="col-10 modal-input" type="text" id="modifyDelete" name="modifyDelete" placeholder="Nome oggetto da eliminare" required>
                                                             </div>
 
                                                         </div>
@@ -401,11 +406,10 @@
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                   </div>
                                                     <div class="row">
-                                                        <div class="col-2"></div>
+                                                        <div class="col-1"></div>
                                                         <div class="col-8">
                                                             <p>Per eliminare questa spedizione inserisci il suo nome come conferma della tua volontà, se vi sono ancora ordini in corso che richiedono questo metodo di spedizione esso non verrà eliminato</p>
                                                         </div>
-                                                        <div class="col-2"></div>
                                                     </div>
                                                     <form action="${pageContext.request.contextPath}/NegozioController" method="GET">
                                                         <input type="hidden" name="action" value="deleteSpedizione">
@@ -413,8 +417,7 @@
                                                         <input type="hidden" name="modifySpedizione" value="<c:out value="${spedizione.getIdS()}" />">
                                                         <div class="modal-body">
                                                             <div>
-                                                                <input class="col-10 modal-input" type="text" id="modifyDelete" name="modifyDelete" required>
-                                                                <label for="modifyDelete">Nome spedizione da eliminare</label>
+                                                                <input class="col-10 modal-input" type="text" id="modifyDelete" name="modifyDelete" placeholder="Nome spedizione da eliminare" required>
                                                             </div>
 
                                                         </div>
