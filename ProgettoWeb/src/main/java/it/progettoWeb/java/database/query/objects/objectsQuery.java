@@ -23,7 +23,7 @@ public class objectsQuery {
      */
     public static String selectObjectById(String id)
     {
-        return "SELECT * FROM Oggetto WHERE id = '" + id + "';";
+        return "SELECT * FROM oggetto WHERE id = '" + id + "';";
     }
     
     /**

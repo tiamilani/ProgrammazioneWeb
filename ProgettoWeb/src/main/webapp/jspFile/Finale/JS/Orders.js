@@ -63,8 +63,8 @@ function changeQuantity(elem)
     var oldQuantita = parseInt(elem.getAttribute("data-oldvalueQuantita"));
     var newQuantita = parseInt(elem.value);
     var prezzoOggetto = 0;
-    var oldPrezzoTotale = (parseDouble(document.getElementById("lblResultCart").getAttribute("data-oldvaluePrezzo"))).toFixed(2);
-    var oldNumeroArticoli = parseDouble(document.getElementById("lblResultCart").getAttribute("data-oldvalueOggetti"));
+    var oldPrezzoTotale = (parseFloat(document.getElementById("lblResultCart").getAttribute("data-oldvaluePrezzo"))).toFixed(2);
+    var oldNumeroArticoli = parseFloat(document.getElementById("lblResultCart").getAttribute("data-oldvalueOggetti"));
     var newPrezzoTotale = 0;
     var newNumeroArticoli = 0;
     var disponibilitaProdotto = parseInt(document.getElementById("lblDisponibilita"+elem.id).getAttribute("data-disponibilita"));
@@ -78,13 +78,13 @@ function changeQuantity(elem)
 
     //Ottengo il prezzo dell'oggetto
     if(document.getElementById("lblPrezzo"+elem.id) == null)
-        prezzoOggetto = (parseDouble(document.getElementById("lblPrezzoScontato"+elem.id).innerHTML.replace(',', '.'))).toFixed(2);
+        prezzoOggetto = (parseFloat(document.getElementById("lblPrezzoScontato"+elem.id).innerHTML.replace(',', '.'))).toFixed(2);
     else
-        prezzoOggetto = (parseDouble(document.getElementById("lblPrezzo"+elem.id).innerHTML.replace(',', '.'))).toFixed(2);
+        prezzoOggetto = (parseFloat(document.getElementById("lblPrezzo"+elem.id).innerHTML.replace(',', '.'))).toFixed(2);
 
    //Ottengo il prezzo dell'oggetto e il vecchio prezzo totale
-   prezzoOggetto = parseDouble(prezzoOggetto);
-   oldPrezzoTotale = parseDouble(oldPrezzoTotale);
+   prezzoOggetto = parseFloat(prezzoOggetto);
+   oldPrezzoTotale = parseFloat(oldPrezzoTotale);
 
    //Calcolo il nuovo prezzo totale e il nuovo numero di articoli
    newPrezzoTotale = (oldPrezzoTotale + prezzoOggetto * (newQuantita - oldQuantita));
@@ -113,8 +113,8 @@ function changeDescription(id)
     var nome = document.getElementById(index).getAttribute("data-nome");
     var newSubTot;
     var newTot;
-    var oldSubTot = parseDouble(document.getElementById("pSubTot"+firstIndex).getAttribute("data-oldSubTot"));
-    var oldTot = parseDouble(document.getElementById("pTot").getAttribute("data-oldTot"));
+    var oldSubTot = parseFloat(document.getElementById("pSubTot"+firstIndex).getAttribute("data-oldSubTot"));
+    var oldTot = parseFloat(document.getElementById("pTot").getAttribute("data-oldTot"));
     
     if(nome === "RitiroInNegozio")
     {

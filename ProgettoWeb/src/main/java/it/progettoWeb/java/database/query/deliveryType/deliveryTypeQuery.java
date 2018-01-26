@@ -58,8 +58,8 @@ public class deliveryTypeQuery
      */
     public static String selectDeliveryTypeByIdO(String idO)
     {
-        return "SELECT tipoSpedizione.* FROM tipoSpedizione INNER JOIN spedizioneoggetto ON "
-                + "(spedizioneoggetto.idO = '" +idO+ "' AND tipoSpedizione.idS = spedizioneoggetto.idS)";
+        return "SELECT tipospedizione.* FROM tipospedizione INNER JOIN spedizioneoggetto ON "
+                + "(spedizioneoggetto.idO = '" +idO+ "' AND tipospedizione.idS = spedizioneoggetto.idS)";
     }
 
     public static String updateSpedizione(ModelloTipoSpedizione spedizione) {

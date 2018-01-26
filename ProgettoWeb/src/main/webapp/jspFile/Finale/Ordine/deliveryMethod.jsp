@@ -10,6 +10,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
@@ -109,7 +110,7 @@
                                 <div class="row">
                                     <!-- Immagine prodotto -->
                                     <div class="col-2">
-                                        <img style="width: 100px; height: 100px; object-fit: cover;" src="<c:out value="${object.getR().getSrc()}"/>" alt="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png">
+                                        <img style="width: 100px; height: 100px; object-fit: cover;" src="<c:out value="${object.getR().getSrc()}"/>" alt="img">
                                     </div>
                                     
                                     <div class="col-4">

@@ -141,7 +141,7 @@ public class genericsQuery {
      */
     public static String selectStoreById(int idStore)
     {
-        return "SELECT * FROM Negozio WHERE id = " + idStore + ";";
+        return "SELECT * FROM negozio WHERE id = " + idStore + ";";
     }
 
     /**

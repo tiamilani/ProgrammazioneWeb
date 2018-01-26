@@ -10,6 +10,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
@@ -68,7 +69,7 @@
                                     <hr size="3" width="100%" align="left"/>
                                     <!-- Immagine prodotto -->
                                     <div class="col-2">
-                                        <img style="width: 100px; height: 100px; object-fit: cover;" src="<c:out value="${object.getR().getSrc()}"/>" alt="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/square.png">
+                                        <img style="width: 100px; height: 100px; object-fit: cover;" src="<c:out value="${object.getR().getSrc()}"/>" alt="img">
                                     </div>
 
                                     <!-- Descrizione prodotto -->
@@ -112,7 +113,7 @@
                                     <div class="col-2">
                                         <div class="row">
                                             <p style="text-align: left">Quantita': 
-                                                <input id="${iterator}" type="number" min="1" max="${disp}" style="width: 3em; text-align: right" data-oldvalueQuantita="${quantita}"  value="${quantita}" onkeypress='checkInputText(event, this)' onchange="changeQuantity(this)" />
+                                                <input id="${iterator}" type="number" min="1" max="${disp}" style="width: 3em; text-align: right" data-oldvalueQuantita="${quantita}"  value="${quantita}" onkeypress="checkInputText(event, this)" onchange="changeQuantity(this)" />
                                             </p>
                                         </div>
                                         <div class="row" style="margin: 0 auto;">

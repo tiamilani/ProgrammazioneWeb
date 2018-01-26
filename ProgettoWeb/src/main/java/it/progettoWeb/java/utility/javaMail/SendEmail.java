@@ -125,10 +125,8 @@ public class SendEmail
                 message.setText(
                         "Salve " + user.getNome() + ",\n"
                         + "Grazie per la tua registrazione su ShopEro.\n"
-                        + "Il tuo account è stato creato deve essere attivato prima dell'utilizzo.\n"
-                        + "Per attivatlo clicca sul seguente link:\n"
-                        + "(LINK)" + "\n\n"
-                        + "Dopo averlo attivato, potrai accedere utilizzando le tue credenziali.\n\n"
+                        + "Il tuo account è stato creato ed e' gia' stato attivato.\n"
+                        + "Potrai accedere utilizzando le tue credenziali.\n\n"
                         + "BUONO SHOPPING!");
 
                 sendEmail(userEmail, message);
@@ -161,8 +159,7 @@ public class SendEmail
                         + "La modifica del tuo indirizzo email per ShopEro è andata a buon fine.\n"
                         + "La tua VECCHIA email era " + oldEmail + ", la tua NUOVA email è " + newEmail + "\n\n"
                         + "Se non sei stato tu a modificare la tua email, "
-                        + "ti suggeriamo di contattare il servizio clienti (LINK) "
-                        + "o di reimpostare la password (LINK)\n\n"
+                        + "ti suggeriamo di contattare gli sviluppatori http://localhost:8080/ProgettoWeb/jspFile/Finale/Footer/sviluppatori.jsp#findUs \n\n"
                         + "Buona giornata!");
 
                 sendEmail(newEmail, message);
@@ -178,8 +175,7 @@ public class SendEmail
                         + "La modifica del tuo indirizzo email per ShopEro è andata a buon fine.\n"
                         + "La tua VECCHIA email era " + oldEmail + ", la tua NUOVA email è " + newEmail + "\n\n"
                         + "Se non sei stato tu a modificare la tua email, "
-                        + "ti suggeriamo di contattare il servizio clienti (LINK) "
-                        + "o di reimpostare la password (LINK)\n\n"
+                        + "ti suggeriamo di contattare gli sviluppatori http://localhost:8080/ProgettoWeb/jspFile/Finale/Footer/sviluppatori.jsp#findUs \n\n"
                         + "Buona giornata!");
 
                 sendEmail(oldEmail, message);
@@ -215,7 +211,8 @@ public class SendEmail
                         + "Sarà valido solo per 2 ore.\n"
                         + link + "\n\n"
                         + "Se non desideri reimpostare la password o se non hai richiesto tale modifica, puoi ignorare questa email. "
-                        + "Nessun altro utente può modificare la tua password.");
+                        + "Nessun altro utente può modificare la tua password."
+                        + "Buona giornata!");
 
                 sendEmail(userEmail, message);
             }else{
@@ -248,8 +245,8 @@ public class SendEmail
                         "Salve " + user.getNome() + ",\n"
                         + "La tua password per ShopEro è stata appena modificata.\n"
                         + "Se non sei stato tu a modificare la tua password, "
-                        + "ti suggeriamo di contattare il servizio clienti (LINK) "
-                        + "o di reimpostare la password (LINK)");
+                        + "ti suggeriamo di contattare gli sviluppatori http://localhost:8080/ProgettoWeb/jspFile/Finale/Footer/sviluppatori.jsp#findUs \n\n"
+                        + "Buona giornata!");
 
                 sendEmail(userEmail, message);
             }

@@ -70,12 +70,12 @@ public class usersQuery {
     }
 
     public static String updateUtente(int id,String nome,String cognome,String mail,String password,String avatar,double valutazione,int UtenteType,boolean emailConfermata){
-        return "update Utente set "+
+        return "update utente set "+
                 "nome='"+nome+"',"+
                 "cognome='"+cognome+"',"+
                 "mail='"+mail+"',"+
                 "password='"+password+"',"+
-                "avatar="+avatar+","+
+                "avatar='"+avatar+"',"+
                 "valutazione="+valutazione+","+
                 "UtenteType="+UtenteType+","+
                 "emailConfermata="+emailConfermata+""
@@ -101,7 +101,7 @@ public class usersQuery {
      * @return String: lista di ordini
      */
     public static String selectOrdersComplete(int idU, int orderStatus){
-        return "SELECT * FROM Ordine WHERE Ordine.idUtente = "+idU+" AND Ordine.stato = "+orderStatus+" ORDER BY Ordine.dataOrdine DESC;";
+        return "SELECT * FROM ordine WHERE ordine.idUtente = "+idU+" AND ordine.stato = "+orderStatus+" ORDER BY ordine.dataOrdine DESC;";
     }
 
     /**

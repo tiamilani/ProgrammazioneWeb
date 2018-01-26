@@ -115,6 +115,7 @@ public class DaoUtente {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
+            System.out.println(e.toString());
         }
     }
 
