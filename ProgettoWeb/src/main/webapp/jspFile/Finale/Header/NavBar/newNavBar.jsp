@@ -43,7 +43,27 @@ function myFunction() {
     form1.action = "${pageContext.request.contextPath}/searchObjectController";
     form1.submit();
 }
-
+    
+    function login() {
+        var password = document.loginForm.password.value;
+        
+        document.loginForm.password.value = md5(password);
+        
+        loginForm.action = "${pageContext.request.contextPath}/UserController?action=selectUser";
+        loginForm.submit();
+    }
+    
+    function registration() {
+        var password = document.registrationForm.password.value;
+        var confirmPassword = document.registrationForm.confirmPassword.value;
+        
+        document.registrationForm.password.value = md5(password);
+        document.registrationForm.confirmPassword.value = md5(confirmPassword);
+        
+        registrationForm.action = "${pageContext.request.contextPath}/UserController?action=addUser";
+        registrationForm.submit();
+    }
+    
     function calcStar(){
         if(document.getElementById('star-5').checked){
             return "5";
@@ -189,7 +209,7 @@ function myFunction() {
             <h4 class="modal-title col-11">Creare un account</h4>
             <button type="button" class="close col-1" data-dismiss="modal">&times;</button>
           </div>
-          <form id="registrationForm" action="${pageContext.request.contextPath}/UserController?action=addUser" method="POST">
+            <form id="registrationForm" name="registrationForm" <%--action="${pageContext.request.contextPath}/UserController?action=addUser"--%> method="POST">
             <div class="modal-body">
                 <div>
                     <i class="large material-icons">person_outline</i>
@@ -221,7 +241,7 @@ function myFunction() {
 
             </div>
             <div class="modal-footer">
-              <button type="submit" class="col-12 paddingNav btn btn-outline-primary">Crea il tuo account</button>
+                <button type="submit" class="col-12 paddingNav btn btn-outline-primary" onclick="registration()">Crea il tuo account</button>
             </div>
           </form>
         </div>
@@ -238,7 +258,7 @@ function myFunction() {
             <h4 class="modal-title col-11">Login</h4>
             <button type="button" class="close col-1" data-dismiss="modal">&times;</button>
           </div>
-            <form action="${pageContext.request.contextPath}/UserController?action=selectUser" method="POST">
+            <form id="loginForm" name="loginForm" <%--action="${pageContext.request.contextPath}/UserController?action=selectUser"--%> method="POST">
                 <div style="display: none">
                     <input type="text" id="fromPage" name="fromPage" value="${pageContext.request.requestURI}"/>
                 </div>
@@ -259,7 +279,7 @@ function myFunction() {
 
             </div>
             <div class="modal-footer">
-              <button type="submit" class="col-12 paddingNav btn btn-outline-primary my-2 my-sm-0">Login</button>
+              <button type="submit" class="col-12 paddingNav btn btn-outline-primary my-2 my-sm-0" onclick="login()">Login</button>
             </div>
           </form>
         </div>

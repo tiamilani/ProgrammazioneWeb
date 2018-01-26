@@ -82,25 +82,55 @@
                 <div class="col-4">
                     <p>
                         Modalit&aacute; di spedizione:<br>
-                        <c:out value="${tipoSpedizione.getNome()}" />, Corriere <c:out value="${tipoSpedizione.getCorriere()}" />
+                        <c:choose>
+                            <c:when test="${ordine.getIdS() == 0}">
+                                Ritiro in negozio
+                            </c:when>
+                            <c:otherwise>
+                                <c:out value="${tipoSpedizione.getNome()}" />, Corriere <c:out value="${tipoSpedizione.getCorriere()}" />
+                            </c:otherwise>
+                        </c:choose>
                     </p>
                 </div>
                 <div class="col-2">
                     <p>
                         Data di arrivo presunta<br>
-                        <c:out value="${ordine.getDataArrivoPresunta()}" />
+                        <c:choose>
+                            <c:when test="${ordine.getIdS() == 0}">
+                                Ritiro in negozio
+                            </c:when>
+                            <c:otherwise>
+                                <c:out value="${ordine.getDataArrivoPresunta()}" />
+                            </c:otherwise>
+                        </c:choose>
                     </p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
                     <p>
-                        Indirizzo di spedizione da utilizzare: <c:out value="${indirizzo.getVia()}" /> <c:out value="${indirizzo.getnCivico()}" />, <c:out value="${indirizzo.getCitta()}" />, <c:out value="${indirizzo.getProvincia()}" />, <c:out value="${indirizzo.getRegione()}" />, <c:out value="${indirizzo.getStato()}" />
+                        Indirizzo di spedizione da utilizzare: 
+                        <c:choose>
+                            <c:when test="${ordine.getIdS() == 0}">
+                                Attendi l'utente in negozio
+                            </c:when>
+                            <c:otherwise>
+                                <c:out value="${indirizzo.getVia()}" /> <c:out value="${indirizzo.getnCivico()}" />, <c:out value="${indirizzo.getCitta()}" />, <c:out value="${indirizzo.getProvincia()}" />, <c:out value="${indirizzo.getRegione()}" />, <c:out value="${indirizzo.getStato()}" />
+                            </c:otherwise>
+                        </c:choose>
                     </p>
                 </div>
             </div>
             <div class="row">
                 <c:choose>
+                    <c:when test="${ordine.getIdS() == 0}">
+                        <p>
+                            Quest'ordine non va spedito, dovrai aspettare che l'utente venga a ritirare il prodotto. <br>
+                        </p>
+                        <div class="col-3">
+                            <a href="${pageContext.request.contextPath}/NegozioController?action=articoloRitirato&idOrdine=<c:out value="${ordine.getIdOrdine()}" />&idOggetto=<c:out value="${ordine.getIdOggetto()}" />" method="GET" class="btn btn-outline-primary buttonSpace btn-block">Ordine ritirato dall'utente</a>
+                        </div>
+                    </c:when>
                     <c:when test="${ordine.getStato() == 0}">
                     </c:when>
                     <c:when test="${ordine.getStato() == 5}">

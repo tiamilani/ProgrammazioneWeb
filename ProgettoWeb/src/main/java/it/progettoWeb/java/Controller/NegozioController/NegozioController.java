@@ -202,14 +202,46 @@ public class NegozioController extends HttpServlet {
             String idOggetto = request.getParameter("idOggetto");
             ModelloOrdine ordine = daoOrdine.selectOrdersByIdOrderIdOggetto(idOrdine,idOggetto);
             ModelloOggetto oggetto = daoOggetto.getObjectById(idOggetto);
-            ModelloTipoSpedizione tipoSpedizione = daoTipoSpedizione.selectDeliveryTypesByIdS(ordine.getIdS()).get(0);
-            ModelloIndirizzo indirizzo = daoIndirizzo.selectAddressByIdAddress(ordine.getIdI());
-            
-            request.setAttribute("ordine", ordine);
-            request.setAttribute("oggetto", oggetto);
-            request.setAttribute("tipoSpedizione", tipoSpedizione);
-            request.setAttribute("indirizzo", indirizzo);
+            if(ordine.getIdS() > 0){
+                ModelloTipoSpedizione tipoSpedizione = daoTipoSpedizione.selectDeliveryTypesByIdS(ordine.getIdS()).get(0);
+                ModelloIndirizzo indirizzo = daoIndirizzo.selectAddressByIdAddress(ordine.getIdI());
+                request.setAttribute("ordine", ordine);
+                request.setAttribute("oggetto", oggetto);
+                request.setAttribute("tipoSpedizione", tipoSpedizione);
+                request.setAttribute("indirizzo", indirizzo);
+            } else {
+                request.setAttribute("ordine", ordine);
+                request.setAttribute("oggetto", oggetto);
+            }
             forward=MODIFICAORDINE;
+        }
+        else if(action.equalsIgnoreCase("articoloRitirato")){
+            String idOrdine = request.getParameter("idOrdine");
+            String idOggetto = request.getParameter("idOggetto");
+            ModelloOrdine ordine = daoOrdine.selectOrdersByIdOrderIdOggetto(idOrdine,idOggetto);
+            ModelloOggetto oggetto = daoOggetto.getObjectById(idOggetto);
+            ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+
+            //daoOrdine.updateOrderDataArrivoPresunta(ordine,dt);
+            daoOrdine.changeOrderStatus(ordine, ordine.getStato(), 4);
+            
+            int idNegozio = ((ModelloNegozio)request.getSession().getAttribute("negozio")).getId();
+            
+            tris<ModelloNegozio, ModelloIndirizzo, ModelloImmagineNegozio> trisNegozioIndirizzoImmagine = daoNegozio.selectStoreAddressImageByStoreID(idNegozio);
+            ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCategoria.selectAllCategory());
+            ModelloListeOggetto listaOggetti = new ModelloListeOggetto(daoOggetto.selectObjectByShop(trisNegozioIndirizzoImmagine.getL().getId()));
+            ModelloListeOrdine listaOrdini = new ModelloListeOrdine(daoOrdine.selectOrderRecivedBySellerIdShopIDNewstToOldes(utente.getId(),idNegozio));
+            ModelloListeTipoSpedizione listaTipiSpedizione = new ModelloListeTipoSpedizione(daoTipoSpedizione.selectDeliveryTypesByIdN(idNegozio));
+            
+            request.setAttribute("negozio", trisNegozioIndirizzoImmagine.getL());
+            request.setAttribute("indirizzo", trisNegozioIndirizzoImmagine.getC());
+            request.setAttribute("immagine", trisNegozioIndirizzoImmagine.getR());
+            request.setAttribute("categorie", listaCategorie);
+            request.setAttribute("listaOggeti", listaOggetti);
+            request.setAttribute("ordineModificato", 0);
+            request.setAttribute("listaOrdini", listaOrdini);
+            request.setAttribute("listaTipiSpedizione", listaTipiSpedizione);
+            forward = SHOPPAGE;
         }
         else if(action.equalsIgnoreCase("portaOrdineInLavorazione")){
             String idOrdine = request.getParameter("idOrdine");

@@ -40,8 +40,8 @@
         </c:choose>
 
         <div class="container-fluid">
-            <%@include file="../label/labelUserLogin.jsp" %>
-            <%@include file="../label/labelUserRegistration.jsp" %>
+            <%@include file="../alert/alertUserLogin.jsp" %>
+            <%@include file="../alert/alertUserRegistration.jsp" %>
             <%@include file="../DescrizioneOggetto/oggettiCorrelati.jsp" %>
 
             <div class="row rowListaOggetto">
