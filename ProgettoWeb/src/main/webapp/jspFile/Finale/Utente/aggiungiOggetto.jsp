@@ -113,6 +113,18 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
+                            <h2>Metodi di spedizione</h2>
+                            <p>Seleziona almeno un metodo di spedizione per questo oggetto</p>
+                        </div>
+                        <c:forEach items="${listaSpedizioni.getList()}" var="spedizione" >
+                            <div class="col-3">
+                                <input type="checkbox" class="form-check-input" id="checkbox-${spedizione.getIdS()}" name="checkbox-${spedizione.getIdS()}">
+                                ${spedizione.getNome()}
+                            </div>
+                        </c:forEach>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
                             <button action="submit" type="submit" class="btn btn-outline-primary btn-block" id="btn">Aggiungi oggetto</button>
                         </div>
                     </div>
