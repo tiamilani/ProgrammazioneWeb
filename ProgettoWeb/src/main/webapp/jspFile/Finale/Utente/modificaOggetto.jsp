@@ -172,6 +172,25 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
+                            <h2>Metodi di spedizione</h2>
+                            <p>Questi sono i metodi di spedizione Scelti per questo oggetto, ricordati di lasciarne almeno uno attivo, nel caso in cui tu li disattivassi tutti verrà attivato il primo</p>
+                        </div>
+                        <c:forEach items="${listaSpedizioni.getList()}" var="spedizione" >
+                            <div class="col-3">
+                                <c:choose>
+                                    <c:when test="${listaSpedizioniOggetto.present(spedizione.getIdS())}">
+                                        <input type="checkbox" class="form-check-input" id="checkbox-${spedizione.getIdS()}" name="checkbox-${spedizione.getIdS()}" checked>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input type="checkbox" class="form-check-input" id="checkbox-${spedizione.getIdS()}" name="checkbox-${spedizione.getIdS()}">
+                                    </c:otherwise>
+                                </c:choose>
+                                ${spedizione.getNome()}
+                            </div>
+                        </c:forEach>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
                             <button action="submit" type="submit" class="btn btn-outline-primary btn-block" id="btnModify">Modifica oggetto</button>
                         </div>
                     </div>

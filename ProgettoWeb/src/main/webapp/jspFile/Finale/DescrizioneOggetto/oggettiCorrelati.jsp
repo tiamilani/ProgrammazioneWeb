@@ -15,8 +15,7 @@
 <div class="carouselSpacing">
     <div id="oggettiCorrelati" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators" style="top: 105%">
-            <c:set var="i" scope="page" value="${0}"/>
-            <c:forEach items="${listaOggetti.getList()}" var="img">
+            <c:forEach var="i" begin="${0}" end="${listaOggetti.getList().size() -1}" step="2">
                 <c:choose>
                     <c:when test="${i == 0}">
                         <li data-target="#fotoOggetto" data-slide-to="${i}" class="active"></li>
@@ -25,7 +24,6 @@
                         <li data-target="#fotoOggetto" data-slide-to="${i}"></li>
                     </c:otherwise>
                 </c:choose>
-                <c:set var="i" value="${i+1}"/>
             </c:forEach>
         </ol>
         <div class="carousel-inner">

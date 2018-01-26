@@ -58,119 +58,14 @@
                 </div>
             </div>
             <hr>
-            <c:choose>
-                <c:when test="${ordineModificato == 0}">
-                    <div class="alert alert-success alert-dismissable">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>Successo!</strong> Operazione di modifca dell'ordine portata a termine con successo
-                    </div>
-                </c:when>
-                <c:when test="${spedizioneModificata == 0}">
-                    <div class="alert alert-success alert-dismissable">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>Successo!</strong> Operazione di modifca della spedizione portata a termine con successo
-                    </div>
-                </c:when>
-                <c:when test="${spedizioneModificata == 1}">
-                    <div class="alert alert-warning alert-dismissable">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>Attenzione!</strong> Devi scrivere il nome della spedizione che vuoi eliminare nella textbox specifica
-                    </div>
-                </c:when>
-                <c:when test="${spedizioneModificata == 2}">
-                    <div class="alert alert-danger alert-dismissable">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>Errore!</strong> Il nome da te inserito non corrisponde a quello della spedizione
-                    </div>
-                </c:when>
-                <c:when test="${spedizioneModificata == 3}">
-                    <div class="alert alert-success alert-dismissable">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>Successo!</strong> Operazione di eliminazione portata a termine con successo
-                    </div>
-                </c:when>
-                <c:when test="${spedizioneModificata == 4}">
-                    <div class="alert alert-warning alert-dismissable">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>Attenzione!</strong> Impossibile modificare la spedizione a causa di un errore
-                    </div>
-                </c:when>
-                <c:when test="${aggiungiSepdizione == 0}">
-                    <div class="alert alert-success alert-dismissable">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>Successo!</strong> Operazione di modifca della spedizione portata a termine con successo
-                    </div>
-                </c:when>
-                <c:when test="${aggiungiSepdizione == 1}">
-                    <div class="alert alert-warning alert-dismissable">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>Attenzione!</strong> Devi scrivere il nome della spedizione che vuoi eliminare nella textbox specifica
-                    </div>
-                </c:when>
-                <c:otherwise>
-                </c:otherwise>
-            </c:choose>
+            <%@include file="../alert/alertOrdineModificato.jsp" %>
+            <%@include file="../alert/alertSpedizioneModificata.jsp" %>
+            <%@include file="../alert/alertSpedizioneAggiunta.jsp" %>
             <div class="row">
                 <div class="col-12">
                     <h2>Lista degli oggetti attualmente nel catalogo</h2>
-                    <c:choose>
-                        <c:when test="${oggettoInserito == 0}">
-                            <div class="alert alert-success alert-dismissable">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <strong>Successo!</strong> oggetto inserito con successo.
-                            </div>
-                        </c:when>
-                        <c:when test="${oggettoInserito == 1}">
-                            <div class="alert alert-danger alert-dismissable">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <strong>Attenzione!</strong> oggetto non inserito.
-                            </div>
-                        </c:when>
-                        <c:when test="${oggettoModificato == 0}">
-                            <div class="alert alert-success alert-dismissable">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <strong>Successo!</strong> modifica del catalogo terminata con successo.
-                            </div>
-                        </c:when>
-                        <c:when test="${oggettoModificato == 1}">
-                            <div class="alert alert-danger alert-dismissable">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <strong>Attenzione!</strong> modifica al catalogo non apportata a causa di un errore.
-                            </div>
-                        </c:when>
-                        <c:when test="${oggettoModificato == 2}">
-                            <div class="alert alert-warning alert-dismissable">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <strong>Attenzione!</strong> Devi prima selezionare un oggetto da modificare tra quelli disponibili.
-                            </div>
-                        </c:when>
-                        <c:when test="${oggettoModificato == 3}">
-                            <div class="alert alert-warning alert-dismissable">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <strong>Attenzione!</strong> Devi scrivere il nome dell'oggetto he vuoi eliminare nella textbox specifica
-                            </div>
-                        </c:when>
-                        <c:when test="${oggettoModificato == 4}">
-                            <div class="alert alert-danger alert-dismissable">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <strong>Errore!</strong> Il nome da te inserito non corrisponde a quello dell'oggetto
-                            </div>
-                        </c:when>
-                        <c:when test="${oggettoModificato == 6}">
-                            <div class="alert alert-danger alert-dismissable">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <strong>Errore!</strong> Impossibile eliminare l'oggetto
-                            </div>
-                        </c:when>
-                        <c:when test="${oggettoModificato == 5}">
-                            <div class="alert alert-success alert-dismissable">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <strong>Successo!</strong> Operazione di eliminazione portata a termine con successo
-                            </div>
-                        </c:when>
-                        <c:otherwise>
-                        </c:otherwise>
-                    </c:choose>
+                    <%@include file="../alert/alertOggettoInserito.jsp" %>
+                    <%@include file="../alert/alertOggettoModificato.jsp" %>
                 </div>
                 <hr>
                 <div class="col-12">
@@ -227,7 +122,7 @@
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                   </div>
                                                     <div class="row">
-                                                        <div class="col-2"></div>
+                                                        <div class="col-1"></div>
                                                         <div class="col-8">
                                                             <p>Per eliminare l'oggetto inserisci il nome dell'oggetto che vuoi eliminare per confermare la tua volontà di eliminarlo</p>
                                                         </div>
@@ -239,8 +134,7 @@
                                                         <input type="hidden" name="modifyObject" value="<c:out value="${oggetto.getId()}" />">
                                                         <div class="modal-body">
                                                             <div>
-                                                                <input class="col-10 modal-input" type="text" id="modifyDelete" name="modifyDelete" required>
-                                                                <label for="modifyDelete">Nome oggetto da eliminare</label>
+                                                                <input class="col-10 modal-input" type="text" id="modifyDelete" name="modifyDelete" placeholder="Nome oggetto da eliminare" required>
                                                             </div>
 
                                                         </div>
@@ -401,11 +295,10 @@
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                   </div>
                                                     <div class="row">
-                                                        <div class="col-2"></div>
+                                                        <div class="col-1"></div>
                                                         <div class="col-8">
                                                             <p>Per eliminare questa spedizione inserisci il suo nome come conferma della tua volontà, se vi sono ancora ordini in corso che richiedono questo metodo di spedizione esso non verrà eliminato</p>
                                                         </div>
-                                                        <div class="col-2"></div>
                                                     </div>
                                                     <form action="${pageContext.request.contextPath}/NegozioController" method="GET">
                                                         <input type="hidden" name="action" value="deleteSpedizione">
@@ -413,8 +306,7 @@
                                                         <input type="hidden" name="modifySpedizione" value="<c:out value="${spedizione.getIdS()}" />">
                                                         <div class="modal-body">
                                                             <div>
-                                                                <input class="col-10 modal-input" type="text" id="modifyDelete" name="modifyDelete" required>
-                                                                <label for="modifyDelete">Nome spedizione da eliminare</label>
+                                                                <input class="col-10 modal-input" type="text" id="modifyDelete" name="modifyDelete" placeholder="Nome spedizione da eliminare" required>
                                                             </div>
 
                                                         </div>

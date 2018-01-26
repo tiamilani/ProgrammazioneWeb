@@ -75,4 +75,16 @@ public class deliveryTypeQuery
         return "INSERT INTO tipoSpedizione (idN,Nome,Prezzo,Corriere,tempoRichiesto,numeroMassimo) "
                 + "VALUES ("+spedizione.getIdN()+",'"+spedizione.getNome()+"',"+spedizione.getPrezzo()+",'"+spedizione.getCorriere()+"',"+spedizione.getTempoRichiesto()+","+spedizione.getNumeroMassimo()+");";
     }
+
+    public static String addSpedizioneOggetto(int idS, String id) {
+        return "insert into spedizioneOggetto values("+idS+",'"+id+"');";
+    }
+
+    public static String selectSpedizioneOggetto(String idOggetto) {
+        return "select * from spedizioneOggetto where idO='"+idOggetto+"';";
+    }
+
+    public static String deleteSpedizioneOggetto(int idS, String id) {
+        return "DELETE FROM spedizioneOggetto WHERE idS="+idS+" AND idO='"+id+"';";
+    }
 }
