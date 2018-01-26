@@ -117,6 +117,19 @@ public class DaoUtente {
         } catch (SQLException e) {
         }
     }
+    
+    public boolean updateUserStars(int idUtente, double value)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(usersQuery.updateUserStars(idUtente, value));
+        }
+        catch (SQLException e) {
+            return false;
+        }
+        return true;
+    }
 
     public List<ModelloUtente> getAllUsers() {
         List<ModelloUtente> users = new ArrayList<ModelloUtente>();

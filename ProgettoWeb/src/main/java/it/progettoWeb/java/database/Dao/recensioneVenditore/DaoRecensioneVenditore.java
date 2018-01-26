@@ -165,6 +165,21 @@ public class DaoRecensioneVenditore {
         return recensioni;
     }
     
+    public int howManyReviews(int idV) {
+        int numRecensioni = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(usersQuery.howManyReviewV(idV));
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                numRecensioni = rs.getInt("counter");
+            }
+        } catch (SQLException e) {
+        }
+
+        return numRecensioni;
+    }
+    
     /**
      * @author Mattia
      * Ottenere la lista delle proprie recensioni Venditore dalla più utile

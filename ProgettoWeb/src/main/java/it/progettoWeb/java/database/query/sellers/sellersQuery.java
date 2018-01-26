@@ -474,6 +474,11 @@ public class sellersQuery {
     {
         return "UPDATE Negozio SET attivo=" + attivo + " WHERE id=" + idNegozio + ";";
     }
+    
+    public static String updateShopStars(int idNegozio, double value)
+    {
+        return "UPDATE Negozio SET valutazione=" + value + " WHERE id=" + idNegozio + ";";
+    }
 
     /**
      * @author fbrug

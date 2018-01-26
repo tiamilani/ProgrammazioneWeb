@@ -226,6 +226,27 @@ public class DaoRecensioneNegozio {
     }
     
     /**
+     * @author Andrea
+     * Ottenere un intero indicante il numero di recensioni ottenuto
+     * @param idN Un intero che rappresenta l'identificativo del negozio preso in considerazione
+     * @return int indicante il numero di recensioni ottenuto
+     */
+    public int howManyReviews(int idN) {
+        int numRecensioni = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(usersQuery.howManyReviews(idN));
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                numRecensioni = rs.getInt("counter");
+            }
+        } catch (SQLException e) {
+        }
+
+        return numRecensioni;
+    }
+    
+    /**
      * @author andrea
      * Ottenere un boolean se si ha acquistato oppure no da un negozio (se il count è 1 vuol dire di si)
      * @param idN Un intero che rappresenta l'identificativo del negozio preso in considerazione

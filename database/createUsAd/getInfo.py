@@ -849,6 +849,38 @@ def generaRVenditori():
     return queryV
 
 
+def generaMSpedizini():
+    queryS = "INSERT INTO tipoSpedizione (idS,idN,Nome,Prezzo,Corriere,tempoRichiesto,numeroMassimo) VALUES\n"
+
+    descrizioneS = ['Spedizione Veloce','Spedizione su Appuntamento','Spedizione Standard','Spedizione Veloce','Spedizione Standard','Spedizione Veloce','Spedizione Express','Spedizione su Appuntamento','Spedizione standard,SPedizionasda','Spedizione poco sicura']
+    corrieriS =['GLS','DHL','SGA','DHL','Non specificato','SGA','Bartolini']
+
+    for i in range(1, 201):
+        queryS += "(" + str(i) + "," + str(i) + ",'" + descrizioneS[randint(0, len(descrizioneS)-1)] + "'," + str(randint(1, 50)) + ",'" + corrieriS[randint(0, len(corrieriS)-1)] + "'," + str(randint(1, 5)) + "," + str(randint(5, 10)) + "),\n"
+
+    queryS = queryS[:-2]
+    queryS += ';'
+
+    return queryS
+
+
+def generaOSpedizini(dbO):
+    idOggetti = []
+
+    for x in dbO:
+        for y in dbO.get(x):
+            idOggetti.append(y)
+
+    queryS = "INSERT INTO spedizioneOggetto (idS,idO) VALUES\n"
+
+    for i in range(1, 201):
+        queryS += "(" + str(i) + "," + idOggetti[randint(0, len(idOggetti)-1)] + "),\n"
+
+    queryS = queryS[:-2]
+    queryS += ';'
+
+    return queryS
+
 
 menuT = {
     0   :   'Creazione utenti',
@@ -860,7 +892,9 @@ menuT = {
     6   :   'Crea oggetti',
     7   :   'Associa Immagine-Oggetto',
     8   :   'Crea recensioni Oggetto',
-    9   :   'Crea recensioni Venditore'
+    9   :   'Crea recensioni Venditore',
+    10  :   'Associa negozio-spedizione',
+    11  :   'Associa oggetto-spedizione'
 }
 
 for i in menuT:
@@ -888,3 +922,7 @@ elif menuC is 8:
     print(generaROggetti(checkObjects()))
 elif menuC is 9:
     print(generaRVenditori())
+elif menuC is 10:
+    print(generaMSpedizini())
+elif menuC is 11:
+    print(generaOSpedizini(checkObjects()))
