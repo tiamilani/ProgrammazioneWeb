@@ -5,10 +5,13 @@
  */
 package it.progettoWeb.java.Controller.InserisciRecensione;
 
+import it.progettoWeb.java.database.Dao.Negozio.DaoNegozio;
+import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
 import it.progettoWeb.java.database.Dao.immagineRecensione.DaoImmagineRecensione;
 import it.progettoWeb.java.database.Dao.recensioneNegozio.DaoRecensioneNegozio;
 import it.progettoWeb.java.database.Dao.recensioneOggetto.DaoRecensioneOggetto;
 import it.progettoWeb.java.database.Dao.recensioneVenditore.DaoRecensioneVenditore;
+import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
 import it.progettoWeb.java.database.Model.immagineRecensione.ModelloImmagineRecensione;
 import it.progettoWeb.java.database.Model.recensioneNegozio.ModelloRecensioneNegozio;
 import it.progettoWeb.java.database.Model.recensioneOggetto.ModelloRecensioneOggetto;
@@ -46,6 +49,8 @@ public class InserisciRecensioneController extends HttpServlet {
     private DaoRecensioneNegozio daoRecensioneNegozio;
     private DaoRecensioneVenditore daoRecensioneVenditore;
     private DaoImmagineRecensione daoImmagineRecensione;
+    private DaoNegozio daoNegozio;
+    private DaoUtente daoUtente;
     private List<String> imageSrcs = new ArrayList<String>();
     
     public InserisciRecensioneController(){
@@ -54,6 +59,8 @@ public class InserisciRecensioneController extends HttpServlet {
         daoRecensioneNegozio = new DaoRecensioneNegozio();
         daoRecensioneVenditore = new DaoRecensioneVenditore();
         daoImmagineRecensione = new DaoImmagineRecensione();
+        daoNegozio = new DaoNegozio();
+        daoUtente = new DaoUtente();
     }
     
     /**
@@ -134,6 +141,10 @@ public class InserisciRecensioneController extends HttpServlet {
             recensioneNegozio.setUtilita(0);
             recensioneNegozio.setValutazione(valutazioneRecensione);
             daoRecensioneNegozio.addReviewToStore(recensioneNegozio);
+            
+            int numReviews = daoRecensioneNegozio.howManyReviews(idNegozio);
+            double newMedia = ((daoNegozio.getStoreById(idNegozio).getValutazione() * numReviews + valutazioneRecensione) / (numReviews + valutazioneRecensione));
+            daoNegozio.updateShopStars(idNegozio, newMedia);
         }
         else if(action.equals("Venditore")) {
             int idUtente = Integer.parseInt(request.getParameter("utenteReview"));
@@ -148,6 +159,10 @@ public class InserisciRecensioneController extends HttpServlet {
             recensioneVenditore.setUtilita(0);
             recensioneVenditore.setValutazione(valutazioneRecensione);
             daoRecensioneVenditore.addReviewToSeller(recensioneVenditore);
+            
+            int numReviews = daoRecensioneVenditore.howManyReviews(idVenditore);
+            double newMedia = ((daoUtente.getUserById(idVenditore).getValutazione() * numReviews + valutazioneRecensione) / (numReviews + valutazioneRecensione));
+            daoUtente.updateUserStars(idVenditore, newMedia);
         }
         
         RequestDispatcher view = request.getRequestDispatcher(forward);

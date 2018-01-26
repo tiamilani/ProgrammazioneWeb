@@ -64,6 +64,11 @@ public class usersQuery {
                 ""+UtenteType+","+
                 ""+emailConfermata+");";
     }
+    
+    public static String updateUserStars(int idUtente, double value)
+    {
+        return "UPDATE Utente SET valutazione=" + value + " WHERE id=" + idUtente + ";";
+    }
 
     public static String eliminaUtente(int id){
         return "DELETE FROM Utente WHERE id="+id+";";
@@ -770,6 +775,22 @@ public class usersQuery {
         return "SELECT COUNT(idNegozio) AS counter FROM Ordine "
                 + "WHERE Ordine.idNegozio ="+idN+" AND "
                 + "Ordine.idUtente ="+idU+" AND Ordine.stato=4;";
+    }
+    
+    /**
+     * @author Andrea
+     * Ottenere un intero indicante il numero di recensioni ottenuto
+     * @param idN Un intero che rappresenta l'identificativo del negozio preso in considerazione
+     * @return Integer: intero indicante il numero di recensioni ottenuto
+     */
+    public static String howManyReviews(int idN){
+        return "SELECT COUNT(*) AS counter FROM RecensioneNegozio "
+                + "WHERE RecensioneNegozio.idNegozio ="+idN+";";
+    }
+    
+    public static String howManyReviewV(int idV){
+        return "SELECT COUNT(*) AS counter FROM RecensioneVenditore "
+                + "WHERE RecensioneVenditore.idVenditore ="+idV+";";
     }
 
     /**

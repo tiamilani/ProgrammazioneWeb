@@ -658,6 +658,19 @@ public class DaoNegozio {
         return true;
     }
     
+    public boolean updateShopStars(int idNegozio, double value)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sellersQuery.updateShopStars(idNegozio, value));
+        }
+        catch (SQLException e) {
+            return false;
+        }
+        return true;
+    }
+    
    /**
      * @author fbrug
      * Aggiungere una immagine del profilo di un negozio
