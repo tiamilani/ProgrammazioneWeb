@@ -14317,3 +14317,115 @@ INSERT INTO spedizioneoggetto (idS,idO) VALUES
 (4325,'e22dbf1477e5ac04508fac5a4b1a2b44'),
 (4495,'3ca6fe7c9d151879e746df7c077a1264'),
 (4929,'85f60723cce92d8071af573237d4140f');
+
+--
+-- Trigger `Oggetto`
+--
+DROP TRIGGER IF EXISTS `AggiornamentoOrdiniSeVieneModificatoIlPrezzo`;
+DELIMITER //
+CREATE TRIGGER `AggiornamentoOrdiniSeVieneModificatoIlPrezzo` AFTER UPDATE ON `Oggetto`
+ FOR EACH ROW BEGIN
+
+DECLARE curDate DATETIME DEFAULT NOW();
+
+
+IF(curDate <= new.dataFineSconto)
+	THEN
+    	UPDATE Ordine
+        	SET Ordine.prezzoDiAcquisto = new.prezzo - ((new.prezzo * new.sconto) / 100)
+            WHERE Ordine.stato = 0 AND Ordine.idOggetto = new.id AND Ordine.idNegozio = new.idNegozio;
+    ELSE
+    UPDATE Ordine
+        	SET Ordine.prezzoDiAcquisto = new.prezzo
+            WHERE Ordine.stato = 0 AND Ordine.idOggetto = new.id AND Ordine.idNegozio = new.idNegozio;
+
+END IF;
+
+END
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `NomeSenzaLettereMaiuscole`;
+DELIMITER //
+CREATE TRIGGER `NomeSenzaLettereMaiuscole` AFTER INSERT ON `Oggetto`
+ FOR EACH ROW BEGIN
+
+UPDATE Oggetto
+	SET nomeDownCase = LOWER(nome)
+    WHERE Oggetto.id = new.id;
+
+END
+//
+DELIMITER ;
+
+--
+-- Trigger `Ordine`
+--
+DROP TRIGGER IF EXISTS `AggiornamentoCarrelloAggiuntaElemento`;
+DELIMITER //
+CREATE TRIGGER `AggiornamentoCarrelloAggiuntaElemento` AFTER INSERT ON `Ordine`
+ FOR EACH ROW UPDATE Carrello c
+	SET c.subTotal = c.subTotal + (new.prezzoDiAcquisto * new.quantita)
+    WHERE c.idUtente = new.idUtente AND new.stato = 0
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `AggiornamentoCarrelloModificaPrezzoElemento`;
+DELIMITER //
+CREATE TRIGGER `AggiornamentoCarrelloModificaPrezzoElemento` AFTER UPDATE ON `Ordine`
+ FOR EACH ROW BEGIN
+IF new.stato = 0
+THEN
+    UPDATE Carrello c
+        SET c.subTotal = c.subTotal - (old.prezzoDiAcquisto * old.quantita) + (new.prezzoDiAcquisto * new.quantita)
+        WHERE c.idUtente = old.idUtente AND old.stato = 0;
+ELSE
+    UPDATE Carrello c
+        SET c.subTotal = c.subTotal - (old.prezzoDiAcquisto * old.quantita)
+        WHERE c.idUtente = old.idUtente AND old.stato = 0;
+
+    IF (SELECT subTotal
+       	FROM Carrello
+       	WHERE idUtente = old.idUtente) = 0
+    THEN
+    	DELETE FROM Carrello
+        WHERE idUtente = old.idUtente;
+    END IF;
+END IF;
+END
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `AggiornamentoCarrelloRimozioneElemento`;
+DELIMITER //
+CREATE TRIGGER `AggiornamentoCarrelloRimozioneElemento` AFTER DELETE ON `Ordine`
+ FOR EACH ROW UPDATE Carrello c
+	SET c.subTotal = c.subTotal - (old.prezzoDiAcquisto * old.quantita)
+    WHERE c.idUtente = old.idUtente AND old.stato = 0
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `CreoElementoCarrello`;
+DELIMITER //
+CREATE TRIGGER `CreoElementoCarrello` BEFORE INSERT ON `Ordine`
+ FOR EACH ROW BEGIN
+declare x int default 0;
+SET x = (SELECT COUNT(idUtente)
+         FROM Carrello
+         WHERE Carrello.idUtente = new.idUtente
+         LIMIT 1
+        );
+
+IF(x < 1) THEN
+	INSERT INTO Carrello
+		(idOrdine,idUtente,subTotal)
+    VALUES (new.idOrdine, new.idUtente, 0);
+END IF;
+end
+//
+DELIMITER ;
+
+DELIMITER $$
+--
+-- Eventi
+--
+DROP EVENT IF EXISTS `ControlloScontiAttivi`$$
+CREATE DEFINER=`progettoweb`@`%` EVENT `ControlloScontiAttivi` ON SCHEDULE EVERY 1 DAY STARTS '2017-07-22 00:01:00' ENDS '2018-07-22 00:01:00' ON COMPLETION PRESERVE ENABLE COMMENT 'Evento utilizzato per eliminare gli sconti terminati' DO UPDATE Oggetto SET Oggetto.`sconto` = 0, Oggetto.`dataFineSconto` = IF(Oggetto.`dataFineSconto`<CURDATE(), NULL,Oggetto.`dataFineSconto`)$$
+
+DELIMITER ;
