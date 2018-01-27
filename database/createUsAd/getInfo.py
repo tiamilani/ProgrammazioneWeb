@@ -855,8 +855,12 @@ def generaMSpedizini():
     descrizioneS = ['Spedizione Veloce','Spedizione su Appuntamento','Spedizione Standard','Spedizione Veloce','Spedizione Standard','Spedizione Veloce','Spedizione Express','Spedizione su Appuntamento','Spedizione standard,SPedizionasda','Spedizione poco sicura']
     corrieriS =['GLS','DHL','SGA','DHL','Non specificato','SGA','Bartolini']
 
+    indice=1
     for i in range(1, 201):
-        queryS += "(" + str(i) + "," + str(i) + ",'" + descrizioneS[randint(0, len(descrizioneS)-1)] + "'," + str(randint(1, 50)) + ",'" + corrieriS[randint(0, len(corrieriS)-1)] + "'," + str(randint(1, 5)) + "," + str(randint(5, 10)) + "),\n"
+        for j in range(1, len(descrizioneS)-1):
+            for w in range(1, len(corrieriS)-1):
+                queryS += "(" + str(indice) + "," + str(i) + ",'" + descrizioneS[j] + "'," + str(randint(1, 50)) + ",'" + corrieriS[w] + "'," + str(randint(1, 5)) + "," + str(randint(5, 10)) + "),\n"
+                indice+=1
 
     queryS = queryS[:-2]
     queryS += ';'
@@ -873,8 +877,8 @@ def generaOSpedizini(dbO):
 
     queryS = "INSERT INTO spedizioneOggetto (idS,idO) VALUES\n"
 
-    for i in range(1, 201):
-        queryS += "(" + str(i) + "," + idOggetti[randint(0, len(idOggetti)-1)] + "),\n"
+    for i in range(1, len(idOggetti)-1):
+        queryS += "(" + str(randint(1, 8001)) + "," + idOggetti[i] + "),\n"
 
     queryS = queryS[:-2]
     queryS += ';'

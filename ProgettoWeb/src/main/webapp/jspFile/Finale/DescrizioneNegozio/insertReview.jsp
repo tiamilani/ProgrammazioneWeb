@@ -4,15 +4,15 @@
     Author     : andreafadi
 --%>
 <style>
-    div.stars {
+    div.starsr {
         width: auto;
         display: inline-block;
     }
 
-    input.star {display: none; }
+    input.starr {display: none; }
     label { top: 0; margin: 0; padding: 0;}
 
-    label.star {
+    label.starr {
         float: right;
         padding: 10px;
         font-size: 50px;
@@ -20,27 +20,27 @@
         transition: all .2s;
     }
 
-    input.star:checked ~ label.star:before {
+    input.starr:checked ~ label.starr:before {
         content: '\f005';
         color: #FD4;
         transition: all .25s;
     }
 
-    input.star-5:checked ~ label.star:before {
+    input.starr-5:checked ~ label.starr:before {
         color: #FE7;
         text-shadow: 0 0 20px #952;
     }
 
-    input.star-1:checked ~ label.star:before { color: #F62; }
-    label.star:hover { transform: rotate(-15deg) scale(1.3); }
+    input.starr-1:checked ~ label.starr:before { color: #F62; }
+    label.starr:hover { transform: rotate(-15deg) scale(1.3); }
 
-    label.star:before {
+    label.starr:before {
         content: '\f006';
         font-family: FontAwesome;
     }
     
     @media screen and (max-width: 480px) {
-        label.star {
+        label.starr {
             padding: 2px;
             font-size: 36px;
         }
@@ -67,17 +67,17 @@
             <textarea class="form-control" id="testoReview" name="testoReview" rows="3" placeholder="Scrivi qui la tua recensione..."></textarea>
         </div>
         <div class="form-group">
-            <div class="stars">
-                <input class="star star-5" id="star-5" type="radio" name="valutazioneReview" value="5"/>
-                <label class="star star-5" for="star-5"></label>
-                <input class="star star-4" id="star-4" type="radio" name="valutazioneReview" value="4"/>
-                <label class="star star-4" for="star-4"></label>
-                <input class="star star-3" id="star-3" type="radio" name="valutazioneReview" value="3"/>
-                <label class="star star-3" for="star-3"></label>
-                <input class="star star-2" id="star-2" type="radio" name="valutazioneReview" value="2"/>
-                <label class="star star-2" for="star-2"></label>
-                <input class="star star-1" id="star-1" type="radio" name="valutazioneReview" value="1"/>
-                <label class="star star-1" for="star-1"></label>
+            <div class="starsr">
+                <input class="starr starr-5" id="starr-5" type="radio" name="valutazioneReview" value="5"/>
+                <label class="starr starr-5" for="starr-5"></label>
+                <input class="starr starr-4" id="starr-4" type="radio" name="valutazioneReview" value="4"/>
+                <label class="starr starr-4" for="starr-4"></label>
+                <input class="starr starr-3" id="starr-3" type="radio" name="valutazioneReview" value="3"/>
+                <label class="starr starr-3" for="starr-3"></label>
+                <input class="starr starr-2" id="starr-2" type="radio" name="valutazioneReview" value="2"/>
+                <label class="starr starr-2" for="starr-2"></label>
+                <input class="starr starr-1" id="starr-1" type="radio" name="valutazioneReview" value="1"/>
+                <label class="starr starr-1" for="starr-1"></label>
             </div>
         </div>
         <c:if test="${canUploadImages == true}">

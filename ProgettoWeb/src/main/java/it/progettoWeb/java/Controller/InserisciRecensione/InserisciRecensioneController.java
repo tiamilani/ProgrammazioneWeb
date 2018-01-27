@@ -6,6 +6,7 @@
 package it.progettoWeb.java.Controller.InserisciRecensione;
 
 import it.progettoWeb.java.database.Dao.Negozio.DaoNegozio;
+import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
 import it.progettoWeb.java.database.Dao.immagineRecensione.DaoImmagineRecensione;
 import it.progettoWeb.java.database.Dao.recensioneNegozio.DaoRecensioneNegozio;
@@ -51,6 +52,7 @@ public class InserisciRecensioneController extends HttpServlet {
     private DaoImmagineRecensione daoImmagineRecensione;
     private DaoNegozio daoNegozio;
     private DaoUtente daoUtente;
+    private DaoOggetto daoOggetto;
     private List<String> imageSrcs = new ArrayList<String>();
     
     public InserisciRecensioneController(){
@@ -61,6 +63,7 @@ public class InserisciRecensioneController extends HttpServlet {
         daoImmagineRecensione = new DaoImmagineRecensione();
         daoNegozio = new DaoNegozio();
         daoUtente = new DaoUtente();
+        daoOggetto = new DaoOggetto();
     }
     
     /**
@@ -127,6 +130,10 @@ public class InserisciRecensioneController extends HttpServlet {
                     daoImmagineRecensione.addImageReviewSet(immagineRecensione);
                 }
             }
+            
+            int numReviews = daoRecensioneOggetto.howManyReviewsO(idOggetto);
+            double newMedia = ((daoOggetto.getObjectById(idOggetto).getValutazione() * numReviews + valutazioneRecensione) / (numReviews + valutazioneRecensione));
+            daoOggetto.updateObjectStars(idOggetto, newMedia);
         }
         else if(action.equals("Negozio")) {
             int idUtente = Integer.parseInt(request.getParameter("utenteReview"));
@@ -174,8 +181,9 @@ public class InserisciRecensioneController extends HttpServlet {
      */
     private boolean getImages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String appPath = request.getServletContext().getRealPath("");
-        appPath = appPath.substring(0, (appPath.indexOf("Tomcat") + 6)) + File.separator;
         String savePath = appPath + SAVE_DIR;
+        String savePathFake = request.getContextPath() + File.separator + SAVE_DIR;
+        
         File fileSaveDir = new File(savePath);
         if (!fileSaveDir.exists()) {
             fileSaveDir.mkdir();
@@ -186,10 +194,11 @@ public class InserisciRecensioneController extends HttpServlet {
             String fileName = extractFileName(part);
             if(!fileName.isEmpty()) {
                 fileName = new File(fileName).getName();
-                System.out.println(savePath + File.separator + fileName);
                 part.write(savePath + File.separator + fileName);
-                imageSrcs.add(savePath + File.separator + fileName);
+                imageSrcs.add(savePathFake + File.separator + fileName);
                 imageSaved = true;
+                System.out.println(savePath + File.separator + fileName);
+                System.out.println(savePathFake + File.separator + fileName);
             }
         }
         

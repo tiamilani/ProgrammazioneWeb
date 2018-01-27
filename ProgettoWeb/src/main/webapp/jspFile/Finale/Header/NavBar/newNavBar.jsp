@@ -105,7 +105,7 @@ function myFunction() {
         margin: 0;
     }
 
-    .col-2:hover {
+    .categs.col-2:hover {
         background-color: lightgray;
     }
 </style>
@@ -128,7 +128,7 @@ function myFunction() {
                         <c:set var="i" value="${0}" />
                         <c:forEach items="${listacategoriesessione.getList()}" var="cat">
                             <c:if test="${i == 0}">
-                                <div class="row">
+                                <div class="row categs">
                             </c:if>
                                     <div class="col-2" style="border-radius: 1rem;">
                                         <c:url value="/CategoriaController" var="catUrl">

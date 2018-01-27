@@ -33,6 +33,11 @@ public class genericsQuery {
     {
         return "SELECT * FROM Oggetto ORDER BY RAND() LIMIT " + limit + ";";
     }
+    
+    public static String howManyReviewsO(String idO){
+        return "SELECT COUNT(*) AS counter FROM RecensioneOggetto "
+                + "WHERE RecensioneOggetto.idOggetto ='"+idO+"';";
+    }
 
     public static String selectRandomObjectsAndImages(int limit)
     {
