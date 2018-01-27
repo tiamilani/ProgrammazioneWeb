@@ -22,39 +22,39 @@ public class usersQuery {
     // OTHER QUERY
     //Slezionare tutti gli utenti senza distinzioni
     public static String selectAllUsers(){
-        return "SELECT * FROM Utente";
+        return "SELECT * FROM utente";
     }
 
     //Seleziono un utente dall'id
     public static String selectUserById(int id){
-        return "SELECT * FROM Utente WHERE id='"+id+"'";
+        return "SELECT * FROM utente WHERE id='"+id+"'";
     }
 
 
     // ottenere la lista dei negozi di un venditore specificando l'id del venditore
     public static String listaNegoziVenditore(String idV){
-        return "SELECT * FROM Negozio WHERE idVenditore = '"+idV+"';";
+        return "SELECT * FROM negozio WHERE idVenditore = '"+idV+"';";
     }
     // ottenere la lista dei negozi di un venditore avendo nome e cognome del venditore
 
     public static String listaNegoziVenditore(String nome,String cognome) {
-        return "SELECT Negozio.* FROM Negozio INNER JOIN Utente ON (Utente.nome = '"+nome+"' AND Utente.cognome = '"+cognome+"' AND Utente.UtenteType = 1 AND Negozio.idVenditore = Utente.id);";
+        return "SELECT negozio.* FROM negozio INNER JOIN utente ON (utente.nome = '"+nome+"' AND utente.cognome = '"+cognome+"' AND utente.UtenteType = 1 AND negozio.idVenditore = utente.id);";
     }
 
     // ottenre la lista dei negozi di un venditore avendo l'id e l'immagine del negozio
 
     public static String listaNegoziVenditorePlusImage(String idV) {
-        return "SELECT Negozio.*, imageNegozio.src FROM Negozio INNER JOIN imageNegozio ON (Negozio.idVenditore = '"+idV+"' AND Negozio.id = imageNegozio.idN);";
+        return "SELECT negozio.*, imagenegozio.src FROM negozio INNER JOIN imagenegozio ON (negozio.idVenditore = '"+idV+"' AND negozio.id = imagenegozio.idN);";
     }
 
     // ottenere la lista dei negozi di un venditore avendo nome e cognome e la prima immagine del negozio
 
     public static String listaNegoziVenditorePlusImage(String nome,String cognome) {
-        return "SELECT Negozio.*, imageNegozio.src FROM Negozio INNER JOIN Utente ON (Utente.nome = '"+nome+"' AND Utente.cognome = '"+cognome+"' AND Utente.UtenteType = 1 AND Negozio.idVenditore = Utente.id)LEFT JOIN imageNegozio ON (Negozio.id = imageNegozio.idN);";
+        return "SELECT negozio.*, imagenegozio.src FROM negozio INNER JOIN utente ON (utente.nome = '"+nome+"' AND utente.cognome = '"+cognome+"' AND utente.UtenteType = 1 AND negozio.idVenditore = utente.id)LEFT JOIN imagenegozio ON (negozio.id = imagenegozio.idN);";
     }
 
     public static String inserisciUtente(String nome,String cognome,String mail,String password,String avatar,double valutazione,int UtenteType,boolean emailConfermata){
-        return "insert into Utente(nome, cognome, mail, password, avatar, valutazione, UtenteType, emailConfermata) values ("+
+        return "insert into utente(nome, cognome, mail, password, avatar, valutazione, UtenteType, emailConfermata) values ("+
                 "'"+nome+"',"+
                 "'"+cognome+"',"+
                 "'"+mail+"',"+
@@ -67,11 +67,11 @@ public class usersQuery {
     
     public static String updateUserStars(int idUtente, double value)
     {
-        return "UPDATE Utente SET valutazione=" + value + " WHERE id=" + idUtente + ";";
+        return "UPDATE utente SET valutazione=" + value + " WHERE id=" + idUtente + ";";
     }
 
     public static String eliminaUtente(int id){
-        return "DELETE FROM Utente WHERE id="+id+";";
+        return "DELETE FROM utente WHERE id="+id+";";
     }
 
     public static String updateUtente(int id,String nome,String cognome,String mail,String password,String avatar,double valutazione,int UtenteType,boolean emailConfermata){
@@ -95,7 +95,7 @@ public class usersQuery {
      * @return String: lista di ordini
      */
     public static String selectOrders(int idU){
-        return "SELECT * FROM Ordine WHERE Ordine.idUtente ="+idU+" ORDER BY Ordine.dataOrdine DESC;";
+        return "SELECT * FROM ordine WHERE ordine.idUtente ="+idU+" ORDER BY ordine.dataOrdine DESC;";
     }
 
     /**
@@ -116,9 +116,9 @@ public class usersQuery {
      * @return String: lista di negozi
      */
     public static String selectStoresUsed(int idU){
-        return "SELECT Negozio.* FROM Negozio INNER JOIN Ordine ON "
-                + "(Ordine.idUtente ="+idU+" AND Negozio.id = Ordine.idNegozio "
-                + "AND Ordine.stato <> 0 AND Ordine.stato <> 5) GROUP BY Negozio.id;";
+        return "SELECT negozio.* FROM negozio INNER JOIN ordine ON "
+                + "(ordine.idUtente ="+idU+" AND negozio.id = ordine.idNegozio "
+                + "AND ordine.stato <> 0 AND ordine.stato <> 5) GROUP BY negozio.id;";
     }
 
     /**
@@ -128,10 +128,10 @@ public class usersQuery {
      * @return String: lista di negozi
      */
     public static String selectStoresUsedAndPhoto(int idU){
-        return "SELECT Negozio.*, imageNegozio.src FROM Negozio INNER JOIN Ordine ON "
-                + "(Ordine.idUtente ="+idU+" AND Negozio.id = Ordine.idNegozio "
-                + "AND Ordine.stato <> 0 AND Ordine.stato <> 5) LEFT JOIN "
-                + "imageNegozio ON (Negozio.id = imageNegozio.idN) GROUP BY Negozio.id;";
+        return "SELECT negozio.*, imagenegozio.src FROM negozio INNER JOIN ordine ON "
+                + "(ordine.idUtente ="+idU+" AND negozio.id = ordine.idNegozio "
+                + "AND ordine.stato <> 0 AND ordine.stato <> 5) LEFT JOIN "
+                + "imagenegozio ON (negozio.id = imagenegozio.idN) GROUP BY negozio.id;";
     }
 
     /**
@@ -141,14 +141,14 @@ public class usersQuery {
      * @return String: lista di negozi
      */
     public static String selectStoresUsedAndDataPhotoSPhotoO(int idU){
-        return "SELECT Negozio.*, imageNegozio.src AS imgNeg, Oggetto.id AS idOgg, "
-                + "Oggetto.nome AS nomeOgg, Oggetto.descrizione, imageOggetto.src AS "
-                + "imgOgg FROM Negozio INNER JOIN Ordine ON (Ordine.idUtente ="+idU+" "
-                + "AND Negozio.id = Ordine.idNegozio AND Ordine.stato <> 0 AND "
-                + "Ordine.stato <> 5) LEFT JOIN imageNegozio ON (Negozio.id = "
-                + "imageNegozio.idN) LEFT JOIN Oggetto ON (Ordine.idOggetto = "
-                + "Oggetto.id) LEFT JOIN imageOggetto ON (Oggetto.id = "
-                + "imageOggetto.idO) GROUP BY Oggetto.id;";
+        return "SELECT negozio.*, imagenegozio.src AS imgNeg, oggetto.id AS idOgg, "
+                + "oggetto.nome AS nomeOgg, oggetto.descrizione, imageOggetto.src AS "
+                + "imgOgg FROM negozio INNER JOIN ordine ON (ordine.idUtente ="+idU+" "
+                + "AND negozio.id = ordine.idNegozio AND ordine.stato <> 0 AND "
+                + "ordine.stato <> 5) LEFT JOIN imagenegozio ON (negozio.id = "
+                + "imagenegozio.idN) LEFT JOIN oggetto ON (ordine.idOggetto = "
+                + "oggetto.id) LEFT JOIN imageOggetto ON (oggetto.id = "
+                + "imageOggetto.idO) GROUP BY oggetto.id;";
     }
 
     /**
@@ -158,8 +158,8 @@ public class usersQuery {
      * @return String: lista di ordini
      */
     public static String selectOrdersCart(int idU){
-        return "SELECT Ordine.*, Carrello.subtotale FROM Carrello, Ordine WHERE "
-                + "Carrello.idUtente ="+idU+" AND Ordine.idOrdine = Carrello.idOrdine;";
+        return "SELECT ordine.*, carrello.subtotale FROM carrello, ordine WHERE "
+                + "carrello.idUtente ="+idU+" AND ordine.idOrdine = carrello.idOrdine;";
     }
 
     /**
@@ -169,7 +169,7 @@ public class usersQuery {
      * @return String: lista di recensioni
      */
     public static String selectReviewsObjects(int idU){
-        return "SELECT * FROM RecensioneOggetto WHERE idUtente ="+idU+";";
+        return "SELECT * FROM recensioneOggetto WHERE idUtente ="+idU+";";
     }
 
     /**
@@ -179,7 +179,7 @@ public class usersQuery {
      * @return String: lista di recensioni
      */
     public static String selectReviewsStores(int idU){
-        return "SELECT * FROM RecensioneNegozio WHERE idUtente ="+idU+";";
+        return "SELECT * FROM recensioneNegozio WHERE idUtente ="+idU+";";
     }
 
     /**
@@ -189,7 +189,7 @@ public class usersQuery {
      * @return String: lista di recensioni
      */
     public static String selectReviewsSellers(int idU){
-        return "SELECT * FROM RecensioneVenditore WHERE idUtente ="+idU+";";
+        return "SELECT * FROM recensioneVenditore WHERE idUtente ="+idU+";";
     }
 
     /**
@@ -199,9 +199,9 @@ public class usersQuery {
      * @return String: lista di risposte alle recensioni
      */
     public static String selectAnswerReviewsObjects(int idU){
-        return "SELECT RispostaOggetto.* FROM RispostaOggetto, RecensioneOggetto "
-                + "WHERE RecensioneOggetto.idUtente ="+idU+" AND "
-                + "RispostaOggetto.idRecensione = RecensioneOggetto.id;";
+        return "SELECT rispostaOggetto.* FROM rispostaOggetto, recensioneOggetto "
+                + "WHERE recensioneOggetto.idUtente ="+idU+" AND "
+                + "rispostaOggetto.idRecensione = recensioneOggetto.id;";
     }
 
     /**
@@ -211,9 +211,9 @@ public class usersQuery {
      * @return String: lista di risposte alle recensioni
      */
     public static String selectAnswerReviewsStores(int idU){
-        return "SELECT RispostaNegozio.* FROM RispostaNegozio, RecensioneNegozio "
-                + "WHERE RecensioneNegozio.idUtente ="+idU+" AND "
-                + "RispostaNegozio.idRecensione = RecensioneNegozio.id;";
+        return "SELECT Rispostanegozio.* FROM Rispostanegozio, recensioneNegozio "
+                + "WHERE recensioneNegozio.idUtente ="+idU+" AND "
+                + "Rispostanegozio.idRecensione = recensioneNegozio.id;";
     }
 
     /**
@@ -223,9 +223,9 @@ public class usersQuery {
      * @return String: lista di risposte alle recensioni
      */
     public static String selectAnswerReviewsSellers(int idU){
-        return "SELECT RispostaVenditore.* FROM RispostaVenditore, RecensioneVenditore "
-                + "WHERE RecensioneVenditore.idUtente ="+idU+" AND "
-                + "RispostaVenditore.idRecensione = RecensioneVenditore.id;";
+        return "SELECT rispostaVenditore.* FROM rispostaVenditore, recensioneVenditore "
+                + "WHERE recensioneVenditore.idUtente ="+idU+" AND "
+                + "rispostaVenditore.idRecensione = recensioneVenditore.id;";
     }
 
     /**
@@ -235,7 +235,7 @@ public class usersQuery {
      * @return String: lista di recensioni
      */
     public static String selectAllReviewsObjects(int idO){
-        return "SELECT * FROM RecensioneOggetto WHERE idOggetto ="+idO+";";
+        return "SELECT * FROM recensioneOggetto WHERE idOggetto ="+idO+";";
     }
 
     /**
@@ -245,7 +245,7 @@ public class usersQuery {
      * @return String: lista di recensioni
      */
     public static String selectAllReviewsStores(int idN){
-        return "SELECT * FROM RecensioneNegozio WHERE idNegozio ="+idN+";";
+        return "SELECT * FROM recensioneNegozio WHERE idNegozio ="+idN+";";
     }
 
     /**
@@ -255,7 +255,7 @@ public class usersQuery {
      * @return String: lista di recensioni
      */
     public static String selectAllReviewsSellers(int idV){
-        return "SELECT * FROM RecensioneVenditore WHERE idVenditore ="+idV+";";
+        return "SELECT * FROM recensioneVenditore WHERE idVenditore ="+idV+";";
     }
 
     /**
@@ -408,14 +408,14 @@ public class usersQuery {
      * @return String: informazioni di un venditore
      */
     public static String selectProductsSamePriceCategoryAlreadyBought(int idU){
-        return "Create OR REPLACE View IDUInteressi_"+idU+" as SELECT Oggetto.categoria, "
-                + "MAX(Oggetto.prezzo) AS prezzoMassimo, MIN(Oggetto.prezzo) AS "
-                + "prezzoMinimo FROM Oggetto INNER JOIN Ordine ON "
-                + "(Ordine.idOggetto = Oggetto.id) WHERE Ordine.idUtente ="+idU+" "
-                + "AND Ordine.stato <> 0 AND Ordine.stato <> 5 GROUP BY Oggetto.categoria;"
-                + "SELECT Oggetto.* FROM Oggetto, IDUInteressi_"+idU+" WHERE Oggetto.categoria = "
-                + "IDUInteressi_"+idU+".categoria AND (Oggetto.prezzo - "
-                + "(Oggetto.prezzo*Oggetto.sconto)/100) BETWEEN "
+        return "Create OR REPLACE View IDUInteressi_"+idU+" as SELECT oggetto.categoria, "
+                + "MAX(oggetto.prezzo) AS prezzoMassimo, MIN(oggetto.prezzo) AS "
+                + "prezzoMinimo FROM oggetto INNER JOIN ordine ON "
+                + "(ordine.idOggetto = oggetto.id) WHERE ordine.idUtente ="+idU+" "
+                + "AND ordine.stato <> 0 AND ordine.stato <> 5 GROUP BY oggetto.categoria;"
+                + "SELECT oggetto.* FROM oggetto, IDUInteressi_"+idU+" WHERE oggetto.categoria = "
+                + "IDUInteressi_"+idU+".categoria AND (oggetto.prezzo - "
+                + "(oggetto.prezzo*oggetto.sconto)/100) BETWEEN "
                 + "IDUInteressi_"+idU+".prezzoMassimo AND IDUInteressi_"+idU+".prezzoMinimo;";
     }
 
@@ -436,9 +436,9 @@ public class usersQuery {
      * @return String: lista di recensioni
      */
     public static String selectObjectReviewsOrderUseful(int idU){
-        return "SELECT * FROM RecensioneOggetto WHERE "
-                + "RecensioneOggetto.idUtente ="+idU+" ORDER BY "
-                + "RecensioneOggetto.utilita DESC;";
+        return "SELECT * FROM recensioneOggetto WHERE "
+                + "recensioneOggetto.idUtente ="+idU+" ORDER BY "
+                + "recensioneOggetto.utilita DESC;";
     }
 
     /**
@@ -448,33 +448,33 @@ public class usersQuery {
      * @return String: lista di recensioni
      */
     public static String selectObjectReviewsOrderUseless(int idU){
-        return "SELECT * FROM RecensioneOggetto WHERE "
-                + "RecensioneOggetto.idUtente ="+idU+" ORDER BY "
-                + "RecensioneOggetto.utilita ASC;";
+        return "SELECT * FROM recensioneOggetto WHERE "
+                + "recensioneOggetto.idUtente ="+idU+" ORDER BY "
+                + "recensioneOggetto.utilita ASC;";
     }
 
     /**
      * @author Andrea
-     * Ottenere la lista delle proprie recensioni Negozio dalla più utile
+     * Ottenere la lista delle proprie recensioni negozio dalla più utile
      * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @return String: lista di recensioni
      */
     public static String selectStoreReviewsOrderUseful(int idU){
-        return "SELECT * FROM RecensioneNegozio WHERE "
-                + "RecensioneNegozio.idUtente ="+idU+" ORDER BY "
-                + "RecensioneNegozio.utilita DESC;";
+        return "SELECT * FROM recensioneNegozio WHERE "
+                + "recensioneNegozio.idUtente ="+idU+" ORDER BY "
+                + "recensioneNegozio.utilita DESC;";
     }
 
     /**
      * @author Andrea
-     * Ottenere la lista delle proprie recensioni Negozio dalla meno utile
+     * Ottenere la lista delle proprie recensioni negozio dalla meno utile
      * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @return String: lista di recensioni
      */
     public static String selectStoreReviewsOrderUseless(int idU){
-        return "SELECT * FROM RecensioneNegozio WHERE "
-                + "RecensioneNegozio.idUtente ="+idU+" ORDER BY "
-                + "RecensioneNegozio.utilita ASC;";
+        return "SELECT * FROM recensioneNegozio WHERE "
+                + "recensioneNegozio.idUtente ="+idU+" ORDER BY "
+                + "recensioneNegozio.utilita ASC;";
     }
 
     /**
@@ -484,9 +484,9 @@ public class usersQuery {
      * @return String: lista di recensioni
      */
     public static String selectSellerReviewsOrderUseful(int idU){
-        return "SELECT * FROM RecensioneVenditore WHERE "
-                + "RecensioneVenditore.idUtente ="+idU+" ORDER BY "
-                + "RecensioneVenditore.utilita DESC;";
+        return "SELECT * FROM recensioneVenditore WHERE "
+                + "recensioneVenditore.idUtente ="+idU+" ORDER BY "
+                + "recensioneVenditore.utilita DESC;";
     }
 
     /**
@@ -496,9 +496,9 @@ public class usersQuery {
      * @return String: lista di recensioni
      */
     public static String selectSellerReviewsOrderUseless(int idU){
-        return "SELECT * FROM RecensioneVenditore WHERE "
-                + "RecensioneVenditore.idUtente ="+idU+" ORDER BY "
-                + "RecensioneVenditore.utilita ASC;";
+        return "SELECT * FROM recensioneVenditore WHERE "
+                + "recensioneVenditore.idUtente ="+idU+" ORDER BY "
+                + "recensioneVenditore.utilita ASC;";
     }
 
     /**
@@ -528,7 +528,7 @@ public class usersQuery {
      * @return String: lista di foto
      */
     public static String selectPhotoStore(int idN){
-        return "SELECT * FROM imageNegozio WHERE imageNegozio.idN ="+idN+";";
+        return "SELECT * FROM imagenegozio WHERE imagenegozio.idN ="+idN+";";
     }
 
     /**
@@ -538,7 +538,7 @@ public class usersQuery {
      * @return String: lista di foto
      */
     public static String selectFirstPhotoStore(int idN){
-        return "SELECT * FROM imageNegozio WHERE imageNegozio.idN ="+idN+" LIMIT 1;";
+        return "SELECT * FROM imagenegozio WHERE imagenegozio.idN ="+idN+" LIMIT 1;";
     }
 
     /**
@@ -590,12 +590,12 @@ public class usersQuery {
      * @param idO Una stringa che rappresenta l'identificativo dell'oggetto preso in considerazione
      */
     public static String insertObjectInCart(int idOr, int idU, int quant, String idO){
-        return "INSERT INTO progettoweb.Ordine (idOrdine, idOggetto, idNegozio, "
+        return "INSERT INTO progettoweb.ordine (idOrdine, idOggetto, idNegozio, "
             + "idUtente, stato, quantita, codiceTracking, dataArrivoPresunta, "
-            + "dataOrdine, prezzoDiAcquisto) SELECT "+idOr+", Oggetto.id , "
-            + "Oggetto.idNegozio , "+idU+", 0, "+quant+", NULL, NULL, CURRENT_TIMESTAMP, "
-            + "(Oggetto.prezzo - (Oggetto.prezzo*Oggetto.sconto)/100) FROM "
-            + "Oggetto WHERE Oggetto.id ='"+idO+"';";
+            + "dataOrdine, prezzoDiAcquisto) SELECT "+idOr+", oggetto.id , "
+            + "oggetto.idNegozio , "+idU+", 0, "+quant+", NULL, NULL, CURRENT_TIMESTAMP, "
+            + "(oggetto.prezzo - (oggetto.prezzo*oggetto.sconto)/100) FROM "
+            + "oggetto WHERE oggetto.id ='"+idO+"';";
     }
 
     /**
@@ -606,7 +606,7 @@ public class usersQuery {
      * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      */
     public static String removeObjectInCart(int idOr, String idOg, int idU){
-        return "DELETE FROM Ordine WHERE idOrdine ="+idOr+" AND "
+        return "DELETE FROM ordine WHERE idOrdine ="+idOr+" AND "
                 + "idOggetto ='"+idOg+"' AND IDUTENTE ="+idU+";";
     }
 
@@ -617,8 +617,8 @@ public class usersQuery {
      * @param to Un intero che rappresenta lo stato da impostare agli ordini selezionati
      */
     public static String changeOrderStatus(ModelloOrdine ordine, int from, int to){
-        return "UPDATE progettoweb.Ordine SET stato ="+to+" WHERE "
-                + "Ordine.stato ="+from+" AND Ordine.idOrdine ="+ordine.getIdOrdine()+" AND Ordine.idOggetto = '"+ordine.getIdOggetto()+"';";
+        return "UPDATE progettoweb.ordine SET stato ="+to+" WHERE "
+                + "ordine.stato ="+from+" AND ordine.idOrdine ="+ordine.getIdOrdine()+" AND ordine.idOggetto = '"+ordine.getIdOggetto()+"';";
     }
 
     /**
@@ -631,7 +631,7 @@ public class usersQuery {
      */
     public static String changeOrderQuantity(int idOr, String idOg, int idU, int newQuantity)
     {
-        return "UPDATE progettoweb.Ordine SET quantita = " + newQuantity + " WHERE "
+        return "UPDATE progettoweb.ordine SET quantita = " + newQuantity + " WHERE "
                 + "idOrdine = " + idOr + " AND idOggetto = '" + idOg + "' AND IDUTENTE = " + idU + ";";
     }
 
@@ -644,12 +644,12 @@ public class usersQuery {
      * @param idO Una stringa che rappresenta l'identificativo dell'oggetto preso in considerazione
      */
     public static String insertObjectInWislist(int idOr, int idU, int quant, String idO){
-        return "INSERT INTO progettoweb.Ordine (idOrdine, idOggetto, idNegozio, "
+        return "INSERT INTO progettoweb.ordine (idOrdine, idOggetto, idNegozio, "
                 + "idUtente, stato, quantita, codiceTracking, dataArrivoPresunta, "
-                + "dataOrdine, prezzoDiAcquisto) SELECT "+idOr+", Oggetto.id , "
-                + "Oggetto.idNegozio , "+idU+", 5, "+quant+", NULL, NULL, CURRENT_TIMESTAMP, "
-                + "(Oggetto.prezzo - (Oggetto.prezzo*Oggetto.sconto)/100) FROM "
-                + "Oggetto WHERE Oggetto.id ='"+idO+"';";
+                + "dataOrdine, prezzoDiAcquisto) SELECT "+idOr+", oggetto.id , "
+                + "oggetto.idNegozio , "+idU+", 5, "+quant+", NULL, NULL, CURRENT_TIMESTAMP, "
+                + "(oggetto.prezzo - (oggetto.prezzo*oggetto.sconto)/100) FROM "
+                + "oggetto WHERE oggetto.id ='"+idO+"';";
     }
 
     /**
@@ -662,7 +662,7 @@ public class usersQuery {
      * @param star Un intero indicante l'utilità della recensione
      */
     public static String addReviewToSeller(int idV, int idU, String txt, int val, int star){
-        return "INSERT INTO RecensioneVenditore (id, idVenditore, idUtente, testo, "
+        return "INSERT INTO recensioneVenditore (id, idVenditore, idUtente, testo, "
                 + "valutazione, data, utilita) VALUES (NULL, '" + idV + "', " +
                 idU + ", '" + txt + "', " + val + ", CURRENT_TIMESTAMP, " + star + ");";
     }
@@ -677,7 +677,7 @@ public class usersQuery {
      * @param star Un intero indicante l'utilità della recensione
      */
     public static String addReviewToStore(int idN, int idU, String txt, int val, int star){
-        return "INSERT INTO RecensioneNegozio (id, idNegozio, idUtente, testo, "
+        return "INSERT INTO recensioneNegozio (id, idNegozio, idUtente, testo, "
                 + "valutazione, data, utilita) VALUES (NULL, '" + idN + "', " +
                 idU + ", '" + txt + "', " + val + ", CURRENT_TIMESTAMP, " + star + ");";
     }
@@ -692,7 +692,7 @@ public class usersQuery {
      * @param star Un intero indicante l'utilità della recensione
      */
     public static String addReviewToObject(String idO, int idU, String txt, int val, int star) {
-        String tmp = "INSERT INTO RecensioneOggetto (id, idOggetto, idUtente, testo, "
+        String tmp = "INSERT INTO recensioneOggetto (id, idOggetto, idUtente, testo, "
                 + "valutazione, data, utilita) VALUES (NULL, '" + idO + "', " +
                 idU + ", '" + txt + "', " + val + ", CURRENT_TIMESTAMP, " + star + ");";
         
@@ -708,9 +708,9 @@ public class usersQuery {
      * @return String: booleano indicante se si ha recensito o no un venditore
      */
     public static String reviewOrNotSeller(int idV, int idU){
-        return "SELECT COUNT(idVenditore) AS counter FROM RecensioneVenditore "
-                + "WHERE RecensioneVenditore.idVenditore ="+idV+" AND "
-                + "RecensioneVenditore.idUtente ="+idU+";";
+        return "SELECT COUNT(idVenditore) AS counter FROM recensioneVenditore "
+                + "WHERE recensioneVenditore.idVenditore ="+idV+" AND "
+                + "recensioneVenditore.idUtente ="+idU+";";
     }
     
     /**
@@ -721,8 +721,8 @@ public class usersQuery {
      * @return String: booleano indicante se si ha acquistato o no da un venditore
      */
     public static String buyOrNotFromSeller(int idV, int idU){
-        return "SELECT COUNT(*) as counter FROM Negozio WHERE idVenditore="+idV+" AND id IN (SELECT idNegozio FROM Ordine "
-                + "WHERE Ordine.idUtente ="+idU+" AND Ordine.stato=4)";
+        return "SELECT COUNT(*) as counter FROM negozio WHERE idVenditore="+idV+" AND id IN (SELECT idNegozio FROM ordine "
+                + "WHERE ordine.idUtente ="+idU+" AND ordine.stato=4)";
     }
 
     /**
@@ -733,9 +733,9 @@ public class usersQuery {
      * @return String: booleano indicante se si ha recensito o no un negozio
      */
     public static String reviewOrNotStore(int idN, int idU){
-        return "SELECT COUNT(idNegozio) AS counter FROM RecensioneNegozio "
-                + "WHERE RecensioneNegozio.idNegozio ="+idN+" AND "
-                + "RecensioneNegozio.idUtente ="+idU+";";
+        return "SELECT COUNT(idNegozio) AS counter FROM recensioneNegozio "
+                + "WHERE recensioneNegozio.idNegozio ="+idN+" AND "
+                + "recensioneNegozio.idUtente ="+idU+";";
     }
 
     /**
@@ -746,9 +746,9 @@ public class usersQuery {
      * @return String: booleano indicante se si ha recensito o no un oggetto
      */
     public static String reviewOrNotObject(String idO, int idU){
-        return "SELECT COUNT(idOggetto) AS counter FROM RecensioneOggetto WHERE "
-                + "RecensioneOggetto.idOggetto ='"+idO+"' AND "
-                + "RecensioneOggetto.idUtente ="+idU+";";
+        return "SELECT COUNT(idOggetto) AS counter FROM recensioneOggetto WHERE "
+                + "recensioneOggetto.idOggetto ='"+idO+"' AND "
+                + "recensioneOggetto.idUtente ="+idU+";";
     }
     
     /**
@@ -759,9 +759,9 @@ public class usersQuery {
      * @return String: booleano indicante se si ha recensito o no un oggetto
      */
     public static String buyOrNotObject(String idO, int idU){
-        return "SELECT COUNT(idOggetto) AS counter FROM Ordine WHERE "
-                + "Ordine.idOggetto ='"+idO+"' AND "
-                + "Ordine.idUtente ="+idU+" AND Ordine.stato=4;";
+        return "SELECT COUNT(idOggetto) AS counter FROM ordine WHERE "
+                + "ordine.idOggetto ='"+idO+"' AND "
+                + "ordine.idUtente ="+idU+" AND ordine.stato=4;";
     }
     
     /**
@@ -772,9 +772,9 @@ public class usersQuery {
      * @return String: booleano indicante se si ha acquistato o no da un negozio
      */
     public static String buyOrNotFromStore(int idN, int idU){
-        return "SELECT COUNT(idNegozio) AS counter FROM Ordine "
-                + "WHERE Ordine.idNegozio ="+idN+" AND "
-                + "Ordine.idUtente ="+idU+" AND Ordine.stato=4;";
+        return "SELECT COUNT(idNegozio) AS counter FROM ordine "
+                + "WHERE ordine.idNegozio ="+idN+" AND "
+                + "ordine.idUtente ="+idU+" AND ordine.stato=4;";
     }
     
     /**
@@ -784,13 +784,13 @@ public class usersQuery {
      * @return Integer: intero indicante il numero di recensioni ottenuto
      */
     public static String howManyReviews(int idN){
-        return "SELECT COUNT(*) AS counter FROM RecensioneNegozio "
-                + "WHERE RecensioneNegozio.idNegozio ="+idN+";";
+        return "SELECT COUNT(*) AS counter FROM recensioneNegozio "
+                + "WHERE recensioneNegozio.idNegozio ="+idN+";";
     }
     
     public static String howManyReviewV(int idV){
-        return "SELECT COUNT(*) AS counter FROM RecensioneVenditore "
-                + "WHERE RecensioneVenditore.idVenditore ="+idV+";";
+        return "SELECT COUNT(*) AS counter FROM recensioneVenditore "
+                + "WHERE recensioneVenditore.idVenditore ="+idV+";";
     }
 
     /**
@@ -808,19 +808,19 @@ public class usersQuery {
      * @param idU Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      */
     public static String insertAddress(String stato, String regione, String provincia, String citta, String via, int nCivico, int interno, double lat, double lon, int idU){
-        return "INSERT INTO progettoweb.Indirizzo (idI, stato, regione, provincia, "
+        return "INSERT INTO progettoweb.indirizzo (idI, stato, regione, provincia, "
                 + "citta, via, nCivico, interno, latitudine, longitudine) VALUES "
                 + "(NULL, '"+stato+"', '"+regione+"', '"+provincia+"', '"+citta+"', '"+via+"', "+nCivico+", "+interno+", "+lat+", "+lon+"); "
                 + "SET @IDI = 1; "
-                + "SELECT @IDI:=idI FROM Indirizzo WHERE stato ='"+stato+"' AND "
+                + "SELECT @IDI:=idI FROM indirizzo WHERE stato ='"+stato+"' AND "
                 + "regione = '"+regione+"' AND provincia = '"+provincia+"' AND "
                 + "citta = '"+citta+"' AND via = '"+via+"' AND nCivico = "+nCivico+" AND interno = "+interno+"; "
-                + "INSERT INTO progettoweb.IndirizzoUtente (idI, idU) "
+                + "INSERT INTO progettoweb.indirizzoUtente (idI, idU) "
                 + "VALUES (@IDI, "+idU+");";
     }
 
     public static String insertAddress1(String stato, String regione, String provincia, String citta, String via, int nCivico, int interno, double lat, double lon){
-        return "INSERT INTO progettoweb.Indirizzo (idI, stato, regione, provincia, "
+        return "INSERT INTO progettoweb.indirizzo (idI, stato, regione, provincia, "
                 + "citta, via, nCivico, interno, latitudine, longitudine) VALUES "
                 + "(NULL, '"+stato+"', '"+regione+"', '"+provincia+"', '"+citta+"', '"+via+"', "+nCivico+", "+interno+", "+lat+", "+lon+"); ";
     }
@@ -830,13 +830,13 @@ public class usersQuery {
     }
 
     public static String insertAddress3(String stato, String regione, String provincia, String citta, String via, int nCivico, int interno, double lat, double lon){
-        return "SELECT @IDI:=idI FROM Indirizzo WHERE stato ='"+stato+"' AND "
+        return "SELECT @IDI:=idI FROM indirizzo WHERE stato ='"+stato+"' AND "
                 + "regione = '"+regione+"' AND provincia = '"+provincia+"' AND "
                 + "citta = '"+citta+"' AND via = '"+via+"' AND nCivico = "+nCivico+" AND interno = "+interno+"; ";
     }
 
     public static String insertAddress4(int idI,int idU){
-        return "INSERT INTO progettoweb.IndirizzoUtente (idI, idU) "
+        return "INSERT INTO progettoweb.indirizzoUtente (idI, idU) "
                 + "VALUES ("+idI+", "+idU+");";
     }
 
@@ -846,7 +846,7 @@ public class usersQuery {
      * @param idI Un intero che rappresenta l'identificativo dell'indirizzo preso in considerazione
      */
     public static String deleteAddress(int idI){
-        return "DELETE FROM Indirizzo WHERE idI ="+idI+";";
+        return "DELETE FROM indirizzo WHERE idI ="+idI+";";
     }
 
     /**
@@ -856,6 +856,6 @@ public class usersQuery {
      * @param idU id utente
      */
     public static String deleteAddressUtente(int idI, int idU){
-        return "DELETE FROM Indirizzo WHERE idI ="+idI+" AND idU ="+idU+";";
+        return "DELETE FROM indirizzo WHERE idI ="+idI+" AND idU ="+idU+";";
     }
 }
