@@ -512,6 +512,7 @@ public class DaoOrdine {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
+            System.out.println(e.toString());
         }
     }
     

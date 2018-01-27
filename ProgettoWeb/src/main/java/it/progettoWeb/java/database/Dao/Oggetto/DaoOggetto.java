@@ -5708,7 +5708,7 @@ public class DaoOggetto {
         catch (SQLException e) {}
     }
 
-     /**
+    /**
      * @author fbrug
      * Modificare la quantita' di un oggetto
      * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui modificare il prezzo
@@ -5720,6 +5720,22 @@ public class DaoOggetto {
         {
             Statement statement = connection.createStatement();
             statement.executeQuery(sellersQuery.updateObjectQuantity(idOggetto, newQuantity));
+        }
+        catch (SQLException e) {}
+    }
+    
+    /**
+     * @author fbrug
+     * Modificare la quantita' di un oggetto
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param newState: intero rappresentante il nuovo stato di disponibilita' per l'oggetto in questione
+     */
+    public void updateObjectStatus(String idOggetto, int newState)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(sellersQuery.updateObjectStatus(idOggetto, newState));
         }
         catch (SQLException e) {}
     }
