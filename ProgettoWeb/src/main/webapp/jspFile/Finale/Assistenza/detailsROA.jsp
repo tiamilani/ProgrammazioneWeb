@@ -46,17 +46,33 @@
                 
                 <br>
                 
-                <div class="row">
-                    <div class="col-3">
-                        <span>Venditore contestato</span>
+                <c:if test="${isVenditore == 0}">
+                    <div class="row">
+                        <div class="col-3">
+                            <span>Venditore contestato</span>
+                        </div>
+                        <div class="col-9">
+                            <span>
+                                <c:out value="${venditoreContestato.getCognome()}"/> 
+                                <c:out value="${venditoreContestato.getNome()}"/>
+                            </span>
+                        </div>
                     </div>
-                    <div class="col-9">
-                        <span>
-                            <c:out value="${venditoreContestato.getCognome()}"/> 
-                            <c:out value="${venditoreContestato.getNome()}"/>
-                        </span>
+                </c:if>
+                
+                <c:if test="${isVenditore == 1}">
+                    <div class="row">
+                        <div class="col-3">
+                            <span>Utente contestatore</span>
+                        </div>
+                        <div class="col-9">
+                            <span>
+                                <c:out value="${utenteContestatore.getCognome()}"/> 
+                                <c:out value="${utenteContestatore.getNome()}"/>
+                            </span>
+                        </div>
                     </div>
-                </div>
+                </c:if>
                 
                 <br>
                 

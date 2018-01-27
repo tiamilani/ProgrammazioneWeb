@@ -37,6 +37,7 @@ public class ModelloOggetto {
      * Variabile utilizzata per la descrizione dell'oggetto da parte del venditore
      */
     private String descrizione;
+    private double valutazione;
     /**
      * Variabile che indica o meno la presenza del ritiro in negozio
      */
@@ -160,6 +161,14 @@ public class ModelloOggetto {
      */
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
+    }
+    
+    public double getValutazione() {
+        return valutazione;
+    }
+
+    public void setValutazione(double valutazione) {
+        this.valutazione = valutazione;
     }
 
     /**

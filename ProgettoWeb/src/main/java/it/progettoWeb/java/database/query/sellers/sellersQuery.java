@@ -353,7 +353,7 @@ public class sellersQuery {
      */
     public static String selectServiceRequestBySellerID(int idVenditore)
     {
-        return "SELECT * FROM Utente JOIN Assistenza ON Utente.id=Assistenza.idVenditore "
+        return "SELECT * FROM Assistenza JOIN Utente ON Utente.id=Assistenza.idVenditore "
                 + "WHERE idVenditore=" + idVenditore + ";";
     }
 
@@ -566,6 +566,11 @@ public class sellersQuery {
     {
         return "DELETE FROM Oggetto WHERE id='" + idOggetto + "';";
     }
+    
+    public static String updateObjectStars(String idOggetto, double value)
+    {
+        return "UPDATE Oggetto SET valutazione=" + value + " WHERE id='" + idOggetto + "';";
+    }
 
     public static String updateObject(ModelloOggetto oggetto,String oldId){
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
@@ -635,6 +640,18 @@ public class sellersQuery {
     public static String updateObjectQuantity(String idOggetto, int newQuantity)
     {
         return "UPDATE Oggetto SET disponibilita="+ newQuantity + " WHERE id='" + idOggetto + "';";
+    }
+    
+    /**
+     * @author fbrug
+     * Modificare la quantita' di un oggetto
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param newState: intero rappresentante il nuovo stato di disponibilita' per l'oggetto in questione
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateObjectStatus(String idOggetto, int newState)
+    {
+        return "UPDATE Oggetto SET statoDisponibilita=" + newState + " WHERE id='" + idOggetto + "';";
     }
 
 

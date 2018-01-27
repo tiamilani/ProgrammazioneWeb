@@ -49,6 +49,7 @@ public class DaoOggetto {
     private static final String NOMEDOWNCASE="nomeDownCase";
     private static final String PREZZO="prezzo";
     private static final String DESCRIZIONE="descrizione";
+    private static final String VALUTAZIONE="valutazione";
     private static final String RITIROINNEGOZIO="ritiroInNegozio";
     private static final String DISPONIBILITA="disponibilita";
     private static final String STATODISPONIBILITA="statoDisponibilita";
@@ -85,6 +86,7 @@ public class DaoOggetto {
             Object.setNomeDownCase(rs.getString(NOMEDOWNCASE));
             Object.setPrezzo(rs.getDouble(PREZZO));
             Object.setDescrizione(rs.getString(DESCRIZIONE));
+            Object.setValutazione(rs.getDouble(VALUTAZIONE));
             Object.setRitiroInNegozio(rs.getInt(RITIROINNEGOZIO));
             Object.setDisponibilita(rs.getInt(DISPONIBILITA));
             Object.setStatoDisponibilita(rs.getInt(STATODISPONIBILITA));
@@ -5627,6 +5629,19 @@ public class DaoOggetto {
         }
         return true;
     }
+    
+    public boolean updateObjectStars(String idOggetto, double value)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sellersQuery.updateObjectStars(idOggetto, value));
+        }
+        catch (SQLException e) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * @author fbrug
@@ -5693,7 +5708,7 @@ public class DaoOggetto {
         catch (SQLException e) {}
     }
 
-     /**
+    /**
      * @author fbrug
      * Modificare la quantita' di un oggetto
      * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui modificare il prezzo
@@ -5705,6 +5720,22 @@ public class DaoOggetto {
         {
             Statement statement = connection.createStatement();
             statement.executeQuery(sellersQuery.updateObjectQuantity(idOggetto, newQuantity));
+        }
+        catch (SQLException e) {}
+    }
+    
+    /**
+     * @author fbrug
+     * Modificare la quantita' di un oggetto
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param newState: intero rappresentante il nuovo stato di disponibilita' per l'oggetto in questione
+     */
+    public void updateObjectStatus(String idOggetto, int newState)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(sellersQuery.updateObjectStatus(idOggetto, newState));
         }
         catch (SQLException e) {}
     }

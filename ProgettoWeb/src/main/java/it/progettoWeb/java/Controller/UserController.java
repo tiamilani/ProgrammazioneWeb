@@ -418,8 +418,9 @@ public class UserController extends HttpServlet {
                 try
                 {
                     ModelloListeOrdine carrelloInSessione = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
+                    ModelloListeOrdine carrelloInDB = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 0));
 
-                    for(ModelloOrdine ordineInCU : (daoOrdine.selectOrdersComplete(utente.getId(), 0)))
+                    for(ModelloOrdine ordineInCU : carrelloInDB.getList())
                         for(Iterator<ModelloOrdine> iterator = carrelloInSessione.getList().iterator(); iterator.hasNext();)
                         {
                             ModelloOrdine ordineInCIS = iterator.next();
@@ -434,9 +435,15 @@ public class UserController extends HttpServlet {
                                 iterator.remove();
                             }
                         }
-
+                    
+                    int idUtente = utente.getId();
+                    int idOrdine = carrelloInDB.get(0).getIdOrdine();
                     for(ModelloOrdine ordineInCIS : carrelloInSessione.getList())
+                    {
+                        ordineInCIS.setIdUtente(idUtente);
+                        ordineInCIS.setIdOrdine(idOrdine);
                         daoOrdine.insertObjectInCart(ordineInCIS);
+                    }
 
                     carrelloInSessione = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 0));
                     request.getSession().removeAttribute("carrelloSessione");

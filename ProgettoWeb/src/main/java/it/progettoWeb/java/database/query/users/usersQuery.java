@@ -687,12 +687,9 @@ public class usersQuery {
      * @param star Un intero indicante l'utilità della recensione
      */
     public static String addReviewToObject(String idO, int idU, String txt, int val, int star) {
-        String tmp = "INSERT INTO RecensioneOggetto (id, idOggetto, idUtente, testo, "
+        return "INSERT INTO RecensioneOggetto (id, idOggetto, idUtente, testo, "
                 + "valutazione, data, utilita) VALUES (NULL, '" + idO + "', " +
-                idU + ", '" + txt + "', " + val + ", CURRENT_TIMESTAMP, " + star + ");";
-        
-        System.out.println(tmp);
-        return tmp;
+                idU + ", '" + txt + "', " + val + ", CURRENT_TIMESTAMP, " + star + ");";        
     }
 
     /**
