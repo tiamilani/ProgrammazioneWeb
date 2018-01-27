@@ -152,7 +152,6 @@ function changeDescription(id)
     
     
     var idS = document.getElementById(index).getAttribute("data-idS");
-    alert(idS);
     document.getElementById("idS"+firstIndex).setAttribute("value", idS.toString());
 };
 

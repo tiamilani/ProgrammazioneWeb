@@ -309,8 +309,6 @@ public class OrdineController extends HttpServlet {
                     {
                         identificatore = "idS" + Integer.toString(i);
                         int idS = Integer.parseInt(request.getParameter(identificatore));
-                        System.out.println("identificatore = " + identificatore);
-                        System.out.println("idS = " + idS);
 
                         identificatore = "idOrdine" + Integer.toString(i);
                         int idO = Integer.parseInt(request.getParameter(identificatore));

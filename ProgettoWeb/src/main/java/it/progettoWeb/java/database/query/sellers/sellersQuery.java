@@ -761,7 +761,6 @@ public class sellersQuery {
      */
     public static String updateOrderIdS(int idOrdine, int idS)
     {
-        System.out.println("idS = " + idS);
         return "UPDATE Ordine SET idS = " + idS + " WHERE idOrdine = " + idOrdine + ";";
     }
 
