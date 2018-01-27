@@ -571,6 +571,11 @@ public class sellersQuery {
     {
         return "DELETE FROM Oggetto WHERE id='" + idOggetto + "';";
     }
+    
+    public static String updateObjectStars(String idOggetto, double value)
+    {
+        return "UPDATE Oggetto SET valutazione=" + value + " WHERE id='" + idOggetto + "';";
+    }
 
     public static String updateObject(ModelloOggetto oggetto,String oldId){
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");

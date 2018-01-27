@@ -49,6 +49,7 @@
             <div class="col-12 col-sm-12 col-md-6 col-lg-9 col-xl-9">
                 <div class="text-justify">
                     <h5>${oggetto.getDescrizione()}</h5><br>
+                    <h5>${oggetto.getValutazione()} / 5</h5><br/>
                     <h5>Venduto da: 
                         <c:url value="/UserController" var="sellerUrl">
                             <c:param name="action" value="DescrizioneVenditore" />

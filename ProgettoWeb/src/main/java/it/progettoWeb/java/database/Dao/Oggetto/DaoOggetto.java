@@ -49,6 +49,7 @@ public class DaoOggetto {
     private static final String NOMEDOWNCASE="nomeDownCase";
     private static final String PREZZO="prezzo";
     private static final String DESCRIZIONE="descrizione";
+    private static final String VALUTAZIONE="valutazione";
     private static final String RITIROINNEGOZIO="ritiroInNegozio";
     private static final String DISPONIBILITA="disponibilita";
     private static final String STATODISPONIBILITA="statoDisponibilita";
@@ -85,6 +86,7 @@ public class DaoOggetto {
             Object.setNomeDownCase(rs.getString(NOMEDOWNCASE));
             Object.setPrezzo(rs.getDouble(PREZZO));
             Object.setDescrizione(rs.getString(DESCRIZIONE));
+            Object.setValutazione(rs.getDouble(VALUTAZIONE));
             Object.setRitiroInNegozio(rs.getInt(RITIROINNEGOZIO));
             Object.setDisponibilita(rs.getInt(DISPONIBILITA));
             Object.setStatoDisponibilita(rs.getInt(STATODISPONIBILITA));
@@ -5621,6 +5623,19 @@ public class DaoOggetto {
         {
             Statement statement = connection.createStatement();
             statement.executeUpdate(sellersQuery.deleteObject(idOggetto));
+        }
+        catch (SQLException e) {
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean updateObjectStars(String idOggetto, double value)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sellersQuery.updateObjectStars(idOggetto, value));
         }
         catch (SQLException e) {
             return false;

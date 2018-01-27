@@ -99,6 +99,21 @@ public class DaoRecensioneOggetto {
         return recensioni;
     }
     
+    public int howManyReviewsO(String idO) {
+        int numRecensioni = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(genericsQuery.howManyReviewsO(idO));
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                numRecensioni = rs.getInt("counter");
+            }
+        } catch (SQLException e) {
+        }
+
+        return numRecensioni;
+    }
+    
     /**
      * @author andrea
      * Ottenere una specifica recensioni dati i parametri identificativi
