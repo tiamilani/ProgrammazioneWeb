@@ -862,4 +862,9 @@ public class sellersQuery {
     {
         return "INSERT INTO ordiniricevuti(idO, idV, data) VALUES (" + idOrdine + "," + idVenditore + ",CURRENT_TIMESTAMP)";
     }
+    
+    public static String updateShopStars(int idNegozio, double value)
+    {
+        return "UPDATE Negozio SET valutazione=" + value + " WHERE id=" + idNegozio + ";";
+    }
 }

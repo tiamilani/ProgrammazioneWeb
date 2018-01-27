@@ -834,4 +834,25 @@ public class usersQuery {
     public static String deleteAddressUtente(int idI, int idU){
         return "DELETE FROM Indirizzo WHERE idI ="+idI+" AND idU ="+idU+";";
     }
+    
+    /**
+     * @author Andrea
+     * Ottenere un intero indicante il numero di recensioni ottenuto
+     * @param idN Un intero che rappresenta l'identificativo del negozio preso in considerazione
+     * @return Integer: intero indicante il numero di recensioni ottenuto
+     */
+    public static String howManyReviews(int idN){
+        return "SELECT COUNT(*) AS counter FROM RecensioneNegozio "
+                + "WHERE RecensioneNegozio.idNegozio ="+idN+";";
+    }
+    
+    public static String howManyReviewV(int idV){
+        return "SELECT COUNT(*) AS counter FROM RecensioneVenditore "
+                + "WHERE RecensioneVenditore.idVenditore ="+idV+";";
+ 
+    }
+    public static String updateUserStars(int idUtente, double value)
+    {
+        return "UPDATE Utente SET valutazione=" + value + " WHERE id=" + idUtente + ";";
+    }
 }
