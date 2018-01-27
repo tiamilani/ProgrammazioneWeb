@@ -265,7 +265,7 @@ public class usersQuery {
      * @return String: lista di richieste di assistenza
      */
     public static String selectAskSupport(int idU){
-        return "SELECT * FROM Assistenza WHERE Assistenza.idUtente ="+idU+";";
+        return "SELECT * FROM assistenza WHERE assistenza.idUtente ="+idU+";";
     }
 
     /**
@@ -275,7 +275,7 @@ public class usersQuery {
      * @return String: informazioni di una richiesta di assistenza
      */
     public static String selectSpecifiedInfoSupport(int idA){
-        return "SELECT * FROM Assistenza WHERE Assistenza.id ="+idA+";";
+        return "SELECT * FROM assistenza WHERE assistenza.id ="+idA+";";
     }
 
 
@@ -289,7 +289,7 @@ public class usersQuery {
      */
     public static String selectAssistanceByState(int stato)
     {
-        return "SELECT * FROM Assistenza WHERE Assistenza.stato=" + stato + ";";
+        return "SELECT * FROM assistenza WHERE assistenza.stato=" + stato + ";";
     }
 
     /**
@@ -300,7 +300,7 @@ public class usersQuery {
      */
     public static String selectAssistanceByAdminId(int idAdmin)
     {
-        return "SELECT * FROM Assistenza WHERE Assistenza.idAmministratore=" + idAdmin + ";";
+        return "SELECT * FROM assistenza WHERE assistenza.idAmministratore=" + idAdmin + ";";
     }
 
     /**
@@ -312,7 +312,7 @@ public class usersQuery {
      */
     public static String selectAssistanceByAdminIdAndState(int idAdmin, int stato)
     {
-        return "SELECT * FROM Assistenza WHERE Assistenza.idAmministratore=" + idAdmin + " AND Assistenza.stato=" + stato + ";";
+        return "SELECT * FROM assistenza WHERE assistenza.idAmministratore=" + idAdmin + " AND assistenza.stato=" + stato + ";";
     }
 
     /*2017-12-25*/
@@ -326,8 +326,8 @@ public class usersQuery {
      */
     public static String updateAssistanceSolution(int idA, String solution)
     {
-        return "UPDATE progettoweb.Assistenza SET soluzione ='"+solution+"' WHERE "
-                + "Assistenza.id ="+idA+";";
+        return "UPDATE progettoweb.assistenza SET soluzione ='"+solution+"' WHERE "
+                + "assistenza.id ="+idA+";";
     }
 
     /**
@@ -339,8 +339,8 @@ public class usersQuery {
      */
     public static String updateAssistanceCloseDate(int idA, String date)
     {
-        return "UPDATE progettoweb.Assistenza SET dataChiusura ='"+date+"' WHERE "
-                + "Assistenza.id ="+idA+";";
+        return "UPDATE progettoweb.assistenza SET dataChiusura ='"+date+"' WHERE "
+                + "assistenza.id ="+idA+";";
     }
 
     /**
@@ -352,8 +352,8 @@ public class usersQuery {
      */
     public static String updateAssistanceState(int idA, int state)
     {
-        return "UPDATE progettoweb.Assistenza SET stato ="+state+" WHERE "
-                + "Assistenza.id ="+idA+";";
+        return "UPDATE progettoweb.assistenza SET stato ="+state+" WHERE "
+                + "assistenza.id ="+idA+";";
     }
 
     /**
@@ -364,7 +364,7 @@ public class usersQuery {
      */
     public static String updateAssistance(ModelloAssistenza assistance)
     {
-        return "UPDATE progettoweb.Assistenza SET "
+        return "UPDATE progettoweb.assistenza SET "
                 + "idUtente="+assistance.getIdUtente()+","
                 + "idVenditore="+assistance.getIdVenditore()+","
                 + "idAmministratore="+assistance.getIdAmministratore()+","
@@ -426,7 +426,7 @@ public class usersQuery {
      * @return String: lista di assistenze
      */
     public static String selectSupportOfOrder(int idO){
-        return "SELECT * FROM Assistenza WHERE Assistenza.idOrdine ="+idO+";";
+        return "SELECT * FROM assistenza WHERE assistenza.idOrdine ="+idO+";";
     }
 
     /**
