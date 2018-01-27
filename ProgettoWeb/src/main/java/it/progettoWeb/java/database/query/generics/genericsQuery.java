@@ -26,27 +26,27 @@ public class genericsQuery {
      */
     public static String selectAllCategory()
     {
-        return "SELECT * FROM categoria;";
+        return "SELECT * FROM Categoria;";
     }
 
     public static String selectRandomObjects(int limit)
     {
-        return "SELECT * FROM oggetto ORDER BY RAND() LIMIT " + limit + ";";
+        return "SELECT * FROM Oggetto ORDER BY RAND() LIMIT " + limit + ";";
     }
 
     public static String selectRandomObjectsAndImages(int limit)
     {
-        return "SELECT oggetto.*, imageOggetto.* FROM oggetto JOIN imageOggetto ON oggetto.id=imageOggetto.idO GROUP BY oggetto.id,imageOggetto.src ORDER BY RAND() LIMIT " + limit + ";";
+        return "SELECT Oggetto.*, imageOggetto.* FROM Oggetto JOIN imageOggetto ON Oggetto.id=imageOggetto.idO GROUP BY Oggetto.id,imageOggetto.src ORDER BY RAND() LIMIT " + limit + ";";
     }
 
     public static String selectObjectsImageSelledByStoreID(int idNegozio)
     {
-        return "SELECT oggetto.*, imageOggetto.* FROM oggetto JOIN imageOggetto ON oggetto.id=imageOggetto.idO WHERE oggetto.idNegozio = " + idNegozio + " GROUP BY oggetto.id ORDER BY RAND();";
+        return "SELECT Oggetto.*, imageOggetto.* FROM Oggetto JOIN imageOggetto ON Oggetto.id=imageOggetto.idO WHERE Oggetto.idNegozio = " + idNegozio + " GROUP BY Oggetto.id ORDER BY RAND();";
     }
 
     public static String selectAddressByIdAddress(int idAddress)
     {
-        return "SELECT * FROM indirizzo WHERE idI = " + idAddress + ";";
+        return "SELECT * FROM Indirizzo WHERE idI = " + idAddress + ";";
     }
 
 
@@ -68,7 +68,7 @@ public class genericsQuery {
      */
     public static String selectCategoryById(int id)
     {
-        return "SELECT * FROM categoria WHERE id="+id+";";
+        return "SELECT * FROM Categoria WHERE id="+id+";";
     }
 
     /**
@@ -79,12 +79,12 @@ public class genericsQuery {
      */
     public static String selectAllUsersByType(int utenteType)
     {
-        return "SELECT * FROM utente WHERE UtenteType = " + utenteType + ";";
+        return "SELECT * FROM Utente WHERE UtenteType = " + utenteType + ";";
     }
 
     public static String selectUserByEmail(String email)
     {
-        return "SELECT * FROM utente WHERE mail = '" + email + "';";
+        return "SELECT * FROM Utente WHERE mail = '" + email + "';";
     }
 
     /**
@@ -96,7 +96,7 @@ public class genericsQuery {
      */
     public static String selectUserByEmailAndPassword(String mail, String password)
     {
-        return "SELECT * FROM utente WHERE mail = '" + mail + "' AND password = '" + password + "';";
+        return "SELECT * FROM Utente WHERE mail = '" + mail + "' AND password = '" + password + "';";
     }
 
     /**
@@ -107,7 +107,7 @@ public class genericsQuery {
      */
     public static String selectAllUsersByName(String nome)
     {
-        return "SELECT * FROM utente WHERE nome = '" + nome + "';";
+        return "SELECT * FROM Utente WHERE nome = '" + nome + "';";
     }
 
     /**
@@ -119,7 +119,7 @@ public class genericsQuery {
      */
     public static String selectAllUsersByNameAndSurname(String nome, String cognome)
     {
-        return "SELECT * FROM utente WHERE nome = '" + nome + "' AND cognome = '" + cognome + "';";
+        return "SELECT * FROM Utente WHERE nome = '" + nome + "' AND cognome = '" + cognome + "';";
     }
 
     /**
@@ -130,7 +130,7 @@ public class genericsQuery {
      */
     public static String selectUserByID(int idUtente)
     {
-        return "SELECT * FROM utente WHERE id = " + idUtente + ";";
+        return "SELECT * FROM Utente WHERE id = " + idUtente + ";";
     }
 
     /**
@@ -141,7 +141,7 @@ public class genericsQuery {
      */
     public static String selectStoreById(int idStore)
     {
-        return "SELECT * FROM negozio WHERE id = " + idStore + ";";
+        return "SELECT * FROM Negozio WHERE id = " + idStore + ";";
     }
 
     /**
@@ -152,15 +152,15 @@ public class genericsQuery {
      */
     public static String selectAddressByUserID(int idUtente)
     {
-        return "SELECT indirizzo.* "
-               + "FROM indirizzo INNER JOIN indirizzoUtente ON "
-               + "(indirizzo.idI = indirizzoUtente.idI AND indirizzoUtente.idU = " + idUtente + ");";
+        return "SELECT Indirizzo.* "
+               + "FROM Indirizzo INNER JOIN IndirizzoUtente ON "
+               + "(Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = " + idUtente + ");";
     }
 
     public static String selectAddressLatLng(double lat, double lng)
     {
         return "SELECT * "
-               + "FROM indirizzo "
+               + "FROM Indirizzo "
                + "WHERE latitudine="+lat+" and longitudine="+lng+";";
     }
 
@@ -173,9 +173,9 @@ public class genericsQuery {
      */
     public static String selectUserAndAddressByEmailAndPassword(String mail, String password)
     {
-        return "SELECT utente.*, indirizzo.* "
-               + "FROM utente INNER JOIN indirizzoUtente INNER JOIN indirizzo "
-               + "ON (utente.mail = '" + mail + "' AND utente.password = '" + password + "' AND indirizzo.idI = indirizzoUtente.idI AND indirizzoUtente.idU = utente.id);";
+        return "SELECT Utente.*, Indirizzo.* "
+               + "FROM Utente INNER JOIN IndirizzoUtente INNER JOIN Indirizzo "
+               + "ON (Utente.mail = '" + mail + "' AND Utente.password = '" + password + "' AND Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = Utente.id);";
     }
 
     /**
@@ -186,9 +186,9 @@ public class genericsQuery {
      */
     public static String selectUserAndAddressByUserID(int idUtente)
     {
-        return "SELECT utente.*, indirizzo.* "
-               + "FROM utente INNER JOIN indirizzoUtente INNER JOIN indirizzo "
-               + "ON (utente.id = " + idUtente + " AND indirizzo.idI = indirizzoUtente.idI AND indirizzoUtente.idU = utente.id);";
+        return "SELECT Utente.*, Indirizzo.* "
+               + "FROM Utente INNER JOIN IndirizzoUtente INNER JOIN Indirizzo "
+               + "ON (Utente.id = " + idUtente + " AND Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = Utente.id);";
     }
 
     /**
@@ -204,36 +204,36 @@ public class genericsQuery {
 
     /**
      * @author andrea
-     * Ottenere coppia negozio, indirizzo
+     * Ottenere coppia Negozio, Indirizzo
      * @param idUtente
-     * @return negozio.*, indirizzo.*
+     * @return Negozio.*, Indirizzo.*
      */
     public static String selectStoreAndAddressByUser(int idUtente)
     {
-        return "SELECT negozio.*, indirizzo.* FROM negozio JOIN indirizzo ON negozio.idI=indirizzo.idI WHERE negozio.idVenditore=" + idUtente + ";";
+        return "SELECT Negozio.*, Indirizzo.* FROM Negozio JOIN Indirizzo ON Negozio.idI=Indirizzo.idI WHERE Negozio.idVenditore=" + idUtente + ";";
     }
 
     /**
      * @author andrea
-     * Ottenere tris negozio, indirizzo, Immagine
+     * Ottenere tris Negozio, Indirizzo, Immagine
      * @param idUtente
-     * @return negozio.*, indirizzo.*, Immaginenegozio.*
+     * @return Negozio.*, Indirizzo.*, ImmagineNegozio.*
      */
     public static String selectStoreAndAddressImageByUser(int idUtente)
     {
-        return "SELECT negozio.*, indirizzo.*, imagenegozio.* FROM negozio JOIN indirizzo ON negozio.idI=indirizzo.idI JOIN imagenegozio ON negozio.id=imagenegozio.idN WHERE negozio.idVenditore=" + idUtente + " GROUP BY negozio.id;";
+        return "SELECT Negozio.*, Indirizzo.*, imageNegozio.* FROM Negozio JOIN Indirizzo ON Negozio.idI=Indirizzo.idI JOIN imageNegozio ON Negozio.id=imageNegozio.idN WHERE Negozio.idVenditore=" + idUtente + " GROUP BY Negozio.id;";
     }
 
     /**
      * @author andrea
-     * Ottenere tris negozio, indirizzo, Immagine
+     * Ottenere tris Negozio, Indirizzo, Immagine
      * @param idNegozio Id del negozio di cui si vogliono le informazioni
-     * @return negozio.*, indirizzo.*, Immaginenegozio.*
+     * @return Negozio.*, Indirizzo.*, ImmagineNegozio.*
      */
     public static String selectStoreAddressImageByStoreID(int idNegozio)
     {
-        //Update, rimosso group by negozio.id, visto che la ricerca restituirà un risultato univoco dato dall'id del negozio non serve effettuare il group by che altrimenti dava errore sql
-        return "SELECT negozio.*, indirizzo.*, imagenegozio.* FROM negozio JOIN indirizzo ON negozio.idI=indirizzo.idI JOIN imagenegozio ON negozio.id=imagenegozio.idN WHERE negozio.id=" + idNegozio + ";";
+        //Update, rimosso group by Negozio.id, visto che la ricerca restituirà un risultato univoco dato dall'id del negozio non serve effettuare il group by che altrimenti dava errore sql
+        return "SELECT Negozio.*, Indirizzo.*, imageNegozio.* FROM Negozio JOIN Indirizzo ON Negozio.idI=Indirizzo.idI JOIN imageNegozio ON Negozio.id=imageNegozio.idN WHERE Negozio.id=" + idNegozio + ";";
     }
 
     /**
@@ -245,9 +245,9 @@ public class genericsQuery {
      */
     public static String selectUserAndAddressAndImageByEmailAndPassword(String mail, String password)
     {
-        return "SELECT utente.*, indirizzo.*, imageUtente.src "
-               + "FROM utente INNER JOIN indirizzoUtente INNER JOIN indirizzo ON (utente.mail = '" + mail + "' AND utente.password = '" + password + "' AND indirizzo.idI = indirizzoUtente.idI AND indirizzoUtente.idU = utente.id) "
-               + "LEFT JOIN imageUtente ON (imageUtente.idU = utente.id);";
+        return "SELECT Utente.*, Indirizzo.*, imageUtente.src "
+               + "FROM Utente INNER JOIN IndirizzoUtente INNER JOIN Indirizzo ON (Utente.mail = '" + mail + "' AND Utente.password = '" + password + "' AND Indirizzo.idI = IndirizzoUtente.idI AND IndirizzoUtente.idU = Utente.id) "
+               + "LEFT JOIN imageUtente ON (imageUtente.idU = Utente.id);";
     }
 
     /**
@@ -258,8 +258,8 @@ public class genericsQuery {
     public static String selectAdministratorByNumerOfRequests()
     {
         return "SELECT DISTINCT COUNT(A2.idAmministratore) as contatore, A1.idAmministratore as id "
-               + "FROM assistenza A1 "
-               + "LEFT JOIN assistenza A2 ON (A1.idAmministratore = A2.idAmministratore) "
+               + "FROM Assistenza A1 "
+               + "LEFT JOIN Assistenza A2 ON (A1.idAmministratore = A2.idAmministratore) "
                + "GROUP BY A1.id "
                + "ORDER BY contatore DESC;";
     }
@@ -273,8 +273,8 @@ public class genericsQuery {
     public static String selectAdministratorByNumerOfPendingRequests()
     {
         return "SELECT DISTINCT COUNT(A2.idAmministratore) as contatore, A1.idAmministratore as id "
-               + "FROM assistenza A1 "
-               + "LEFT JOIN assistenza A2 ON (A1.idAmministratore = A2.idAmministratore) "
+               + "FROM Assistenza A1 "
+               + "LEFT JOIN Assistenza A2 ON (A1.idAmministratore = A2.idAmministratore) "
                + "WHERE A1.stato=0 "
                + "GROUP BY A1.id "
                + "ORDER BY contatore DESC;";
@@ -301,7 +301,7 @@ public class genericsQuery {
      */
     public static String updateUserEmailByUserID(int idUtente, String mail)
     {
-        return "UPDATE utente SET utente.mail = '" + mail + "' WHERE utente.id = " + idUtente + ";";
+        return "UPDATE Utente SET Utente.mail = '" + mail + "' WHERE Utente.id = " + idUtente + ";";
     }
 
     /**
@@ -313,7 +313,7 @@ public class genericsQuery {
      */
     public static String updateUserPasswordByUserID(int idUtente, String password)
     {
-        return "UPDATE utente SET utente.password = '" + password + "' WHERE utente.id = " + idUtente + ";";
+        return "UPDATE Utente SET Utente.password = '" + password + "' WHERE Utente.id = " + idUtente + ";";
     }
 
     /**
@@ -335,17 +335,17 @@ public class genericsQuery {
     public static String updateUserAddressByAddressID(int addrID, String stato, String regione, String provincia, String citta, String via,
                                                       int nCivico, int interno, double latitudine, double longitudine)
     {
-        return "UPDATE indirizzo"
-               + " SET indirizzo.citta = '" + citta
-               + "', indirizzo.interno = " + interno
-               + ", indirizzo.latitudine = " + latitudine
-               + ", indirizzo.longitudine = " + longitudine
-               + ", indirizzo.nCivico = " + nCivico
-               + ", indirizzo.provincia = '" + provincia
-               + "', indirizzo.regione = '" + regione
-               + "', indirizzo.stato = '" + stato
-               + "', indirizzo.via = '" + via
-               + "' WHERE indirizzo.idI = " + addrID + ";";
+        return "UPDATE Indirizzo"
+               + " SET Indirizzo.citta = '" + citta
+               + "', Indirizzo.interno = " + interno
+               + ", Indirizzo.latitudine = " + latitudine
+               + ", Indirizzo.longitudine = " + longitudine
+               + ", Indirizzo.nCivico = " + nCivico
+               + ", Indirizzo.provincia = '" + provincia
+               + "', Indirizzo.regione = '" + regione
+               + "', Indirizzo.stato = '" + stato
+               + "', Indirizzo.via = '" + via
+               + "' WHERE Indirizzo.idI = " + addrID + ";";
     }
 
     /**
@@ -369,7 +369,7 @@ public class genericsQuery {
     public static String insertUserImage(int idUtente, String imagePath)
     {
         return "INSERT INTO imageUtente (src,idU) "
-               + "SELECT '" + imagePath + "', utente.id FROM utente WHERE utente.id = " + idUtente + ";";
+               + "SELECT '" + imagePath + "', Utente.id FROM Utente WHERE Utente.id = " + idUtente + ";";
     }
 
     /**
@@ -378,7 +378,7 @@ public class genericsQuery {
      * @return String: Informazioni sulle recensioni dell'oggetto ricercato
      */
     public static String selectReviewsObjects(String idO) {
-        return "SELECT * FROM recensioneOggetto WHERE idOggetto = '" + idO + "';";
+        return "SELECT * FROM RecensioneOggetto WHERE idOggetto = '" + idO + "';";
     }
 
     /**
@@ -409,7 +409,7 @@ public class genericsQuery {
      * @return ModelloRecensioneOggetto
      */
     public static String selectReviewsByDataO(String idO, int idUtente, String testo, int valutazione) {
-        return "SELECT * FROM recensioneOggetto WHERE idOggetto = '" + idO + "' AND "
+        return "SELECT * FROM RecensioneOggetto WHERE idOggetto = '" + idO + "' AND "
                 + "idUtente=" + idUtente + " AND testo='" + testo + "' AND valutazione=" + valutazione + ";";
     }
 
@@ -422,7 +422,7 @@ public class genericsQuery {
      * @return ModelloRecensioneOggetto
      */
     public static String selectReviewsByDataN(int idN, int idUtente, String testo, int valutazione) {
-        return "SELECT * FROM recensioneNegozio WHERE idNegozio = '" + idN + "' AND "
+        return "SELECT * FROM RecensioneNegozio WHERE idNegozio = '" + idN + "' AND "
                 + "idUtente=" + idUtente + " AND testo='" + testo + "' AND valutazione=" + valutazione + ";";
     }
 
@@ -435,13 +435,13 @@ public class genericsQuery {
      * @return ModelloRecensioneOggetto
      */
     public static String selectReviewsByDataV(int idV, int idUtente, String testo, int valutazione) {
-        return "SELECT * FROM recensioneVenditore WHERE idVenditore = '" + idV + "' AND "
+        return "SELECT * FROM RecensioneVenditore WHERE idVenditore = '" + idV + "' AND "
                 + "idUtente=" + idUtente + " AND testo='" + testo + "' AND valutazione=" + valutazione + ";";
     }
 
     public static String selectNumberOfAddress(ModelloIndirizzo indirizzo, int idU) {
         return "select COUNT(idI) AS numIndirizzi "
-                + "from indirizzo NATURAL JOIN indirizzoUtente "
+                + "from Indirizzo NATURAL JOIN IndirizzoUtente "
                 + "WHERE stato='"+indirizzo.getStato()+"' AND "
                 + "regione='"+indirizzo.getRegione()+"' AND "
                 + "provincia='"+indirizzo.getProvincia()+"' AND "
