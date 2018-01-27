@@ -96,14 +96,14 @@
                                     <div class="col-4">
                                         <c:if test="${sconto > 0}">
                                             <c:set var="prezzoScontato" value="${prezzo - (prezzo * sconto / 100)}"/>
-                                            <p><del>&euro; <fmt:formatNumber type = "number"  minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzo}" /></del></p>
-                                            &euro; <span id="lblPrezzoScontato${iterator}"><fmt:formatNumber type = "number"  minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzoScontato}" /></span>
+                                            <p><del>&euro; <fmt:formatNumber groupingUsed = "false" type = "number"  minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzo}" /></del></p>
+                                            &euro; <span id="lblPrezzoScontato${iterator}"><fmt:formatNumber groupingUsed = "false" type = "number"  minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzoScontato}" /></span>
                                             <p>(Applicato sconto del <c:out value="${sconto}"/> %)</p>
 
                                             <c:set var="prezzoTot" value="${prezzoTot + (prezzoScontato * quantita)}"/>
                                         </c:if>
                                         <c:if test="${sconto == 0}">
-                                            &euro; <span id="lblPrezzo${iterator}"><fmt:formatNumber type = "number" minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzo}" /></span>
+                                            &euro; <span id="lblPrezzo${iterator}"><fmt:formatNumber groupingUsed = "false" type = "number" minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzo}" /></span>
 
                                             <c:set var="prezzoTot" value="${prezzoTot + (prezzo * quantita)}"/>
                                         </c:if>
@@ -130,7 +130,7 @@
                 </div>
                 
                 <hr size="3" width="100%" align="left"/>
-                <p id="lblResultCart" style="text-align: left" data-oldvaluePrezzo="${prezzoTot}" data-oldvalueOggetti="${nOggetti}"><b>Prezzo provvisorio (<c:out value="${nOggetti}"/> articoli): &euro; <fmt:formatNumber type = "number" minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzoTot}"/></b></p>
+                <p id="lblResultCart" style="text-align: left" data-oldvaluePrezzo="${prezzoTot}" data-oldvalueOggetti="${nOggetti}"><b>Prezzo provvisorio (<c:out value="${nOggetti}"/> articoli): &euro; <fmt:formatNumber groupingUsed = "false" type = "number" minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzoTot}"/></b></p>
                 
                 <button class="btn btn-outline-primary buttonSpace" type="button" onclick="saveChanges(0)">Salva modifiche al carrello</button>
                 <c:if test="${utenteSessioneID == -1}">

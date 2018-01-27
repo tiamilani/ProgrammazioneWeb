@@ -353,7 +353,7 @@ public class sellersQuery {
      */
     public static String selectServiceRequestBySellerID(int idVenditore)
     {
-        return "SELECT * FROM Utente JOIN Assistenza ON Utente.id=Assistenza.idVenditore "
+        return "SELECT * FROM Assistenza JOIN Utente ON Utente.id=Assistenza.idVenditore "
                 + "WHERE idVenditore=" + idVenditore + ";";
     }
 
@@ -641,6 +641,18 @@ public class sellersQuery {
     {
         return "UPDATE Oggetto SET disponibilita="+ newQuantity + " WHERE id='" + idOggetto + "';";
     }
+    
+    /**
+     * @author fbrug
+     * Modificare la quantita' di un oggetto
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param newState: intero rappresentante il nuovo stato di disponibilita' per l'oggetto in questione
+     * @return String: conferma avvenuta operazione
+     */
+    public static String updateObjectStatus(String idOggetto, int newState)
+    {
+        return "UPDATE Oggetto SET statoDisponibilita=" + newState + " WHERE id='" + idOggetto + "';";
+    }
 
 
     /**
@@ -744,6 +756,7 @@ public class sellersQuery {
      */
     public static String updateOrderIdS(int idOrdine, int idS)
     {
+        System.out.println("idS = " + idS);
         return "UPDATE Ordine SET idS = " + idS + " WHERE idOrdine = " + idOrdine + ";";
     }
 

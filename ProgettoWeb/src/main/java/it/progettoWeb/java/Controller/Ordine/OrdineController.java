@@ -119,9 +119,6 @@ public class OrdineController extends HttpServlet {
             ModelloListeOrdine orders = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
             int utenteSessioneID = utenteSessione.getId();
             
-            //System.out.println("----------------");
-            //System.out.println("idUtente = " + utenteSessioneID);
-            
             if(orders.getSize() > 0)
             {
                 if(utenteSessioneID != -1)
@@ -143,7 +140,6 @@ public class OrdineController extends HttpServlet {
                 for (ModelloOrdine order : orders.getList())
                 {
                     idOggetto = order.getIdOggetto();
-                    //System.out.println("idOggetto = " + idOggetto);
                     objects.add(new pair<>(daoOggetto.getObjectById(idOggetto), daoImmagineOggetto.selectFirstPhotoObject(idOggetto)));
                     
                     negozi.add(daoNegozio.getStoreById(order.getIdNegozio()));
@@ -163,16 +159,11 @@ public class OrdineController extends HttpServlet {
                         List<ModelloListeTipoSpedizione> tipiSpedizione = new ArrayList<>();
 
                         for (ModelloOrdine order : orders.getList())
-                        {
-                            
-                            //System.out.println("idOggetto = " + order.getIdOggetto());
-                            
+                        {                            
                             //Recupero TipoSpedizione in base all'ID dell'oggetto
                             ModelloListeTipoSpedizione tipiSpedizioneOggetto = new ModelloListeTipoSpedizione(daoTipoSpedizione.selectDeliveryTypesByIdO(order.getIdOggetto()));
 
                             tipiSpedizione.add(tipiSpedizioneOggetto);
-                            
-                            //System.out.println("tipospedizione = " + tipiSpedizioneOggetto.get(0).getIdS());
                         }
 
                         request.setAttribute("listaTipiSpedizione", tipiSpedizione);
@@ -318,6 +309,8 @@ public class OrdineController extends HttpServlet {
                     {
                         identificatore = "idS" + Integer.toString(i);
                         int idS = Integer.parseInt(request.getParameter(identificatore));
+                        System.out.println("identificatore = " + identificatore);
+                        System.out.println("idS = " + idS);
 
                         identificatore = "idOrdine" + Integer.toString(i);
                         int idO = Integer.parseInt(request.getParameter(identificatore));
@@ -348,7 +341,11 @@ public class OrdineController extends HttpServlet {
 
                         idVenditori.add(daoNegozio.getStoreById(order.getIdNegozio()).getIdVenditore());
 
-                        daoOggetto.updateObjectQuantity(order.getIdOggetto(), ((daoOggetto.getObjectById(order.getIdOggetto())).getDisponibilita() - order.getQuantita()));
+                        
+                        int quantitaResidua = (daoOggetto.getObjectById(order.getIdOggetto())).getDisponibilita() - order.getQuantita();
+                        daoOggetto.updateObjectQuantity(order.getIdOggetto(), quantitaResidua);
+                        if(quantitaResidua == 0)
+                            daoOggetto.updateObjectStatus(order.getIdOggetto(), 2); // statoDisponibilita = 2 -> NON DISPONIBILE
                     }
 
                     //Aggiungo righe alla tabella ordiniRicevuti

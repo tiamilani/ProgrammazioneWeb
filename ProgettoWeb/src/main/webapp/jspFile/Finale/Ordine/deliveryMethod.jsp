@@ -120,7 +120,7 @@
                                         </div>
                                         <!-- Prezzo del prodotto -->
                                         <div class="row">
-                                            <span>&euro; <fmt:formatNumber type = "number"  minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzoScontato}" /></span>
+                                            <span>&euro; <fmt:formatNumber groupingUsed = "false" type = "number"  minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzoScontato}" /></span>
                                         </div>
                                         <!-- Quantita' prodotto nel carrello -->
                                         <div class="row">
