@@ -50,6 +50,7 @@ public class DaoOggetto {
     private static final String NOMEDOWNCASE="nomeDownCase";
     private static final String PREZZO="prezzo";
     private static final String DESCRIZIONE="descrizione";
+    private static final String VALUTAZIONE="valutazione";
     private static final String RITIROINNEGOZIO="ritiroInNegozio";
     private static final String DISPONIBILITA="disponibilita";
     private static final String STATODISPONIBILITA="statoDisponibilita";
@@ -86,6 +87,7 @@ public class DaoOggetto {
             Object.setNomeDownCase(rs.getString(NOMEDOWNCASE));
             Object.setPrezzo(rs.getDouble(PREZZO));
             Object.setDescrizione(rs.getString(DESCRIZIONE));
+            Object.setValutazione(rs.getDouble(VALUTAZIONE));
             Object.setRitiroInNegozio(rs.getInt(RITIROINNEGOZIO));
             Object.setDisponibilita(rs.getInt(DISPONIBILITA));
             Object.setStatoDisponibilita(rs.getInt(STATODISPONIBILITA));
@@ -5602,7 +5604,7 @@ public class DaoOggetto {
      * @param dataFineSconto: indica la data in cui terminerà lo sconto applicato all'oggetto
      * @param idCategoria: intero rappresentante l'ID della categoria di cui l'oggetto fa parte
      */
-    public void insertObject(String id,int idNegozio, String nomeOggetto,String nomeDownCase, double prezzoOggetto,
+    public boolean insertObject(String id,int idNegozio, String nomeOggetto,String nomeDownCase, double prezzoOggetto,
             String descrizioneOggetto, int ritiroInNegozio, int disponibilita, int statoDisponibilita,
             double sconto, Date dataFineSconto, int idCategoria)
     {
@@ -5611,7 +5613,10 @@ public class DaoOggetto {
             Statement statement = connection.createStatement();
             statement.executeUpdate(sellersQuery.insertObject(id,idNegozio, nomeOggetto,nomeDownCase, prezzoOggetto, descrizioneOggetto,
                     ritiroInNegozio, disponibilita, statoDisponibilita, sconto, dataFineSconto, idCategoria));
-        } catch(SQLException e) {}
+        } catch(SQLException e) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -5619,14 +5624,30 @@ public class DaoOggetto {
      * Rimuovere un oggetto da un proprio negozio
      * @return String: conferma avvenuta operazione
      */
-    public void deleteObject(String idOggetto)
+    public boolean deleteObject(String idOggetto)
     {
         try
         {
             Statement statement = connection.createStatement();
             statement.executeUpdate(sellersQuery.deleteObject(idOggetto));
         }
-        catch (SQLException e) {}
+        catch (SQLException e) {
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean updateObjectStars(String idOggetto, double value)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sellersQuery.updateObjectStars(idOggetto, value));
+        }
+        catch (SQLException e) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -5694,7 +5715,7 @@ public class DaoOggetto {
         catch (SQLException e) {}
     }
 
-     /**
+    /**
      * @author fbrug
      * Modificare la quantita' di un oggetto
      * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui modificare il prezzo
@@ -5706,6 +5727,22 @@ public class DaoOggetto {
         {
             Statement statement = connection.createStatement();
             statement.executeQuery(sellersQuery.updateObjectQuantity(idOggetto, newQuantity));
+        }
+        catch (SQLException e) {}
+    }
+    
+    /**
+     * @author fbrug
+     * Modificare la quantita' di un oggetto
+     * @param idOggetto: stringa rappresentante l'ID dell'oggetto a cui modificare il prezzo
+     * @param newState: intero rappresentante il nuovo stato di disponibilita' per l'oggetto in questione
+     */
+    public void updateObjectStatus(String idOggetto, int newState)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(sellersQuery.updateObjectStatus(idOggetto, newState));
         }
         catch (SQLException e) {}
     }
@@ -8424,12 +8461,15 @@ public class DaoOggetto {
         return res;
     }
 
-    public void updateObject(ModelloOggetto object, String previusId) {
+    public boolean updateObject(ModelloOggetto object, String previusId) {
         try
         {
             Statement statement = connection.createStatement();
             statement.executeUpdate(sellersQuery.updateObject(object, previusId));
-        } catch(SQLException e) {}
+        } catch(SQLException e) {
+            return false;
+        }
+        return true;
     }
     
     /**

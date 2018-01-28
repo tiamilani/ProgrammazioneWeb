@@ -512,6 +512,7 @@ public class DaoOrdine {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
+            System.out.println(e.toString());
         }
     }
     
@@ -603,5 +604,16 @@ public class DaoOrdine {
             Statement statement = connection.createStatement();
             statement.executeUpdate(sellersQuery.updateOrderDataArrivoPrevista(ordine, dt));
         } catch(SQLException e) {}
+    }
+
+    public String insertObjectInCartFirstTime(ModelloOrdine oggetto) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(usersQuery.insertObjectInCartFistTime(oggetto.getIdUtente(), oggetto.getQuantita(), oggetto.getIdOggetto()));
+            preparedStatement.executeUpdate();
+            return usersQuery.insertObjectInCartFistTime(oggetto.getIdUtente(), oggetto.getQuantita(), oggetto.getIdOggetto());
+        } catch (SQLException e) {
+            return usersQuery.insertObjectInCartFistTime(oggetto.getIdUtente(), oggetto.getQuantita(), oggetto.getIdOggetto());
+        }
     }
 }

@@ -626,17 +626,17 @@ public class DaoNegozio {
      * Aggiungere un proprio negozio
      * @param negozio: negozio da inserire
      */
-    public String insertShop(ModelloNegozio negozio)
+    public boolean insertShop(ModelloNegozio negozio)
     {
         try
         {
             Statement statement = connection.createStatement();
             statement.executeUpdate(sellersQuery.insertShop(negozio));
-            return "OK";
         }
         catch (SQLException e) {
-            return e.toString();
+            return false;
         }
+        return true;
     }
     
     /**
@@ -645,14 +645,30 @@ public class DaoNegozio {
      * @param idNegozio: intero rappresentante l'ID del negozio a cui cambiare lo stato
      * @param attivo: nuovo stato del negozio (0 = chiuso, 1 = in attività)
      */
-    public void updateShopStatus(int idNegozio, int attivo)
+    public boolean updateShopStatus(int idNegozio, int attivo)
     {
         try
         {
             Statement statement = connection.createStatement();
             statement.executeUpdate(sellersQuery.updateShopStatus(idNegozio, attivo));
         }
-        catch (SQLException e) {}
+        catch (SQLException e) {
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean updateShopStars(int idNegozio, double value)
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sellersQuery.updateShopStars(idNegozio, value));
+        }
+        catch (SQLException e) {
+            return false;
+        }
+        return true;
     }
     
    /**

@@ -165,6 +165,21 @@ public class DaoRecensioneVenditore {
         return recensioni;
     }
     
+    public int howManyReviews(int idV) {
+        int numRecensioni = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(usersQuery.howManyReviewV(idV));
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                numRecensioni = rs.getInt("counter");
+            }
+        } catch (SQLException e) {
+        }
+
+        return numRecensioni;
+    }
+    
     /**
      * @author Mattia
      * Ottenere la lista delle proprie recensioni Venditore dalla più utile
@@ -231,6 +246,28 @@ public class DaoRecensioneVenditore {
         int numRecensioni = 0;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(usersQuery.reviewOrNotSeller(idV, idU));
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                numRecensioni = rs.getInt("counter");
+            }
+        } catch (SQLException e) {
+        }
+
+        return numRecensioni;
+    }
+    
+    /**
+     * @author Mattia
+     * Ottenere un boolean se si ha acquistato oppure no da un venditore (se il count è 1 vuol dire di si)
+     * @param idV Un intero identificativo del venditore preso in considerazione
+     * @param idU Un intero identificativo dell'utente preso in considerazione
+     * @return int NumRecensioni
+     */
+    public int buyOrNotFromSeller(int idV, int idU) {
+        int numRecensioni = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(usersQuery.buyOrNotFromSeller(idV, idU));
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {

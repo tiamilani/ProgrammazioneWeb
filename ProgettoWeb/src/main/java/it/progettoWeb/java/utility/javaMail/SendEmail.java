@@ -1,6 +1,8 @@
 package it.progettoWeb.java.utility.javaMail;
 
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
+import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
+import it.progettoWeb.java.database.Model.Ordine.ModelloOrdine;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import java.util.Properties;
 import javax.mail.Message;
@@ -49,8 +51,8 @@ public class SendEmail
         catch (MessagingException ex)
         {
             System.out.println("Errore nella funzione preProcessing");
-            System.out.println(ex.getMessage());
-            sendError(userEmail, ex.getMessage());
+            System.out.println(ex.toString());
+            sendError(userEmail, ex.toString());
             return null;
         }
     }
@@ -123,10 +125,8 @@ public class SendEmail
                 message.setText(
                         "Salve " + user.getNome() + ",\n"
                         + "Grazie per la tua registrazione su ShopEro.\n"
-                        + "Il tuo account è stato creato deve essere attivato prima dell'utilizzo.\n"
-                        + "Per attivatlo clicca sul seguente link:\n"
-                        + "(LINK)" + "\n\n"
-                        + "Dopo averlo attivato, potrai accedere utilizzando le tue credenziali.\n\n"
+                        + "Il tuo account è stato creato ed e' gia' stato attivato.\n"
+                        + "Potrai accedere utilizzando le tue credenziali.\n\n"
                         + "BUONO SHOPPING!");
 
                 sendEmail(userEmail, message);
@@ -159,8 +159,7 @@ public class SendEmail
                         + "La modifica del tuo indirizzo email per ShopEro è andata a buon fine.\n"
                         + "La tua VECCHIA email era " + oldEmail + ", la tua NUOVA email è " + newEmail + "\n\n"
                         + "Se non sei stato tu a modificare la tua email, "
-                        + "ti suggeriamo di contattare il servizio clienti (LINK) "
-                        + "o di reimpostare la password (LINK)\n\n"
+                        + "ti suggeriamo di contattare gli sviluppatori http://localhost:8080/ProgettoWeb/jspFile/Finale/Footer/sviluppatori.jsp#findUs \n\n"
                         + "Buona giornata!");
 
                 sendEmail(newEmail, message);
@@ -176,8 +175,7 @@ public class SendEmail
                         + "La modifica del tuo indirizzo email per ShopEro è andata a buon fine.\n"
                         + "La tua VECCHIA email era " + oldEmail + ", la tua NUOVA email è " + newEmail + "\n\n"
                         + "Se non sei stato tu a modificare la tua email, "
-                        + "ti suggeriamo di contattare il servizio clienti (LINK) "
-                        + "o di reimpostare la password (LINK)\n\n"
+                        + "ti suggeriamo di contattare gli sviluppatori http://localhost:8080/ProgettoWeb/jspFile/Finale/Footer/sviluppatori.jsp#findUs \n\n"
                         + "Buona giornata!");
 
                 sendEmail(oldEmail, message);
@@ -213,7 +211,8 @@ public class SendEmail
                         + "Sarà valido solo per 2 ore.\n"
                         + link + "\n\n"
                         + "Se non desideri reimpostare la password o se non hai richiesto tale modifica, puoi ignorare questa email. "
-                        + "Nessun altro utente può modificare la tua password.");
+                        + "Nessun altro utente può modificare la tua password."
+                        + "Buona giornata!");
 
                 sendEmail(userEmail, message);
             }else{
@@ -246,8 +245,8 @@ public class SendEmail
                         "Salve " + user.getNome() + ",\n"
                         + "La tua password per ShopEro è stata appena modificata.\n"
                         + "Se non sei stato tu a modificare la tua password, "
-                        + "ti suggeriamo di contattare il servizio clienti (LINK) "
-                        + "o di reimpostare la password (LINK)");
+                        + "ti suggeriamo di contattare gli sviluppatori http://localhost:8080/ProgettoWeb/jspFile/Finale/Footer/sviluppatori.jsp#findUs \n\n"
+                        + "Buona giornata!");
 
                 sendEmail(userEmail, message);
             }
@@ -313,6 +312,72 @@ public class SendEmail
                         + "Potrai visionare il tuo ordine nella sezione apposita del tuo account.\n"
                         + "Inoltre, appena il venditore effettuerà la spedizione, ti sarà possibile tracciare "
                         + "il tuo ordine tramite codice tracking fornito dal venditore stesso.");
+
+                sendEmail(userEmail, message);
+            }
+        }
+        catch (MessagingException ex)
+        {
+            System.out.println(ex.toString());
+            sendError(userEmail, ex.toString());
+        }
+    }
+
+    public static void ordineInLavorazione(String userEmail, ModelloOrdine ordine, ModelloOggetto oggetto) {
+        try
+        {
+            ModelloUtente user = daoUtente.selectUserByEmail(userEmail);
+            Message message = preProcessing(userEmail);
+
+            if(message != null)
+            {
+                message.setSubject("ShopEro - Ordine in lavorazione :D [" + ordine.getIdOrdine()+ "]");
+                message.setText(
+                        "Salve " + user.getNome() + ",\n"
+                        + "Ci teniamo a comunicarti che il tuo ordine è ora in lavorazione.\n"
+                        + "L'ordine in questione è il seguente: \n"
+                        + "idOrdine: " + ordine.getIdOrdine()+ ".\n"
+                        + "L'idOggeto: "+ordine.getIdOggetto()+"\n"
+                        + "Oggetto: "+oggetto.getNome()+"\n"
+                        + "Acquistato il: "+ordine.getDataOrdine().toString()+"\n"
+                        + "Potrai visionare il tuo ordine nella sezione apposita del tuo account.\n"
+                        + "Inoltre, appena il venditore effettuerà la spedizione, ti sarà possibile tracciare "
+                        + "il tuo ordine tramite codice tracking fornito dal venditore stesso.\n"
+                        + "Per qualsiasi necessita non esitare a rivolgerti al servizio di assistenza");
+
+                sendEmail(userEmail, message);
+            }
+        }
+        catch (MessagingException ex)
+        {
+            System.out.println(ex.toString());
+            sendError(userEmail, ex.toString());
+        }
+    }
+    
+    public static void ordineSpedito(String userEmail, ModelloOrdine ordine, ModelloOggetto oggetto) {
+        try
+        {
+            ModelloUtente user = daoUtente.selectUserByEmail(userEmail);
+            Message message = preProcessing(userEmail);
+
+            if(message != null)
+            {
+                message.setSubject("ShopEro - Ordine spedito :D [" + ordine.getIdOrdine() + "]");
+                message.setText(
+                        "Salve " + user.getNome() + ",\n"
+                        + "Ci teniamo a comunicarti che il tuo ordine è stato spedito.\n"
+                        + "L'ordine in questione è il seguente: \n"
+                        + "idOrdine: " + ordine.getIdOrdine()+ ".\n"
+                        + "L'idOggeto: "+ordine.getIdOggetto()+"\n"
+                        + "Oggetto: "+oggetto.getNome()+"\n"
+                        + "Acquistato il: "+ordine.getDataOrdine().toString()+"\n"
+                        + "Codice di tracking fornito dal venditore: "+ordine.getCodiceTracking()+""
+                        + "Data di arrivo presunta: "+ordine.getDataArrivoPresunta().toString()+""
+                        + "Potrai visionare il tuo ordine nella sezione apposita del tuo account.\n"
+                        + "Inoltre, appena il venditore effettuerà la spedizione, ti sarà possibile tracciare "
+                        + "il tuo ordine tramite codice tracking fornito dal venditore stesso.\n"
+                        + "Per qualsiasi necessita non esitare a rivolgerti al servizio di assistenza");
 
                 sendEmail(userEmail, message);
             }

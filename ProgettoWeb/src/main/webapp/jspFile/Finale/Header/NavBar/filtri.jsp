@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : filtri
     Created on : 3-ott-2017, 15.37.04
     Author     : Damiano
@@ -38,28 +38,28 @@
         content: '\f006';
         font-family: FontAwesome;
     }
-    
+
     @media screen and (max-width: 480px) {
         label.star {
             padding: 2px;
             font-size: 36px;
         }
     }
-    
+
     .form-control-file, .form-control-range {
         display: inline-block;
     }
-    
+
     input {
         margin: 0;
     }
-    
+
     .distance {
         margin-bottom: 10px;
         display: block;
     }
-    
-    .checkbox label:after, 
+
+    .checkbox label:after,
     .radio label:after {
         content: '';
         display: table;
@@ -117,7 +117,7 @@
     .radio label input[type="radio"]:disabled + .cr {
         opacity: .5;
     }
-    
+
     #star-block{
         background: inherit;
         border: none;
@@ -150,13 +150,13 @@
             <i class="large material-icons">person_outline</i>
             <input class="col-10 text-input" type="text" id="venditore" name="filtroNomeVenditore" required placeholder="Nome venditore" value="${param.hiddennomeVenditore != null ? param.hiddennomeVenditore : ''}">
         </div>
-        
+
         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
             <i class="large material-icons">shop</i>
             <input class="col-10 text-input" type="text" id="negozio" name="filtroNomeNegozio" required placeholder="Nome negozio" value="${param.hiddennomeNegozio != null ? param.hiddennomeNegozio : ''}">
         </div>
     </div>
-   
+
     <div class="form-group row filterRow">
         <div class="form-check col-xl-4 col-lg-6 col-md-6 col-sm-5">
             <div style="width: 100%">
@@ -170,13 +170,13 @@
                 </center>
             </div>
         </div>
-        
+
         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-7">
             <center>
                 <b class="price-label" id="minSliderValue">0&euro; </b><input name="range-slider" id="double-slider" type="number" range="true" value="" data-provide="slider" data-slider-min="0" data-slider-max="1000" data-slider-step="5" data-slider-value="[${param.hiddenPriceRange != null ? param.hiddenPriceRange : '0,1000'}]"><b class="price-label" id="maxSliderValue"> 1000&euro;</b>
             </center>
         </div>
-        
+
         <div class="form-control col-xl-4 col-lg-12 col-md-12 col-sm-12" id="star-block">
             <div class="form-group">
                 <div class="stars">
@@ -215,15 +215,15 @@
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                       <div class="input-group-addon"><i class="large material-icons">person_outline</i></div>
                       <input name="filtroMinPrice" type="text" class="form-control" id="minPrice" placeholder="0">
-                    </div>    
+                    </div>
                 </div>
 
                 <div class="col-6 labelSpacing">
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                     <div class="input-group-addon"><i class="large material-icons">person_outline</i></div>
                     <input name="filtroMaxPrice" type="text" class="form-control" id="minPrice" placeholder="0">
-                </div>  
-                </div>  
+                </div>
+                </div>
             </div>
         </div>
 
@@ -231,12 +231,12 @@
             <p>Nome venditore</p>
             <input name="filtroNomeVenditore" class="col-11 labelSpacing form-control mr-sm-2" type="text" name="venditore" placeholder="Venditore"/>
         </div>
-              
+
         <div class="col-2">
             <p>Nome Negozio</p>
             <input name="filtroNomeNegozio" class="col-11 labelSpacing form-control mr-sm-2" type="text" name="negozio" placeholder="Negozio"/>
         </div>
-        
+
         <div class="col-2">
             <label class="checkboxMargin form-check-label">
                 <input name="filtroRitiroInNegozio" type="checkbox" class="form-check-input" name="checkboxRitiroInNegozio" value = "false">
@@ -252,18 +252,18 @@
         <div class="col-3 spazziatuaOggetti">
             <p>Latitudine</p>
             <input name="filtroLatitudine" class="labelSpacing form-control mr-sm-2" type="text" name="latitudine" placeholder="Lat"/>
-            
+
             <p>Longitudine</p>
             <input name="filtroLongitudine" class="labelSpacing form-control mr-sm-2" type="text" name="Longitudine" placeholder="Long"/>
-            
+
             <p>Raggio</p>
             <input name="filtroRaggio" class="labelSpacing form-control mr-sm-2" type="text" name="raggio" placeholder="Raggio"/>
         </div>
-        
+
         <div class="col-3 spazziatuaOggetti">
             <h1>Spazio riservato alla mappa</h1>
         </div>
-        
+
         <div class="col-3">
             <p>Valutazione minima</p>
             <select name="filtroValutazioneMinima" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="selettoreValutazione">
@@ -283,14 +283,14 @@
  $('.dropdown-menu a').click(function(){
     $('#selected').text($(this).text());
  });
- 
+
  $(document).ready(function(){
     var valore = $('#double-slider').attr('value');
     var estremi = valore.split(',');
     $('#minSliderValue').html(estremi[0] + "&euro;");
     $('#maxSliderValue').html(estremi[1] + "&euro;");
  });
- 
+
  $(document).ready(function(){
     $('#double-slider').on('change', function(){
         var newValore = $(this).attr('value');

@@ -164,6 +164,33 @@ public class AssistenzaController extends HttpServlet
 
                         request.setAttribute("assistenzeAperte", assistenzeAperte);
                         request.setAttribute("assistenzeChiuse", assistenzeChiuse);
+                        
+                        
+                        //Se l'utente è un venditore, mostro le richieste di assistenza in cui è stato citato
+                        if(utenteSessione.getUtenteType() == 1)
+                        {
+                            ModelloListeAssistenza listaAssistenzeVenditore = new ModelloListeAssistenza(
+                                    daoAssistenza.selectServiceRequestBySellerID(utenteSessione.getId()));
+                            
+                            List<pair<ModelloAssistenza, String>> assistenzeAperteVenditore = new ArrayList<>();
+                            List<pair<ModelloAssistenza, String>> assistenzeChiuseVenditore = new ArrayList<>();
+
+                            for(ModelloAssistenza assistenza : listaAssistenzeVenditore.getList())
+                            {
+                                String nomeOggettoContestato = (daoOggetto.getObjectById(assistenza.getIdOggetto())).getNome();
+
+                                if(assistenza.getStato() == 0)
+                                    assistenzeAperteVenditore.add(new pair<>(assistenza, nomeOggettoContestato));
+                                else
+                                    assistenzeChiuseVenditore.add(new pair<>(assistenza, nomeOggettoContestato));
+                            }
+
+                            request.setAttribute("assistenzeAperteVenditore", assistenzeAperteVenditore);
+                            request.setAttribute("assistenzeChiuseVenditore", assistenzeChiuseVenditore);
+                            request.setAttribute("isVenditore", 1);
+                        }
+                        else
+                            request.setAttribute("isVenditore", 0);
                     }
                     else if(action.equalsIgnoreCase("details"))
                     {
@@ -173,6 +200,7 @@ public class AssistenzaController extends HttpServlet
                         ModelloAssistenza assistenza = daoAssistenza.selectSpecifiedInfoSupport(index);
                         request.setAttribute("assistenza", assistenza);
 
+                        /*
                         if(assistenza.getIdVenditore() > 0)
                         {
                             ModelloUtente venditoreContestato = daoUtente.selectUserByID(assistenza.getIdVenditore());
@@ -187,14 +215,28 @@ public class AssistenzaController extends HttpServlet
                         {
                             int ordineContestato = daoOrdine.selectOrdersByIdOrder(assistenza.getIdOrdine()).get(0).getIdOrdine();
                             request.setAttribute("ordineContestato", ordineContestato);
+                        }*/
+                        
+                        if(utenteSessione.getUtenteType() == 0)
+                        {
+                            request.setAttribute("venditoreContestato", daoUtente.selectUserByID(assistenza.getIdVenditore()));
+                            request.setAttribute("isVenditore", 0);
                         }
+                        else if(utenteSessione.getUtenteType() == 1)
+                        {
+                            request.setAttribute("utenteContestatore", daoUtente.selectUserByID(assistenza.getIdUtente()));
+                            request.setAttribute("isVenditore", 1);
+                        }
+                            
+                        request.setAttribute("oggettoContestato", daoOggetto.getObjectById(assistenza.getIdOggetto()));
+                        request.setAttribute("ordineContestato", (daoOrdine.selectOrdersByIdOrder(assistenza.getIdOrdine()).get(0)).getIdOrdine());
                     }
                 }
             }
         }
         catch (Exception e) 
         {
-            System.out.println("error message = " + e.toString());
+            System.out.println(getServletName() + " error message = " + e.toString());
             forward = ERROR_PAGE;
             request.setAttribute("ECCEZIONE", e.toString());
         }
@@ -246,7 +288,8 @@ public class AssistenzaController extends HttpServlet
             }
             else if(action.equalsIgnoreCase("createAssistance"))
             {
-                int idUtenteRichiedente = ((ModelloUtente)request.getSession().getAttribute("utenteSessione")).getId();
+                ModelloUtente utenteRichiedente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+                int idUtenteRichiedente = utenteRichiedente.getId();
                 int idOrdine = Integer.parseInt(request.getParameter("idOrdine"));
                 int idNegozio = Integer.parseInt(request.getParameter("idNegozio"));
                 int idVenditore = (daoNegozio.getStoreById(idNegozio)).getIdVenditore();
@@ -263,12 +306,15 @@ public class AssistenzaController extends HttpServlet
                 
                 daoAssistenza.insertAssistance(assistance);
                 
-                forward = "AssistenzaController?action=listAssistances";
+                if(utenteRichiedente.getUtenteType() == 2)
+                    forward = "AssistenzaController?action=listAssistances";
+                else
+                    forward = "AssistenzaController?action=showAssistances";
             }
         }
         catch (Exception e) 
         {
-            System.out.println("error message = " + e.toString());
+            System.out.println(getServletName() + " error message = " + e.toString());
             forward = ERROR_PAGE;
             request.setAttribute("ECCEZIONE", e.toString());
         }

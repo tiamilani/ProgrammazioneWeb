@@ -5,10 +5,14 @@
  */
 package it.progettoWeb.java.Controller.InserisciRecensione;
 
+import it.progettoWeb.java.database.Dao.Negozio.DaoNegozio;
+import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
+import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
 import it.progettoWeb.java.database.Dao.immagineRecensione.DaoImmagineRecensione;
 import it.progettoWeb.java.database.Dao.recensioneNegozio.DaoRecensioneNegozio;
 import it.progettoWeb.java.database.Dao.recensioneOggetto.DaoRecensioneOggetto;
 import it.progettoWeb.java.database.Dao.recensioneVenditore.DaoRecensioneVenditore;
+import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
 import it.progettoWeb.java.database.Model.immagineRecensione.ModelloImmagineRecensione;
 import it.progettoWeb.java.database.Model.recensioneNegozio.ModelloRecensioneNegozio;
 import it.progettoWeb.java.database.Model.recensioneOggetto.ModelloRecensioneOggetto;
@@ -46,6 +50,9 @@ public class InserisciRecensioneController extends HttpServlet {
     private DaoRecensioneNegozio daoRecensioneNegozio;
     private DaoRecensioneVenditore daoRecensioneVenditore;
     private DaoImmagineRecensione daoImmagineRecensione;
+    private DaoNegozio daoNegozio;
+    private DaoUtente daoUtente;
+    private DaoOggetto daoOggetto;
     private List<String> imageSrcs = new ArrayList<String>();
     
     public InserisciRecensioneController(){
@@ -54,6 +61,9 @@ public class InserisciRecensioneController extends HttpServlet {
         daoRecensioneNegozio = new DaoRecensioneNegozio();
         daoRecensioneVenditore = new DaoRecensioneVenditore();
         daoImmagineRecensione = new DaoImmagineRecensione();
+        daoNegozio = new DaoNegozio();
+        daoUtente = new DaoUtente();
+        daoOggetto = new DaoOggetto();
     }
     
     /**
@@ -120,6 +130,10 @@ public class InserisciRecensioneController extends HttpServlet {
                     daoImmagineRecensione.addImageReviewSet(immagineRecensione);
                 }
             }
+            
+            int numReviews = daoRecensioneOggetto.howManyReviewsO(idOggetto);
+            double newMedia = ((daoOggetto.getObjectById(idOggetto).getValutazione() * numReviews + valutazioneRecensione) / (numReviews + valutazioneRecensione));
+            daoOggetto.updateObjectStars(idOggetto, newMedia);
         }
         else if(action.equals("Negozio")) {
             int idUtente = Integer.parseInt(request.getParameter("utenteReview"));
@@ -134,6 +148,10 @@ public class InserisciRecensioneController extends HttpServlet {
             recensioneNegozio.setUtilita(0);
             recensioneNegozio.setValutazione(valutazioneRecensione);
             daoRecensioneNegozio.addReviewToStore(recensioneNegozio);
+            
+            int numReviews = daoRecensioneNegozio.howManyReviews(idNegozio);
+            double newMedia = ((daoNegozio.getStoreById(idNegozio).getValutazione() * numReviews + valutazioneRecensione) / (numReviews + valutazioneRecensione));
+            daoNegozio.updateShopStars(idNegozio, newMedia);
         }
         else if(action.equals("Venditore")) {
             int idUtente = Integer.parseInt(request.getParameter("utenteReview"));
@@ -148,6 +166,10 @@ public class InserisciRecensioneController extends HttpServlet {
             recensioneVenditore.setUtilita(0);
             recensioneVenditore.setValutazione(valutazioneRecensione);
             daoRecensioneVenditore.addReviewToSeller(recensioneVenditore);
+            
+            int numReviews = daoRecensioneVenditore.howManyReviews(idVenditore);
+            double newMedia = ((daoUtente.getUserById(idVenditore).getValutazione() * numReviews + valutazioneRecensione) / (numReviews + valutazioneRecensione));
+            daoUtente.updateUserStars(idVenditore, newMedia);
         }
         
         RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -159,8 +181,9 @@ public class InserisciRecensioneController extends HttpServlet {
      */
     private boolean getImages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String appPath = request.getServletContext().getRealPath("");
-        appPath = appPath.substring(0, (appPath.indexOf("Tomcat") + 6)) + File.separator;
         String savePath = appPath + SAVE_DIR;
+        String savePathFake = request.getContextPath() + File.separator + SAVE_DIR;
+        
         File fileSaveDir = new File(savePath);
         if (!fileSaveDir.exists()) {
             fileSaveDir.mkdir();
@@ -171,10 +194,11 @@ public class InserisciRecensioneController extends HttpServlet {
             String fileName = extractFileName(part);
             if(!fileName.isEmpty()) {
                 fileName = new File(fileName).getName();
-                System.out.println(savePath + File.separator + fileName);
                 part.write(savePath + File.separator + fileName);
-                imageSrcs.add(savePath + File.separator + fileName);
+                imageSrcs.add(savePathFake + File.separator + fileName);
                 imageSaved = true;
+                System.out.println(savePath + File.separator + fileName);
+                System.out.println(savePathFake + File.separator + fileName);
             }
         }
         

@@ -91,7 +91,7 @@ function changeQuantity(elem)
    newNumeroArticoli = oldNumeroArticoli + (newQuantita - oldQuantita);
 
    //Stampo il nuovo numero di articoli e il nuovo prezzo totale
-   var newText = "<b>Prezzo provvisorio (" + newNumeroArticoli + " articoli): EUR " + newPrezzoTotale.toFixed(2);
+   var newText = "<b>Prezzo provvisorio (" + newNumeroArticoli + " articoli): &euro; " + newPrezzoTotale.toFixed(2);
    document.getElementById("lblResultCart").innerHTML = newText;
 
    //Setto i vari attriuti (dei vari elementi utilizzati nel processo) con i nuovi valori
@@ -136,7 +136,7 @@ function changeDescription(id)
 
         document.getElementById("DCP"+firstIndex).innerHTML = "Data consegna prevista " + addDays(parseInt(tempo));
 
-        document.getElementById("pDesc"+firstIndex).innerHTML = nome + "<br>Prezzo: EUR " + prezzo+
+        document.getElementById("pDesc"+firstIndex).innerHTML = nome + "<br>Prezzo: &euro; " + prezzo+
                 "<br>Corriere: " + corriere + "<br>Tempo stimato di consegna: " + tempo + " giorni";
 
         newSubTot = (prezzoOgg * quantitaOgg + (Math.ceil(quantitaOgg / nMax) * prezzo));
@@ -144,10 +144,10 @@ function changeDescription(id)
     
     newTot = (oldTot - oldSubTot + newSubTot);
     
-    document.getElementById("pSubTot"+firstIndex).innerHTML = "Subtotale: EUR " + (newSubTot.toFixed(2));
+    document.getElementById("pSubTot"+firstIndex).innerHTML = "Subtotale: &euro; " + (newSubTot.toFixed(2));
     document.getElementById("pSubTot"+firstIndex).setAttribute("data-oldSubTot", newSubTot.toFixed(2));
     
-    document.getElementById("pTot").innerHTML = "<b>Totale: EUR " + newTot.toFixed(2) + "</b>";
+    document.getElementById("pTot").innerHTML = "<b>Totale: &euro; " + newTot.toFixed(2) + "</b>";
     document.getElementById("pTot").setAttribute("data-oldTot", newTot.toFixed(2));
     
     

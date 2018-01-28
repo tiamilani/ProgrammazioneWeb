@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="col-6">
                     <p>Totale numero articoli: <c:out value="${nArticoli}"/></p>
-                    <p>Prezzo totale: EUR <c:out value="${prezzoTot}"/></p>
+                    <p>Prezzo totale: &euro; <c:out value="${prezzoTot}"/></p>
                 </div>
                 <div class="col-3">
                     <p>Nome e cognome:</p>

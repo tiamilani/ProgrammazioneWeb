@@ -10,6 +10,7 @@ package it.progettoWeb.java.database.Dao.spedizioneOggetto;
  * @author mattia
  */
 
+import it.progettoWeb.java.database.Model.spedizioneOggetto.ModelloListeSpedizioneOggetto;
 import it.progettoWeb.java.database.Model.spedizioneOggetto.ModelloSpedizioneOggetto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,6 +20,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
+import it.progettoWeb.java.database.query.deliveryType.deliveryTypeQuery;
 
 public class DaoSpedizioneOggetto {
     
@@ -57,5 +59,38 @@ public class DaoSpedizioneOggetto {
         }
         
         return SpedizioneOggetto;
+    }
+
+    public void addSpedizioneOggetto(int idS, String id) {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(deliveryTypeQuery.addSpedizioneOggetto(idS,id));
+        } catch(SQLException e) {
+        }
+    }
+
+    public List<ModelloSpedizioneOggetto> getListSpedizioniOggetto(String idOggetto) {
+        List<ModelloSpedizioneOggetto> types = new ArrayList<>();
+        
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(deliveryTypeQuery.selectSpedizioneOggetto(idOggetto));
+            while(rs.next())
+                types.add(getModelloFromRs(rs));
+        }
+        catch (SQLException e) { System.out.println(e.toString()); }
+        
+        return types;
+    }
+
+    public void deleteSpedizioneOggetto(int idS, String id) {
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(deliveryTypeQuery.deleteSpedizioneOggetto(idS,id));
+        } catch(SQLException e) {
+        }
     }
 }

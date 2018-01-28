@@ -40,6 +40,12 @@
                 getLatitudeLongitude(showResult, address);
             }
             
+            $(document).ready(function() {
+                $('#tabellaIndirizzi').DataTable({
+                    responsive: true,
+                    colReorder: true
+                });
+            } );
         </script>
     </head>
     <body>
@@ -133,26 +139,60 @@
             </form>
             <hr>
             <h2>Indirizzi</h2>
-            <c:forEach items="${listaIndirizzi.getList()}" var="indirizzo" >
-                <div class="row">
-                    <div class="col-10">
-                        <div class="row">
-                            <h3><c:out value="${indirizzo.getCitta()}" /></h3>
-                        </div>
-                        <div class="row">
-                            <p><c:out value="${indirizzo.getVia()}" /> <c:out value="${indirizzo.getnCivico()}" />, <c:out value="${indirizzo.getCitta()}" />, <c:out value="${indirizzo.getProvincia()}" />, <c:out value="${indirizzo.getRegione()}" /></p>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <form action="${pageContext.request.contextPath}/IndirizzoController" id="formPassword" name="formIndirizzo" method="GET">
-                            <input type="hidden" name="action" value="cancIndirizzo">
-                            <input type="hidden" name="id" value="${indirizzo.getIdI()}">
-                            <button class="btn btn-outline-danger buttonSpace btn-block" type="submit" value="submit"><i class="Small material-icons">close</i></button>
-                        </form>
-                    </div>
+            <div class="row">
+                <div class="col-12">
+                    <table id="tabellaIndirizzi" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                         <thead>
+                            <tr>
+                                <th>Citt&aacute;</th>
+                                <th>Via</th>
+                                <th>Numero Civico</th>
+                                <th>Provincia</th>
+                                <th>Regione</th>
+                                <th>Elimina</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Citt&aacute;</th>
+                                <th>Via</th>
+                                <th>Numero Civico</th>
+                                <th>Provincia</th>
+                                <th>Regione</th>
+                                <th>Elimina</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <c:forEach items="${listaIndirizzi.getList()}" var="indirizzo" >
+                                <tr>
+                                    <td>
+                                        <c:out value="${indirizzo.getCitta()}" />
+                                    </td>
+                                    <td>
+                                        <c:out value="${indirizzo.getVia()}" />
+                                    </td>
+                                    <td>
+                                        <c:out value="${indirizzo.getnCivico()}" />
+                                    </td>
+                                    <td>
+                                        <c:out value="${indirizzo.getProvincia()}" />
+                                    </td>
+                                    <td>
+                                        <c:out value="${indirizzo.getRegione()}" />
+                                    </td>
+                                    <td>
+                                        <form action="${pageContext.request.contextPath}/IndirizzoController" id="formPassword" name="formIndirizzo" method="GET">
+                                            <input type="hidden" name="action" value="cancIndirizzo">
+                                            <input type="hidden" name="id" value="${indirizzo.getIdI()}">
+                                            <button class="btn btn-outline-danger buttonSpace" type="submit" value="submit"><i class="Small material-icons">close</i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
-                <hr>
-            </c:forEach>
+            </div>
             <div class="row">
                 <div class="col-2">
                     <button class="btn btn-outline-primary buttonSpace btn-block" type="submit" value="submit" data-toggle="modal" data-target="#addAddrModal"><i class="Small material-icons">add</i></button>

@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : descrizioneOggetto
     Created on : 3-ott-2017, 8.55.49
     Author     : andreafadi
@@ -9,7 +9,7 @@
 <jsp:useBean id="oggetto" class="it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto" scope="request" />
 <jsp:useBean id="negozio" class="it.progettoWeb.java.database.Model.Negozio.ModelloNegozio" scope="request" />
 <jsp:useBean id="venditore" class="it.progettoWeb.java.database.Model.Utente.ModelloUtente" scope="request" />
-<jsp:useBean id="utenteSessione" class="it.progettoWeb.java.database.Model.Utente.ModelloUtente" scope="request" />
+<%--<jsp:useBean id="utenteSessione" class="it.progettoWeb.java.database.Model.Utente.ModelloUtente" scope="request" />--%>
 <jsp:useBean id="recensioni" class="it.progettoWeb.java.database.Model.recensioneOggetto.ModelloListeRecensioneOggetto" scope="request" />
 <jsp:useBean id="indirizzo" class="it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo" scope="request" />
 <jsp:useBean id="listaImmagini" class="it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto" scope="request" />
@@ -33,10 +33,12 @@
                 <%@include file="mapOggetto.jsp" %>
             </c:if>
             <%@include file="oggettiCorrelati.jsp" %>
-            <%--<c:if test="${canReviewsO == true}">
+            <c:if test="${canReviewsO == true}">
                 <%@include file="insertReview.jsp" %>
             </c:if>
-            <%@include file="recensioni.jsp" %> --%>
+            <c:if test="${recensioniUtenteImmagini.getL().size() > 0}">
+                <%@include file="recensioni.jsp" %>
+            </c:if>
         </div>
         <%@include file="../Footer/footer.jsp" %>
     </body>

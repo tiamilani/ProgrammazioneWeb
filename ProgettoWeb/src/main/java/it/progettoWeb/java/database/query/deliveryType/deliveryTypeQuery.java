@@ -25,7 +25,7 @@ public class deliveryTypeQuery
      */
     public static String selectAllDeliveryTypes()
     {
-        return "SELECT * FROM tipoSpedizione";
+        return "SELECT * FROM tipospedizione";
     }
     
     /**
@@ -36,43 +36,56 @@ public class deliveryTypeQuery
      */
     public static String selectDeliveryTypeByIdS(int idS)
     {
-        return "SELECT * FROM tipoSpedizione WHERE idS="+idS+"";
+        return "SELECT * FROM tipospedizione WHERE idS="+idS+"";
     }
     
     /**
      * @author FBrug
-     * Ottenere la lista di tutti i tipi di spedizione in base all'ID Negozio
+     * Ottenere la lista di tutti i tipi di spedizione in base all'ID negozio
+     * 
      * @param idN Intero rappresentante l'ID del negozio
      * @return String: lista tipi di spedizione
      */
     public static String selectDeliveryTypeByIdN(int idN)
     {
-        return "SELECT * FROM tipoSpedizione WHERE idN="+idN+"";
+        return "SELECT * FROM tipospedizione WHERE idN="+idN+"";
     }
     
     /**
      * @author FBrug
-     * Ottenere la lista di tutti i tipi di spedizione in base all'ID Oggetto
+     * Ottenere la lista di tutti i tipi di spedizione in base all'ID oggetto
      * @param idO Intero rappresentante l'ID dell'oggetto
      * @return String: lista tipi di spedizione
      */
     public static String selectDeliveryTypeByIdO(String idO)
     {
-        return "SELECT tipoSpedizione.* FROM tipoSpedizione INNER JOIN spedizioneoggetto ON "
-                + "(spedizioneoggetto.idO = '" +idO+ "' AND tipoSpedizione.idS = spedizioneoggetto.idS)";
+        return "SELECT tipospedizione.* FROM tipospedizione INNER JOIN spedizioneoggetto ON "
+                + "(spedizioneoggetto.idO = '" +idO+ "' AND tipospedizione.idS = spedizioneoggetto.idS)";
     }
 
     public static String updateSpedizione(ModelloTipoSpedizione spedizione) {
-        return "UPDATE tipoSpedizione SET Nome='"+spedizione.getNome()+"', prezzo="+spedizione.getPrezzo()+", Corriere='"+spedizione.getCorriere()+"', "
-                + "tempoRichiesto="+spedizione.getTempoRichiesto()+", numeroMassimo="+spedizione.getNumeroMassimo()+"   WHERE idS=1;";
+        return "UPDATE tipospedizione SET Nome='"+spedizione.getNome()+"', prezzo="+spedizione.getPrezzo()+", Corriere='"+spedizione.getCorriere()+"', "
+                + "tempoRichiesto="+spedizione.getTempoRichiesto()+", numeroMassimo="+spedizione.getNumeroMassimo()+"   WHERE idS="+spedizione.getIdS()+";";
     }
 
     public static String deleteSpedizione(int idS) {
-        return "DELETE FROM tipoSpedizione WHERE idS=" + idS + ";";
+        return "DELETE FROM tipospedizione WHERE idS=" + idS + ";";
     }
 
     public static String insertObject(ModelloTipoSpedizione spedizione) {
-        return "INSERT INTO tipoSpedizione (idN,Nome,Prezzo,Corriere,tempoRichiesto,numeroMassimo) "
+        return "INSERT INTO tipospedizione (idN,Nome,Prezzo,Corriere,tempoRichiesto,numeroMassimo) "
                 + "VALUES ("+spedizione.getIdN()+",'"+spedizione.getNome()+"',"+spedizione.getPrezzo()+",'"+spedizione.getCorriere()+"',"+spedizione.getTempoRichiesto()+","+spedizione.getNumeroMassimo()+");";
+    }
+    
+    public static String addSpedizioneOggetto(int idS, String id) {
+        return "insert into spedizioneoggetto values("+idS+",'"+id+"');";
+    }
+
+    public static String selectSpedizioneOggetto(String idOggetto) {
+        return "select * from spedizioneoggetto where idO='"+idOggetto+"';";
+    }
+
+    public static String deleteSpedizioneOggetto(int idS, String id) {
+        return "DELETE FROM spedizioneoggetto WHERE idS="+idS+" AND idO='"+id+"';";
     }
 }

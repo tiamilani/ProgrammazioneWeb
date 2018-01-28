@@ -24,14 +24,14 @@
         margin: 0;
     }
 
-    .col-2:hover {
+    .categs.col-2:hover {
         background-color: lightgray;
     }
 </style>
 
 <nav class="navbar fixed-top navbar-default bg-light navbar-expand-lg row no-gutters" role="navigation" style="padding: 0 .5rem 0 .5rem;">
     <a class="navbar-brand" href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Index/index.jsp">
-        <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/shopero_small.jpg" height=40px class="d-inline-block align-top" alt="IMG">
+        <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/shopero.jpg" height=40px width=100px class="d-inline-block align-top" alt="IMG">
     </a>
     <button class="navbar-toggler navbar-toggler-right" id="visible" type="button" data-toggle="collapse" data-target="#collapse-menu" aria-controls="collapse-menu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="Small material-icons">dehaze</span>
@@ -47,7 +47,7 @@
                         <c:set var="i" value="${0}" />
                         <c:forEach items="${listacategoriesessione.getList()}" var="cat">
                             <c:if test="${i == 0}">
-                                <div class="row">
+                                <div class="row categs">
                             </c:if>
                                     <div class="col-2" style="border-radius: 1rem;">
                                         <c:url value="/CategoriaController" var="catUrl">
@@ -83,7 +83,7 @@
                     <input class="form-control" id="expand" type="text" placeholder="Search" autocomplete="on" name="search">
                     <div style="width: 90%; margin-left: 10%;" id="appendToSearch">  </div>
                 </div>
-                
+
                 <button type="submit" class="btn btn-default col-1" id="nopad" onclick="myFunction()">
                     <i class="material-icons">search</i>
                 </button>
@@ -99,9 +99,8 @@
         <div class="user d-flex justify-content-between row no-gutters col-xl-3 col-lg-3">
             <c:choose>
                 <c:when test="${utenteSessione.getId() != -1}">
-                    <button type="button" class="btn nav-button col-xl-8 col-lg-9 col-md-12 col-sm-12"
-                            onclick="location.href='${pageContext.request.contextPath}/jspFile/Finale/Utente/utente.jsp'">
-                        <c:out value="${utenteSessione.getNome()} ${utenteSessione.getCognome()}" />
+                    <button type="button" class="btn nav-button col-xl-8 col-lg-9 col-md-12 col-sm-12" onclick="location.href='${pageContext.request.contextPath}/jspFile/Finale/Utente/utente.jsp'">
+                        ${utenteSessione.getNome()} ${utenteSessione.getCognome()}
                     </button>
                 </c:when>
                 <c:otherwise>
@@ -115,11 +114,12 @@
             </c:choose>
             <button type="button" class="btn nav-button col-xl-4 col-lg-3 col-md-12 col-sm-12" onclick="location.href='${pageContext.request.contextPath}/OrdineController?action=listOrders'">
                 Carello
+                <span class="badge badge-light">${carrelloSessione.getSize()}</span>
             </button>
         </div>
     </div>
 </nav>
-                
+
 <%-- messo esternamente al resto in modo da non influenzare il suo autofocus da propriet� di posizionamento prima definite--%>
 <div id="registerModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -130,41 +130,50 @@
             <h4 class="modal-title col-11">Creare un account</h4>
             <button type="button" class="close col-1" data-dismiss="modal">&times;</button>
           </div>
-          <form id="registrationForm" action="${pageContext.request.contextPath}/UserController?action=addUser" method="POST">
-            <div class="modal-body">
-                <div>
-                    <i class="large material-icons">person_outline</i>
-                    <input class="col-10 modal-input" type="text" id="customerName" name="nome" required>
-                    <label class="modal-label" for="customerName">Nome</label>
+            <form id="registrationForm" name="registrationForm" onsubmit="registration()" <%--action="${pageContext.request.contextPath}/UserController?action=addUser"--%> method="POST">
+                <div class="modal-body">
+                    <div>
+                        <i class="large material-icons">person_outline</i>
+                        <input class="col-10 modal-input" type="text" id="customerName" name="nome" required>
+                        <label class="modal-label" for="customerName">Nome</label>
+                    </div>
+                    <div>
+                        <i class="large material-icons">group</i>
+                        <input class="col-10 modal-input" type="text" id="customerSurname" name="cognome" required>
+                        <label class="modal-label" for="customerSurname">Cognome</label>
+                    </div>
+                    <div>
+                        <i class="large material-icons">email</i>
+                        <input class="col-10 modal-input" type="email" id="customerEmail" name="email" required>
+                        <label class="modal-label" for="customerEmail">E-mail</label>
+                    </div>
+                    <div>
+                        <i class="large material-icons">lock_outline</i>
+                        <input class="col-10 modal-input" type="password" id="customerPassword" name="password" required>
+                        <label class="modal-label" for="customerPassword">Password</label>
+                    </div>
+                    <div>
+                        <i class="large material-icons">lock_outline</i>
+                        <input class="col-10 modal-input" type="password" id="customerConfirmPassword" name="confirmPassword" required>
+                        <label class="modal-label" for="customerConfirmPassword">Ripeti la password</label>
+                    </div>
+                    <div class="g-recaptcha" data-sitekey="6Le96jMUAAAAAC5kV0EuyDRuTXUColh5_HReQeCS"></div>
+                    <p>Per creare un account devi accettare le nostre politiche sulla privacy, disponibili <a href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Policy/Privacy/privacyPolicy.jsp" target="_blank">qui</a><p>
+                    <div>
+                        <div class="row">
+                            <div class="col-7">
+                                <p>Accetto le politiche sulla privacy</p>
+                            </div>
+                            <div class="col-4">
+                                <input type="checkbox" id="privacyCheck" name="privacyCheck" required >
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <i class="large material-icons">group</i>
-                    <input class="col-10 modal-input" type="text" id="customerSurname" name="cognome" required>
-                    <label class="modal-label" for="customerSurname">Cognome</label>
+                <div class="modal-footer">
+                    <button type="submit" class="col-12 paddingNav btn btn-outline-primary">Crea il tuo account</button>
                 </div>
-                <div>
-                    <i class="large material-icons">email</i>
-                    <input class="col-10 modal-input" type="email" id="customerEmail" name="email" required>
-                    <label class="modal-label" for="customerEmail">E-mail</label>
-                </div>
-                <div>
-                    <i class="large material-icons">lock_outline</i>
-                    <input class="col-10 modal-input" type="password" id="customerPassword" name="password" required>
-                    <label class="modal-label" for="customerPassword">Password</label>
-                </div>
-                <div>
-                    <i class="large material-icons">lock_outline</i>
-                    <input class="col-10 modal-input" type="password" id="customerConfirmPassword" name="confirmPassword" required>
-                    <label class="modal-label" for="customerConfirmPassword">Ripeti la password</label>
-                </div>
-                <div class="g-recaptcha" data-sitekey="6Le96jMUAAAAAC5kV0EuyDRuTXUColh5_HReQeCS"></div>
-                    <p>Creando il tuo accont, accetti le nostro condizioni sulla privacy<p>
-
-            </div>
-            <div class="modal-footer">
-              <button type="submit" class="col-12 paddingNav btn btn-outline-primary">Crea il tuo account</button>
-            </div>
-          </form>
+            </form>
         </div>
 
     </div>
@@ -179,7 +188,7 @@
             <h4 class="modal-title col-11">Login</h4>
             <button type="button" class="close col-1" data-dismiss="modal">&times;</button>
           </div>
-            <form action="${pageContext.request.contextPath}/UserController?action=selectUser" method="POST">
+            <form id="loginForm" name="loginForm" <%--action="${pageContext.request.contextPath}/UserController?action=selectUser"--%> method="POST">
                 <div style="display: none">
                     <input type="text" id="fromPage" name="fromPage" value="${pageContext.request.requestURI}"/>
                 </div>
@@ -200,7 +209,7 @@
 
             </div>
             <div class="modal-footer">
-              <button type="submit" class="col-12 paddingNav btn btn-outline-primary my-2 my-sm-0">Login</button>
+              <button type="submit" class="col-12 paddingNav btn btn-outline-primary my-2 my-sm-0" onclick="login()">Login</button>
             </div>
           </form>
         </div>
@@ -235,13 +244,13 @@
     </div>
 </div>
 
-            
-<script> 
+
+<script>
     $(document).ready(function(){
-       
+
         //$('#expand').autocomplete().disable();
         $('#expand').on('focus', function(){
-            $('#expand').autocomplete({  
+            $('#expand').autocomplete({
                 serviceUrl: '${pageContext.request.contextPath}/AutocompleteSearchController',
                 type: 'POST',
                 dataType: 'json',
@@ -262,24 +271,24 @@
                 }*/
             });
         });
-        
+
         $(window).scroll(function(){
             // console.log("you are scrolling");
             // $('.autocomplete-suggestions').css('display', 'none');
             $('#expand').autocomplete().hide();
         });
-        
+
         $(window).resize(function(){
             console.log("you are scrolling");
             // $('.autocomplete-suggestions').css('display', 'none');
-            
+
             $("#visible").attr("aria-expanded", "false");
             $("#visible").addClass("collapsed");
             $("#collapse-menu").removeClass("show");
             console.log("resizing");
             $('#expand').autocomplete().hide();
         });
-        
+
     });
 
     function myFunction() {

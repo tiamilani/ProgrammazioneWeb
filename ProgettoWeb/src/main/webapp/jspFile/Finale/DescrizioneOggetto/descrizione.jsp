@@ -49,12 +49,19 @@
             <div class="col-12 col-sm-12 col-md-6 col-lg-9 col-xl-9">
                 <div class="text-justify">
                     <h5>${oggetto.getDescrizione()}</h5><br>
+                    <h5>${oggetto.getValutazione()} / 5</h5><br/>
                     <h5>Venduto da: 
                         <c:url value="/UserController" var="sellerUrl">
                             <c:param name="action" value="DescrizioneVenditore" />
                             <c:param name="idUtente" value="${venditore.getId()}" />
                         </c:url>
                         <a href="${sellerUrl}">${venditore.getCognome()} ${venditore.getNome()}</a>
+                         - 
+                        <c:url value="/UserController" var="storeUrl">
+                            <c:param name="action" value="DescrizioneNegozio" />
+                            <c:param name="idNegozio" value="${negozio.getId()}" />
+                        </c:url>
+                        <a href="${storeUrl}">${negozio.getNomeNegozio()}</a>
                     </h5>
                 </div>
             </div>
@@ -79,17 +86,17 @@
                     </c:if>
                     <p class="lead"/>
                     <div class="row">
-                        <span class="col-4 item-left">Quantità:</span>
+                        <span class="col-4 item-left">Quantità: (Max ${oggetto.getDisponibilita()})</span>
                         <c:choose>
-                            <c:when test="${oggetto.getDisponibilita() > 0}">
+                            <c:when test="${(oggetto.getDisponibilita() > 0) and (negozio.getAttivo() == 1)}">
                                 <input type="number" id="numNow" name="numNow" class="item-right col-6 form-control" min="1" max="${oggetto.getDisponibilita()}" value="1"/>
                             </c:when>
                             <c:otherwise>
-                                <span class="col-8 item-right text-danger" id="numNow" name="numNow">ESAURITO</span>
+                                <span class="col-8 item-right text-danger" id="numNow" name="numNow">ESAURITO<br/>NON DISPONIBILE</span>
                             </c:otherwise>
                         </c:choose>
                     </div>
-                    <c:if test="${oggetto.getDisponibilita() > 0}">
+                    <c:if test="${(oggetto.getDisponibilita() > 0) and (negozio.getAttivo() == 1)}">
                         <div class="row" style="display: none;">
                             <input type="hidden" id="shipType" name="shipType" value='{"prezzo":"${oggetto.getPrezzo()}","negozio":"${oggetto.getIdNegozio()}","oggetto":"${oggetto.getId()}"}'/>
                         </div>
@@ -104,7 +111,12 @@
                 
                 <script>                    
                     $('#addToCart').click(function() {
-                        $('#addCartForm').submit();
+                        if(parseInt($('#numNow').val()) <= ${oggetto.getDisponibilita()}) {
+                            alert("Articolo inserito nel carrello!");
+                            $('#addCartForm').submit();
+                        }
+                        else
+                            alert("Non puoi acquistarne più di " + ${oggetto.getDisponibilita()} + "!");
                     });
                     
                     $('#numNow').change(function() {
