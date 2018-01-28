@@ -209,41 +209,50 @@ function myFunction() {
             <h4 class="modal-title col-11">Creare un account</h4>
             <button type="button" class="close col-1" data-dismiss="modal">&times;</button>
           </div>
-            <form id="registrationForm" name="registrationForm" <%--action="${pageContext.request.contextPath}/UserController?action=addUser"--%> method="POST">
-            <div class="modal-body">
-                <div>
-                    <i class="large material-icons">person_outline</i>
-                    <input class="col-10 modal-input" type="text" id="customerName" name="nome" required>
-                    <label class="modal-label" for="customerName">Nome</label>
+            <form id="registrationForm" name="registrationForm" onsubmit="registration()" <%--action="${pageContext.request.contextPath}/UserController?action=addUser"--%> method="POST">
+                <div class="modal-body">
+                    <div>
+                        <i class="large material-icons">person_outline</i>
+                        <input class="col-10 modal-input" type="text" id="customerName" name="nome" required>
+                        <label class="modal-label" for="customerName">Nome</label>
+                    </div>
+                    <div>
+                        <i class="large material-icons">group</i>
+                        <input class="col-10 modal-input" type="text" id="customerSurname" name="cognome" required>
+                        <label class="modal-label" for="customerSurname">Cognome</label>
+                    </div>
+                    <div>
+                        <i class="large material-icons">email</i>
+                        <input class="col-10 modal-input" type="email" id="customerEmail" name="email" required>
+                        <label class="modal-label" for="customerEmail">E-mail</label>
+                    </div>
+                    <div>
+                        <i class="large material-icons">lock_outline</i>
+                        <input class="col-10 modal-input" type="password" id="customerPassword" name="password" required>
+                        <label class="modal-label" for="customerPassword">Password</label>
+                    </div>
+                    <div>
+                        <i class="large material-icons">lock_outline</i>
+                        <input class="col-10 modal-input" type="password" id="customerConfirmPassword" name="confirmPassword" required>
+                        <label class="modal-label" for="customerConfirmPassword">Ripeti la password</label>
+                    </div>
+                    <div class="g-recaptcha" data-sitekey="6Le96jMUAAAAAC5kV0EuyDRuTXUColh5_HReQeCS"></div>
+                    <p>Per creare un account devi accettare le nostre politiche sulla privacy, disponibili <a href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Policy/Privacy/privacyPolicy.jsp" target="_blank">qui</a><p>
+                    <div>
+                        <div class="row">
+                            <div class="col-7">
+                                <p>Accetto le politiche sulla privacy</p>
+                            </div>
+                            <div class="col-4">
+                                <input type="checkbox" id="privacyCheck" name="privacyCheck" required >
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <i class="large material-icons">group</i>
-                    <input class="col-10 modal-input" type="text" id="customerSurname" name="cognome" required>
-                    <label class="modal-label" for="customerSurname">Cognome</label>
+                <div class="modal-footer">
+                    <button type="submit" class="col-12 paddingNav btn btn-outline-primary">Crea il tuo account</button>
                 </div>
-                <div>
-                    <i class="large material-icons">email</i>
-                    <input class="col-10 modal-input" type="email" id="customerEmail" name="email" required>
-                    <label class="modal-label" for="customerEmail">E-mail</label>
-                </div>
-                <div>
-                    <i class="large material-icons">lock_outline</i>
-                    <input class="col-10 modal-input" type="password" id="customerPassword" name="password" required>
-                    <label class="modal-label" for="customerPassword">Password</label>
-                </div>
-                <div>
-                    <i class="large material-icons">lock_outline</i>
-                    <input class="col-10 modal-input" type="password" id="customerConfirmPassword" name="confirmPassword" required>
-                    <label class="modal-label" for="customerConfirmPassword">Ripeti la password</label>
-                </div>
-                <div class="g-recaptcha" data-sitekey="6Le96jMUAAAAAC5kV0EuyDRuTXUColh5_HReQeCS"></div>
-                    <p>Creando il tuo accont, accetti le nostro condizioni sulla privacy<p>
-
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="col-12 paddingNav btn btn-outline-primary" onclick="registration()">Crea il tuo account</button>
-            </div>
-          </form>
+            </form>
         </div>
 
     </div>
