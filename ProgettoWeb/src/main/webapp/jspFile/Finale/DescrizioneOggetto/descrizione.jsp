@@ -18,7 +18,7 @@
     }
 
     .button {
-        background-color: rgba(225, 150, 100, 0.7);
+        background-color: rgba(225, 150, 100, 0.8);
         color: white;
         text-align: center;
         padding: 12px;
@@ -49,7 +49,7 @@
             <div class="col-12 col-sm-12 col-md-6 col-lg-9 col-xl-9">
                 <div class="text-justify">
                     <h5>${oggetto.getDescrizione()}</h5><br>
-                    <h5>${oggetto.getValutazione()} / 5</h5><br/>
+                    <h5>Popolarita': ${oggetto.getValutazione()} / 5</h5><br/>
                     <h5>Venduto da: 
                         <c:url value="/UserController" var="sellerUrl">
                             <c:param name="action" value="DescrizioneVenditore" />
@@ -72,7 +72,7 @@
                 <form method="POST" id="addCartForm" name="addCartForm" action="${addToCartLink}">
                     <div class="row">
                         <span class="col-4 item-left">Prezzo:</span>
-                        <span class="col-8 item-right">${oggetto.getPrezzo()} Euro</span>
+                        <span class="col-8 item-right">${oggetto.getPrezzo()} &euro;</span>
                     </div>
                     <p class="lead"/>
                     <c:if test="${oggetto.getSconto() > 0}">

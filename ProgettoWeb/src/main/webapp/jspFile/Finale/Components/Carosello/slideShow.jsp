@@ -31,7 +31,7 @@
                         <div class="carousel-item">
                     </c:otherwise>
                 </c:choose>
-                            <img class="d-block w-100" src="${img.getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: auto; object-fit: contain;">
+                            <img class="d-block w-100" src="${img.getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: auto; object-fit: scale-down;">
                             <div class="carousel-caption d-none d-md-block">
                                 <h3>${listaOggetti.get(i).getNome()}</h3>
                                 <p>${listaOggetti.get(i).getPrezzo()}</p>

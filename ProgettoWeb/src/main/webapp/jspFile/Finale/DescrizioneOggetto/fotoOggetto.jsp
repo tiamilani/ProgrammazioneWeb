@@ -30,7 +30,7 @@
                         <div class="carousel-item">
                     </c:otherwise>
                 </c:choose>
-                            <img class="d-block w-100" src="${img.getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: auto; object-fit: contain;">
+                            <img class="d-block w-100" src="${img.getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; object-fit: scale-down;">
                         </div>
                 <c:set var="i" value="${i+1}"/>
             </c:forEach>

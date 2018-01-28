@@ -139,7 +139,7 @@
             </div>
             
             <div class="valutazione row no-gutters justify-content-between">
-                <div class="user-votes col-8">
+                <div class="user-votes col-9">
                     <div class="stars-${listaOggetti.get(iterator).getId()}">
                         <input class="star star-5" id="star-5-${listaOggetti.get(iterator).getId()}" type="radio" name="valutazioneReview-${listaOggetti.get(iterator).getId()}" value="5" disabled ${iterator == 5 ? 'checked' : ''}/>
                         <label class="star star-5" for="star-5-${listaOggetti.get(iterator).getId()}"></label>
