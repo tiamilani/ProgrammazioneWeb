@@ -113,7 +113,7 @@
                 </c:otherwise>
             </c:choose>
             <button type="button" class="btn nav-button col-xl-4 col-lg-3 col-md-12 col-sm-12" onclick="location.href='${pageContext.request.contextPath}/OrdineController?action=listOrders'">
-                Carello
+                Carrello
                 <span class="badge badge-light">${carrelloSessione.getSize()}</span>
             </button>
         </div>
