@@ -358,7 +358,7 @@ public class UserController extends HttpServlet {
 
 
             forward = HOME_PAGE;
-        }
+        } 
         else
         {
             forward = ERROR_PAGE;

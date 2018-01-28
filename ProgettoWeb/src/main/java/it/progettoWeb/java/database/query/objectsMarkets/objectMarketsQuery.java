@@ -24,7 +24,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopId(int idS, int ritiroInNegozio ) {
-        return "SELECT * FROM Oggetto WHERE Oggetto.idNegozio = "+ idS +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+        return "SELECT * FROM oggetto WHERE oggetto.idNegozio = "+ idS +" AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
     }
 
 
@@ -37,7 +37,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificName(int idS, String name, int ritiroInNegozio ) {
-        return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+        return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND nomeDownCase LIKE '%"+ name + "%' AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
     }
 
 
@@ -50,7 +50,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificCategory(int idS, int category, int ritiroInNegozio ) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
     }
 
 
@@ -64,7 +64,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificName(int idS, int category, String name, int ritiroInNegozio ) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
         }
 
 
@@ -77,7 +77,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificMinPrice(int idS, double min, int ritiroInNegozio ) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo >= "+ min +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.prezzo >= "+ min +" AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -90,7 +90,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificMaxPrice(int idS, double max, int ritiroInNegozio ) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo <= "+ max +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.prezzo <= "+ max +" AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -104,7 +104,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificBetweenPrice(int idS, double min, double max, int ritiroInNegozio ) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -118,7 +118,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificMinPrice(int idS, int category, double min, int ritiroInNegozio ) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo >= "+ min +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.prezzo >= "+ min +" AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -132,7 +132,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificMaxPrice(int idS, int category, double max, int ritiroInNegozio ) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo <= "+ max +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.prezzo <= "+ max +" AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -147,7 +147,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificBetweenPrice(int idS, int category, double min, double max, int ritiroInNegozio ) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -161,7 +161,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificNameAndSpecificMinPrice(int idS, String name, double min, int ritiroInNegozio ) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo >= "+ min +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.prezzo >= "+ min +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -175,7 +175,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificNameAndSpecificMaxPrice(int idS, String name, double max, int ritiroInNegozio ) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo <= "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.prezzo <= "+ max +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -190,7 +190,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificNameAndSpecificBetweenPrice(int idS, String name, double min, double max, int ritiroInNegozio ) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -205,7 +205,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMinPrice(int idS, int category, String name, double min, int ritiroInNegozio ) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo >= "+ min +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.prezzo >= "+ min +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -220,7 +220,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMaxPrice(int idS, int category, String name, double max, int ritiroInNegozio ) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo <= "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.prezzo <= "+ max +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -236,7 +236,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificBetweenPrice(int idS, int category, String name, double min, double max, int ritiroInNegozio ) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -253,13 +253,13 @@ public class objectMarketsQuery {
             return "SET @latitudine = "+ latitudine +"; "
                     + "SET @longitudine = "+ longitudine +"; "
                     + "SET @raggio = "+ raggio +"; "
-                    + "SELECT Negozio.* "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.* "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE @raggio >= 111.111 *DEGREES(ACOS(COS(RADIANS(@latitudine))"
-                    + "* COS(RADIANS(Indirizzo.latitudine))"
-                    + "* COS(RADIANS(@longitudine - Indirizzo.longitudine))"
+                    + "* COS(RADIANS(indirizzo.latitudine))"
+                    + "* COS(RADIANS(@longitudine - indirizzo.longitudine))"
                     + "+ SIN(RADIANS(@latitudine))"
-                    + "* SIN(RADIANS(Indirizzo.latitudine))));";
+                    + "* SIN(RADIANS(indirizzo.latitudine))));";
 
         }
 
@@ -275,15 +275,16 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 *DEGREES(ACOS(COS(RADIANS("+ latitudine +"))"
-                + "* COS(RADIANS(Indirizzo.latitudine))"
-                + "* COS(RADIANS("+ longitudine +" - Indirizzo.longitudine))"
-                + "+ SIN(RADIANS("+ latitudine +"))* SIN(RADIANS(Indirizzo.latitudine))));"
-                + "SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                + "* COS(RADIANS(indirizzo.latitudine))"
+                + "* COS(RADIANS("+ longitudine +" - indirizzo.longitudine))"
+                + "+ SIN(RADIANS("+ latitudine +"))* SIN(RADIANS(indirizzo.latitudine))));"
+                + "SELECT oggetto.* "
+                
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
     }
 
@@ -300,15 +301,15 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificNameWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  String name, int ritiroInNegozio ) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) "
-                    + "* COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "* COS(RADIANS(indirizzo.latitudine)) "
+                    + "* COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + "SELECT oggetto.* "
+                    + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -325,15 +326,15 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  int category, int ritiroInNegozio ) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) "
-                    + "* COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) + SIN(RADIANS("+ latitudine +")) "
-                    + "* SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.categoria="+ category +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "* COS(RADIANS(indirizzo.latitudine)) "
+                    + "* COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) + SIN(RADIANS("+ latitudine +")) "
+                    + "* SIN(RADIANS(indirizzo.latitudine)))); "
+                    + "SELECT oggetto.* "
+                    + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.categoria="+ category +" AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -351,13 +352,13 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  int category, String name, int ritiroInNegozio ) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + "SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + "SELECT oggetto.* FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.categoria="+ category +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -374,14 +375,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificMinPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  double min, int ritiroInNegozio ) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.prezzo >= "+ min +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + "SELECT oggetto.* "
+                    + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.prezzo >= "+ min +" AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -398,14 +399,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificMaxPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  double max, int ritiroInNegozio ) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.prezzo <= "+ max +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + "SELECT oggetto.* "
+                    + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.prezzo <= "+ max +" AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -423,14 +424,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificBetweenPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  double min, double max, int ritiroInNegozio ) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + "SELECT oggetto.* "
+                    + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -448,14 +449,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificMinPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  int category, double min, int ritiroInNegozio ) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.prezzo >= "+ min +" AND Oggetto.categoria="+ category +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + "SELECT oggetto.* "
+                    + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.prezzo >= "+ min +" AND oggetto.categoria="+ category +" AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -473,14 +474,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificMaxPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  int category, double max, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                + "SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.prezzo <= "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +"; ";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                + "SELECT oggetto.* "
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.prezzo <= "+ max +" AND oggetto.categoria="+ category +" AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +"; ";
 
     }
 
@@ -499,14 +500,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificBetweenPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  int category, double min, double max, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                + "SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                + "SELECT oggetto.* "
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.categoria="+ category +" AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
     }
 
@@ -524,14 +525,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificNameAndSpecificMinPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  String name, double min, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                + "SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.prezzo >= "+ min +" and Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                + "SELECT oggetto.* "
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.prezzo >= "+ min +" and oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
     }
 
@@ -549,14 +550,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificNameAndSpecificMaxPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  String name, double max, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                + "SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.prezzo <= "+ max +" and Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                + "SELECT oggetto.* "
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.prezzo <= "+ max +" and oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
     }
 
@@ -575,14 +576,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificNameAndSpecificBetweenPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  String name, double min, double max, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                + "SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                + "SELECT oggetto.* "
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
     }
 
@@ -601,14 +602,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMinPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  int category, String name, double min, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                + "SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.prezzo >= "+ min +" AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                + "SELECT oggetto.* "
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.prezzo >= "+ min +" AND oggetto.categoria="+ category +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
     }
 
@@ -627,14 +628,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMaxPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  int category, String name, double max, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                + "SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.prezzo <= "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                + "SELECT oggetto.* "
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.prezzo <= "+ max +" AND oggetto.categoria="+ category +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
     }
 
@@ -654,14 +655,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificBetweenPriceWithLatitudeAndLongitude(double raggio, double longitudine, double latitudine, int idU,  int category, String name, double min, double max, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                + "SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                + "SELECT oggetto.* "
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.categoria="+ category +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
     }
 
@@ -672,7 +673,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdWithDiscount(int idS) {
-            return "SELECT * FROM Oggetto WHERE Oggetto.idNegozio = '"+ idS +"' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+            return "SELECT * FROM oggetto WHERE oggetto.idNegozio = '"+ idS +"' AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -684,7 +685,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificNameWithDiscount(int idS,String name) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -696,7 +697,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificCategoryWithDiscount(int idS,int category) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -709,7 +710,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameWithDiscount(int idS, int category, String name) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -721,7 +722,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificMinPriceWithDiscount(int idS, double min) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo >= "+ min +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.prezzo >= "+ min +" AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -733,7 +734,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificMaxPriceWithDiscount(int idS, double max) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo <= "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.prezzo <= "+ max +" AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -746,7 +747,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificBetweenPriceWithDiscount(int idS, double min, double max) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -759,7 +760,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificMinPriceWithDiscount(int idS,int category, double min) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo >= "+ min +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.prezzo >= "+ min +" AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -772,7 +773,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificMaxPriceWithDiscount(int idS, int category, double max) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo <= "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.prezzo <= "+ max +" AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -786,7 +787,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificBetweenPriceWithDiscount(int idS,int category, double min, double max) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -799,7 +800,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificNameAndSpecificMinPriceWithDiscount(int idS,String name, double min) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo >= "+ min +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.prezzo >= "+ min +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -813,8 +814,8 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificNameAndSpecificMaxPriceWithDiscount(int idS, String name, double max) {
             return "SELECT * "
-                    + "FROM Oggetto "
-                    + "WHERE idNegozio="+ idS +"  AND Oggetto.prezzo <= "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "FROM oggetto "
+                    + "WHERE idNegozio="+ idS +"  AND oggetto.prezzo <= "+ max +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -829,8 +830,8 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificNameAndSpecificBetweenPriceWithDiscount(int idS,String name, double min, double max) {
             return "SELECT * "
-                    + "FROM Oggetto "
-                    + "WHERE idNegozio="+ idS +"  AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "FROM oggetto "
+                    + "WHERE idNegozio="+ idS +"  AND oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -845,8 +846,8 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMinPriceWithDiscount(int idS, int category, String name, double min) {
             return "SELECT * "
-                    + "FROM Oggetto "
-                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo >= "+ min +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "FROM oggetto "
+                    + "WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.prezzo >= "+ min +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -861,8 +862,8 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMaxPriceWithDiscount(int idS, int category, String name, double max) {
             return "SELECT * "
-                    + "FROM Oggetto "
-                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo <= "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "FROM oggetto "
+                    + "WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.prezzo <= "+ max +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -878,8 +879,8 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificBetweenPriceWithDiscount(int idS, int category, String name, double min, double max) {
             return "SELECT * "
-                    + "FROM Oggetto "
-                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "FROM oggetto "
+                    + "WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -895,14 +896,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + "SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + "SELECT oggetto.* "
+                    + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -918,14 +919,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificNameWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  String name) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + " SELECT oggetto.* "
+                    + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -941,14 +942,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  int category) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.categoria="+ category +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + " SELECT oggetto.* "
+                    + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.categoria="+ category +" AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -965,14 +966,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  int category, String name) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + " SELECT oggetto.* "
+                    + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.categoria="+ category +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -988,14 +989,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificMinPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  double min) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + " SELECT Oggetto.* "
-                    + " FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + " WHERE Oggetto.prezzo >= "+ min +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + " SELECT oggetto.* "
+                    + " FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + " WHERE oggetto.prezzo >= "+ min +" AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -1011,14 +1012,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificMaxPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  double max) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.prezzo <= "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + " SELECT oggetto.* "
+                    + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.prezzo <= "+ max +" AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -1035,13 +1036,13 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  double min, double max) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + " SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + " SELECT oggetto.* FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -1058,14 +1059,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificMinPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  int category, double min) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + " SELECT Oggetto.*"
-                    + " FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id)"
-                    + " WHERE Oggetto.prezzo >= "+ min +" AND Oggetto.categoria="+ category +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + " SELECT oggetto.*"
+                    + " FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id)"
+                    + " WHERE oggetto.prezzo >= "+ min +" AND oggetto.categoria="+ category +" AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -1083,14 +1084,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificMaxPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  int category, double max ) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + " SELECT Oggetto.*"
-                    + " FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.prezzo <= "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + " SELECT oggetto.*"
+                    + " FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.prezzo <= "+ max +" AND oggetto.categoria="+ category +" AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -1109,14 +1110,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  int category, double min, double max) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + " SELECT oggetto.* "
+                    + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.categoria="+ category +" AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -1135,14 +1136,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificNameAndSpecificMinPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  String name, double min) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.prezzo >= "+ min +" and Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + " SELECT oggetto.* "
+                    + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.prezzo >= "+ min +" and oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -1160,14 +1161,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificNameAndSpecificMaxPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  String name, double max) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.prezzo <= "+ max +" and Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + " SELECT oggetto.* "
+                    + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.prezzo <= "+ max +" and oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -1186,14 +1187,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificNameAndSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  String name, double min, double max) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + " SELECT oggetto.* "
+                    + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -1211,14 +1212,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMinPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  int category, String name, double min) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.prezzo >= "+ min +" AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + " SELECT oggetto.* "
+                    + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.prezzo >= "+ min +" AND oggetto.categoria="+ category +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -1236,14 +1237,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMaxPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  int category, String name, double max) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.prezzo <= "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + " SELECT oggetto.* "
+                    + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.prezzo <= "+ max +" AND oggetto.categoria="+ category +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -1262,14 +1263,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscount(double raggio, double longitudine, double latitudine, int idU,  int category, String name, double min, double max) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine)))); "
-                    + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL;";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine)))); "
+                    + " SELECT oggetto.* "
+                    + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.categoria="+ category +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
 
         }
 
@@ -1283,8 +1284,8 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdWithDiscountAndPickupInStore(int idS, int ritiroInNegozio ) {
             return "SELECT * "
-                    + "FROM Oggetto "
-                    + "WHERE Oggetto.idNegozio = '"+ idS +"' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "FROM oggetto "
+                    + "WHERE oggetto.idNegozio = '"+ idS +"' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -1299,8 +1300,8 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificNameWithDiscountAndPickupInStore(int idS,String name, int ritiroInNegozio ) {
             return "SELECT * "
-                    + "FROM Oggetto "
-                    + "WHERE idNegozio="+ idS +"  AND nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "FROM oggetto "
+                    + "WHERE idNegozio="+ idS +"  AND nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -1315,8 +1316,8 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryWithDiscountAndPickupInStore(int idS,int category, int ritiroInNegozio ) {
             return "SELECT * "
-                    + "FROM Oggetto "
-                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "FROM oggetto "
+                    + "WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -1332,8 +1333,8 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameWithDiscountAndPickupInStore(int idS, int category, String name, int ritiroInNegozio ) {
             return "SELECT * "
-                    + "FROM Oggetto "
-                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "FROM oggetto "
+                    + "WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -1347,7 +1348,7 @@ public class objectMarketsQuery {
      * @return lista di oggetti
      */
     public static String selectObjectShopIdSpecificMinPriceWithDiscountAndPickupInStore(int idS, double min, int ritiroInNegozio ) {
-            return "SELECT * FROM Oggetto WHERE idNegozio="+ idS +"  AND Oggetto.prezzo >= "+ min +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+            return "SELECT * FROM oggetto WHERE idNegozio="+ idS +"  AND oggetto.prezzo >= "+ min +" AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -1362,8 +1363,8 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificMaxPriceWithDiscountAndPickupInStore(int idS, double max, int ritiroInNegozio ) {
             return "SELECT * "
-                    + "FROM Oggetto "
-                    + "WHERE idNegozio="+ idS +"  AND Oggetto.prezzo <= "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "FROM oggetto "
+                    + "WHERE idNegozio="+ idS +"  AND oggetto.prezzo <= "+ max +" AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -1379,8 +1380,8 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificBetweenPriceWithDiscountAndPickupInStore(int idS, double min, double max, int ritiroInNegozio ) {
             return "SELECT * "
-                    + "FROM Oggetto "
-                    + "WHERE idNegozio="+ idS +"  AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "FROM oggetto "
+                    + "WHERE idNegozio="+ idS +"  AND oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -1396,8 +1397,8 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificMinPriceWithDiscountAndPickupInStore(int idS,int category, double min, int ritiroInNegozio ) {
             return "SELECT * "
-                    + "FROM Oggetto "
-                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo >= "+ min +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "FROM oggetto "
+                    + "WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.prezzo >= "+ min +" AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -1413,8 +1414,8 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificMaxPriceWithDiscountAndPickupInStore(int idS, int category, double max, int ritiroInNegozio ) {
             return "SELECT * "
-                    + "FROM Oggetto "
-                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo <= "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "FROM oggetto "
+                    + "WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.prezzo <= "+ max +" AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -1431,8 +1432,8 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificBetweenPriceWithDiscountAndPickupInStore(int idS,int category, double min, double max, int ritiroInNegozio ) {
             return "SELECT * "
-                    + "FROM Oggetto "
-                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "FROM oggetto "
+                    + "WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -1448,8 +1449,8 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificNameAndSpecificMinPriceWithDiscountAndPickupInStore(int idS,String name, double min, int ritiroInNegozio ) {
             return "SELECT * "
-                    + "FROM Oggetto "
-                    + "WHERE idNegozio="+ idS +"  AND Oggetto.prezzo >= "+ min +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "FROM oggetto "
+                    + "WHERE idNegozio="+ idS +"  AND oggetto.prezzo >= "+ min +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -1465,8 +1466,8 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificNameAndSpecificMaxPriceWithDiscountAndPickupInStore(int idS, String name, double max, int ritiroInNegozio ) {
             return "SELECT * "
-                    + "FROM Oggetto "
-                    + "WHERE idNegozio="+ idS +"  AND Oggetto.prezzo <= "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "FROM oggetto "
+                    + "WHERE idNegozio="+ idS +"  AND oggetto.prezzo <= "+ max +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -1483,8 +1484,8 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificNameAndSpecificBetweenPriceWithDiscountAndPickupInStore(int idS,String name, double min, double max, int ritiroInNegozio ) {
             return "SELECT * "
-                    + "FROM Oggetto "
-                    + "WHERE idNegozio="+ idS +"  AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "FROM oggetto "
+                    + "WHERE idNegozio="+ idS +"  AND oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -1501,8 +1502,8 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMinPriceWithDiscountAndPickupInStore(int idS, int category, String name, double min, int ritiroInNegozio ) {
             return "SELECT * "
-                    + "FROM Oggetto "
-                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo >= "+ min +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "FROM oggetto "
+                    + "WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.prezzo >= "+ min +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -1519,8 +1520,8 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMaxPriceWithDiscountAndPickupInStore(int idS, int category, String name, double max, int ritiroInNegozio ) {
             return "SELECT * "
-                    + "FROM Oggetto "
-                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo <= "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "FROM oggetto "
+                    + "WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.prezzo <= "+ max +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -1538,8 +1539,8 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificBetweenPriceWithDiscountAndPickupInStore(int idS, int category, String name, double min, double max, int ritiroInNegozio ) {
             return "SELECT * "
-                    + "FROM Oggetto "
-                    + "WHERE idNegozio="+ idS +"  AND Oggetto.categoria="+ category +" AND Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "FROM oggetto "
+                    + "WHERE idNegozio="+ idS +"  AND oggetto.categoria="+ category +" AND oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -1557,14 +1558,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU, int ritiroInNegozio ) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
-                    + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine))));"
+                    + " SELECT oggetto.* "
+                    + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -1582,14 +1583,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificNameWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU, String name, int ritiroInNegozio ) {
             return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                    + "SELECT Negozio.id "
-                    + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                    + "SELECT negozio.id "
+                    + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                     + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                    + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
-                    + " SELECT Oggetto.* "
-                    + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                    + "WHERE Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                    + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                    + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine))));"
+                    + " SELECT oggetto.* "
+                    + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                    + "WHERE oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
         }
 
@@ -1607,14 +1608,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU, int category, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
-                + " SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.categoria="+ category +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine))));"
+                + " SELECT oggetto.* "
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.categoria="+ category +" AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
     }
 
@@ -1633,14 +1634,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU, int category, String name, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
-                + " SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine))));"
+                + " SELECT oggetto.* "
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.categoria="+ category +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
     }
 
@@ -1658,14 +1659,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificMinPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU, double min, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
-                + " SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.prezzo >= "+ min +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine))));"
+                + " SELECT oggetto.* "
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.prezzo >= "+ min +" AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
     }
 
@@ -1683,14 +1684,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificMaxPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU, double max, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
-                + " SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.prezzo <= "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine))));"
+                + " SELECT oggetto.* "
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.prezzo <= "+ max +" AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
     }
 
@@ -1709,14 +1710,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU, double min, double max, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
-                + " SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine))));"
+                + " SELECT oggetto.* "
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
     }
 
@@ -1735,14 +1736,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificMinPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU, int category, double min, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
-                + " SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.prezzo >= "+ min +" AND Oggetto.categoria="+ category +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine))));"
+                + " SELECT oggetto.* "
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.prezzo >= "+ min +" AND oggetto.categoria="+ category +" AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
     }
 
@@ -1761,14 +1762,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificMaxPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU, int category, double max, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
-                + " SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.prezzo <= "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine))));"
+                + " SELECT oggetto.* "
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.prezzo <= "+ max +" AND oggetto.categoria="+ category +" AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
     }
 
@@ -1788,14 +1789,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU, int category, double min, double max, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
-                + " SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine))));"
+                + " SELECT oggetto.* "
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.categoria="+ category +" AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
     }
 
@@ -1814,14 +1815,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificNameAndSpecificMinPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU, String name, double min, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
-                + " SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.prezzo >= "+ min +" and Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine))));"
+                + " SELECT oggetto.* "
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.prezzo >= "+ min +" and oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
     }
 
@@ -1840,12 +1841,12 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificNameAndSpecificMaxPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU, String name, double max, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
-                + " SELECT Oggetto.* FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) WHERE Oggetto.prezzo <= "+ max +" and Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine))));"
+                + " SELECT oggetto.* FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) WHERE oggetto.prezzo <= "+ max +" and oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
     }
 
@@ -1865,14 +1866,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificNameAndSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU, String name, double min, double max, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
-                + " SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine))));"
+                + " SELECT oggetto.* "
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
     }
 
@@ -1892,14 +1893,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMinPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU, int category, String name, double min, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
-                + " SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.prezzo >= "+ min +" AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine))));"
+                + " SELECT oggetto.* "
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.prezzo >= "+ min +" AND oggetto.categoria="+ category +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
     }
 
@@ -1919,14 +1920,14 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificMaxPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU, int category, String name, double max, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
-                + " SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.prezzo <= "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine))));"
+                + " SELECT oggetto.* "
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.prezzo <= "+ max +" AND oggetto.categoria="+ category +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +";";
 
     }
 
@@ -1947,13 +1948,13 @@ public class objectMarketsQuery {
      */
     public static String selectObjectShopIdSpecificCategoryAndSpecificNameAndSpecificBetweenPriceWithLatitudeAndLongitudeWithDiscountAndPickupInStore(double raggio, double latitudine, double longitudine, int idU, int category, String name, double min, double max, int ritiroInNegozio ) {
         return "Create OR REPLACE View NegoziDistanza_"+ idU +" as "
-                + "SELECT Negozio.id "
-                + "FROM Negozio INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI) "
+                + "SELECT negozio.id "
+                + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI) "
                 + "WHERE "+ raggio +">= 111.111 * DEGREES(ACOS(COS(RADIANS("+ latitudine +")) "
-                + "* COS(RADIANS(Indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - Indirizzo.longitudine)) "
-                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(Indirizzo.latitudine))));"
-                + " SELECT Oggetto.* "
-                + "FROM Oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (Oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
-                + "WHERE Oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND Oggetto.categoria="+ category +" AND Oggetto.nomeDownCase LIKE '%"+ name + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = "+ ritiroInNegozio +"";
+                + "* COS(RADIANS(indirizzo.latitudine)) * COS(RADIANS("+ longitudine +" - indirizzo.longitudine)) "
+                + "+ SIN(RADIANS("+ latitudine +")) * SIN(RADIANS(indirizzo.latitudine))));"
+                + " SELECT oggetto.* "
+                + "FROM oggetto INNER JOIN NegoziDistanza_"+ idU +" ON (oggetto.idNegozio = NegoziDistanza_"+ idU +".id) "
+                + "WHERE oggetto.prezzo BETWEEN "+ min +" AND "+ max +" AND oggetto.categoria="+ category +" AND oggetto.nomeDownCase LIKE '%"+ name + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = "+ ritiroInNegozio +"";
     }
 }

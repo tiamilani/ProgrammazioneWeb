@@ -31,13 +31,13 @@ public class sellersQuery {
      */
     public static String selectShopsBySellerID(int idVenditore)
     {
-        return "SELECT * FROM Negozio WHERE idVenditore = " + idVenditore + ";";
+        return "SELECT * FROM negozio WHERE idVenditore = " + idVenditore + ";";
     }
 
     public static String selectNumberOfOrderForStore(int idVenditore, int idNegozio){
-        return "select COUNT(Ordine.idOggetto) as ordini "
-                + "from Ordine INNER JOIN ordiniRicevuti ON (Ordine.idOrdine = ordiniRicevuti.idO) "
-                + "where ordiniRicevuti.idV = "+idVenditore+" AND Ordine.idNegozio = "+idNegozio+";";
+        return "select COUNT(ordine.idOggetto) as ordini "
+                + "from ordine INNER JOIN ordiniricevuti ON (ordine.idOrdine = ordiniricevuti.idO) "
+                + "where ordiniricevuti.idV = "+idVenditore+" AND ordine.idNegozio = "+idNegozio+";";
     }
 
     /**
@@ -48,7 +48,7 @@ public class sellersQuery {
      */
     public static String selectOrdersBySellerID(int idVenditore)
     {
-        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + ";";
+        return "SELECT * FROM ordine JOIN negozio ON ordine.idNegozio=negozio.id WHERE idVenditore=" + idVenditore + ";";
     }
 
     /**
@@ -59,9 +59,9 @@ public class sellersQuery {
      */
     public static String selectReviewUserBySeller(int idV)
     {
-        return "SELECT RecensioneVenditore.*, Utente.* FROM "
-                + "RecensioneVenditore JOIN Utente ON RecensioneVenditore.idUtente=Utente.id "
-                + "WHERE RecensioneVenditore.idVenditore='" + idV + "';";
+        return "SELECT recensionevenditore.*, utente.* FROM "
+                + "recensionevenditore JOIN utente ON recensionevenditore.idUtente=utente.id "
+                + "WHERE recensionevenditore.idVenditore='" + idV + "';";
     }
 
     /**
@@ -72,7 +72,7 @@ public class sellersQuery {
      */
     public static String selectNewestToOldestOrdersBySellerID(int idVenditore)
     {
-        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " ORDER BY dataOrdine DESC;";
+        return "SELECT * FROM ordine JOIN negozio ON ordine.idNegozio=negozio.id WHERE idVenditore=" + idVenditore + " ORDER BY dataOrdine DESC;";
     }
 
 
@@ -86,7 +86,7 @@ public class sellersQuery {
      */
     public static String selectOrderBySellerIDAndStatus(int idVenditore, int stato)
     {
-        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND stato=" + stato + ";";
+        return "SELECT * FROM ordine JOIN negozio ON ordine.idNegozio=negozio.id WHERE idVenditore=" + idVenditore + " AND stato=" + stato + ";";
     }
 
     /**
@@ -98,7 +98,7 @@ public class sellersQuery {
      */
     public static String selectOrderByDate(int idVenditore, Timestamp dataOrdine)
     {
-        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND dataOrdine=" + dataOrdine + ";";
+        return "SELECT * FROM ordine JOIN negozio ON ordine.idNegozio=negozio.id WHERE idVenditore=" + idVenditore + " AND dataOrdine=" + dataOrdine + ";";
     }
 
     /**
@@ -110,7 +110,7 @@ public class sellersQuery {
      */
     public static String selectOrderByWeek(int idVenditore, Timestamp dataOrdine)
     {
-        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND WEEK(dataOrdine)=WEEK(" + dataOrdine + ");";
+        return "SELECT * FROM ordine JOIN negozio ON ordine.idNegozio=negozio.id WHERE idVenditore=" + idVenditore + " AND WEEK(dataOrdine)=WEEK(" + dataOrdine + ");";
     }
 
     /**
@@ -122,7 +122,7 @@ public class sellersQuery {
      */
     public static String selectOrderByMonth(int idVenditore, Timestamp dataOrdine)
     {
-        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND MONTH(dataOrdine)=MONTH(" + dataOrdine + ");";
+        return "SELECT * FROM ordine JOIN negozio ON ordine.idNegozio=negozio.id WHERE idVenditore=" + idVenditore + " AND MONTH(dataOrdine)=MONTH(" + dataOrdine + ");";
     }
 
     /**
@@ -134,7 +134,7 @@ public class sellersQuery {
      */
     public static String selectOrderByYear(int idVenditore, Timestamp dataOrdine)
     {
-        return "SELECT * FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id WHERE idVenditore=" + idVenditore + " AND YEAR(dataOrdine)=YEAR(" + dataOrdine + ");";
+        return "SELECT * FROM ordine JOIN negozio ON ordine.idNegozio=negozio.id WHERE idVenditore=" + idVenditore + " AND YEAR(dataOrdine)=YEAR(" + dataOrdine + ");";
     }
 
     /**
@@ -146,7 +146,7 @@ public class sellersQuery {
     public static String selectShopAndSalesNumberBySellerID(int idVenditore)
     {
         return "SELECT idNegozio, COUNT(idOrdine) AS numeroVendite "
-                + "FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id "
+                + "FROM ordine JOIN negozio ON ordine.idNegozio=negozio.id "
                 + "WHERE idVenditore=" + idVenditore + " GROUP BY idNegozio;";
     }
 
@@ -158,10 +158,10 @@ public class sellersQuery {
      */
     public static String selectShopWithHigherSalesBySellerID(int idVenditore)
     {
-        return "select Negozio.*, COUNT(idOrdine) AS numeroVendite "
-                + "FROM Negozio JOIN Ordine ON (Ordine.idNegozio=Negozio.id) "
-                + "where Negozio.idVenditore="+idVenditore+" "
-                + "GROUP BY Negozio.id, Negozio.nomeNegozio, Negozio.valutazione, Negozio.attivo, Negozio.idI "
+        return "select negozio.*, COUNT(idOrdine) AS numeroVendite "
+                + "FROM negozio JOIN ordine ON (ordine.idNegozio=negozio.id) "
+                + "where negozio.idVenditore="+idVenditore+" "
+                + "GROUP BY negozio.id, negozio.nomeNegozio, negozio.valutazione, negozio.attivo, negozio.idI "
                 + "ORDER BY numeroVendite DESC;";
     }
 
@@ -173,10 +173,10 @@ public class sellersQuery {
      */
     public static String selectShopWithLowestSalesBySellerID(int idVenditore)
     {
-        return "select Negozio.*, COUNT(idOrdine) AS numeroVendite "
-                + "FROM Negozio JOIN Ordine ON (Ordine.idNegozio=Negozio.id) "
-                + "where Negozio.idVenditore="+idVenditore+" "
-                + "GROUP BY Negozio.id, Negozio.nomeNegozio, Negozio.valutazione, Negozio.attivo, Negozio.idI "
+        return "select negozio.*, COUNT(idOrdine) AS numeroVendite "
+                + "FROM negozio JOIN ordine ON (ordine.idNegozio=negozio.id) "
+                + "where negozio.idVenditore="+idVenditore+" "
+                + "GROUP BY negozio.id, negozio.nomeNegozio, negozio.valutazione, negozio.attivo, negozio.idI "
                 + "ORDER BY numeroVendite ASC;";
     }
 
@@ -190,7 +190,7 @@ public class sellersQuery {
     public static String selectShopWithLowerSalesThanBySellerID(int idVenditore, int valore)
     {
         return "SELECT idNegozio, COUNT(idOrdine) AS numeroVendite "
-                + "FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id "
+                + "FROM ordine JOIN negozio ON ordine.idNegozio=negozio.id "
                 + "WHERE idVenditore=" + idVenditore
                 + " GROUP BY idNegozio"
                 + " HAVING COUNT(idOrdine)<" + valore + ";";
@@ -206,7 +206,7 @@ public class sellersQuery {
     public static String selectShopWithHigherSalesThanBySellerID(int idVenditore, int valore)
     {
         return "SELECT idNegozio, COUNT(idOrdine) AS numeroVendite "
-                + "FROM Ordine JOIN Negozio ON Ordine.idNegozio=Negozio.id "
+                + "FROM ordine JOIN negozio ON ordine.idNegozio=negozio.id "
                 + "WHERE idVenditore=" + idVenditore
                 + " GROUP BY idNegozio"
                 + " HAVING COUNT(idOrdine)>" + valore + ";";
@@ -223,10 +223,10 @@ public class sellersQuery {
     public static String selectShopByCategory(int idVenditore, int attivo, int idCategoria)
     {
         return "SELECT * "
-                + "FROM ((Oggetto JOIN Categoria ON oggetto.categoria=Categoria.id) "
-                + "JOIN Negozio ON Negozio.id=Oggetto.idNegozio) "
-                + "JOIN Utente ON Utente.id=Negozio.idVenditore "
-                + "WHERE idVenditore=" + idVenditore + " AND attivo=" + attivo + " AND Categoria.id=" + idCategoria + ";";
+                + "FROM ((oggetto JOIN categoria ON oggetto.categoria=categoria.id) "
+                + "JOIN negozio ON negozio.id=oggetto.idNegozio) "
+                + "JOIN utente ON utente.id=negozio.idVenditore "
+                + "WHERE idVenditore=" + idVenditore + " AND attivo=" + attivo + " AND categoria.id=" + idCategoria + ";";
     }
 
     /**
@@ -240,14 +240,14 @@ public class sellersQuery {
      */
     public static String selectShopWithHigherSalesByCategory(int idVenditore, int attivo, int idCategoria, int categoriaOggetto)
     {
-        return "SELECT Negozio.*, COUNT(Ordine.idOrdine) "
-                + "FROM ((Oggetto JOIN Negozio ON Negozio.id = Oggetto.idNegozio) "
-                + "JOIN Utente ON Utente.id = Negozio.idVenditore) "
-                + "JOIN Ordine ON Ordine.idNegozio = Negozio.id "
+        return "SELECT negozio.*, COUNT(ordine.idOrdine) "
+                + "FROM ((oggetto JOIN negozio ON negozio.id = oggetto.idNegozio) "
+                + "JOIN utente ON utente.id = negozio.idVenditore) "
+                + "JOIN ordine ON ordine.idNegozio = negozio.id "
                 + "WHERE idVenditore = " + idVenditore + " AND attivo = " + attivo
-                + " AND Categoria.id = " + idCategoria + " AND Oggetto.categoria = " + categoriaOggetto
-                + " AND Ordine.stato BETWEEN 1 AND 4 GROUP BY Negozio.id "
-                + "ORDER BY COUNT(Ordine.idOrdine) DESC;";
+                + " AND categoria.id = " + idCategoria + " AND oggetto.categoria = " + categoriaOggetto
+                + " AND ordine.stato BETWEEN 1 AND 4 GROUP BY negozio.id "
+                + "ORDER BY COUNT(ordine.idOrdine) DESC;";
     }
 
     /**
@@ -261,14 +261,14 @@ public class sellersQuery {
      */
     public static String selectShopWithLowerSalesByCategory(int idVenditore, int attivo, int idCategoria, int categoriaOggetto)
     {
-        return "SELECT Negozio.*, COUNT(Ordine.idOrdine) "
-                + "FROM ((Oggetto JOIN Negozio ON Negozio.id = Oggetto.idNegozio) "
-                + "JOIN Utente ON Utente.id = Negozio.idVenditore) "
-                + "JOIN Ordine ON Ordine.idNegozio = Negozio.id "
+        return "SELECT negozio.*, COUNT(ordine.idOrdine) "
+                + "FROM ((oggetto JOIN negozio ON negozio.id = oggetto.idNegozio) "
+                + "JOIN utente ON utente.id = negozio.idVenditore) "
+                + "JOIN ordine ON ordine.idNegozio = negozio.id "
                 + "WHERE idVenditore = " + idVenditore + " AND attivo = " + attivo
-                + " AND Categoria.id = " + idCategoria + " AND Oggetto.categoria = " + categoriaOggetto
-                + " AND Ordine.stato BETWEEN 1 AND 4 GROUP BY Negozio.id "
-                + "ORDER BY COUNT(Ordine.idOrdine) DESC;";
+                + " AND categoria.id = " + idCategoria + " AND oggetto.categoria = " + categoriaOggetto
+                + " AND ordine.stato BETWEEN 1 AND 4 GROUP BY negozio.id "
+                + "ORDER BY COUNT(ordine.idOrdine) DESC;";
     }
 
     /**
@@ -279,17 +279,17 @@ public class sellersQuery {
      */
     public static String selectShopByOpenDate(int idVenditore)
     {
-        return "SELECT * FROM Negozio WHERE idVenditore=" + idVenditore + " ORDER BY dataApertura DESC;";
+        return "SELECT * FROM negozio WHERE idVenditore=" + idVenditore + " ORDER BY dataApertura DESC;";
     }
 
     public static String selectShopByNameup(int idVenditore)
     {
-        return "SELECT * FROM Negozio WHERE idVenditore=" + idVenditore + " ORDER BY nomeNegozio;";
+        return "SELECT * FROM negozio WHERE idVenditore=" + idVenditore + " ORDER BY nomeNegozio;";
     }
 
     public static String selectShopByNameDown(int idVenditore)
     {
-        return "SELECT * FROM Negozio WHERE idVenditore=" + idVenditore + " ORDER BY nomeNegozio DESC;";
+        return "SELECT * FROM negozio WHERE idVenditore=" + idVenditore + " ORDER BY nomeNegozio DESC;";
     }
 
     /**
@@ -300,12 +300,12 @@ public class sellersQuery {
      */
     public static String selectShopByRevenue(int idVenditore)
     {
-        return "SELECT SUM(Ordine.quantita * Oggetto.prezzo) AS fatturato, Ordine.idNegozio, Negozio.nomeNegozio "
-                + "FROM (Oggetto JOIN Ordine ON Oggetto.id = Ordine.idOggetto) "
-                + "JOIN Negozio ON Negozio.id = Ordine.idNegozio "
-                + "WHERE Negozio.idVenditore = " + idVenditore
-                + " AND Ordine.stato BETWEEN 1 AND 4 "
-                + "GROUP BY Negozio.id ORDER BY fatturato DESC;";
+        return "SELECT SUM(ordine.quantita * oggetto.prezzo) AS fatturato, ordine.idNegozio, negozio.nomeNegozio "
+                + "FROM (oggetto JOIN ordine ON oggetto.id = ordine.idOggetto) "
+                + "JOIN negozio ON negozio.id = ordine.idNegozio "
+                + "WHERE negozio.idVenditore = " + idVenditore
+                + " AND ordine.stato BETWEEN 1 AND 4 "
+                + "GROUP BY negozio.id ORDER BY fatturato DESC;";
     }
 
     /**
@@ -317,7 +317,7 @@ public class sellersQuery {
      */
     public static String selectShopBySellerIDAndShopID(int idVenditore, int idNegozio)
     {
-        return "SELECT * FROM Negozio WHERE idVenditore=" + idVenditore + " AND id=" + idNegozio + ";";
+        return "SELECT * FROM negozio WHERE idVenditore=" + idVenditore + " AND id=" + idNegozio + ";";
     }
 
     /**
@@ -328,7 +328,7 @@ public class sellersQuery {
      */
     public static String selectOrderByShopID(int idNegozio)
     {
-        return "SELECT * FROM Ordine WHERE Ordine.idNegozio = " + idNegozio + "AND Ordine.stato BETWEEN 1 AND 4;";
+        return "SELECT * FROM ordine WHERE ordine.idNegozio = " + idNegozio + "AND ordine.stato BETWEEN 1 AND 4;";
     }
 
     /**
@@ -340,9 +340,9 @@ public class sellersQuery {
      */
     public static String selectOrderByCategory(int idNegozio, int idCategoria)
     {
-        return "SELECT Ordine.* FROM Ordine JOIN Oggetto ON Oggetto.id = Ordine.idOggetto"
-                + "WHERE Ordine.idNegozio = " + idNegozio
-                + " AND Ordine.stato BETWEEN 1 AND 4 AND Oggetto.categoria = " + idCategoria + ";";
+        return "SELECT ordine.* FROM ordine JOIN oggetto ON oggetto.id = ordine.idOggetto"
+                + "WHERE ordine.idNegozio = " + idNegozio
+                + " AND ordine.stato BETWEEN 1 AND 4 AND oggetto.categoria = " + idCategoria + ";";
     }
 
     /**
@@ -353,7 +353,7 @@ public class sellersQuery {
      */
     public static String selectServiceRequestBySellerID(int idVenditore)
     {
-        return "SELECT * FROM Assistenza JOIN Utente ON Utente.id=Assistenza.idVenditore "
+        return "SELECT * FROM assistenza JOIN utente ON utente.id=assistenza.idVenditore "
                 + "WHERE idVenditore=" + idVenditore + ";";
     }
 
@@ -365,10 +365,10 @@ public class sellersQuery {
      */
     public static String selectObjectSaledGroupByCategoryAndShop(int idVenditore)
     {
-        return "SELECT * FROM (Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) "
-                + "JOIN Negozio ON Negozio.id=Oggetto.idNegozio "
+        return "SELECT * FROM (oggetto JOIN categoria ON oggetto.categoria=categoria.id) "
+                + "JOIN negozio ON negozio.id=oggetto.idNegozio "
                 + "WHERE idVenditore=" + idVenditore + " AND stato=4 "
-                + "GROUP BY idNegozio ASC, Categoria.nome ASC;";
+                + "GROUP BY idNegozio ASC, categoria.nome ASC;";
     }
 
     /**
@@ -380,9 +380,9 @@ public class sellersQuery {
      */
     public static String selectObjectSaledGroupByShop(int idVenditore, String nomeCategoria)
     {
-        return "SELECT * FROM (Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) "
-                + "JOIN Negozio ON Negozio.id=Oggetto.idNegozio "
-                + "WHERE idVenditore=" + idVenditore + " AND stato=4 AND Categoria.nome=" + nomeCategoria
+        return "SELECT * FROM (oggetto JOIN categoria ON oggetto.categoria=categoria.id) "
+                + "JOIN negozio ON negozio.id=oggetto.idNegozio "
+                + "WHERE idVenditore=" + idVenditore + " AND stato=4 AND categoria.nome=" + nomeCategoria
                 + " GROUP BY idNegozio ASC;";
     }
 
@@ -394,10 +394,10 @@ public class sellersQuery {
      */
     public static String selectObjectSaledOrderedByRating(int idVenditore)
     {
-        return "SELECT * FROM (Ordine JOIN RecensioneOggetto ON Ordine.idOggetto=RecensioneOggetto.idOggetto) "
-                + "JOIN Negozio ON Ordine.idNegozio=Negozio.id "
+        return "SELECT * FROM (ordine JOIN recensioneoggetto ON ordine.idOggetto=recensioneoggetto.idOggetto) "
+                + "JOIN negozio ON ordine.idNegozio=negozio.id "
                 + "WHERE idVenditore=" + idVenditore + " AND stato=4 "
-                + "ORDER BY AVG(RecensioneOggetto.valutazione) DESC;";
+                + "ORDER BY AVG(recensioneoggetto.valutazione) DESC;";
     }
 
     /**
@@ -408,7 +408,7 @@ public class sellersQuery {
      */
     public static String selectShopOrderedByRating(int idVenditore)
     {
-        return "SELECT * FROM Negozio WHERE idVenditore=" + idVenditore + " ORDER BY valutazione DESC;";
+        return "SELECT * FROM negozio WHERE idVenditore=" + idVenditore + " ORDER BY valutazione DESC;";
     }
 
     /**
@@ -419,10 +419,10 @@ public class sellersQuery {
      */
     public static String selectObjectDiscountedGroupByShopAndCategory(int idVenditore)
     {
-        return "SELECT * FROM (Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) "
-                + "JOIN Negozio ON Negozio.id=Oggetto.idNegozio "
+        return "SELECT * FROM (oggetto JOIN categoria ON oggetto.categoria=categoria.id) "
+                + "JOIN negozio ON negozio.id=oggetto.idNegozio "
                 + "WHERE idVenditore=" + idVenditore + " AND sconto>0 "
-                + "GROUP BY Categoria.nome ASC, idNegozio ASC;";
+                + "GROUP BY categoria.nome ASC, idNegozio ASC;";
     }
 
     /**
@@ -433,10 +433,10 @@ public class sellersQuery {
      */
     public static String selectObjectsDiscountedGrupByShopAndCategoryOrderedByDeadline(int idVenditore)
     {
-        return "SELECT * FROM (Oggetto JOIN Categoria ON Oggetto.categoria=Categoria.id) "
-                + "JOIN Negozio ON Negozio.id=Oggetto.idNegozio "
+        return "SELECT * FROM (oggetto JOIN categoria ON oggetto.categoria=categoria.id) "
+                + "JOIN negozio ON negozio.id=oggetto.idNegozio "
                 + "WHERE idVenditore=" + idVenditore + " AND sconto>0 "
-                + "GROUP BY Categoria.nome ASC, idNegozio ASC "
+                + "GROUP BY categoria.nome ASC, idNegozio ASC "
                 + "ORDER BY dataFineSconto ASC;";
     }
 
@@ -448,7 +448,7 @@ public class sellersQuery {
      */
     public static String selectSellerReview(int idVenditore)
     {
-        return "SELECT * FROM RecensioneVenditore WHERE idVenditore=" + idVenditore + ";";
+        return "SELECT * FROM recensionevenditore WHERE idVenditore=" + idVenditore + ";";
     }
 
     /**
@@ -459,7 +459,7 @@ public class sellersQuery {
      */
     public static String insertShop(ModelloNegozio negozio)
     {
-        return "INSERT INTO Negozio (idVenditore, nomeNegozio, valutazione, attivo, idI, dataApertura, linkSito, orarioNegozio) "
+        return "INSERT INTO negozio (idVenditore, nomeNegozio, valutazione, attivo, idI, dataApertura, linkSito, orarioNegozio) "
                 + "VALUES ('" + negozio.getIdVenditore() + "','" +  negozio.getNomeNegozio() + "',NULL, '1' ,'" + negozio.getIdI() + "', CURRENT_TIMESTAMP,'"+negozio.getLinkSito()+"','"+negozio.getOrarioNegozio()+"');";
     }
 
@@ -472,12 +472,7 @@ public class sellersQuery {
      */
     public static String updateShopStatus(int idNegozio, int attivo)
     {
-        return "UPDATE Negozio SET attivo=" + attivo + " WHERE id=" + idNegozio + ";";
-    }
-    
-    public static String updateShopStars(int idNegozio, double value)
-    {
-        return "UPDATE Negozio SET valutazione=" + value + " WHERE id=" + idNegozio + ";";
+        return "UPDATE negozio SET attivo=" + attivo + " WHERE id=" + idNegozio + ";";
     }
 
     /**
@@ -489,7 +484,7 @@ public class sellersQuery {
      */
     public static String updateOrderStatus(int idOrdine , int nuovoStato)
     {
-        return "UPDATE Ordine SET stato=" + nuovoStato + " WHERE idOrdine=" + idOrdine + ";";
+        return "UPDATE ordine SET stato=" + nuovoStato + " WHERE idOrdine=" + idOrdine + ";";
     }
 
     /**
@@ -500,7 +495,7 @@ public class sellersQuery {
      */
     public static String updateOrderTracking(ModelloOrdine ordine, String codiceTracking)
     {
-        return "UPDATE Ordine SET codiceTracking='" + codiceTracking + "' WHERE idOrdine=" + ordine.getIdOrdine() + " AND idOggetto = '"+ordine.getIdOggetto()+"';";
+        return "UPDATE ordine SET codiceTracking='" + codiceTracking + "' WHERE idOrdine=" + ordine.getIdOrdine() + " AND idOggetto = '"+ordine.getIdOggetto()+"';";
     }
 
     /**
@@ -524,7 +519,7 @@ public class sellersQuery {
     {
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
         if(dataFineSconto != null)
-            return "INSERT INTO Oggetto "
+            return "INSERT INTO oggetto "
                     + "(id, idNegozio, nome,nomeDownCase, prezzo, descrizione, ritiroInNegozio, disponibilita, "
                     + "statoDisponibilita, sconto, dataFineSconto, categoria) "
                     + "VALUES ("
@@ -542,7 +537,7 @@ public class sellersQuery {
                     + ", " + idCategoria
                     + ");";
         else
-            return "INSERT INTO Oggetto "
+            return "INSERT INTO oggetto "
                     + "(id, idNegozio, nome,nomeDownCase, prezzo, descrizione, ritiroInNegozio, disponibilita, "
                     + "statoDisponibilita, sconto, dataFineSconto, categoria) "
                     + "VALUES ("
@@ -569,18 +564,18 @@ public class sellersQuery {
      */
     public static String deleteObject(String idOggetto)
     {
-        return "DELETE FROM Oggetto WHERE id='" + idOggetto + "';";
+        return "DELETE FROM oggetto WHERE id='" + idOggetto + "';";
     }
     
     public static String updateObjectStars(String idOggetto, double value)
     {
-        return "UPDATE Oggetto SET valutazione=" + value + " WHERE id='" + idOggetto + "';";
+        return "UPDATE oggetto SET valutazione=" + value + " WHERE id='" + idOggetto + "';";
     }
 
     public static String updateObject(ModelloOggetto oggetto,String oldId){
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
         if(oggetto.getDataFineSconto() != null)
-            return "UPDATE Oggetto SET "
+            return "UPDATE oggetto SET "
                     + "id='"+oggetto.getId()+"'"
                     + ",idNegozio=" + oggetto.getIdNegozio()
                     + ",nome='" + oggetto.getNome() + "'"
@@ -595,7 +590,7 @@ public class sellersQuery {
                     + ",categoria=" + oggetto.getCategoria()
                     + " WHERE id='" + oldId + "';";
         else
-            return "UPDATE Oggetto SET "
+            return "UPDATE oggetto SET "
                     + "id='"+oggetto.getId()+"'"
                     + ",idNegozio=" + oggetto.getIdNegozio()
                     + ",nome='" + oggetto.getNome() + "'"
@@ -620,7 +615,7 @@ public class sellersQuery {
      */
     public static String updateObjectPrice(String idOggetto, double prezzoOggetto)
     {
-        return "UPDATE Oggetto SET prezzo=" + prezzoOggetto + " WHERE id='" + idOggetto + "';";
+        return "UPDATE oggetto SET prezzo=" + prezzoOggetto + " WHERE id='" + idOggetto + "';";
     }
 
     /**
@@ -632,7 +627,7 @@ public class sellersQuery {
      */
     public static String updateObjectDiscount(String idOggetto, double sconto)
     {
-        return "UPDATE Oggetto SET sconto=" + sconto + " WHERE id='" + idOggetto + "';";
+        return "UPDATE oggetto SET sconto=" + sconto + " WHERE id='" + idOggetto + "';";
     }
 
     /**
@@ -644,7 +639,7 @@ public class sellersQuery {
      */
     public static String updateObjectQuantity(String idOggetto, int newQuantity)
     {
-        return "UPDATE Oggetto SET disponibilita="+ newQuantity + " WHERE id='" + idOggetto + "';";
+        return "UPDATE oggetto SET disponibilita="+ newQuantity + " WHERE id='" + idOggetto + "';";
     }
     
     /**
@@ -656,7 +651,7 @@ public class sellersQuery {
      */
     public static String updateObjectStatus(String idOggetto, int newState)
     {
-        return "UPDATE Oggetto SET statoDisponibilita=" + newState + " WHERE id='" + idOggetto + "';";
+        return "UPDATE oggetto SET statoDisponibilita=" + newState + " WHERE id='" + idOggetto + "';";
     }
 
 
@@ -669,8 +664,8 @@ public class sellersQuery {
      */
     public static String insertObjectImage(String idOggetto, String imagePath)
     {
-        return "INSERT INTO imageOggetto (src, idO) "
-                + "SELECT '" + imagePath + "', Oggetto.id FROM Oggetto WHERE Oggetto.id = '" + idOggetto + "';";
+        return "INSERT INTO imageoggetto (src, idO) "
+                + "SELECT '" + imagePath + "', oggetto.id FROM oggetto WHERE oggetto.id = '" + idOggetto + "';";
     }
 
     /**
@@ -683,8 +678,8 @@ public class sellersQuery {
      */
     public static String updateObjectImage(String idOggetto, String oldImagePath, String newImagePath)
     {
-        return "UPDATE imageOggetto SET imageOggetto.src = " + newImagePath + " "
-                + "WHERE imageOggetto.idO = '" + idOggetto + "' AND imageOggetto.src = " + oldImagePath + ";";
+        return "UPDATE imageoggetto SET imageoggetto.src = " + newImagePath + " "
+                + "WHERE imageoggetto.idO = '" + idOggetto + "' AND imageoggetto.src = " + oldImagePath + ";";
     }
 
     /**
@@ -696,7 +691,7 @@ public class sellersQuery {
      */
     public static String deleteObjectImage(String idOggetto, String imagePath)
     {
-        return "DELETE FROM imageOggetto WHERE imageOggetto.idO = " + idOggetto + " AND imageOggetto.src = " + imagePath + ";";
+        return "DELETE FROM imageoggetto WHERE imageoggetto.idO = " + idOggetto + " AND imageoggetto.src = " + imagePath + ";";
     }
 
     /**
@@ -708,7 +703,7 @@ public class sellersQuery {
      */
     public static String insertShopImage(int idNegozio, String imagePath)
     {
-        return "INSERT INTO imageNegozio (src, idN) values ('"+imagePath+"',"+idNegozio+");";
+        return "INSERT INTO imagenegozio (src, idN) values ('"+imagePath+"',"+idNegozio+");";
     }
 
     /**
@@ -721,8 +716,8 @@ public class sellersQuery {
      */
     public static String updateShopImage(int idNegozio, String oldImagePath, String newImagePath)
     {
-        return "UPDATE imageNegozio SET imageNegozio.src = " + newImagePath + " "
-                + "WHERE imageNegozio.idO = " + idNegozio + " AND imageNegozio.src = " + oldImagePath + ";";
+        return "UPDATE imagenegozio SET imagenegozio.src = " + newImagePath + " "
+                + "WHERE imagenegozio.idO = " + idNegozio + " AND imagenegozio.src = " + oldImagePath + ";";
     }
 
     /**
@@ -734,7 +729,7 @@ public class sellersQuery {
      */
     public static String deleteShopImage(int idNegozio, String imagePath)
     {
-        return "DELETE FROM imageNegozio WHERE imageNegozio.idO = " + idNegozio + " AND imageNegozio.src = " + imagePath + ";";
+        return "DELETE FROM imagenegozio WHERE imagenegozio.idO = " + idNegozio + " AND imagenegozio.src = " + imagePath + ";";
     }
 
 
@@ -749,7 +744,7 @@ public class sellersQuery {
      */
     public static String selectOrderByIdS(int idS)
     {
-        return "SELECT * FROM Ordine WHERE Ordine.idS = " + idS + ";";
+        return "SELECT * FROM ordine WHERE ordine.idS = " + idS + ";";
     }
 
     /**
@@ -761,7 +756,10 @@ public class sellersQuery {
      */
     public static String updateOrderIdS(int idOrdine, int idS)
     {
-        return "UPDATE Ordine SET idS = " + idS + " WHERE idOrdine = " + idOrdine + ";";
+        if(idS == -1) //Ritiro in negozio
+            return "UPDATE ordine SET idS = NULL WHERE idOrdine = " + idOrdine + ";";
+        else
+            return "UPDATE ordine SET idS = " + idS + " WHERE idOrdine = " + idOrdine + ";";
     }
 
 
@@ -775,7 +773,7 @@ public class sellersQuery {
      */
     public static String selectOrderByIdI(int idI)
     {
-        return "SELECT * FROM Ordine WHERE Ordine.idI = " + idI + ";";
+        return "SELECT * FROM ordine WHERE ordine.idI = " + idI + ";";
     }
 
     /**
@@ -787,7 +785,7 @@ public class sellersQuery {
      */
     public static String updateOrderIdI(int idOrdine, int idI)
     {
-        return "UPDATE Ordine SET idI = " + idI + " WHERE idOrdine = " + idOrdine + ";";
+        return "UPDATE ordine SET idI = " + idI + " WHERE idOrdine = " + idOrdine + ";";
     }
 
 
@@ -801,7 +799,7 @@ public class sellersQuery {
      */
     public static String selectOrdersByIdOrder(int idOrdine)
     {
-        return "SELECT * FROM Ordine WHERE Ordine.idOrdine = " + idOrdine + ";";
+        return "SELECT * FROM ordine WHERE ordine.idOrdine = " + idOrdine + ";";
     }
 
     /**
@@ -811,7 +809,7 @@ public class sellersQuery {
      */
     public static String selectCartByIdU(int idUtente)
     {
-        return "SELECT * FROM Carrello WHERE Carrello.idUtente = " + idUtente + ";";
+        return "SELECT * FROM carrello WHERE carrello.idUtente = " + idUtente + ";";
     }
 
     /**
@@ -821,33 +819,33 @@ public class sellersQuery {
      */
     public static String selectCartByIdOrder(int idordine)
     {
-        return "SELECT * FROM Carrello WHERE Carrello.idOrdine = " + idordine + ";";
+        return "SELECT * FROM carrello WHERE carrello.idOrdine = " + idordine + ";";
     }
 
     public static String increaseCategory(int categoria) {
-        return "update Categoria set oggettiPresenti = oggettiPresenti+1 where id = "+categoria+";";
+        return "update categoria set oggettiPresenti = oggettiPresenti+1 where id = "+categoria+";";
     }
 
     public static String decraseCategory(int categoria) {
-        return "update Categoria set oggettiPresenti = oggettiPresenti-1 where id = "+categoria+";";
+        return "update categoria set oggettiPresenti = oggettiPresenti-1 where id = "+categoria+";";
     }
 
     public static String selectNewestToOldestOrdersByShopId(int idNegozio) {
-        return "SELECT * FROM Ordine WHERE Ordine.idNegozio = " + idNegozio + " ORDER BY dataOrdine DESC;";
+        return "SELECT * FROM ordine WHERE ordine.idNegozio = " + idNegozio + " ORDER BY dataOrdine DESC;";
     }
 
     public static String selectOrdersByIdOrderIdOggetto(String idOrdine, String idOggetto) {
-        return "SELECT * FROM Ordine WHERE Ordine.idOrdine = " + idOrdine + " AND Ordine.idOggetto = '"+idOggetto+"';";
+        return "SELECT * FROM ordine WHERE ordine.idOrdine = " + idOrdine + " AND ordine.idOggetto = '"+idOggetto+"';";
     }
 
     public static String selectOrderRecivedBySellerIdShopId(int idVenditore, int idNegozio) {
-        return "select Ordine.* "
-                + "from Ordine INNER JOIN ordiniRicevuti ON (Ordine.idOrdine = ordiniRicevuti.idO) "
-                + "where ordiniRicevuti.idV = "+idVenditore+" AND Ordine.idNegozio = "+idNegozio+" ORDER BY Ordine.dataOrdine DESC;";
+        return "select ordine.* "
+                + "from ordine INNER JOIN ordiniricevuti ON (ordine.idOrdine = ordiniricevuti.idO) "
+                + "where ordiniricevuti.idV = "+idVenditore+" AND ordine.idNegozio = "+idNegozio+" ORDER BY ordine.dataOrdine DESC;";
     }
 
     public static String updateOrderDataArrivoPrevista(ModelloOrdine ordine, String dt) {
-        return "UPDATE Ordine SET dataArrivoPresunta = '" + dt + "' WHERE idOrdine = " + ordine.getIdOrdine() + " AND idOggetto = '"+ordine.getIdOggetto()+"';";
+        return "UPDATE ordine SET dataArrivoPresunta = '" + dt + "' WHERE idOrdine = " + ordine.getIdOrdine() + " AND idOggetto = '"+ordine.getIdOggetto()+"';";
     }
 
 
@@ -863,5 +861,10 @@ public class sellersQuery {
     public static String addOrdineRicevuto(int idOrdine, int idVenditore)
     {
         return "INSERT INTO ordiniricevuti(idO, idV, data) VALUES (" + idOrdine + "," + idVenditore + ",CURRENT_TIMESTAMP)";
+    }
+    
+    public static String updateShopStars(int idNegozio, double value)
+    {
+        return "UPDATE negozio SET valutazione=" + value + " WHERE id=" + idNegozio + ";";
     }
 }

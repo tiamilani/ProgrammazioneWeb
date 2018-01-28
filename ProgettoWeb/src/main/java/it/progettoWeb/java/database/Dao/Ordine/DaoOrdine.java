@@ -41,12 +41,12 @@ public class DaoOrdine {
     private static final String PREZZODIACQUISTO="prezzoDiAcquisto";
     private static final String IDS="idS";
     private static final String IDI="idI";
-    
+
     /**
      * Variabile che gestisce la connessione con il db
      */
     private Connection connection;
-    
+
     /**
      * Costruttore della classe, utilizzato per instaurare la connessione con il db
      */
@@ -63,7 +63,7 @@ public class DaoOrdine {
     private ModelloOrdine getModelloFromRs(ResultSet rs)
     {
         ModelloOrdine Ordine = new ModelloOrdine();
-        
+
         try{
             Ordine.setIdOrdine(rs.getInt(IDORDINE));
             Ordine.setIdOggetto(rs.getString(IDOGGETTO));
@@ -79,10 +79,10 @@ public class DaoOrdine {
             Ordine.setIdI(rs.getInt(IDI));
         } catch (SQLException e) {
         }
-        
+
         return Ordine;
-    }  
-    
+    }
+
     /**
      * @author Mattia
      * Ottenere la lista degli ordini
@@ -103,7 +103,7 @@ public class DaoOrdine {
 
         return Ordini;
     }
-    
+
     /**
      * @author Mattia
      * Ottenere la lista degli ordini con richieste specifiche per l'ordine
@@ -125,7 +125,7 @@ public class DaoOrdine {
 
         return Ordini;
     }
-    
+
     /**
      * @author Mattia
      * Ottenere il carrello (La lista degli ordini che sono nel carrello)
@@ -145,7 +145,7 @@ public class DaoOrdine {
 
         return Ordini;
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista degli ordini ricevuti
@@ -155,19 +155,19 @@ public class DaoOrdine {
     public List<ModelloOrdine> selectOrdersBySellerID(int idVenditore)
     {
         List<ModelloOrdine> ordini = new ArrayList<>();
-        
+
         try
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sellersQuery.selectOrdersBySellerID(idVenditore));
-            
+
             while(rs.next())
                 ordini.add(getModelloFromRs(rs));
         } catch(SQLException e) {}
-        
+
         return ordini;
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista degli ordini ricevuti dal più nuovo al più vecchio
@@ -177,19 +177,19 @@ public class DaoOrdine {
     public List<ModelloOrdine> selectNewestToOldestOrdersBySellerID(int idVenditore)
     {
         List<ModelloOrdine> ordini = new ArrayList<>();
-        
+
         try
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sellersQuery.selectNewestToOldestOrdersBySellerID(idVenditore));
-            
+
             while(rs.next())
                 ordini.add(getModelloFromRs(rs));
         } catch(SQLException e) {}
-        
+
         return ordini;
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista degli ordini in base al loro stato
@@ -200,19 +200,19 @@ public class DaoOrdine {
     public List<ModelloOrdine> selectOrderBySellerIDAndStatus(int idVenditore, int stato)
     {
         List<ModelloOrdine> ordini = new ArrayList<>();
-        
+
         try
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sellersQuery.selectOrderBySellerIDAndStatus(idVenditore, stato));
-            
+
             while(rs.next())
                 ordini.add(getModelloFromRs(rs));
         } catch(SQLException e) {}
-        
+
         return ordini;
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista degli ordini ricevuti in un determinato giorno
@@ -223,19 +223,19 @@ public class DaoOrdine {
     public List<ModelloOrdine> selectOrderByDate(int idVenditore, Timestamp dataOrdine)
     {
         List<ModelloOrdine> ordini = new ArrayList<>();
-        
+
         try
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sellersQuery.selectOrderByDate(idVenditore, dataOrdine));
-            
+
             while(rs.next())
                 ordini.add(getModelloFromRs(rs));
         } catch(SQLException e) {}
-        
+
         return ordini;
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista degli ordini ricevuti nella settimana corrente
@@ -246,19 +246,19 @@ public class DaoOrdine {
     public List<ModelloOrdine> selectOrderByWeek(int idVenditore, Timestamp dataOrdine)
     {
         List<ModelloOrdine> ordini = new ArrayList<>();
-        
+
         try
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sellersQuery.selectOrderByWeek(idVenditore, dataOrdine));
-            
+
             while(rs.next())
                 ordini.add(getModelloFromRs(rs));
         } catch(SQLException e) {}
-        
+
         return ordini;
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista degli ordini ricevuti nel mese corrente
@@ -269,19 +269,19 @@ public class DaoOrdine {
     public List<ModelloOrdine> selectOrderByMonth(int idVenditore, Timestamp dataOrdine)
     {
         List<ModelloOrdine> ordini = new ArrayList<>();
-        
+
         try
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sellersQuery.selectOrderByMonth(idVenditore, dataOrdine));
-            
+
             while(rs.next())
                 ordini.add(getModelloFromRs(rs));
         } catch(SQLException e) {}
-        
+
         return ordini;
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista degli ordini ricevuti nell'anno corrente
@@ -292,19 +292,19 @@ public class DaoOrdine {
     public List<ModelloOrdine> selectOrderByYear(int idVenditore, Timestamp dataOrdine)
     {
         List<ModelloOrdine> ordini = new ArrayList<>();
-        
+
         try
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sellersQuery.selectOrderByYear(idVenditore, dataOrdine));
-            
+
             while(rs.next())
                 ordini.add(getModelloFromRs(rs));
         } catch(SQLException e) {}
-        
+
         return ordini;
     }
-    
+
     /**
      * @author fbrug
      * Ottenere i dati delle vendite di un determinato negozio
@@ -314,35 +314,35 @@ public class DaoOrdine {
     public List<ModelloOrdine> selectOrderByShopID(int idNegozio)
     {
         List<ModelloOrdine> ordini = new ArrayList<>();
-        
+
         try
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sellersQuery.selectOrderByShopID(idNegozio));
-            
+
             while(rs.next())
                 ordini.add(getModelloFromRs(rs));
         } catch(SQLException e) {}
-        
+
         return ordini;
     }
-    
+
     public List<ModelloOrdine> selectOrderRecivedBySellerIdShopIDNewstToOldes(int idVenditore,int idNegozio)
     {
         List<ModelloOrdine> ordini = new ArrayList<>();
-        
+
         try
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sellersQuery.selectOrderRecivedBySellerIdShopId(idVenditore,idNegozio));
-            
+
             while(rs.next())
                 ordini.add(getModelloFromRs(rs));
         } catch(SQLException e) {}
-        
+
         return ordini;
     }
-    
+
     /**
      * @author fbrug
      * Ottenere i dati di vendita di un determinato negozio in una determinata categoria
@@ -353,19 +353,19 @@ public class DaoOrdine {
     public List<ModelloOrdine> selectOrderByCategory(int idNegozio, int idCategoria)
     {
         List<ModelloOrdine> ordini = new ArrayList<>();
-        
+
         try
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sellersQuery.selectOrderByCategory(idNegozio, idCategoria));
-            
+
             while(rs.next())
                 ordini.add(getModelloFromRs(rs));
         } catch(SQLException e) {}
-        
+
         return ordini;
     }
-    
+
     /**
      * @author fbrug
      * Modificare lo stato di un ordine
@@ -380,7 +380,7 @@ public class DaoOrdine {
             statement.executeQuery(sellersQuery.updateOrderStatus(idOrdine, nuovoStato));
         } catch(SQLException e) {}
     }
-    
+
     /**
      * @author fbrug
      * Aggiungere ad un ordine spedito il codice di tracking
@@ -409,7 +409,7 @@ public class DaoOrdine {
         } catch (SQLException e) {
         }
     }
-    
+
     /**
      * @author Mattia
      * Rimuovere un ordine (oggetto) dal carrello
@@ -424,7 +424,7 @@ public class DaoOrdine {
         } catch (SQLException e) {
         }
     }
-    
+
     /**
      * @author Mattia
      * Cambia lo stato degli ordini da from a to
@@ -440,7 +440,7 @@ public class DaoOrdine {
         } catch (SQLException e) {
         }
     }
-    
+
     /**
      * @author fbrug
      * @param idOr Un intero che rappresenta l'identificativo dell'ordine preso in considerazione
@@ -458,7 +458,7 @@ public class DaoOrdine {
         } catch (SQLException e) {
         }
     }
-    
+
     /**
      * @author Mattia
      * Aggiungi un oggetto agli ordini nella lista dei desideri
@@ -473,9 +473,9 @@ public class DaoOrdine {
         } catch (SQLException e) {
         }
     }
-    
+
     /*---2017-11-20---*/
-    
+
     /**
      * @author fbrug
      * Seleziona gli ordini con lo stesso tipo di spedizione (in base all'idS)
@@ -485,19 +485,19 @@ public class DaoOrdine {
     public List<ModelloOrdine> selectOrderByIdS(int idS)
     {
         List<ModelloOrdine> ordini = new ArrayList<>();
-        
+
         try
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sellersQuery.selectOrderByIdS(idS));
-            
+
             while(rs.next())
                 ordini.add(getModelloFromRs(rs));
         } catch(SQLException e) {}
-        
+
         return ordini;
     }
-    
+
     /**
      * @author fbrug
      * Aggiorna il valore dell'idS dell'ordine selezionato
@@ -515,10 +515,10 @@ public class DaoOrdine {
             System.out.println(e.toString());
         }
     }
-    
-    
+
+
     /*---2017-11-21---*/
-    
+
     /**
      * @author fbrug
      * Seleziona gli ordini con lo stesso indirizzo spedizione (in base all'idI)
@@ -528,19 +528,19 @@ public class DaoOrdine {
     public List<ModelloOrdine> selectOrderByIdI(int idI)
     {
         List<ModelloOrdine> ordini = new ArrayList<>();
-        
+
         try
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sellersQuery.selectOrderByIdI(idI));
-            
+
             while(rs.next())
                 ordini.add(getModelloFromRs(rs));
         } catch(SQLException e) {}
-        
+
         return ordini;
     }
-    
+
     /**
      * @author fbrug
      * Aggiorna il valore dell'idI dell'ordine selezionato
@@ -557,44 +557,44 @@ public class DaoOrdine {
         } catch (SQLException e) {
         }
     }
-    
-    
+
+
     /*---2017-12-04---*/
-    
+
     /**
      * @author fbrug
      * Seleziona gli ordini con lo stesso ID ordine
      * @param idOrdine: intero rappresentante l'ID dell'ordine
-     * @return 
+     * @return
      */
     public List<ModelloOrdine> selectOrdersByIdOrder(int idOrdine)
     {
         List<ModelloOrdine> ordini = new ArrayList<>();
-        
+
         try
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sellersQuery.selectOrdersByIdOrder(idOrdine));
-            
+
             while(rs.next())
                 ordini.add(getModelloFromRs(rs));
         } catch(SQLException e) {}
-        
+
         return ordini;
     }
 
     public ModelloOrdine selectOrdersByIdOrderIdOggetto(String idOrdine, String idOggetto) {
         ModelloOrdine ordine = new ModelloOrdine();
-        
+
         try
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sellersQuery.selectOrdersByIdOrderIdOggetto(idOrdine,idOggetto));
-            
+
             while(rs.next())
                 ordine = getModelloFromRs(rs);
         } catch(SQLException e) {}
-        
+
         return ordine;
     }
 
@@ -605,11 +605,11 @@ public class DaoOrdine {
             statement.executeUpdate(sellersQuery.updateOrderDataArrivoPrevista(ordine, dt));
         } catch(SQLException e) {}
     }
- 
+
     public String insertObjectInCartFirstTime(ModelloOrdine oggetto) {
         try {
             PreparedStatement preparedStatement = connection
-                .prepareStatement(usersQuery.insertObjectInCartFistTime(oggetto.getIdUtente(), oggetto.getQuantita(), oggetto.getIdOggetto()));
+                    .prepareStatement(usersQuery.insertObjectInCartFistTime(oggetto.getIdUtente(), oggetto.getQuantita(), oggetto.getIdOggetto()));
             preparedStatement.executeUpdate();
             return usersQuery.insertObjectInCartFistTime(oggetto.getIdUtente(), oggetto.getQuantita(), oggetto.getIdOggetto());
         } catch (SQLException e) {
