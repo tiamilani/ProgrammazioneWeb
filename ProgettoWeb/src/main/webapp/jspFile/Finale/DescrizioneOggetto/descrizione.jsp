@@ -103,13 +103,27 @@
                         <p class="lead"/>
                         <div class="row" id="totNow">
                             <span class="col-4 item-left">Totale:</span>
-                            <span class="col-8 item-right text-primary" id="totNowElem">${oggetto.getPrezzo()} Euro</span>
+                            <span class="col-8 item-right text-primary" id="totNowElem">&euro;</span>
                             <a href="#" class="button col-12" id="addToCart">Acquista</a>
                         </div>
                     </c:if>
                 </form>
                 
-                <script>                    
+                <script>
+                    $(document).ready(function() {
+                        var costoTotale = ${oggetto.getPrezzo()};
+                        var sconto = ${oggetto.getSconto()};
+
+                        var numProdotti = parseInt($('#numNow').val());
+
+                        costoTotale *= numProdotti;
+
+                        if(sconto > 0)
+                            costoTotale -= (costoTotale * sconto) / 100;
+                        
+                        $('#totNowElem').text(costoTotale.toFixed(2) + $('#totNowElem').text());
+                    });
+                    
                     $('#addToCart').click(function() {
                         if(parseInt($('#numNow').val()) <= ${oggetto.getDisponibilita()}) {
                             //alert("Articolo inserito nel carrello!");
@@ -130,7 +144,7 @@
                         if(sconto > 0)
                             costoTotale -= (costoTotale * sconto) / 100;
                         
-                        $('#totNowElem').text(costoTotale.toFixed(2) + " Euro");
+                        $('#totNowElem').text(costoTotale.toFixed(2) + $('#totNowElem').text());
                     });
                 </script>
             </div>
