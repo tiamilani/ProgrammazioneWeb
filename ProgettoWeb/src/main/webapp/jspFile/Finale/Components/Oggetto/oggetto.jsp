@@ -123,7 +123,7 @@
 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
     <div class="card card-present">    
         <a href="${objUrl}" style="box-shadow: none;">
-            <img class="card-img-top" src="${listaImmaginiOggetto.get(iterator).getSrc()}" alt="IMAGE NOT LOADED" style="object-fit: cover;"> <!--add object-fit: contain;-->
+            <img class="card-img-top" src="${listaImmaginiOggetto.get(iterator).getSrc()}" alt="IMAGE NOT LOADED" style="height: 250px; object-fit: scale-down;"> <!--add object-fit: contain;-->
         </a>
 
         <div class="card-block">

@@ -8446,7 +8446,7 @@ public class DaoOggetto {
             while (rs.next()) {
                 
                 //System.out.println(rs.getString(4));
-                if(jw.distance(rs.getString(4), name) <= 0.5) {
+                if(jw.distance(rs.getString(4), name) <= 0.3) {
                     oggetti.add(DaoOggetto.getModelloFromRs(rs));
                     immagini.add(DaoImmagineOggetto.getModelloFromRs(rs));
                     //System.out.println("Ho aggiunto " + rs.getString(4)  + " perché " + jw.distance(rs.getString(4), name));
