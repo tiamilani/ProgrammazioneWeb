@@ -3,29 +3,23 @@
     Created on : 3-ott-2017, 22.32.00
     Author     : andreafadi
 --%>
-<style>
-    .carousel-indicators li {
-        background-color: rgba(225, 150, 100, 0.5);
-    }
-    
-    .carousel-indicators .active {
-        background-color: rgba(255, 50, 50, 0.7);
-    }
-</style>
+
 <div class="carouselSpacing">
     <div id="oggettiCorrelati" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators" style="top: 105%">
-            <c:forEach var="i" begin="${0}" end="${listaOggetti.getList().size() -1}" step="2">
-                <c:choose>
-                    <c:when test="${i == 0}">
-                        <li data-target="#fotoOggetto" data-slide-to="${i}" class="active"></li>
-                    </c:when>
-                    <c:otherwise>
-                        <li data-target="#fotoOggetto" data-slide-to="${i}"></li>
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
-        </ol>
+        <c:if test="${listaOggetti.getList().size() > 1}">
+            <ol class="carousel-indicators">
+                <c:forEach var="i" begin="${0}" end="${listaOggetti.getList().size() -1}" step="2">
+                    <c:choose>
+                        <c:when test="${i == 0}">
+                            <li data-target="#fotoOggetto" data-slide-to="${i}" class="active"></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li data-target="#fotoOggetto" data-slide-to="${i}"></li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+            </ol>
+        </c:if>
         <div class="carousel-inner">
             <c:forEach var="i" begin="${0}" end="${listaOggetti.getList().size() -1}" step="2">
                 <c:choose>
@@ -117,13 +111,15 @@
             </div>
             </c:forEach>
         </div>
-        <a class="carousel-control-prev" href="#oggettiCorrelati" role="button" data-slide="prev">
-            <i class="fa fa-chevron-left" aria-hidden="true" style="color: rgb(225, 100, 50); font-size: 200%;"></i>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#oggettiCorrelati" role="button" data-slide="next">
-            <i class="fa fa-chevron-right" aria-hidden="true" style="color: rgb(225, 100, 50); font-size: 200%;"></i>
-            <span class="sr-only">Next</span>
-        </a>
+        <c:if test="${listaOggetti.getList().size() > 1}">
+            <a class="carousel-control-prev" href="#oggettiCorrelati" role="button" data-slide="prev">
+                <i class="fa fa-chevron-left" aria-hidden="true" style="color: rgb(225, 100, 50); font-size: 200%;"></i>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#oggettiCorrelati" role="button" data-slide="next">
+                <i class="fa fa-chevron-right" aria-hidden="true" style="color: rgb(225, 100, 50); font-size: 200%;"></i>
+                <span class="sr-only">Next</span>
+            </a>
+        </c:if>
     </div>
 </div>

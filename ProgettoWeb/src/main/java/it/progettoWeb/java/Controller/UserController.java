@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
+import it.progettoWeb.java.database.Dao.immagineNegozio.DaoImmagineNegozio;
 import it.progettoWeb.java.database.Dao.immagineOggetto.DaoImmagineOggetto;
 import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
 import it.progettoWeb.java.database.Dao.ordiniRicevuti.DaoOrdiniRicevuti;
@@ -73,6 +74,7 @@ public class UserController extends HttpServlet {
     private DaoOrdine daoOrdine;
     private DaoImmagineOggetto daoImgOggetto;
     private DaoOrdiniRicevuti daoOrdiniRicevuti;
+    private DaoImmagineNegozio daoImmagineNegozio;
 
     public UserController() {
         super();
@@ -85,6 +87,7 @@ public class UserController extends HttpServlet {
         daoOrdine = new DaoOrdine();
         daoImgOggetto = new DaoImmagineOggetto();
         daoOrdiniRicevuti = new DaoOrdiniRicevuti();
+        daoImmagineNegozio = new DaoImmagineNegozio();
     }
 
     /**
@@ -198,6 +201,7 @@ public class UserController extends HttpServlet {
             pair<List<ModelloRecensioneNegozio>, List<ModelloUtente>> recensioniNegozi;
             recensioniNegozi = daoRecensioneN.selectReviewImagesUserByStore(idNegozio);
 
+            ModelloListeImmagineNegozio immagini = new ModelloListeImmagineNegozio(daoImmagineNegozio.selectPhotoStore(idNegozio));
             pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectObjectsImageSelledByStoreID(idNegozio);
             ModelloListeOggetto listaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
             ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
@@ -216,6 +220,7 @@ public class UserController extends HttpServlet {
 
             request.setAttribute("canUploadImages", false);
             request.setAttribute("negozio", negozio);
+            request.setAttribute("listaImmagini", immagini);
             request.setAttribute("immagine", immagine);
             request.setAttribute("indirizzo", indirizzo);
             request.setAttribute("listaOggetti", listaOggetti);

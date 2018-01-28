@@ -18,7 +18,7 @@
     }
 
     .button {
-        background-color: #6394F8;
+        background-color: rgba(225, 150, 100, 0.7);
         color: white;
         text-align: center;
         padding: 12px;
@@ -31,7 +31,7 @@
 
 
     .button:hover {
-        background-color: #3b7af7;
+        background-color: rgb(225, 150, 100);
         color: white;
     }
 
@@ -112,7 +112,7 @@
                 <script>                    
                     $('#addToCart').click(function() {
                         if(parseInt($('#numNow').val()) <= ${oggetto.getDisponibilita()}) {
-                            alert("Articolo inserito nel carrello!");
+                            //alert("Articolo inserito nel carrello!");
                             $('#addCartForm').submit();
                         }
                         else

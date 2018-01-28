@@ -31,11 +31,11 @@
         
         marker.setMap(map);
         
-        $('#mapStore').css("height",$('#imgNegozio').height());
+        $('#mapStore').css("height",$('#fotoNegozio').height());
     }
 
     $(window).resize(function(){
-        $('#mapStore').css("height",$('#imgNegozio').height());
+        $('#mapStore').css("height",$('#fotoNegozio').height());
         google.maps.event.trigger(map, 'resize');
         map.setZoom( 15 );
         map.setCenter( myCenter );
