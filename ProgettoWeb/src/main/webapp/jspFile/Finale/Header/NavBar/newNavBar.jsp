@@ -328,6 +328,26 @@
         form1.submit();
     }
 
+    function login() {
+        var password = document.loginForm.password.value;
+
+        document.loginForm.password.value = md5(password);
+
+        loginForm.action = "${pageContext.request.contextPath}/UserController?action=selectUser";
+        loginForm.submit();
+    }
+
+    function registration() {
+        var password = document.registrationForm.password.value;
+        var confirmPassword = document.registrationForm.confirmPassword.value;
+
+        document.registrationForm.password.value = md5(password);
+        document.registrationForm.confirmPassword.value = md5(confirmPassword);
+
+        registrationForm.action = "${pageContext.request.contextPath}/UserController?action=addUser";
+        registrationForm.submit();
+    }
+
     function calcStar(){
         if(document.getElementById('star-5').checked){
             return "5";
