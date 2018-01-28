@@ -233,6 +233,10 @@ public class AssistenzaController extends HttpServlet
                 int idA = Integer.parseInt(request.getParameter("idA"));
                 String solution = request.getParameter("solution");
                 
+                if(solution.length() > 2000)
+                    solution = solution.substring(0, 2000);
+                solution = solution.replace('\'', ' ');
+                
                 daoAssistenza.updateAssistanceSolution(idA, solution);
                 
                 forward = "AssistenzaController?action=listAssistances";
@@ -241,6 +245,12 @@ public class AssistenzaController extends HttpServlet
             {
                 int idA = Integer.parseInt(request.getParameter("idA"));
                 String solution = request.getParameter("solution");
+                
+                if(solution.length() > 2000)
+                    solution = solution.substring(0, 2000);
+                solution = solution.replace('\'', ' ');
+                
+                System.out.println("solution = \n" + solution);
                 
                 ModelloAssistenza ass = daoAssistenza.selectSpecifiedInfoSupport(idA);
                 ass.setDataChiusura(new Timestamp(System.currentTimeMillis()));
@@ -266,6 +276,12 @@ public class AssistenzaController extends HttpServlet
                 int idVenditore = (daoNegozio.getStoreById(idNegozio)).getIdVenditore();
                 String idOggetto = request.getParameter("idOggetto");
                 String testo = request.getParameter("testoAssistenza");
+                
+                if(testo.length() > 2000)
+                    testo = testo.substring(0, 2000);
+                testo = testo.replace('\'', ' ');
+                
+                System.out.println("testo = \n" + testo);
                 
                 ModelloAssistenza assistance = new ModelloAssistenza();
                 assistance.setIdUtente(idUtenteRichiedente);

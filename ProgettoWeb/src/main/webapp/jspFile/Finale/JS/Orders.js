@@ -45,7 +45,7 @@ function checkInputText(e, elem)
 {
     if(e.keyCode == 13) // invio
     {
-        checkInput(elem);
+        //checkInput(elem);
         return true;
     }
     else if(e.keyCode >= 48 && e.keyCode <= 57) // tra 0 e 9
@@ -55,6 +55,21 @@ function checkInputText(e, elem)
 
     e.returnValue = false;
 };
+
+function checkInputTextLetters(e, elem)
+{
+    if(e.keyCode == 13) // Invio
+    {
+        //checkInput(elem);
+        return true;
+    }
+    else if(e.keyCode >= 65 && e.keyCode <= 90) // Tra A e Z
+        return true;
+    else if(e.keyCode >= 97 && e.keyCode <= 122) // Tra a e z
+        return true;
+    
+    e.returnValue = false;
+}
 
 //--- Aggiorno il valore della quantita' dell'ordine
 function changeQuantity(elem)

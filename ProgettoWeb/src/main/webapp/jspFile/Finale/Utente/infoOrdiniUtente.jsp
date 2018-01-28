@@ -451,11 +451,11 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <span class="modal-title"><b>Scrivi la tua richiesta di assistenza (max 2500 caratteri)</b></span>
+                <span class="modal-title"><b>Scrivi la tua richiesta di assistenza (max 2000 caratteri)</b></span>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <textarea cols="50" rows="5" maxlength="2500" form="richiestaAssistenza" id="testoAssistenza" name="testoAssistenza" required></textarea>
+                <textarea cols="50" rows="5" maxlength="2000" form="richiestaAssistenza" id="testoAssistenza" name="testoAssistenza" required></textarea>
             </div>
             <div class="modal-footer">
                 <button form="richiestaAssistenza" type="submit" class="col-5 paddingNav btn btn-outline-primary my-2 my-sm-0">INVIA RICHIESTA</button>
