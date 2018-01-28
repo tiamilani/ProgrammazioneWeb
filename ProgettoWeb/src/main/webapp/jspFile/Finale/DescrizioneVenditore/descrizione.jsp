@@ -13,7 +13,7 @@
         <div class="text-justify">
             <h5>
                 Email: ${venditore.getMail()}<br>
-                Valutazione: ${venditore.getValutazione()} / 5
+                Popolarita': ${venditore.getValutazione()} / 5
             </h5>
         </div>
     </div>
