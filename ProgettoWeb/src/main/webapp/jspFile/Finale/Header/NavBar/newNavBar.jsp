@@ -6,67 +6,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<script>
-function myFunction() {
-    var idCategoria = document.forms["filterForm"].elements[0].value;
-    var nomeVenditore = document.forms["filterForm"].elements[1].value;
-    var nomeNegozio = document.forms["filterForm"].elements[2].value;
-    var checkRitiroInNegozio = document.forms["filterForm"].elements[3].checked;
-    var checkProdottiScontati = document.forms["filterForm"].elements[4].checked;
-    var rangeValue = $('#double-slider').attr('value');
-    var valutazioneMinima = calcStar();
-    console.log(valutazioneMinima);
-
-
-
-    /*
-    var latitudine = document.forms["filterForm"].elements[7].value;
-    var longitudine = document.forms["filterForm"].elements[8].value;
-    var raggio = document.forms["filterForm"].elements[9].value;
-    */
-
-    document.form1.hiddenidCategoria.value = String(idCategoria);
-    document.form1.hiddennomeVenditore.value = String(nomeVenditore);
-    document.form1.hiddennomeNegozio.value = String(nomeNegozio);
-    document.form1.hiddencheckRitiroInNegozio.value = String(checkRitiroInNegozio);
-    document.form1.hiddencheckProdottiScontati.value = String(checkProdottiScontati);
-    document.form1.hiddenPriceRange.value = String(rangeValue);
-    document.form1.hiddenvalutazioneMinima.value = String(valutazioneMinima);
-        /*
-    document.form1.hiddenlatitudine.value = String(latitudine);
-    document.form1.hiddenlongitudine.value = String(longitudine);
-    document.form1.hiddenraggio.value = String(raggio);
-    */
-
-    //alert('idCategoria: '+ idCategoria +' minPrice: '+ minPrice +' maxPrice: '+ maxPrice +' nomeVenditore: '+ nomeVenditore +' nomeNegozio: '+ nomeNegozio +' checkRitiroInNegozio: '+ checkRitiroInNegozio +' checkProdottiScontati: '+ checkProdottiScontati +' latitudine: '+ latitudine +' longitudine: '+ longitudine +' raggio: '+ raggio +' valutazioneMinima: ' + valutazioneMinima + '')
-
-    form1.action = "${pageContext.request.contextPath}/searchObjectController";
-    form1.submit();
-}
-
-    function calcStar(){
-        if(document.getElementById('star-5').checked){
-            return "5";
-        }else if(document.getElementById('star-4').checked){
-            return "4";
-        }else if(document.getElementById('star-3').checked){
-            return "3";
-        }else if(document.getElementById('star-2').checked){
-            return "2";
-        }else if(document.getElementById('star-1').checked){
-            return "1";
-        }else return 0;
-    };
-
-    $(window).resize(function(){
-        if($("nav").width() > 942){
-            console.log($("nav").width());
-            $("#visible").attr("aria-expanded", "false");
-            $("#visible").addClass("collapsed");
-            $("#collapse-menu").removeClass("show");
-        }
-    });
-</script>
 <style>
     .dropdown-menu.show {
         width: 100%;
@@ -131,7 +70,7 @@ function myFunction() {
         </div>
         <div class="dropdown col-xl-1 col-lg-1 col-md-12 col-sm-12">
             <button class="btn nav-button dropdown-toggle" type="button" data-toggle="dropdown">Filtri</button>
-            <div class="dropdown-menu">
+            <div class="dropdown-menu" id="filter-dropdown-menu">
                 <div class="bg-light p-4">
                     <h4>Filtri</h4>
                     <%@include file="filtri.jsp" %>
@@ -142,7 +81,9 @@ function myFunction() {
             <div class="form-group">
                 <div class="find col-10">
                     <input class="form-control" id="expand" type="text" placeholder="Search" autocomplete="on" name="search">
+                    <div style="width: 90%; margin-left: 10%;" id="appendToSearch">  </div>
                 </div>
+                
                 <button type="submit" class="btn btn-default col-1" id="nopad" onclick="myFunction()">
                     <i class="material-icons">search</i>
                 </button>
@@ -158,9 +99,9 @@ function myFunction() {
         <div class="user d-flex justify-content-between row no-gutters col-xl-3 col-lg-3">
             <c:choose>
                 <c:when test="${utenteSessione.getId() != -1}">
-                    <button type="button" class="btn nav-button col-xl-4 col-lg-9 col-md-12 col-sm-12"
+                    <button type="button" class="btn nav-button col-xl-8 col-lg-9 col-md-12 col-sm-12"
                             onclick="location.href='${pageContext.request.contextPath}/jspFile/Finale/Utente/utente.jsp'">
-                        Account
+                        <c:out value="${utenteSessione.getNome()} ${utenteSessione.getCognome()}" />
                     </button>
                 </c:when>
                 <c:otherwise>
@@ -178,7 +119,7 @@ function myFunction() {
         </div>
     </div>
 </nav>
-
+                
 <%-- messo esternamente al resto in modo da non influenzare il suo autofocus da propriet� di posizionamento prima definite--%>
 <div id="registerModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -293,3 +234,111 @@ function myFunction() {
 
     </div>
 </div>
+
+            
+<script> 
+    $(document).ready(function(){
+       
+        //$('#expand').autocomplete().disable();
+        $('#expand').on('focus', function(){
+            $('#expand').autocomplete({  
+                serviceUrl: '${pageContext.request.contextPath}/AutocompleteSearchController',
+                type: 'POST',
+                dataType: 'json',
+                paramName: 'research',
+                maxHeight: '290',
+                orientation: 'auto',
+                width: $('#appendToSearch').width(),
+                showNoSuggestionNotice: 'true',
+                appendTo: $('#appendToSearch'),
+                noSuggestionNotice: 'Nessun risultato trovato'
+                /*beforeRender: function(container){
+                    console.log($('#appendToSearch').width());
+                    console.log($('#expand').width());
+                    //if($('#expand').width() < hiddenAutoComplete)
+                }*/
+                /*onSelect: function(suggestion){
+                    alert('You selected: ' + suggestion.value);
+                }*/
+            });
+        });
+        
+        $(window).scroll(function(){
+            // console.log("you are scrolling");
+            // $('.autocomplete-suggestions').css('display', 'none');
+            $('#expand').autocomplete().hide();
+        });
+        
+        $(window).resize(function(){
+            console.log("you are scrolling");
+            // $('.autocomplete-suggestions').css('display', 'none');
+            
+            $("#visible").attr("aria-expanded", "false");
+            $("#visible").addClass("collapsed");
+            $("#collapse-menu").removeClass("show");
+            console.log("resizing");
+            $('#expand').autocomplete().hide();
+        });
+        
+    });
+
+    function myFunction() {
+        var idCategoria = document.forms["filterForm"].elements[0].value;
+        var nomeVenditore = document.forms["filterForm"].elements[1].value;
+        var nomeNegozio = document.forms["filterForm"].elements[2].value;
+        var checkRitiroInNegozio = document.forms["filterForm"].elements[3].checked;
+        var checkProdottiScontati = document.forms["filterForm"].elements[4].checked;
+        var rangeValue = $('#double-slider').attr('value');
+        var valutazioneMinima = calcStar();
+        console.log(valutazioneMinima);
+
+
+
+        /*
+        var latitudine = document.forms["filterForm"].elements[7].value;
+        var longitudine = document.forms["filterForm"].elements[8].value;
+        var raggio = document.forms["filterForm"].elements[9].value;
+        */
+
+        document.form1.hiddenidCategoria.value = String(idCategoria);
+        document.form1.hiddennomeVenditore.value = String(nomeVenditore);
+        document.form1.hiddennomeNegozio.value = String(nomeNegozio);
+        document.form1.hiddencheckRitiroInNegozio.value = String(checkRitiroInNegozio);
+        document.form1.hiddencheckProdottiScontati.value = String(checkProdottiScontati);
+        document.form1.hiddenPriceRange.value = String(rangeValue);
+        document.form1.hiddenvalutazioneMinima.value = String(valutazioneMinima);
+            /*
+        document.form1.hiddenlatitudine.value = String(latitudine);
+        document.form1.hiddenlongitudine.value = String(longitudine);
+        document.form1.hiddenraggio.value = String(raggio);
+        */
+
+        //alert('idCategoria: '+ idCategoria +' minPrice: '+ minPrice +' maxPrice: '+ maxPrice +' nomeVenditore: '+ nomeVenditore +' nomeNegozio: '+ nomeNegozio +' checkRitiroInNegozio: '+ checkRitiroInNegozio +' checkProdottiScontati: '+ checkProdottiScontati +' latitudine: '+ latitudine +' longitudine: '+ longitudine +' raggio: '+ raggio +' valutazioneMinima: ' + valutazioneMinima + '')
+
+        form1.action = "${pageContext.request.contextPath}/searchObjectController";
+        form1.submit();
+    }
+
+    function calcStar(){
+        if(document.getElementById('star-5').checked){
+            return "5";
+        }else if(document.getElementById('star-4').checked){
+            return "4";
+        }else if(document.getElementById('star-3').checked){
+            return "3";
+        }else if(document.getElementById('star-2').checked){
+            return "2";
+        }else if(document.getElementById('star-1').checked){
+            return "1";
+        }else return 0;
+    };
+
+    /*$(window).resize(function(){
+        if($("nav").width() > 942){
+            // console.log($("nav").width());
+            $("#visible").attr("aria-expanded", "false");
+            $("#visible").addClass("collapsed");
+            $("#collapse-menu").removeClass("show");
+        }
+    });*/
+</script>

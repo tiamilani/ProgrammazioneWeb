@@ -57,11 +57,15 @@ span{
     width: 20px;
 }
 
-b{
+.price-label{
     padding: 0px 10px 0px 10px;
 }
 
 .estremi{
     min-width: 80px;
     background-color: yellow;
+}
+
+.category-filter{
+    margin-bottom: 2%;
 }

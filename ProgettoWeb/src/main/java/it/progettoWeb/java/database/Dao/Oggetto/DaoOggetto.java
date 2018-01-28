@@ -15,6 +15,7 @@ package it.progettoWeb.java.database.Dao.Oggetto;
  * @author mattia
  */
 
+import info.debatty.java.stringsimilarity.JaroWinkler;
 import it.progettoWeb.java.database.Dao.immagineOggetto.DaoImmagineOggetto;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -25,7 +26,6 @@ import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
 import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto;
-import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
 import it.progettoWeb.java.database.query.generics.genericsQuery;
 import it.progettoWeb.java.database.query.marketsSellers.marketsSellersQuery;
 import it.progettoWeb.java.database.query.objectSellers.objectSellersQuery;
@@ -35,8 +35,9 @@ import java.sql.Date;
 import it.progettoWeb.java.database.query.objectsMarkets.objectMarketsQuery;
 import it.progettoWeb.java.database.query.users.usersQuery;
 import it.progettoWeb.java.utility.pair.pair;
-import static java.rmi.server.LogStream.log;
 import java.sql.PreparedStatement;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 public class DaoOggetto {
 
@@ -969,17 +970,23 @@ public class DaoOggetto {
      * @param idCategoria: Intero indicante l'id della categoria
      * @return List<ModelloOggetto> lista di oggetti
      */
-    public List<ModelloOggetto> selectObjectByCategory(int idCategoria) {
-      List<ModelloOggetto> Objects = new ArrayList<>();
+    public pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> selectObjectByCategory(int idCategoria) {
+        pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> res;
+        List<ModelloOggetto> Objects = new ArrayList<>();
+        List<ModelloImmagineOggetto> immagini = new ArrayList<>();
 
         try {
             Statement statement = connection.createStatement();
-          ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByCategory(idCategoria));
+            ResultSet rs = statement.executeQuery(objectsQuery.selectObjectByCategory(idCategoria));
             while (rs.next()) {
-                Objects.add(getModelloFromRs(rs));
+                Objects.add(DaoOggetto.getModelloFromRs(rs));
+                immagini.add(DaoImmagineOggetto.getModelloFromRs(rs));
             }
         } catch (SQLException e) {}
-      return Objects;
+    
+        
+        res = new pair(Objects, immagini);
+        return res;
     }
 
      /**
@@ -8313,15 +8320,17 @@ public class DaoOggetto {
      * @param name
      * @return List<ModelloOggetto> lista di oggetti ottenuti dalla ricerca
      */
-    public List<ModelloOggetto> selectObjectByQuery(String name, String categoria, String venditore, String negozio, double minPrice, double maxPrice, boolean sconto, boolean ritiro) {
-      List<ModelloOggetto> Objects = new ArrayList<>();
+    public pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> selectObjectByQuery(String name, String categoria, String venditore, String negozio, double minPrice, double maxPrice, boolean sconto, boolean ritiro) {
+        pair<List<ModelloOggetto>,List<ModelloImmagineOggetto>> res;
+        List<ModelloOggetto> oggetti = new ArrayList<>();
+        List<ModelloImmagineOggetto> immagini = new ArrayList<>();
 
         try {
             boolean shop = false;
             boolean seller = false;
-            Statement statement = connection.createStatement();
-            String query = "SELECT * FROM Oggetto";
-
+            boolean before = false;
+            String query = "SELECT Oggetto.*, imageOggetto.* FROM Oggetto JOIN imageOggetto ON (Oggetto.id = imageOggetto.idO)";
+            
             if(negozio != null && negozio.length() > 0){
                 query = query + " INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id)";
                 shop = true;
@@ -8340,42 +8349,79 @@ public class DaoOggetto {
                     query = query + " AND Utente.nome LIKE '%" + venditore + "%'";
                 }else{
                     query = query + " WHERE Utente.nome LIKE '%" + venditore + "%'";
+                    seller = true;
                 }
             }
 
             // se sono state aggiunte cose prima scrivo AND, altrimenti WHERE
-            if(shop || seller){
-                query = query + " AND nomeDownCase LIKE '%" + name + "%'";
+            /*if(shop || seller){
+                query = query + " AND Oggetto.nomeDownCase LIKE '%" + name + "%'";
             }else{
-                query = query + " WHERE nomeDownCase LIKE '%" + name + "%'";
+                query = query + " WHERE Oggetto.nomeDownCase LIKE '%" + name + "%'";
+            }*/
+            if(!categoria.equals("Categoria") && (shop || seller)){
+                query = query + " AND Oggetto.categoria = " + categoria;
+            }else if (!categoria.equals("Categoria")){
+                query = query + " WHERE Oggetto.categoria = " + categoria;
+                before = true;
             }
-            if(!categoria.equals("Categoria")){
-                query = query + " AND categoria = " + categoria;
+            
+            if(shop || seller || before){
+                if(minPrice > 0 && maxPrice < 1000){
+                    query = query + " AND Oggetto.prezzo BETWEEN " + minPrice + " AND " + maxPrice;
+                }else if(minPrice > 0){
+                    query = query + " AND Oggetto.prezzo > " + minPrice;
+                }else if(maxPrice < 1000){
+                    query = query + " AND Oggetto.prezzo < " + maxPrice;
+                }
+            }else{
+                if(minPrice > 0 && maxPrice < 1000){
+                    query = query + " WHERE Oggetto.prezzo BETWEEN " + minPrice + " AND " + maxPrice;
+                }else if(minPrice > 0){
+                    query = query + " WHERE Oggetto.prezzo > " + minPrice;
+                }else if(maxPrice < 1000){
+                    query = query + " WHERE Oggetto.prezzo < " + maxPrice;
+                }
+                before = true;
             }
-            if(minPrice > 0 && maxPrice < 1000){
-                query = query + " AND prezzo BETWEEN " + minPrice + " AND " + maxPrice;
-            }else if(minPrice > 0){
-                query = query + " AND prezzo > " + minPrice;
-            }else if(maxPrice < 1000){
-                query = query + " AND prezzo < " + maxPrice;
+            
+            if(sconto && (shop || seller || before)){
+                query = query + " AND Oggetto.sconto <> 0";
+            }else if(sconto){
+                query = query + " WHERE Oggetto.sconto <> 0";
+                before = true;
             }
-            if(sconto){
-                query = query + " AND sconto <> 0";
-            }
-            if(ritiro){
-                query = query + " AND ritiroInNegozio = 1";
+            
+            if(ritiro && (shop || seller || before)){
+                query = query + " AND Oggetto.ritiroInNegozio = 1";
+            }else if(ritiro){
+                query = query + " WHERE Oggetto.ritiroInNegozio = 1";
             }
 
             query = query + ";";
 
             System.out.println(query);
 
+            Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(query);
+            JaroWinkler jw = new JaroWinkler(); 
+            
             while (rs.next()) {
-                Objects.add(getModelloFromRs(rs));
+                
+                //System.out.println(rs.getString(4));
+                if(jw.distance(rs.getString(4), name) <= 0.5) {
+                    oggetti.add(DaoOggetto.getModelloFromRs(rs));
+                    immagini.add(DaoImmagineOggetto.getModelloFromRs(rs));
+                    //System.out.println("Ho aggiunto " + rs.getString(4)  + " perché " + jw.distance(rs.getString(4), name));
+                }
+                /*oggetti.add(DaoOggetto.getModelloFromRs(rs));
+                immagini.add(DaoImmagineOggetto.getModelloFromRs(rs));*/
             }
+            
         } catch (SQLException e) {}
-      return Objects;
+        
+        res = new pair(oggetti, immagini);
+        return res;
     }
 
     public void updateObject(ModelloOggetto object, String previusId) {
@@ -8385,4 +8431,48 @@ public class DaoOggetto {
             statement.executeUpdate(sellersQuery.updateObject(object, previusId));
         } catch(SQLException e) {}
     }
+    
+    /**
+     * @author Damiano
+     * Ottenere la lista di oggetti che contengono una stringa nel nome
+     * @param nomeDownCase: Stringa contenente il nome dell'oggetto in minuscolo, per facilitare alcune operazioni
+     * @return List<ModelloOggetto> lista di oggetti
+     */
+    public List<String> selectByStringSimilarity(String searched) {
+        PriorityQueue <pair<Double, String>> queue = new PriorityQueue<>(new Comparator(){
+            @Override
+            public int compare(Object first, Object second) {
+                return Double.compare(((pair<Double, String>)first).getL(),((pair<Double, String>)second).getL());
+            }
+            
+        });
+        
+        JaroWinkler jw = new JaroWinkler();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectAllObjectNames());
+            int i = 0;
+            while (rs.next()) {
+                queue.add(new pair(jw.distance(searched.toLowerCase(), rs.getString(1).toLowerCase()), rs.getString(1)));
+            }
+            
+            /*System.out.println("Oggetti trovati: " + queue.size());
+            System.out.println("Distanza delle stringhe da " + nomeDownCase);*/
+            
+        } catch (SQLException e) {}
+        
+        List<String> result = new ArrayList<>();
+        //System.out.println("Elementi nella queue di dimensione " + queue.size());
+        int i = 1;
+        while(queue.size() > 0 && i <= 10){
+            pair<Double, String> elem = queue.poll();
+            //System.out.println("Elemento " + (i++) + ") " + elem.getR() + " - " + elem.getL());
+            i++;
+            result.add(elem.getR());
+        }
+        
+        return result;
+    }
+    
 }

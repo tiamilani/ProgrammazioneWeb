@@ -71,7 +71,7 @@ public class objectsQuery {
      */
     public static String selectObjectByCategory(int idCategoria)
     {
-        return "SELECT * FROM Oggetto WHERE categoria = " + idCategoria + ";";
+        return "SELECT Oggetto.*, imageOggetto.* FROM Oggetto JOIN imageOggetto ON (Oggetto.id = imageOggetto.idO) WHERE categoria = " + idCategoria + ";";
     }
     
     /**
@@ -1374,5 +1374,16 @@ public class objectsQuery {
     public static String selectObjectByCategoryAndNameAndBetweenPricesAndPISAndEndDiscount(int idCategoria, String nomeDownCase, double prezzoMin, double prezzoMax, int ritiroInNegozio)
     {
         return "SELECT * FROM Oggetto WHERE categoria=" + idCategoria + " AND prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND Oggetto.`dataFineSconto` IS NOT NULL AND Oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere la lista di oggetti che contengono una stringa nel nome
+     * @param nomeDownCase
+     * @return String: elenco oggetti
+     */
+    public static String selectAllObjectNames()
+    {
+        return "SELECT DISTINCT(Oggetto.nome) FROM Oggetto;";
     }
 }

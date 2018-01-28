@@ -9,8 +9,12 @@ import it.progettoWeb.java.database.Dao.Categoria.DaoCategoria;
 import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
 import it.progettoWeb.java.database.Model.Categoria.ModelloCategoria;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
+import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
+import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto;
+import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
+import it.progettoWeb.java.utility.pair.pair;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -62,12 +66,17 @@ public class CategoriaController extends HttpServlet {
         int idCategoria = Integer.parseInt(request.getParameter("id"));
 
         forward = LIST_CATEGORY;
+        
+        pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectObjectByCategory(idCategoria);
+        
         ModelloCategoria categoria = daoCategoria.selectCategoryById(idCategoria);
-        ModelloListeOggetto ListaOggetti = new ModelloListeOggetto(daoOggetto.selectObjectByCategory(idCategoria));
+        ModelloListeOggetto ListaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
+        ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
         
         request.setAttribute("categoria", categoria);
-        request.setAttribute("ListaOggetti", ListaOggetti);
-
+        request.setAttribute("listaOggetti", ListaOggetti);
+        request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
+        
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
     }

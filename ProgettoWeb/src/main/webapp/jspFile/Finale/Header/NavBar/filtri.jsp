@@ -4,6 +4,7 @@
     Author     : Damiano
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/bootstrap-slider.css">
 <script src="${pageContext.request.contextPath}/jspFile/Finale/JS/bootstrap-slider.js"></script>
 
@@ -115,64 +116,79 @@
     .checkbox label input[type="checkbox"]:disabled + .cr,
     .radio label input[type="radio"]:disabled + .cr {
         opacity: .5;
-}
+    }
+    
+    #star-block{
+        background: inherit;
+        border: none;
+    }
 </style>
 
 
 <form class="form-inline" name="filterForm">
     <div class="form-group row filterRow">
-        <div class="col-lg-4 col-md-4">
+        <div class="col-lg-4 col-md-4 col-sm-12 category-filter">
             <select class="form-control" style="height: 100%; width: 100%" name="filtroCategoria">
-                <option selected>Categoria</option>
-                <c:forEach items="${listacategoriesessione.getList()}" var="cat">
-                  <option value="${cat.getId()}"><c:out value="${cat.getNome()}"/></option>
-                </c:forEach>
+                <c:choose>
+                    <c:when test="${param.hiddenidCategoria != 'Categoria' && param.hiddenidCategoria > 0}">
+                        <option>Categoria</option>
+                        <c:forEach items="${listacategoriesessione.getList()}" var="cat">
+                            <option value="${cat.getId()}" ${cat.getId() == param.hiddenidCategoria ? 'selected' : ''}><c:out value="${cat.getNome()}" /></option>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <option selected>Categoria</option>
+                        <c:forEach items="${listacategoriesessione.getList()}" var="cat">
+                            <option value="${cat.getId()}"><c:out value="${cat.getNome()}" /></option>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
             </select>
         </div>
 
-        <div class="col-xl-4 col-lg-4 col-md-4">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
             <i class="large material-icons">person_outline</i>
-            <input class="col-10 text-input" type="text" id="venditore" name="filtroNomeVenditore" required placeholder="Nome venditore">
+            <input class="col-10 text-input" type="text" id="venditore" name="filtroNomeVenditore" required placeholder="Nome venditore" value="${param.hiddennomeVenditore != null ? param.hiddennomeVenditore : ''}">
         </div>
         
-        <div class="col-xl-4 col-lg-4 col-md-4">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
             <i class="large material-icons">shop</i>
-            <input class="col-10 text-input" type="text" id="negozio" name="filtroNomeNegozio" required placeholder="Nome negozio">
+            <input class="col-10 text-input" type="text" id="negozio" name="filtroNomeNegozio" required placeholder="Nome negozio" value="${param.hiddennomeNegozio != null ? param.hiddennomeNegozio : ''}">
         </div>
     </div>
    
     <div class="form-group row filterRow">
-        <div class="form-check col-lg-4 col-md-4">
+        <div class="form-check col-xl-4 col-lg-6 col-md-6 col-sm-5">
             <div style="width: 100%">
                 <center>
-                    <input class="form-check-input" name="filtroRitiroInNegozio" type="checkbox">Ritiro in negozio
+                    <input class="form-check-input" name="filtroRitiroInNegozio" type="checkbox" ${param.hiddencheckRitiroInNegozio ? 'checked' : ''}>Ritiro in negozio
                 </center>
             </div>
             <div style="width: 100%">
                 <center>
-                    <input class="form-check-input" name="filtroProdottiScontati" type="checkbox">Prodotti scontati
+                    <input class="form-check-input" name="filtroProdottiScontati" type="checkbox" ${param.hiddencheckProdottiScontati ? 'checked' : ''}>Prodotti scontati
                 </center>
             </div>
         </div>
         
-        <div class="col-xl-4 col-lg-4 col-md-4">
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-7">
             <center>
-                <b id="minSliderValue">0&euro; </b><input name="range-slider" id="double-slider" type="number" range="true" value="" data-provide="slider" data-slider-min="0" data-slider-max="1000" data-slider-step="5" data-slider-value="[0,1000]"><b id="maxSliderValue"> 1000&euro;</b>
+                <b class="price-label" id="minSliderValue">0&euro; </b><input name="range-slider" id="double-slider" type="number" range="true" value="" data-provide="slider" data-slider-min="0" data-slider-max="1000" data-slider-step="5" data-slider-value="[${param.hiddenPriceRange != null ? param.hiddenPriceRange : '0,1000'}]"><b class="price-label" id="maxSliderValue"> 1000&euro;</b>
             </center>
         </div>
         
-        <div class="form-control col-lg-4 col-md-4">
+        <div class="form-control col-xl-4 col-lg-12 col-md-12 col-sm-12" id="star-block">
             <div class="form-group">
                 <div class="stars">
-                    <input class="star star-5" id="star-5" type="radio" name="valutazioneReview" value="5"/>
+                    <input class="star star-5" id="star-5" type="radio" name="valutazioneReview" value="5" ${param.hiddenvalutazioneMinima != null && param.hiddenvalutazioneMinima == 5 ? 'checked' : ''}/>
                     <label class="star star-5" for="star-5"></label>
-                    <input class="star star-4" id="star-4" type="radio" name="valutazioneReview" value="4"/>
+                    <input class="star star-4" id="star-4" type="radio" name="valutazioneReview" value="4" ${param.hiddenvalutazioneMinima != null && param.hiddenvalutazioneMinima == 4 ? 'checked' : ''}/>
                     <label class="star star-4" for="star-4"></label>
-                    <input class="star star-3" id="star-3" type="radio" name="valutazioneReview" value="3"/>
+                    <input class="star star-3" id="star-3" type="radio" name="valutazioneReview" value="3" ${param.hiddenvalutazioneMinima != null && param.hiddenvalutazioneMinima == 3 ? 'checked' : ''}/>
                     <label class="star star-3" for="star-3"></label>
-                    <input class="star star-2" id="star-2" type="radio" name="valutazioneReview" value="2"/>
+                    <input class="star star-2" id="star-2" type="radio" name="valutazioneReview" value="2" ${param.hiddenvalutazioneMinima != null && param.hiddenvalutazioneMinima == 2 ? 'checked' : ''}/>
                     <label class="star star-2" for="star-2"></label>
-                    <input class="star star-1" id="star-1" type="radio" name="valutazioneReview" value="1"/>
+                    <input class="star star-1" id="star-1" type="radio" name="valutazioneReview" value="1" ${param.hiddenvalutazioneMinima != null && param.hiddenvalutazioneMinima == 1 ? 'checked' : ''}/>
                     <label class="star star-1" for="star-1"></label>
                 </div>
             </div>

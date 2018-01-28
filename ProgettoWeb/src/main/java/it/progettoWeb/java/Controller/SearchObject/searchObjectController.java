@@ -7,8 +7,13 @@ package it.progettoWeb.java.Controller.SearchObject;
 
 import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
+import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
+import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto;
+import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
+import it.progettoWeb.java.utility.pair.pair;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,11 +30,11 @@ public class searchObjectController extends HttpServlet {
     private static String SEARCH_PAGE = "/jspFile/Finale/search/searchResult.jsp";
     private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
 
-    private DaoOggetto dao;
+    private DaoOggetto daoOggetto;
 
     public searchObjectController() {
         super();
-        dao = new DaoOggetto();
+        daoOggetto = new DaoOggetto();
     }
 
     /**
@@ -74,7 +79,7 @@ public class searchObjectController extends HttpServlet {
 
         //System.out.println(nomeVenditore);
 
-        if(search.length() < 3) {
+        if(search.length() < 1) {
             forward = ERROR_PAGE;
 
             String errore = "Nome elemento da cercare troppo corto";
@@ -83,8 +88,13 @@ public class searchObjectController extends HttpServlet {
             view.forward(request, response);
         }
         
-        ModelloListeOggetto listaOggetti = new ModelloListeOggetto(dao.selectObjectByQuery(search.toLowerCase(), categoria, nomeVenditore, nomeNegozio, minPrice, maxPrice, checkProdottiScontati, checkRitiroInNegozio));
-        request.setAttribute("ListaOggetti", listaOggetti);
+        pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectObjectByQuery(search.toLowerCase(), categoria, nomeVenditore, nomeNegozio, minPrice, maxPrice, checkProdottiScontati, checkRitiroInNegozio);
+        ModelloListeOggetto listaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
+        ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
+        
+        request.setAttribute("listaOggetti", listaOggetti);
+        request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
+
         System.out.println(listaOggetti.getList().size());
 
         /*

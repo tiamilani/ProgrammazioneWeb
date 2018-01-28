@@ -45,9 +45,9 @@ public class AutocompleteSearchController extends HttpServlet {
         response.setContentType("application/json");
         
         /*System.out.println(request.getParameter("research"));
-        System.out.println("Arrivato nella servlet");
+        System.out.println("Arrivato nella servlet");*/
         
-        JsonObject jsonObject = Json.createObjectBuilder()
+        /*JsonObject jsonObject = Json.createObjectBuilder()
                 .add("suggestions",
                         Json.createArrayBuilder().add("iPhone SE")
                                               .add("Motosega")
@@ -57,19 +57,20 @@ public class AutocompleteSearchController extends HttpServlet {
                                               .build()
                 ).build();*/
         
-        List<ModelloOggetto> research = daoOggetto.selectObjectByName(request.getParameter("research"));
+        //List<ModelloOggetto> research = daoOggetto.selectObjectByName(request.getParameter("research"));
         //System.out.println("La ricerca per " + request.getParameter("research") + " ha fornito " + research.size() + " risultati");
+        List<String> similar = daoOggetto.selectByStringSimilarity(request.getParameter("research"));
+        //System.out.println("Oggetti trovati nel DB: " + similar.size());
         
         JsonArrayBuilder values = Json.createArrayBuilder();
-        for (ModelloOggetto entry : research) {
-            values.add(entry.getNome());
+        for (String entry : similar) {
+            values.add(entry);
         }
         
         JsonArray listaValori = values.build();
         
         JsonObject jsonObject = Json.createObjectBuilder().
                 add("suggestions", listaValori).build();
-        
         
         String suggestions = jsonObject.toString();
         //System.out.println(suggestions);
