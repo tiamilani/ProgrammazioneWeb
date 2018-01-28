@@ -129,8 +129,8 @@
 
                         if(sconto > 0)
                             costoTotale -= (costoTotale * sconto) / 100;
-
-                        $('#totNowElem').text(costoTotale + " Euro");
+                        
+                        $('#totNowElem').text(costoTotale.toFixed(2) + " Euro");
                     });
                 </script>
             </div>
