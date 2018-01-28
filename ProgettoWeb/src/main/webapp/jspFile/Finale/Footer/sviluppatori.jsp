@@ -8,18 +8,19 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
         <title>ShopHero Developer</title>
+        <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
         <link rel="stylesheet" href="sviluppatori.css">
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     </head>
 
     <body>
-        <div class="container-fluid">
+        <div class="container">
             <%@include file="../Header/NavBar/newNavBar.jsp" %>
+        </div>
+        
+        <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-6 description">
                     <h1>Ciao</h1>
@@ -29,7 +30,7 @@
                     </p>
                 </div>
             </div>
-            <div class="content container-fluid">
+            <div class="content">
                 <div class="card-deck">
                     <div class="col col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="card">

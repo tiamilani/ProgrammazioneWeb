@@ -44,14 +44,9 @@ function removeObject(elem)
 function checkInputText(e, elem)
 {
     if(e.keyCode == 13) // invio
-    {
-        //checkInput(elem);
         return true;
-    }
     else if(e.keyCode >= 48 && e.keyCode <= 57) // tra 0 e 9
-    {
         return true;
-    }
 
     e.returnValue = false;
 };
@@ -59,10 +54,7 @@ function checkInputText(e, elem)
 function checkInputTextLetters(e, elem)
 {
     if(e.keyCode == 13) // Invio
-    {
-        //checkInput(elem);
         return true;
-    }
     else if(e.keyCode >= 65 && e.keyCode <= 90) // Tra A e Z
         return true;
     else if(e.keyCode >= 97 && e.keyCode <= 122) // Tra a e z
@@ -173,13 +165,12 @@ function changeDescription(id)
 //--- Funzione per calcolare la data prevista per la consegna (in base alla spedizione selezionata)
 function addDays(daysToAdd)
 {
-    //var daysITA = ["Domenica", "Lunedi'", "Martedi'", "Mercoledi'", "Giovedi'", "Venerdi'", "Sabato"];
     var monthsSITA = ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dec"];
 
     var result = new Date();
     result.setDate(result.getDate() + daysToAdd);
 
-    return (/*daysITA[result.getDay()] + " " + */result.getDate() + " " + monthsSITA[result.getMonth()] + " " + result.getFullYear());
+    return (result.getDate() + " " + monthsSITA[result.getMonth()] + " " + result.getFullYear());
 };
 
 //--- Funzione per settare descrizione e data prevista della spedizione selezionata (la prima nella <select>).

@@ -7,7 +7,6 @@ import it.progettoWeb.java.database.Dao.Ordine.DaoOrdine;
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
 import it.progettoWeb.java.database.Model.Assistenza.ModelloAssistenza;
 import it.progettoWeb.java.database.Model.Assistenza.ModelloListeAssistenza;
-import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.utility.javaMail.SendEmail;
 import it.progettoWeb.java.utility.pair.pair;
@@ -250,8 +249,6 @@ public class AssistenzaController extends HttpServlet
                     solution = solution.substring(0, 2000);
                 solution = solution.replace('\'', ' ');
                 
-                System.out.println("solution = \n" + solution);
-                
                 ModelloAssistenza ass = daoAssistenza.selectSpecifiedInfoSupport(idA);
                 ass.setDataChiusura(new Timestamp(System.currentTimeMillis()));
                 ass.setSoluzione(solution);
@@ -280,8 +277,6 @@ public class AssistenzaController extends HttpServlet
                 if(testo.length() > 2000)
                     testo = testo.substring(0, 2000);
                 testo = testo.replace('\'', ' ');
-                
-                System.out.println("testo = \n" + testo);
                 
                 ModelloAssistenza assistance = new ModelloAssistenza();
                 assistance.setIdUtente(idUtenteRichiedente);

@@ -84,7 +84,7 @@ public class SendEmail
         catch (MessagingException ex)
         {
             System.out.println("Errore nella funzione sendError");
-            System.out.println("ERROR MAIL: " + ex.getMessage());
+            System.out.println("ERROR MAIL: " + ex.toString());
             System.out.println(ex.toString());
         }
     }
@@ -104,9 +104,9 @@ public class SendEmail
         catch (MessagingException ex)
         {
             System.out.println("Errore nella funzione sendEmail");
-            System.out.println(ex.getMessage());
             System.out.println(ex.toString());
-            sendError(userEmail, ex.getMessage());
+            System.out.println(ex.toString());
+            sendError(userEmail, ex.toString());
         }
     }
 
@@ -242,8 +242,8 @@ public class SendEmail
         catch (MessagingException ex)
         {
             System.out.println("Errore nella funzione passwordForget");
-            System.out.println(ex.getMessage());
-            sendError(userEmail, ex.getMessage());
+            System.out.println(ex.toString());
+            sendError(userEmail, ex.toString());
         }
     }
 
