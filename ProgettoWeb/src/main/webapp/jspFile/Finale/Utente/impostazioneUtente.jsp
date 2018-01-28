@@ -12,6 +12,18 @@
         <title><c:out value="${utenteSessione.getNome()}" /></title>
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyB7LZyOZzvwxSWSLr6cwFw9CpTPT2iIFiw" async defer></script>
         <script type="text/javascript">
+           
+           function changePassword() {
+                var password = document.formPassword.newPassword.value;
+                var confirmPassword = document.formPassword.newConfirmPassword.value;
+
+                document.formPassword.newPassword.value = md5(password);
+                document.formPassword.newConfirmPassword.value = md5(confirmPassword);
+
+                formPassword.action = "${pageContext.request.contextPath}/UserController";
+                formPassword.submit();
+            }
+            
            function showResult(result) {
                 document.addAddrForm.latitudine.value = result.geometry.location.lat();
                 document.addAddrForm.longitudine.value = result.geometry.location.lng();
@@ -123,7 +135,7 @@
             </div>
             </form>
             <p>Modifica password</p>
-            <form action="${pageContext.request.contextPath}/UserController" id="formPassword" name="formPassword" method="POST">
+            <form <%--action="${pageContext.request.contextPath}/UserController"--%> id="formPassword" name="formPassword" method="POST">
                 <input type="hidden" name="action" value="updatePassword">
                 <div class="row">
                     <div class="col-5">
@@ -133,7 +145,7 @@
                         <input type="password" class="form-control" id="inputPassword" name="newConfirmPassword" placeholder="Confirm New Password">
                     </div>
                     <div class="col-2">
-                        <button class="btn btn-outline-primary buttonSpace btn-block" type="submit" value="submit">Salva password</button>
+                        <button class="btn btn-outline-primary buttonSpace btn-block" type="submit" value="submit" onclick="changePassword()">Salva password</button>
                     </div>
                 </div>
             </form>

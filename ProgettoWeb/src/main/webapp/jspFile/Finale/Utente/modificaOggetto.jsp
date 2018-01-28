@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="row">
-                <form class="col-12" id="modificaOggetto" name="modificaOggetto" method="POST" action="${pageContext.request.contextPath}/NegozioController">
+                <form class="col-12" id="modificaOggetto" name="modificaOggetto" method="POST" enctype="multipart/form-data" action="${pageContext.request.contextPath}/NegozioController">
                     <input type="hidden" name="action" value="modifyObject">
                     <input type="hidden" name="idNegozio" value="${negozio.getId()}">
                     <input type="hidden" id="modifyObject" name="modifyObject" value="${oggetto.getId()}">
@@ -185,9 +185,15 @@
                                         <input type="checkbox" class="form-check-input" id="checkbox-${spedizione.getIdS()}" name="checkbox-${spedizione.getIdS()}">
                                     </c:otherwise>
                                 </c:choose>
-                                ${spedizione.getNome()}
+                                ${spedizione.getCorriere()} - ${spedizione.getNome()}
                             </div>
                         </c:forEach>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 form-group">
+                            <label style="margin-bottom: 10px; display: block;" for="file">Carica delle immagini per una recensione migliore!</label>
+                            <input type="file" style="margin: 0; display: inline-block" id="file" name="file" accept="image/*" multiple>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-12">

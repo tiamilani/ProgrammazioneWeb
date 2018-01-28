@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.query.users.usersQuery;
+import java.sql.PreparedStatement;
 
 public class DaoImmagineOggetto {
 
@@ -97,5 +98,19 @@ public class DaoImmagineOggetto {
         } catch (SQLException e) {   
         } 
         return img;
+    }
+    
+    public void addImageToObject(ModelloImmagineOggetto imageObject) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(usersQuery.addImageToObject(imageObject.getIdO(), imageObject.getSrc()));
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) { System.out.println(e); }
+    }
+    
+    public void remImageToObject(ModelloImmagineOggetto imageObject) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(usersQuery.remImageToObject(imageObject.getIdO(), imageObject.getSrc()));
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) { System.out.println(e); }
     }
 }

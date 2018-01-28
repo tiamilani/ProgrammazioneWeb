@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
+import it.progettoWeb.java.database.Dao.immagineNegozio.DaoImmagineNegozio;
 import it.progettoWeb.java.database.Dao.immagineOggetto.DaoImmagineOggetto;
 import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
 import it.progettoWeb.java.database.Dao.ordiniRicevuti.DaoOrdiniRicevuti;
@@ -72,6 +73,7 @@ public class UserController extends HttpServlet {
     private DaoOrdine daoOrdine;
     private DaoImmagineOggetto daoImgOggetto;
     private DaoOrdiniRicevuti daoOrdiniRicevuti;
+    private DaoImmagineNegozio daoImmagineNegozio;
 
     public UserController() {
         super();
@@ -84,6 +86,7 @@ public class UserController extends HttpServlet {
         daoOrdine = new DaoOrdine();
         daoImgOggetto = new DaoImmagineOggetto();
         daoOrdiniRicevuti = new DaoOrdiniRicevuti();
+        daoImmagineNegozio = new DaoImmagineNegozio();
     }
 
     /**
@@ -197,6 +200,7 @@ public class UserController extends HttpServlet {
             pair<List<ModelloRecensioneNegozio>, List<ModelloUtente>> recensioniNegozi;
             recensioniNegozi = daoRecensioneN.selectReviewImagesUserByStore(idNegozio);
 
+            ModelloListeImmagineNegozio immagini = new ModelloListeImmagineNegozio(daoImmagineNegozio.selectPhotoStore(idNegozio));
             pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectObjectsImageSelledByStoreID(idNegozio);
             ModelloListeOggetto listaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
             ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
@@ -215,6 +219,7 @@ public class UserController extends HttpServlet {
 
             request.setAttribute("canUploadImages", false);
             request.setAttribute("negozio", negozio);
+            request.setAttribute("listaImmagini", immagini);
             request.setAttribute("immagine", immagine);
             request.setAttribute("indirizzo", indirizzo);
             request.setAttribute("listaOggetti", listaOggetti);
@@ -358,7 +363,19 @@ public class UserController extends HttpServlet {
 
 
             forward = HOME_PAGE;
-        } 
+        } else if(action.equalsIgnoreCase("validateUser")){
+            String emailMD5 = request.getParameter("identification");
+            
+            boolean validato = daoUtente.validateUser(emailMD5);
+            
+            if(validato){
+                request.setAttribute("accountVerificato", 0);
+            } else {
+                request.setAttribute("accountVerificato", 1);
+            }
+            
+            forward = HOME_PAGE;
+        }
         else
         {
             forward = ERROR_PAGE;
@@ -393,95 +410,99 @@ public class UserController extends HttpServlet {
             ModelloUtente utente = daoUtente.selectUserByEmailAndPassword(email, password);
             log("Utente trovato: " + utente.getId());
             if(utente.getId() > 0){
-                request.getSession().removeAttribute("utenteSessione");
-                request.getSession().setAttribute("utenteSessione", utente);
+                if(utente.isEmailConfermata()) {
+                    request.getSession().removeAttribute("utenteSessione");
+                    request.getSession().setAttribute("utenteSessione", utente);
 
-                Cookie ck=new Cookie("user",String.valueOf(utente.getId()));//creating cookie object
-                ck.setMaxAge(-1);
-                response.addCookie(ck);//adding cookie in the response
+                    Cookie ck=new Cookie("user",String.valueOf(utente.getId()));//creating cookie object
+                    ck.setMaxAge(-1);
+                    response.addCookie(ck);//adding cookie in the response
 
-                forward = request.getHeader("referer");
-                log("forward: " + forward);
-                if(forward.equals("http://localhost:8080/ProgettoWeb/UserController?action=addUser") || forward.equals("http://localhost:8080/ProgettoWeb/UserController?action=logout"))
-                {
-                    redirect = false;
-                    forward = HOME_PAGE;
-                    log("Il forword è a home page: " + forward);
-                }
-                else
-                {
-                    redirect = true;
-                }
-                log("forward: " + forward);
-
-                try
-                {
-                    log("sono nel ty catch");
-                    ModelloListeOrdine carrelloInSessione = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
-                    ModelloListeOrdine carrelloInDB = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 0));
-                    log("Varibili inizializzate");
-                    
-                    for(ModelloOrdine ordineInCU : carrelloInDB.getList())
-                        for(Iterator<ModelloOrdine> iterator = carrelloInSessione.getList().iterator(); iterator.hasNext();)
-                        {
-                            ModelloOrdine ordineInCIS = iterator.next();
-                            if(ordineInCIS.getIdOggetto().equalsIgnoreCase(ordineInCU.getIdOggetto()))
-                            {
-                                daoOrdine.changeOrderQuantity(
-                                        ordineInCU.getIdOrdine(),
-                                        ordineInCU.getIdOggetto(),
-                                        ordineInCU.getIdUtente(),
-                                        (ordineInCU.getQuantita() + ordineInCIS.getQuantita()));
-
-                                iterator.remove();
-                            }
-                        }
-                    log("Inserimento eventuali nuove quantità degli oggetti in sessione");
-                    int idUtente = utente.getId();
-                    int idOrdine;
-                    if(carrelloInDB.getSize() > 0){
-                        idOrdine = carrelloInDB.get(0).getIdOrdine();
+                    forward = request.getHeader("referer");
+                    log("forward: " + forward);
+                    if(forward.equals("http://localhost:8080/ProgettoWeb/UserController?action=addUser") || forward.equals("http://localhost:8080/ProgettoWeb/UserController?action=logout"))
+                    {
+                        redirect = false;
+                        forward = HOME_PAGE;
+                        log("Il forword è a home page: " + forward);
                     }
                     else
                     {
-                        if(carrelloInSessione.getSize() > 0){
-                            ModelloOrdine primoOggetto = carrelloInSessione.get(0);
-                            primoOggetto.setIdUtente(idUtente);
-                            daoOrdine.insertObjectInCartFirstTime(primoOggetto);
-                            
-                            primoOggetto = daoOrdine.selectOrdersComplete(utente.getId(), 0).get(0);
-                            idOrdine = primoOggetto.getIdOrdine();
-                            List<ModelloOrdine> carrelloSenzaIlPrimoOggetto = carrelloInSessione.getList();
-                            carrelloSenzaIlPrimoOggetto.remove(0);
-                            carrelloInSessione = new ModelloListeOrdine(carrelloSenzaIlPrimoOggetto);
-                        } else {
-                            idOrdine = 0; //Il for più sotto non verrà eseguito neanche una volta
-                        }
+                        redirect = true;
                     }
-                                
-                    for(ModelloOrdine ordineInCIS : carrelloInSessione.getList())
-                    {
-                        ordineInCIS.setIdUtente(idUtente);
-                        ordineInCIS.setIdOrdine(idOrdine);
-                        daoOrdine.insertObjectInCart(ordineInCIS);
-                    }
-                    
-                    log("Aggiungo nuovi oggetti che erano nel carrello in sessione");
+                    log("forward: " + forward);
 
-                    carrelloInSessione = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 0));
-                    request.getSession().removeAttribute("carrelloSessione");
-                    request.getSession().setAttribute("carrelloSessione", carrelloInSessione);
+                    try
+                    {
+                        log("sono nel ty catch");
+                        ModelloListeOrdine carrelloInSessione = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
+                        ModelloListeOrdine carrelloInDB = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 0));
+                        log("Varibili inizializzate");
+
+                        for(ModelloOrdine ordineInCU : carrelloInDB.getList())
+                            for(Iterator<ModelloOrdine> iterator = carrelloInSessione.getList().iterator(); iterator.hasNext();)
+                            {
+                                ModelloOrdine ordineInCIS = iterator.next();
+                                if(ordineInCIS.getIdOggetto().equalsIgnoreCase(ordineInCU.getIdOggetto()))
+                                {
+                                    daoOrdine.changeOrderQuantity(
+                                            ordineInCU.getIdOrdine(),
+                                            ordineInCU.getIdOggetto(),
+                                            ordineInCU.getIdUtente(),
+                                            (ordineInCU.getQuantita() + ordineInCIS.getQuantita()));
+
+                                    iterator.remove();
+                                }
+                            }
+                        log("Inserimento eventuali nuove quantità degli oggetti in sessione");
+                        int idUtente = utente.getId();
+                        int idOrdine;
+                        if(carrelloInDB.getSize() > 0){
+                            idOrdine = carrelloInDB.get(0).getIdOrdine();
+                        }
+                        else
+                        {
+                            if(carrelloInSessione.getSize() > 0){
+                                ModelloOrdine primoOggetto = carrelloInSessione.get(0);
+                                primoOggetto.setIdUtente(idUtente);
+                                daoOrdine.insertObjectInCartFirstTime(primoOggetto);
+
+                                primoOggetto = daoOrdine.selectOrdersComplete(utente.getId(), 0).get(0);
+                                idOrdine = primoOggetto.getIdOrdine();
+                                List<ModelloOrdine> carrelloSenzaIlPrimoOggetto = carrelloInSessione.getList();
+                                carrelloSenzaIlPrimoOggetto.remove(0);
+                                carrelloInSessione = new ModelloListeOrdine(carrelloSenzaIlPrimoOggetto);
+                            } else {
+                                idOrdine = 0; //Il for più sotto non verrà eseguito neanche una volta
+                            }
+                        }
+
+                        for(ModelloOrdine ordineInCIS : carrelloInSessione.getList())
+                        {
+                            ordineInCIS.setIdUtente(idUtente);
+                            ordineInCIS.setIdOrdine(idOrdine);
+                            daoOrdine.insertObjectInCart(ordineInCIS);
+                        }
+
+                        log("Aggiungo nuovi oggetti che erano nel carrello in sessione");
+
+                        carrelloInSessione = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 0));
+                        request.getSession().removeAttribute("carrelloSessione");
+                        request.getSession().setAttribute("carrelloSessione", carrelloInSessione);
+                    }
+                    catch (Exception e) {
+                        log("ERRORE: " + e.toString());
+                        System.out.println("error message = " + e.toString());
+                        forward = ERROR_PAGE;
+                        redirect = false;
+                        request.setAttribute("errore", "404 Pagina non trovata");
+                    }
                 }
-                catch (Exception e) {
-                    log("ERRORE: " + e.toString());
-                    System.out.println("error message = " + e.toString());
-                    forward = ERROR_PAGE;
-                    redirect = false;
-                    request.setAttribute("errore", "404 Pagina non trovata");
+                else {
+                    request.setAttribute("utenteLoginError", 2);
                 }
-            }
-            else {
-                log("Utente non trovato");
+            } else {
+                    log("Utente non trovato");
                 request.setAttribute("utenteLoginError", 1);
             }
         }

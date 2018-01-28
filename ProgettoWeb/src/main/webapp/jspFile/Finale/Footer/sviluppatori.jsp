@@ -9,7 +9,7 @@
 <html>
     <head>
         <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
-        <title>ShopEro Developer</title>
+        <title>ShopHero Developer</title>
         <link rel="stylesheet" href="sviluppatori.css">
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -25,13 +25,13 @@
                     <h1>Ciao</h1>
                     <p>
                         Siamo un gruppo di studenti di Informatica all'Università degli Studi di Trento.<br>
-                        Benvenuto nel nostro nuovo sito di e-commerce
+                        Benvenuto nel nostro nuovo sito di e-commerce!
                     </p>
                 </div>
             </div>
             <div class="content container-fluid">
                 <div class="card-deck">
-                    <div class="col col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <div class="col col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title text-center"> Andrea Fadi</h4>
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <div class="col col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title text-center">Damiano Sartori</h4>
@@ -59,7 +59,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <div class="col col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title text-center">Federico Brugiolo</h4>
@@ -72,7 +72,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <div class="col col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title text-center">Mattia Milani</h4>

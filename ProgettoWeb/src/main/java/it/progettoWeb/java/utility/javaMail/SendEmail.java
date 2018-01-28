@@ -4,6 +4,8 @@ import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
 import it.progettoWeb.java.database.Model.Ordine.ModelloOrdine;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -114,6 +116,23 @@ public class SendEmail
      */
     public static void addUser(String userEmail)
     {
+        String linkVerifica = "http://localhost:8080/ProgettoWeb/UserController?action=validateUser&identification=";
+        String original = userEmail;
+        String converted = "";
+        try{
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(original.getBytes());
+            byte[] digest = md.digest();
+            StringBuffer sb = new StringBuffer();
+            for (byte b : digest) {
+                    sb.append(String.format("%02x", b & 0xff));
+            }
+            converted = sb.toString();
+        } catch(NoSuchAlgorithmException e){
+
+        }
+        linkVerifica += converted;
+        
         try
         {
             ModelloUtente user = daoUtente.selectUserByEmail(userEmail);
@@ -125,7 +144,8 @@ public class SendEmail
                 message.setText(
                         "Salve " + user.getNome() + ",\n"
                         + "Grazie per la tua registrazione su ShopEro.\n"
-                        + "Il tuo account è stato creato ed e' gia' stato attivato.\n"
+                        + "Il tuo account è stato creato, ma per attivarlo devi clickare il link qui sotto.\n"
+                        + ""+linkVerifica+"\n"
                         + "Potrai accedere utilizzando le tue credenziali.\n\n"
                         + "BUONO SHOPPING!");
 

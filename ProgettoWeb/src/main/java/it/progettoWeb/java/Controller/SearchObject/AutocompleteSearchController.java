@@ -3,19 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.progettoWeb.java.Controller.Categorie;
+package it.progettoWeb.java.Controller.SearchObject;
 
-import it.progettoWeb.java.database.Dao.Categoria.DaoCategoria;
 import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
-import it.progettoWeb.java.database.Model.Categoria.ModelloCategoria;
-import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
-import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto;
-import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
-import it.progettoWeb.java.utility.pair.pair;
 import java.io.IOException;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,18 +20,14 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author mattia
+ * @author DAS
  */
-public class CategoriaController extends HttpServlet {
+public class AutocompleteSearchController extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
-    private static String LIST_CATEGORY = "/jspFile/Finale/Categorie/categoria.jsp";
-    private DaoCategoria daoCategoria;
     private DaoOggetto daoOggetto;
     
-    public CategoriaController(){
+    public AutocompleteSearchController(){
         super();
-        daoCategoria = new DaoCategoria();
         daoOggetto = new DaoOggetto();
     }
     
@@ -49,8 +42,43 @@ public class CategoriaController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("application/json");
+        
+        /*System.out.println(request.getParameter("research"));
+        System.out.println("Arrivato nella servlet");*/
+        
+        /*JsonObject jsonObject = Json.createObjectBuilder()
+                .add("suggestions",
+                        Json.createArrayBuilder().add("iPhone SE")
+                                              .add("Motosega")
+                                              .add("Diocane")
+                                              .add("Huawei")
+                                              .add("HTC U11")
+                                              .build()
+                ).build();*/
+        
+        //List<ModelloOggetto> research = daoOggetto.selectObjectByName(request.getParameter("research"));
+        //System.out.println("La ricerca per " + request.getParameter("research") + " ha fornito " + research.size() + " risultati");
+        List<String> similar = daoOggetto.selectByStringSimilarity(request.getParameter("research"));
+        //System.out.println("Oggetti trovati nel DB: " + similar.size());
+        
+        JsonArrayBuilder values = Json.createArrayBuilder();
+        for (String entry : similar) {
+            values.add(entry);
+        }
+        
+        JsonArray listaValori = values.build();
+        
+        JsonObject jsonObject = Json.createObjectBuilder().
+                add("suggestions", listaValori).build();
+        
+        String suggestions = jsonObject.toString();
+        //System.out.println(suggestions);
+
+        response.getWriter().write(suggestions);
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -62,23 +90,7 @@ public class CategoriaController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String forward="";
-        int idCategoria = Integer.parseInt(request.getParameter("id"));
-
-        forward = LIST_CATEGORY;
-        
-        pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectObjectByCategory(idCategoria);
-        
-        ModelloCategoria categoria = daoCategoria.selectCategoryById(idCategoria);
-        ModelloListeOggetto ListaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
-        ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
-        
-        request.setAttribute("categoria", categoria);
-        request.setAttribute("listaOggetti", ListaOggetti);
-        request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
-        
-        RequestDispatcher view = request.getRequestDispatcher(forward);
-        view.forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -103,6 +115,6 @@ public class CategoriaController extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }
+    }// </editor-fold>
 
 }

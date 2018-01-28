@@ -25,20 +25,16 @@ import it.progettoWeb.java.database.Model.immagineRecensione.ModelloListeImmagin
 import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
 import it.progettoWeb.java.database.Model.recensioneOggetto.ModelloListeRecensioneOggetto;
 import it.progettoWeb.java.database.Model.recensioneOggetto.ModelloRecensioneOggetto;
-import it.progettoWeb.java.database.Model.tipoSpedizione.ModelloListeTipoSpedizione;
 import it.progettoWeb.java.utility.pair.pair;
 import it.progettoWeb.java.utility.tris.tris;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Timestamp;
-import java.util.Enumeration;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;  
 

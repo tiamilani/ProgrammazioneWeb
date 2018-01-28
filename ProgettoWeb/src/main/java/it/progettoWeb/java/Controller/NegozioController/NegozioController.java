@@ -25,6 +25,8 @@ import it.progettoWeb.java.database.Model.Ordine.ModelloListeOrdine;
 import it.progettoWeb.java.database.Model.Ordine.ModelloOrdine;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.Model.immagineNegozio.ModelloImmagineNegozio;
+import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto;
+import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
 import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
 import it.progettoWeb.java.database.Model.ordiniRicevuti.ModelloListeOrdiniRicevuti;
 import it.progettoWeb.java.database.Model.spedizioneOggetto.ModelloListeSpedizioneOggetto;
@@ -33,6 +35,7 @@ import it.progettoWeb.java.database.Model.tipoSpedizione.ModelloTipoSpedizione;
 import it.progettoWeb.java.utility.javaMail.SendEmail;
 import it.progettoWeb.java.utility.pair.pair;
 import it.progettoWeb.java.utility.tris.tris;
+import java.io.File;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -44,9 +47,17 @@ import java.util.Calendar;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+@WebServlet("/NegozioController")
+@MultipartConfig(fileSizeThreshold = 1024*1024*2, // 2MB
+                 maxFileSize = 1024*1024*10,      // 10MB
+                 maxRequestSize = 1024*1024*50)   // 50MB
 
 /**
  *
@@ -54,6 +65,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class NegozioController extends HttpServlet {
     
+    private static final String SAVE_DIR = "uploadFiles";
     private static String USERPAGE = "/jspFile/Finale/Utente/utente.jsp";
     private static String SHOPPAGE = "/jspFile/Finale/Utente/gestioneSingoloNegozio.jsp";
     private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
@@ -73,6 +85,9 @@ public class NegozioController extends HttpServlet {
     private DaoOrdiniRicevuti daoOrdiniRicevuti;
     private DaoTipoSpedizione daoTipoSpedizione;
     private DaoSpedizioneOggetto daoSpedizioneOggetto;
+    
+    private List<String> imageSrcs = new ArrayList<String>();
+    private List<ModelloImmagineOggetto> immaginiOggetto = new ArrayList<ModelloImmagineOggetto>();
     
     public NegozioController() {
         super();
@@ -612,7 +627,17 @@ public class NegozioController extends HttpServlet {
             
             boolean inserimentoAvvenuto = daoOggetto.insertObject(newObject.getId(),newObject.getIdNegozio(), newObject.getNome(),newObject.getNomeDownCase(), newObject.getPrezzo(), newObject.getDescrizione(), newObject.getRitiroInNegozio(), newObject.getDisponibilita(), newObject.getStatoDisponibilita(), newObject.getSconto(), newObject.getDataFineSconto(), newObject.getCategoria());
             if(inserimentoAvvenuto){
-                daoOggetto.insertObjectImage(newObject.getId(),"http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png");
+                immaginiOggetto.clear();
+                imageSrcs.clear();
+                if(getImages(request, response)) {
+                    for (String src : imageSrcs) {
+                        ModelloImmagineOggetto immagineOggettoNew = new ModelloImmagineOggetto();
+                        immagineOggettoNew.setIdO(newObject.getId());
+                        immagineOggettoNew.setSrc(src);
+                        daoImmagineOggetto.addImageToObject(immagineOggettoNew);
+                    }
+                }
+                
                 daoCategoria.increaseCategory(newObject.getCategoria());
                 
                 int k=0;
@@ -727,11 +752,31 @@ public class NegozioController extends HttpServlet {
                 String previusId = object.getId();
                 object.setId(converted);
                 
-                
                 boolean modificaOggetto = daoOggetto.updateObject(object,previusId);
-                if(modificaOggetto){
-                    daoOggetto.deleteObjectImage(previusId, "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png");
-                    daoOggetto.insertObjectImage(object.getId(), "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png");
+                
+                if(modificaOggetto) {
+                    immaginiOggetto.clear();
+                    immaginiOggetto = daoImmagineOggetto.selectPhotoObject(object.getId());
+                    for (ModelloImmagineOggetto immagineOggetto : immaginiOggetto) {
+                        daoImmagineOggetto.remImageToObject(immagineOggetto);
+                        if(!immagineOggetto.getSrc().contains("objectImage.png")) {
+                            if(tempAvailable(immagineOggetto.getSrc(), request)) {
+                                immagineOggetto.setIdO(object.getId());
+                                immagineOggetto.setSrc(immagineOggetto.getSrc());
+                                daoImmagineOggetto.addImageToObject(immagineOggetto);
+                            }
+                        }
+                    }
+                    
+                    imageSrcs.clear();
+                    if(getImages(request, response)) {
+                        for (String src : imageSrcs) {
+                            ModelloImmagineOggetto immagineOggettoNew = new ModelloImmagineOggetto();
+                            immagineOggettoNew.setIdO(object.getId());
+                            immagineOggettoNew.setSrc(src);
+                            daoImmagineOggetto.addImageToObject(immagineOggettoNew);
+                        }
+                    }
 
                     int k=0;
                     for(int i=0;i<listaTipiSpedizione.getList().size();i++){
@@ -898,6 +943,65 @@ public class NegozioController extends HttpServlet {
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
+    }
+    
+    /**
+     * Get uploaded images
+     */
+    private boolean getImages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String appPath = request.getServletContext().getRealPath("");
+        String savePath = appPath + SAVE_DIR;
+        String savePathFake = request.getContextPath() + File.separator + SAVE_DIR;
+        
+        File fileSaveDir = new File(savePath);
+        if (!fileSaveDir.exists()) {
+            fileSaveDir.mkdir();
+        }
+        
+        boolean imageSaved = false;
+        for (Part part : request.getParts()) {
+            String fileName = extractFileName(part);
+            if(!fileName.isEmpty()) {
+                fileName = new File(fileName).getName();
+                part.write(savePath + File.separator + fileName);
+                imageSrcs.add(savePathFake + File.separator + fileName);
+                imageSaved = true;
+            }
+        }
+        
+        return imageSaved;
+    }
+    
+    /**
+     * Extracts file name from HTTP header content-disposition
+     */
+    private String extractFileName(Part part) {
+        String contentDisp = part.getHeader("content-disposition");
+        String[] items = contentDisp.split(";");
+        for (String s : items) {
+            if (s.trim().startsWith("filename")) {
+                return s.substring(s.indexOf("=") + 2, s.length()-1);
+            }
+        }
+        return "";
+    }
+    
+    private boolean tempAvailable(String src, HttpServletRequest request) {
+        String appPath = request.getServletContext().getRealPath("");
+        String savePath = appPath + SAVE_DIR;
+        String fileName = getFileName(src);
+        savePath += fileName;
+        
+        File fileSaveAvailable = new File(savePath);
+        if (fileSaveAvailable.exists()) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    private String getFileName (String src) {
+        return src.substring(src.indexOf(SAVE_DIR) + SAVE_DIR.length(), src.length());
     }
 
     /**

@@ -17,6 +17,19 @@
     <head>
         <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
         <title>${venditore.getCognome()} ${venditore.getNome()}</title>
+        <style>
+            .carousel-indicators li {
+                background-color: rgba(225, 150, 100, 0.5);
+            }
+
+            .carousel-indicators .active {
+                background-color: rgba(255, 50, 50, 0.7);
+            }
+
+            .carousel-indicators {
+                top: 105%;
+            }
+        </style> 
     </head>
     <body>
         <div class="container">
