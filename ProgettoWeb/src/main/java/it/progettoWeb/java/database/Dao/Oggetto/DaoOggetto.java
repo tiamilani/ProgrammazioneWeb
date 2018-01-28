@@ -5661,7 +5661,7 @@ public class DaoOggetto {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.updateObjectPrice(idOggetto, prezzoOggetto));
+            statement.executeUpdate(sellersQuery.updateObjectPrice(idOggetto, prezzoOggetto));
         }
         catch (SQLException e) {}
     }
@@ -5677,7 +5677,7 @@ public class DaoOggetto {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.updateObjectDiscount(idOggetto, sconto));
+            statement.executeUpdate(sellersQuery.updateObjectDiscount(idOggetto, sconto));
         }
         catch (SQLException e) {}
     }
@@ -5710,7 +5710,7 @@ public class DaoOggetto {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.updateObjectImage(idOggetto, oldImagePath, newImagePath));
+            statement.executeUpdate(sellersQuery.updateObjectImage(idOggetto, oldImagePath, newImagePath));
         }
         catch (SQLException e) {}
     }
@@ -5726,9 +5726,11 @@ public class DaoOggetto {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.updateObjectQuantity(idOggetto, newQuantity));
+            statement.executeUpdate(sellersQuery.updateObjectQuantity(idOggetto, newQuantity));
         }
-        catch (SQLException e) {}
+        catch (SQLException e) {
+            System.out.println("updateObjectQuantity ex = " + e.toString());
+        }
     }
     
     /**
@@ -5742,7 +5744,7 @@ public class DaoOggetto {
         try
         {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sellersQuery.updateObjectStatus(idOggetto, newState));
+            statement.executeUpdate(sellersQuery.updateObjectStatus(idOggetto, newState));
         }
         catch (SQLException e) {}
     }
