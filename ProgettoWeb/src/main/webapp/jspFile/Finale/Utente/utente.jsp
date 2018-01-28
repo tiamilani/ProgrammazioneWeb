@@ -41,9 +41,7 @@
                     <c:if test="${utenteSessione.getUtenteType() == 2}" >
                         <a href="${pageContext.request.contextPath}/AssistenzaController?action=listAssistances" method="GET" class="btn btn-outline-primary buttonSpace btn-block">Gestisci richieste di assistenza</a>
                     </c:if>
-                    <c:if test="${utenteSessione.getUtenteType() != 2}" >
-                        <a href="${pageContext.request.contextPath}/AssistenzaController?action=showAssistances" method="GET" class="btn btn-outline-primary buttonSpace btn-block">Assistenza</a>
-                    </c:if>
+                    <a href="${pageContext.request.contextPath}/AssistenzaController?action=showAssistances" method="GET" class="btn btn-outline-primary buttonSpace btn-block">Richieste di assistenza</a>
                     <a  href="${pageContext.request.contextPath}/UserController?action=logout" method="POST" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">person</i> Logout</a>
                 </div>
             </div>

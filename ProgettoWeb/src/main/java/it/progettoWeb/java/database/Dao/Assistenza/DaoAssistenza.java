@@ -234,7 +234,7 @@ public class DaoAssistenza {
      * @author fbrug
      * Ottenere le richieste di assistenza in un determinato stato (0 = in corso, 1 = chiuse)
      * @param stato Intero rappresentante lo stato della richiesta di assistenza
-     * @return String: lista di richieste di assistenza
+     * @return List<ModelloAssistenza>: lista di richieste di assistenza
      */
     public List<ModelloAssistenza> selectAssistanceByState(int stato) {
         List<ModelloAssistenza> richieste = new ArrayList<>();
@@ -254,7 +254,7 @@ public class DaoAssistenza {
      * @author fbrug
      * Ottenere le richieste di assistenza in base all'ID dell'amministratore a cui sono state assegnate
      * @param idAdmin Intero rappresentante l'ID dell'amministratore di cui si vogliono le richieste di assistenza assegnate
-     * @return String: lista di richieste di assistenza
+     * @return List<ModelloAssistenza>: lista di richieste di assistenza
      */
     public List<ModelloAssistenza> selectAssistanceByAdminId(int idAdmin) {
         List<ModelloAssistenza> richieste = new ArrayList<>();
@@ -275,7 +275,7 @@ public class DaoAssistenza {
      * Ottenere le richieste di assistenza in base all'ID dell'amministratore a cui sono state assegnate e in un determinato stato (0 = in corso, 1 = chiuse)
      * @param idAdmin Intero rappresentante l'ID dell'amministratore di cui si vogliono le richieste di assistenza assegnate
      * @param stato Intero rappresentante lo stato della richiesta di assistenza
-     * @return String: lista di richieste di assistenza
+     * @return List<ModelloAssistenza>: lista di richieste di assistenza
      */
     public List<ModelloAssistenza> selectAssistanceByAdminIdAndState(int idAdmin, int stato) {
         List<ModelloAssistenza> richieste = new ArrayList<>();
@@ -286,6 +286,32 @@ public class DaoAssistenza {
                 richieste.add(getModelloFromRs(rs));
             }
         } catch (SQLException e) {
+        }
+
+        return richieste;
+    }
+    
+    /**
+     * @author fbrug
+     * Ottenere le richieste di assistenza in base ai parametri specificati
+     * @param idUtente Intero rappresentante l'ID dell'utente che ha richiesto l'assistenza
+     * @param idVenditore Intero rappresentante l'ID del venditore citato nella richiesta di assistenza
+     * @param idAmministratore Intero rappresentante l'ID dell'amministratore incaricato di risolvere la richiesta di assistenza
+     * @param idOrdine Intero rappresentante l'ID dell'ordine citato nella richiesta di assistenza
+     * @param idOggetto Stringa rappresentate l'ID dell'oggetto citato nella richiesta di assistenza
+     * @return List<ModelloAssistenza>: lista di richieste di assistenza
+     */
+    public List<ModelloAssistenza> selectAssistance(int idUtente, int idVenditore, int idAmministratore, int idOrdine, String idOggetto)
+    {
+        List<ModelloAssistenza> richieste = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectAssistance(idUtente, idVenditore, idAmministratore, idOrdine, idOggetto));
+            while (rs.next()) {
+                richieste.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
         }
 
         return richieste;

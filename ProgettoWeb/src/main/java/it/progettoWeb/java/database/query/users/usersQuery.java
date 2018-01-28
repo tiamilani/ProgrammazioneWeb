@@ -314,6 +314,27 @@ public class usersQuery {
     {
         return "SELECT * FROM Assistenza WHERE Assistenza.idAmministratore=" + idAdmin + " AND Assistenza.stato=" + stato + ";";
     }
+    
+    /**
+     * @author fbrug
+     * Ottenere le richieste di assistenza in base ai parametri specificati
+     * @param idUtente Intero rappresentante l'ID dell'utente che ha richiesto l'assistenza
+     * @param idVenditore Intero rappresentante l'ID del venditore citato nella richiesta di assistenza
+     * @param idAmministratore Intero rappresentante l'ID dell'amministratore incaricato di risolvere la richiesta di assistenza
+     * @param idOrdine Intero rappresentante l'ID dell'ordine citato nella richiesta di assistenza
+     * @param idOggetto Stringa rappresentate l'ID dell'oggetto citato nella richiesta di assistenza
+     * @return String: lista di richieste di assistenza
+     */
+    public static String selectAssistance(int idUtente, int idVenditore, int idAmministratore, int idOrdine, String idOggetto)
+    {
+        return "SELECT * FROM assistenza WHERE "
+                + "assistenza.idUtente=" + idUtente + " AND "
+                + "assistenza.idVenditore=" + idVenditore + " AND "
+                + "assistenza.idAmministratore=" + idAmministratore + " AND "
+                + "assistenza.idOrdine=" + idOrdine + " AND "
+                + "assistenza.idOggetto='" + idOggetto + "';";
+    }
+    
 
     /*2017-12-25*/
 

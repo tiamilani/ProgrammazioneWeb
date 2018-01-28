@@ -10264,7 +10264,7 @@ CREATE TABLE assistenza (
   stato int(11) DEFAULT '0',
   richiesta varchar(2500) NOT NULL,
   soluzione varchar(2500) DEFAULT NULL,
-  dataApertura datetime NOT NULL,
+  dataApertura datetime DEFAULT CURRENT_TIMESTAMP,
   dataChiusura datetime DEFAULT NULL,
   PRIMARY KEY (id),
   KEY idUtente (idUtente),

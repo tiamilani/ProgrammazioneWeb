@@ -9,6 +9,7 @@ import it.progettoWeb.java.database.Model.Assistenza.ModelloAssistenza;
 import it.progettoWeb.java.database.Model.Assistenza.ModelloListeAssistenza;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
+import it.progettoWeb.java.utility.javaMail.SendEmail;
 import it.progettoWeb.java.utility.pair.pair;
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -84,153 +85,117 @@ public class AssistenzaController extends HttpServlet
             String action = request.getParameter("action");
             ModelloUtente utenteSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
             
-            //Se l'utente loggato esiste ed è amministatore
+            //Se l'utente loggato esiste
             if(utenteSessione.getId() > 0)
             {
-                if(utenteSessione.getUtenteType() == 2)
+                if((utenteSessione.getUtenteType() == 2) && (action.equalsIgnoreCase("listAssistances")))  //Solo se l'utente è amministratore
                 {
-                    if(action.equalsIgnoreCase("listAssistances"))
+                    forward = SHOW_ASSISTANCES;
+
+                    ModelloListeAssistenza listaAssistenze = new ModelloListeAssistenza(
+                            daoAssistenza.selectAssistanceByAdminId(utenteSessione.getId()));
+
+                    List<pair<ModelloAssistenza, String>> assistenzeAperte = new ArrayList<>();
+                    List<pair<ModelloAssistenza, String>> assistenzeChiuse = new ArrayList<>();
+
+                    for(ModelloAssistenza assistenza : listaAssistenze.getList())
                     {
-                        forward = SHOW_ASSISTANCES;
+                        ModelloUtente utenteRichiedente = daoUtente.getUserById(assistenza.getIdUtente());
+                        String nomeUtenteRichiedente = utenteRichiedente.getCognome() + " " + utenteRichiedente.getNome();
 
-                        ModelloListeAssistenza listaAssistenze = new ModelloListeAssistenza(
-                                daoAssistenza.selectAssistanceByAdminId(utenteSessione.getId()));
-
-                        List<pair<ModelloAssistenza, String>> assistenzeAperte = new ArrayList<>();
-                        List<pair<ModelloAssistenza, String>> assistenzeChiuse = new ArrayList<>();
-
-                        for(ModelloAssistenza assistenza : listaAssistenze.getList())
-                        {
-                            ModelloUtente utenteRichiedente = daoUtente.getUserById(assistenza.getIdUtente());
-                            String nomeUtenteRichiedente = utenteRichiedente.getCognome() + " " + utenteRichiedente.getNome();
-
-                            if(assistenza.getStato() == 0)
-                                assistenzeAperte.add(new pair<>(assistenza, nomeUtenteRichiedente));
-                            else
-                                assistenzeChiuse.add(new pair<>(assistenza, nomeUtenteRichiedente));
-                        }
-
-                        request.setAttribute("assistenzeAperte", assistenzeAperte);
-                        request.setAttribute("assistenzeChiuse", assistenzeChiuse);
+                        if(assistenza.getStato() == 0)
+                            assistenzeAperte.add(new pair<>(assistenza, nomeUtenteRichiedente));
+                        else
+                            assistenzeChiuse.add(new pair<>(assistenza, nomeUtenteRichiedente));
                     }
-                    else if(action.equalsIgnoreCase("resolve"))
-                    {
-                        forward = RESOLVE_ASSITANCE;
-                        int index = Integer.parseInt(request.getParameter("id"));
 
-                        ModelloAssistenza assistenza = daoAssistenza.selectSpecifiedInfoSupport(index);
-                        ModelloUtente utenteRichiedente = daoUtente.selectUserByID(assistenza.getIdUtente());
-                        request.setAttribute("assistenza", assistenza);
-                        request.setAttribute("utenteRichiedente", utenteRichiedente);
-
-                        if(assistenza.getIdVenditore() > 0)
-                        {
-                            ModelloUtente venditoreContestato = daoUtente.selectUserByID(assistenza.getIdVenditore());
-                            request.setAttribute("venditoreContestato", venditoreContestato);
-                        }
-                        if(assistenza.getIdOggetto() !=  null || assistenza.getIdOggetto() != "")
-                        {
-                            ModelloOggetto oggettoContestato = daoOggetto.getObjectById(assistenza.getIdOggetto());
-                            request.setAttribute("oggettoContestato", oggettoContestato);
-                        }
-                        if(assistenza.getIdOrdine() > 0)
-                        {
-                            int ordineContestato = daoOrdine.selectOrdersByIdOrder(assistenza.getIdOrdine()).get(0).getIdOrdine();
-                            request.setAttribute("ordineContestato", ordineContestato);
-                        }
-                    }
+                    request.setAttribute("assistenzeAperte", assistenzeAperte);
+                    request.setAttribute("assistenzeChiuse", assistenzeChiuse);
                 }
-                else
+                else if((utenteSessione.getUtenteType() == 2) && (action.equalsIgnoreCase("resolve")))  //Solo se l'utente è amministratore
                 {
-                    if(action.equalsIgnoreCase("showAssistances"))
-                    {
-                        forward = YOUR_ROA;
-                        
-                        ModelloListeAssistenza listaAssistenze = new ModelloListeAssistenza(
-                                daoAssistenza.selectUserAssistances(utenteSessione.getId()));
-                        
-                        List<pair<ModelloAssistenza, String>> assistenzeAperte = new ArrayList<>();
-                        List<pair<ModelloAssistenza, String>> assistenzeChiuse = new ArrayList<>();
+                    forward = RESOLVE_ASSITANCE;
+                    int index = Integer.parseInt(request.getParameter("id"));
 
-                        for(ModelloAssistenza assistenza : listaAssistenze.getList())
+                    ModelloAssistenza assistenza = daoAssistenza.selectSpecifiedInfoSupport(index);
+                    ModelloUtente utenteRichiedente = daoUtente.selectUserByID(assistenza.getIdUtente());
+                    request.setAttribute("assistenza", assistenza);
+                    request.setAttribute("utenteRichiedente", utenteRichiedente);
+                    request.setAttribute("venditoreContestato", daoUtente.selectUserByID(assistenza.getIdVenditore()));
+                    request.setAttribute("oggettoContestato", daoOggetto.getObjectById(assistenza.getIdOggetto()));
+                    request.setAttribute("ordineContestato", (daoOrdine.selectOrdersByIdOrder(assistenza.getIdOrdine()).get(0)).getIdOrdine());
+                }
+                else if(action.equalsIgnoreCase("showAssistances"))
+                {
+                    forward = YOUR_ROA;
+
+                    ModelloListeAssistenza listaAssistenze = new ModelloListeAssistenza(
+                            daoAssistenza.selectUserAssistances(utenteSessione.getId()));
+
+                    List<pair<ModelloAssistenza, String>> assistenzeAperte = new ArrayList<>();
+                    List<pair<ModelloAssistenza, String>> assistenzeChiuse = new ArrayList<>();
+
+                    for(ModelloAssistenza assistenza : listaAssistenze.getList())
+                    {
+                        String nomeOggettoContestato = (daoOggetto.getObjectById(assistenza.getIdOggetto())).getNome();
+
+                        if(assistenza.getStato() == 0)
+                            assistenzeAperte.add(new pair<>(assistenza, nomeOggettoContestato));
+                        else
+                            assistenzeChiuse.add(new pair<>(assistenza, nomeOggettoContestato));
+                    }
+
+                    request.setAttribute("assistenzeAperte", assistenzeAperte);
+                    request.setAttribute("assistenzeChiuse", assistenzeChiuse);
+
+
+                    //Se l'utente è un venditore, mostro le richieste di assistenza in cui è stato citato
+                    if(utenteSessione.getUtenteType() == 1)
+                    {
+                        ModelloListeAssistenza listaAssistenzeVenditore = new ModelloListeAssistenza(
+                                daoAssistenza.selectServiceRequestBySellerID(utenteSessione.getId()));
+
+                        List<pair<ModelloAssistenza, String>> assistenzeAperteVenditore = new ArrayList<>();
+                        List<pair<ModelloAssistenza, String>> assistenzeChiuseVenditore = new ArrayList<>();
+
+                        for(ModelloAssistenza assistenza : listaAssistenzeVenditore.getList())
                         {
                             String nomeOggettoContestato = (daoOggetto.getObjectById(assistenza.getIdOggetto())).getNome();
-                            
+
                             if(assistenza.getStato() == 0)
-                                assistenzeAperte.add(new pair<>(assistenza, nomeOggettoContestato));
+                                assistenzeAperteVenditore.add(new pair<>(assistenza, nomeOggettoContestato));
                             else
-                                assistenzeChiuse.add(new pair<>(assistenza, nomeOggettoContestato));
+                                assistenzeChiuseVenditore.add(new pair<>(assistenza, nomeOggettoContestato));
                         }
 
-                        request.setAttribute("assistenzeAperte", assistenzeAperte);
-                        request.setAttribute("assistenzeChiuse", assistenzeChiuse);
-                        
-                        
-                        //Se l'utente è un venditore, mostro le richieste di assistenza in cui è stato citato
-                        if(utenteSessione.getUtenteType() == 1)
-                        {
-                            ModelloListeAssistenza listaAssistenzeVenditore = new ModelloListeAssistenza(
-                                    daoAssistenza.selectServiceRequestBySellerID(utenteSessione.getId()));
-                            
-                            List<pair<ModelloAssistenza, String>> assistenzeAperteVenditore = new ArrayList<>();
-                            List<pair<ModelloAssistenza, String>> assistenzeChiuseVenditore = new ArrayList<>();
-
-                            for(ModelloAssistenza assistenza : listaAssistenzeVenditore.getList())
-                            {
-                                String nomeOggettoContestato = (daoOggetto.getObjectById(assistenza.getIdOggetto())).getNome();
-
-                                if(assistenza.getStato() == 0)
-                                    assistenzeAperteVenditore.add(new pair<>(assistenza, nomeOggettoContestato));
-                                else
-                                    assistenzeChiuseVenditore.add(new pair<>(assistenza, nomeOggettoContestato));
-                            }
-
-                            request.setAttribute("assistenzeAperteVenditore", assistenzeAperteVenditore);
-                            request.setAttribute("assistenzeChiuseVenditore", assistenzeChiuseVenditore);
-                            request.setAttribute("isVenditore", 1);
-                        }
-                        else
-                            request.setAttribute("isVenditore", 0);
+                        request.setAttribute("assistenzeAperteVenditore", assistenzeAperteVenditore);
+                        request.setAttribute("assistenzeChiuseVenditore", assistenzeChiuseVenditore);
+                        request.setAttribute("isVenditore", 1);
                     }
-                    else if(action.equalsIgnoreCase("details"))
+                    else
+                        request.setAttribute("isVenditore", 0);
+                }
+                else if(action.equalsIgnoreCase("details"))
+                {
+                    forward = DETAILS_ROA;
+                    int index = Integer.parseInt(request.getParameter("id"));
+
+                    ModelloAssistenza assistenza = daoAssistenza.selectSpecifiedInfoSupport(index);
+                    request.setAttribute("assistenza", assistenza);
+                    
+                    if(utenteSessione.getUtenteType() == 1)
                     {
-                        forward = DETAILS_ROA;
-                        int index = Integer.parseInt(request.getParameter("id"));
-
-                        ModelloAssistenza assistenza = daoAssistenza.selectSpecifiedInfoSupport(index);
-                        request.setAttribute("assistenza", assistenza);
-
-                        /*
-                        if(assistenza.getIdVenditore() > 0)
-                        {
-                            ModelloUtente venditoreContestato = daoUtente.selectUserByID(assistenza.getIdVenditore());
-                            request.setAttribute("venditoreContestato", venditoreContestato);
-                        }
-                        if(assistenza.getIdOggetto() !=  null || assistenza.getIdOggetto() != "")
-                        {
-                            ModelloOggetto oggettoContestato = daoOggetto.getObjectById(assistenza.getIdOggetto());
-                            request.setAttribute("oggettoContestato", oggettoContestato);
-                        }
-                        if(assistenza.getIdOrdine() > 0)
-                        {
-                            int ordineContestato = daoOrdine.selectOrdersByIdOrder(assistenza.getIdOrdine()).get(0).getIdOrdine();
-                            request.setAttribute("ordineContestato", ordineContestato);
-                        }*/
-                        
-                        if(utenteSessione.getUtenteType() == 0)
-                        {
-                            request.setAttribute("venditoreContestato", daoUtente.selectUserByID(assistenza.getIdVenditore()));
-                            request.setAttribute("isVenditore", 0);
-                        }
-                        else if(utenteSessione.getUtenteType() == 1)
-                        {
-                            request.setAttribute("utenteContestatore", daoUtente.selectUserByID(assistenza.getIdUtente()));
-                            request.setAttribute("isVenditore", 1);
-                        }
-                            
-                        request.setAttribute("oggettoContestato", daoOggetto.getObjectById(assistenza.getIdOggetto()));
-                        request.setAttribute("ordineContestato", (daoOrdine.selectOrdersByIdOrder(assistenza.getIdOrdine()).get(0)).getIdOrdine());
+                        request.setAttribute("utenteContestatore", daoUtente.selectUserByID(assistenza.getIdUtente()));
+                        request.setAttribute("isVenditore", 1);
                     }
+                    else
+                    {
+                        request.setAttribute("venditoreContestato", daoUtente.selectUserByID(assistenza.getIdVenditore()));
+                        request.setAttribute("isVenditore", 0);
+                    }
+
+                    request.setAttribute("oggettoContestato", daoOggetto.getObjectById(assistenza.getIdOggetto()));
+                    request.setAttribute("ordineContestato", (daoOrdine.selectOrdersByIdOrder(assistenza.getIdOrdine()).get(0)).getIdOrdine());
                 }
             }
         }
@@ -284,6 +249,12 @@ public class AssistenzaController extends HttpServlet
                 
                 daoAssistenza.updateAssistance(ass);
                 
+                SendEmail.chiusuraRichiestaDiAssistenza(
+                        (daoUtente.getUserById(ass.getIdVenditore())).getMail(),
+                        (daoUtente.getUserById(ass.getIdUtente())).getMail(), 
+                        ass.getIdOrdine(), 
+                        ass.getId());
+                
                 forward = "AssistenzaController?action=listAssistances";
             }
             else if(action.equalsIgnoreCase("createAssistance"))
@@ -302,14 +273,18 @@ public class AssistenzaController extends HttpServlet
                 assistance.setIdVenditore(idVenditore);
                 assistance.setIdOggetto(idOggetto);
                 assistance.setRichiesta(testo);
-                assistance.setIdAmministratore(getAdminWithMinimumPendingRequests());
+                assistance.setIdAmministratore(getAdminWithMinimumPendingRequests(idUtenteRichiedente));
                 
                 daoAssistenza.insertAssistance(assistance);
                 
-                if(utenteRichiedente.getUtenteType() == 2)
-                    forward = "AssistenzaController?action=listAssistances";
-                else
-                    forward = "AssistenzaController?action=showAssistances";
+                SendEmail.nuovaRichiestaDiAssistenza(
+                        (daoUtente.getUserById(idVenditore)).getMail(), 
+                        (daoUtente.getUserById(assistance.getIdAmministratore())).getMail(), 
+                        (utenteRichiedente.getCognome() + " " + utenteRichiedente.getNome()), 
+                        idOrdine, 
+                        (daoAssistenza.selectAssistance(idUtenteRichiedente, idVenditore, assistance.getIdAmministratore(), idOrdine, idOggetto)).get(0).getId());
+                
+                forward = "AssistenzaController?action=showAssistances";
             }
         }
         catch (Exception e) 
@@ -333,18 +308,25 @@ public class AssistenzaController extends HttpServlet
     }// </editor-fold>
 
     
-    private int getAdminWithMinimumPendingRequests()
+    private int getAdminWithMinimumPendingRequests(int idUtenteRichiedente)
     {
         int min = Integer.MAX_VALUE;
         List<ModelloUtente> listAdministrators = daoUtente.selectAllUsersByType(2);
+        
         int idAmministratore = listAdministrators.get(0).getId();
         for(ModelloUtente adm : listAdministrators)
         {
-            int requests = daoAssistenza.numberRequestOfAssistanceInAStateOfSpecificAdministrator(0, adm.getId());
-            if(min > requests)
+            if(adm.getId() != idUtenteRichiedente)
             {
-                min = requests;
-                idAmministratore = adm.getId();
+                int requests = daoAssistenza.numberRequestOfAssistanceInAStateOfSpecificAdministrator(0, adm.getId());
+                if(min > requests)
+                {
+                    min = requests;
+                    idAmministratore = adm.getId();
+
+                    if(requests == 0)
+                    break;
+                }
             }
         }
         

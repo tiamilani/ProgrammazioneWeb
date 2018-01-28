@@ -388,14 +388,110 @@ public class SendEmail
             sendError(userEmail, ex.toString());
         }
     }
-}
+    
+    
+    /**
+     * Invia una mail all'utente venditore per informarlo che è stato citato in una richiesta di assistenza
+     * Invia una mail all'utente amministratore per informarlo che è stato scelto per risolvere una richiesta di assistenza
+     * @param mailVenditore: email dell'utente venditore citato nella richiesta di assistenza
+     * @param mailAmministratore: email dell'utente amministratore incaricato di risolvere la richiesta di assistenza
+     * @param nomeUtenteRichiedente: nome e cognome dell'utente che ha richiesta l'assistenza
+     * @param idOrdine: intero rappresentante l'id dell'ordine contestato
+     * @param idAssistenza: intero rappresentate l'id dell'assistenza in questione
+     */
+    public static void nuovaRichiestaDiAssistenza(String mailVenditore, String mailAmministratore, String nomeUtenteRichiedente, int idOrdine, int idAssistenza)
+    {
+        try
+        {
+            ModelloUtente user = daoUtente.selectUserByEmail(mailVenditore);
+            Message message = preProcessing(mailVenditore);
 
-/*
-### Email
-Inviare dal server email per tutto ciò che sarà necessario
-- iscrizione
-- cambio dati account
-- conferma pagamento ordine
-- invio dell'ordine
-ecc ecc
-*/
+            if(message != null)
+            {
+                message.setSubject("Richiesta di assistenza per l'ordine [" + idOrdine + "]");
+                message.setText(
+                        "Salve " + user.getNome() + ",\n"
+                        + "È stata creata una richiesta di assistenza (N° " + idAssistenza + ") da parte di " + nomeUtenteRichiedente + "\n"
+                        + " in merito all'ordine " + idOrdine + ".\n"
+                        + "Ti consigliamo di visualizzare maggiori dettagli nella sezione \"Richieste di assistenza\" \n"
+                        + "nella pagina del tuo account.\n"
+                        + "Buona giornata!");
+
+                sendEmail(mailVenditore, message);
+            }
+
+            user = daoUtente.selectUserByEmail(mailAmministratore);
+            message = preProcessing(mailAmministratore);
+
+            if(message != null)
+            {
+                message.setSubject("Richiesta di assistenza per l'ordine [" + idOrdine + "]");
+                message.setText(
+                        "Salve " + user.getNome() + ",\n"
+                        + "È stata creata una richiesta di assistenza (N° " + idAssistenza + ") da parte di " + nomeUtenteRichiedente + "\n"
+                        + " in merito all'ordine " + idOrdine + " ed è stata assegnata a te.\n"
+                        + "Ti consigliamo di visualizzare maggiori dettagli nella sezione \"Gestisci richieste di assistenza\" \n"
+                        + "nella pagina del tuo account.\n"
+                        + "Buona giornata!");
+
+                sendEmail(mailAmministratore, message);
+            }
+        }
+        catch (MessagingException ex)
+        {
+            System.out.println(ex.toString());
+            sendError(mailVenditore, ex.toString());
+        }
+    }
+    
+    /**
+     * Invia una mail all'utente venditore per informarlo che una richiesta di assistenza in cui era stato citato si è conclusa
+     * Invia una mail all'utente richiedente per informarlo che una sua richiesta di assistenza si è conclusa
+     * @param mailVenditore: email dell'utente venditore citato nella richiesta di assistenza
+     * @param mailUtenteRichiedente: email dell'utente che ha richiesto l'assistenza
+     * @param idOrdine: intero rappresentante l'id dell'ordine contestato
+     * @param idAssistenza: intero rappresentate l'id dell'assistenza in questione
+     */
+    public static void chiusuraRichiestaDiAssistenza(String mailVenditore, String mailUtenteRichiedente, int idOrdine, int idAssistenza)
+    {
+        try
+        {
+            ModelloUtente user = daoUtente.selectUserByEmail(mailVenditore);
+            Message message = preProcessing(mailVenditore);
+
+            if(message != null)
+            {
+                message.setSubject("Richiesta di assistenza N° " + idAssistenza + " conclusa");
+                message.setText(
+                        "Salve " + user.getNome() + ",\n"
+                        + "La richiesta di assistenza N° " + idAssistenza + " riguardante l'ordine " + idOrdine + " è stata chiusa con successo.\n"
+                        + "Ti consigliamo di visualizzare maggiori dettagli nella sezione \"Richieste di assistenza\" \n"
+                        + "nella pagina del tuo account.\n"
+                        + "Buona giornata!");
+
+                sendEmail(mailVenditore, message);
+            }
+
+            user = daoUtente.selectUserByEmail(mailUtenteRichiedente);
+            message = preProcessing(mailUtenteRichiedente);
+
+            if(message != null)
+            {
+                message.setSubject("Richiesta di assistenza N° " + idAssistenza + " conclusa");
+                message.setText(
+                        "Salve " + user.getNome() + ",\n"
+                        + "La richiesta di assistenza N° " + idAssistenza + " riguardante l'ordine " + idOrdine + " è stata chiusa con successo.\n"
+                        + "Ti consigliamo di visualizzare maggiori dettagli nella sezione \"Richieste di assistenza\" \n"
+                        + "nella pagina del tuo account.\n"
+                        + "Buona giornata!");
+
+                sendEmail(mailUtenteRichiedente, message);
+            }
+        }
+        catch (MessagingException ex)
+        {
+            System.out.println(ex.toString());
+            sendError(mailVenditore, ex.toString());
+        }
+    }
+}

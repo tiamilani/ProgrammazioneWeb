@@ -42,7 +42,6 @@ import javax.servlet.RequestDispatcher;
 import it.progettoWeb.java.utility.VerifyRecaptcha;
 import it.progettoWeb.java.utility.javaMail.SendEmail;
 import javax.servlet.http.Cookie;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
