@@ -456,4 +456,8 @@ public class genericsQuery {
                 + "nCivico="+indirizzo.getnCivico()+" AND "
                 + "idU="+idU+";";
     }
+
+    public static String validateUser(String emailMD5) {
+        return "update utente set emailConfermata = 1 where md5(utente.mail) = '"+emailMD5+"';";
+    }
 }

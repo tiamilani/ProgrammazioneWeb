@@ -474,6 +474,18 @@ public class DaoUtente {
             System.out.println(ex.toString());
         }
     }
+
+    public boolean validateUser(String emailMD5) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement(genericsQuery.validateUser(emailMD5));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            return false;
+        }
+        return true;
+    }
     
     
 }
