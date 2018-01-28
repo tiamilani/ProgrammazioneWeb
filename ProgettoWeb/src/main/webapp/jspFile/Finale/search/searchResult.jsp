@@ -12,7 +12,6 @@
     <head>
     <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
     <title>ShopEro</title>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 
@@ -24,11 +23,13 @@
         <title>Risultati</title>
     </head>
     <body>
-        <jsp:useBean id="ListaOggetti" class="it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto" scope="request" />
+        <jsp:useBean id="listaOggetti" class="it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto" scope="request" />
+        <jsp:useBean id="listaImmaginiOggetto" class="it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto" scope="request" />
+        <c:set var="searchedCategory" value="${hiddenidCategoria}" scope="page" />
         <%@include file="../Header/NavBar/newNavBar.jsp" %>
 
         <div class="container-fluid">
-
+            
             <div class="summary">
                 <p>Risultati in per: <%=  request.getParameter("search")%></p>
                 <p>Categoria selezionata: <%= request.getParameter("hiddenidCategoria")%></p>
@@ -39,13 +40,12 @@
                 <p>Range di prezzo: <%= request.getParameter("hiddenPriceRange")%></p>
                 <p>Valutazione minima: <%= request.getParameter("hiddenvalutazioneMinima")%></p>
                 
+                <c:out value="${listaOggetti.getList().size()}" /> 
                 
-
-                <c:out value="${ListaOggetti.getList().size()}" /> 
-
-                <!-- %@include file="../Components/Liste/ListaOggetto/testListaOggetto.jsp" --%>
-                <%@include file="../Footer/footer.jsp" %>
+                <c:set var="limitColum" value="${4}" scope="page" />
+                <%@include file="../Components/Liste/ListaOggetto/testListaOggetto.jsp" %> 
             </div>
         </div>
+        <%@include file="../Footer/footer.jsp" %>
     </body>
 </html>

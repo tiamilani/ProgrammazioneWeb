@@ -12,9 +12,9 @@ public class objectsQuery {
     public static String hello() {
         return "Hello from" + objectsQuery.class.toString();
     }
-    
+
     /*---LAST UPDATE - 2017-09-20---*/
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti che contengono una stringa nel nome
@@ -25,7 +25,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE id = '" + id + "';";
     }
-    
+
     /**
      * @author andrea
      * Ottenere Recensione, utente
@@ -38,7 +38,7 @@ public class objectsQuery {
                 + "recensioneoggetto JOIN utente ON recensioneoggetto.idUtente=utente.id "
                 + "WHERE recensioneoggetto.idOggetto='" + idO + "';";
     }
-    
+
     /**
      * @author andrea
      * Ottenere Immagini
@@ -51,7 +51,7 @@ public class objectsQuery {
                 + "imagerecensione.idR=recensioneoggetto.id WHERE "
                 + "recensioneoggetto.id=" + idR + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti che contengono una stringa nel nome
@@ -62,7 +62,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti di una categoria
@@ -71,9 +71,9 @@ public class objectsQuery {
      */
     public static String selectObjectByCategory(int idCategoria)
     {
-        return "SELECT * FROM oggetto WHERE categoria = " + idCategoria + ";";
+        return "SELECT Oggetto.*, imageOggetto.* FROM Oggetto JOIN imageOggetto ON (Oggetto.id = imageOggetto.idO) WHERE categoria = " + idCategoria + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti di una categoria con una certa stringa nel nome
@@ -85,7 +85,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo
@@ -96,7 +96,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo >= " + prezzoMin + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo
@@ -107,7 +107,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo <= " + prezzoMax + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo
@@ -119,7 +119,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria
@@ -131,7 +131,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo >= " + prezzoMin + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria
@@ -143,7 +143,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo <= " + prezzoMax + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria
@@ -156,7 +156,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome
@@ -168,7 +168,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo >= " + prezzoMin + " AND nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome
@@ -180,7 +180,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo <= " + prezzoMax + " AND nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome
@@ -193,7 +193,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome
@@ -206,7 +206,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo >= " + prezzoMin + " AND nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome
@@ -219,7 +219,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo <= " + prezzoMax + " AND nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome
@@ -233,7 +233,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti di un determinato negozio
@@ -244,7 +244,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE oggetto.idNegozio = " + idNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti che contengono una stringa nel nome di un determinato negozio
@@ -256,7 +256,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE idNegozio=" + idNegozio + " AND nomeDownCase LIKE '%" + nomeDownCase + "%'";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti di una categoria di un determinato negozio
@@ -268,7 +268,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE idNegozio=" + idNegozio + " AND oggetto.categoria=" + idCategoria + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti di una categoria con una certa stringa nel nome di un determinato negozio
@@ -281,7 +281,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE idNegozio=" + idNegozio + " AND oggetto.categoria=" + idCategoria + " AND oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo di un determinato negozio
@@ -293,7 +293,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE idNegozio=" + idNegozio + " AND oggetto.prezzo >= " + prezzoMin + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo di un determinato negozio
@@ -305,7 +305,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE idNegozio=" + idNegozio + " AND oggetto.prezzo <= " + prezzoMax + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di un determinato negozio
@@ -318,7 +318,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE idNegozio=" + idNegozio + " AND prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di un determinato negozio
@@ -331,7 +331,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE idNegozio=" + idNegozio + " AND categoria=" + idCategoria + " AND prezzo >= " + prezzoMin + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di un determinato negozio
@@ -344,7 +344,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE idNegozio=" + idNegozio + " AND categoria=" + idCategoria + " AND prezzo <= " + prezzoMax + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di un determinato negozio
@@ -358,7 +358,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE idNegozio=" + idNegozio + " AND categoria=" + idCategoria + " AND prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome di un determinato negozio
@@ -371,7 +371,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE idNegozio=" + idNegozio + " AND oggetto.prezzo >= " + prezzoMin + " AND oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome di un determinato negozio
@@ -384,7 +384,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE idNegozio=" + idNegozio + " AND oggetto.prezzo <= " + prezzoMax + " AND oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome di un determinato negozio
@@ -398,7 +398,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE idNegozio=" + idNegozio + " AND oggetto.prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di un determinato negozio
@@ -412,7 +412,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE idNegozio=" + idNegozio + "  AND categoria=" + idCategoria + " AND oggetto.prezzo >= " + prezzoMin + " AND oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio
@@ -426,7 +426,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE idNegozio=" + idNegozio + " AND categoria=" + idCategoria + " AND oggetto.prezzo <= " + prezzoMax + " AND oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di un determinato negozio
@@ -441,8 +441,8 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE idNegozio=" + idNegozio + " AND categoria=" + idCategoria + " AND oggetto.prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
-    
+
+
     /*---1*/    /*---QUERY BRUGI---*/
     /**
      * @author fbrug
@@ -459,7 +459,7 @@ public class objectsQuery {
                 + "SET @latitudine = " + lat + ";"
                 + "SET @longitudine = " + lon + ";"
                 + "SET @raggio = " + r + ";"
-                
+
                 + "SELECT negozio.id"
                 + "FROM negozio INNER JOIN indirizzo ON (indirizzo.idI = negozio.idI)"
                 + "WHERE @raggio >= 111.111"
@@ -469,7 +469,7 @@ public class objectsQuery {
                 + "+ SIN(RADIANS(@latitudine))"
                 + "* SIN(RADIANS(indirizzo.latitudine))));";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -483,7 +483,7 @@ public class objectsQuery {
     {
         return LLR(idUtente, lat, lon, r);
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti in negozi data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -495,12 +495,12 @@ public class objectsQuery {
      */
     public static String selectObjectByLLR(int idUtente, double lat, double lon, double r)
     {
-        return LLR(idUtente, lat, lon, r) 
+        return LLR(idUtente, lat, lon, r)
                 + "SELECT oggetto.* FROM oggetto "
-                
+
                 + "INNER JOIN NegoziDistanza_"+idUtente+" ON (oggetto.idNegozio = NegoziDistanza_"+idUtente+".id);";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti che contengono una stringa nel nome, nei negozi data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -518,7 +518,7 @@ public class objectsQuery {
                 + "INNER JOIN NegoziDistanza_"+idUtente+" ON (oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti di una categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -527,7 +527,7 @@ public class objectsQuery {
      * @param lon
      * @param r
      * @param idCategoria
-     * @return String: lista di oggetti 
+     * @return String: lista di oggetti
      */
     public static String selectObjectByCategoryAndLLR(int idUtente, double lat, double lon, double r, int idCategoria)
     {
@@ -536,7 +536,7 @@ public class objectsQuery {
                 + "INNER JOIN NegoziDistanza_"+idUtente+" ON (oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE oggetto.categoria=" + idCategoria + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti di una categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -546,7 +546,7 @@ public class objectsQuery {
      * @param r
      * @param idCategoria
      * @param nomeDownCase
-     * @return String: lista di oggetti 
+     * @return String: lista di oggetti
      */
     public static String selectObjectByCategoryAndNameAndLLR(int idUtente, double lat, double lon, double r, int idCategoria, String nomeDownCase)
     {
@@ -555,7 +555,7 @@ public class objectsQuery {
                 + "INNER JOIN NegoziDistanza_"+idUtente+" ON (oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE oggetto.categoria=" + idCategoria + " AND oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -564,7 +564,7 @@ public class objectsQuery {
      * @param lon
      * @param r
      * @param prezzoMin
-     * @return String: lista di oggetti 
+     * @return String: lista di oggetti
      */
     public static String selectObjectByLLRAndHigherThanPrice(int idUtente, double lat, double lon, double r, double prezzoMin)
     {
@@ -573,7 +573,7 @@ public class objectsQuery {
                 + "INNER JOIN NegoziDistanza_"+idUtente+" ON (oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE oggetto.prezzo >= " + prezzoMin + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -582,7 +582,7 @@ public class objectsQuery {
      * @param lon
      * @param r
      * @param prezzoMax
-     * @return String: lista di oggetti 
+     * @return String: lista di oggetti
      */
     public static String selectObjectByLLRAndLowerThanPrice(int idUtente, double lat, double lon, double r, double prezzoMax)
     {
@@ -591,7 +591,7 @@ public class objectsQuery {
                 + "INNER JOIN NegoziDistanza_"+idUtente+" ON (oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE oggetto.prezzo <= " + prezzoMax + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -601,7 +601,7 @@ public class objectsQuery {
      * @param r
      * @param prezzoMin
      * @param prezzoMax
-     * @return String: lista di oggetti 
+     * @return String: lista di oggetti
      */
     public static String selectObjectByLLRAndBetweenPrices(int idUtente, double lat, double lon, double r, double prezzoMin, double prezzoMax)
     {
@@ -610,7 +610,7 @@ public class objectsQuery {
                 + "INNER JOIN NegoziDistanza_"+idUtente+" ON (oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE oggetto.prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -620,7 +620,7 @@ public class objectsQuery {
      * @param r
      * @param idCategoria
      * @param prezzoMin
-     * @return String: lista di oggetti 
+     * @return String: lista di oggetti
      */
     public static String selectObjectByCategoryAndLLRAndHigherThanPrice(int idUtente, double lat, double lon, double r, int idCategoria, double prezzoMin)
     {
@@ -629,7 +629,7 @@ public class objectsQuery {
                 + "INNER JOIN NegoziDistanza_"+idUtente+" ON (oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE oggetto.prezzo >= " + prezzoMin + " AND oggetto.categoria=" + idCategoria + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -639,7 +639,7 @@ public class objectsQuery {
      * @param r
      * @param idCategoria
      * @param prezzoMax
-     * @return String: lista di oggetti 
+     * @return String: lista di oggetti
      */
     public static String selectObjectByCategoryAndLLRLowerThanPrice(int idUtente, double lat, double lon, double r, int idCategoria, double prezzoMax)
     {
@@ -648,7 +648,7 @@ public class objectsQuery {
                 + "INNER JOIN NegoziDistanza_"+idUtente+" ON (oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE oggetto.prezzo <= " + prezzoMax + " AND oggetto.categoria=" + idCategoria + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -659,7 +659,7 @@ public class objectsQuery {
      * @param idCategoria
      * @param prezzoMin
      * @param prezzoMax
-     * @return String: lista di oggetti 
+     * @return String: lista di oggetti
      */
     public static String selectObjectByCategoryAndLLRAndBetweenPrices(int idUtente, double lat, double lon, double r, int idCategoria, double prezzoMin, double prezzoMax)
     {
@@ -668,7 +668,7 @@ public class objectsQuery {
                 + "INNER JOIN NegoziDistanza_"+idUtente+" ON (oggetto.idNegozio = NegoziDistanza_"+idUtente+".id) "
                 + "WHERE oggetto.prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND oggetto.categoria=" + idCategoria + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -678,7 +678,7 @@ public class objectsQuery {
      * @param r
      * @param prezzoMin
      * @param nomeDownCase
-     * @return String: lista di oggetti 
+     * @return String: lista di oggetti
      */
     public static String selectObjectByNameAndLLRAndHigherThanPrice(int idUtente, double lat, double lon, double r, double prezzoMin, String nomeDownCase)
     {
@@ -688,7 +688,7 @@ public class objectsQuery {
                 + "WHERE oggetto.prezzo >= " + prezzoMin
                 + " AND oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -698,7 +698,7 @@ public class objectsQuery {
      * @param r
      * @param prezzoMax
      * @param nomeDownCase
-     * @return String: lista di oggetti 
+     * @return String: lista di oggetti
      */
     public static String selectObjectByNameAndLLRLowerThanPrice(int idUtente, double lat, double lon, double r, double prezzoMax, String nomeDownCase)
     {
@@ -708,7 +708,7 @@ public class objectsQuery {
                 + "WHERE oggetto.prezzo <= " + prezzoMax
                 + " AND oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -719,7 +719,7 @@ public class objectsQuery {
      * @param prezzoMin
      * @param prezzoMax
      * @param nomeDownCase
-     * @return String: lista di oggetti 
+     * @return String: lista di oggetti
      */
     public static String selectObjectByNameAndLLRAndBetweenPrices(int idUtente, double lat, double lon, double r, double prezzoMin, double prezzoMax, String nomeDownCase)
     {
@@ -729,8 +729,8 @@ public class objectsQuery {
                 + "WHERE oggetto.prezzo BETWEEN " + prezzoMin
                 + " AND oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
-    
+
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -741,7 +741,7 @@ public class objectsQuery {
      * @param idCategoria
      * @param prezzoMin
      * @param nomeDownCase
-     * @return String: lista di oggetti 
+     * @return String: lista di oggetti
      */
     public static String selectObjectByCategoryAndNameAndLLRAndHigherThanPrice(int idUtente, double lat, double lon, double r, int idCategoria, double prezzoMin, String nomeDownCase)
     {
@@ -751,7 +751,7 @@ public class objectsQuery {
                 + "WHERE oggetto.prezzo >= " + prezzoMin + " AND oggetto.categoria=" + idCategoria
                 + " AND oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -762,7 +762,7 @@ public class objectsQuery {
      * @param idCategoria
      * @param prezzoMax
      * @param nomeDownCase
-     * @return String: lista di oggetti 
+     * @return String: lista di oggetti
      */
     public static String selectObjectByCategoryAndNameAndLLRLowerThanPrice(int idUtente, double lat, double lon, double r, int idCategoria, double prezzoMax, String nomeDownCase)
     {
@@ -772,7 +772,7 @@ public class objectsQuery {
                 + "WHERE oggetto.prezzo <= " + prezzoMax + " AND oggetto.categoria=" + idCategoria
                 + " AND oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome di negozi data una determinata longitudine, latitudine ed un raggio di ricerca
@@ -784,7 +784,7 @@ public class objectsQuery {
      * @param prezzoMin
      * @param prezzoMax
      * @param nomeDownCase
-     * @return String: lista di oggetti 
+     * @return String: lista di oggetti
      */
     public static String selectObjectByCategoryAndNameAndLLRAndBetweenPrices(int idUtente, double lat, double lon, double r, int idCategoria, double prezzoMin, double prezzoMax, String nomeDownCase)
     {
@@ -794,7 +794,7 @@ public class objectsQuery {
                 + "WHERE oggetto.prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND oggetto.categoria=" + idCategoria
                 + " AND oggetto.nomeDownCase LIKE '%" + nomeDownCase + "%';";
     }
-    
+
     /*---2*/
     /**
      * @author fbrug
@@ -807,7 +807,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti di una categoria
@@ -819,7 +819,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria = " + idCategoria + " AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti di una categoria con una certa stringa nel nome
@@ -832,7 +832,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo
@@ -844,7 +844,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo >= " + prezzoMin + " AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo
@@ -856,7 +856,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo <= " + prezzoMax + " AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo
@@ -869,7 +869,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria
@@ -882,7 +882,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo >= " + prezzoMin + " AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria
@@ -895,7 +895,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo <= " + prezzoMax + " AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria
@@ -909,7 +909,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome
@@ -922,7 +922,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo >= " + prezzoMin + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome
@@ -935,7 +935,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo <= " + prezzoMax + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome
@@ -949,7 +949,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome
@@ -963,7 +963,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo >= " + prezzoMin + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome
@@ -977,7 +977,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo <= " + prezzoMax + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome
@@ -992,10 +992,10 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
-    
-    
-    
+
+
+
+
     /*---3*/
     /**
      * @author fbrug
@@ -1007,7 +1007,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti di una categoria
@@ -1018,7 +1018,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria = " + idCategoria + " AND oggetto.`dataFineSconto` IS NOT NULL;";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti di una categoria con una certa stringa nel nome
@@ -1030,7 +1030,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo
@@ -1041,7 +1041,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo >= " + prezzoMin + " AND oggetto.`dataFineSconto` IS NOT NULL;";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo
@@ -1052,7 +1052,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo <= " + prezzoMax + " AND oggetto.`dataFineSconto` IS NOT NULL;";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo
@@ -1064,7 +1064,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND oggetto.`dataFineSconto` IS NOT NULL;";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria
@@ -1076,7 +1076,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo >= " + prezzoMin + " AND oggetto.`dataFineSconto` IS NOT NULL;";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria
@@ -1088,7 +1088,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo <= " + prezzoMax + " AND oggetto.`dataFineSconto` IS NOT NULL;";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria
@@ -1101,7 +1101,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND oggetto.`dataFineSconto` IS NOT NULL;";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome
@@ -1113,7 +1113,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo >= " + prezzoMin + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome
@@ -1125,7 +1125,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo <= " + prezzoMax + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome
@@ -1138,7 +1138,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome
@@ -1151,7 +1151,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo >= " + prezzoMin + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome
@@ -1164,7 +1164,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo <= " + prezzoMax + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome
@@ -1178,7 +1178,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.`dataFineSconto` IS NOT NULL;";
     }
-    
+
     /*---4*/
     /**
      * @author fbrug
@@ -1191,7 +1191,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti di una categoria
@@ -1203,7 +1203,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria = " + idCategoria + " AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti di una categoria con una certa stringa nel nome
@@ -1216,7 +1216,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo
@@ -1228,7 +1228,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo >= " + prezzoMin + " AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo
@@ -1240,7 +1240,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo <= " + prezzoMax + " AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo
@@ -1253,7 +1253,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria
@@ -1266,7 +1266,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo >= " + prezzoMin + " AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria
@@ -1279,7 +1279,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo <= " + prezzoMax + " AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria
@@ -1293,7 +1293,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo con una certa stringa nel nome
@@ -1306,7 +1306,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo >= " + prezzoMin + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo con una certa stringa nel nome
@@ -1319,7 +1319,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo <= " + prezzoMax + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo con una certa stringa nel nome
@@ -1333,7 +1333,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo in una certa categoria con una certa stringa nel nome
@@ -1347,7 +1347,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo >= " + prezzoMin + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo massimo in una certa categoria con una certa stringa nel nome
@@ -1361,7 +1361,7 @@ public class objectsQuery {
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo <= " + prezzoMax + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
     }
-    
+
     /**
      * @author fbrug
      * Ottenere la lista di oggetti con un certo prezzo minimo ed un certo prezzo massimo in una certa categoria con una certa stringa nel nome
@@ -1375,5 +1375,16 @@ public class objectsQuery {
     public static String selectObjectByCategoryAndNameAndBetweenPricesAndPISAndEndDiscount(int idCategoria, String nomeDownCase, double prezzoMin, double prezzoMax, int ritiroInNegozio)
     {
         return "SELECT * FROM oggetto WHERE categoria=" + idCategoria + " AND prezzo BETWEEN " + prezzoMin + " AND " + prezzoMax + " AND nomeDownCase LIKE '%" + nomeDownCase + "%' AND oggetto.`dataFineSconto` IS NOT NULL AND oggetto.ritiroInNegozio = " + ritiroInNegozio + ";";
+    }
+
+    /**
+     * @author fbrug
+     * Ottenere la lista di oggetti che contengono una stringa nel nome
+     * @param nomeDownCase
+     * @return String: elenco oggetti
+     */
+    public static String selectAllObjectNames()
+    {
+        return "SELECT DISTINCT(Oggetto.nome) FROM Oggetto;";
     }
 }

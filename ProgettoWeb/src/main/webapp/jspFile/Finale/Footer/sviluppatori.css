@@ -32,9 +32,9 @@ and open the template in the editor.
     margin: 0.5em;
 }
 
-/*div .card{
-    border: none;
-}*/
+div .card{
+    margin-bottom: 1em;
+}
 
 .card-subtitle{
     font-style: italic;
