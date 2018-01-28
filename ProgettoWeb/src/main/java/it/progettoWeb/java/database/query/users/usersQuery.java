@@ -855,4 +855,10 @@ public class usersQuery {
     {
         return "UPDATE utente SET valutazione=" + value + " WHERE id=" + idUtente + ";";
     }
+
+    public static String insertObjectInCartFistTime(int idU, int quant, String idO) {
+        return "INSERT INTO progettoweb.ordine (idOggetto, idNegozio, idUtente, stato, quantita, codiceTracking, dataArrivoPresunta, dataOrdine, prezzoDiAcquisto) " +
+                "SELECT oggetto.id , oggetto.idNegozio , "+idU+", 0, "+quant+", NULL, NULL, CURRENT_TIMESTAMP, (oggetto.prezzo - (oggetto.prezzo*oggetto.sconto)/100) " +
+                "FROM oggetto WHERE oggetto.id ='"+idO+"';";
+    }
 }
