@@ -416,9 +416,11 @@ public class UserController extends HttpServlet {
 
                 try
                 {
+                    log("sono nel ty catch");
                     ModelloListeOrdine carrelloInSessione = (ModelloListeOrdine)request.getSession().getAttribute("carrelloSessione");
                     ModelloListeOrdine carrelloInDB = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 0));
-
+                    log("Varibili inizializzate");
+                    
                     for(ModelloOrdine ordineInCU : carrelloInDB.getList())
                         for(Iterator<ModelloOrdine> iterator = carrelloInSessione.getList().iterator(); iterator.hasNext();)
                         {
@@ -434,21 +436,44 @@ public class UserController extends HttpServlet {
                                 iterator.remove();
                             }
                         }
-                    
+                    log("Inserimento eventuali nuove quantità degli oggetti in sessione");
                     int idUtente = utente.getId();
-                    int idOrdine = carrelloInDB.get(0).getIdOrdine();
+                    int idOrdine;
+                    if(carrelloInDB.getSize() > 0){
+                        idOrdine = carrelloInDB.get(0).getIdOrdine();
+                    }
+                    else
+                    {
+                        if(carrelloInSessione.getSize() > 0){
+                            ModelloOrdine primoOggetto = carrelloInSessione.get(0);
+                            primoOggetto.setIdUtente(idUtente);
+                            daoOrdine.insertObjectInCartFirstTime(primoOggetto);
+                            
+                            primoOggetto = daoOrdine.selectOrdersComplete(utente.getId(), 0).get(0);
+                            idOrdine = primoOggetto.getIdOrdine();
+                            List<ModelloOrdine> carrelloSenzaIlPrimoOggetto = carrelloInSessione.getList();
+                            carrelloSenzaIlPrimoOggetto.remove(0);
+                            carrelloInSessione = new ModelloListeOrdine(carrelloSenzaIlPrimoOggetto);
+                        } else {
+                            idOrdine = 0; //Il for più sotto non verrà eseguito neanche una volta
+                        }
+                    }
+                                
                     for(ModelloOrdine ordineInCIS : carrelloInSessione.getList())
                     {
                         ordineInCIS.setIdUtente(idUtente);
                         ordineInCIS.setIdOrdine(idOrdine);
                         daoOrdine.insertObjectInCart(ordineInCIS);
                     }
+                    
+                    log("Aggiungo nuovi oggetti che erano nel carrello in sessione");
 
                     carrelloInSessione = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(utente.getId(), 0));
                     request.getSession().removeAttribute("carrelloSessione");
                     request.getSession().setAttribute("carrelloSessione", carrelloInSessione);
                 }
                 catch (Exception e) {
+                    log("ERRORE: " + e.toString());
                     System.out.println("error message = " + e.toString());
                     forward = ERROR_PAGE;
                     redirect = false;
