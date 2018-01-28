@@ -755,7 +755,7 @@ public class usersQuery {
      */
     public static String buyOrNotFromSeller(int idV, int idU){
         return "SELECT COUNT(*) as counter FROM negozio WHERE idVenditore="+idV+" AND id IN (SELECT idNegozio FROM ordine "
-                + "WHERE ordine.idUtente ="+idU+" AND ordine.stato=4)";
+                + "WHERE ordine.idUtente ="+idU+" AND ordine.stato=3)";
     }
 
     /**
@@ -794,7 +794,7 @@ public class usersQuery {
     public static String buyOrNotObject(String idO, int idU){
         return "SELECT COUNT(idOggetto) AS counter FROM ordine WHERE "
                 + "ordine.idOggetto ='"+idO+"' AND "
-                + "ordine.idUtente ="+idU+" AND ordine.stato=4;";
+                + "ordine.idUtente ="+idU+" AND ordine.stato=3;";
     }
     
     /**
@@ -807,7 +807,7 @@ public class usersQuery {
     public static String buyOrNotFromStore(int idN, int idU){
         return "SELECT COUNT(idNegozio) AS counter FROM ordine "
                 + "WHERE ordine.idNegozio ="+idN+" AND "
-                + "ordine.idUtente ="+idU+" AND ordine.stato=4;";
+                + "ordine.idUtente ="+idU+" AND ordine.stato=3;";
     }
 
     /**

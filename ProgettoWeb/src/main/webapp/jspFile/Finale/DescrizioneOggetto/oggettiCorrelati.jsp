@@ -41,7 +41,7 @@
                                     <img class="imgCard" src="${listaImmaginiOggetto.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: cover;">
                                     <div class="container">
                                         <h4><b><c:out value="${listaOggetti.get(i).getNome()}" /></b></h4>
-                                        <p>Prezzo: <c:out value="${listaOggetti.get(i).getPrezzo()}" /></p>
+                                        <p>Prezzo: <c:out value="${listaOggetti.get(i).getPrezzo()}" />&euro;</p>
                                     </div>
                                 </a>
                             </div>
@@ -53,7 +53,7 @@
                                     <img class="imgCard" src="${listaImmaginiOggetto.get(i+1).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: cover;">
                                     <div class="container">
                                         <h4><b><c:out value="${listaOggetti.get(i+1).getNome()}" /></b></h4>
-                                        <p>Prezzo: <c:out value="${listaOggetti.get(i+1).getPrezzo()}" /></p>
+                                        <p>Prezzo: <c:out value="${listaOggetti.get(i+1).getPrezzo()}" />&euro;</p>
                                     </div>
                                 </a>
                             </div>
@@ -71,7 +71,7 @@
                                             <img class="imgCard" src="${listaImmaginiOggetto.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: cover;">
                                             <div class="container">
                                                 <h4><b><c:out value="${listaOggetti.get(i).getNome()}" /></b></h4>
-                                                <p>Prezzo: <c:out value="${listaOggetti.get(i).getPrezzo()}" /></p>
+                                                <p>Prezzo: <c:out value="${listaOggetti.get(i).getPrezzo()}" />&euro;</p>
                                             </div>
                                         </a>
                                     </div>
@@ -87,7 +87,7 @@
                                             <img class="imgCard" src="${listaImmaginiOggetto.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: cover;">
                                             <div class="container">
                                                 <h4><b><c:out value="${listaOggetti.get(i).getNome()}" /></b></h4>
-                                                <p>Prezzo: <c:out value="${listaOggetti.get(i).getPrezzo()}" /></p>
+                                                <p>Prezzo: <c:out value="${listaOggetti.get(i).getPrezzo()}" />&euro;</p>
                                             </div>
                                         </a>
                                     </div>
@@ -99,7 +99,7 @@
                                             <img class="imgCard" src="${listaImmaginiOggetto.get(i+1).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: cover;">
                                             <div class="container">
                                                 <h4><b><c:out value="${listaOggetti.get(i+1).getNome()}" /></b></h4>
-                                                <p>Prezzo: <c:out value="${listaOggetti.get(i+1).getPrezzo()}" /></p>
+                                                <p>Prezzo: <c:out value="${listaOggetti.get(i+1).getPrezzo()}" />&euro;</p>
                                             </div>
                                         </a>
                                     </div>

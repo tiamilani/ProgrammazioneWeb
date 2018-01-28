@@ -196,6 +196,9 @@ public class UserController extends HttpServlet {
             ModelloNegozio negozio = negozioIndirizzoImmagine.getL();
             ModelloImmagineNegozio immagine = negozioIndirizzoImmagine.getR();
             ModelloIndirizzo indirizzo = negozioIndirizzoImmagine.getC();
+            
+            ModelloUtente venditore = new ModelloUtente();
+            venditore = daoUtente.getUserById(negozio.getIdVenditore());
 
             pair<List<ModelloRecensioneNegozio>, List<ModelloUtente>> recensioniNegozi;
             recensioniNegozi = daoRecensioneN.selectReviewImagesUserByStore(idNegozio);
@@ -219,6 +222,7 @@ public class UserController extends HttpServlet {
 
             request.setAttribute("canUploadImages", false);
             request.setAttribute("negozio", negozio);
+            request.setAttribute("venditore", venditore);
             request.setAttribute("listaImmagini", immagini);
             request.setAttribute("immagine", immagine);
             request.setAttribute("indirizzo", indirizzo);
