@@ -95,7 +95,6 @@
                             </select>
                             <select id="expCard_Year" name="expCard_Year" required>
                                 <option value="">yyyy</option>
-                                <option value="17">2017</option>
                                 <option value="18">2018</option>
                                 <option value="19">2019</option>
                                 <option value="20">2020</option>

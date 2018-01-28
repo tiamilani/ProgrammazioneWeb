@@ -120,7 +120,7 @@
                                         <img style="width: 100px; height: 100px; object-fit: cover;" src="<c:out value="${object.getR().getSrc()}"/>" alt="img">
                                     </div>
                                     
-                                    <div class="col-4">
+                                    <div class="col-4 ">
                                         <!-- Nome prodotto -->
                                         <div class="row">
                                             <c:out value="${object.getL().getNome()}" />
@@ -139,7 +139,7 @@
                                     </div>
                                     
                                     <!-- Selezione metodo di spedizione -->
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <select id="${iterator}" onchange="changeDescription(this.id)">
                                             <c:set var="iterator2" value="0"/>
                                             <c:forEach items="${spedizioniOggetto}" var="spedizione">
@@ -154,10 +154,10 @@
                                                 </option>
                                             </c:if>
                                         </select>
-                                    </div>
-                                    
-                                    <!-- Descrizione metodo spedizione -->
-                                    <div class="col-2">
+                                        
+                                        <hr size="3" width="100%" align="left"/>
+                                        
+                                        <!-- Descrizione metodo spedizione -->
                                         <p id="pDesc${iterator}"/>
                                     </div>
                                 </div>

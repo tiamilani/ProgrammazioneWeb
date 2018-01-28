@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package it.progettoWeb.java.Controller.Oggetto;
 
 import it.progettoWeb.java.database.Dao.Negozio.DaoNegozio;
@@ -195,7 +190,7 @@ public class objectSelectedController extends HttpServlet {
                     }
                 
                 if(!alreadyInCart)
-                {
+                {                    
                     ModelloOrdine addElemento = new ModelloOrdine();
                     
                     addElemento.setStato(0);

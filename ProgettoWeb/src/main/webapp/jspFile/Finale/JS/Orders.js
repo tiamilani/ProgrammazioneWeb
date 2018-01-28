@@ -126,7 +126,7 @@ function changeDescription(id)
     if(nome === "RitiroInNegozio")
     {
         document.getElementById("DCP"+firstIndex).innerHTML = "Data consegna prevista QUANDO CHE TI VOL";
-        document.getElementById("pDesc"+firstIndex).innerHTML = "Ritiro in negozio<br>Il ritiro in negozio non comporta<br> nessun costo di spese di spedizione.";
+        document.getElementById("pDesc"+firstIndex).innerHTML = "<b>Ritiro in negozio</b><br>Il ritiro in negozio non comporta nessun costo di spese di spedizione.";
         
         var prezzoOgg = document.getElementById(index).getAttribute("data-prezzoOgg");
         var quantitaOgg = document.getElementById(index).getAttribute("data-quantitaOgg");
@@ -143,8 +143,9 @@ function changeDescription(id)
 
         document.getElementById("DCP"+firstIndex).innerHTML = "Data consegna prevista " + addDays(parseInt(tempo));
 
-        document.getElementById("pDesc"+firstIndex).innerHTML = nome + "<br>Prezzo: &euro; " + prezzo+
-                "<br>Corriere: " + corriere + "<br>Tempo stimato di consegna: " + tempo + " giorni";
+        document.getElementById("pDesc"+firstIndex).innerHTML = "<b>" + nome + "</b><br>Prezzo: &euro; " + prezzo+
+                "<br>Corriere: " + corriere + "<br>Tempo stimato di consegna: " + tempo + " giorni"+
+                "<br>Numero massimo di oggetti per spedizione: " + nMax;
 
         newSubTot = (prezzoOgg * quantitaOgg + (Math.ceil(quantitaOgg / nMax) * prezzo));
     }
