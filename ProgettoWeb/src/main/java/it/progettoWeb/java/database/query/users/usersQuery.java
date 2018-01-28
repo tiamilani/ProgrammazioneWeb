@@ -515,6 +515,26 @@ public class usersQuery {
     public static String selectFirstPhotoObject(String idO){
         return "SELECT * FROM imageoggetto WHERE imageoggetto.idO ='"+idO+"' LIMIT 1;";
     }
+    
+    public static String addImageToObject(String idO, String src)
+    {
+        return "INSERT INTO imageoggetto (src,idO) values ('" + src + "','" + idO + "');";
+    }
+    
+    public static String remImageToObject(String idO, String src)
+    {
+        return "DELETE FROM imageoggetto WHERE src='" + src + "' AND idO='" + idO + "';";
+    }
+    
+    public static String remImageToReview(int idR, String src)
+    {
+        return "DELETE FROM imageRecensione WHERE src='" + src + "' AND idR=" + idR + ";";
+    }
+    
+    public static String addImageToReview(int idR, String src)
+    {
+        return "INSERT INTO imageRecensione (src,idR) values ('" + src + "'," + idR + ");";
+    }
 
     /**
      * @author Andrea

@@ -119,4 +119,18 @@ public class DaoImmagineRecensione {
         
         return img;
     }
+    
+    public void remImageToReview(ModelloImmagineRecensione imageReview) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(usersQuery.remImageToReview(imageReview.getIdR(), imageReview.getSrc()));
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) { System.out.println(e); }
+    }
+    
+    public void addImageToReview(ModelloImmagineRecensione imageReview) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(usersQuery.addImageToReview(imageReview.getIdR(), imageReview.getSrc()));
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) { System.out.println(e); }
+    }
 }

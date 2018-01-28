@@ -105,14 +105,16 @@ public class InserisciRecensioneController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-        String forward = "/jspFile/Finale/Index/index.jsp";
+        String forward = "";
         String action = request.getParameter("action");
         
         if(action.equals("Oggetto")) {
             int idUtente = Integer.parseInt(request.getParameter("utenteReview"));
             String idOggetto = request.getParameter("oggettoReview");
-            String testoRecensione = request.getParameter("testoReview");
+            String testoRecensione = request.getParameter("testoReview").replace('\'', ' ');
             int valutazioneRecensione = Integer.parseInt(request.getParameter("valutazioneReview"));
+            
+            forward = "/objectSelectedController?idOggetto=" + idOggetto;
             
             ModelloRecensioneOggetto recensioneOggetto = new ModelloRecensioneOggetto();
             recensioneOggetto.setIdUtente(idUtente);
@@ -122,6 +124,7 @@ public class InserisciRecensioneController extends HttpServlet {
             recensioneOggetto.setValutazione(valutazioneRecensione);
             daoRecensioneOggetto.addReviewToObject(recensioneOggetto);
             
+            imageSrcs.clear();
             if(getImages(request, response)) {
                 for (String src : imageSrcs) {
                     ModelloImmagineRecensione immagineRecensione = new ModelloImmagineRecensione();
@@ -138,8 +141,10 @@ public class InserisciRecensioneController extends HttpServlet {
         else if(action.equals("Negozio")) {
             int idUtente = Integer.parseInt(request.getParameter("utenteReview"));
             int idNegozio = Integer.parseInt(request.getParameter("negozioReview"));
-            String testoRecensione = request.getParameter("testoReview");
+            String testoRecensione = request.getParameter("testoReview").replace('\'', ' ');
             int valutazioneRecensione = Integer.parseInt(request.getParameter("valutazioneReview"));
+            
+            forward = "/UserController?action=DescrizioneNegozio&idNegozio=" + idNegozio;
             
             ModelloRecensioneNegozio recensioneNegozio = new ModelloRecensioneNegozio();
             recensioneNegozio.setIdUtente(idUtente);
@@ -156,8 +161,10 @@ public class InserisciRecensioneController extends HttpServlet {
         else if(action.equals("Venditore")) {
             int idUtente = Integer.parseInt(request.getParameter("utenteReview"));
             int idVenditore = Integer.parseInt(request.getParameter("venditoreReview"));
-            String testoRecensione = request.getParameter("testoReview");
+            String testoRecensione = request.getParameter("testoReview").replace('\'', ' ');
             int valutazioneRecensione = Integer.parseInt(request.getParameter("valutazioneReview"));
+            
+            forward = "/UserController?action=DescrizioneVenditore&idUtente=" + idVenditore;
             
             ModelloRecensioneVenditore recensioneVenditore = new ModelloRecensioneVenditore();
             recensioneVenditore.setIdUtente(idUtente);
