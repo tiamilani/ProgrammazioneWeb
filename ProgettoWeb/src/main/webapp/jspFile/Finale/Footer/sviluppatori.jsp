@@ -36,7 +36,7 @@
                             <div class="card-body">
                                 <h4 class="card-title text-center"> Andrea Fadi</h4>
                                 <img class="rounded-circle img-thumbnail d-block mx-auto" src="../Img/Andrea_Fadi.jpg" alt="Andrea Fadi">
-                                <h6 class="card-subtitle text-muted text-center">Full Stack Developer &AMP; Web Designer</h6>
+                                <h6 class="card-subtitle text-muted text-center" id="myInfo">Full Stack Developer &AMP; Web Designer</h6>
                             </div>
                             <div class="card-social">
                                     <a href="http://www.facebook.com/iAndrea96?fref=ts" class="fa fa-facebook"></a>
@@ -96,12 +96,20 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div id="mapObject" style="height: 400px; width: 600px"></div>
+                    <div class="col-12" id="mapObject" style="height: 400px; width: 80%"></div>
                 </div>
             </div>
 
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATC6NxeSsKDBncZwJ4aDivvvs6_5iusSc&callback=createMapAboutUs" async defer></script>
             <script type="text/javascript">
+                $('#myInfo')
+                    .mouseover(function() {
+                        $(this).text("JAVA Hater");
+                    })
+                    .mouseout(function() {
+                        $(this).text("Full Stack Developer & Web Designer");
+                    });
+                
                 var myCenter;
                 function createMapAboutUs() {
                     myCenter = new google.maps.LatLng(46.066993034254345, 11.149814128875732);
