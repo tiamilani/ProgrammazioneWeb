@@ -215,8 +215,21 @@ public class objectSelectedController extends HttpServlet {
                     
                     carrello.add(addElemento);
                     
-                    if(idUtente != -1)
-                        daoOrdine.insertObjectInCart(addElemento);
+                    if(idUtente != -1) {
+                        ModelloListeOrdine carrelloInDB = new ModelloListeOrdine(daoOrdine.selectOrdersComplete(idUtente, 0));
+                        if(carrelloInDB.getSize() > 0){
+                            addElemento.setIdOrdine(carrelloInDB.get(0).getIdOrdine());
+                            daoOrdine.insertObjectInCart(addElemento);
+                        }
+                        else
+                        {
+                            if(carrello.getSize() > 0){
+                                ModelloOrdine primoOggetto = carrello.get(0);
+                                primoOggetto.setIdUtente(idUtente);
+                                daoOrdine.insertObjectInCartFirstTime(primoOggetto);
+                            }
+                        }
+                    }
                 }
                 
                 request.getSession().removeAttribute("carrelloSessione");
