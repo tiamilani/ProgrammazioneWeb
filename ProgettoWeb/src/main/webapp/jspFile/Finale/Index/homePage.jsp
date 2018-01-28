@@ -42,6 +42,7 @@
         <div class="container-fluid">
             <%@include file="../alert/alertUserLogin.jsp" %>
             <%@include file="../alert/alertUserRegistration.jsp" %>
+            <%@include file="../alert/alertEmailVerificata.jsp" %>
             <%@include file="../DescrizioneOggetto/oggettiCorrelati.jsp" %>
 
             <div class="row rowListaOggetto">
