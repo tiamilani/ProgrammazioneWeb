@@ -6,13 +6,19 @@
 
 <style>
     .item-left {
+        text-align: left;
         float:left;
         display: block;
+        margin-left: 0;
+        margin-right: auto;
     }
 
     .item-right {
+        text-align: right;
         float:right;
         display: block;
+        margin-right: 0;
+        margin-left: auto;
     }
 
     .button {
@@ -83,10 +89,10 @@
                     </c:if>
                     <p class="lead"/>
                     <div class="row">
-                        <span class="col-4 item-left">Quantità: (Max ${oggetto.getDisponibilita()})</span>
+                        <span class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 item-left">Quantità: (Max ${oggetto.getDisponibilita()})</span>
                         <c:choose>
                             <c:when test="${(oggetto.getDisponibilita() > 0) and (negozio.getAttivo() == 1)}">
-                                <input type="number" id="numNow" name="numNow" class="item-right col-6 form-control" min="1" max="${oggetto.getDisponibilita()}" value="1"/>
+                                <input type="number" id="numNow" name="numNow" style="font-size: 20px; height: auto;" class="item-right col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 form-control" min="1" max="${oggetto.getDisponibilita()}" value="1"/>
                             </c:when>
                             <c:otherwise>
                                 <span class="col-8 item-right text-danger" id="numNow" name="numNow">ESAURITO<br/>NON DISPONIBILE</span>
