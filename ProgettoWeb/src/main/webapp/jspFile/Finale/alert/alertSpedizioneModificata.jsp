@@ -35,6 +35,12 @@
             <strong>Attenzione!</strong> Impossibile eliminare il metodo di spedizione, devi sempre avere almeno 1 metodo di spedizione.
         </div>
     </c:when>
+    <c:when test="${spedizioneModificata == 6}">
+        <div class="alert alert-warning alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Attenzione!</strong> Impossibile eliminare il metodo di spedizione, Hai oggetti con questo metodo di spedizione assegnato.
+        </div>
+    </c:when>
     <c:otherwise>
     </c:otherwise>
 </c:choose>

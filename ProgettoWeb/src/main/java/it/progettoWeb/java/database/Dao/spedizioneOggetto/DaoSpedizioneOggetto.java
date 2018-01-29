@@ -93,4 +93,18 @@ public class DaoSpedizioneOggetto {
         } catch(SQLException e) {
         }
     }
+
+    public boolean exist(int idS, int idNegozio) {
+        List<ModelloSpedizioneOggetto> types = new ArrayList<>();
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(deliveryTypeQuery.exists(idS,idNegozio));
+            while(rs.next())
+                types.add(getModelloFromRs(rs));
+            
+            return types.size() > 0;
+        }
+        catch (SQLException e) { return false; }
+    }
 }

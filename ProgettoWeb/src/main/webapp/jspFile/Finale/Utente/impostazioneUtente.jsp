@@ -59,6 +59,11 @@
                 });
             } );
         </script>
+        <style>
+            table.dataTable > tbody > tr.child ul.dtr-details{
+                width: 100%;
+            }
+        </style>
     </head>
     <body>
         <%--<jsp:useBean id="indirizzi" class="it.progettoWeb.java.database.Model.indirizzo.ModelloListeIndirizzo" scope="request" />--%>

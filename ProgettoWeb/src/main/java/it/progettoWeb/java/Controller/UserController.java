@@ -523,6 +523,7 @@ public class UserController extends HttpServlet {
                 utente.setPassword(request.getParameter("password"));
                 utente.setAvatar("http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png");
                 String confirmPassword = request.getParameter("confirmPassword");
+                utente.setEmailConfermata(false);
 
                 if(!utente.getPassword().equals(confirmPassword)){
                     forward = HOME_PAGE;
