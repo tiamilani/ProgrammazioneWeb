@@ -18,21 +18,21 @@ public class objectSellersQuery {
     /**
      * @author Andrea
      * Ottenere la lista di negozi di un determinato venditore
-     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param idV Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @return String: lista di negozi
      */
-    public static String selectSellerStores(int id){
-        return "SELECT * FROM negozio WHERE idVenditore='"+id+"';";
+    public static String selectSellerStores(int idV){
+        return "SELECT * FROM negozio WHERE idVenditore="+idV+";";
     }
     
     /**
      * @author Andrea
      * Ottenere la lista di oggetti di negozi di un determinato venditore
-     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param idV Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @return String: lista di oggetti
      */
-    public static String selectSellerObjects(int id){
-        return "SELECT oggetto.* FROM oggetto INNER JOIN negozio ON (oggetto.idNegozio = negozio.id) WHERE negozio.idVenditore='"+id+"';";
+    public static String selectSellerObjects(int idV){
+        return "SELECT oggetto.* FROM oggetto INNER JOIN negozio ON (oggetto.idNegozio = negozio.id) WHERE negozio.idVenditore="+idV+";";
     }
     
     /**

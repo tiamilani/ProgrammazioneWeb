@@ -17,236 +17,236 @@ CREATE TABLE utente (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 INSERT INTO utente (id, nome, cognome, mail, password, avatar, valutazione, UtenteType, emailConfermata) VALUES
-(1, 'Ada', 'Buccho', 'AdaBuccho@dayrep.com', '6e6bc4e49dd477ebc98ef4046c067b5f', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 0, b'0'),
-(2, 'Albertino', 'Iadanza', 'AlbertinoIadanza@dayrep.com', 'f94f364c716e32eec69c14b729a3f5c8', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 0, b'0'),
-(3, 'Dionisia', 'Udinesi', 'DionisiaUdinesi@armyspy.com', '9e0639132728ff77f67fbb3ff6c69416', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 0, b'0'),
-(4, 'Michelina', 'Ferri', 'MichelinaFerri@armyspy.com', '467c31bfdeda5e42aaead5b94d00c519', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 0, b'0'),
-(5, 'Alceo', 'Marchesi', 'AlceoMarchesi@dayrep.com', '3d74357f517f0de700f43ddc6e1b2a6c', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 0, b'0'),
-(6, 'Lucia', 'Bergamaschi', 'LuciaBergamaschi@jourrapide.com', 'd30c13ce923d7d21d623fccb786b9067', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 0, b'0'),
-(7, 'Geremia', 'Piccio', 'GeremiaPiccio@rhyta.com', 'f21a5c11186ef434f7720ea7fbda3692', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 0, b'0'),
-(8, 'Ferdinando', 'Pagnotto', 'FerdinandoPagnotto@armyspy.com', '532fe974bba7644764405c7c7cb1ff0a', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 0, b'0'),
-(9, 'Lioba', 'Toscani', 'LiobaToscani@rhyta.com', '03379157c519c9c5630ee9c56fcd4b70', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 0, b'0'),
-(10, 'Cornelia', 'Marchesi', 'CorneliaMarchesi@teleworm.us', '3290ab7d62ab3365da9798c2e67add44', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 0, b'0'),
-(11, 'Giosuè', 'Manfrin', 'GiosueManfrin@teleworm.us', '41ecd13cbbe0644ea49ca004aa095edb', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 0, b'0'),
-(12, 'Orlando', 'Fanucci', 'OrlandoFanucci@rhyta.com', '37c14080544154928163ece630551bb8', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 0, b'0'),
-(13, 'Luigina', 'Greece', 'LuiginaGreece@jourrapide.com', '521d685fb294699f8bcf8791cf8ba6ba', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 0, b'0'),
-(14, 'Fabrizio', 'Lori', 'FabrizioLori@teleworm.us', 'a47815e779ec906388f88b97ceda5de3', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 0, b'0'),
-(15, 'Alina', 'Bianchi', 'AlinaBianchi@jourrapide.com', 'ad77ac29059596441e99adf5cb3b3e5b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 0, b'0'),
-(16, 'Arduino', 'Giordano', 'ArduinoGiordano@teleworm.us', '1a80b9ca099739dd46e6addc43df7bde', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 0, b'0'),
-(17, 'Quintina', 'Mazzanti', 'QuintinaMazzanti@dayrep.com', '56786404262f3d556758fd78dbc1ef5e', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 0, b'0'),
-(18, 'Adelfina', 'Udinese', 'AdelfinaUdinese@dayrep.com', '3880acfef128ad59911b91460511d1ca', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 0, b'0'),
-(19, 'Virginio', 'Padovano', 'VirginioPadovano@teleworm.us', '275168fafc293348b422310092347da2', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 0, b'0'),
-(20, 'Vito', 'Bruno', 'VitoBruno@jourrapide.com', 'b7fa6a9bc0b32acd9332188197b98904', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 0, b'0'),
-(21, 'Marisa', 'Angelo', 'MarisaAngelo@rhyta.com', '6e6bc4e49dd477ebc98ef4046c067b5f', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(22, 'Gilberto', 'Colombo', 'GilbertoColombo@rhyta.com', '7cc0b5e4c574c25994871d71f6e851f9', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(23, 'Secondo', 'Lombardi', 'SecondoLombardi@rhyta.com', 'b5c9d8f8f6af6d68c1082c6ee1ec3f8d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(24, 'Clotilde', 'Angelo', 'ClotildeAngelo@dayrep.com', '8c7357ff8add4fa489b81fb8f33baaac', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(25, 'Elia', 'Lori', 'EliaLori@teleworm.us', '3659099835522993fbe46ea8f4d2c7ad', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(26, 'Danilo', 'Loggia', 'DaniloLoggia@jourrapide.com', '33694be8e51463d9cd007299ae2eb284', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(27, 'Amilcare', 'Pinto', 'AmilcarePinto@jourrapide.com', 'ffbfeb2861b91984153a176a76359dc7', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(28, 'Nilde', 'Calabrese', 'NildeCalabrese@teleworm.us', 'e133b8ced0726260d9b69891e7ffdb8c', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(29, 'Natalina', 'Mancini', 'NatalinaMancini@jourrapide.com', '1e34c8d1cd8d08b74eee267b6930bfec', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(30, 'Albina', 'Giordano', 'AlbinaGiordano@jourrapide.com', '38e45f0ef9f237bcdf73821ae05eb515', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(31, 'Lorenza', 'Nucci', 'LorenzaNucci@rhyta.com', '285a0707b7964bd625942dc76b8adae5', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(32, 'Duilio', 'Romano', 'DuilioRomano@jourrapide.com', 'a73c62dcbb5b549457d5b95162a25db8', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'0'),
-(33, 'Ariosto', 'Rossi', 'AriostoRossi@armyspy.com', '7243b42195d4ccc937cd52dbc64fe743', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(34, 'Giordana', 'Monaldo', 'GiordanaMonaldo@rhyta.com', 'e41044a7e01286bdcfe1cf039f8d937b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(35, 'Jolanda', '', 'JolandaNucci@jourrapide.com', '555a112b7de59aa47392eb14bab29f75', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(36, 'Maddalena', 'Colombo', 'MaddalenaColombo@teleworm.us', '3ef6ce80858e5873226d4d1f5024b7d1', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(37, 'Girolamo', 'Piazza', 'GirolamoPiazza@jourrapide.com', 'e1eeb512ada60e1780b1fdeaaabafe2c', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(38, 'Clemente', 'Colombo', 'ClementeColombo@rhyta.com', 'c6aa9d6669eb25cae616ded1e27ac611', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(39, 'Francesca', 'Udinese', 'FrancescaUdinese@jourrapide.com', 'ad187e8fb500f5f93a97386921a63fd3', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(40, 'Amalia', 'Li', 'AmaliaLiFonti@armyspy.com', '44440bcf8def9bf928285a432241f3ae', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(41, 'Severo', 'Castiglione', 'SeveroCastiglione@armyspy.com', '16e79f409734952019182ad6e98fbc57', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'0'),
-(42, 'Brigida', 'Fiorentino', 'BrigidaFiorentino@armyspy.com', '435a7a50107fa450a9d17789b003caf8', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'0'),
-(43, 'Gaudenzia', 'Pirozzi', 'GaudenziaPirozzi@dayrep.com', '4716af57c1dfef48fc23a2878f1fde05', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(44, 'Rosa', 'Longo', 'RosaLongo@dayrep.com', '05ba0a5adaeeb93bb8f681d4f0b3e9bd', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(45, 'Rebecca', 'Bruno', 'RebeccaBruno@rhyta.com', '801f28278f80b3ab7ce2c95797d0e4f1', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(46, 'Calliope', '', 'CalliopeGallo@teleworm.us', '88b87ccdf505dcb95bc6a61f2b5d51b2', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(47, 'Concordio', 'Folliero', 'ConcordioFolliero@teleworm.us', 'deaeb79d08f088b50cfeef7b18d23fe6', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(48, 'Rocco', 'Pisani', 'RoccoPisani@armyspy.com', '09521f5b150122a7df5e1d826a79525c', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(49, 'Martino', 'Marcelo', 'MartinoMarcelo@jourrapide.com', '59d15a290fd23fd8d08a269bfc6209d2', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(50, 'Alfonsino', 'Greco', 'AlfonsinoGreco@armyspy.com', 'd0b0dc639d1043ad3aa87fa47d8f406b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(51, 'Tarquinia', 'Esposito', 'TarquiniaEsposito@armyspy.com', '3ce8adab2c9c93602103223e61ac16f4', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(52, 'Ileana', 'Romani', 'IleanaRomani@rhyta.com', 'e5f43b8fa5ae47bcff3c094d63ba39c2', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(53, 'Beata', 'Davide', 'BeataDavide@jourrapide.com', '7a997fd7cffe056bb1d6e26428fe3172', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(54, 'Fabiana', '', 'FabianaToscani@armyspy.com', 'fea867e6778b095a0228f437fd7054b5', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(55, 'Achille', 'Fallaci', 'AchilleFallaci@jourrapide.com', '30eab3a13c026e94b81d8c63757c3259', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(56, 'Dina', 'Zito', 'DinaZito@rhyta.com', 'b5291e123e94ed21084a59dd0a1748f8', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(57, 'Artemisia', 'Padovano', 'ArtemisiaPadovano@jourrapide.com', '38b2dbbd67212d5cb73746430893b084', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(58, 'Muzio', 'Pagnotto', 'MuzioPagnotto@teleworm.us', 'e0bda6f0fa7c611e6d04d4f96ea23bf6', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'0'),
-(59, 'Raffaello', 'Ferrari', 'RaffaelloFerrari@jourrapide.com', '74ea67d63183d92e1e24e2bc08f8e22d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(60, 'Rufina', 'Pirozzi', 'RufinaPirozzi@jourrapide.com', '681c034f5cd360f84a6c94305f89389b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(61, 'Clio', 'Onio', 'ClioOnio@jourrapide.com', '5566ae923a8cc9ac09fd314eeab2da63', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(62, 'Annunziata', 'Rossi', 'AnnunziataRossi@jourrapide.com', '50229e8124d5afcbf1a93465a0049ae5', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(63, 'Colombano', 'Loggia', 'ColombanoLoggia@armyspy.com', '47eb9fa0b9f257224eb98220ca0a5d4a', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(64, 'Nino', 'Siciliano', 'NinoSiciliano@teleworm.us', '32f41828ca6f9723079ec89034b96797', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(65, 'Milena', 'Onio', 'MilenaOnio@jourrapide.com', '7ef8da58c1ede2180a0bd4b4714871fb', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(66, 'Antonino', 'Sabbatini', 'AntoninoSabbatini@armyspy.com', '0a752efb5e06f7dd5997dd7bdb775f1f', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(67, 'Roberta', 'Padovesi', 'RobertaPadovesi@jourrapide.com', '533c5fa1b173cf912a7076960fa47191', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(68, 'Ornella', 'Davide', 'OrnellaDavide@teleworm.us', 'f6dbe33acbecc0d3d0ac8861ab777ab7', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(69, 'Renato', 'Calabresi', 'RenatoCalabresi@armyspy.com', '959d7348673295cd20aad8b0b022eb25', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(70, 'Elide', 'Rossi', 'ElideRossi@armyspy.com', '44f7daec252a2d5ce41dc5aaa7cad197', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'0'),
-(71, 'Fosco', 'Pagnotto', 'FoscoPagnotto@dayrep.com', '0bc36114e88b6fca64f073c17107fe20', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(72, 'Piero', 'Lombardi', 'PieroLombardi@armyspy.com', 'e76a2a8eb31e387893b09f44e5f9d883', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(73, 'Ester', 'Calabresi', 'EsterCalabresi@teleworm.us', '84d0688ba9668d3b86573407f5168b0b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(74, 'Cino', 'Greco', 'CinoGreco@teleworm.us', '36cedb3f2bdda0bda6f8dbb1bf18aab1', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(75, 'Natale', 'Li', 'NataleLiFonti@jourrapide.com', '29bb50088161db7784cda38d805b2dbd', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(76, 'Concetta', 'Endrizzi', 'ConcettaEndrizzi@dayrep.com', '5af0608cb4abd7f17b72b5d8cd64cf6b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(77, 'Umberto', 'Russo', 'UmbertoRusso@armyspy.com', '12a516420d172b4adfe1ea4e1ab5d119', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(78, 'Lilla', 'Buccho', 'LillaBuccho@rhyta.com', '067f617f8ca577ba5d74f1c16da33e82', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(79, 'Quartilla', '', 'QuartillaLombardo@armyspy.com', '2e4f46bb788847a56e53f4f7a976dd87', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(80, 'Rodolfo', 'Zetticci', 'RodolfoZetticci@armyspy.com', 'ddb59c5d0f9fc86930952403094ddb55', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(81, 'Artemio', 'Milanesi', 'ArtemioMilanesi@dayrep.com', '71b4475cbbefa829d57f051c0ad4f436', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(82, 'Bonacata', 'Bruno', 'BonacataBruno@dayrep.com', '5ac3ec5c1212b14c9b4c53b5db933245', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(83, 'Rosalia', 'Rizzo', 'RosaliaRizzo@armyspy.com', '84f271bd8ac52db0bbd12cb85b2265e0', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(84, 'Agnese', 'Bellucci', 'AgneseBellucci@rhyta.com', '194eae09bb6bd147fd74c92c645bc168', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(85, 'Editta', 'Marino', 'EdittaMarino@armyspy.com', '2bb4bfe89ce2c0d63559cc9c8596274f', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(86, 'Gianna', 'Fiorentino', 'GiannaFiorentino@dayrep.com', 'c85c7853816d146523dca984c5c3e7cc', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(87, 'Carla', 'Giordano', 'CarlaGiordano@dayrep.com', '4ee4a8ae0c57576d2801c204b3e56465', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(88, 'Lucrezia', 'Colombo', 'LucreziaColombo@dayrep.com', 'c5202b61daac1e57604eedf3b3738f22', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(89, 'Gerardino', 'Monaldo', 'GerardinoMonaldo@dayrep.com', 'ec440fa6f77af41a91dcb85e1bf03d52', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(90, 'Cataldo', 'Pisano', 'CataldoPisano@dayrep.com', '3aa6f8b162d435d467a66611d0f8cd91', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(91, 'Renzo', 'Sal', 'RenzoSal@teleworm.us', 'd8b84c5f225c0edb2b47a2a05ec4de3a', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(92, 'Fiorenzo', 'Loggia', 'FiorenzoLoggia@teleworm.us', '5d93da9676a22342d704f503f63101f2', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(93, 'Rufina', 'Siciliano', 'RufinaSiciliano@rhyta.com', '8b1f531982d394b0f70a5ea6e525b686', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(94, 'Virgilia', 'Capon', 'VirgiliaCapon@dayrep.com', '5b8a1fd243fe08a19a8ce8b4b5943daf', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(95, 'Maddalena', 'Fiorentini', 'MaddalenaFiorentini@jourrapide.com', 'e38739274ec146a37d2d3882d3176c17', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(96, 'Arianna', 'Lombardo', 'AriannaLombardo@rhyta.com', 'd58e25eb339b5c5a1b0348f9bfa4b072', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(97, 'Arcangelo', 'Arcuri', 'ArcangeloArcuri@rhyta.com', '0de6d09547180150ba70d1262634f905', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(98, 'Ippolito', 'Sabbatini', 'IppolitoSabbatini@armyspy.com', '28f681440122cf303c8cd65f6ff9261c', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(99, 'Gioele', 'Cremonesi', 'GioeleCremonesi@teleworm.us', 'fcb9054c5830f0319f81ce66d51bfe93', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'0'),
-(100, 'Lorena', 'Li', 'LorenaLiFonti@armyspy.com', '61249ac1ad1547e7208dd0edd21d9301', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(101, 'Fiorenza', 'Calabrese', 'FiorenzaCalabrese@armyspy.com', '7cf6e1f7254946817675bf03e293f5c7', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(102, 'Quintilia', 'Toscani', 'QuintiliaToscani@dayrep.com', '26e0059b305f2198fd9ff30b16b153c1', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(103, 'Santa', 'Lori', 'SantaLori@dayrep.com', 'eb76e4c3bbeb41f44b7bf17895ba2a98', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(104, 'Alvisa', 'Genovese', 'AlvisaGenovese@dayrep.com', '74c858a0b6592ada1b427f7db608557d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(105, 'Ivan', 'Marino', 'IvanMarino@armyspy.com', 'cef724ea52f1a0c57139994fd558cb81', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(106, 'Ciro', 'Sal', 'CiroSal@jourrapide.com', '6cec19c2702a9653238e86c95e8eb192', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(107, 'Anacleto', 'Calabrese', 'AnacletoCalabrese@dayrep.com', '2d76b223c63fc2a140ba6a9137d42002', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(108, 'Primo', 'Lori', 'PrimoLori@dayrep.com', '79f309974bf392b2c711c73365de15be', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(109, 'Carolina', 'Padovesi', 'CarolinaPadovesi@jourrapide.com', 'c1ec2a718d0ad1eedf04c4faa350ba31', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(110, 'Geronima', 'Siciliano', 'GeronimaSiciliano@jourrapide.com', '4f6495c604afd1c602320fff2e8f5182', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(111, 'Cherubino', 'Fanucci', 'CherubinoFanucci@armyspy.com', 'bb9f8d7cae41bf92d93d23f1b7545124', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(112, 'Abbondio', 'Napolitani', 'AbbondioNapolitani@jourrapide.com', '24bfcbde4cc38e09178cfb17b117e2ed', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(113, 'Dino', 'Folliero', 'DinoFolliero@armyspy.com', '08c28ca4e8a2855a27477b67e4619551', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(114, 'Claudia', 'Bruno', 'ClaudiaBruno@jourrapide.com', '408a59e4b15c6102b077da41f6c66f29', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(115, 'Principio', 'Sabbatini', 'PrincipioSabbatini@teleworm.us', 'aaf82efae126faab6531819328daabec', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(116, 'Marilena', 'Schiavone', 'MarilenaSchiavone@teleworm.us', '28fadb4de624bccdd9c34a946433b38e', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(117, 'Igor', 'Mazzi', 'IgorMazzi@dayrep.com', 'a0aa34c9a1ecbb3bc2eeeb74032d2e24', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(118, 'Vittore', 'Castiglione', 'VittoreCastiglione@rhyta.com', 'edd9a9d9ddc1e77bf4cdedd941f26b3b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(119, 'Affiano', 'Lo', 'AffianoLoDuca@teleworm.us', 'aba8d89a98729da6d33e1712c5b3d070', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'0'),
-(120, 'Alvise', 'Bergamaschi', 'AlviseBergamaschi@armyspy.com', 'bd6d4303dae3182925c6902b812ff596', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(121, 'Guglielmo', 'Manfrin', 'GuglielmoManfrin@teleworm.us', '20cf7074cb4c87e79c5131ad60678ede', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(122, 'Gioacchina', 'Buccho', 'GioacchinaBuccho@rhyta.com', '67dc22d79099a7a71d94f4248c6c187b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(123, 'Palmiro', 'Esposito', 'PalmiroEsposito@teleworm.us', 'bee40cba2156e76818c91d7b7a8aba43', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'0'),
-(124, 'Carisio', 'Milanesi', 'CarisioMilanesi@dayrep.com', 'fe3c1998ca3ed371a651d785fa123fe9', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(125, 'Dionisia', 'Calabresi', 'DionisiaCalabresi@rhyta.com', 'dc4ca38c69d27a5da0e7f2ad807e91c9', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(126, 'Callisto', 'Endrizzi', 'CallistoEndrizzi@armyspy.com', 'a01a89bca29829430fe742fdf282556d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(127, 'Boris', 'Sal', 'BorisSal@jourrapide.com', '21397855f3447f99fd0c033958312db5', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(128, 'Luce', 'Toscano', 'LuceToscano@teleworm.us', 'ab4386ca61d818538c4669efb6aa20bf', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(129, 'Giuseppa', 'Pisani', 'GiuseppaPisani@rhyta.com', '450b853fd2740b0a99a3c6da903551ba', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(130, 'Alida', 'Mancini', 'AlidaMancini@jourrapide.com', '473d81be3d1bf3bb5eb05cd88189d17e', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(131, 'Clementina', 'Padovesi', 'ClementinaPadovesi@rhyta.com', '3f32ec4dbce5cfec26bd1d8342b7cc2d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(132, 'Daniela', 'Bergamaschi', 'DanielaBergamaschi@rhyta.com', '40ae3a44c9c2f0facab7df31a2cff5f2', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(133, 'Aurelio', 'Trentino', 'AurelioTrentino@jourrapide.com', 'ef194c4a6be6e80ea284ca7cb9492e27', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(134, 'Roberto', 'Manna', 'RobertoManna@rhyta.com', '80907d179f480639c8014093448d3a3f', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(135, 'Renato', 'Toscani', 'RenatoToscani@armyspy.com', 'b16f352099d1cd3d093c3a63a9c72774', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(136, 'Consuelo', 'Marchesi', 'ConsueloMarchesi@teleworm.us', '4df732ffd1d437687c790ad0ccf31205', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(137, 'Speranza', 'Arcuri', 'SperanzaArcuri@dayrep.com', '8bc8414fd29e3271f387f45c8c50b48c', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(138, 'Sandra', 'Trevisan', 'SandraTrevisan@armyspy.com', '6251bd99cf3c03d9dfe439b57a620227', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'0'),
-(139, 'Ernesto', 'Sal', 'ErnestoSal@jourrapide.com', '1a1bf4f54eedd8c5042d70af0eb43115', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'0'),
-(140, 'Ciriaco', 'Greece', 'CiriacoGreece@jourrapide.com', '881ab57e6e6e14d2baf3497d9dc19010', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(141, 'Vera', 'Gallo', 'VeraGallo@jourrapide.com', '31e900411beb2fc94461305a013f9d0d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(142, 'Frediana', 'Castiglione', 'FredianaCastiglione@jourrapide.com', '1bd238dc3369bd68a5dd0023e8714d66', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(143, 'Piero', 'Pisano', 'PieroPisano@jourrapide.com', '96dc3ca6016267db69ed207cb540a079', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(144, 'Gennaro', 'Fallaci', 'GennaroFallaci@rhyta.com', 'e688e79f9a30ca316a88c733db5e6ef4', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(145, 'Narciso', 'Costa', 'NarcisoCosta@teleworm.us', 'cb9b38fc6e48566ae3100fcc4bd2fcac', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(146, 'Cassandra', 'Barese', 'CassandraBarese@dayrep.com', '50d955bf8d02c8038e700da8200dcf05', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(147, 'Isidora', 'Genovese', 'IsidoraGenovese@teleworm.us', '60dddabdd7a4c451ad550e89eff533be', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(148, 'Furio', 'Castiglione', 'FurioCastiglione@teleworm.us', '19dc9993e58e133c6632a55681278056', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(149, 'Fioretta', 'Pisano', 'FiorettaPisano@jourrapide.com', '7ed3041ed5dbdb13ecca82fcd8ca8a9d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(150, 'Cora', 'Milanesi', 'CoraMilanesi@dayrep.com', 'ebbd91441f5091f1b1937a44227b2e13', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(151, 'Berenice', 'Marcelo', 'BereniceMarcelo@rhyta.com', '77767154d1a74df9121e844e26ed92a8', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'0'),
-(152, 'Delfio', 'Russo', 'DelfioRusso@rhyta.com', '80adf6dcc91c88b2a70afb1f19d5e987', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(153, 'Chiaffredo', 'Padovesi', 'ChiaffredoPadovesi@armyspy.com', 'b3a54185d84365db8553d1f0f71861cc', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(154, 'Gemma', 'Ferrari', 'GemmaFerrari@teleworm.us', '7b4101a66520557376093cead1b10bcf', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(155, 'Pasqualina', 'Napolitani', 'PasqualinaNapolitani@rhyta.com', '8f2ca606a9344727e786e0d66da1f519', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(156, 'Divo', 'Moretti', 'DivoMoretti@teleworm.us', '659ea30dafb62dcf1dae60f493cd20a6', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(157, 'Ferdinando', 'Longo', 'FerdinandoLongo@armyspy.com', 'd9be2e139c2d89433cbddbe06cfb18ab', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(158, 'Nicla', 'Sal', 'NiclaSal@dayrep.com', 'e2eab9256e5cb68a81768d687be79e7d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'0'),
-(159, 'Bonifacio', 'Lucciano', 'BonifacioLucciano@armyspy.com', '37244a0d86d6144bddd9ae7b3a9deb5d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(160, 'Luigina', 'Iadanza', 'LuiginaIadanza@rhyta.com', '6215f8b03aca9916418a36d2e2b2e2f1', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(161, 'Crescenzo', 'Marino', 'CrescenzoMarino@jourrapide.com', 'f4eff8e6354c1f8fed6ea9768ab4b79b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(162, 'Ennio', 'Palermo', 'EnnioPalermo@jourrapide.com', '4a3eb135191650fb637fb12db0b37446', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(163, 'Merigo', 'Pirozzi', 'MerigoPirozzi@rhyta.com', 'cbbf75abb7845137424fa44cce147c9e', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(164, 'Delma', 'De', 'DelmaDeLuca@rhyta.com', '90d79c06663a965e12f00337ef6ed08f', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'0'),
-(165, 'Delfino', 'Iadanza', 'DelfinoIadanza@rhyta.com', '2fa6d1493a04994dd5f06eb8574740f6', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(166, 'Arnaldo', 'Fiorentino', 'ArnaldoFiorentino@dayrep.com', 'edb8c6f5ca14d79dc774a49703ea6aa8', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'0'),
-(167, 'Itala', 'Greece', 'ItalaGreece@armyspy.com', '2ee208706a716a5d7629a5fa8b15a5fa', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(168, 'Silvana', 'Longo', 'SilvanaLongo@dayrep.com', 'e402c03fd91ccae70dc882db85526d77', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(169, 'Maria', 'Lori', 'MariaLori@rhyta.com', '1ea79b1bdb6a6534d067c108c7a38e04', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(170, 'Beato', 'Pagnotto', 'BeatoPagnotto@rhyta.com', '1eb05f425214e83a4e53895a287b1484', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(171, 'Bartolomeo', 'Ferri', 'BartolomeoFerri@jourrapide.com', 'df6b0e6a2be98610049158eaa85c0675', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'0'),
-(172, 'Maurizia', 'Milanesi', 'MauriziaMilanesi@armyspy.com', 'e540b434733dc5256946bcff9ff553a5', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(173, 'Ornella', 'De', 'OrnellaDeLuca@dayrep.com', '8d3d619cb045cfb9597479327280261d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(174, 'Vittorio', 'Endrizzi', 'VittorioEndrizzi@armyspy.com', 'de1b8fdf0ac83e1177f9b9c30d9e2a15', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(175, 'Ermenegildo', 'Pisani', 'ErmenegildoPisani@rhyta.com', '3bb35871e462c431dbb203e4e904bd92', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(176, 'Cupido', 'Ferri', 'CupidoFerri@teleworm.us', '915945abf765a8de2f896377601157bb', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'0'),
-(177, 'Sabina', '', 'SabinaNapolitani@teleworm.us', '652e238ceeab65da4b260e9a874199d0', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(178, 'Paola', 'Lo', 'PaolaLoDuca@armyspy.com', '2d325c82916d7505af3be44a057dd226', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(179, 'Rosaura', 'Nucci', 'RosauraNucci@teleworm.us', 'c4144c4a6886efc8f82d3a1cd1ce90d5', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(180, 'Agnese', 'Marcelo', 'AgneseMarcelo@dayrep.com', '265fb3c32e9c6757874bf24fb5479a3f', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'0'),
-(181, 'Macario', 'Lo', 'MacarioLoDuca@dayrep.com', '9348d573e59ca538ae12f4f75cf45888', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(182, 'Lealdo', 'Marino', 'LealdoMarino@rhyta.com', 'fc1d3f6cfced93d255eb1ce6be473e18', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(183, 'Paride', 'Pinto', 'ParidePinto@teleworm.us', 'c0faff3023430a87ce58cebe3580fcfd', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(184, 'Fiorenzo', 'Dellucci', 'FiorenzoDellucci@teleworm.us', '4c1c609c13e119ce14176c3e4c86ba3e', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(185, 'Vala', '', 'ValaMilanesi@armyspy.com', '781579f7f0e7dac39649ac4bd9e303f7', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(186, 'Giacinto', 'Buccho', 'GiacintoBuccho@armyspy.com', 'fde460e1c057faa3e6983e6efe79d09d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'0'),
-(187, 'Damiano', 'Udinese', 'DamianoUdinese@rhyta.com', '612aa584356cc4a10b2b2ef2203d795c', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(188, 'Amalio', 'Piccio', 'AmalioPiccio@dayrep.com', 'e514aec1c059ae63f5b168395c30e2e1', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'0'),
-(189, 'Liberio', 'Napolitano', 'LiberioNapolitano@jourrapide.com', '45619a4fcc1c2940a0fe57f92470790b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(190, 'Christian', 'Boni', 'ChristianBoni@jourrapide.com', '0e18f5010e7c334ea0b0dd2f2581a6fb', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(191, 'Ivano', 'Greece', 'IvanoGreece@teleworm.us', '43885349cf5c4e9f7c68f234febc4328', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(192, 'Giuseppe', 'Lo', 'GiuseppeLoDuca@dayrep.com', '8965df2aa06d3e3cbccae41d0e5e546c', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(193, 'Pierino', 'Panicucci', 'PierinoPanicucci@rhyta.com', '672d63172d254c8e896ad56f83eef7b6', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(194, 'Quadrato', 'Angelo', 'QuadratoAngelo@armyspy.com', 'c64b1a0297239ee19e654787548eff7a', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(195, 'Eros', 'Ricci', 'ErosRicci@dayrep.com', 'b53be05ea252fe36de6c9cdf0f5bf0fa', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(196, 'Filippa', 'Rossi', 'FilippaRossi@armyspy.com', 'f5257c966ef88bbd3d345b003d95dead', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(197, 'Simonetta', 'Genovese', 'SimonettaGenovese@dayrep.com', '85e67b8e2d94fefe677e993b7f6cdc9f', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(198, 'Olga', 'Pugliesi', 'OlgaPugliesi@armyspy.com', 'ef795e8fff4751b2f871a246a76e264f', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'0'),
-(199, 'Natascia', 'Ferri', 'NatasciaFerri@dayrep.com', '5f9a030af1a47c9e585beb763b329dea', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(200, 'Pupa', 'Ferri', 'PupaFerri@armyspy.com', '41426a3910027eb4537ef5a6a049a573', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(201, 'Cristian', 'Lombardi', 'CristianLombardi@rhyta.com', '8900b331dca76ceef468027bcb43aab5', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(202, 'Filippa', 'Piccio', 'FilippaPiccio@dayrep.com', 'fe2923b9f8246fca302dd038b0190fe2', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(203, 'Primo', 'Trevisan', 'PrimoTrevisan@dayrep.com', 'ec96c69d318a093cd759b14d4c47a645', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(204, 'Luce', 'Lucchesi', 'LuceLucchesi@armyspy.com', '511e33d61849075702bcf431fbd3a1e1', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(205, 'Quintilio', 'Pinto', 'QuintilioPinto@jourrapide.com', 'fb713a5d4db3f354f43843d72d2e85d2', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(206, 'Galdino', 'Lucciano', 'GaldinoLucciano@teleworm.us', 'dff4664950673637872958ce750a8d90', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(207, 'Adelia', 'Nucci', 'AdeliaNucci@teleworm.us', '92911571f744f2ebc4b80669030b1f67', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(208, 'Chiaffredo', 'Li', 'ChiaffredoLiFonti@jourrapide.com', 'e4950f1066f471259f1b95e9c71d7c55', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(209, 'Costanzo', 'Pisani', 'CostanzoPisani@rhyta.com', '367cff81aaa31cfdebf204424c2a278a', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(210, 'Nicola', 'Lori', 'NicolaLori@teleworm.us', '34b8142b63ebc4eee2ada23665e73570', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(211, 'Cecilia', 'Ferrari', 'CeciliaFerrari@rhyta.com', '0e400c5cb22470ce238a29a1aac4427a', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'0'),
-(212, 'Silvana', 'Schiavone', 'SilvanaSchiavone@teleworm.us', '0fd43f6481b645562ab7dd1c793ed3ec', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'0'),
-(213, 'Morgana', 'Costa', 'MorganaCosta@dayrep.com', '9308a1767ea3ff77421700a9fc7f874f', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(214, 'Abbondanzio', 'Romani', 'AbbondanzioRomani@armyspy.com', '1495b832cd3052d80115fccba42dbc81', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(215, 'Enzo', 'Capon', 'EnzoCapon@jourrapide.com', '4b725a405073a8107987edaa4ef4dfe0', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'0'),
-(216, 'Gino', 'Trentino', 'GinoTrentino@teleworm.us', '5611ef80edca9bc93ed4510bc68fdd63', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(217, 'Alberica', 'Rossi', 'AlbericaRossi@rhyta.com', '542eeeab110c10e761a2f69f568c112b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(218, 'Adalrico', 'Trevisano', 'AdalricoTrevisano@jourrapide.com', '71ec4a53c6a1b505f7c60469ee59414e', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'0'),
-(219, 'Renata', 'Toscani', 'RenataToscani@jourrapide.com', 'a654050918b0e426e7ef45c5457aa805', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'0'),
-(220, 'Paride', 'Panicucci', 'ParidePanicucci@teleworm.us', 'faca68718af835451cc2ac1510abb51a', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'0'),
-(221, 'Teresa', 'Russo', 'TeresaRusso@dayrep.com', '97583c1c40823bb3e046e3c2f12ef1b9', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 2, b'0'),
-(222, 'Nora', 'Baresi', 'NoraBaresi@armyspy.com', '3d46fc494420bd7d2abe9a5f0d8a9740', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 2, b'0'),
-(223, 'Alberica', 'Piccio', 'AlbericaPiccio@armyspy.com', '3986798056d7493654922fb459e608b1', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 2, b'0'),
-(224, 'Marzia', 'Cattaneo', 'MarziaCattaneo@armyspy.com', 'de7240e4144e1d64b8d85b08206f3bb2', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 2, b'0'),
-(225, 'Irene', 'Angelo', 'IreneAngelo@dayrep.com', '4b0b7fae0b051e96f8b4d4448ee7dfc2', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 2, b'0'),
-(226, 'Augusto', 'Cocci', 'AugustoCocci@rhyta.com', '0757010b67d022037b2c52f395abe149', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 2, b'0'),
-(227, 'Ennio', 'Genovesi', 'EnnioGenovesi@armyspy.com', '6797efa8498eba1247b2f4a6bb941bb9', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 2, b'0'),
-(228, 'Quirino', 'Udinese', 'QuirinoUdinese@jourrapide.com', '416c9b8c28d59e1df8f6afea11c8c7bf', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 2, b'0'),
-(229, 'Cristian', 'Dellucci', 'CristianDellucci@teleworm.us', '5d2bc6b3d480e6be4aeaa2dc2af9c0f9', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 2, b'0'),
-(230, 'Leo', 'Milano', 'LeoMilano@teleworm.us', 'e8bc7f2643c74894c4f111c75c8beaa9', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 2, b'0');
+(1, 'Ada', 'Buccho', 'AdaBuccho@dayrep.com', '6e6bc4e49dd477ebc98ef4046c067b5f', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 0, b'1'),
+(2, 'Albertino', 'Iadanza', 'AlbertinoIadanza@dayrep.com', 'f94f364c716e32eec69c14b729a3f5c8', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 0, b'1'),
+(3, 'Dionisia', 'Udinesi', 'DionisiaUdinesi@armyspy.com', '9e0639132728ff77f67fbb3ff6c69416', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 0, b'1'),
+(4, 'Michelina', 'Ferri', 'MichelinaFerri@armyspy.com', '467c31bfdeda5e42aaead5b94d00c519', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 0, b'1'),
+(5, 'Alceo', 'Marchesi', 'AlceoMarchesi@dayrep.com', '3d74357f517f0de700f43ddc6e1b2a6c', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 0, b'1'),
+(6, 'Lucia', 'Bergamaschi', 'LuciaBergamaschi@jourrapide.com', 'd30c13ce923d7d21d623fccb786b9067', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 0, b'1'),
+(7, 'Geremia', 'Piccio', 'GeremiaPiccio@rhyta.com', 'f21a5c11186ef434f7720ea7fbda3692', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 0, b'1'),
+(8, 'Ferdinando', 'Pagnotto', 'FerdinandoPagnotto@armyspy.com', '532fe974bba7644764405c7c7cb1ff0a', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 0, b'1'),
+(9, 'Lioba', 'Toscani', 'LiobaToscani@rhyta.com', '03379157c519c9c5630ee9c56fcd4b70', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 0, b'1'),
+(10, 'Cornelia', 'Marchesi', 'CorneliaMarchesi@teleworm.us', '3290ab7d62ab3365da9798c2e67add44', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 0, b'1'),
+(11, 'Giosuè', 'Manfrin', 'GiosueManfrin@teleworm.us', '41ecd13cbbe0644ea49ca004aa095edb', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 0, b'1'),
+(12, 'Orlando', 'Fanucci', 'OrlandoFanucci@rhyta.com', '37c14080544154928163ece630551bb8', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 0, b'1'),
+(13, 'Luigina', 'Greece', 'LuiginaGreece@jourrapide.com', '521d685fb294699f8bcf8791cf8ba6ba', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 0, b'1'),
+(14, 'Fabrizio', 'Lori', 'FabrizioLori@teleworm.us', 'a47815e779ec906388f88b97ceda5de3', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 0, b'1'),
+(15, 'Alina', 'Bianchi', 'AlinaBianchi@jourrapide.com', 'ad77ac29059596441e99adf5cb3b3e5b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 0, b'1'),
+(16, 'Arduino', 'Giordano', 'ArduinoGiordano@teleworm.us', '1a80b9ca099739dd46e6addc43df7bde', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 0, b'1'),
+(17, 'Quintina', 'Mazzanti', 'QuintinaMazzanti@dayrep.com', '56786404262f3d556758fd78dbc1ef5e', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 0, b'1'),
+(18, 'Adelfina', 'Udinese', 'AdelfinaUdinese@dayrep.com', '3880acfef128ad59911b91460511d1ca', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 0, b'1'),
+(19, 'Virginio', 'Padovano', 'VirginioPadovano@teleworm.us', '275168fafc293348b422310092347da2', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 0, b'1'),
+(20, 'Vito', 'Bruno', 'VitoBruno@jourrapide.com', 'b7fa6a9bc0b32acd9332188197b98904', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 0, b'1'),
+(21, 'Marisa', 'Angelo', 'MarisaAngelo@rhyta.com', '6e6bc4e49dd477ebc98ef4046c067b5f', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(22, 'Gilberto', 'Colombo', 'GilbertoColombo@rhyta.com', '7cc0b5e4c574c25994871d71f6e851f9', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(23, 'Secondo', 'Lombardi', 'SecondoLombardi@rhyta.com', 'b5c9d8f8f6af6d68c1082c6ee1ec3f8d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(24, 'Clotilde', 'Angelo', 'ClotildeAngelo@dayrep.com', '8c7357ff8add4fa489b81fb8f33baaac', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(25, 'Elia', 'Lori', 'EliaLori@teleworm.us', '3659099835522993fbe46ea8f4d2c7ad', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(26, 'Danilo', 'Loggia', 'DaniloLoggia@jourrapide.com', '33694be8e51463d9cd007299ae2eb284', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(27, 'Amilcare', 'Pinto', 'AmilcarePinto@jourrapide.com', 'ffbfeb2861b91984153a176a76359dc7', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(28, 'Nilde', 'Calabrese', 'NildeCalabrese@teleworm.us', 'e133b8ced0726260d9b69891e7ffdb8c', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(29, 'Natalina', 'Mancini', 'NatalinaMancini@jourrapide.com', '1e34c8d1cd8d08b74eee267b6930bfec', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(30, 'Albina', 'Giordano', 'AlbinaGiordano@jourrapide.com', '38e45f0ef9f237bcdf73821ae05eb515', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(31, 'Lorenza', 'Nucci', 'LorenzaNucci@rhyta.com', '285a0707b7964bd625942dc76b8adae5', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(32, 'Duilio', 'Romano', 'DuilioRomano@jourrapide.com', 'a73c62dcbb5b549457d5b95162a25db8', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'1'),
+(33, 'Ariosto', 'Rossi', 'AriostoRossi@armyspy.com', '7243b42195d4ccc937cd52dbc64fe743', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(34, 'Giordana', 'Monaldo', 'GiordanaMonaldo@rhyta.com', 'e41044a7e01286bdcfe1cf039f8d937b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(35, 'Jolanda', '', 'JolandaNucci@jourrapide.com', '555a112b7de59aa47392eb14bab29f75', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(36, 'Maddalena', 'Colombo', 'MaddalenaColombo@teleworm.us', '3ef6ce80858e5873226d4d1f5024b7d1', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(37, 'Girolamo', 'Piazza', 'GirolamoPiazza@jourrapide.com', 'e1eeb512ada60e1780b1fdeaaabafe2c', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(38, 'Clemente', 'Colombo', 'ClementeColombo@rhyta.com', 'c6aa9d6669eb25cae616ded1e27ac611', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(39, 'Francesca', 'Udinese', 'FrancescaUdinese@jourrapide.com', 'ad187e8fb500f5f93a97386921a63fd3', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(40, 'Amalia', 'Li', 'AmaliaLiFonti@armyspy.com', '44440bcf8def9bf928285a432241f3ae', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(41, 'Severo', 'Castiglione', 'SeveroCastiglione@armyspy.com', '16e79f409734952019182ad6e98fbc57', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'1'),
+(42, 'Brigida', 'Fiorentino', 'BrigidaFiorentino@armyspy.com', '435a7a50107fa450a9d17789b003caf8', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'1'),
+(43, 'Gaudenzia', 'Pirozzi', 'GaudenziaPirozzi@dayrep.com', '4716af57c1dfef48fc23a2878f1fde05', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(44, 'Rosa', 'Longo', 'RosaLongo@dayrep.com', '05ba0a5adaeeb93bb8f681d4f0b3e9bd', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(45, 'Rebecca', 'Bruno', 'RebeccaBruno@rhyta.com', '801f28278f80b3ab7ce2c95797d0e4f1', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(46, 'Calliope', '', 'CalliopeGallo@teleworm.us', '88b87ccdf505dcb95bc6a61f2b5d51b2', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(47, 'Concordio', 'Folliero', 'ConcordioFolliero@teleworm.us', 'deaeb79d08f088b50cfeef7b18d23fe6', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(48, 'Rocco', 'Pisani', 'RoccoPisani@armyspy.com', '09521f5b150122a7df5e1d826a79525c', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(49, 'Martino', 'Marcelo', 'MartinoMarcelo@jourrapide.com', '59d15a290fd23fd8d08a269bfc6209d2', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(50, 'Alfonsino', 'Greco', 'AlfonsinoGreco@armyspy.com', 'd0b0dc639d1043ad3aa87fa47d8f406b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(51, 'Tarquinia', 'Esposito', 'TarquiniaEsposito@armyspy.com', '3ce8adab2c9c93602103223e61ac16f4', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(52, 'Ileana', 'Romani', 'IleanaRomani@rhyta.com', 'e5f43b8fa5ae47bcff3c094d63ba39c2', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(53, 'Beata', 'Davide', 'BeataDavide@jourrapide.com', '7a997fd7cffe056bb1d6e26428fe3172', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(54, 'Fabiana', '', 'FabianaToscani@armyspy.com', 'fea867e6778b095a0228f437fd7054b5', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(55, 'Achille', 'Fallaci', 'AchilleFallaci@jourrapide.com', '30eab3a13c026e94b81d8c63757c3259', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(56, 'Dina', 'Zito', 'DinaZito@rhyta.com', 'b5291e123e94ed21084a59dd0a1748f8', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(57, 'Artemisia', 'Padovano', 'ArtemisiaPadovano@jourrapide.com', '38b2dbbd67212d5cb73746430893b084', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(58, 'Muzio', 'Pagnotto', 'MuzioPagnotto@teleworm.us', 'e0bda6f0fa7c611e6d04d4f96ea23bf6', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'1'),
+(59, 'Raffaello', 'Ferrari', 'RaffaelloFerrari@jourrapide.com', '74ea67d63183d92e1e24e2bc08f8e22d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(60, 'Rufina', 'Pirozzi', 'RufinaPirozzi@jourrapide.com', '681c034f5cd360f84a6c94305f89389b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(61, 'Clio', 'Onio', 'ClioOnio@jourrapide.com', '5566ae923a8cc9ac09fd314eeab2da63', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(62, 'Annunziata', 'Rossi', 'AnnunziataRossi@jourrapide.com', '50229e8124d5afcbf1a93465a0049ae5', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(63, 'Colombano', 'Loggia', 'ColombanoLoggia@armyspy.com', '47eb9fa0b9f257224eb98220ca0a5d4a', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(64, 'Nino', 'Siciliano', 'NinoSiciliano@teleworm.us', '32f41828ca6f9723079ec89034b96797', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(65, 'Milena', 'Onio', 'MilenaOnio@jourrapide.com', '7ef8da58c1ede2180a0bd4b4714871fb', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(66, 'Antonino', 'Sabbatini', 'AntoninoSabbatini@armyspy.com', '0a752efb5e06f7dd5997dd7bdb775f1f', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(67, 'Roberta', 'Padovesi', 'RobertaPadovesi@jourrapide.com', '533c5fa1b173cf912a7076960fa47191', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(68, 'Ornella', 'Davide', 'OrnellaDavide@teleworm.us', 'f6dbe33acbecc0d3d0ac8861ab777ab7', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(69, 'Renato', 'Calabresi', 'RenatoCalabresi@armyspy.com', '959d7348673295cd20aad8b0b022eb25', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(70, 'Elide', 'Rossi', 'ElideRossi@armyspy.com', '44f7daec252a2d5ce41dc5aaa7cad197', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'1'),
+(71, 'Fosco', 'Pagnotto', 'FoscoPagnotto@dayrep.com', '0bc36114e88b6fca64f073c17107fe20', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(72, 'Piero', 'Lombardi', 'PieroLombardi@armyspy.com', 'e76a2a8eb31e387893b09f44e5f9d883', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(73, 'Ester', 'Calabresi', 'EsterCalabresi@teleworm.us', '84d0688ba9668d3b86573407f5168b0b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(74, 'Cino', 'Greco', 'CinoGreco@teleworm.us', '36cedb3f2bdda0bda6f8dbb1bf18aab1', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(75, 'Natale', 'Li', 'NataleLiFonti@jourrapide.com', '29bb50088161db7784cda38d805b2dbd', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(76, 'Concetta', 'Endrizzi', 'ConcettaEndrizzi@dayrep.com', '5af0608cb4abd7f17b72b5d8cd64cf6b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(77, 'Umberto', 'Russo', 'UmbertoRusso@armyspy.com', '12a516420d172b4adfe1ea4e1ab5d119', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(78, 'Lilla', 'Buccho', 'LillaBuccho@rhyta.com', '067f617f8ca577ba5d74f1c16da33e82', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(79, 'Quartilla', '', 'QuartillaLombardo@armyspy.com', '2e4f46bb788847a56e53f4f7a976dd87', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(80, 'Rodolfo', 'Zetticci', 'RodolfoZetticci@armyspy.com', 'ddb59c5d0f9fc86930952403094ddb55', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(81, 'Artemio', 'Milanesi', 'ArtemioMilanesi@dayrep.com', '71b4475cbbefa829d57f051c0ad4f436', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(82, 'Bonacata', 'Bruno', 'BonacataBruno@dayrep.com', '5ac3ec5c1212b14c9b4c53b5db933245', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(83, 'Rosalia', 'Rizzo', 'RosaliaRizzo@armyspy.com', '84f271bd8ac52db0bbd12cb85b2265e0', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(84, 'Agnese', 'Bellucci', 'AgneseBellucci@rhyta.com', '194eae09bb6bd147fd74c92c645bc168', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(85, 'Editta', 'Marino', 'EdittaMarino@armyspy.com', '2bb4bfe89ce2c0d63559cc9c8596274f', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(86, 'Gianna', 'Fiorentino', 'GiannaFiorentino@dayrep.com', 'c85c7853816d146523dca984c5c3e7cc', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(87, 'Carla', 'Giordano', 'CarlaGiordano@dayrep.com', '4ee4a8ae0c57576d2801c204b3e56465', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(88, 'Lucrezia', 'Colombo', 'LucreziaColombo@dayrep.com', 'c5202b61daac1e57604eedf3b3738f22', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(89, 'Gerardino', 'Monaldo', 'GerardinoMonaldo@dayrep.com', 'ec440fa6f77af41a91dcb85e1bf03d52', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(90, 'Cataldo', 'Pisano', 'CataldoPisano@dayrep.com', '3aa6f8b162d435d467a66611d0f8cd91', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(91, 'Renzo', 'Sal', 'RenzoSal@teleworm.us', 'd8b84c5f225c0edb2b47a2a05ec4de3a', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(92, 'Fiorenzo', 'Loggia', 'FiorenzoLoggia@teleworm.us', '5d93da9676a22342d704f503f63101f2', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(93, 'Rufina', 'Siciliano', 'RufinaSiciliano@rhyta.com', '8b1f531982d394b0f70a5ea6e525b686', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(94, 'Virgilia', 'Capon', 'VirgiliaCapon@dayrep.com', '5b8a1fd243fe08a19a8ce8b4b5943daf', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(95, 'Maddalena', 'Fiorentini', 'MaddalenaFiorentini@jourrapide.com', 'e38739274ec146a37d2d3882d3176c17', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(96, 'Arianna', 'Lombardo', 'AriannaLombardo@rhyta.com', 'd58e25eb339b5c5a1b0348f9bfa4b072', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(97, 'Arcangelo', 'Arcuri', 'ArcangeloArcuri@rhyta.com', '0de6d09547180150ba70d1262634f905', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(98, 'Ippolito', 'Sabbatini', 'IppolitoSabbatini@armyspy.com', '28f681440122cf303c8cd65f6ff9261c', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(99, 'Gioele', 'Cremonesi', 'GioeleCremonesi@teleworm.us', 'fcb9054c5830f0319f81ce66d51bfe93', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'1'),
+(100, 'Lorena', 'Li', 'LorenaLiFonti@armyspy.com', '61249ac1ad1547e7208dd0edd21d9301', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(101, 'Fiorenza', 'Calabrese', 'FiorenzaCalabrese@armyspy.com', '7cf6e1f7254946817675bf03e293f5c7', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(102, 'Quintilia', 'Toscani', 'QuintiliaToscani@dayrep.com', '26e0059b305f2198fd9ff30b16b153c1', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(103, 'Santa', 'Lori', 'SantaLori@dayrep.com', 'eb76e4c3bbeb41f44b7bf17895ba2a98', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(104, 'Alvisa', 'Genovese', 'AlvisaGenovese@dayrep.com', '74c858a0b6592ada1b427f7db608557d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(105, 'Ivan', 'Marino', 'IvanMarino@armyspy.com', 'cef724ea52f1a0c57139994fd558cb81', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(106, 'Ciro', 'Sal', 'CiroSal@jourrapide.com', '6cec19c2702a9653238e86c95e8eb192', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(107, 'Anacleto', 'Calabrese', 'AnacletoCalabrese@dayrep.com', '2d76b223c63fc2a140ba6a9137d42002', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(108, 'Primo', 'Lori', 'PrimoLori@dayrep.com', '79f309974bf392b2c711c73365de15be', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(109, 'Carolina', 'Padovesi', 'CarolinaPadovesi@jourrapide.com', 'c1ec2a718d0ad1eedf04c4faa350ba31', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(110, 'Geronima', 'Siciliano', 'GeronimaSiciliano@jourrapide.com', '4f6495c604afd1c602320fff2e8f5182', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(111, 'Cherubino', 'Fanucci', 'CherubinoFanucci@armyspy.com', 'bb9f8d7cae41bf92d93d23f1b7545124', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(112, 'Abbondio', 'Napolitani', 'AbbondioNapolitani@jourrapide.com', '24bfcbde4cc38e09178cfb17b117e2ed', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(113, 'Dino', 'Folliero', 'DinoFolliero@armyspy.com', '08c28ca4e8a2855a27477b67e4619551', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(114, 'Claudia', 'Bruno', 'ClaudiaBruno@jourrapide.com', '408a59e4b15c6102b077da41f6c66f29', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(115, 'Principio', 'Sabbatini', 'PrincipioSabbatini@teleworm.us', 'aaf82efae126faab6531819328daabec', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(116, 'Marilena', 'Schiavone', 'MarilenaSchiavone@teleworm.us', '28fadb4de624bccdd9c34a946433b38e', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(117, 'Igor', 'Mazzi', 'IgorMazzi@dayrep.com', 'a0aa34c9a1ecbb3bc2eeeb74032d2e24', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(118, 'Vittore', 'Castiglione', 'VittoreCastiglione@rhyta.com', 'edd9a9d9ddc1e77bf4cdedd941f26b3b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(119, 'Affiano', 'Lo', 'AffianoLoDuca@teleworm.us', 'aba8d89a98729da6d33e1712c5b3d070', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'1'),
+(120, 'Alvise', 'Bergamaschi', 'AlviseBergamaschi@armyspy.com', 'bd6d4303dae3182925c6902b812ff596', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(121, 'Guglielmo', 'Manfrin', 'GuglielmoManfrin@teleworm.us', '20cf7074cb4c87e79c5131ad60678ede', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(122, 'Gioacchina', 'Buccho', 'GioacchinaBuccho@rhyta.com', '67dc22d79099a7a71d94f4248c6c187b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(123, 'Palmiro', 'Esposito', 'PalmiroEsposito@teleworm.us', 'bee40cba2156e76818c91d7b7a8aba43', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'1'),
+(124, 'Carisio', 'Milanesi', 'CarisioMilanesi@dayrep.com', 'fe3c1998ca3ed371a651d785fa123fe9', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(125, 'Dionisia', 'Calabresi', 'DionisiaCalabresi@rhyta.com', 'dc4ca38c69d27a5da0e7f2ad807e91c9', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(126, 'Callisto', 'Endrizzi', 'CallistoEndrizzi@armyspy.com', 'a01a89bca29829430fe742fdf282556d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(127, 'Boris', 'Sal', 'BorisSal@jourrapide.com', '21397855f3447f99fd0c033958312db5', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(128, 'Luce', 'Toscano', 'LuceToscano@teleworm.us', 'ab4386ca61d818538c4669efb6aa20bf', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(129, 'Giuseppa', 'Pisani', 'GiuseppaPisani@rhyta.com', '450b853fd2740b0a99a3c6da903551ba', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(130, 'Alida', 'Mancini', 'AlidaMancini@jourrapide.com', '473d81be3d1bf3bb5eb05cd88189d17e', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(131, 'Clementina', 'Padovesi', 'ClementinaPadovesi@rhyta.com', '3f32ec4dbce5cfec26bd1d8342b7cc2d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(132, 'Daniela', 'Bergamaschi', 'DanielaBergamaschi@rhyta.com', '40ae3a44c9c2f0facab7df31a2cff5f2', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(133, 'Aurelio', 'Trentino', 'AurelioTrentino@jourrapide.com', 'ef194c4a6be6e80ea284ca7cb9492e27', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(134, 'Roberto', 'Manna', 'RobertoManna@rhyta.com', '80907d179f480639c8014093448d3a3f', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(135, 'Renato', 'Toscani', 'RenatoToscani@armyspy.com', 'b16f352099d1cd3d093c3a63a9c72774', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(136, 'Consuelo', 'Marchesi', 'ConsueloMarchesi@teleworm.us', '4df732ffd1d437687c790ad0ccf31205', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(137, 'Speranza', 'Arcuri', 'SperanzaArcuri@dayrep.com', '8bc8414fd29e3271f387f45c8c50b48c', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(138, 'Sandra', 'Trevisan', 'SandraTrevisan@armyspy.com', '6251bd99cf3c03d9dfe439b57a620227', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'1'),
+(139, 'Ernesto', 'Sal', 'ErnestoSal@jourrapide.com', '1a1bf4f54eedd8c5042d70af0eb43115', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'1'),
+(140, 'Ciriaco', 'Greece', 'CiriacoGreece@jourrapide.com', '881ab57e6e6e14d2baf3497d9dc19010', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(141, 'Vera', 'Gallo', 'VeraGallo@jourrapide.com', '31e900411beb2fc94461305a013f9d0d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(142, 'Frediana', 'Castiglione', 'FredianaCastiglione@jourrapide.com', '1bd238dc3369bd68a5dd0023e8714d66', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(143, 'Piero', 'Pisano', 'PieroPisano@jourrapide.com', '96dc3ca6016267db69ed207cb540a079', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(144, 'Gennaro', 'Fallaci', 'GennaroFallaci@rhyta.com', 'e688e79f9a30ca316a88c733db5e6ef4', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(145, 'Narciso', 'Costa', 'NarcisoCosta@teleworm.us', 'cb9b38fc6e48566ae3100fcc4bd2fcac', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(146, 'Cassandra', 'Barese', 'CassandraBarese@dayrep.com', '50d955bf8d02c8038e700da8200dcf05', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(147, 'Isidora', 'Genovese', 'IsidoraGenovese@teleworm.us', '60dddabdd7a4c451ad550e89eff533be', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(148, 'Furio', 'Castiglione', 'FurioCastiglione@teleworm.us', '19dc9993e58e133c6632a55681278056', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(149, 'Fioretta', 'Pisano', 'FiorettaPisano@jourrapide.com', '7ed3041ed5dbdb13ecca82fcd8ca8a9d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(150, 'Cora', 'Milanesi', 'CoraMilanesi@dayrep.com', 'ebbd91441f5091f1b1937a44227b2e13', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(151, 'Berenice', 'Marcelo', 'BereniceMarcelo@rhyta.com', '77767154d1a74df9121e844e26ed92a8', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'1'),
+(152, 'Delfio', 'Russo', 'DelfioRusso@rhyta.com', '80adf6dcc91c88b2a70afb1f19d5e987', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(153, 'Chiaffredo', 'Padovesi', 'ChiaffredoPadovesi@armyspy.com', 'b3a54185d84365db8553d1f0f71861cc', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(154, 'Gemma', 'Ferrari', 'GemmaFerrari@teleworm.us', '7b4101a66520557376093cead1b10bcf', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(155, 'Pasqualina', 'Napolitani', 'PasqualinaNapolitani@rhyta.com', '8f2ca606a9344727e786e0d66da1f519', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(156, 'Divo', 'Moretti', 'DivoMoretti@teleworm.us', '659ea30dafb62dcf1dae60f493cd20a6', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(157, 'Ferdinando', 'Longo', 'FerdinandoLongo@armyspy.com', 'd9be2e139c2d89433cbddbe06cfb18ab', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(158, 'Nicla', 'Sal', 'NiclaSal@dayrep.com', 'e2eab9256e5cb68a81768d687be79e7d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'1'),
+(159, 'Bonifacio', 'Lucciano', 'BonifacioLucciano@armyspy.com', '37244a0d86d6144bddd9ae7b3a9deb5d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(160, 'Luigina', 'Iadanza', 'LuiginaIadanza@rhyta.com', '6215f8b03aca9916418a36d2e2b2e2f1', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(161, 'Crescenzo', 'Marino', 'CrescenzoMarino@jourrapide.com', 'f4eff8e6354c1f8fed6ea9768ab4b79b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(162, 'Ennio', 'Palermo', 'EnnioPalermo@jourrapide.com', '4a3eb135191650fb637fb12db0b37446', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(163, 'Merigo', 'Pirozzi', 'MerigoPirozzi@rhyta.com', 'cbbf75abb7845137424fa44cce147c9e', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(164, 'Delma', 'De', 'DelmaDeLuca@rhyta.com', '90d79c06663a965e12f00337ef6ed08f', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'1'),
+(165, 'Delfino', 'Iadanza', 'DelfinoIadanza@rhyta.com', '2fa6d1493a04994dd5f06eb8574740f6', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(166, 'Arnaldo', 'Fiorentino', 'ArnaldoFiorentino@dayrep.com', 'edb8c6f5ca14d79dc774a49703ea6aa8', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'1'),
+(167, 'Itala', 'Greece', 'ItalaGreece@armyspy.com', '2ee208706a716a5d7629a5fa8b15a5fa', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(168, 'Silvana', 'Longo', 'SilvanaLongo@dayrep.com', 'e402c03fd91ccae70dc882db85526d77', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(169, 'Maria', 'Lori', 'MariaLori@rhyta.com', '1ea79b1bdb6a6534d067c108c7a38e04', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(170, 'Beato', 'Pagnotto', 'BeatoPagnotto@rhyta.com', '1eb05f425214e83a4e53895a287b1484', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(171, 'Bartolomeo', 'Ferri', 'BartolomeoFerri@jourrapide.com', 'df6b0e6a2be98610049158eaa85c0675', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'1'),
+(172, 'Maurizia', 'Milanesi', 'MauriziaMilanesi@armyspy.com', 'e540b434733dc5256946bcff9ff553a5', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(173, 'Ornella', 'De', 'OrnellaDeLuca@dayrep.com', '8d3d619cb045cfb9597479327280261d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(174, 'Vittorio', 'Endrizzi', 'VittorioEndrizzi@armyspy.com', 'de1b8fdf0ac83e1177f9b9c30d9e2a15', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(175, 'Ermenegildo', 'Pisani', 'ErmenegildoPisani@rhyta.com', '3bb35871e462c431dbb203e4e904bd92', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(176, 'Cupido', 'Ferri', 'CupidoFerri@teleworm.us', '915945abf765a8de2f896377601157bb', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'1'),
+(177, 'Sabina', '', 'SabinaNapolitani@teleworm.us', '652e238ceeab65da4b260e9a874199d0', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(178, 'Paola', 'Lo', 'PaolaLoDuca@armyspy.com', '2d325c82916d7505af3be44a057dd226', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(179, 'Rosaura', 'Nucci', 'RosauraNucci@teleworm.us', 'c4144c4a6886efc8f82d3a1cd1ce90d5', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(180, 'Agnese', 'Marcelo', 'AgneseMarcelo@dayrep.com', '265fb3c32e9c6757874bf24fb5479a3f', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'1'),
+(181, 'Macario', 'Lo', 'MacarioLoDuca@dayrep.com', '9348d573e59ca538ae12f4f75cf45888', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(182, 'Lealdo', 'Marino', 'LealdoMarino@rhyta.com', 'fc1d3f6cfced93d255eb1ce6be473e18', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(183, 'Paride', 'Pinto', 'ParidePinto@teleworm.us', 'c0faff3023430a87ce58cebe3580fcfd', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(184, 'Fiorenzo', 'Dellucci', 'FiorenzoDellucci@teleworm.us', '4c1c609c13e119ce14176c3e4c86ba3e', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(185, 'Vala', '', 'ValaMilanesi@armyspy.com', '781579f7f0e7dac39649ac4bd9e303f7', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(186, 'Giacinto', 'Buccho', 'GiacintoBuccho@armyspy.com', 'fde460e1c057faa3e6983e6efe79d09d', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'1'),
+(187, 'Damiano', 'Udinese', 'DamianoUdinese@rhyta.com', '612aa584356cc4a10b2b2ef2203d795c', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(188, 'Amalio', 'Piccio', 'AmalioPiccio@dayrep.com', 'e514aec1c059ae63f5b168395c30e2e1', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'1'),
+(189, 'Liberio', 'Napolitano', 'LiberioNapolitano@jourrapide.com', '45619a4fcc1c2940a0fe57f92470790b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(190, 'Christian', 'Boni', 'ChristianBoni@jourrapide.com', '0e18f5010e7c334ea0b0dd2f2581a6fb', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(191, 'Ivano', 'Greece', 'IvanoGreece@teleworm.us', '43885349cf5c4e9f7c68f234febc4328', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(192, 'Giuseppe', 'Lo', 'GiuseppeLoDuca@dayrep.com', '8965df2aa06d3e3cbccae41d0e5e546c', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(193, 'Pierino', 'Panicucci', 'PierinoPanicucci@rhyta.com', '672d63172d254c8e896ad56f83eef7b6', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(194, 'Quadrato', 'Angelo', 'QuadratoAngelo@armyspy.com', 'c64b1a0297239ee19e654787548eff7a', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(195, 'Eros', 'Ricci', 'ErosRicci@dayrep.com', 'b53be05ea252fe36de6c9cdf0f5bf0fa', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(196, 'Filippa', 'Rossi', 'FilippaRossi@armyspy.com', 'f5257c966ef88bbd3d345b003d95dead', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(197, 'Simonetta', 'Genovese', 'SimonettaGenovese@dayrep.com', '85e67b8e2d94fefe677e993b7f6cdc9f', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(198, 'Olga', 'Pugliesi', 'OlgaPugliesi@armyspy.com', 'ef795e8fff4751b2f871a246a76e264f', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'1'),
+(199, 'Natascia', 'Ferri', 'NatasciaFerri@dayrep.com', '5f9a030af1a47c9e585beb763b329dea', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(200, 'Pupa', 'Ferri', 'PupaFerri@armyspy.com', '41426a3910027eb4537ef5a6a049a573', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(201, 'Cristian', 'Lombardi', 'CristianLombardi@rhyta.com', '8900b331dca76ceef468027bcb43aab5', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(202, 'Filippa', 'Piccio', 'FilippaPiccio@dayrep.com', 'fe2923b9f8246fca302dd038b0190fe2', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(203, 'Primo', 'Trevisan', 'PrimoTrevisan@dayrep.com', 'ec96c69d318a093cd759b14d4c47a645', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(204, 'Luce', 'Lucchesi', 'LuceLucchesi@armyspy.com', '511e33d61849075702bcf431fbd3a1e1', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(205, 'Quintilio', 'Pinto', 'QuintilioPinto@jourrapide.com', 'fb713a5d4db3f354f43843d72d2e85d2', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(206, 'Galdino', 'Lucciano', 'GaldinoLucciano@teleworm.us', 'dff4664950673637872958ce750a8d90', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(207, 'Adelia', 'Nucci', 'AdeliaNucci@teleworm.us', '92911571f744f2ebc4b80669030b1f67', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(208, 'Chiaffredo', 'Li', 'ChiaffredoLiFonti@jourrapide.com', 'e4950f1066f471259f1b95e9c71d7c55', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(209, 'Costanzo', 'Pisani', 'CostanzoPisani@rhyta.com', '367cff81aaa31cfdebf204424c2a278a', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(210, 'Nicola', 'Lori', 'NicolaLori@teleworm.us', '34b8142b63ebc4eee2ada23665e73570', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(211, 'Cecilia', 'Ferrari', 'CeciliaFerrari@rhyta.com', '0e400c5cb22470ce238a29a1aac4427a', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 1, b'1'),
+(212, 'Silvana', 'Schiavone', 'SilvanaSchiavone@teleworm.us', '0fd43f6481b645562ab7dd1c793ed3ec', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 1, b'1'),
+(213, 'Morgana', 'Costa', 'MorganaCosta@dayrep.com', '9308a1767ea3ff77421700a9fc7f874f', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(214, 'Abbondanzio', 'Romani', 'AbbondanzioRomani@armyspy.com', '1495b832cd3052d80115fccba42dbc81', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(215, 'Enzo', 'Capon', 'EnzoCapon@jourrapide.com', '4b725a405073a8107987edaa4ef4dfe0', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 1, b'1'),
+(216, 'Gino', 'Trentino', 'GinoTrentino@teleworm.us', '5611ef80edca9bc93ed4510bc68fdd63', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(217, 'Alberica', 'Rossi', 'AlbericaRossi@rhyta.com', '542eeeab110c10e761a2f69f568c112b', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(218, 'Adalrico', 'Trevisano', 'AdalricoTrevisano@jourrapide.com', '71ec4a53c6a1b505f7c60469ee59414e', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 1, b'1'),
+(219, 'Renata', 'Toscani', 'RenataToscani@jourrapide.com', 'a654050918b0e426e7ef45c5457aa805', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 1, b'1'),
+(220, 'Paride', 'Panicucci', 'ParidePanicucci@teleworm.us', 'faca68718af835451cc2ac1510abb51a', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 1, b'1'),
+(221, 'Teresa', 'Russo', 'TeresaRusso@dayrep.com', '97583c1c40823bb3e046e3c2f12ef1b9', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 2, b'1'),
+(222, 'Nora', 'Baresi', 'NoraBaresi@armyspy.com', '3d46fc494420bd7d2abe9a5f0d8a9740', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 2, b'1'),
+(223, 'Alberica', 'Piccio', 'AlbericaPiccio@armyspy.com', '3986798056d7493654922fb459e608b1', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 2, b'1'),
+(224, 'Marzia', 'Cattaneo', 'MarziaCattaneo@armyspy.com', 'de7240e4144e1d64b8d85b08206f3bb2', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 2, b'1'),
+(225, 'Irene', 'Angelo', 'IreneAngelo@dayrep.com', '4b0b7fae0b051e96f8b4d4448ee7dfc2', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 1, 2, b'1'),
+(226, 'Augusto', 'Cocci', 'AugustoCocci@rhyta.com', '0757010b67d022037b2c52f395abe149', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 2, b'1'),
+(227, 'Ennio', 'Genovesi', 'EnnioGenovesi@armyspy.com', '6797efa8498eba1247b2f4a6bb941bb9', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 4, 2, b'1'),
+(228, 'Quirino', 'Udinese', 'QuirinoUdinese@jourrapide.com', '416c9b8c28d59e1df8f6afea11c8c7bf', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 2, 2, b'1'),
+(229, 'Cristian', 'Dellucci', 'CristianDellucci@teleworm.us', '5d2bc6b3d480e6be4aeaa2dc2af9c0f9', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 3, 2, b'1'),
+(230, 'Leo', 'Milano', 'LeoMilano@teleworm.us', 'e8bc7f2643c74894c4f111c75c8beaa9', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 5, 2, b'1');
 
 CREATE TABLE indirizzo (
   idI int(11) NOT NULL AUTO_INCREMENT,
@@ -10294,6 +10294,34 @@ CREATE TABLE recensionenegozio (
   CONSTRAINT RecensioneNegozio_ibfk_2 FOREIGN KEY (idUtente) REFERENCES utente (id) ON DELETE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
+--
+-- TRIGGER RecensioneNegozio
+--
+DELIMITER $$
+
+CREATE TRIGGER progettoweb.recensionenegozio_AFTER_INSERT AFTER INSERT ON recensionenegozio FOR EACH ROW
+BEGIN
+  declare numRecensioni int default 0;
+     declare sommatoria int default 0;
+     declare media int default 0;
+
+  SELECT COUNT(id) INTO numRecensioni
+  FROM recensionenegozio
+  WHERE recensionenegozio.idNegozio = new.idNegozio
+  LIMIT 1;
+
+    SELECT SUM(valutazione) INTO sommatoria
+ FROM recensionenegozio
+  WHERE recensionenegozio.idNegozio = new.idNegozio
+  LIMIT 1;
+
+    set media = sommatoria/numRecensioni;
+
+    update negozio n set n.valutazione = media where n.id = new.idNegozio;
+END
+$$
+DELIMITER ;
+
 CREATE TABLE recensioneoggetto (
   id int(11) NOT NULL AUTO_INCREMENT,
   idOggetto varchar(32) NOT NULL,
@@ -10308,6 +10336,36 @@ CREATE TABLE recensioneoggetto (
   CONSTRAINT RecensioneOggetto_ibfk_1 FOREIGN KEY (idOggetto) REFERENCES oggetto (id) ON DELETE CASCADE,
   CONSTRAINT RecensioneOggetto_ibfk_2 FOREIGN KEY (idUtente) REFERENCES utente (id) ON DELETE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- TRIGGER RecensioneOggetto
+--
+
+DELIMITER $$
+
+CREATE TRIGGER progettoweb.recensioneoggetto_AFTER_INSERT AFTER INSERT ON recensioneoggetto FOR EACH ROW
+BEGIN
+   declare numRecensioni int default 0;
+     declare sommatoria int default 0;
+     declare media int default 0;
+
+   SELECT COUNT(id) INTO numRecensioni
+   FROM recensioneoggetto
+   WHERE recensioneoggetto.idOggetto = new.idOggetto
+   LIMIT 1;
+
+
+    SELECT SUM(valutazione) INTO sommatoria
+  from recensioneoggetto
+  where recensioneoggetto.idOggetto = new.idOggetto
+  limit 1;
+
+    set media = sommatoria/numRecensioni;
+
+    update oggetto o set o.valutazione = media where o.id = new.idOggetto;
+END
+$$
+DELIMITER ;
 
 INSERT INTO recensioneoggetto (id, idOggetto, idUtente, testo, valutazione, data, utilita) VALUES
 (1,'55af1208f171b67d24e7115424a31fa6',4,'USB compatta, bella linea, veloce nel trasferimento dati ma, a mio modo di vedere, con un cappuccio terribilmente scomodo da togliere. La superfice liscia e l aderenza dello stesso al corpo della penna, infatti, nel rendono difficoltosa l apertura.Vedremo se con l uso migliorerà.',4,'2018-01-26',4),
@@ -10589,6 +10647,35 @@ CREATE TABLE recensionevenditore (
   CONSTRAINT RecensioneVenditore_ibfk_1 FOREIGN KEY (idVenditore) REFERENCES utente (id) ON DELETE CASCADE,
   CONSTRAINT RecensioneVenditore_ibfk_2 FOREIGN KEY (idUtente) REFERENCES utente (id) ON DELETE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- TRIGGER RecensioneVenditore
+--
+DELIMITER $$
+
+CREATE TRIGGER progettoweb.recensionevenditore_AFTER_INSERT AFTER INSERT ON recensionevenditore FOR EACH ROW
+BEGIN
+   declare numRecensioni int default 0;
+     declare sommatoria int default 0;
+     declare media int default 0;
+
+   SELECT COUNT(id) INTO numRecensioni
+   FROM recensionevenditore
+   WHERE recensionevenditore.idVenditore = new.idVenditore
+   LIMIT 1;
+
+
+    SELECT SUM(valutazione) INTO sommatoria
+  FROM recensionevenditore
+   WHERE recensionevenditore.idVenditore = new.idVenditore
+   LIMIT 1;
+
+    set media = sommatoria/numRecensioni;
+
+    update utente u set u.valutazione = media where u.id = new.idVenditore;
+END
+$$
+DELIMITER ;
 
 INSERT INTO recensionevenditore (id, idVenditore, idUtente, testo, valutazione, data, utilita) VALUES
 (1,65,19,'Molto bene perfetti ottima comunicazione +++++',0,'2018-01-26',0),
@@ -14319,11 +14406,11 @@ INSERT INTO spedizioneoggetto (idS,idO) VALUES
 (4929,'85f60723cce92d8071af573237d4140f');
 
 --
--- Trigger `oggetto`
+-- Trigger oggetto
 --
-DROP TRIGGER IF EXISTS `AggiornamentoOrdiniSeVieneModificatoIlPrezzo`;
+DROP TRIGGER IF EXISTS AggiornamentoOrdiniSeVieneModificatoIlPrezzo;
 DELIMITER //
-CREATE TRIGGER `AggiornamentoOrdiniSeVieneModificatoIlPrezzo` AFTER UPDATE ON `oggetto`
+CREATE TRIGGER AggiornamentoOrdiniSeVieneModificatoIlPrezzo AFTER UPDATE ON oggetto
  FOR EACH ROW BEGIN
 
 DECLARE curDate DATETIME DEFAULT NOW();
@@ -14346,10 +14433,10 @@ END
 DELIMITER ;
 
 --
--- Trigger `ordine`
+-- Trigger ordine
 --
 DELIMITER ;;
-CREATE TRIGGER `CreoElementoCarrello` BEFORE INSERT ON `ordine`
+CREATE TRIGGER CreoElementoCarrello BEFORE INSERT ON ordine
  FOR EACH ROW BEGIN
 declare x int default 0;
 SET x = (SELECT COUNT(idUtente)
@@ -14369,7 +14456,7 @@ end
 DELIMITER ;
 
 DELIMITER ;;
-CREATE TRIGGER `AggiornamentoCarrelloAggiuntaElemento` AFTER INSERT ON `ordine`
+CREATE TRIGGER AggiornamentoCarrelloAggiuntaElemento AFTER INSERT ON ordine
  FOR EACH ROW UPDATE carrello c
 	SET c.subTotal = c.subTotal + (new.prezzoDiAcquisto * new.quantita)
     WHERE c.idUtente = new.idUtente AND new.stato = 0
@@ -14377,7 +14464,7 @@ CREATE TRIGGER `AggiornamentoCarrelloAggiuntaElemento` AFTER INSERT ON `ordine`
 DELIMITER ;
 
 DELIMITER ;;
-CREATE TRIGGER `AggiornamentoCarrelloModificaPrezzoElemento` AFTER UPDATE ON `ordine`
+CREATE TRIGGER AggiornamentoCarrelloModificaPrezzoElemento AFTER UPDATE ON ordine
  FOR EACH ROW BEGIN
 IF new.stato = 0
 THEN
@@ -14402,7 +14489,7 @@ END
 DELIMITER ;
 
 DELIMITER ;;
-CREATE TRIGGER `AggiornamentoCarrelloRimozioneElemento` AFTER DELETE ON `ordine`
+CREATE TRIGGER AggiornamentoCarrelloRimozioneElemento AFTER DELETE ON ordine
  FOR EACH ROW UPDATE carrello c
 	SET c.subTotal = c.subTotal - (old.prezzoDiAcquisto * old.quantita)
     WHERE c.idUtente = old.idUtente AND old.stato = 0
@@ -14413,7 +14500,7 @@ DELIMITER ;
 -- Eventi
 --
 DELIMITER $$
-DROP EVENT IF EXISTS `ControlloScontiAttivi`$$
-CREATE DEFINER=`progettoweb`@`%` EVENT `ControlloScontiAttivi` ON SCHEDULE EVERY 1 DAY STARTS '2017-07-22 00:01:00' ENDS '2018-07-22 00:01:00' ON COMPLETION PRESERVE ENABLE COMMENT 'Evento utilizzato per eliminare gli sconti terminati' DO UPDATE oggetto SET oggetto.`sconto` = 0, oggetto.`dataFineSconto` = IF(oggetto.`dataFineSconto`<CURDATE(), NULL,oggetto.`dataFineSconto`)$$
+DROP EVENT IF EXISTS ControlloScontiAttivi$$
+CREATE EVENT ControlloScontiAttivi ON SCHEDULE EVERY 1 DAY STARTS '2017-07-22 00:01:00' ENDS '2018-07-22 00:01:00' ON COMPLETION PRESERVE ENABLE COMMENT 'Evento utilizzato per eliminare gli sconti terminati' DO UPDATE oggetto SET oggetto.sconto = 0, oggetto.dataFineSconto = IF(oggetto.dataFineSconto<CURDATE(), NULL,oggetto.dataFineSconto)$$
 
 DELIMITER ;

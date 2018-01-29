@@ -11,8 +11,10 @@ package it.progettoWeb.java.database.Dao.recensioneVenditore;
  */
 
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
+import it.progettoWeb.java.database.Dao.rispostaVenditore.DaoRispostaVenditore;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.Model.recensioneVenditore.ModelloRecensioneVenditore;
+import it.progettoWeb.java.database.Model.rispostaVenditore.ModelloRispostaVenditore;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -122,6 +124,25 @@ public class DaoRecensioneVenditore {
         return res;
     }
     
+    public pair<List<ModelloRispostaVenditore>,List<ModelloUtente>> selectAnswerUserBySeller(int idV) {
+        pair<List<ModelloRispostaVenditore>,List<ModelloUtente>> res;
+        List<ModelloRispostaVenditore> risposte = new ArrayList<>();
+        List<ModelloUtente> venditori = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sellersQuery.selectAnswerUserBySeller(idV));
+            
+            while (rs.next()) {
+                risposte.add(DaoRispostaVenditore.getModelloFromRs(rs));
+                venditori.add(DaoUtente.getModelloFromRs(rs));
+            }
+        } catch (SQLException e) { }
+        
+        res = new pair(risposte, venditori);
+        return res;
+    }
+    
     /**
      * @author andrea
      * Ottenere una specifica recensioni dati i parametri identificativi
@@ -156,6 +177,20 @@ public class DaoRecensioneVenditore {
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(usersQuery.selectReviewsSellers(idU));
+            while (rs.next()) {
+                recensioni.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return recensioni;
+    }
+    
+    public List<ModelloRecensioneVenditore> selectReviewsSeller(int idV) {
+        List<ModelloRecensioneVenditore> recensioni = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectReviewsSeller(idV));
             while (rs.next()) {
                 recensioni.add(getModelloFromRs(rs));
             }

@@ -37,8 +37,19 @@ public class marketsSellersQuery {
     public static String selectReviewUserByStore(int idN)
     {
         return "SELECT recensionenegozio.*, utente.* FROM "
-                + "recensionenegozio JOIN utente ON recensionenegozio.idUtente=utente.id "
-                + "WHERE recensionenegozio.idNegozio='" + idN + "';";
+                + "(recensionenegozio JOIN rispostanegozio ON "
+                + "recensionenegozio.id=rispostanegozio.idRecensione ) JOIN utente "
+                + "ON recensionenegozio.idUtente=utente.id WHERE "
+                + "recensionenegozio.idNegozio=" + idN + ";";
+    }
+    
+    public static String selectAnswerUserByStore(int idN)
+    {
+        return "SELECT rispostanegozio.*, utente.* FROM "
+                + "(recensionenegozio JOIN rispostanegozio ON "
+                + "recensionenegozio.id=rispostanegozio.idRecensione ) JOIN utente "
+                + "ON recensionenegozio.idUtente=utente.id WHERE "
+                + "recensionenegozio.idNegozio=" + idN + ";";
     }
     
     /**

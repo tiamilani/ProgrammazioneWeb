@@ -34,6 +34,7 @@
                     <a href="${pageContext.request.contextPath}/UserController?action=orderList&order=data" method="GET" class="btn btn-outline-primary buttonSpace btn-block">I miei ordini</a>
                     <c:if test="${utenteSessione.getUtenteType() == 1}" >
                         <a href="${pageContext.request.contextPath}/UserController?action=gestisciNegozi&order=data&orderStore=dataup" method="GET" class="btn btn-outline-primary buttonSpace btn-block">Gestisci negozi</a>
+                        <a href="${pageContext.request.contextPath}/UserController?action=infoPersonalReviews" method="GET"  class="btn btn-outline-primary buttonSpace btn-block">Recensioni Personali</a>
                     </c:if>
                     <c:if test="${utenteSessione.getUtenteType() == 0}" >
                         <a href="${pageContext.request.contextPath}/jspFile/Finale/Utente/diventaVenditore.jsp" class="btn btn-outline-primary buttonSpace btn-block">Diventa un venditore</a>

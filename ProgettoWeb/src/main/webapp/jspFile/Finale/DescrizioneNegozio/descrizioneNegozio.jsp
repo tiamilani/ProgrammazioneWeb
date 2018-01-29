@@ -30,6 +30,43 @@
             .carousel-indicators {
                 top: 105%;
             }
+            
+            @media screen and (max-width: 380px) {
+                .carouselSpacing { height: 100px; }
+                #fotoNegozio { height: 100px; }
+                .carousel-inner { height: 100px; }
+                .carousel-item { height: 100px; }
+                .carousel-item > img { height: 100px; width: auto; object-fit: scale-down; }
+                h5 { font-size: 1rem; }
+                span { font-size: 1rem; }
+            }
+            @media screen and (min-width: 381px) and (max-width: 600px) {
+                .carouselSpacing { height: 200; }
+                #fotoNegozio { height: 200px; }
+                .carousel-inner { height: 200px; }
+                .carousel-item { height: 200px; }
+                .carousel-item > img { height: 200px; width: auto; object-fit: scale-down; }
+                h5 { font-size: 1.5rem; }
+                span { font-size: 1.2rem; }
+            }
+            @media screen and (min-width: 601px) and (max-width: 1280px) {
+                .carouselSpacing { height: 300; }
+                #fotoNegozio { height: 300px; }
+                .carousel-inner { height: 300px; }
+                .carousel-item { height: 300px; }
+                .carousel-item > img { height: 300px; width: auto; object-fit: scale-down; }
+                h5 { font-size: 1.4rem; }
+                span { font-size: 1.4rem; }
+            }
+            @media screen and (min-width: 1281px) {
+                .carouselSpacing { height: 400; }
+                #fotoNegozio { height: 400px; }
+                .carousel-inner { height: 400px; }
+                .carousel-item { height: 400px; }
+                .carousel-item > img { height: 400px; width: auto; object-fit: scale-down; }
+                h5 { font-size: 1.6rem; }
+                span { font-size: 1.6rem; }
+            }
         </style> 
     </head>
     <body>
