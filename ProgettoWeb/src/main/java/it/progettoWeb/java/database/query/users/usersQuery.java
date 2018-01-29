@@ -75,7 +75,7 @@ public class usersQuery {
                 "cognome='"+cognome+"',"+
                 "mail='"+mail+"',"+
                 "password='"+password+"',"+
-                "avatar="+avatar+","+
+                "avatar='"+avatar+"',"+
                 "valutazione="+valutazione+","+
                 "UtenteType="+UtenteType+","+
                 "emailConfermata="+emailConfermata+""
