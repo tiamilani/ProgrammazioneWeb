@@ -28,10 +28,10 @@
             
             <div>
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <span>Data di apertura</span>
                     </div>
-                    <div class="col-9">
+                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                         <span><c:out value="${assistenza.getDataApertura()}"/></span>
                     </div>
                 </div>
@@ -39,10 +39,10 @@
                 <br>
                 
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <span>Data di chiusura</span>
                     </div>
-                    <div class="col-9">
+                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                         <span><c:out value="${assistenza.getDataChiusura()}"/></span>
                     </div>
                 </div>
@@ -51,10 +51,10 @@
                 
                 <c:if test="${isVenditore == 0}">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                             <span>Venditore contestato</span>
                         </div>
-                        <div class="col-9">
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                             <span>
                                 <c:out value="${venditoreContestato.getCognome()}"/> 
                                 <c:out value="${venditoreContestato.getNome()}"/>
@@ -65,10 +65,10 @@
                 
                 <c:if test="${isVenditore == 1}">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                             <span>Utente contestatore</span>
                         </div>
-                        <div class="col-9">
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                             <span>
                                 <c:out value="${utenteContestatore.getCognome()}"/> 
                                 <c:out value="${utenteContestatore.getNome()}"/>
@@ -80,10 +80,10 @@
                 <br>
                 
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <span>Oggetto contestato</span>
                     </div>
-                    <div class="col-9">
+                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                         <span>
                             <c:out value="${oggettoContestato.getNome()}"/>
                         </span>
@@ -93,10 +93,10 @@
                 <br>
                 
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <span>ID Ordine contestato</span>
                     </div>
-                    <div class="col-9">
+                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                         <span><c:out value="${ordineContestato}"/></span>
                     </div>
                 </div>
@@ -104,10 +104,10 @@
                 <br>
                 
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <span>Testo della richiesta</span>
                     </div>
-                    <div class="col-9">
+                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                         <span><c:out value="${assistenza.getRichiesta()}"/></span>
                     </div>
                 </div>
@@ -115,10 +115,10 @@
                 <br>
                 
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <span>Testo della soluzione</span>
                     </div>
-                    <div class="col-9">
+                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                         <textarea cols="100" rows="5" disabled><c:out value="${assistenza.getSoluzione()}"/></textarea>
                     </div>
                 </div>
