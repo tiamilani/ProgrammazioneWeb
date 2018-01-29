@@ -12,11 +12,14 @@ package it.progettoWeb.java.database.Dao.recensioneOggetto;
 
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
 import it.progettoWeb.java.database.Dao.immagineRecensione.DaoImmagineRecensione;
+import it.progettoWeb.java.database.Dao.rispostaNegozio.DaoRispostaNegozio;
+import it.progettoWeb.java.database.Dao.rispostaOggetto.DaoRispostaOggetto;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
 import it.progettoWeb.java.database.Model.immagineRecensione.ModelloImmagineRecensione;
 import it.progettoWeb.java.database.Model.immagineRecensione.ModelloListeImmagineRecensione;
 import it.progettoWeb.java.database.Model.recensioneOggetto.ModelloRecensioneOggetto;
+import it.progettoWeb.java.database.Model.rispostaOggetto.ModelloRispostaOggetto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,6 +31,7 @@ import it.progettoWeb.java.database.Util.DbUtil;
 import it.progettoWeb.java.database.query.generics.genericsQuery;
 import it.progettoWeb.java.database.query.objects.objectsQuery;
 import it.progettoWeb.java.database.query.users.usersQuery;
+import it.progettoWeb.java.utility.pair.pair;
 import it.progettoWeb.java.utility.tris.tris;
 
 public class DaoRecensioneOggetto {
@@ -177,6 +181,25 @@ public class DaoRecensioneOggetto {
         } catch (SQLException e) { }
         
         res = new tris(recensioni, immagini, utenti);
+        return res;
+    }
+    
+    public pair<List<ModelloRispostaOggetto>,List<ModelloUtente>> selectAnswerUserByObject(String idO) {
+        pair<List<ModelloRispostaOggetto>,List<ModelloUtente>> res;
+        List<ModelloRispostaOggetto> risposte = new ArrayList<>();
+        List<ModelloUtente> utenti = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(objectsQuery.selectAnswerUserByObject(idO));
+            
+            while (rs.next()) {
+                risposte.add(DaoRispostaOggetto.getModelloFromRs(rs));
+                utenti.add(DaoUtente.getModelloFromRs(rs));
+            }
+        } catch (SQLException e) { }
+        
+        res = new pair(risposte, utenti);
         return res;
     }
     

@@ -3,6 +3,7 @@
     Created on : 3-ott-2017, 22.32.00
     Author     : andreafadi
 --%>
+
 <div class="carouselSpacing">
     <div id="fotoOggetto" class="carousel slide" data-ride="carousel">
         <c:if test="${listaImmagini.getList().size() > 1}">
@@ -30,7 +31,7 @@
                         <div class="carousel-item">
                     </c:otherwise>
                 </c:choose>
-                            <img class="d-block w-100" src="${img.getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; object-fit: scale-down;">
+                            <img class="d-block w-100" src="${img.getSrc()}" alt="IMAGE NOT LOADED">
                         </div>
                 <c:set var="i" value="${i+1}"/>
             </c:forEach>

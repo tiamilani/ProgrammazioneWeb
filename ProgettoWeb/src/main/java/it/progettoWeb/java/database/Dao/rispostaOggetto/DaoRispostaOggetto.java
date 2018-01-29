@@ -48,7 +48,7 @@ public class DaoRispostaOggetto {
      * @param rs un resultset da cui ricavare un modello negozio
      * @return il modello negozio presente nel resultset
      */
-    private ModelloRispostaOggetto getModelloFromRs(ResultSet rs)
+    public static ModelloRispostaOggetto getModelloFromRs(ResultSet rs)
     {
         ModelloRispostaOggetto RispostaOggetto = new ModelloRispostaOggetto();
         
@@ -81,5 +81,18 @@ public class DaoRispostaOggetto {
         }
 
         return risposte;
+    }
+    
+    public boolean insertAnswerToObject(ModelloRispostaOggetto rispostaOggetto) {
+        
+       try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(usersQuery.insertAnswerToObject(rispostaOggetto.getIdRecensione(), rispostaOggetto.getTesto()));
+        }
+        catch (SQLException e) {
+            return false;
+        }
+        return true;
     }
 }

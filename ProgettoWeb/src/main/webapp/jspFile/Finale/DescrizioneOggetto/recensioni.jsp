@@ -38,6 +38,16 @@
                                             </c:forEach>
                                         </div>
                                     </c:if>
+                                    <c:if test="${risposteOggetto.getL().size() > 0}">
+                                        <div class="row" style="padding-left: 10%;">
+                                            <div class="col-2">
+                                                <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
+                                            </div>
+                                            <div class="col-8">
+                                                <p class="lead">${risposteOggetto.getL().get(i).getTesto()}</p>
+                                            </div>
+                                        </div>
+                                    </c:if>
                                 </div>
                             </div>
                             <div class="jumbotron" style="padding: 1rem 1rem">
@@ -57,6 +67,16 @@
                                             </c:forEach>
                                         </div>
                                     </c:if>
+                                    <c:if test="${risposteOggetto.getL().size() > 0}">
+                                        <div class="row" style="padding-left: 10%;">
+                                            <div class="col-2">
+                                                <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
+                                            </div>
+                                            <div class="col-8">
+                                                <p class="lead">${risposteOggetto.getL().get(i+1).getTesto()}</p>
+                                            </div>
+                                        </div>
+                                    </c:if>
                                 </div>
                             </div>
                             <div class="jumbotron" style="padding: 1rem 1rem">
@@ -74,6 +94,16 @@
                                                     <img src="${img.getSrc()}" alt="IMAGE NOT LOADED" style="width: 200px; height: 300px; object-fit: cover;">
                                                 </div>
                                             </c:forEach>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${risposteOggetto.getL().size() > 0}">
+                                        <div class="row" style="padding-left: 10%;">
+                                            <div class="col-2">
+                                                <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
+                                            </div>
+                                            <div class="col-8">
+                                                <p class="lead">${risposteOggetto.getL().get(i+2).getTesto()}</p>
+                                            </div>
                                         </div>
                                     </c:if>
                                 </div>
@@ -100,6 +130,16 @@
                                             </c:forEach>
                                         </div>
                                     </c:if>
+                                    <c:if test="${risposteOggetto.getL().size() > 0}">
+                                        <div class="row" style="padding-left: 10%;">
+                                            <div class="col-2">
+                                                <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
+                                            </div>
+                                            <div class="col-8">
+                                                <p class="lead">${risposteOggetto.getL().get(i).getTesto()}</p>
+                                            </div>
+                                        </div>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -124,6 +164,16 @@
                                             </c:forEach>
                                         </div>
                                     </c:if>
+                                    <c:if test="${risposteOggetto.getL().size() > 0}">
+                                        <div class="row" style="padding-left: 10%;">
+                                            <div class="col-2">
+                                                <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
+                                            </div>
+                                            <div class="col-8">
+                                                <p class="lead">${risposteOggetto.getL().get(i).getTesto()}</p>
+                                            </div>
+                                        </div>
+                                    </c:if>
                                 </div>
                             </div>
                             <div class="jumbotron" style="padding: 1rem 1rem">
@@ -141,6 +191,16 @@
                                                     <img src="${img.getSrc()}" alt="IMAGE NOT LOADED" style="width: 200px; height: 300px; object-fit: cover;">
                                                 </div>
                                             </c:forEach>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${risposteOggetto.getL().size() > 0}">
+                                        <div class="row" style="padding-left: 10%;">
+                                            <div class="col-2">
+                                                <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
+                                            </div>
+                                            <div class="col-8">
+                                                <p class="lead">${risposteOggetto.getL().get(i+1).getTesto()}</p>
+                                            </div>
                                         </div>
                                     </c:if>
                                 </div>
@@ -168,6 +228,16 @@
                                         </c:forEach>
                                     </div>
                                 </c:if>
+                                <c:if test="${risposteOggetto.getL().size() > 0}">
+                                    <div class="row" style="padding-left: 10%;">
+                                        <div class="col-2">
+                                            <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
+                                        </div>
+                                        <div class="col-8">
+                                            <p class="lead">${risposteOggetto.getL().get(i).getTesto()}</p>
+                                        </div>
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
                         <div class="jumbotron" style="padding: 1rem 1rem">
@@ -187,6 +257,16 @@
                                         </c:forEach>
                                     </div>
                                 </c:if>
+                                <c:if test="${risposteOggetto.getL().size() > 0}">
+                                    <div class="row" style="padding-left: 10%;">
+                                        <div class="col-2">
+                                            <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
+                                        </div>
+                                        <div class="col-8">
+                                            <p class="lead">${risposteOggetto.getL().get(i+1).getTesto()}</p>
+                                        </div>
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
                         <div class="jumbotron" style="padding: 1rem 1rem">
@@ -204,6 +284,16 @@
                                                 <img src="${img.getSrc()}" alt="IMAGE NOT LOADED" style="width: 200px; height: 300px; object-fit: cover;">
                                             </div>
                                         </c:forEach>
+                                    </div>
+                                </c:if>
+                                <c:if test="${risposteOggetto.getL().size() > 0}">
+                                    <div class="row" style="padding-left: 10%;">
+                                        <div class="col-2">
+                                            <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
+                                        </div>
+                                        <div class="col-8">
+                                            <p class="lead">${risposteOggetto.getL().get(i+2).getTesto()}</p>
+                                        </div>
                                     </div>
                                 </c:if>
                             </div>

@@ -11,6 +11,10 @@
         <servlet-name>AutocompleteSearchController</servlet-name>
         <servlet-class>it.progettoWeb.java.Controller.SearchObject.AutocompleteSearchController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RispondiRecensioneController</servlet-name>
+        <servlet-class>it.progettoWeb.java.Controller.InserisciRecensione.RispondiRecensioneController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AutocompleteController</servlet-name>
         <url-pattern>/AutocompleteController</url-pattern>
@@ -18,6 +22,10 @@
     <servlet-mapping>
         <servlet-name>AutocompleteSearchController</servlet-name>
         <url-pattern>/AutocompleteSearchController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RispondiRecensioneController</servlet-name>
+        <url-pattern>/RispondiRecensioneController</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>jspFile/Finale/Index/index.jsp</welcome-file>
