@@ -124,33 +124,40 @@
                 </div>
             </div>
             <form>
-                <div class="row">
+            <div class="row">
+                <div class="col-xl-10 col-sm-12 col-xs-12">
                     <p>Aggiorna Email <c:out value="${utenteSessione.getMail()}" /></p>
                 </div>
+            </div>
             <div class="row">
                 <form action="${pageContext.request.contextPath}/UserController" id="formMail" name="formMail" method="GET">
                     <input type="hidden" name="action" value="updateMail">
-                    <div class="col-10">
+                    <div class="col-xl-10 col-sm-12 col-xs-12">
                         <input type="email" class="form-control" id="changeEmail" name="changeEmail" placeholder="New Email">
                     </div>
-                    <div class="col-2">
-                        <button class="btn btn-outline-primary buttonSpace btn-block" type="submit" value="submit">Salva email</button>
+                    <div class="col-xl-2 col-sm-12 col-xs-12">
+                        <button class="btn btn-outline-primary btn-block" type="submit" value="submit" style="margin-top: 0.4rem; margin-bottom: 1rem;">Salva email</button>
                     </div>
                 </form>
             </div>
             </form>
-            <p>Modifica password</p>
+            <div class="row">
+                <div class="col-xl-10 col-sm-12 col-xs-12">
+                    <p>Modifica password</p>
+                </div>
+            </div>
+            
             <form <%--action="${pageContext.request.contextPath}/UserController"--%> id="formPassword" name="formPassword" method="POST">
                 <input type="hidden" name="action" value="updatePassword">
                 <div class="row">
-                    <div class="col-5">
+                    <div class="col-xl-5 col-md-6 col-sm-12 col-xs-12">
                         <input type="password" class="form-control" id="inputPassword" name="newPassword" placeholder="New Password">
                     </div>
-                    <div class="col-5">
-                        <input type="password" class="form-control" id="inputPassword" name="newConfirmPassword" placeholder="Confirm New Password">
+                    <div class="col-xl-5 col-md-6 col-sm-12 col-xs-12">
+                        <input type="password" class="form-control" id="inputPassword" name="newConfirmPassword" placeholder="Confirm New Password" style="margin-top: 0.4rem;">
                     </div>
-                    <div class="col-2">
-                        <button class="btn btn-outline-primary buttonSpace btn-block" type="submit" value="submit" onclick="changePassword()">Salva password</button>
+                    <div class="col-xl-2 col-sm-12 col-xs-12">
+                        <button class="btn btn-outline-primary btn-block" type="submit" value="submit" onclick="changePassword()" style="margin-top: 0.4rem;">Salva password</button>
                     </div>
                 </div>
             </form>
@@ -211,8 +218,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-2">
-                    <button class="btn btn-outline-primary buttonSpace btn-block" type="submit" value="submit" data-toggle="modal" data-target="#addAddrModal"><i class="Small material-icons">add</i></button>
+                <div class="col-lg-4 col-sm-12 col-xs-12">
+                    <button class="btn btn-outline-primary buttonSpace btn-block" type="submit" value="submit" data-toggle="modal" data-target="#addAddrModal" style="margin-top: 0.4rem;"><i class="Small material-icons">add</i> Aggiungi indirizzo</button>
                 </div>
             </div>
         </div>
