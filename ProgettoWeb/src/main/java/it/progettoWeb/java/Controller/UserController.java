@@ -469,7 +469,7 @@ public class UserController extends HttpServlet {
 
                     forward = request.getHeader("referer");
                     log("forward: " + forward);
-                    if(forward.equals("http://localhost:8080/ProgettoWeb/UserController?action=addUser") || forward.equals("http://localhost:8080/ProgettoWeb/UserController?action=logout"))
+                    if(forward.equals("http://localhost:8080/ProgettoWeb/PasswordReset?action=confirm") || forward.equals("http://localhost:8080/ProgettoWeb/UserController?action=addUser") || forward.equals("http://localhost:8080/ProgettoWeb/UserController?action=logout"))
                     {
                         redirect = false;
                         forward = HOME_PAGE;
