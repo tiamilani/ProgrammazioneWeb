@@ -17,7 +17,8 @@
         <title>Carrello</title>
     </head>
     
-    <script src="http://localhost:8080/ProgettoWeb/jspFile/Finale/JS/Orders.js"></script>
+    <script src="${pageContext.request.contextPath}/jspFile/Finale/JS/Orders.js"></script>
+    <script src="${pageContext.request.contextPath}/jspFile/Finale/JS/fixFooter.js"></script>
     
     <body>
         <c:set var="iterator" value="0"/>
@@ -41,10 +42,6 @@
         <div class="container">
             <%@include file="../Header/NavBar/newNavBar.jsp" %>
         </div>
-        
-        
-        
-        
         
         <div class="container-fluid">
             <%@include file="../alert/alertOverQuantity.jsp" %>
@@ -77,7 +74,9 @@
                                     <div class="col-4">
                                         <!-- Nome prodotto -->
                                         <div class="row">
-                                            <p><c:out value="${object.getL().getNome()}" /></p>
+                                            <a href="/ProgettoWeb/objectSelectedController?idOggetto=${object.getL().getId()}">
+                                                <p><c:out value="${object.getL().getNome()}" /></p>
+                                            </a>
                                         </div>
                                         <!-- Disponibilita' prodotto -->
                                         <div class="row" id="lblDisponibilita${iterator}" data-disponibilita="${disp}">

@@ -15,7 +15,8 @@
         <title>Assistance Management</title>
     </head>
     
-    <script src="http://localhost:8080/ProgettoWeb/jspFile/Finale/JS/Assistances.js"></script>
+    <script src="${pageContext.request.contextPath}/jspFile/Finale/JS/Assistances.js"></script>
+    <script src="${pageContext.request.contextPath}/jspFile/Finale/JS/fixFooter.js"></script>
     
     <body>
         <div class="container">
@@ -115,9 +116,6 @@
             </div>
         </div>
             
-        <div class="container">
-            <hr>
-            <%@include file="../Footer/footer.jsp" %>
-        </div>
+        <%@include file="../Footer/footer.jsp" %>
     </body>
 </html>

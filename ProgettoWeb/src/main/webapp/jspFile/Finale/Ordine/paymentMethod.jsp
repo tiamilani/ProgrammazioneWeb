@@ -16,7 +16,8 @@
         <title>Metodo di Pagamento</title>
     </head>
     
-    <script src="http://localhost:8080/ProgettoWeb/jspFile/Finale/JS/Orders.js"></script>
+    <script src="${pageContext.request.contextPath}/jspFile/Finale/JS/Orders.js"></script>
+    <script src="${pageContext.request.contextPath}/jspFile/Finale/JS/fixFooter.js"></script>
     
     <body>
         <div class="container">
@@ -62,7 +63,7 @@
             <form method="POST" id="formPayment" name="formPayment" action="/ProgettoWeb/OrdineController?save=3&action=finish">
                 <div class="row">
                     <div class="col-12">
-                        <p><b> Carta di credito </b><img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/creditCarts.png" alt="imgCreditCards"></p>
+                        <p><b> Carta di credito </b><img src="${pageContext.request.contextPath}/jspFile/Finale/Img/creditCarts.png" alt="imgCreditCards"></p>
                     </div>
                 </div>
                 <div class="row">
@@ -111,7 +112,7 @@
                                 <option value="31">2031</option>
                             </select>
                         </p>
-                        <p><input type="tel" id="checkCard" name="checkCard" minlength="3" maxlength="5" onkeypress="checkInputText(event, this)" required/><img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/cvv.png" alt="imgCVV"></p>
+                        <p><input type="tel" id="checkCard" name="checkCard" minlength="3" maxlength="5" onkeypress="checkInputText(event, this)" required/><img src="${pageContext.request.contextPath}/jspFile/Finale/Img/cvv.png" alt="imgCVV"></p>
                     </div>
                 </div>
             </form>

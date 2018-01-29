@@ -17,7 +17,16 @@
         <title>Metodo di Spedizione</title>
     </head>
     
-    <script src="http://localhost:8080/ProgettoWeb/jspFile/Finale/JS/Orders.js"></script>
+    <script src="${pageContext.request.contextPath}/jspFile/Finale/JS/Orders.js"></script>
+    <script src="${pageContext.request.contextPath}/jspFile/Finale/JS/fixFooter.js"></script>
+    <script>
+        $(document).ready(function() {
+                $('#tabellaIndirizzi').DataTable({
+                    responsive: true,
+                    colReorder: true
+                });
+            } );
+    </script>
     
     <body onload="setFirstDescription(<c:out value="${carrelloSessione.getSize()}"/>)">
         <div class="container">
@@ -50,7 +59,8 @@
             </c:if>
             
             <c:if test="${addrs.getList().size() > 0}">
-                <table width="100%" cellpadding="5">
+                <!--<table width="100%" cellpadding="5">-->
+                <table id="tabellaIndirizzi" class="table table-striped table-bordered" width="100%" cellspacing="0">
                     <!-- Elenco indirizzi - si seleziona tramite un radio button -->
                     <tr>
                         <td></td>
@@ -112,7 +122,9 @@
                                     <!-- Nome negozio da cui viene spedito il prodotto -->
                                     <div class="col-12">
                                         <div class="row">
-                                            <p>Spedito da <c:out value="${shops.get(iterator).getNomeNegozio()}"/></p>
+                                            <a href="/ProgettoWeb/UserController?action=DescrizioneNegozio&idNegozio=${shops.get(iterator).getId()}">
+                                                <p>Spedito da <c:out value="${shops.get(iterator).getNomeNegozio()}"/></p>
+                                            </a>
                                         </div>
                                     </div>
                                     <!-- Data di consegna prevista del prodotto -->
@@ -132,7 +144,9 @@
                                             <div class="col-4 ">
                                                 <!-- Nome prodotto -->
                                                 <div class="row">
-                                                    <p><c:out value="${object.getL().getNome()}" /></p>
+                                                    <a href="/ProgettoWeb/objectSelectedController?idOggetto=${object.getL().getId()}">
+                                                        <p><c:out value="${object.getL().getNome()}" /></p>
+                                                    </a>
                                                 </div>
                                                 <!-- Prezzo del prodotto -->
                                                 <div class="row">

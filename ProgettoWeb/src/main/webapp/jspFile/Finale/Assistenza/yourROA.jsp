@@ -22,6 +22,7 @@
             document.location.href='/ProgettoWeb/AssistenzaController?action=details&id=' + index;
         };
     </script>
+    <script src="${pageContext.request.contextPath}/jspFile/Finale/JS/fixFooter.js"></script>
     
     <body>
         <div class="container">
@@ -216,10 +217,7 @@
             </c:if>
         </div>
             
-        <div class="container">
-            <hr>
-            <%@include file="../Footer/footer.jsp" %>
-        </div>
+        <%@include file="../Footer/footer.jsp" %>
     </body>
 </html>
 
