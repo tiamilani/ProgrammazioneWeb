@@ -13,10 +13,12 @@ package it.progettoWeb.java.database.Dao.recensioneNegozio;
 import it.progettoWeb.java.database.Dao.Negozio.DaoNegozio;
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
 import it.progettoWeb.java.database.Dao.immagineRecensione.DaoImmagineRecensione;
+import it.progettoWeb.java.database.Dao.rispostaNegozio.DaoRispostaNegozio;
 import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.Model.immagineRecensione.ModelloListeImmagineRecensione;
 import it.progettoWeb.java.database.Model.recensioneNegozio.ModelloRecensioneNegozio;
+import it.progettoWeb.java.database.Model.rispostaNegozio.ModelloRispostaNegozio;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -100,6 +102,20 @@ public class DaoRecensioneNegozio {
         return recensioni;
     }
     
+    public List<ModelloRecensioneNegozio> selectReviewStores(int idN) {
+        List<ModelloRecensioneNegozio> recensioni = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(usersQuery.selectReviewStores(idN));
+            while (rs.next()) {
+                recensioni.add(getModelloFromRs(rs));
+            }
+        } catch (SQLException e) {
+        }
+
+        return recensioni;
+    }
+    
     /**
      * @author andrea
      * Ottenere una specifica recensioni dati i parametri identificativi
@@ -145,6 +161,25 @@ public class DaoRecensioneNegozio {
         } catch (SQLException e) { }
         
         res = new pair(recensioni, utenti);
+        return res;
+    }
+    
+    public pair<List<ModelloRispostaNegozio>,List<ModelloUtente>> selectAnswerUserByStore(int idV) {
+        pair<List<ModelloRispostaNegozio>,List<ModelloUtente>> res;
+        List<ModelloRispostaNegozio> risposte = new ArrayList<>();
+        List<ModelloUtente> venditori = new ArrayList<>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(marketsSellersQuery.selectAnswerUserByStore(idV));
+            
+            while (rs.next()) {
+                risposte.add(DaoRispostaNegozio.getModelloFromRs(rs));
+                venditori.add(DaoUtente.getModelloFromRs(rs));
+            }
+        } catch (SQLException e) { }
+        
+        res = new pair(risposte, venditori);
         return res;
     }
     

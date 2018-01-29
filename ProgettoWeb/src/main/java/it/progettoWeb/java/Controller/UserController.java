@@ -19,7 +19,9 @@ import it.progettoWeb.java.database.Dao.immagineOggetto.DaoImmagineOggetto;
 import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
 import it.progettoWeb.java.database.Dao.ordiniRicevuti.DaoOrdiniRicevuti;
 import it.progettoWeb.java.database.Dao.recensioneNegozio.DaoRecensioneNegozio;
+import it.progettoWeb.java.database.Dao.recensioneOggetto.DaoRecensioneOggetto;
 import it.progettoWeb.java.database.Dao.recensioneVenditore.DaoRecensioneVenditore;
+import it.progettoWeb.java.database.Dao.rispostaVenditore.DaoRispostaVenditore;
 import it.progettoWeb.java.database.Model.Negozio.ModelloListeNegozio;
 import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
@@ -33,9 +35,14 @@ import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto
 import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
 import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
 import it.progettoWeb.java.database.Model.indirizzo.ModelloListeIndirizzo;
+import it.progettoWeb.java.database.Model.recensioneNegozio.ModelloListeRecensioneNegozio;
 import it.progettoWeb.java.database.Model.recensioneNegozio.ModelloRecensioneNegozio;
+import it.progettoWeb.java.database.Model.recensioneOggetto.ModelloListeRecensioneOggetto;
+import it.progettoWeb.java.database.Model.recensioneOggetto.ModelloRecensioneOggetto;
 import it.progettoWeb.java.database.Model.recensioneVenditore.ModelloListeRecensioneVenditore;
 import it.progettoWeb.java.database.Model.recensioneVenditore.ModelloRecensioneVenditore;
+import it.progettoWeb.java.database.Model.rispostaNegozio.ModelloRispostaNegozio;
+import it.progettoWeb.java.database.Model.rispostaVenditore.ModelloRispostaVenditore;
 import it.progettoWeb.java.utility.pair.pair;
 import it.progettoWeb.java.utility.tris.tris;
 import java.util.List;
@@ -63,10 +70,12 @@ public class UserController extends HttpServlet {
     private static String INFOORDERDONE= "/jspFile/Finale/Utente/infoOrdiniUtente.jsp";
     private static String ERROR_PAGE = "/jspFile/Finale/Error/ricercaErrata.jsp";
     private static String INFONEGOZI = "/jspFile/Finale/Utente/gestioneNegoziUtente.jsp";
+    private static String RISPONDIRECENSIONI = "/jspFile/Finale/Utente/rispondiRecensione.jsp";
 
     private DaoUtente daoUtente;
     private DaoRecensioneVenditore daoRecensioneV;
     private DaoRecensioneNegozio daoRecensioneN;
+    private DaoRecensioneOggetto daoRecensioneO;
     private DaoNegozio daoNegozio;
     private DaoOggetto daoOggetto;
     private DaoIndirizzo daoIndirizzo;
@@ -74,6 +83,7 @@ public class UserController extends HttpServlet {
     private DaoImmagineOggetto daoImgOggetto;
     private DaoOrdiniRicevuti daoOrdiniRicevuti;
     private DaoImmagineNegozio daoImmagineNegozio;
+    private DaoRispostaVenditore daoRispostaVenditore;
 
     public UserController() {
         super();
@@ -81,12 +91,14 @@ public class UserController extends HttpServlet {
         daoUtente = new DaoUtente();
         daoRecensioneV = new DaoRecensioneVenditore();
         daoRecensioneN = new DaoRecensioneNegozio();
+        daoRecensioneO = new DaoRecensioneOggetto();
         daoNegozio = new DaoNegozio();
         daoOggetto = new DaoOggetto();
         daoOrdine = new DaoOrdine();
         daoImgOggetto = new DaoImmagineOggetto();
         daoOrdiniRicevuti = new DaoOrdiniRicevuti();
         daoImmagineNegozio = new DaoImmagineNegozio();
+        daoRispostaVenditore = new DaoRispostaVenditore();
     }
 
     /**
@@ -139,8 +151,11 @@ public class UserController extends HttpServlet {
             ModelloListeIndirizzo listaIndirizzi = new ModelloListeIndirizzo(listaNegoziIndirizziImmagini.getC());
             ModelloListeImmagineNegozio listaImmagini = new ModelloListeImmagineNegozio(listaNegoziIndirizziImmagini.getR());
 
-            pair<List<ModelloRecensioneVenditore>, List<ModelloUtente>> recensioniVenditori;
+            pair<List<ModelloRecensioneVenditore>,List<ModelloUtente>> recensioniVenditori;
             recensioniVenditori = daoRecensioneV.selectReviewUserBySeller(idUtente);
+            
+            pair<List<ModelloRispostaVenditore>,List<ModelloUtente>> risposteVenditori;
+            risposteVenditori = daoRecensioneV.selectAnswerUserBySeller(idUtente);
 
             try {
                 ModelloUtente utenteSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
@@ -161,6 +176,7 @@ public class UserController extends HttpServlet {
             request.setAttribute("listaIndirizzi", listaIndirizzi);
             request.setAttribute("listaImmagini", listaImmagini);
             request.setAttribute("recensioniVenditori", recensioniVenditori);
+            request.setAttribute("risposteVenditori", risposteVenditori);
             forward = DESCRIZIONEVENDITORE;
         }
         else if(action.equals("infoCurrentUser")){
@@ -169,6 +185,31 @@ public class UserController extends HttpServlet {
 
             request.setAttribute("listaIndirizzi", listaIndirizzi);
             forward = GESTIONEUTENTE;
+        }
+        else if(action.equals("infoPersonalReviews")) {
+            ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
+            
+            List<ModelloRecensioneVenditore> listaRecensioniVTMP = daoRecensioneV.selectReviewsSeller(utente.getId());
+            ModelloListeRecensioneVenditore listaRecensioniV = new ModelloListeRecensioneVenditore(listaRecensioniVTMP);           
+            
+            List<ModelloNegozio> negoziVenditore = daoNegozio.selectSellerStore(utente.getId());
+            List<ModelloRecensioneNegozio> listaRecensioniNTMP = new ArrayList<ModelloRecensioneNegozio>();
+            for(ModelloNegozio store : negoziVenditore) {
+                listaRecensioniNTMP.addAll(daoRecensioneN.selectReviewStores(store.getId()));
+            }
+            ModelloListeRecensioneNegozio listaRecensioniN = new ModelloListeRecensioneNegozio(listaRecensioniNTMP);
+            
+            List<ModelloOggetto> oggettiVenditore = daoOggetto.selectSellerObjects(utente.getId());
+            List<ModelloRecensioneOggetto> listaRecensioniOTMP = new ArrayList<ModelloRecensioneOggetto>();
+            for(ModelloOggetto object : oggettiVenditore) {
+                listaRecensioniOTMP.addAll(daoRecensioneO.selectReviewsObjects(object.getId()));
+            }
+            ModelloListeRecensioneOggetto listaRecensioniO = new ModelloListeRecensioneOggetto(listaRecensioniOTMP);
+            
+            request.setAttribute("listaRecensioniV", listaRecensioniV);
+            request.setAttribute("listaRecensioniN", listaRecensioniN);
+            request.setAttribute("listaRecensioniO", listaRecensioniO);
+            forward = RISPONDIRECENSIONI;
         }
         else if(action.equals("updateMail")){
             ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
@@ -202,6 +243,9 @@ public class UserController extends HttpServlet {
 
             pair<List<ModelloRecensioneNegozio>, List<ModelloUtente>> recensioniNegozi;
             recensioniNegozi = daoRecensioneN.selectReviewImagesUserByStore(idNegozio);
+            
+            pair<List<ModelloRispostaNegozio>,List<ModelloUtente>> risposteNegozi;
+            risposteNegozi = daoRecensioneN.selectAnswerUserByStore(idNegozio);
 
             ModelloListeImmagineNegozio immagini = new ModelloListeImmagineNegozio(daoImmagineNegozio.selectPhotoStore(idNegozio));
             pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectObjectsImageSelledByStoreID(idNegozio);
@@ -229,6 +273,7 @@ public class UserController extends HttpServlet {
             request.setAttribute("listaOggetti", listaOggetti);
             request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
             request.setAttribute("recensioniNegozi", recensioniNegozi);
+            request.setAttribute("risposteNegozi", risposteNegozi);
             forward = DESCRIZIONENEGOZIO;
         }
         else if(action.equalsIgnoreCase("orderList")){
@@ -424,7 +469,7 @@ public class UserController extends HttpServlet {
 
                     forward = request.getHeader("referer");
                     log("forward: " + forward);
-                    if(forward.equals("http://localhost:8080/ProgettoWeb/UserController?action=addUser") || forward.equals("http://localhost:8080/ProgettoWeb/UserController?action=logout"))
+                    if(forward.equals("http://localhost:8080/ProgettoWeb/PasswordReset?action=confirm") || forward.equals("http://localhost:8080/ProgettoWeb/UserController?action=addUser") || forward.equals("http://localhost:8080/ProgettoWeb/UserController?action=logout"))
                     {
                         redirect = false;
                         forward = HOME_PAGE;
@@ -523,6 +568,7 @@ public class UserController extends HttpServlet {
                 utente.setPassword(request.getParameter("password"));
                 utente.setAvatar("http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png");
                 String confirmPassword = request.getParameter("confirmPassword");
+                utente.setEmailConfermata(false);
 
                 if(!utente.getPassword().equals(confirmPassword)){
                     forward = HOME_PAGE;

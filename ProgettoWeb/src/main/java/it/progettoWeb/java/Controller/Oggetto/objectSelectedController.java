@@ -7,6 +7,7 @@ import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
 import it.progettoWeb.java.database.Dao.immagineOggetto.DaoImmagineOggetto;
 import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
 import it.progettoWeb.java.database.Dao.recensioneOggetto.DaoRecensioneOggetto;
+import it.progettoWeb.java.database.Dao.rispostaOggetto.DaoRispostaOggetto;
 import it.progettoWeb.java.database.Dao.tipoSpedizione.DaoTipoSpedizione;
 import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
@@ -20,6 +21,7 @@ import it.progettoWeb.java.database.Model.immagineRecensione.ModelloListeImmagin
 import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
 import it.progettoWeb.java.database.Model.recensioneOggetto.ModelloListeRecensioneOggetto;
 import it.progettoWeb.java.database.Model.recensioneOggetto.ModelloRecensioneOggetto;
+import it.progettoWeb.java.database.Model.rispostaOggetto.ModelloRispostaOggetto;
 import it.progettoWeb.java.utility.pair.pair;
 import it.progettoWeb.java.utility.tris.tris;
 import java.io.IOException;
@@ -86,6 +88,9 @@ public class objectSelectedController extends HttpServlet {
         tris<List<ModelloRecensioneOggetto>, List<ModelloListeImmagineRecensione>, List<ModelloUtente>> recensioniUtenteImmagini;
         recensioniUtenteImmagini = daoRecensioneOggetto.selectReviewImagesUserByObject(idOggetto);
         
+        pair<List<ModelloRispostaOggetto>,List<ModelloUtente>> risposteOggetto;
+        risposteOggetto = daoRecensioneOggetto.selectAnswerUserByObject(idOggetto);
+        
         ModelloListeRecensioneOggetto recensioni = new ModelloListeRecensioneOggetto(daoRecensione.selectReviewsObjects(idOggetto));
         ModelloIndirizzo indirizzo = daoIndirizzo.selectAddressByIdAddress(negozio.getIdI());
         
@@ -119,6 +124,7 @@ public class objectSelectedController extends HttpServlet {
         request.setAttribute("listaOggetti", listaOggetti);
         request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
         request.setAttribute("recensioniUtenteImmagini", recensioniUtenteImmagini);
+        request.setAttribute("risposteOggetto", risposteOggetto);
         
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);

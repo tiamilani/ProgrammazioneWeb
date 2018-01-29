@@ -29,6 +29,14 @@
                                     <p class="lead">Valutazione: ${recensioniVenditori.getL().get(i).getValutazione()} / 5</p>
                                     <hr class="my-2">
                                     <p class="lead">${recensioniVenditori.getL().get(i).getTesto()}</p>
+                                    <div class="row" style="padding-left: 10%;">
+                                        <div class="col-2">
+                                            <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
+                                        </div>
+                                        <div class="col-8">
+                                            <p class="lead">${risposteVenditori.getL().get(i).getTesto()}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="jumbotron" style="padding: 1rem 1rem">
@@ -39,6 +47,14 @@
                                     <p class="lead">Valutazione: ${recensioniVenditori.getL().get(i+1).getValutazione()} / 5</p>
                                     <hr class="my-2">
                                     <p class="lead">${recensioniVenditori.getL().get(i+1).getTesto()}</p>
+                                    <div class="row" style="padding-left: 10%;">
+                                        <div class="col-2">
+                                            <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
+                                        </div>
+                                        <div class="col-8">
+                                            <p class="lead">${risposteVenditori.getL().get(i+1).getTesto()}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="jumbotron" style="padding: 1rem 1rem">
@@ -49,6 +65,14 @@
                                     <p class="lead">Valutazione: ${recensioniVenditori.getL().get(i+2).getValutazione()} / 5</p>
                                     <hr class="my-2">
                                     <p class="lead">${recensioniVenditori.getL().get(i+2).getTesto()}</p>
+                                    <div class="row" style="padding-left: 10%;">
+                                        <div class="col-2">
+                                            <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
+                                        </div>
+                                        <div class="col-8">
+                                            <p class="lead">${risposteVenditori.getL().get(i+2).getTesto()}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -64,6 +88,14 @@
                                     <p class="lead">Valutazione: ${recensioniVenditori.getL().get(i).getValutazione()} / 5</p>
                                     <hr class="my-2">
                                     <p class="lead">${recensioniVenditori.getL().get(i).getTesto()}</p>
+                                    <div class="row" style="padding-left: 10%;">
+                                        <div class="col-2">
+                                            <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
+                                        </div>
+                                        <div class="col-8">
+                                            <p class="lead">${risposteVenditori.getL().get(i).getTesto()}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -79,6 +111,14 @@
                                     <p class="lead">Valutazione: ${recensioniVenditori.getL().get(i).getValutazione()} / 5</p>
                                     <hr class="my-2">
                                     <p class="lead">${recensioniVenditori.getL().get(i).getTesto()}</p>
+                                    <div class="row" style="padding-left: 10%;">
+                                        <div class="col-2">
+                                            <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
+                                        </div>
+                                        <div class="col-8">
+                                            <p class="lead">${risposteVenditori.getL().get(i).getTesto()}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="jumbotron" style="padding: 1rem 1rem">
@@ -89,6 +129,14 @@
                                     <p class="lead">Valutazione: ${recensioniVenditori.getL().get(i+1).getValutazione()} / 5</p>
                                     <hr class="my-2">
                                     <p class="lead">${recensioniVenditori.getL().get(i+1).getTesto()}</p>
+                                    <div class="row" style="padding-left: 10%;">
+                                        <div class="col-2">
+                                            <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
+                                        </div>
+                                        <div class="col-8">
+                                            <p class="lead">${risposteVenditori.getL().get(i+1).getTesto()}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -105,7 +153,15 @@
                                 <p class="lead">Valutazione: ${recensioniVenditori.getL().get(i).getValutazione()} / 5</p>
                                 <hr class="my-2">
                                 <p class="lead">${recensioniVenditori.getL().get(i).getTesto()}</p>
-                            </div>
+                                <div class="row" style="padding-left: 10%;">
+                                    <div class="col-2">
+                                        <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
+                                    </div>
+                                    <div class="col-8">
+                                        <p class="lead">${risposteVenditori.getL().get(i).getTesto()}</p>
+                                    </div>
+                                </div>
+                        </div>
                         </div>
                         <div class="jumbotron" style="padding: 1rem 1rem">
                             <a href="#review${i+1}" data-toggle="collapse" id="collapReview"><h1 class="h1-responsive">${recensioniVenditori.getR().get(i+1).getCognome()} ${recensioniVenditori.getR().get(i+1).getNome()}</h1></a>
@@ -115,6 +171,14 @@
                                 <p class="lead">Valutazione: ${recensioniVenditori.getL().get(i+1).getValutazione()} / 5</p>
                                 <hr class="my-2">
                                 <p class="lead">${recensioniVenditori.getL().get(i+1).getTesto()}</p>
+                                <div class="row" style="padding-left: 10%;">
+                                    <div class="col-2">
+                                        <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
+                                    </div>
+                                    <div class="col-8">
+                                        <p class="lead">${risposteVenditori.getL().get(i+1).getTesto()}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="jumbotron" style="padding: 1rem 1rem">
@@ -125,6 +189,14 @@
                                 <p class="lead">Valutazione: ${recensioniVenditori.getL().get(i+2).getValutazione()} / 5</p>
                                 <hr class="my-2">
                                 <p class="lead">${recensioniVenditori.getL().get(i+2).getTesto()}</p>
+                                <div class="row" style="padding-left: 10%;">
+                                    <div class="col-2">
+                                        <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
+                                    </div>
+                                    <div class="col-8">
+                                        <p class="lead">${risposteVenditori.getL().get(i+2).getTesto()}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -38,6 +38,15 @@ public class objectsQuery {
                 + "recensioneoggetto JOIN utente ON recensioneoggetto.idUtente=utente.id "
                 + "WHERE recensioneoggetto.idOggetto='" + idO + "';";
     }
+    
+    public static String selectAnswerUserByObject(String idO)
+    {
+        return "SELECT rispostaoggetto.*, utente.* FROM "
+                + "(recensioneoggetto JOIN rispostaoggetto ON "
+                + "recensioneoggetto.id=rispostaoggetto.idRecensione ) JOIN utente "
+                + "ON recensioneoggetto.idUtente=utente.id WHERE "
+                + "recensioneoggetto.idOggetto='" + idO + "';";
+    }
 
     /**
      * @author andrea

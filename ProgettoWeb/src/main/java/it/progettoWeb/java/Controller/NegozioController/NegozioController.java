@@ -195,11 +195,16 @@ public class NegozioController extends HttpServlet {
                 String nomeScritto = request.getParameter("modifyDelete");
                 if(!nomeScritto.isEmpty()){
                     if(nomeScritto.equals(spedizione.getNome())){
-                        boolean cancellaTipoSpedizione = daoTipoSpedizione.deleteSpedizione(spedizione.getIdS());
-                        if(!cancellaTipoSpedizione)
-                            request.setAttribute("spedizioneModificata", 4); 
-                        else
-                            request.setAttribute("spedizioneModificata", 3); 
+                        boolean oggettoSpedizioneAssegnata = daoSpedizioneOggetto.exist(spedizione.getIdS(),idNegozio);
+                        if(!oggettoSpedizioneAssegnata){
+                            boolean cancellaTipoSpedizione = daoTipoSpedizione.deleteSpedizione(spedizione.getIdS());
+                            if(!cancellaTipoSpedizione)
+                                request.setAttribute("spedizioneModificata", 4); 
+                            else
+                                request.setAttribute("spedizioneModificata", 3); 
+                        } else {
+                            request.setAttribute("spedizioneModificata", 6);
+                        }
                     } else {
                         request.setAttribute("spedizioneModificata", 2); 
                     }

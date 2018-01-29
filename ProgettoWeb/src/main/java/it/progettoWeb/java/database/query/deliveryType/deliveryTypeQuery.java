@@ -88,4 +88,8 @@ public class deliveryTypeQuery
     public static String deleteSpedizioneOggetto(int idS, String id) {
         return "DELETE FROM spedizioneoggetto WHERE idS="+idS+" AND idO='"+id+"';";
     }
+
+    public static String exists(int idS, int idNegozio) {
+        return "SELECT * FROM spedizioneoggetto INNER join oggetto on (spedizioneoggetto.idO = oggetto.id) where spedizioneoggetto.idS = "+idS+" AND oggetto.idNegozio = "+idNegozio+";";
+    }
 }

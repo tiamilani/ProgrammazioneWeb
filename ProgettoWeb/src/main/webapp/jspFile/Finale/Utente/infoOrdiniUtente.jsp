@@ -112,7 +112,7 @@
                                             <p><c:out value="${ordine.getDataOrdine()}" /></p>
                                         </div>
                                         <div class="col-2">
-                                            <h2><c:out value="${ordine.getPrezzoDiAcquisto()}" /> &euro;</h2>
+                                            <h2><c:out value="${ordine.getPrezzoDiAcquistoRounded()}" /> &euro;</h2>
                                         </div>
                                         <div class="col-2">
                                             <p>Stato attuale:</p>
@@ -203,7 +203,7 @@
                                                     <c:param name="idOggetto" value="${listaOggetti.get(i).getId()}" />
                                                 </c:url>
                                                 <a href="${objUrl}" class="linkOggetto"><h2><c:out value="${listaOggetti.get(i).getNome()}" /></h2></a>
-                                                <p>quantit&aacute;: <c:out value="${ordine.getQuantita()}"/></p>
+                                                <p>quantit&aacute;: <c:out value="${ordine.getQuantita()}getPrezzoDiAcquistoRounded"/></p>
                                             </div>
                                             <div class="col-2">
                                                 <p>Comprato da: </p>
@@ -223,7 +223,7 @@
                                                 <p><c:out value="${ordine.getDataOrdine()}" /></p>
                                             </div>
                                             <div class="col-2">
-                                                <h2><c:out value="${ordine.getPrezzoDiAcquisto()}" /> &euro;</h2>
+                                                <h2><c:out value="${ordine.getPrezzoDiAcquistoRounded()}" /> &euro;</h2>
                                             </div>
                                             <div class="col-2">
                                                 <p>Stato attuale:</p>
@@ -311,7 +311,7 @@
                                                 <p><c:out value="${ordine.getDataOrdine()}" /></p>
                                             </div>
                                             <div class="col-2">
-                                                <h2><c:out value="${ordine.getPrezzoDiAcquisto()}" /> &euro;</h2>
+                                                <h2><c:out value="${ordine.getPrezzoDiAcquistoRounded()}" /> &euro;</h2>
                                             </div>
                                             <div class="col-2">
                                                 <p>Stato attuale:</p>

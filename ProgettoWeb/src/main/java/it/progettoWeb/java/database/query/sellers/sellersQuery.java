@@ -60,8 +60,19 @@ public class sellersQuery {
     public static String selectReviewUserBySeller(int idV)
     {
         return "SELECT recensionevenditore.*, utente.* FROM "
-                + "recensionevenditore JOIN utente ON recensionevenditore.idUtente=utente.id "
-                + "WHERE recensionevenditore.idVenditore='" + idV + "';";
+                + "(recensionevenditore JOIN rispostavenditore ON "
+                + "recensionevenditore.id=rispostavenditore.idRecensione ) JOIN utente "
+                + "ON recensionevenditore.idUtente=utente.id WHERE "
+                + "recensionevenditore.idVenditore=" + idV + ";";
+    }
+    
+    public static String selectAnswerUserBySeller(int idV)
+    {
+        return "SELECT rispostavenditore.*, utente.* FROM "
+                + "(recensionevenditore JOIN rispostavenditore ON "
+                + "recensionevenditore.id=rispostavenditore.idRecensione ) JOIN utente "
+                + "ON recensionevenditore.idUtente=utente.id WHERE "
+                + "recensionevenditore.idVenditore=" + idV + ";";
     }
 
     /**

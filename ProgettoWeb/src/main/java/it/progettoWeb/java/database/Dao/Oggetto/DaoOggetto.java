@@ -105,15 +105,15 @@ public class DaoOggetto {
     /**
      * @author Mattia
      * Funzione utilizzata per ottenre la lista degli oggetti di un utente venditore partendo dall'id
-     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param idV Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @return List<ModelloOggetto> lista di modelli Oggetto che risultano dalla query
      */
-    public List<ModelloOggetto> selectSellerObjects(int id) {
+    public List<ModelloOggetto> selectSellerObjects(int idV) {
         List<ModelloOggetto> Objects = new ArrayList<>();
 
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjects(id));
+            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjects(idV));
             while (rs.next()) {
                 Objects.add(getModelloFromRs(rs));
             }

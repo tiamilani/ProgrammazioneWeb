@@ -8,13 +8,11 @@
     .item-left {
         float:left;
         display: block;
-        font-size: 16px;
     }
 
     .item-right {
         float:right;
         display: block;
-        font-size: 16px;
     }
 
     .button {
@@ -50,7 +48,7 @@
                 <div class="text-justify">
                     <h5>${oggetto.getDescrizione()}</h5><br>
                     <h5>Popolarita': ${oggetto.getValutazione()} / 5</h5><br/>
-                    <h5>Venduto da: 
+                    <h5 class="mine">Venduto da: 
                         <c:url value="/UserController" var="sellerUrl">
                             <c:param name="action" value="DescrizioneVenditore" />
                             <c:param name="idUtente" value="${venditore.getId()}" />
@@ -74,7 +72,6 @@
                         <span class="col-4 item-left">Prezzo:</span>
                         <span class="col-8 item-right">${oggetto.getPrezzo()} &euro;</span>
                     </div>
-                    <p class="lead"/>
                     <c:if test="${oggetto.getSconto() > 0}">
                         <div class="row">
                             <span class="col-4 item-left">Sconto:</span>

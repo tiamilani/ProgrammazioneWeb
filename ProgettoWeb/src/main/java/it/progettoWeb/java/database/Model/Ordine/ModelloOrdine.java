@@ -5,6 +5,8 @@
  */
 package it.progettoWeb.java.database.Model.Ordine;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -253,5 +255,9 @@ public class ModelloOrdine {
      */
     public void setIdI(int idI) {
         this.idI = idI;
+    }
+    
+    public double getPrezzoDiAcquistoRounded(){
+        return new BigDecimal(prezzoDiAcquisto).setScale(2, RoundingMode.HALF_UP).doubleValue();
     }
 }
