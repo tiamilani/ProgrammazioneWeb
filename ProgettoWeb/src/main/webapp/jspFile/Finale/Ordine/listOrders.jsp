@@ -57,7 +57,7 @@
                     <c:forEach items="${carrelloSessione.getList()}" var="order">
                         <c:forEach items="${objects}" var="object">
                             <c:if test="${order.idOggetto eq object.getL().getId()}">
-                                <div class="row">
+                                <div class="row" style="margin-left: 0px;">
                                     <c:set var="disp" value="${object.getL().getDisponibilita()}"/>
                                     <c:set var="sconto" value="${object.getL().getSconto()}"/>
                                     <c:set var="prezzo" value="${object.getL().getPrezzo()}"/>
@@ -66,12 +66,12 @@
 
                                     <hr size="3" width="100%" align="left"/>
                                     <!-- Immagine prodotto -->
-                                    <div class="col-2">
+                                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                         <img style="width: 100px; height: 100px; object-fit: cover;" src="<c:out value="${object.getR().getSrc()}"/>" alt="img">
                                     </div>
 
                                     <!-- Descrizione prodotto -->
-                                    <div class="col-4">
+                                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                                         <!-- Nome prodotto -->
                                         <div class="row">
                                             <a href="/ProgettoWeb/objectSelectedController?idOggetto=${object.getL().getId()}">
@@ -93,7 +93,7 @@
                                     </div>
 
                                     <!-- Prezzo prodotto + sconto prodotto --> 
-                                    <div class="col-4">
+                                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                         <c:if test="${sconto > 0}">
                                             <c:set var="prezzoScontato" value="${prezzo - (prezzo * sconto / 100)}"/>
                                             <p><del>&euro; <fmt:formatNumber groupingUsed = "false" type = "number"  minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzo}" /></del></p>
@@ -110,7 +110,7 @@
                                     </div>
 
                                     <!-- Quantita' prodotto nel carrello -->
-                                    <div class="col-2">
+                                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                                         <div class="row">
                                             <p style="text-align: left">Quantita': 
                                                 <input id="${iterator}" type="number" min="1" max="${disp}" style="width: 3em; text-align: right" data-oldvalueQuantita="${quantita}"  value="${quantita}" onkeypress="checkInputText(event, this)" onchange="changeQuantity(this)" />

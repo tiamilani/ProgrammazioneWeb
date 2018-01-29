@@ -32,7 +32,7 @@
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <strong>Successo!</strong> Operazione di modifca della passwprd portata a termine con successo
+                    <strong>Successo!</strong> Operazione di modifca della password portata a termine con successo
                 </div>
             </c:when>
             <c:otherwise>

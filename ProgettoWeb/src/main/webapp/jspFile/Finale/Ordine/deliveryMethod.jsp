@@ -120,7 +120,7 @@
                                     <hr size="3" width="100%" align="left"/>
 
                                     <!-- Nome negozio da cui viene spedito il prodotto -->
-                                    <div class="col-12">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <div class="row">
                                             <a href="/ProgettoWeb/UserController?action=DescrizioneNegozio&idNegozio=${shops.get(iterator).getId()}">
                                                 <p>Spedito da <c:out value="${shops.get(iterator).getNomeNegozio()}"/></p>
@@ -128,7 +128,7 @@
                                         </div>
                                     </div>
                                     <!-- Data di consegna prevista del prodotto -->
-                                    <div class="col-12">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <div class="row">
                                             <h6 id="DCP${iterator}"/>
                                         </div>
@@ -137,11 +137,11 @@
                                     <div class="col-12">
                                         <div class="row">
                                             <!-- Immagine prodotto -->
-                                            <div class="col-2">
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                                                 <img style="width: 100px; height: 100px; object-fit: cover;" src="<c:out value="${object.getR().getSrc()}"/>" alt="img">
                                             </div>
 
-                                            <div class="col-4 ">
+                                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                                 <!-- Nome prodotto -->
                                                 <div class="row">
                                                     <a href="/ProgettoWeb/objectSelectedController?idOggetto=${object.getL().getId()}">
@@ -162,7 +162,7 @@
                                             </div>
 
                                             <!-- Selezione metodo di spedizione -->
-                                            <div class="col-6">
+                                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                                 <select id="${iterator}" onchange="changeDescription(this.id)">
                                                     <c:set var="iterator2" value="0"/>
                                                     <c:forEach items="${spedizioniOggetto}" var="spedizione">
@@ -187,7 +187,7 @@
                                     </div>
 
                                     <!-- Prezzo del subtotale: PrezzoProdotto*Quantita + PrezzoSpedizione -->
-                                    <div class="col-12">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <div class="row">
                                             <p id="pSubTot${iterator}" data-oldSubTot="0"/>
                                         </div>
