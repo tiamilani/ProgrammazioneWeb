@@ -11,7 +11,7 @@
         <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
         <link type="stylesheet" href="assistenza.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>ShopEro: Assistenza</title>
+        <title>ShopHero Assistenza</title>
         
         <script type="text/javascript">
             function personalForm(){

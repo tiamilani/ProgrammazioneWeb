@@ -19,7 +19,7 @@
         </div>
             
         <div class="container-fluid">
-            <h2>Quali dati personali dei clienti vengono raccolti su ShopEro?</h2>
+            <h2>Quali dati personali dei clienti vengono raccolti su ShopHero?</h2>
             
             <p>
                 I dati personali che riceviamo dai nostri clienti ci aiutano a personalizzare ed a migliorare continuamente i tuoi acquisti sul sito.
@@ -44,15 +44,15 @@
             </p>
             <p>
                 Riceviamo e conserviamo alcune categorie di dati personali ogni volta che interagisci con noi. 
-                Ad esempio, come molti siti web, utilizziamo "cookie" e otteniamo alcuni dati quando il tuo browser web accede ad ShopEro o ad annunci pubblicitari 
-                e ad altri contenuti presentati con riferimento a ShopEro su altri siti web.
+                Ad esempio, come molti siti web, utilizziamo "cookie" e otteniamo alcuni dati quando il tuo browser web accede ad ShopHero o ad annunci pubblicitari 
+                e ad altri contenuti presentati con riferimento a ShopHero su altri siti web.
             </p>
 
             <p>
                 <strong>Dispositivi mobili</strong>
             </p>
             <p>
-                Quando scarichi o utilizzi applicazioni create da ShopEro o dalle sue affiliate e, se applicabile, quando hai richiesto o acconsentito all'utilizzo della funzione di localizzazione sul tuo dispositivo mobile, 
+                Quando scarichi o utilizzi applicazioni create da ShopHero o dalle sue affiliate e, se applicabile, quando hai richiesto o acconsentito all'utilizzo della funzione di localizzazione sul tuo dispositivo mobile, 
                 potremmo ricevere informazioni riguardo alla tua posizione geografica ed al tuo dispositivo mobile, incluso un identificativo unico per il tuo dispositivo. 
                 Potremmo utilizzare queste informazioni per fornirti servizi basati sulla localizzazione come risultati della ricerca ed altro contenuto personalizzato. 
                 La maggior parte dei dispositivi mobili ti consente di disattivare i servizi di localizzazione. 

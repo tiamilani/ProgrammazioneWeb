@@ -469,7 +469,7 @@ public class UserController extends HttpServlet {
 
                     forward = request.getHeader("referer");
                     log("forward: " + forward);
-                    if(forward.equals("http://localhost:8080/ProgettoWeb/UserController?action=addUser") || forward.equals("http://localhost:8080/ProgettoWeb/UserController?action=logout"))
+                    if(forward.equals("http://localhost:8080/ProgettoWeb/PasswordReset?action=confirm") || forward.equals("http://localhost:8080/ProgettoWeb/UserController?action=addUser") || forward.equals("http://localhost:8080/ProgettoWeb/UserController?action=logout"))
                     {
                         redirect = false;
                         forward = HOME_PAGE;
@@ -568,6 +568,7 @@ public class UserController extends HttpServlet {
                 utente.setPassword(request.getParameter("password"));
                 utente.setAvatar("http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png");
                 String confirmPassword = request.getParameter("confirmPassword");
+                utente.setEmailConfermata(false);
 
                 if(!utente.getPassword().equals(confirmPassword)){
                     forward = HOME_PAGE;

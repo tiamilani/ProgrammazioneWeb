@@ -11,7 +11,7 @@
 <html>
     <head>
     <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
-    <title>ShopEro</title>
+    <title>ShopHero</title>
         <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 

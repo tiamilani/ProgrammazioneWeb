@@ -50,7 +50,7 @@
                 </div>
                 <div class="card cardSmall" style="box-shadow: none; align-items: center">
                     <img class="imgCard" src="https://images-na.ssl-images-amazon.com/images/G/30/amazonservices/2015/assets/images/icons/benefits/svg/trusted.svg" alt="IMAGE NOT LOADED" style="width: 50%; height: 50%;">
-                    <div class="container"><p>Questo e molto altro ti aspetta se deciderai di diventare venditore in ShopEro</p></div>
+                    <div class="container"><p>Questo e molto altro ti aspetta se deciderai di diventare venditore in ShopHero</p></div>
                 </div>
             </div>
             

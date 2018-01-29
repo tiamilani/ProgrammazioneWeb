@@ -26,19 +26,19 @@
             </div>
             <hr>
             <div class="row">
-                <div class="col-4">
+                <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
                     <p>
                         Codice identificativo dell'ordine:<br>
                         <c:out value="${ordine.getIdOrdine()}" />
                     </p>
                 </div>
-                <div class="col-5">
+                <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12">
                     <p>
                         Id e nome dell'oggetto dell'ordine:<br>
                         <c:out value="${oggetto.getId()}" /> - <c:out value="${oggetto.getNome()}" />
                     </p>
                 </div>
-                <div class="col-3">
+                <div class="col-lg-3 col-sm-12 col-xs-12">
                     <p>
                         Stato attuale dell'ordine:<br>
                         <c:choose>
@@ -61,25 +61,25 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-2">
+                <div class="col-lg-2 col-md-4 col-sm-12 col-xs-12">
                     <p>
                         Prezzo di acquisto:<br>
                         <c:out value="${ordine.getPrezzoDiAcquisto()}" />&euro;
                     </p>
                 </div>
-                <div class="col-1">
+                <div class="col-xl-1 col-lg-2 col-md-4 col-sm-12 col-xs-12">
                     <p>
                         Quantit&aacute;:<br>
                         <c:out value="${ordine.getQuantita()}" />
                     </p>
                 </div>
-                <div class="col-2">
+                <div class="col-lg-2 col-md-4 col-sm-12 col-xs-12">
                     <p>
                         Data di acquisto:<br>
                         <c:out value="${ordine.getDataOrdine()}" />
                     </p>
                 </div>
-                <div class="col-4">
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <p>
                         Modalit&aacute; di spedizione:<br>
                         <c:choose>
@@ -92,9 +92,9 @@
                         </c:choose>
                     </p>
                 </div>
-                <div class="col-2">
+                <div class="col-xl-3 col-md-6 col-sm-12 col-xs-12">
                     <p>
-                        Data di arrivo presunta<br>
+                        Data di arrivo presunta:<br>
                         <c:choose>
                             <c:when test="${ordine.getIdS() == 0}">
                                 Ritiro in negozio
@@ -123,11 +123,11 @@
             </div>
             <div class="row">
                 <c:choose>
-                    <c:when test="${ordine.getIdS() == 0}">
+                    <c:when test="${ordine.getIdS() == null}">
                         <p>
                             Quest'ordine non va spedito, dovrai aspettare che l'utente venga a ritirare il prodotto. <br>
                         </p>
-                        <div class="col-3">
+                        <div class="col-xl-4 col-sm-12 col-xs-12">
                             <a href="${pageContext.request.contextPath}/NegozioController?action=articoloRitirato&idOrdine=<c:out value="${ordine.getIdOrdine()}" />&idOggetto=<c:out value="${ordine.getIdOggetto()}" />" method="GET" class="btn btn-outline-primary buttonSpace btn-block">Ordine ritirato dall'utente</a>
                         </div>
                     </c:when>
@@ -136,7 +136,7 @@
                     <c:when test="${ordine.getStato() == 5}">
                     </c:when>
                     <c:when test="${ordine.getStato() == 1}">
-                        <div class="col-3">
+                        <div class="col-xl-4 col-sm-12 col-xs-12">
                             <a href="${pageContext.request.contextPath}/NegozioController?action=portaOrdineInLavorazione&idOrdine=<c:out value="${ordine.getIdOrdine()}" />&idOggetto=<c:out value="${ordine.getIdOggetto()}" />" method="GET" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">build</i> Porta L'ordine in lavorazione</a>
                         </div>
                     </c:when>
@@ -146,13 +146,17 @@
                             <input type="hidden" id="idOrdine" name="idOrdine" value="${ordine.getIdOrdine()}">
                             <input type="hidden" id="idOggetto" name="idOggetto" value="${oggetto.getId()}">
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col-lg-8 col-sm-12 col-xs-12">
                                     <p>
                                         Inserisci il codice di tracking se noto, altrimenti lascia vuoto, non sarà più modificabile
-                                        <input type="text" class="form-control" id="codiceTracking" name="codiceTracking" maxlength="40" placeholder="Track this">
                                     </p>
                                 </div>
-                                <div class="col-4">
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-8 col-sm-12 col-xs-12">
+                                    <input type="text" class="form-control" id="codiceTracking" name="codiceTracking" maxlength="40" placeholder="Track this">
+                                </div>
+                                <div class="col-lg-4 col-sm-12 col-xs-12">
                                     <button action="submit" type="submit" class="btn btn-outline-primary btn-block" id="btnModify">L'ordine è stato spedito</button>
                                 </div>
                             </div>
@@ -182,8 +186,6 @@
                 </c:choose>
             </div>
         </div>
-        <div class="container">
             <%@include file="../Footer/footer.jsp" %>
-        </div>
     </body>
 </html>

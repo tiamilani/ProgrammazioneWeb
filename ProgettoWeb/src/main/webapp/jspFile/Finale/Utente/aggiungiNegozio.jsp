@@ -90,7 +90,7 @@
                 </div>
                 <div class="col-12">
                     <h1>Aggiungi un negozio</h1>
-                    <p>Aggiungendo un negozio migliori le tue possbilità di vendita, ma attento, i tuoi utenti e noi di shopero ci aspettiamo che tu sia sempre leale corretto e sincero</p>
+                    <p>Aggiungendo un negozio migliori le tue possbilità di vendita, ma attento, i tuoi utenti e noi di ShopHero ci aspettiamo che tu sia sempre leale corretto e sincero.</p>
                     <p>Una volta aggiunto il tuo negozio potrai gestirlo ed aggiungervi gli oggetti che sono in vendita dalla pagina "Gestisci negozi" presente nel tuo account</p> 
                 </div>
                 <div class="col-12">
@@ -145,108 +145,108 @@
                         <p>Ora gentilmente inserisci gli orari ed i giorni di apertura del tuo negozio, in modo che gli utenti che vorranno venire a ritirare gli oggetti in negozio possano conoscerli</p>
                     </div>
                     <div class="row">
-                        <div class="col-1">
+                        <div class="col-xl-1 col-sm-3 d-none d-sm-block">
                             <p>Giorno</p>
                         </div>
-                        <div class="col-4">
+                        <div class="col-xl-4 col-sm-3 d-none d-sm-block">
                             <p>Orario apertura</p>
                         </div>
-                        <div class="col-4">
+                        <div class="col-xl-4 col-sm-3 d-none d-sm-block">
                             <p>Orario chiusura</p>
                         </div>
-                        <div class="col-3">
+                        <div class="col-xl-3 col-sm-3 d-none d-sm-block">
                             <p>Giorno di chiusura</p>
                         </div>
                         
                         
-                        <div class="col-1">
+                        <div class="col-xl-1 col-sm-3">
                             <p>Luned&iacute;</p>
                         </div>
-                        <div class="col-4">
+                        <div class="col-xl-4 col-sm-3">
                             <input type="time" class="form-control" id="orarioAperturaNegozioLunedi" name="orarioAperturaNegozioLunedi">
                         </div>
-                        <div class="col-4">
+                        <div class="col-xl-4 col-sm-3">
                             <input type="time" class="form-control" id="orarioChiusuraNegozioLunedi" name="orarioChiusuraNegozioLunedi">
                         </div>
-                        <div class="col-3">
+                        <div class="col-xl-3 col-sm-3">
                             <input type="checkbox" class="form-check-input" id="chiusoLunedi" name="chiusoLunedi">
                             Chiuso
                         </div>
-                        <div class="col-1">
+                        <div class="col-xl-1 col-sm-3">
                             <p>Marted&iacute;</p>
                         </div>
-                        <div class="col-4">
+                        <div class="col-xl-4 col-sm-3">
                             <input type="time" class="form-control" id="orarioAperturaNegozioMartedi" name="orarioAperturaNegozioMartedi">
                         </div>
-                        <div class="col-4">
+                        <div class="col-xl-4 col-sm-3">
                             <input type="time" class="form-control" id="orarioChiusuraNegozioMartedi" name="orarioChiusuraNegozioMartedi">
                         </div>
-                        <div class="col-3">
+                        <div class="col-xl-3 col-sm-3">
                             <input type="checkbox" class="form-check-input" id="chiusoMartedi" name="chiusoMartedi">
                             Chiuso
                         </div>
-                        <div class="col-1">
+                        <div class="col-xl-1 col-sm-3">
                             <p>Mercoled&iacute;</p>
                         </div>
-                        <div class="col-4">
+                        <div class="col-xl-4 col-sm-3">
                             <input type="time" class="form-control" id="orarioAperturaNegozioMercoledi" name="orarioAperturaNegozioMercoledi">
                         </div>
-                        <div class="col-4">
+                        <div class="col-xl-4 col-sm-3">
                             <input type="time" class="form-control" id="orarioChiusuraNegozioMercoledi" name="orarioChiusuraNegozioMercoledi">
                         </div>
-                        <div class="col-3">
+                        <div class="col-xl-3 col-sm-3">
                             <input type="checkbox" class="form-check-input" id="chiusoMercoledi" name="chiusoMercoledi">
                             Chiuso
                         </div>
-                        <div class="col-1">
+                        <div class="col-xl-1 col-sm-3">
                             <p>Gioed&iacute;</p>
                         </div>
-                        <div class="col-4">
+                        <div class="col-xl-4 col-sm-3">
                             <input type="time" class="form-control" id="orarioAperturaNegozioGiovedi" name="orarioAperturaNegozioGiovedi">
                         </div>
-                        <div class="col-4">
+                        <div class="col-xl-4 col-sm-3">
                             <input type="time" class="form-control" id="orarioChiusuraNegozioGiovedi" name="orarioChiusuraNegozioGiovedi">
                         </div>
-                        <div class="col-3">
+                        <div class="col-xl-3 col-sm-3">
                             <input type="checkbox" class="form-check-input" id="chiusoGiovedi" name="chiusoGiovedi">
                             Chiuso
                         </div>
-                        <div class="col-1">
+                        <div class="col-xl-1 col-sm-3">
                             <p>Venerd&iacute;</p>
                         </div>
-                        <div class="col-4">
+                        <div class="col-xl-4 col-sm-3">
                             <input type="time" class="form-control" id="orarioAperturaNegozioVenerdi" name="orarioAperturaNegozioVenerdi">
                         </div>
-                        <div class="col-4">
+                        <div class="col-xl-4 col-sm-3">
                             <input type="time" class="form-control" id="orarioChiusuraNegozioVenerdi" name="orarioChiusuraNegozioVenerdi">
                         </div>
-                        <div class="col-3">
+                        <div class="col-xl-3 col-sm-3">
                             <input type="checkbox" class="form-check-input" id="chiusoVenerdi" name="chiusoVenerdi">
                             Chiuso
                         </div>
-                        <div class="col-1">
+                        <div class="col-xl-1 col-sm-3">
                             <p>Sabato</p>
                         </div>
-                        <div class="col-4">
+                        <div class="col-xl-4 col-sm-3">
                             <input type="time" class="form-control" id="orarioAperturaNegozioSabato" name="orarioAperturaNegozioSabato">
                         </div>
-                        <div class="col-4">
+                        <div class="col-xl-4 col-sm-3">
                             <input type="time" class="form-control" id="orarioChiusuraNegozioSabato" name="orarioChiusuraNegozioSabato">
                         </div>
-                        <div class="col-3">
+                        <div class="col-xl-3 col-sm-3">
                             <input type="checkbox" class="form-check-input" id="chiusoSabato" name="chiusoSabato">
                             Chiuso
                         </div>
-                        <div class="col-1">
+                        <div class="col-xl-1 col-sm-3">
                             <p>Domenica</p>
                         </div>
-                        <div class="col-4">
+                        <div class="col-xl-4 col-sm-3">
                             <input type="time" class="form-control" id="orarioAperturaNegozioDomenica" name="orarioAperturaNegozioDomenica">
                         </div>
-                        <div class="col-4">
+                        <div class="col-xl-4 col-sm-3">
                             <input type="time" class="form-control" id="orarioChiusuraNegozioDomenica" name="orarioChiusuraNegozioDomenica">
                         </div>
-                        <div class="col-3">
+                        <div class="col-xl-3 col-sm-3">
                             <input type="checkbox" class="form-check-input" id="chiusoDomenica" name="chiusoDomenica">
                             Chiuso
                         </div>
@@ -257,26 +257,49 @@
                         <p>Devi obbligatoriamente inserire un metodo di spedizione adesso, altrimenti gli utenti non sapranno come farsi mandare i tuoi oggetti</p>
                     </div>
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-md-4 col-sm-12 col-xs-12">
                             <p>Nome della spedizione</p>
+                        </div>
+                        <div class="col-md-4 d-none d-sm-none d-md-block">
+                            <p>Prezzo della spedizione</p>
+                        </div>
+                        <div class="col-md-4 d-none d-sm-none d-md-block">
+                            <p>Corriere che effettuer&aacute; la consegna</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12 col-xs-12">
                             <input type="text" class="form-control" id="nomeSpedizione" name="nomeSpedizione" maxlength="50" placeholder="Spedizione standard" required>
                         </div>
-                        <div class="col-4">
+                        <div class="d-block d-sm-block d-md-none col-sm-12 col-xs-12">
                             <p>Prezzo della spedizione</p>
+                        </div>
+                        <div class="col-md-4 col-sm-12 col-xs-12">
                             <input type="text" class="form-control" id="prezzoSpedizione" name="prezzoSpedizione" placeholder="10.0" required>
                         </div>
-                        <div class="col-4">
+                        <div class="d-block d-sm-block d-md-none col-sm-12 col-xs-12">
                             <p>Corriere che effettuer&aacute; la consegna</p>
+                        </div>
+                        <div class="col-md-4 col-sm-12 col-xs-12">
                             <input type="text" class="form-control" id="corriereSpedizione" name="corriereSpedizione" maxlength="50" placeholder="Corriere" required>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-md-4 col-sm-12 col-xs-12">
                             <p>Giorni lavorativi per la consegna</p>
+                        </div>
+                        <div class="col-md-8 d-none d-sm-none d-md-block">
+                            <p>Numero massimo di oggetti presenti per singola spedizione, oltre questa soglia verranno applicate nuovamente le spese di spedizione all'ordine</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12 col-xs-12">
                             <input class="form-control" type="number" id="giorniConsegna" name="giorniConsegna" value="5" required>
                         </div>
-                        <div class="col-8">
+                        <div class="d-block d-sm-block d-md-none col-sm-12 col-xs-12">
                             <p>Numero massimo di oggetti presenti per singola spedizione, oltre questa soglia verranno applicate nuovamente le spese di spedizione all'ordine</p>
+                        </div>
+                        <div class="col-md-8 col-sm-12 col-xs-12">
                             <input class="form-control" type="number" id="numeroMassimo" name="numeroMassimo" value="5" required>
                         </div>
                     </div>

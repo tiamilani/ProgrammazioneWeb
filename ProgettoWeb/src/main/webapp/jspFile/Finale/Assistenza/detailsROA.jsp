@@ -11,8 +11,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/textareaAssistance.css">
         <title>Assistance Management</title>
     </head>
+    
+    <script src="${pageContext.request.contextPath}/jspFile/Finale/JS/fixFooter.js"></script>
     
     <body>
         <div class="container">
@@ -129,9 +132,6 @@
                 </div>
             </div>
         </div>
-            
-        <div class="container">
-            <hr>
-            <%@include file="../Footer/footer.jsp" %>
-        </div>
+        
+        <%@include file="../Footer/footer.jsp" %>
 </html>
