@@ -204,9 +204,11 @@ public class OrdineController extends HttpServlet {
                 
                 if(showError)
                 {
-                    request.setAttribute("erroreQuantita", "Alcuni oggetti nel carrello superano la quantita' massima disponibile.");
+                    request.setAttribute("erroreQuantita", 1);
                     showError = false;
                 }
+                else
+                    request.setAttribute("erroreQuantita", 0);
             }
         } catch (Exception e) { System.out.println(getServletName() + " error message = " + e.toString()); forward = ERROR_PAGE; request.setAttribute("errore", "404 Pagina non trovata"); }
         

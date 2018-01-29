@@ -30,31 +30,31 @@
                 <h3><b>Assistenze in attesa di risposta</b></h3>
                 
                 <c:if test="${assistenzeAperte.size() == 0}">
-                    <span><b>Nessun assistenza in corso.</b></span>
+                    <p><b>Nessun assistenza in corso.</b></p>
                 </c:if>
                     
                 <c:if test="${assistenzeAperte.size() > 0}">
                     <div class="row">
                         <div class="col-2">
-                            <span><b>Data apertura</b></span>
+                            <p><b>Data apertura</b></p>
                         </div>
                         <div class="col-2">
-                            <span><b>Richiedente</b></span>
+                            <p><b>Richiedente</b></p>
                         </div>
                         <div class="col-6">
-                            <span><b>Anteprima richiesta</b></span>
+                            <p><b>Anteprima richiesta</b></p>
                         </div>
                     </div>
                     <c:forEach items="${assistenzeAperte}" var="assAperta">
                         <div class="row">
                             <div class="col-2">
-                                <c:out value="${assAperta.getL().getDataApertura()}"/>
+                                <p><c:out value="${assAperta.getL().getDataApertura()}"/></p>
                             </div>
                             <div class="col-2">
-                                <c:out value="${assAperta.getR()}"/>
+                                <p><c:out value="${assAperta.getR()}"/></p>
                             </div>
                             <div class="col-6">
-                                <c:out value="${fn:substring(assAperta.getL().getRichiesta(), 0, 200)}"/> ...
+                                <p><c:out value="${fn:substring(assAperta.getL().getRichiesta(), 0, 200)}"/> ...</p>
                             </div>
                             <div class="col-2">
                                 <button class="btn btn-outline-primary buttonSpace" type="button" data-idA="${assAperta.getL().getId()}" onclick="openAssistance(this)">RISOLVI</button>
@@ -68,43 +68,43 @@
                 <h3><b>Assistenze concluse</b></h3>
                 
                 <c:if test="${assistenzeChiuse.size() == 0}">
-                    <span><b>Nessun assistenza conclusa.</b></span>
+                    <p><b>Nessun assistenza conclusa.</b></p>
                 </c:if>
                 
                 <c:if test="${assistenzeChiuse.size() > 0}">                    
                     <div class="row">
                         <div class="col-2">
-                            <span><b>Data apertura</b></span>
+                            <p><b>Data apertura</b></p>
                         </div>
                         <div class="col-2">
-                            <span><b>Data chiusura</b></span>
+                            <p><b>Data chiusura</b></p>
                         </div>
                         <div class="col-2">
-                            <span><b>Richiedente</b></span>
+                            <p><b>Richiedente</b></p>
                         </div>
                         <div class="col-2">
-                            <span><b>Anteprima richiesta</b></span>
+                            <p><b>Anteprima richiesta</b></p>
                         </div>
                         <div class="col-2">
-                            <span><b>Anteprima soluzione</b></span>
+                            <p><b>Anteprima soluzione</b></p>
                         </div>
                     </div>
                     <c:forEach items="${assistenzeChiuse}" var="assChiusa">
                         <div class="row">
                             <div class="col-2">
-                                <c:out value="${assChiusa.getL().getDataApertura()}"/>
+                                <p><c:out value="${assChiusa.getL().getDataApertura()}"/></p>
                             </div>
                             <div class="col-2">
-                                <c:out value="${assChiusa.getL().getDataChiusura()}"/>
+                                <p><c:out value="${assChiusa.getL().getDataChiusura()}"/></p>
                             </div>
                             <div class="col-2">
-                                <c:out value="${assChiusa.getR()}"/>
+                                <p><c:out value="${assChiusa.getR()}"/></p>
                             </div>
                             <div class="col-2">
-                                <c:out value="${fn:substring(assChiusa.getL().getRichiesta(), 0, 20)}"/> ...
+                                <p><c:out value="${fn:substring(assChiusa.getL().getRichiesta(), 0, 20)}"/> ...</p>
                             </div>
                             <div class="col-2">
-                                <c:out value="${fn:substring(assChiusa.getL().getSoluzione(), 0, 20)}"/> ...
+                                <p><c:out value="${fn:substring(assChiusa.getL().getSoluzione(), 0, 20)}"/> ...</p>
                             </div>
                             <div class="col-2">
                                 <button class="btn btn-outline-primary buttonSpace" type="button" data-idA="${assChiusa.getL().getId()}" onclick="openAssistance(this)">VISUALIZZA</button>

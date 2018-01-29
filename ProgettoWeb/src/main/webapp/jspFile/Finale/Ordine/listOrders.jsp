@@ -42,17 +42,18 @@
             <%@include file="../Header/NavBar/newNavBar.jsp" %>
         </div>
         
+        
+        
+        
+        
         <div class="container-fluid">
+            <%@include file="../alert/alertOverQuantity.jsp" %>
             <c:set var="iterator" value="0"/>
             
             <h2><b>CARRELLO</b></h2>
             
-            <c:if test="${erroreQuantita != null}">
-                <b style="text-align: center"><c:out value="${erroreQuantita}" /></b>
-            </c:if>
-            
             <c:if test="${carrelloSessione.getSize() == 0}">
-                <span><b>Nessun articolo nel carrello.</b></span>
+                <p><b>Nessun articolo nel carrello.</b></p>
             </c:if>
             <c:if test="${carrelloSessione.getSize() > 0}">
                 <div>
@@ -76,7 +77,7 @@
                                     <div class="col-4">
                                         <!-- Nome prodotto -->
                                         <div class="row">
-                                            <c:out value="${object.getL().getNome()}" />
+                                            <p><c:out value="${object.getL().getNome()}" /></p>
                                         </div>
                                         <!-- Disponibilita' prodotto -->
                                         <div class="row" id="lblDisponibilita${iterator}" data-disponibilita="${disp}">
