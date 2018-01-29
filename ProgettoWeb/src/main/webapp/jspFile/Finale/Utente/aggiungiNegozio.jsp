@@ -90,7 +90,7 @@
                 </div>
                 <div class="col-12">
                     <h1>Aggiungi un negozio</h1>
-                    <p>Aggiungendo un negozio migliori le tue possbilità di vendita, ma attento, i tuoi utenti e noi di shopero ci aspettiamo che tu sia sempre leale corretto e sincero</p>
+                    <p>Aggiungendo un negozio migliori le tue possbilità di vendita, ma attento, i tuoi utenti e noi di ShopHero ci aspettiamo che tu sia sempre leale corretto e sincero.</p>
                     <p>Una volta aggiunto il tuo negozio potrai gestirlo ed aggiungervi gli oggetti che sono in vendita dalla pagina "Gestisci negozi" presente nel tuo account</p> 
                 </div>
                 <div class="col-12">

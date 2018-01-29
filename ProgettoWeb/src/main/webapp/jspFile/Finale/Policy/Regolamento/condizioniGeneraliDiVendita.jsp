@@ -39,7 +39,7 @@
                 <li>
                     <span class="a-list-item"><strong>IL NOSTRO CONTRATTO </strong>
                         <p>
-                            La presentazione di prodotti e di servizi sul sito ShopEro costituisce un invito ad offrire.
+                            La presentazione di prodotti e di servizi sul sito ShopHero costituisce un invito ad offrire.
                         </p>
                         <p>
                             Se desideri comprare uno o pi&ugrave; prodotti, potrai selezionarli uno alla volta, aggiungendoli al tuo carrello.
@@ -48,7 +48,7 @@
                             Ti verr&agrave; richiesto di scegliere la soluzione preferita per la consegna, il trasporto e il metodo di pagamento.
                         </p>
                         <p>
-                            Il tuo ordine verr&agrave; quindi considerato come una tua proposta contrattuale di acquisto rivolta ad ShopEro per i prodotti elencati, considerati ciascuno singolarmente. 
+                            Il tuo ordine verr&agrave; quindi considerato come una tua proposta contrattuale di acquisto rivolta ad ShopHero per i prodotti elencati, considerati ciascuno singolarmente. 
                             Al ricevimento del tuo ordine, ti invieremo automaticamente un messaggio di presa in carico dell'ordine stesso ("Conferma Ordine"). 
                             La Conferma Ordine non costituisce accettazione della tua proposta di acquisto. 
                             Con l'invio della Conferma Ordine, infatti, ti confermiamo solamente di aver ricevuto l'ordine e di averlo sottoposto a processo di verifica dati e di disponibilit&agrave; dei prodotti da te richiesti. 
@@ -69,7 +69,7 @@
                             diversa dal corriere.
                         </p>
                         <p>
-                            Per poter esercitare il diritto di recesso, &egrave; necessario che la relativa comunicazione sia inviata prima della scadenza del periodo di 14 giorni e che il prodotto sia restituito a ShopEro.
+                            Per poter esercitare il diritto di recesso, &egrave; necessario che la relativa comunicazione sia inviata prima della scadenza del periodo di 14 giorni e che il prodotto sia restituito a ShopHero.
                         </p>
 
                         <p>
@@ -77,10 +77,10 @@
                         </p>
                         <p>
                             Ti rimborseremo tutti i pagamenti ricevuti in relazione al prodotto per il quale hai esercitato il diritto di recesso, inclusi i costi di spedizione relativi alla modalit&agrave; 
-                            di spedizione pi&ugrave; economica offerta da ShopEro, entro 14 giorni dal giorno in cui abbiamo ricevuto la comunicazione relativa all&rsquo;esercizio del diritto di recesso. 
+                            di spedizione pi&ugrave; economica offerta da ShopHero, entro 14 giorni dal giorno in cui abbiamo ricevuto la comunicazione relativa all&rsquo;esercizio del diritto di recesso. 
                             Effettueremo il rimborso sullo stesso metodo di pagamento che hai utilizzato per effettuare l&rsquo;ordine, salva tua diversa indicazione. 
                             In ogni caso, non sosterrai alcun costo quale conseguenza di tale rimborso. 
-                            Potremo trattenere il rimborso fino a quando non avremo ricevuto il prodotto oppure finch&eacute; non avrai fornito prova di aver provveduto a restituirlo ad ShopEro, a seconda di quale situazione si verifichi prima.
+                            Potremo trattenere il rimborso fino a quando non avremo ricevuto il prodotto oppure finch&eacute; non avrai fornito prova di aver provveduto a restituirlo ad ShopHero, a seconda di quale situazione si verifichi prima.
                             Dovrai sostenere i costi diretti per la restituzione dei prodotti. 
                             Potresti essere ritenuto responsabile della diminuzione del valore dei beni risultante da una manipolazione dei beni (diversa da quella necessaria per stabilire la natura, le caratteristiche e il funzionamento dei beni).
                         </p>
@@ -105,7 +105,7 @@
                             - fornitura di beni che rischiano di deteriorarsi o scadere rapidamente;
                         </p>
                         <p>
-                            - contratti di servizi dopo la completa prestazione del servizio da parte di ShopEro, se hai espressamente consentito 
+                            - contratti di servizi dopo la completa prestazione del servizio da parte di ShopHero, se hai espressamente consentito 
                             all'esecuzione del servizio da parte nostra accettando la perdita del diritto di recesso a seguito della piena esecuzione del contratto;
                         </p>
                         <p>
@@ -118,7 +118,7 @@
                         </p>
                         <p>
                             - fornitura di bevande alcoliche, il cui prezzo sia stato concordato al momento della conclusione del contratto di vendita, 
-                            la cui consegna possa avvenire solo dopo trenta giorni e il cui valore effettivo dipende da fluttuazioni del mercato che non possono essere controllate da ShopEro.
+                            la cui consegna possa avvenire solo dopo trenta giorni e il cui valore effettivo dipende da fluttuazioni del mercato che non possono essere controllate da ShopHero.
                         </p>
                         
                     </span>
@@ -159,7 +159,7 @@
                     <span class="a-list-item"><strong>MINORI</strong>
                         <p>
                             Non vendiamo prodotti ai minori. Vendiamo prodotti per bambini che possono essere acquistati solo da parte di adulti. 
-                            Se hai meno di 18 anni, puoi utilizzare ShopEro solo coinvolgendo un genitore o un tutore.
+                            Se hai meno di 18 anni, puoi utilizzare ShopHero solo coinvolgendo un genitore o un tutore.
                         </p>
                     </span>
                 </li>
