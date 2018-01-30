@@ -27,6 +27,7 @@
     <script type="text/javascript" src="http://localhost:8080/ProgettoWeb/jspFile/Finale/JS/jquery.autocomplete.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/btnColor.css" >
     <script src="${pageContext.request.contextPath}/jspFile/Finale/JS/md5.min.js"></script>
+    <link rel="shortcut icon" type="image/jpg" href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/shopero_logo.jpg" />
 <script>
     $(document).ready(function(){
       $('#registerModal input').focus(function(){

@@ -106,7 +106,7 @@ public class InserisciRecensioneController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        String forward = "";
+        String forward = "http://localhost:8080/ProgettoWeb";
         String action = request.getParameter("action");
         
         if(action.equals("Oggetto")) {
@@ -115,7 +115,7 @@ public class InserisciRecensioneController extends HttpServlet {
             String testoRecensione = request.getParameter("testoReview").replace('\'', ' ');
             int valutazioneRecensione = Integer.parseInt(request.getParameter("valutazioneReview"));
             
-            forward = "/objectSelectedController?idOggetto=" + idOggetto;
+            forward += "/objectSelectedController?idOggetto=" + idOggetto;
             
             ModelloRecensioneOggetto recensioneOggetto = new ModelloRecensioneOggetto();
             recensioneOggetto.setIdUtente(idUtente);
@@ -145,7 +145,7 @@ public class InserisciRecensioneController extends HttpServlet {
             String testoRecensione = request.getParameter("testoReview").replace('\'', ' ');
             int valutazioneRecensione = Integer.parseInt(request.getParameter("valutazioneReview"));
             
-            forward = "/UserController?action=DescrizioneNegozio&idNegozio=" + idNegozio;
+            forward += "/UserController?action=DescrizioneNegozio&idNegozio=" + idNegozio;
             
             ModelloRecensioneNegozio recensioneNegozio = new ModelloRecensioneNegozio();
             recensioneNegozio.setIdUtente(idUtente);
@@ -165,7 +165,7 @@ public class InserisciRecensioneController extends HttpServlet {
             String testoRecensione = request.getParameter("testoReview").replace('\'', ' ');
             int valutazioneRecensione = Integer.parseInt(request.getParameter("valutazioneReview"));
             
-            forward = "/UserController?action=DescrizioneVenditore&idUtente=" + idVenditore;
+            forward += "/UserController?action=DescrizioneVenditore&idUtente=" + idVenditore;
             
             ModelloRecensioneVenditore recensioneVenditore = new ModelloRecensioneVenditore();
             recensioneVenditore.setIdUtente(idUtente);
@@ -180,8 +180,7 @@ public class InserisciRecensioneController extends HttpServlet {
             daoUtente.updateUserStars(idVenditore, newMedia);
         }
         
-        RequestDispatcher view = request.getRequestDispatcher(forward);
-        view.forward(request, response);
+        response.sendRedirect(forward);
     }
     
     /**
