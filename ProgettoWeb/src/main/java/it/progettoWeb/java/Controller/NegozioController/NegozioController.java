@@ -655,7 +655,7 @@ public class NegozioController extends HttpServlet {
                     daoSpedizioneOggetto.addSpedizioneOggetto(listaTipiSpedizione.get(0).getIdS(),newObject.getId());
                 }
                 
-                double limitPrice = (double)request.getSession().getAttribute("massimoPrezzoAttuale");
+                int limitPrice = (int)request.getSession().getAttribute("massimoPrezzoAttuale");
                 if(limitPrice < Double.parseDouble(request.getParameter("prezzo"))){
                     request.getSession().setAttribute("massimoPrezzoAttuale", daoOggetto.getMaxPrice());
                     request.getSession().setAttribute("massimoRangeAttuale", "0," + (int)(daoOggetto.getMaxPrice()) + "");
