@@ -22,7 +22,7 @@
             <form id="formOptionOrder" name="formOptionOrder" action="${pageContext.request.contextPath}/UserController" method="GET">
                 <input type="hidden" id="action" name="action" value="orderList">
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-xl-3 col-lg-5 col-sm-12 col-xs-12">
                         <p>Ordine: </p>
                         <c:choose>
                             <c:when test="${order == 'data'}">
@@ -84,17 +84,17 @@
                             <c:forEach items="${listaOrdini.getList()}" var="ordine" >
                                     <c:if test="${ordine.getStato() != 0 && ordine.getStato() != 5}">
                                     <div class="row">
-                                        <div class="col-1">
+                                        <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3">
                                             <img src="${listaImmagini.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: 50px; height: 50px; object-fit: cover;">
                                         </div>
-                                        <div class="col-3">
+                                        <div class="col-lg-3 col-md-6 col-sm-10 col-xs-9">
                                             <c:url value="/objectSelectedController" var="objUrl" >
                                                 <c:param name="idOggetto" value="${listaOggetti.get(i).getId()}" />
                                             </c:url>
                                             <a href="${objUrl}" class="linkOggetto"><h2><c:out value="${listaOggetti.get(i).getNome()}" /></h2></a>
                                             <p>quantit&aacute;: <c:out value="${ordine.getQuantita()}"/></p>
                                         </div>
-                                        <div class="col-2">
+                                        <div class="col-lg-2 col-md-5 col-sm-6 col-xs-12">
                                             <p>Comprato da: </p>
                                             <c:url value="/UserController" var="storeUrl">
                                                 <c:param name="action" value="DescrizioneNegozio" />
@@ -107,14 +107,15 @@
                                             </c:url>
                                             <p><a href="${sellerUrl}"><c:out value="${listaVenditori.get(i).getCognome()}" /> <c:out value="${listaVenditori.get(i).getNome()}" /></a></p>
                                         </div>
-                                        <div class="col-2">
+                                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                                             <p>Comprato il:</p>
                                             <p><c:out value="${ordine.getDataOrdine()}" /></p>
                                         </div>
-                                        <div class="col-2">
-                                            <h2><c:out value="${ordine.getPrezzoDiAcquisto()}" /> &euro;</h2>
+                                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                                            <p>Prezzo:</p>
+                                            <h2><c:out value="${ordine.getPrezzoDiAcquistoRounded()}" /> &euro;</h2>
                                         </div>
-                                        <div class="col-2">
+                                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                                             <p>Stato attuale:</p>
                                             <c:choose>
                                                 <c:when test="${ordine.getStato() == 1}">
@@ -134,7 +135,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-4 mx-auto">
+                                        <div class="col-lg-5 col-sm-12 col-xs-12 mx-auto">
                                             <form id="richiestaAssistenza" name="richiestaAssistenza" action="${pageContext.request.contextPath}/AssistenzaController?action=createAssistance" method="POST">
                                                 <input type="hidden" id="idOrdine" name="idOrdine" value="${ordine.getIdOrdine()}">
                                                 <input type="hidden" id="idOggetto" name="idOggetto" value="${ordine.getIdOggetto()}">
@@ -195,17 +196,17 @@
                                             </c:when>
                                         </c:choose>
                                         <div class="row">
-                                            <div class="col-1">
+                                            <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3">
                                                 <img src="${listaImmagini.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: 50px; height: 50px; object-fit: cover;">
                                             </div>
-                                            <div class="col-3">
+                                            <div class="col-lg-3 col-md-6 col-sm-10 col-xs-9">
                                                 <c:url value="/objectSelectedController" var="objUrl" >
                                                     <c:param name="idOggetto" value="${listaOggetti.get(i).getId()}" />
                                                 </c:url>
                                                 <a href="${objUrl}" class="linkOggetto"><h2><c:out value="${listaOggetti.get(i).getNome()}" /></h2></a>
-                                                <p>quantit&aacute;: <c:out value="${ordine.getQuantita()}"/></p>
+                                                <p>quantit&aacute;: <c:out value="${ordine.getQuantita()}getPrezzoDiAcquistoRounded"/></p>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-lg-2 col-md-5 col-sm-6 col-xs-12">
                                                 <p>Comprato da: </p>
                                                 <c:url value="/UserController" var="storeUrl">
                                                     <c:param name="action" value="DescrizioneNegozio" />
@@ -218,14 +219,15 @@
                                                 </c:url>
                                                 <p><a href="${sellerUrl}"><c:out value="${listaVenditori.get(i).getCognome()}" /> <c:out value="${listaVenditori.get(i).getNome()}" /></a></p>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                                                 <p>Comprato il:</p>
                                                 <p><c:out value="${ordine.getDataOrdine()}" /></p>
                                             </div>
-                                            <div class="col-2">
-                                                <h2><c:out value="${ordine.getPrezzoDiAcquisto()}" /> &euro;</h2>
+                                            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                                                <p>Prezzo:</p>
+                                                <h2><c:out value="${ordine.getPrezzoDiAcquistoRounded()}" /> &euro;</h2>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                                                 <p>Stato attuale:</p>
                                                 <c:choose>
                                                     <c:when test="${ordine.getStato() == 1}">
@@ -245,7 +247,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                        <div class="col-4 mx-auto">
+                                        <div class="col-lg-5 col-sm-12 col-xs-12 mx-auto">
                                             <form id="richiestaAssistenza" name="richiestaAssistenza" action="${pageContext.request.contextPath}/AssistenzaController?action=createAssistance" method="POST">
                                                 <input type="hidden" id="idOrdine" name="idOrdine" value="${ordine.getIdOrdine()}">
                                                 <input type="hidden" id="idOggetto" name="idOggetto" value="${ordine.getIdOggetto()}">
@@ -283,17 +285,17 @@
                                 <c:forEach items="${listaOrdini.getList()}" var="ordine" >
                                     <c:if test="${ordine.getStato() != 0 && ordine.getStato() != 5}">
                                         <div class="row">
-                                            <div class="col-1">
+                                            <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3">
                                                 <img src="${listaImmagini.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: 50px; height: 50px; object-fit: cover;">
                                             </div>
-                                            <div class="col-3">
+                                            <div class="col-lg-3 col-md-6 col-sm-10 col-xs-9">
                                                 <c:url value="/objectSelectedController" var="objUrl" >
                                                     <c:param name="idOggetto" value="${listaOggetti.get(i).getId()}" />
                                                 </c:url>
                                                 <a href="${objUrl}" class="linkOggetto"><h2><c:out value="${listaOggetti.get(i).getNome()}" /></h2></a>
                                                 <p>quantit&aacute;: <c:out value="${ordine.getQuantita()}"/></p>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-lg-2 col-md-5 col-sm-6 col-xs-12">
                                                 <p>Comprato da: </p>
                                                 <c:url value="/UserController" var="storeUrl">
                                                     <c:param name="action" value="DescrizioneNegozio" />
@@ -306,14 +308,14 @@
                                                 </c:url>
                                                 <p><a href="${sellerUrl}"><c:out value="${listaVenditori.get(i).getCognome()}" /> <c:out value="${listaVenditori.get(i).getNome()}" /></a></p>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                                                 <p>Comprato il:</p>
                                                 <p><c:out value="${ordine.getDataOrdine()}" /></p>
                                             </div>
-                                            <div class="col-2">
-                                                <h2><c:out value="${ordine.getPrezzoDiAcquisto()}" /> &euro;</h2>
+                                            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                                                <h2><c:out value="${ordine.getPrezzoDiAcquistoRounded()}" /> &euro;</h2>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                                                 <p>Stato attuale:</p>
                                                 <c:choose>
                                                     <c:when test="${ordine.getStato() == 1}">
@@ -333,7 +335,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                        <div class="col-4 mx-auto">
+                                        <div class="col-lg-5 col-sm-12 col-xs-12 mx-auto">
                                             <form id="richiestaAssistenza" name="richiestaAssistenza" action="${pageContext.request.contextPath}/AssistenzaController?action=createAssistance" method="POST">
                                                 <input type="hidden" id="idOrdine" name="idOrdine" value="${ordine.getIdOrdine()}">
                                                 <input type="hidden" id="idOggetto" name="idOggetto" value="${ordine.getIdOggetto()}">
@@ -371,17 +373,17 @@
                                 <c:forEach items="${listaOrdini.getList()}" var="ordine" >
                                     <c:if test="${ordine.getStato() != 0 && ordine.getStato() != 5}">
                                         <div class="row">
-                                            <div class="col-1">
+                                            <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3">
                                                 <img src="${listaImmagini.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: 50px; height: 50px; object-fit: cover;">
                                             </div>
-                                            <div class="col-3">
+                                            <div class="col-lg-3 col-md-6 col-sm-10 col-xs-9">
                                                 <c:url value="/objectSelectedController" var="objUrl" >
                                                     <c:param name="idOggetto" value="${listaOggetti.get(i).getId()}" />
                                                 </c:url>
                                                 <a href="${objUrl}" class="linkOggetto"><h2><c:out value="${listaOggetti.get(i).getNome()}" /></h2></a>
                                                 <p>quantit&aacute;: <c:out value="${ordine.getQuantita()}"/></p>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-lg-2 col-md-5 col-sm-6 col-xs-12">
                                                 <p>Comprato da: </p>
                                                 <c:url value="/UserController" var="storeUrl">
                                                     <c:param name="action" value="DescrizioneNegozio" />
@@ -394,14 +396,14 @@
                                                 </c:url>
                                                 <p><a href="${sellerUrl}"><c:out value="${listaVenditori.get(i).getCognome()}" /> <c:out value="${listaVenditori.get(i).getNome()}" /></a></p>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                                                 <p>Comprato il:</p>
                                                 <p><c:out value="${ordine.getDataOrdine()}" /></p>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                                                 <h2><c:out value="${ordine.getPrezzoDiAcquisto()}" /> &euro;</h2>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                                                 <p>Stato attuale:</p>
                                                 <c:choose>
                                                     <c:when test="${ordine.getStato() == 1}">
@@ -421,7 +423,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                        <div class="col-4 mx-auto">
+                                        <div class="col-lg-5 col-sm-12 col-xs-12 mx-auto">
                                             <form id="richiestaAssistenza" name="richiestaAssistenza" action="${pageContext.request.contextPath}/AssistenzaController?action=createAssistance" method="POST">
                                                 <input type="hidden" id="idOrdine" name="idOrdine" value="${ordine.getIdOrdine()}">
                                                 <input type="hidden" id="idOggetto" name="idOggetto" value="${ordine.getIdOggetto()}">

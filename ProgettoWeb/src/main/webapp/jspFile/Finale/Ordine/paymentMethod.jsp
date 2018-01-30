@@ -16,7 +16,8 @@
         <title>Metodo di Pagamento</title>
     </head>
     
-    <script src="http://localhost:8080/ProgettoWeb/jspFile/Finale/JS/Orders.js"></script>
+    <script src="${pageContext.request.contextPath}/jspFile/Finale/JS/Orders.js"></script>
+    <script src="${pageContext.request.contextPath}/jspFile/Finale/JS/fixFooter.js"></script>
     
     <body>
         <div class="container">
@@ -30,29 +31,70 @@
             <hr/>
             
             <div class="row">
-                <div class="col-6"><b>RIEPILOGO ORDINE</b></div>
-                <div class="col-6"><b>INDIRIZZO DI CONSEGNA</b></div>
-            </div>
-            <div class="row">
-                <div class="col-6">
-                    <p>Totale numero articoli: <c:out value="${nArticoli}"/></p>
-                    <p>Prezzo totale: &euro; <c:out value="${prezzoTot}"/></p>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <p><b>RIEPILOGO ORDINE</b></p>
+                            <p>Totale numero articoli: <c:out value="${nArticoli}"/></p>
+                            <p>Prezzo totale: &euro; <c:out value="${prezzoTot}"/></p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-3">
-                    <p>Nome e cognome:</p>
-                    <p>Via:</p>
-                    <p>N° Civico:</p>
-                    <p>Citta':</p>
-                    <p>Provincia:</p>
-                    <p>Stato:</p>
-                </div>
-                <div class="3">
-                    <p><c:out value="${utenteSessione.getNome()}"/> <c:out value="${utenteSessione.getCognome()}"/></p>
-                    <p><c:out value="${address.getVia()}"/></p>
-                    <p><c:out value="${address.getnCivico()}"/></p>
-                    <p><c:out value="${address.getCitta()}"/></p>
-                    <p><c:out value="${address.getProvincia()}"/></p>
-                    <p><c:out value="${address.getStato()}"/></p>
+                    
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <p><b>INDIRIZZO DI CONSEGNA</b></p>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <p><b>Nome e cognome:</b></p>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <p><c:out value="${utenteSessione.getNome()}"/> <c:out value="${utenteSessione.getCognome()}"/></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <p><b>Via:</b></p>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <p><c:out value="${address.getVia()}"/></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <p><b>N° Civico:</b></p>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <p><c:out value="${address.getnCivico()}"/></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <p><b>Citta':</b></p>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <p><c:out value="${address.getCitta()}"/></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <p><b>Provincia:</b></p>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <p><c:out value="${address.getProvincia()}"/></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <p><b>Stato:</b></p>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <p><c:out value="${address.getStato()}"/></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
                 
@@ -61,22 +103,39 @@
             <h4><b>Inserire i dati per il pagamento:</b></h4>
             <form method="POST" id="formPayment" name="formPayment" action="/ProgettoWeb/OrdineController?save=3&action=finish">
                 <div class="row">
-                    <div class="col-12">
-                        <p><b> Carta di credito </b><img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/creditCarts.png" alt="imgCreditCards"></p>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p><b> Carta di credito </b><img src="${pageContext.request.contextPath}/jspFile/Finale/Img/creditCarts.png" alt="imgCreditCards"></p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                         <p>Nome titolare:</p>
-                        <p>Cognome titolare:</p>
-                        <p>Numero carta:</p>
-                        <p>Data di scadenza:</p>
-                        <p>Codice di controllo</p>
                     </div>
-                    <div class="col-6">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                         <p><input type="tetx" id="nameCard" name="nameTitCard" style="text-transform:uppercase" onkeypress="checkInputTextLetters(event, this)" required/></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <p>Cognome titolare:</p>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                         <p><input type="tetx" id="surnameCard" name="surnameCard" style="text-transform:uppercase" onkeypress="checkInputTextLetters(event, this)" required/></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <p>Numero carta:</p>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                         <p><input type="tel" id="numCard" name="numCard" minlength="16" maxlength="19" onkeypress="checkInputText(event, this)" required/></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <p>Data di scadenza:</p>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                         <p>
                             <select id="expCard_Month" name="expCard_Month" required>
                                 <option value="">mm</option>
@@ -95,7 +154,6 @@
                             </select>
                             <select id="expCard_Year" name="expCard_Year" required>
                                 <option value="">yyyy</option>
-                                <option value="17">2017</option>
                                 <option value="18">2018</option>
                                 <option value="19">2019</option>
                                 <option value="20">2020</option>
@@ -112,11 +170,18 @@
                                 <option value="31">2031</option>
                             </select>
                         </p>
-                        <p><input type="tel" id="checkCard" name="checkCard" minlength="3" maxlength="5" onkeypress="checkInputText(event, this)" required/><img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/cvv.png" alt="imgCVV"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <p>Codice di controllo</p>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <p><input type="tel" id="checkCard" name="checkCard" minlength="3" maxlength="5" onkeypress="checkInputText(event, this)" required/><img src="${pageContext.request.contextPath}/jspFile/Finale/Img/cvv.png" alt="imgCVV"></p>
                     </div>
                 </div>
             </form>
-            
+                        
             <button form="formPayment" class="btn btn-outline-primary buttonSpace" type="submit">Paga adesso</button>
         </div>
         

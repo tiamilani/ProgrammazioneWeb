@@ -32,26 +32,49 @@
                     <input type="hidden" name="idNegozio" value="${negozio.getId()}">
                     <input type="hidden" id="modifyTipoSpedizione" name="modifyTipoSpedizione" value="${spedizione.getIdS()}">
                     <div class="row">
-                        <div class="col-4">
-                            <p>Modifca il nome attuale della spedizione</p>
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <p>Nome della spedizione</p>
+                        </div>
+                        <div class="col-md-4 d-none d-sm-none d-md-block">
+                            <p>Prezzo della spedizione</p>
+                        </div>
+                        <div class="col-md-4 d-none d-sm-none d-md-block">
+                            <p>Corriere che effettuer&aacute; la consegna</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12 col-xs-12">
                             <input type="text" class="form-control" id="mdifyNomeSpedizione" name="mdifyNomeSpedizione" maxlength="50" value="${spedizione.getNome()}" required>
                         </div>
-                        <div class="col-4">
-                            <p>Modifica il prezzo attuale della spedizione</p>
+                        <div class="d-block d-sm-block d-md-none col-sm-12 col-xs-12">
+                            <p>Prezzo della spedizione</p>
+                        </div>
+                        <div class="col-md-4 col-sm-12 col-xs-12">
                             <input type="text" class="form-control" id="mdifyPrezzoSpedizione" name="mdifyPrezzoSpedizione" value="${spedizione.getPrezzo()}" required>
                         </div>
-                        <div class="col-4">
-                            <p>Modifca il nome del corriere che effettuer&aacute; la consegna</p>
+                        <div class="d-block d-sm-block d-md-none col-sm-12 col-xs-12">
+                            <p>Corriere che effettuer&aacute; la consegna</p>
+                        </div>
+                        <div class="col-md-4 col-sm-12 col-xs-12">
                             <input type="text" class="form-control" id="mdifyCorriereSpedizione" name="mdifyCorriereSpedizione" maxlength="50" value="${spedizione.getCorriere()}" required>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-md-4 col-sm-12 col-xs-12">
                             <p>Giorni lavorativi per la consegna</p>
+                        </div>
+                        <div class="col-md-8 d-none d-sm-none d-md-block">
+                            <p>Numero massimo di oggetti presenti per singola spedizione, oltre questa soglia verranno applicate nuovamente le spese di spedizione all'ordine</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12 col-xs-12">
                             <input class="form-control" type="number" id="modifyGiorniConsegna" name="modifyGiorniConsegna" value="${spedizione.getTempoRichiesto()}" required>
                         </div>
-                        <div class="col-8">
+                        <div class="d-block d-sm-block d-md-none col-sm-12 col-xs-12">
                             <p>Numero massimo di oggetti presenti per singola spedizione, oltre questa soglia verranno applicate nuovamente le spese di spedizione all'ordine</p>
+                        </div>
+                        <div class="col-md-8 col-sm-12 col-xs-12">
                             <input class="form-control" type="number" id="modifyNumeroMassimo" name="modifyNumeroMassimo" value="${spedizione.getNumeroMassimo()}" required>
                         </div>
                     </div>
@@ -63,9 +86,7 @@
                 </form>
             </div>
         </div>
-        <div class="container">
-            <%@include file="../Footer/footer.jsp" %>
-        </div>
+        <%@include file="../Footer/footer.jsp" %>
     </body>
 </html>
 

@@ -60,8 +60,19 @@ public class sellersQuery {
     public static String selectReviewUserBySeller(int idV)
     {
         return "SELECT recensionevenditore.*, utente.* FROM "
-                + "recensionevenditore JOIN utente ON recensionevenditore.idUtente=utente.id "
-                + "WHERE recensionevenditore.idVenditore='" + idV + "';";
+                + "(recensionevenditore JOIN rispostavenditore ON "
+                + "recensionevenditore.id=rispostavenditore.idRecensione ) JOIN utente "
+                + "ON recensionevenditore.idUtente=utente.id WHERE "
+                + "recensionevenditore.idVenditore=" + idV + ";";
+    }
+    
+    public static String selectAnswerUserBySeller(int idV)
+    {
+        return "SELECT rispostavenditore.*, utente.* FROM "
+                + "(recensionevenditore JOIN rispostavenditore ON "
+                + "recensionevenditore.id=rispostavenditore.idRecensione ) JOIN utente "
+                + "ON recensionevenditore.idUtente=utente.id WHERE "
+                + "recensionevenditore.idVenditore=" + idV + ";";
     }
 
     /**
@@ -752,14 +763,16 @@ public class sellersQuery {
      * Aggiorna il valore dell'idS dell'ordine selezionato
      * @param idOrdine: intero rappresentante l'ID dell'ordine
      * @param idS: intero rappresentante l'ID della spedizione associata all'ordine
+     * @param idOggetto: intero rappresentante l'ID dell'oggetto associato all'ordine
+     * @param idUtente: intero rappresentante l'ID dell'utente associato all'ordine
      * @return String: conferma avvenuta operazione
      */
-    public static String updateOrderIdS(int idOrdine, int idS)
+    public static String updateOrderIdS(int idOrdine, int idS, String idOggetto, int idUtente)
     {
         if(idS == -1) //Ritiro in negozio
-            return "UPDATE ordine SET idS = NULL WHERE idOrdine = " + idOrdine + ";";
+            return "UPDATE ordine SET idS = NULL WHERE idOrdine = " + idOrdine + " AND idOggetto = '" + idOggetto + "' AND idUtente = " + idUtente + ";";
         else
-            return "UPDATE ordine SET idS = " + idS + " WHERE idOrdine = " + idOrdine + ";";
+            return "UPDATE ordine SET idS = " + idS + " WHERE idOrdine = " + idOrdine + " AND idOggetto = '" + idOggetto + "' AND idUtente = " + idUtente + ";";
     }
 
 
@@ -781,11 +794,13 @@ public class sellersQuery {
      * Aggiorna il valore dell'idI dell'ordine selezionato
      * @param idOrdine: intero rappresentante l'ID dell'ordine
      * @param idI: intero rappresentante l'ID dell'indirizzo associato all'ordine
+     * @param idOggetto: intero rappresentante l'ID dell'oggetto associato all'ordine
+     * @param idUtente: intero rappresentante l'ID dell'utente associato all'ordine
      * @return String: conferma avvenuta operazione
      */
-    public static String updateOrderIdI(int idOrdine, int idI)
+    public static String updateOrderIdI(int idOrdine, int idI, String idOggetto, int idUtente)
     {
-        return "UPDATE ordine SET idI = " + idI + " WHERE idOrdine = " + idOrdine + ";";
+        return "UPDATE ordine SET idI = " + idI + " WHERE idOrdine = " + idOrdine + " AND idOggetto = '" + idOggetto + "' AND idUtente = " + idUtente + ";";
     }
 
 

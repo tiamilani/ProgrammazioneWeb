@@ -40,7 +40,7 @@
             <c:set var="limitColum" value="${4}" scope="page" />
             <%@include file="../Components/Liste/ListaOggetto/testListaOggetto.jsp" %>
         </div>
-        
+
         <%@include file="../Footer/footer.jsp" %>
         <!--- 2017-11-08 --->
         <script type="text/javascript">

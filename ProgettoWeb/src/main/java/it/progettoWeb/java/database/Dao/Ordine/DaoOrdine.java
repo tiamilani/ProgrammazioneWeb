@@ -503,12 +503,14 @@ public class DaoOrdine {
      * Aggiorna il valore dell'idS dell'ordine selezionato
      * @param idOrdine: intero rappresentante l'ID dell'ordine
      * @param idS: intero rappresentante l'ID della spedizione associata all'ordine
+     * @param idOggetto: intero rappresentante l'ID dell'oggetto associato all'ordine
+     * @param idUtente: intero rappresentante l'ID dell'utente associato all'ordine
      */
-    public void updateOrderIdS(int idOrdine, int idS)
+    public void updateOrderIdS(int idOrdine, int idS, String idOggetto, int idUtente)
     {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement(sellersQuery.updateOrderIdS(idOrdine, idS));
+                    .prepareStatement(sellersQuery.updateOrderIdS(idOrdine, idS, idOggetto, idUtente));
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -546,12 +548,14 @@ public class DaoOrdine {
      * Aggiorna il valore dell'idI dell'ordine selezionato
      * @param idOrdine: intero rappresentante l'ID dell'ordine
      * @param idI: intero rappresentante l'ID dell'indirizzo associato all'ordine
+     * @param idOggetto: intero rappresentante l'ID dell'oggetto associato all'ordine
+     * @param idUtente: intero rappresentante l'ID dell'utente associato all'ordine
      */
-    public void updateOrderIdI(int idOrdine, int idI)
+    public void updateOrderIdI(int idOrdine, int idI, String idOggetto, int idUtente)
     {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement(sellersQuery.updateOrderIdI(idOrdine, idI));
+                    .prepareStatement(sellersQuery.updateOrderIdI(idOrdine, idI, idOggetto, idUtente));
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

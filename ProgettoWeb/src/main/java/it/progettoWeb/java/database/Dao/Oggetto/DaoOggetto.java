@@ -105,15 +105,15 @@ public class DaoOggetto {
     /**
      * @author Mattia
      * Funzione utilizzata per ottenre la lista degli oggetti di un utente venditore partendo dall'id
-     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param idV Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @return List<ModelloOggetto> lista di modelli Oggetto che risultano dalla query
      */
-    public List<ModelloOggetto> selectSellerObjects(int id) {
+    public List<ModelloOggetto> selectSellerObjects(int idV) {
         List<ModelloOggetto> Objects = new ArrayList<>();
 
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjects(id));
+            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerObjects(idV));
             while (rs.next()) {
                 Objects.add(getModelloFromRs(rs));
             }
@@ -985,8 +985,8 @@ public class DaoOggetto {
                 immagini.add(DaoImmagineOggetto.getModelloFromRs(rs));
             }
         } catch (SQLException e) {}
-    
-        
+
+
         res = new pair(Objects, immagini);
         return res;
     }
@@ -5636,7 +5636,7 @@ public class DaoOggetto {
         }
         return true;
     }
-    
+
     public boolean updateObjectStars(String idOggetto, double value)
     {
         try
@@ -5730,7 +5730,7 @@ public class DaoOggetto {
         }
         catch (SQLException e) {}
     }
-    
+
     /**
      * @author fbrug
      * Modificare la quantita' di un oggetto
@@ -8368,7 +8368,7 @@ public class DaoOggetto {
             boolean place = false;
             boolean before = false;
             String query = "SELECT Oggetto.*, imageOggetto.* FROM Oggetto INNER JOIN imageOggetto ON (Oggetto.id = imageOggetto.idO)";
-            
+
             if(negozio != null && negozio.length() > 0){
                 query = query + " INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id)";
                 shop = true;
@@ -8379,7 +8379,7 @@ public class DaoOggetto {
             }else if(venditore != null && venditore.length() > 0){
                 query = query + " INNER JOIN Utente ON (Negozio.idVenditore = Utente.id)";
             }
-            
+
             if(!regione.equals("Regione")){
                 if(shop || seller){
                     query = query + " INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI)";
@@ -8388,7 +8388,7 @@ public class DaoOggetto {
                     query = query + " INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id) INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI)";
                 }
             }
-            
+
             if(shop){
                 query = query + " WHERE Negozio.nomeNegozio LIKE '%" + negozio + "%'";
             }
@@ -8413,7 +8413,7 @@ public class DaoOggetto {
                 query = query + " WHERE Oggetto.categoria = " + categoria;
                 before = true;
             }
-            
+
             if(shop || seller || before){
                 if(minPrice > 0 && maxPrice < 1000){
                     query = query + " AND Oggetto.prezzo BETWEEN " + minPrice + " AND " + maxPrice;
@@ -8432,28 +8432,28 @@ public class DaoOggetto {
                 }
                 before = true;
             }
-            
+
             if(sconto && (shop || seller || before)){
                 query = query + " AND Oggetto.sconto <> 0";
             }else if(sconto){
                 query = query + " WHERE Oggetto.sconto <> 0";
                 before = true;
             }
-            
+
             if(ritiro && (shop || seller || before)){
                 query = query + " AND Oggetto.ritiroInNegozio = 1";
             }else if(ritiro){
                 query = query + " WHERE Oggetto.ritiroInNegozio = 1";
                 before = true;
             }
-            
+
             if(shop || seller || before){
                 query = query + " AND Oggetto.valutazione >= " + minRating;
             }else{
                 query = query + " WHERE Oggetto.valutazione >= " + minRating;
                 before = true;
             }
-            
+
             if(!regione.equals("Regione")){
                 if(shop || seller || before){
                     query = query + " AND Indirizzo.regione LIKE '" + regione + "'";
@@ -8468,9 +8468,9 @@ public class DaoOggetto {
 
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(query);
-            
+
             if(name.length() != 0){
-                JaroWinkler jw = new JaroWinkler(); 
+                JaroWinkler jw = new JaroWinkler();
 
                 while (rs.next()) {
 
@@ -8482,16 +8482,16 @@ public class DaoOggetto {
                     }
                     /*oggetti.add(DaoOggetto.getModelloFromRs(rs));
                     immagini.add(DaoImmagineOggetto.getModelloFromRs(rs));*/
-                } 
+                }
             }else{
                 while (rs.next()) {
                     oggetti.add(DaoOggetto.getModelloFromRs(rs));
                     immagini.add(DaoImmagineOggetto.getModelloFromRs(rs));
-                } 
+                }
             }
-            
+
         } catch (SQLException e) {}
-        
+
         res = new pair(oggetti, immagini);
         return res;
     }
@@ -8506,7 +8506,7 @@ public class DaoOggetto {
         }
         return true;
     }
-    
+
     /**
      * @author Damiano
      * Ottenere la lista di oggetti che contengono una stringa nel nome
@@ -8519,11 +8519,11 @@ public class DaoOggetto {
             public int compare(Object first, Object second) {
                 return Double.compare(((pair<Double, String>)first).getL(),((pair<Double, String>)second).getL());
             }
-            
+
         });
-        
+
         JaroWinkler jw = new JaroWinkler();
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(objectsQuery.selectAllObjectNames());
@@ -8531,12 +8531,12 @@ public class DaoOggetto {
             while (rs.next()) {
                 queue.add(new pair(jw.distance(searched.toLowerCase(), rs.getString(1).toLowerCase()), rs.getString(1)));
             }
-            
+
             /*System.out.println("Oggetti trovati: " + queue.size());
             System.out.println("Distanza delle stringhe da " + nomeDownCase);*/
-            
+
         } catch (SQLException e) {}
-        
+
         List<String> result = new ArrayList<>();
         //System.out.println("Elementi nella queue di dimensione " + queue.size());
         int i = 1;
@@ -8546,15 +8546,15 @@ public class DaoOggetto {
             i++;
             result.add(elem.getR());
         }
-        
+
         return result;
     }
-    
+
     public double getMaxPrice() {
         try{
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(genericsQuery.getMaxPrice());
-            if(rs.next()){ 
+            if(rs.next()){
                 return Math.ceil(rs.getDouble(1));
             }
             else return (0);
@@ -8562,5 +8562,5 @@ public class DaoOggetto {
         }
         return 0;
     }
-    
+
 }

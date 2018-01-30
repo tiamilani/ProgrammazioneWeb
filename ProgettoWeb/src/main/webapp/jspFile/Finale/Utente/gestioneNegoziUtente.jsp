@@ -21,6 +21,11 @@
                 });
             } );
         </script>
+        <style>
+            table.dataTable > tbody > tr.child ul.dtr-details{
+                width: 100%;
+            }
+        </style>
     </head>
     <body style="padding-bottom: 0rem;">
         <div class="container">

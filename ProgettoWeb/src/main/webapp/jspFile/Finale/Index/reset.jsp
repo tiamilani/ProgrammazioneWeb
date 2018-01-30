@@ -14,7 +14,7 @@
 <html>
     <head>
         <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
-        <title>ShopEro</title>
+        <title>ShopHero</title>
     </head>
     
     <body>

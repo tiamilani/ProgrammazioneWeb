@@ -384,7 +384,13 @@ public class genericsQuery {
      * @return String: Informazioni sulle recensioni dell'oggetto ricercato
      */
     public static String selectReviewsObjects(String idO) {
-        return "SELECT * FROM recensioneoggetto WHERE idOggetto = '" + idO + "';";
+        return "SELECT * from recensioneoggetto where "
+                + "recensioneoggetto.idOggetto='" + idO + "' and "
+                + "recensioneoggetto.id NOT IN "
+                + "(SELECT recensioneoggetto.id from recensioneoggetto "
+                + "join rispostaoggetto on "
+                + "recensioneoggetto.id=rispostaoggetto.idRecensione) "
+                + "order by data desc;";
     }
 
     /**

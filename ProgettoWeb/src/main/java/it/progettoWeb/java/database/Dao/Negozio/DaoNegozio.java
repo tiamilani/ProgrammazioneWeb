@@ -87,15 +87,15 @@ public class DaoNegozio {
     /**
      * @author Mattia
      * Funzione utilizzata per ottenre la lista dei negozio di un utente venditore partendo dall'id
-     * @param id Un intero che rappresenta l'identificativo del soggetto preso in considerazione
+     * @param idV Un intero che rappresenta l'identificativo del soggetto preso in considerazione
      * @return List<ModelloNegozio> lista di modelli negozio che risultano dalla query
      */
-    public List<ModelloNegozio> selectSellerStore(int id) {
+    public List<ModelloNegozio> selectSellerStore(int idV) {
         List<ModelloNegozio> Stores = new ArrayList<>();
         
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerStores(id));
+            ResultSet rs = statement.executeQuery(objectSellersQuery.selectSellerStores(idV));
             while (rs.next()) {
                 Stores.add(getModelloFromRs(rs));
             }

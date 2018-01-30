@@ -177,6 +177,16 @@ public class usersQuery {
     public static String selectReviewsStores(int idU){
         return "SELECT * FROM recensionenegozio WHERE idUtente ="+idU+";";
     }
+    
+    public static String selectReviewStores(int idN){
+        return "SELECT * from recensionenegozio where "
+                + "recensionenegozio.idNegozio=" + idN + " and "
+                + "recensionenegozio.id NOT IN "
+                + "(SELECT recensionenegozio.id from recensionenegozio "
+                + "join rispostanegozio on "
+                + "recensionenegozio.id=rispostanegozio.idRecensione) "
+                + "order by data desc;";
+    }
 
     /**
      * @author Andrea
@@ -186,6 +196,16 @@ public class usersQuery {
      */
     public static String selectReviewsSellers(int idU){
         return "SELECT * FROM recensionevenditore WHERE idUtente ="+idU+";";
+    }
+    
+    public static String selectReviewsSeller(int idV){
+        return "SELECT * from recensionevenditore where "
+                + "recensionevenditore.idVenditore=" + idV + " and "
+                + "recensionevenditore.id NOT IN "
+                + "(SELECT recensionevenditore.id from recensionevenditore "
+                + "join rispostavenditore on "
+                + "recensionevenditore.id=rispostavenditore.idRecensione) "
+                + "order by data desc;";
     }
 
     /**
@@ -210,6 +230,18 @@ public class usersQuery {
         return "SELECT rispostanegozio.* FROM rispostanegozio, recensionenegozio "
                 + "WHERE recensionenegozio.idUtente ="+idU+" AND "
                 + "rispostanegozio.idRecensione = recensionenegozio.id;";
+    }
+    
+    public static String insertAnswerToStore(int idR, String testo){
+        return "INSERT INTO rispostanegozio (idRecensione,testo,data) VALUES (" + idR + ",'" + testo + "',CURRENT_TIMESTAMP);";
+    }
+    
+    public static String insertAnswerToObject(int idR, String testo){
+        return "INSERT INTO rispostaoggetto (idRecensione,testo,data) VALUES (" + idR + ",'" + testo + "',CURRENT_TIMESTAMP);";
+    }
+    
+    public static String insertAnswerToSeller(int idR, String testo){
+        return "INSERT INTO rispostavenditore (idRecensione,testo,data) VALUES (" + idR + ",'" + testo + "',CURRENT_TIMESTAMP);";
     }
 
     /**

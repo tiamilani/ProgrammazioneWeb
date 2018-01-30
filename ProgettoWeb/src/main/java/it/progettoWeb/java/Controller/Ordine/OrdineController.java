@@ -177,17 +177,17 @@ public class OrdineController extends HttpServlet {
                         double prezzoTot = 0;
                         int nArticoli = 0;
                         for (ModelloOrdine order : orders.getList())
-                        {                       
-                            prezzoTot += (order.getPrezzoDiAcquisto() * order.getQuantita());
+                        {
+                            prezzoTot += (order.getPrezzoDiAcquisto() * order.getQuantita());                            
                             if(order.getIdS() != 0)
-                            {
+                            {                                
                                 ModelloTipoSpedizione ts = (daoTipoSpedizione.selectDeliveryTypesByIdS(order.getIdS())).get(0);
                                 prezzoTot += Math.ceil((double)order.getQuantita() / (double)ts.getNumeroMassimo()) * ts.getPrezzo();
                             }
 
                             nArticoli += order.getQuantita();
                         }
-
+                        
                         request.setAttribute("prezzoTot", (Math.round(prezzoTot * 100.0) / 100.0));
                         request.setAttribute("nArticoli", nArticoli);
                     }
@@ -204,9 +204,11 @@ public class OrdineController extends HttpServlet {
                 
                 if(showError)
                 {
-                    request.setAttribute("erroreQuantita", "Alcuni oggetti nel carrello superano la quantita' massima disponibile.");
+                    request.setAttribute("erroreQuantita", 1);
                     showError = false;
                 }
+                else
+                    request.setAttribute("erroreQuantita", 0);
             }
         } catch (Exception e) { System.out.println(getServletName() + " error message = " + e.toString()); forward = ERROR_PAGE; request.setAttribute("errore", "404 Pagina non trovata"); }
         
@@ -307,8 +309,8 @@ public class OrdineController extends HttpServlet {
                         identificatore = "idOrdine" + Integer.toString(i);
                         int idO = Integer.parseInt(request.getParameter(identificatore));
 
-                        daoOrdine.updateOrderIdI(idO, idI);
-                        daoOrdine.updateOrderIdS(idO, idS); //idS==0 -> ritiro in negozio
+                        daoOrdine.updateOrderIdI(idO, idI, carrelloSessione.get(i).getIdOggetto(), carrelloSessione.get(i).getIdUtente());
+                        daoOrdine.updateOrderIdS(idO, idS, carrelloSessione.get(i).getIdOggetto(), carrelloSessione.get(i).getIdUtente()); //idS==0 -> ritiro in negozio
                     }
                 }
                 else

@@ -18,8 +18,8 @@ import javax.mail.internet.MimeMessage;
 public class SendEmail
 {
     private static final DaoUtente daoUtente = new DaoUtente();
-    private static final String shopEroMail = "shoperoweb@gmail.com";
-    private static final String shopEroPass = "u!l937Ik00[.";
+    private static final String shopHeroMail = "shoperoweb@gmail.com";
+    private static final String shopHeroPass = "u!l937Ik00[.";
 
     /**
      * Preparazione Properties e Sessione utilizzate per inviare la mail
@@ -40,13 +40,13 @@ public class SendEmail
             Session session = Session.getDefaultInstance(props,
                     new javax.mail.Authenticator() {
                         protected PasswordAuthentication getPasswordAuthentication() {
-                            return new PasswordAuthentication(shopEroMail, shopEroPass);
+                            return new PasswordAuthentication(shopHeroMail, shopHeroPass);
                         }
                     });
 
             Message message = new MimeMessage(session);
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(userEmail));
-            message.setFrom(new InternetAddress(shopEroMail));
+            message.setFrom(new InternetAddress(shopHeroMail));
 
             return message;
         }
@@ -60,7 +60,7 @@ public class SendEmail
     }
 
     /**
-     * Invia una mail a shoperoweb@gmail.com contenente il messaggio di errore provocato
+     * Invia una mail a shopheroweb@gmail.com contenente il messaggio di errore provocato
      * durante l'invio di una mail all'utente
      * @param userEmail: email dell'utente a cui si sarebbe dovuto inviare la mail
      * @param exceptionMessage: messaggio d'errore generato nel processo da un'eccezione
@@ -69,7 +69,7 @@ public class SendEmail
     {
         try
         {
-            Message messageError = preProcessing(shopEroMail);
+            Message messageError = preProcessing(shopHeroMail);
             messageError.setSubject("Errore nell'invio di email");
             messageError.setText(
                     "C'è stato un errore nell'invio di una mail relativa a:\n"
@@ -140,10 +140,10 @@ public class SendEmail
 
             if(message != null)
             {
-                message.setSubject("Registrazione su ShopEro");
+                message.setSubject("Registrazione su ShopHero");
                 message.setText(
                         "Salve " + user.getNome() + ",\n"
-                        + "Grazie per la tua registrazione su ShopEro.\n"
+                        + "Grazie per la tua registrazione su ShopHero.\n"
                         + "Il tuo account è stato creato, ma per attivarlo devi clickare il link qui sotto.\n"
                         + ""+linkVerifica+"\n"
                         + "Potrai accedere utilizzando le tue credenziali.\n\n"
@@ -176,7 +176,7 @@ public class SendEmail
                 message.setSubject("Modifica indirizzo Email");
                 message.setText(
                         "Salve " + user.getNome() + ",\n"
-                        + "La modifica del tuo indirizzo email per ShopEro è andata a buon fine.\n"
+                        + "La modifica del tuo indirizzo email per ShopHero è andata a buon fine.\n"
                         + "La tua VECCHIA email era " + oldEmail + ", la tua NUOVA email è " + newEmail + "\n\n"
                         + "Se non sei stato tu a modificare la tua email, "
                         + "ti suggeriamo di contattare gli sviluppatori http://localhost:8080/ProgettoWeb/jspFile/Finale/Footer/sviluppatori.jsp#findUs \n\n"
@@ -192,7 +192,7 @@ public class SendEmail
                 message.setSubject("Modifica indirizzo Email");
                 message.setText(
                         "Salve " + user.getNome() + ",\n"
-                        + "La modifica del tuo indirizzo email per ShopEro è andata a buon fine.\n"
+                        + "La modifica del tuo indirizzo email per ShopHero è andata a buon fine.\n"
                         + "La tua VECCHIA email era " + oldEmail + ", la tua NUOVA email è " + newEmail + "\n\n"
                         + "Se non sei stato tu a modificare la tua email, "
                         + "ti suggeriamo di contattare gli sviluppatori http://localhost:8080/ProgettoWeb/jspFile/Finale/Footer/sviluppatori.jsp#findUs \n\n"
@@ -223,7 +223,7 @@ public class SendEmail
 
             if(message != null && user.getNome() != null)
             {
-                message.setSubject("Reimposta la password di ShopEro");
+                message.setSubject("Reimposta la password di ShopHero");
                 message.setText(
                         "Salve " + user.getNome() + ",\n"
                         + "Vogliamo aiutarti a reimpostare la tua password\n"
@@ -263,7 +263,7 @@ public class SendEmail
                 message.setSubject("Hai reimpostato la passowrd");
                 message.setText(
                         "Salve " + user.getNome() + ",\n"
-                        + "La tua password per ShopEro è stata appena modificata.\n"
+                        + "La tua password per ShopHero è stata appena modificata.\n"
                         + "Se non sei stato tu a modificare la tua password, "
                         + "ti suggeriamo di contattare gli sviluppatori http://localhost:8080/ProgettoWeb/jspFile/Finale/Footer/sviluppatori.jsp#findUs \n\n"
                         + "Buona giornata!");
@@ -294,8 +294,8 @@ public class SendEmail
                 message.setSubject("Benvenuto nel mondo dei venditori");
                 message.setText(
                         "Salve " + user.getNome() + ",\n"
-                        + "Congratulazioni per esserti unito al fantastico mondo dei venditori di ShopEro!\n\n"
-                        + "Ora potrai vendere i tuoi prodotti agli utenti di ShopEro, ti basterà entrare nella tua sezione personale "
+                        + "Congratulazioni per esserti unito al fantastico mondo dei venditori di ShopHero!\n\n"
+                        + "Ora potrai vendere i tuoi prodotti agli utenti di ShopHero, ti basterà entrare nella tua sezione personale "
                         + "e inserire i tuoi oggetti in modo da esporli al pubblico.\n\n"
                         + "Questo e altro ancora ti aspettano in questa nuova avventura!\n\n"
                         + "BUONA VENDITA!");
@@ -324,7 +324,7 @@ public class SendEmail
 
             if(message != null)
             {
-                message.setSubject("ShopEro - Informazioni dell'ordine [" + indexOrder + "]");
+                message.setSubject("ShopHero - Informazioni dell'ordine [" + indexOrder + "]");
                 message.setText(
                         "Salve " + user.getNome() + ",\n"
                         + "Congratulazione per aver completato il tuo ordine.\n"
@@ -351,7 +351,7 @@ public class SendEmail
 
             if(message != null)
             {
-                message.setSubject("ShopEro - Ordine in lavorazione :D [" + ordine.getIdOrdine()+ "]");
+                message.setSubject("ShopHero - Ordine in lavorazione :D [" + ordine.getIdOrdine()+ "]");
                 message.setText(
                         "Salve " + user.getNome() + ",\n"
                         + "Ci teniamo a comunicarti che il tuo ordine è ora in lavorazione.\n"
@@ -383,7 +383,7 @@ public class SendEmail
 
             if(message != null)
             {
-                message.setSubject("ShopEro - Ordine spedito :D [" + ordine.getIdOrdine() + "]");
+                message.setSubject("ShopHero - Ordine spedito :D [" + ordine.getIdOrdine() + "]");
                 message.setText(
                         "Salve " + user.getNome() + ",\n"
                         + "Ci teniamo a comunicarti che il tuo ordine è stato spedito.\n"
@@ -428,7 +428,7 @@ public class SendEmail
 
             if(message != null)
             {
-                message.setSubject("Richiesta di assistenza per l'ordine [" + idOrdine + "]");
+                message.setSubject("ShopHero - Richiesta di assistenza per l'ordine [" + idOrdine + "]");
                 message.setText(
                         "Salve " + user.getNome() + ",\n"
                         + "È stata creata una richiesta di assistenza (N° " + idAssistenza + ") da parte di " + nomeUtenteRichiedente + "\n"
@@ -445,7 +445,7 @@ public class SendEmail
 
             if(message != null)
             {
-                message.setSubject("Richiesta di assistenza per l'ordine [" + idOrdine + "]");
+                message.setSubject("ShopHero - Richiesta di assistenza per l'ordine [" + idOrdine + "]");
                 message.setText(
                         "Salve " + user.getNome() + ",\n"
                         + "È stata creata una richiesta di assistenza (N° " + idAssistenza + ") da parte di " + nomeUtenteRichiedente + "\n"
@@ -481,7 +481,7 @@ public class SendEmail
 
             if(message != null)
             {
-                message.setSubject("Richiesta di assistenza N° " + idAssistenza + " conclusa");
+                message.setSubject("ShopHero - Richiesta di assistenza N° " + idAssistenza + " conclusa");
                 message.setText(
                         "Salve " + user.getNome() + ",\n"
                         + "La richiesta di assistenza N° " + idAssistenza + " riguardante l'ordine " + idOrdine + " è stata chiusa con successo.\n"
@@ -497,7 +497,7 @@ public class SendEmail
 
             if(message != null)
             {
-                message.setSubject("Richiesta di assistenza N° " + idAssistenza + " conclusa");
+                message.setSubject("ShopHero - Richiesta di assistenza N° " + idAssistenza + " conclusa");
                 message.setText(
                         "Salve " + user.getNome() + ",\n"
                         + "La richiesta di assistenza N° " + idAssistenza + " riguardante l'ordine " + idOrdine + " è stata chiusa con successo.\n"

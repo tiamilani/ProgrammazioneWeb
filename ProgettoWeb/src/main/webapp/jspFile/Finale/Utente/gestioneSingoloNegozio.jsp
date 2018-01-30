@@ -37,6 +37,10 @@
             label{
                 position: static;
             }
+            
+            table.dataTable > tbody > tr.child ul.dtr-details{
+                width: 100%;
+            }
         </style>
     </head>
     <body>
@@ -45,10 +49,10 @@
         </div>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-2">
+                <div class="col-sm-2 col-xs-12">
                     <img id="imgNegozio" class="d-block w-100" src="${immagine.getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; max-height: 500px; object-fit: cover;">
                 </div>
-                <div class="col-10">
+                <div class="col-sm-10 col-xs-12">
                     <h1><c:out value="${negozio.getNomeNegozio()}" /></h1>
                     <p>Da qui puoi gestire tutto ciò che riguarda il tuo negozio, a partire dagli ordini ricevuti all'aggiunta di oggetti al catalogo</p>
                     <div class="text-justify">
@@ -151,8 +155,8 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-3">
-                    <a href="${pageContext.request.contextPath}/NegozioController?action=richiestaPaginaDiAggiuntaOggetto" method="GET" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">add</i></a>
+                <div class="col-md-3 col-sm-12 col-xs-12">
+                    <a href="${pageContext.request.contextPath}/NegozioController?action=richiestaPaginaDiAggiuntaOggetto" method="GET" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">add</i> Aggiungi</a>
                 </div>
             </div>
             <hr>
@@ -323,14 +327,12 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-3">
-                    <a href="jspFile/Finale/Utente/aggiungiTipoSpedizione.jsp" method="GET" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">add</i></a>
+                <div class="col-md-3 col-sm-12 col-xs-12">
+                    <a href="jspFile/Finale/Utente/aggiungiTipoSpedizione.jsp" method="GET" class="btn btn-outline-primary buttonSpace btn-block"><i class="Small material-icons">add</i> Aggiungi</a>
                 </div>
             </div>
         </div>
-        <div class="container">
             <%@include file="../Footer/footer.jsp" %>
-        </div>
     </body>
 </html>
 
