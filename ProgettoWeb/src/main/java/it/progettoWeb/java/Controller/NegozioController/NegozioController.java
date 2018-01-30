@@ -9,8 +9,6 @@ import it.progettoWeb.java.database.Dao.Categoria.DaoCategoria;
 import it.progettoWeb.java.database.Dao.Negozio.DaoNegozio;
 import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
 import it.progettoWeb.java.database.Dao.Ordine.DaoOrdine;
-import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
-import it.progettoWeb.java.database.Dao.immagineNegozio.DaoImmagineNegozio;
 import it.progettoWeb.java.database.Dao.immagineOggetto.DaoImmagineOggetto;
 import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
 import it.progettoWeb.java.database.Dao.ordiniRicevuti.DaoOrdiniRicevuti;
@@ -26,14 +24,11 @@ import it.progettoWeb.java.database.Model.Ordine.ModelloOrdine;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.Model.immagineNegozio.ModelloImmagineNegozio;
 import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto;
-import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
 import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
-import it.progettoWeb.java.database.Model.ordiniRicevuti.ModelloListeOrdiniRicevuti;
 import it.progettoWeb.java.database.Model.spedizioneOggetto.ModelloListeSpedizioneOggetto;
 import it.progettoWeb.java.database.Model.tipoSpedizione.ModelloListeTipoSpedizione;
 import it.progettoWeb.java.database.Model.tipoSpedizione.ModelloTipoSpedizione;
 import it.progettoWeb.java.utility.javaMail.SendEmail;
-import it.progettoWeb.java.utility.pair.pair;
 import it.progettoWeb.java.utility.tris.tris;
 import java.io.File;
 import java.io.IOException;
@@ -652,6 +647,12 @@ public class NegozioController extends HttpServlet {
                     daoSpedizioneOggetto.addSpedizioneOggetto(listaTipiSpedizione.get(0).getIdS(),newObject.getId());
                 }
                 
+                double limitPrice = (double)request.getSession().getAttribute("massimoPrezzoAttuale");
+                if(limitPrice < Double.parseDouble(request.getParameter("prezzo"))){
+                    request.getSession().setAttribute("massimoPrezzoAttuale", daoOggetto.getMaxPrice());
+                    request.getSession().setAttribute("massimoRangeAttuale", "0," + (int)(daoOggetto.getMaxPrice()) + "");
+                }
+                
                 request.setAttribute("oggettoInserito", 0);
             } else {
                 request.setAttribute("oggettoInserito", 1);
@@ -951,7 +952,7 @@ public class NegozioController extends HttpServlet {
     private boolean getImages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String appPath = request.getServletContext().getRealPath("");
         String savePath = appPath + SAVE_DIR;
-        String savePathFake = request.getContextPath() + File.separator + SAVE_DIR;
+        String savePathFake = request.getContextPath() + "/" + SAVE_DIR;
         
         File fileSaveDir = new File(savePath);
         if (!fileSaveDir.exists()) {
@@ -963,8 +964,9 @@ public class NegozioController extends HttpServlet {
             String fileName = extractFileName(part);
             if(!fileName.isEmpty()) {
                 fileName = new File(fileName).getName();
-                part.write(savePath + File.separator + fileName);
-                imageSrcs.add(savePathFake + File.separator + fileName);
+                part.write(savePath + "/" + fileName);
+                System.out.println(savePathFake + "/" + fileName);
+                imageSrcs.add(savePathFake + "/" + fileName);
                 imageSaved = true;
             }
         }

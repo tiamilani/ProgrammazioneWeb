@@ -70,12 +70,13 @@ public class usersQuery {
     }
 
     public static String updateUtente(int id,String nome,String cognome,String mail,String password,String avatar,double valutazione,int UtenteType,boolean emailConfermata){
+        
         return "update utente set "+
                 "nome='"+nome+"',"+
                 "cognome='"+cognome+"',"+
                 "mail='"+mail+"',"+
                 "password='"+password+"',"+
-                "avatar="+avatar+","+
+                "avatar='"+avatar+"',"+
                 "valutazione="+valutazione+","+
                 "UtenteType="+UtenteType+","+
                 "emailConfermata="+emailConfermata+""

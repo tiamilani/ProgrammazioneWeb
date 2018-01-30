@@ -144,7 +144,7 @@
                         if(sconto > 0)
                             costoTotale -= (costoTotale * sconto) / 100;
                         
-                        $('#totNowElem').text(costoTotale.toFixed(2) + $('#totNowElem').text());
+                            $('#totNowElem').text(costoTotale.toFixed(2) + '\u20AC');
                     });
                 </script>
             </div>

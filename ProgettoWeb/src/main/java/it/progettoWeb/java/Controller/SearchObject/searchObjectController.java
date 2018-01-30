@@ -12,7 +12,6 @@ import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto
 import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
 import it.progettoWeb.java.utility.pair.pair;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -52,74 +51,120 @@ public class searchObjectController extends HttpServlet {
         String forward = SEARCH_PAGE;
         String error = "";
 
-        String search = "", categoria = "", nomeVenditore = "", nomeNegozio = "", range = "";
+        String search = "", categoria = "", nomeVenditore = "", nomeNegozio = "", range = "", regione = "";
         int valutazioneMinima = 0;
         boolean checkRitiroInNegozio = false, checkProdottiScontati = false;
-        double latitudine = 0, longitudine = 0, raggio = 0, minPrice = 0, maxPrice = 1000;
+        double minPrice = 0, maxPrice = daoOggetto.getMaxPrice();
 
-        search = request.getParameter("search").toLowerCase();
-        categoria = request.getParameter("hiddenidCategoria");
+        if(request.getParameter("search") != null){
+            search = request.getParameter("search").toLowerCase();
+        }/*else{
+            search = request.getParameter("hiddenText").toLowerCase();
+        }*/
+        if(request.getParameter("hiddenidCategoria") != null){
+            categoria = request.getParameter("hiddenidCategoria");
+        }
+        
+        if(request.getParameter("hiddennomeVenditore") != null){
         nomeVenditore = request.getParameter("hiddennomeVenditore").trim();
-        nomeNegozio = request.getParameter("hiddennomeNegozio").trim();
-        checkRitiroInNegozio =  Boolean.valueOf(request.getParameter("hiddencheckRitiroInNegozio").trim());
-        checkProdottiScontati = Boolean.valueOf(request.getParameter("hiddencheckProdottiScontati").trim());
-        range = (request.getParameter("hiddenPriceRange"));
-        valutazioneMinima = ((request.getParameter("hiddenvalutazioneMinima") == null || "".equals(request.getParameter("hiddenvalutazioneMinima")) || "Choose...".equals(request.getParameter("hiddenvalutazioneMinima"))) ? 0 : Integer.parseInt(request.getParameter("hiddenvalutazioneMinima")));
+        }
+        
+        if(request.getParameter("hiddennomeNegozio") != null){
+            nomeNegozio = request.getParameter("hiddennomeNegozio").trim();
+        }
+        
+        if(request.getParameter("hiddencheckRitiroInNegozio") != null){
+            checkRitiroInNegozio =  Boolean.valueOf(request.getParameter("hiddencheckRitiroInNegozio").trim());
+        }
+        
+        if(request.getParameter("hiddencheckProdottiScontati") != null){
+            checkProdottiScontati = Boolean.valueOf(request.getParameter("hiddencheckProdottiScontati").trim());
+        }
+        
+        if(request.getParameter("hiddenPriceRange") != null){
+            range = (request.getParameter("hiddenPriceRange"));
+            String[] rangeSplitted = range.split(",");
+            minPrice = Double.parseDouble(rangeSplitted[0]);
+            maxPrice = Double.parseDouble(rangeSplitted[1]);
+        }
+        
+        if(request.getParameter("hiddenvalutazioneMinima") != null){
+            valutazioneMinima = Integer.parseInt(request.getParameter("hiddenvalutazioneMinima"));
+        }
+        
+        if (request.getParameter("hiddenRegione") != null){
+            regione = request.getParameter("hiddenRegione");
+        }
+        
         /*latitudine = ((request.getParameter("hiddenlatitudine") == null || "".equals(request.getParameter("hiddenlatitudine"))) ? 0 : Double.parseDouble(request.getParameter("hiddenlatitudine")));
         longitudine = ((request.getParameter("hiddenlongitudine") == null || "".equals(request.getParameter("hiddenlongitudine"))) ? 0 : Double.parseDouble(request.getParameter("hiddenlongitudine")));
         raggio = ((request.getParameter("hiddenraggio") == null || "".equals(request.getParameter("hiddenraggio"))) ? 0 : Double.parseDouble(request.getParameter("hiddenraggio")));
         */
 
-        
-        String[] rangeSplitted = range.split(",");
-        minPrice = Double.parseDouble(rangeSplitted[0]);
-        maxPrice = Double.parseDouble(rangeSplitted[1]);
-        
         search = search.trim().replaceAll(" +", " ");
 
         //System.out.println(nomeVenditore);
 
         if(search.length() < 1) {
+            if(categoria.equals("Categoria") || categoria.length() == 0 && nomeNegozio.length() == 0 && nomeVenditore.length() == 0 &&
+                    checkProdottiScontati == false && checkRitiroInNegozio == false && regione.equals("Regione") || regione.length() == 0 &&
+                    valutazioneMinima == 0 && minPrice == 0 && maxPrice == (int)daoOggetto.getMaxPrice()){
+                
             forward = ERROR_PAGE;
 
             String errore = "Nome elemento da cercare troppo corto";
             request.setAttribute("errore", errore);
             RequestDispatcher view = request.getRequestDispatcher(forward);
             view.forward(request, response);
-        }
-        
-        pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectObjectByQuery(search.toLowerCase(), categoria, nomeVenditore, nomeNegozio, minPrice, maxPrice, checkProdottiScontati, checkRitiroInNegozio);
-        ModelloListeOggetto listaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
-        ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
-        
-        request.setAttribute("listaOggetti", listaOggetti);
-        request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
+            }else{
+                int limitPrice = (int)request.getSession().getAttribute("massimoPrezzoAttuale");
+                pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectObjectByQuery("", categoria, nomeVenditore, nomeNegozio, minPrice, maxPrice, checkProdottiScontati, checkRitiroInNegozio, valutazioneMinima, limitPrice, regione);
+                ModelloListeOggetto listaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
+                ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
 
-        System.out.println(listaOggetti.getList().size());
+                request.setAttribute("listaOggetti", listaOggetti);
+                request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
 
-        /*
-        String test = search;
-        if(test == null || test.length() < 10){
-            forward=ERROR_PAGE;
+                System.out.println(listaOggetti.getList().size());
+                RequestDispatcher view = request.getRequestDispatcher(forward);
+                view.forward(request, response);
+            }
+        }else{
+        
+            int limitPrice = (int)request.getSession().getAttribute("massimoPrezzoAttuale");
+            pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectObjectByQuery(search.toLowerCase(), categoria, nomeVenditore, nomeNegozio, minPrice, maxPrice, checkProdottiScontati, checkRitiroInNegozio, valutazioneMinima, limitPrice, regione);
+            ModelloListeOggetto listaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
+            ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
+
+            request.setAttribute("listaOggetti", listaOggetti);
+            request.setAttribute("listaImmaginiOggetto", listaImmaginiOggetto);
+
+            System.out.println(listaOggetti.getList().size());
+
+            /*
+            String test = search;
+            if(test == null || test.length() < 10){
+                forward=ERROR_PAGE;
+                RequestDispatcher view = request.getRequestDispatcher(forward);
+                view.forward(request, response);
+            }*/
+            /*
+            request.setAttribute("search",search);
+            request.setAttribute("hiddenidCategoria", categoria);
+            request.setAttribute("hiddenminPrice", minPrice);
+            request.setAttribute("hiddenmaxPrice", maxPrice);
+            request.setAttribute("hiddennomeVenditore", nomeVenditore);
+            request.setAttribute("hiddennomeNegozio", nomeNegozio);
+            request.setAttribute("hiddencheckRitiroInNegozio", checkRitiroInNegozio);
+            request.setAttribute("hiddencheckProdottiScontati", checkProdottiScontati);
+            request.setAttribute("hiddenlatitudine", latitudine);
+            request.setAttribute("hiddenlongitudine", longitudine);
+            request.setAttribute("hiddenraggio", raggio);
+            request.setAttribute("hiddenvalutazioneMinima", valutazioneMinima);*/
+
             RequestDispatcher view = request.getRequestDispatcher(forward);
             view.forward(request, response);
-        }*/
-        /*
-        request.setAttribute("search",search);
-        request.setAttribute("hiddenidCategoria", categoria);
-        request.setAttribute("hiddenminPrice", minPrice);
-        request.setAttribute("hiddenmaxPrice", maxPrice);
-        request.setAttribute("hiddennomeVenditore", nomeVenditore);
-        request.setAttribute("hiddennomeNegozio", nomeNegozio);
-        request.setAttribute("hiddencheckRitiroInNegozio", checkRitiroInNegozio);
-        request.setAttribute("hiddencheckProdottiScontati", checkProdottiScontati);
-        request.setAttribute("hiddenlatitudine", latitudine);
-        request.setAttribute("hiddenlongitudine", longitudine);
-        request.setAttribute("hiddenraggio", raggio);
-        request.setAttribute("hiddenvalutazioneMinima", valutazioneMinima);*/
-
-        RequestDispatcher view = request.getRequestDispatcher(forward);
-        view.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

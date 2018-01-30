@@ -8357,7 +8357,7 @@ public class DaoOggetto {
      * @param name
      * @return List<ModelloOggetto> lista di oggetti ottenuti dalla ricerca
      */
-    public pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> selectObjectByQuery(String name, String categoria, String venditore, String negozio, double minPrice, double maxPrice, boolean sconto, boolean ritiro) {
+    public pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> selectObjectByQuery(String name, String categoria, String venditore, String negozio, double minPrice, double maxPrice, boolean sconto, boolean ritiro, int minRating, double limitPrice, String regione) {
         pair<List<ModelloOggetto>,List<ModelloImmagineOggetto>> res;
         List<ModelloOggetto> oggetti = new ArrayList<>();
         List<ModelloImmagineOggetto> immagini = new ArrayList<>();
@@ -8365,8 +8365,9 @@ public class DaoOggetto {
         try {
             boolean shop = false;
             boolean seller = false;
+            boolean place = false;
             boolean before = false;
-            String query = "SELECT Oggetto.*, imageOggetto.* FROM Oggetto JOIN imageOggetto ON (Oggetto.id = imageOggetto.idO)";
+            String query = "SELECT Oggetto.*, imageOggetto.* FROM Oggetto INNER JOIN imageOggetto ON (Oggetto.id = imageOggetto.idO)";
             
             if(negozio != null && negozio.length() > 0){
                 query = query + " INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id)";
@@ -8378,6 +8379,16 @@ public class DaoOggetto {
             }else if(venditore != null && venditore.length() > 0){
                 query = query + " INNER JOIN Utente ON (Negozio.idVenditore = Utente.id)";
             }
+            
+            if(!regione.equals("Regione")){
+                if(shop || seller){
+                    query = query + " INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI)";
+                }
+                else{
+                    query = query + " INNER JOIN Negozio ON (Oggetto.idNegozio = Negozio.id) INNER JOIN Indirizzo ON (Indirizzo.idI = Negozio.idI)";
+                }
+            }
+            
             if(shop){
                 query = query + " WHERE Negozio.nomeNegozio LIKE '%" + negozio + "%'";
             }
@@ -8407,9 +8418,9 @@ public class DaoOggetto {
                 if(minPrice > 0 && maxPrice < 1000){
                     query = query + " AND Oggetto.prezzo BETWEEN " + minPrice + " AND " + maxPrice;
                 }else if(minPrice > 0){
-                    query = query + " AND Oggetto.prezzo > " + minPrice;
-                }else if(maxPrice < 1000){
-                    query = query + " AND Oggetto.prezzo < " + maxPrice;
+                    query = query + " AND Oggetto.prezzo >= " + minPrice;
+                }else if(maxPrice < limitPrice){
+                    query = query + " AND Oggetto.prezzo <= " + maxPrice;
                 }
             }else{
                 if(minPrice > 0 && maxPrice < 1000){
@@ -8433,6 +8444,22 @@ public class DaoOggetto {
                 query = query + " AND Oggetto.ritiroInNegozio = 1";
             }else if(ritiro){
                 query = query + " WHERE Oggetto.ritiroInNegozio = 1";
+                before = true;
+            }
+            
+            if(shop || seller || before){
+                query = query + " AND Oggetto.valutazione >= " + minRating;
+            }else{
+                query = query + " WHERE Oggetto.valutazione >= " + minRating;
+                before = true;
+            }
+            
+            if(!regione.equals("Regione")){
+                if(shop || seller || before){
+                    query = query + " AND Indirizzo.regione LIKE '" + regione + "'";
+                }else{
+                    query = query + " WHERE Indirizzo.regione LIKE '" + regione + "'";
+                }
             }
 
             query = query + ";";
@@ -8441,18 +8468,26 @@ public class DaoOggetto {
 
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(query);
-            JaroWinkler jw = new JaroWinkler(); 
             
-            while (rs.next()) {
-                
-                //System.out.println(rs.getString(4));
-                if(jw.distance(rs.getString(4), name) <= 0.3) {
+            if(name.length() != 0){
+                JaroWinkler jw = new JaroWinkler(); 
+
+                while (rs.next()) {
+
+                    //System.out.println(rs.getString(4));
+                    if(jw.distance(rs.getString(4), name) <= 0.3) {
+                        oggetti.add(DaoOggetto.getModelloFromRs(rs));
+                        immagini.add(DaoImmagineOggetto.getModelloFromRs(rs));
+                        //System.out.println("Ho aggiunto " + rs.getString(4)  + " perché " + jw.distance(rs.getString(4), name));
+                    }
+                    /*oggetti.add(DaoOggetto.getModelloFromRs(rs));
+                    immagini.add(DaoImmagineOggetto.getModelloFromRs(rs));*/
+                } 
+            }else{
+                while (rs.next()) {
                     oggetti.add(DaoOggetto.getModelloFromRs(rs));
                     immagini.add(DaoImmagineOggetto.getModelloFromRs(rs));
-                    //System.out.println("Ho aggiunto " + rs.getString(4)  + " perché " + jw.distance(rs.getString(4), name));
-                }
-                /*oggetti.add(DaoOggetto.getModelloFromRs(rs));
-                immagini.add(DaoImmagineOggetto.getModelloFromRs(rs));*/
+                } 
             }
             
         } catch (SQLException e) {}
@@ -8513,6 +8548,19 @@ public class DaoOggetto {
         }
         
         return result;
+    }
+    
+    public double getMaxPrice() {
+        try{
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.getMaxPrice());
+            if(rs.next()){ 
+                return Math.ceil(rs.getDouble(1));
+            }
+            else return (0);
+        } catch (SQLException ex) {
+        }
+        return 0;
     }
     
 }

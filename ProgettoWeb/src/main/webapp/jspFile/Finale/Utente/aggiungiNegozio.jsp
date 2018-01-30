@@ -9,8 +9,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/jspFile/Finale/CSS/form.css">
+        <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
         <title><c:out value="${utenteSessione.getNome()}" /> Nuovo Negozio</title>
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyB7LZyOZzvwxSWSLr6cwFw9CpTPT2iIFiw" async defer></script>
         <script type="text/javascript">

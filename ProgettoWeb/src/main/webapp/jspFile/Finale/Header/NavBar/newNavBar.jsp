@@ -78,22 +78,24 @@
             </div>
         </div>
         <form class="navbar-form form-inline col-md-12 col-sm-12 col-xl-7 col-lg-6 row no-gutters" autocomplete="on" id="form1" name="form1" method="GET">
-            <div class="form-group">
+            <div class="form-group input-group">
                 <div class="find col-10">
-                    <input class="form-control" id="expand" type="text" placeholder="Search" autocomplete="on" name="search">
+                    <input class="form-control" id="expand" type="text" placeholder="Search" autocomplete="on" name="search" value="${param.search == '' || param.search == null || param.search == undefined ? '' : param.search}">
                     <div style="width: 90%; margin-left: 10%;" id="appendToSearch">  </div>
                 </div>
 
-                <button type="submit" class="btn btn-default col-1" id="nopad" onclick="myFunction()">
+                <button type="submit" class="btn nav-search-button btn-default col-1" id="nopad" onclick="myFunction()">
                     <i class="material-icons">search</i>
                 </button>
-                <input type='hidden' id = 'hiddenidCategoria' name = 'hiddenidCategoria' value='' />
-                <input type='hidden' id = 'hiddennomeVenditore' name = 'hiddennomeVenditore' value='' />
-                <input type='hidden' id = 'hiddennomeNegozio' name = 'hiddennomeNegozio' value='' />
-                <input type='hidden' id = 'hiddencheckRitiroInNegozio' name = 'hiddencheckRitiroInNegozio' value='' />
-                <input type='hidden' id = 'hiddencheckProdottiScontati' name = 'hiddencheckProdottiScontati' value='' />
-                <input type="hidden" id = 'hiddenPriceRange' name = 'hiddenPriceRange' value='' />
-                <input type='hidden' id = 'hiddenvalutazioneMinima' name = 'hiddenvalutazioneMinima' value='' />
+                <input type='hidden' id='hiddenidCategoria' name='hiddenidCategoria' value='' />
+                <input type='hidden' id='hiddennomeVenditore' name='hiddennomeVenditore' value='' />
+                <input type='hidden' id='hiddennomeNegozio' name='hiddennomeNegozio' value='' />
+                <input type='hidden' id='hiddencheckRitiroInNegozio' name='hiddencheckRitiroInNegozio' value='' />
+                <input type='hidden' id='hiddencheckProdottiScontati' name='hiddencheckProdottiScontati' value='' />
+                <input type="hidden" id='hiddenPriceRange' name='hiddenPriceRange' value='' />
+                <input type='hidden' id='hiddenvalutazioneMinima' name='hiddenvalutazioneMinima' value='' />
+                <input type='hidden' id='hiddenRegione' name='hiddenRegione' value='' />
+                <input type='hidden' id='hiddenText' name='hiddenText' value='' />
             </div>
         </form>
         <div class="user d-flex justify-content-between row no-gutters col-xl-3 col-lg-3">
@@ -275,7 +277,9 @@
         $(window).scroll(function(){
             // console.log("you are scrolling");
             // $('.autocomplete-suggestions').css('display', 'none');
-            $('#expand').autocomplete().hide();
+            if(typeof $('#expand').autocomplete() !== 'undefined'){
+                $('#expand').autocomplete().hide();
+            }
         });
 
         $(window).resize(function(){
@@ -286,10 +290,38 @@
             $("#visible").addClass("collapsed");
             $("#collapse-menu").removeClass("show");
             console.log("resizing");
-            $('#expand').autocomplete().hide();
+            if(typeof $('#expand').autocomplete() !== 'undefined'){
+                $('#expand').autocomplete().hide();
+            }
         });
 
     });
+
+    function resetFilter(){
+        document.forms["filterForm"].elements[0].value = 'Categoria';
+        if(document.forms["filterForm"].elements[1].value !== ''){
+            document.forms["filterForm"].elements[1].value = '';
+        }
+        document.forms["filterForm"].elements[2].value = '';
+        $('input[name=filtroRitiroInNegozio]').prop('checked', false);
+        $('input[name=filtroProdottiScontati]').prop('checked', false);
+        var minRange = $('#double-slider').attr('data-slider-min');
+        var maxRange = $('#double-slider').attr('data-slider-max');
+        var rangeValue = minRange + ',' + maxRange;
+        console.log(rangeValue);
+        // document.getElementById("double-slider").setAttribute('data-slider-value', rangeValue);
+        
+        document.getElementById("double-slider").setAttribute("value", rangeValue);
+        document.getElementById("double-slider").setAttribute("data-value", rangeValue);
+        //$('#double-slider').attr('value');
+        document.getElementById("regionFilter").value = 'Regione';
+
+    }
+    
+    document.getElementById("noAction").addEventListener("click", function(event){
+        event.preventDefault();
+    });
+
 
     function myFunction() {
         var idCategoria = document.forms["filterForm"].elements[0].value;
@@ -298,10 +330,12 @@
         var checkRitiroInNegozio = document.forms["filterForm"].elements[3].checked;
         var checkProdottiScontati = document.forms["filterForm"].elements[4].checked;
         var rangeValue = $('#double-slider').attr('value');
+        var nomeRegione = $('#regionFilter').val();
+        //var testo = $('#expand').val();
         var valutazioneMinima = calcStar();
         console.log(valutazioneMinima);
 
-
+        console.log("Ho appena assegnato il tutto");
 
         /*
         var latitudine = document.forms["filterForm"].elements[7].value;
@@ -316,6 +350,9 @@
         document.form1.hiddencheckProdottiScontati.value = String(checkProdottiScontati);
         document.form1.hiddenPriceRange.value = String(rangeValue);
         document.form1.hiddenvalutazioneMinima.value = String(valutazioneMinima);
+        document.form1.hiddenRegione.value = String(nomeRegione);
+        //document.form1.hiddenText.value = String(testo + " ");
+        
             /*
         document.form1.hiddenlatitudine.value = String(latitudine);
         document.form1.hiddenlongitudine.value = String(longitudine);

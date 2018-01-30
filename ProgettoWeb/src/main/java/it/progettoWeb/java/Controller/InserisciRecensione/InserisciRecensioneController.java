@@ -189,7 +189,7 @@ public class InserisciRecensioneController extends HttpServlet {
     private boolean getImages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String appPath = request.getServletContext().getRealPath("");
         String savePath = appPath + SAVE_DIR;
-        String savePathFake = request.getContextPath() + File.separator + SAVE_DIR;
+        String savePathFake = request.getContextPath() + "/" + SAVE_DIR;
         
         File fileSaveDir = new File(savePath);
         if (!fileSaveDir.exists()) {
@@ -201,11 +201,11 @@ public class InserisciRecensioneController extends HttpServlet {
             String fileName = extractFileName(part);
             if(!fileName.isEmpty()) {
                 fileName = new File(fileName).getName();
-                part.write(savePath + File.separator + fileName);
-                imageSrcs.add(savePathFake + File.separator + fileName);
+                part.write(savePath + "/" + fileName);
+                imageSrcs.add(savePathFake + "/" + fileName);
                 imageSaved = true;
-                System.out.println(savePath + File.separator + fileName);
-                System.out.println(savePathFake + File.separator + fileName);
+                System.out.println(savePath + "/" + fileName);
+                System.out.println(savePathFake + "/" + fileName);
             }
         }
         
