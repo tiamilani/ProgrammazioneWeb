@@ -38,7 +38,7 @@
                                     <c:param name="idOggetto" value="${listaOggetti.get(i).getId()}" />
                                 </c:url>
                                 <a href="${objUrl}" class="card cardSmall" style="box-shadow: none; width: 70%; margin-right: 10%; margin-left: auto;">
-                                    <img class="imgCard" src="${listaImmaginiOggetto.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: cover;">
+                                    <img class="imgCard" src="${listaImmaginiOggetto.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: scale-down;">
                                     <div class="container">
                                         <h4><b><c:out value="${listaOggetti.get(i).getNome()}" /></b></h4>
                                         <p>Prezzo: <c:out value="${listaOggetti.get(i).getPrezzo()}" />&euro;</p>
@@ -50,7 +50,7 @@
                                     <c:param name="idOggetto" value="${listaOggetti.get(i+1).getId()}" />
                                 </c:url>
                                 <a href="${objUrl}" class="card cardSmall" style="box-shadow: none; width: 70%; margin-right: auto; margin-left: 10%;">
-                                    <img class="imgCard" src="${listaImmaginiOggetto.get(i+1).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: cover;">
+                                    <img class="imgCard" src="${listaImmaginiOggetto.get(i+1).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: scale-down;">
                                     <div class="container">
                                         <h4><b><c:out value="${listaOggetti.get(i+1).getNome()}" /></b></h4>
                                         <p>Prezzo: <c:out value="${listaOggetti.get(i+1).getPrezzo()}" />&euro;</p>
@@ -68,7 +68,7 @@
                                             <c:param name="idOggetto" value="${listaOggetti.get(i).getId()}" />
                                         </c:url>
                                         <a href="${objUrl}" class="card cardSmall" style="box-shadow: none; width: 70%; margin-right: auto; margin-left: auto;">
-                                            <img class="imgCard" src="${listaImmaginiOggetto.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: cover;">
+                                            <img class="imgCard" src="${listaImmaginiOggetto.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: scale-down;">
                                             <div class="container">
                                                 <h4><b><c:out value="${listaOggetti.get(i).getNome()}" /></b></h4>
                                                 <p>Prezzo: <c:out value="${listaOggetti.get(i).getPrezzo()}" />&euro;</p>
@@ -84,7 +84,7 @@
                                             <c:param name="idOggetto" value="${listaOggetti.get(i).getId()}" />
                                         </c:url>
                                         <a href="${objUrl}" class="card cardSmall" style="box-shadow: none; width: 70%; margin-right: 10%; margin-left: auto;">
-                                            <img class="imgCard" src="${listaImmaginiOggetto.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: cover;">
+                                            <img class="imgCard" src="${listaImmaginiOggetto.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: scale-down;">
                                             <div class="container">
                                                 <h4><b><c:out value="${listaOggetti.get(i).getNome()}" /></b></h4>
                                                 <p>Prezzo: <c:out value="${listaOggetti.get(i).getPrezzo()}" />&euro;</p>
@@ -96,7 +96,7 @@
                                             <c:param name="idOggetto" value="${listaOggetti.get(i+1).getId()}" />
                                         </c:url>
                                         <a href="${objUrl}" class="card cardSmall" style="box-shadow: none; width: 70%; margin-right: auto; margin-left: 10%;">
-                                            <img class="imgCard" src="${listaImmaginiOggetto.get(i+1).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: cover;">
+                                            <img class="imgCard" src="${listaImmaginiOggetto.get(i+1).getSrc()}" alt="IMAGE NOT LOADED" style="width: auto; height: 300px; object-fit: scale-down;">
                                             <div class="container">
                                                 <h4><b><c:out value="${listaOggetti.get(i+1).getNome()}" /></b></h4>
                                                 <p>Prezzo: <c:out value="${listaOggetti.get(i+1).getPrezzo()}" />&euro;</p>
