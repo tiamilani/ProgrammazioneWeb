@@ -90,7 +90,7 @@ div.form-group{
 }
 
 .modal-dialog{
-    width: 30%;
+    width: 40%;
 }
 
 input:focus{
@@ -121,6 +121,13 @@ input:focus{
 .nav-button{
     background-color: inherit;
     border: none;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.nav-search-button{
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 nav{
@@ -172,4 +179,40 @@ nav{
 
 #filter-dropdown-menu{
     border: none;
+}
+
+@media screen and (min-width: 992px) {
+    .form-inline .input-group{
+        width: inherit;
+    }
+}
+
+.btn.focus, .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px rgba(221, 107, 62, .25);
+}
+
+
+@media screen and (min-width: 992px) {
+    .modal-dialog{
+        width: 40%;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .modal-dialog{
+        width: 60%;
+    }
+}
+
+@media screen and (min-width: 576px) and (max-width: 768px) {
+    .modal-dialog{
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .modal-dialog{
+        width: 95%;
+    }
 }

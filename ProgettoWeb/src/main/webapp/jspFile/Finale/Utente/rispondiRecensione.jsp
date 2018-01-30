@@ -16,7 +16,19 @@
         <title>Recensioni Personali</title>
         <script>
             $(document).ready(function() {
-                $('#tabellaRecensioni').DataTable({
+                $('#tabellaRecensioniV').DataTable({
+                    responsive: true,
+                    colReorder: true
+                });
+            });
+            $(document).ready(function() {
+                $('#tabellaRecensioniO').DataTable({
+                    responsive: true,
+                    colReorder: true
+                });
+            });
+            $(document).ready(function() {
+                $('#tabellaRecensioniN').DataTable({
                     responsive: true,
                     colReorder: true
                 });
@@ -41,11 +53,14 @@
         </div>
         
         <div class="container-fluid">
+            <c:if test="${listaRecensioniV.getList().size() == 0 and listaRecensioniO.getList().size() == 0 and listaRecensioniN.getList().size() == 0}">
+                <h2>Nessuna Recensione Disponibile</h2>
+            </c:if>
             <c:if test="${listaRecensioniV.getList().size() > 0}">
                 <h2>Venditore</h2>
                 <div class="row">
                     <div class="col-12">
-                        <table id="tabellaRecensioni" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                        <table id="tabellaRecensioniV" class="table table-striped table-bordered" width="100%" cellspacing="0">
                              <thead>
                                 <tr>
                                     <th>Data</th>
@@ -88,7 +103,7 @@
                 <h2>Oggetti</h2>
                 <div class="row">
                     <div class="col-12">
-                        <table id="tabellaRecensioni" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                        <table id="tabellaRecensioniO" class="table table-striped table-bordered" width="100%" cellspacing="0">
                              <thead>
                                 <tr>
                                     <th>Data</th>
@@ -131,7 +146,7 @@
                 <h2>Negozi</h2>
                 <div class="row">
                     <div class="col-12">
-                        <table id="tabellaRecensioni" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                        <table id="tabellaRecensioniN" class="table table-striped table-bordered" width="100%" cellspacing="0">
                              <thead>
                                 <tr>
                                     <th>Data</th>

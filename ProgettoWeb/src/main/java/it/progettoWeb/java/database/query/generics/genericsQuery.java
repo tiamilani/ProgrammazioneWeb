@@ -466,4 +466,12 @@ public class genericsQuery {
     public static String validateUser(String emailMD5) {
         return "update utente set emailConfermata = 1 where md5(utente.mail) = '"+emailMD5+"';";
     }
+    
+    public static String getMaxPrice() {
+        return "SELECT MAX(Oggetto.prezzo) FROM Oggetto;";
+    }
+    
+    public static String getAllRegions() {
+        return "SELECT DISTINCT(Indirizzo.regione) FROM Indirizzo INNER JOIN Negozio ON (Negozio.idI = Indirizzo.idI);";
+    }
 }

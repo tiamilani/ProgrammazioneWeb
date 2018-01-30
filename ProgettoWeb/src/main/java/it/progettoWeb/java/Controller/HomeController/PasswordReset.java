@@ -79,7 +79,7 @@ public class PasswordReset extends HttpServlet {
                     utente.setPassword(hexPassword);
                     daoUtente.updateUserPasswordByUserID(utente);
                     System.out.println("Conferma, modifica password avvenuta");
-                    request.setAttribute("changedPassword", true);
+                    request.setAttribute("changedPassword", 1);
                     RequestDispatcher view = request.getRequestDispatcher(HOME_PAGE);
                     view.forward(request, response);
                 }else{

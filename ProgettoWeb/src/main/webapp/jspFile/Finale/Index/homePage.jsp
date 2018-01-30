@@ -26,33 +26,21 @@
             <%@include file="../Header/NavBar/newNavBar.jsp" %>
         </div>
 
-        <c:choose>
-            <c:when test="${changedPassword == true}">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <strong>Successo!</strong> Operazione di modifca della password portata a termine con successo
-                </div>
-            </c:when>
-            <c:otherwise>
-            </c:otherwise>
-        </c:choose>
-
         <div class="container-fluid">
             <%@include file="../alert/alertUserLogin.jsp" %>
             <%@include file="../alert/alertUserRegistration.jsp" %>
             <%@include file="../alert/alertEmailVerificata.jsp" %>
+            <%@include file="../alert/alertPasswordRequest.jsp" %>
             <%@include file="../DescrizioneOggetto/oggettiCorrelati.jsp" %>
 
-            <div class="row rowListaOggetto">
-                <h2>Oggetti che potrebbero piacerti</h2>
+            <div class="row rowListaOggetto justify-content-center">
+                <h2 class="col-12">Oggetti che potrebbero piacerti</h2>
             </div>
 
             <c:set var="limitColum" value="${4}" scope="page" />
             <%@include file="../Components/Liste/ListaOggetto/testListaOggetto.jsp" %>
         </div>
-        
+
         <%@include file="../Footer/footer.jsp" %>
         <!--- 2017-11-08 --->
         <script type="text/javascript">

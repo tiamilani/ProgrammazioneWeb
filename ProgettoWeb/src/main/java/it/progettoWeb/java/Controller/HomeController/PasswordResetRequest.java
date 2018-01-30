@@ -6,6 +6,7 @@
 package it.progettoWeb.java.Controller.HomeController;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 public class PasswordResetRequest extends HttpServlet {
 
     private static String CHANGE_PAGE = "/jspFile/Finale/Index/reset.jsp";
+    private static String HOME_PAGE = "/jspFile/Finale/Index/homePage.jsp";
     private int tokenExpiration = 2;
     private DaoUtente daoUtente;
     
@@ -53,9 +55,21 @@ public class PasswordResetRequest extends HttpServlet {
         String encodedKey = daoUtente.getKey(token);
         System.out.println("La chiave è: " + encodedKey);
         byte[] decodedKey = Base64.getDecoder().decode(encodedKey);
+        String userEmail = "";
         
-        Jws<Claims> parseClaimsJws = Jwts.parser().setSigningKey(decodedKey).parseClaimsJws(token);
-        String userEmail = parseClaimsJws.getBody().getSubject();
+        try{
+            Jws<Claims> parseClaimsJws = Jwts.parser().setSigningKey(decodedKey).parseClaimsJws(token);
+            userEmail = parseClaimsJws.getBody().getSubject();
+            request.setAttribute("resetEmail", userEmail);
+            System.out.println("Email da resettare: " + request.getAttribute("resetEmail"));
+            RequestDispatcher view = request.getRequestDispatcher(CHANGE_PAGE);
+            view.forward(request, response);
+        }catch(ExpiredJwtException e){
+            request.setAttribute("changedPassword", 0);
+            RequestDispatcher view = request.getRequestDispatcher("HomeController?action=Inizializzazione");
+            view.forward(request, response);
+        }
+        
 
         
         /*try (PrintWriter out = response.getWriter()) {
@@ -72,10 +86,7 @@ public class PasswordResetRequest extends HttpServlet {
             out.println("</html>");
         }*/
         
-        request.setAttribute("resetEmail", userEmail);
-        System.out.println("Email da resettare: " + request.getAttribute("resetEmail"));
-        RequestDispatcher view = request.getRequestDispatcher(CHANGE_PAGE);
-        view.forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

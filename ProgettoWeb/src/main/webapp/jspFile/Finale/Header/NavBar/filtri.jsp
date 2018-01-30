@@ -146,19 +146,19 @@
             </select>
         </div>
 
-        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+        <div class="col-xl-4 col-lg-4 col-md-4 d-none d-sm-none d-md-block">
             <i class="large material-icons">person_outline</i>
-            <input class="col-10 text-input" type="text" id="venditore" name="filtroNomeVenditore" required placeholder="Nome venditore" value="${param.hiddennomeVenditore != null ? param.hiddennomeVenditore : ''}">
+            <input class="col-10 text-input" type="text" id="venditore" name="filtroNomeVenditore" placeholder="Nome venditore" value="${param.hiddennomeVenditore != null ? param.hiddennomeVenditore : ''}">
         </div>
 
-        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+        <div class="col-xl-4 col-lg-4 col-md-4 d-none d-sm-none d-md-block">
             <i class="large material-icons">shop</i>
-            <input class="col-10 text-input" type="text" id="negozio" name="filtroNomeNegozio" required placeholder="Nome negozio" value="${param.hiddennomeNegozio != null ? param.hiddennomeNegozio : ''}">
+            <input class="col-10 text-input" type="text" id="negozio" name="filtroNomeNegozio" placeholder="Nome negozio" value="${param.hiddennomeNegozio != null ? param.hiddennomeNegozio : ''}">
         </div>
     </div>
 
     <div class="form-group row filterRow">
-        <div class="form-check col-xl-4 col-lg-6 col-md-6 col-sm-5">
+        <div class="form-check col-xl-4 col-lg-6 col-md-6 d-none d-sm-none d-md-block">
             <div style="width: 100%">
                 <center>
                     <input class="form-check-input" name="filtroRitiroInNegozio" type="checkbox" ${param.hiddencheckRitiroInNegozio ? 'checked' : ''}>Ritiro in negozio
@@ -171,13 +171,13 @@
             </div>
         </div>
 
-        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-7">
-            <center>
-                <b class="price-label" id="minSliderValue">0&euro; </b><input name="range-slider" id="double-slider" type="number" range="true" value="" data-provide="slider" data-slider-min="0" data-slider-max="1000" data-slider-step="5" data-slider-value="[${param.hiddenPriceRange != null ? param.hiddenPriceRange : '0,1000'}]"><b class="price-label" id="maxSliderValue"> 1000&euro;</b>
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <center style="margin: .3rem 0;">
+                <b class="price-label" id="minSliderValue"> 0&euro; </b><input name="range-slider" id="double-slider" type="number" range="true" value="" data-provide="slider" data-slider-min="0" data-slider-max="${sessionScope.massimoPrezzoAttuale}" data-slider-step="5" data-slider-value="[${param.hiddenPriceRange != null ? param.hiddenPriceRange : sessionScope.massimoRangeAttuale}]"><b class="price-label" id="maxSliderValue"> ${sessionScope.massimoPrezzoAttuale}&euro;</b>
             </center>
         </div>
 
-        <div class="form-control col-xl-4 col-lg-12 col-md-12 col-sm-12" id="star-block">
+        <div class="form-control col-xl-4 col-lg-12 col-md-12 col-sm-12 col-xs-12" id="star-block">
             <div class="form-group">
                 <div class="stars">
                     <input class="star star-5" id="star-5" type="radio" name="valutazioneReview" value="5" ${param.hiddenvalutazioneMinima != null && param.hiddenvalutazioneMinima == 5 ? 'checked' : ''}/>
@@ -193,6 +193,33 @@
                 </div>
             </div>
         </div>
+                    
+        <div class="col-lg-4 col-md-4 col-sm-12 category-filter">
+            <select class="form-control" style="height: 100%; width: 100%" name="filtroRegione" id='regionFilter'>
+                <c:choose>
+                    <c:when test="${param.hiddenRegione != 'Regione' && param.hiddenRegione != null}">
+                        <option>Regione</option>
+                        <c:forEach items="${sessionScope.listaRegioni}" var="reg">
+                            <option value="${reg}" ${reg == param.hiddenRegione ? 'selected' : ''}><c:out value="${reg}" /></option>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <option selected>Regione</option>
+                        <c:forEach items="${sessionScope.listaRegioni}" var="reg">
+                            <option value="${reg}"><c:out value="${reg}" /></option>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
+            </select>
+        </div>
+                    
+        <div class="col-lg-4 col-md-4 col-sm-12">
+            
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 row no-gutters justify-content-center">
+            <!--<button class="btn btn-outline-primary btn-block col-5" style="margin: 0 .1rem 0 .1rem; padding: 1rem;" onclick="myFunction()">Applica</button> -->
+            <button id="noAction" class="btn btn-outline-primary btn-block col-6" style="margin: 0 .1rem 0 .1rem; padding: 1rem;" onclick="resetFilter()">Reset</button>
+        </div>                 
     </div>
 </form>
 

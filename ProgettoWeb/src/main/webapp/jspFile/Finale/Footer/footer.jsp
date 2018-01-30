@@ -31,8 +31,23 @@
 
 <script>
     $(document).ready(function(){
-        var altezza = $('body').height();
+        var altezza = $('body').outerHeight();
         var schermo = $(window).height();
+        /*console.log("Dimensione del body: " + altezza);
+        console.log("Dimensione dello schermo: " + schermo);*/
+
+        if (altezza >= schermo){
+            $('#footer').css({position: "relative"});
+        }else{
+            $('#footer').css({position: "absolute"});
+        }
+    });
+    
+    $(window).resize(function(){
+        var altezza = $('body').outerHeight();
+        var schermo = $(window).height();
+        /*console.log("Dimensione del body: " + altezza);
+        console.log("Dimensione dello schermo: " + schermo);*/
 
         if (altezza >= schermo){
             $('#footer').css({position: "relative"});

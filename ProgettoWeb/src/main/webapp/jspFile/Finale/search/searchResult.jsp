@@ -13,10 +13,10 @@
     <%@include file="../Header/Head/HomeHead/homeHead.jsp" %>
     <title>ShopHero</title>
         <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css"> -->
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script> -->
 
     <!-- (Optional) Latest compiled and minified JavaScript translation files -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script> -->
@@ -31,7 +31,7 @@
         <div class="container-fluid">
             
             <div class="summary">
-                <p>Risultati in per: <%=  request.getParameter("search")%></p>
+                <%-- <p>Risultati in per: <%=  request.getParameter("search")%></p>
                 <p>Categoria selezionata: <%= request.getParameter("hiddenidCategoria")%></p>
                 <p>Nome venditore: <%= request.getParameter("hiddennomeVenditore")%></p>
                 <p>Nome negozio: <%= request.getParameter("hiddennomeNegozio")%></p>
@@ -39,8 +39,35 @@
                 <p>Prodotti scontati: <%= request.getParameter("hiddencheckProdottiScontati")%></p>
                 <p>Range di prezzo: <%= request.getParameter("hiddenPriceRange")%></p>
                 <p>Valutazione minima: <%= request.getParameter("hiddenvalutazioneMinima")%></p>
+                <p>Regione: <%= request.getParameter("hiddenRegione")%></p> --%>
                 
-                <c:out value="${listaOggetti.getList().size()}" /> 
+                <c:choose>
+                    <c:when test="${listaOggetti.getList().size() == 0}">
+                        <h3>Siamo spiacenti, la ricerca non ha prodotto alcun risultato</h3>
+                    </c:when>
+                    <c:when test="${listaOggetti.getList().size() == 1}">
+                        <c:choose>
+                            <c:when test="${param.search == ''}">
+                                <h3>La ricerca ha prodotto <c:out value="${listaOggetti.getList().size()}" /> risultato</h3>
+                            </c:when>
+                            <c:otherwise>
+                                <h3>La ricerca per ${param.search} ha prodotto <c:out value="${listaOggetti.getList().size()}" /> risultato</h3>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:when>
+                    <c:otherwise>
+                         <c:choose>
+                            <c:when test="${param.search == ''}">
+                                <h3>La ricerca ha prodotto <c:out value="${listaOggetti.getList().size()}" /> risultati</h3>
+                            </c:when>
+                            <c:otherwise>
+                                <h3>La ricerca per ${param.search} ha prodotto <c:out value="${listaOggetti.getList().size()}" /> risultati</h3>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:otherwise>
+                </c:choose>
+                
+                <%-- <c:out value="${listaOggetti.getList().size()}" />  --%>
                 
                 <c:set var="limitColum" value="${4}" scope="page" />
                 <%@include file="../Components/Liste/ListaOggetto/testListaOggetto.jsp" %> 

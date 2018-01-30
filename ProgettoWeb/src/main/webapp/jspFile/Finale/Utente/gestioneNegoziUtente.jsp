@@ -31,7 +31,7 @@
         <div class="container">
             <%@include file="../Header/NavBar/newNavBar.jsp" %>
         </div>
-        <div class="container-fluid">
+        <div class="container-fluid" style="padding-bottom: .3rem;">
             <div class="row">
                 <div class="col-12">
                     <c:choose>

@@ -91,6 +91,7 @@ public class InserisciRecensioneController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         processRequest(request, response);
     }
 
@@ -104,8 +105,8 @@ public class InserisciRecensioneController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        String forward = "";
+        request.setCharacterEncoding("UTF-8");
+        String forward = "http://localhost:8080/ProgettoWeb";
         String action = request.getParameter("action");
         
         if(action.equals("Oggetto")) {
@@ -114,7 +115,7 @@ public class InserisciRecensioneController extends HttpServlet {
             String testoRecensione = request.getParameter("testoReview").replace('\'', ' ');
             int valutazioneRecensione = Integer.parseInt(request.getParameter("valutazioneReview"));
             
-            forward = "/objectSelectedController?idOggetto=" + idOggetto;
+            forward += "/objectSelectedController?idOggetto=" + idOggetto;
             
             ModelloRecensioneOggetto recensioneOggetto = new ModelloRecensioneOggetto();
             recensioneOggetto.setIdUtente(idUtente);
@@ -144,7 +145,7 @@ public class InserisciRecensioneController extends HttpServlet {
             String testoRecensione = request.getParameter("testoReview").replace('\'', ' ');
             int valutazioneRecensione = Integer.parseInt(request.getParameter("valutazioneReview"));
             
-            forward = "/UserController?action=DescrizioneNegozio&idNegozio=" + idNegozio;
+            forward += "/UserController?action=DescrizioneNegozio&idNegozio=" + idNegozio;
             
             ModelloRecensioneNegozio recensioneNegozio = new ModelloRecensioneNegozio();
             recensioneNegozio.setIdUtente(idUtente);
@@ -164,7 +165,7 @@ public class InserisciRecensioneController extends HttpServlet {
             String testoRecensione = request.getParameter("testoReview").replace('\'', ' ');
             int valutazioneRecensione = Integer.parseInt(request.getParameter("valutazioneReview"));
             
-            forward = "/UserController?action=DescrizioneVenditore&idUtente=" + idVenditore;
+            forward += "/UserController?action=DescrizioneVenditore&idUtente=" + idVenditore;
             
             ModelloRecensioneVenditore recensioneVenditore = new ModelloRecensioneVenditore();
             recensioneVenditore.setIdUtente(idUtente);
@@ -179,8 +180,7 @@ public class InserisciRecensioneController extends HttpServlet {
             daoUtente.updateUserStars(idVenditore, newMedia);
         }
         
-        RequestDispatcher view = request.getRequestDispatcher(forward);
-        view.forward(request, response);
+        response.sendRedirect(forward);
     }
     
     /**
@@ -189,7 +189,7 @@ public class InserisciRecensioneController extends HttpServlet {
     private boolean getImages(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String appPath = request.getServletContext().getRealPath("");
         String savePath = appPath + SAVE_DIR;
-        String savePathFake = request.getContextPath() + File.separator + SAVE_DIR;
+        String savePathFake = request.getContextPath() + "/" + SAVE_DIR;
         
         File fileSaveDir = new File(savePath);
         if (!fileSaveDir.exists()) {
@@ -201,11 +201,11 @@ public class InserisciRecensioneController extends HttpServlet {
             String fileName = extractFileName(part);
             if(!fileName.isEmpty()) {
                 fileName = new File(fileName).getName();
-                part.write(savePath + File.separator + fileName);
-                imageSrcs.add(savePathFake + File.separator + fileName);
+                part.write(savePath + "/" + fileName);
+                imageSrcs.add(savePathFake + "/" + fileName);
                 imageSaved = true;
-                System.out.println(savePath + File.separator + fileName);
-                System.out.println(savePathFake + File.separator + fileName);
+                System.out.println(savePath + "/" + fileName);
+                System.out.println(savePathFake + "/" + fileName);
             }
         }
         

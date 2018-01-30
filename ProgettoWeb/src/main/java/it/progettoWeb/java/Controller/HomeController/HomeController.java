@@ -9,7 +9,7 @@ import it.progettoWeb.java.database.Dao.Categoria.DaoCategoria;
 import it.progettoWeb.java.database.Dao.Oggetto.DaoOggetto;
 import it.progettoWeb.java.database.Dao.Ordine.DaoOrdine;
 import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
-import it.progettoWeb.java.database.Model.Categoria.ModelloCategoria;
+import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
 import it.progettoWeb.java.database.Model.Categoria.ModelloListeCategoria;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloOggetto;
@@ -17,10 +17,8 @@ import it.progettoWeb.java.database.Model.Ordine.ModelloListeOrdine;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.Model.immagineOggetto.ModelloImmagineOggetto;
 import it.progettoWeb.java.database.Model.immagineOggetto.ModelloListeImmagineOggetto;
-import it.progettoWeb.java.utility.javaMail.SendEmail;
 import it.progettoWeb.java.utility.pair.pair;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,6 +40,7 @@ public class HomeController extends HttpServlet {
     private DaoOggetto daoOggetto;
     private DaoUtente daoUtente;
     private DaoOrdine daoOrdine;
+    private DaoIndirizzo daoIndirizzo;
 
     public HomeController() {
         super();
@@ -49,6 +48,7 @@ public class HomeController extends HttpServlet {
         daoOggetto = new DaoOggetto();
         daoUtente = new DaoUtente();
         daoOrdine = new DaoOrdine();
+        daoIndirizzo = new DaoIndirizzo();
     }
 
     /**
@@ -62,7 +62,7 @@ public class HomeController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        request.setCharacterEncoding("UTF-8");
         String forward="";
         String action = request.getParameter("action");
 
@@ -77,6 +77,12 @@ public class HomeController extends HttpServlet {
             
             if(session != null) {
                 log("La sessione non è nulla");
+                
+                System.out.println("Il prezzo massimo del database è " + daoOggetto.getMaxPrice());
+                request.getSession().setAttribute("massimoPrezzoAttuale", (int)daoOggetto.getMaxPrice());
+                System.out.println("Range massimo di prezzo: " + "0," + (int)(daoOggetto.getMaxPrice()) + "");
+                request.getSession().setAttribute("massimoRangeAttuale", "0," + (int)(daoOggetto.getMaxPrice()) + "");
+                
                 ModelloUtente utenteInSessione = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
                 if(utenteInSessione == null || utenteInSessione.getId() == -1){
                     log("Utente nullo o -1");
@@ -159,6 +165,8 @@ public class HomeController extends HttpServlet {
             
             ModelloListeCategoria listaCategorie = new ModelloListeCategoria(daoCat.selectAllCategory());
             request.getSession().setAttribute("listacategoriesessione", listaCategorie);
+            List<String> regioni = daoIndirizzo.getAllRegions();
+            request.getSession().setAttribute("listaRegioni", regioni);
 
             //Richiedo oggetti per riempire la home page
             pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectRandomObjectsAndImage(12);

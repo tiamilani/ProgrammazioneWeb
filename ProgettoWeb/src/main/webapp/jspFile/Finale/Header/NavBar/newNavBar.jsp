@@ -31,7 +31,7 @@
 
 <nav class="navbar fixed-top navbar-default bg-light navbar-expand-lg row no-gutters" role="navigation" style="padding: 0 .5rem 0 .5rem;">
     <a class="navbar-brand" href="http://localhost:8080/ProgettoWeb/jspFile/Finale/Index/index.jsp">
-        <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/shopero.jpg" height=40px width=100px class="d-inline-block align-top" alt="IMG">
+        <img src="http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/shopero.jpg" height=40px style="width: auto;" class="d-inline-block align-top" alt="IMG">
     </a>
     <button class="navbar-toggler navbar-toggler-right" id="visible" type="button" data-toggle="collapse" data-target="#collapse-menu" aria-controls="collapse-menu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="Small material-icons">dehaze</span>
@@ -78,22 +78,24 @@
             </div>
         </div>
         <form class="navbar-form form-inline col-md-12 col-sm-12 col-xl-7 col-lg-6 row no-gutters" autocomplete="on" id="form1" name="form1" method="GET">
-            <div class="form-group">
+            <div class="form-group input-group">
                 <div class="find col-10">
-                    <input class="form-control" id="expand" type="text" placeholder="Search" autocomplete="on" name="search">
+                    <input class="form-control" id="expand" type="text" placeholder="Search" autocomplete="on" name="search" value="${param.search == '' || param.search == null || param.search == undefined ? '' : param.search}">
                     <div style="width: 90%; margin-left: 10%;" id="appendToSearch">  </div>
                 </div>
 
-                <button type="submit" class="btn btn-default col-1" id="nopad" onclick="myFunction()">
+                <button type="submit" class="btn nav-search-button btn-default col-1" id="nopad" onclick="myFunction()">
                     <i class="material-icons">search</i>
                 </button>
-                <input type='hidden' id = 'hiddenidCategoria' name = 'hiddenidCategoria' value='' />
-                <input type='hidden' id = 'hiddennomeVenditore' name = 'hiddennomeVenditore' value='' />
-                <input type='hidden' id = 'hiddennomeNegozio' name = 'hiddennomeNegozio' value='' />
-                <input type='hidden' id = 'hiddencheckRitiroInNegozio' name = 'hiddencheckRitiroInNegozio' value='' />
-                <input type='hidden' id = 'hiddencheckProdottiScontati' name = 'hiddencheckProdottiScontati' value='' />
-                <input type="hidden" id = 'hiddenPriceRange' name = 'hiddenPriceRange' value='' />
-                <input type='hidden' id = 'hiddenvalutazioneMinima' name = 'hiddenvalutazioneMinima' value='' />
+                <input type='hidden' id='hiddenidCategoria' name='hiddenidCategoria' value='' />
+                <input type='hidden' id='hiddennomeVenditore' name='hiddennomeVenditore' value='' />
+                <input type='hidden' id='hiddennomeNegozio' name='hiddennomeNegozio' value='' />
+                <input type='hidden' id='hiddencheckRitiroInNegozio' name='hiddencheckRitiroInNegozio' value='' />
+                <input type='hidden' id='hiddencheckProdottiScontati' name='hiddencheckProdottiScontati' value='' />
+                <input type="hidden" id='hiddenPriceRange' name='hiddenPriceRange' value='' />
+                <input type='hidden' id='hiddenvalutazioneMinima' name='hiddenvalutazioneMinima' value='' />
+                <input type='hidden' id='hiddenRegione' name='hiddenRegione' value='' />
+                <input type='hidden' id='hiddenText' name='hiddenText' value='' />
             </div>
         </form>
         <div class="user d-flex justify-content-between row no-gutters col-xl-3 col-lg-3">
@@ -275,21 +277,53 @@
         $(window).scroll(function(){
             // console.log("you are scrolling");
             // $('.autocomplete-suggestions').css('display', 'none');
-            $('#expand').autocomplete().hide();
+            if(typeof $('#expand').autocomplete() !== 'undefined'){
+                $('#expand').autocomplete().hide();
+            }
         });
 
         $(window).resize(function(){
-            console.log("you are scrolling");
+            //console.log("you are scrolling");
             // $('.autocomplete-suggestions').css('display', 'none');
 
             $("#visible").attr("aria-expanded", "false");
             $("#visible").addClass("collapsed");
             $("#collapse-menu").removeClass("show");
-            console.log("resizing");
-            $('#expand').autocomplete().hide();
+            //console.log("resizing");
+            if(typeof $('#expand').autocomplete() !== 'undefined'){
+                $('#expand').autocomplete().hide();
+            }
         });
 
     });
+
+    function resetFilter(){
+        document.forms["filterForm"].elements[0].value = 'Categoria';
+        if(document.forms["filterForm"].elements[1].value !== ''){
+            document.forms["filterForm"].elements[1].value = '';
+        }
+        document.forms["filterForm"].elements[2].value = '';
+        $('input[name=filtroRitiroInNegozio]').prop('checked', false);
+        $('input[name=filtroProdottiScontati]').prop('checked', false);
+        var minRange = $('#double-slider').attr('data-slider-min');
+        var maxRange = $('#double-slider').attr('data-slider-max');
+        var rangeValue = minRange + ',' + maxRange;
+        console.log(rangeValue);
+        // document.getElementById("double-slider").setAttribute('data-slider-value', rangeValue);
+        
+        document.getElementById("double-slider").setAttribute("value", rangeValue);
+        document.getElementById("double-slider").setAttribute("data-value", rangeValue);
+        //$('#double-slider').attr('value');
+        document.getElementById("regionFilter").value = 'Regione';
+        
+        $('input[name=valutazioneReview]').prop('checked', false);
+
+    }
+    
+    document.getElementById("noAction").addEventListener("click", function(event){
+        event.preventDefault();
+    });
+
 
     function myFunction() {
         var idCategoria = document.forms["filterForm"].elements[0].value;
@@ -298,10 +332,12 @@
         var checkRitiroInNegozio = document.forms["filterForm"].elements[3].checked;
         var checkProdottiScontati = document.forms["filterForm"].elements[4].checked;
         var rangeValue = $('#double-slider').attr('value');
+        var nomeRegione = $('#regionFilter').val();
+        //var testo = $('#expand').val();
         var valutazioneMinima = calcStar();
         console.log(valutazioneMinima);
 
-
+        console.log("Ho appena assegnato il tutto");
 
         /*
         var latitudine = document.forms["filterForm"].elements[7].value;
@@ -316,6 +352,9 @@
         document.form1.hiddencheckProdottiScontati.value = String(checkProdottiScontati);
         document.form1.hiddenPriceRange.value = String(rangeValue);
         document.form1.hiddenvalutazioneMinima.value = String(valutazioneMinima);
+        document.form1.hiddenRegione.value = String(nomeRegione);
+        //document.form1.hiddenText.value = String(testo + " ");
+        
             /*
         document.form1.hiddenlatitudine.value = String(latitudine);
         document.form1.hiddenlongitudine.value = String(longitudine);

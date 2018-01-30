@@ -220,4 +220,18 @@ public class DaoIndirizzo {
         else
             return true;
     }
+    
+    public List<String> getAllRegions() {
+        List<String> regioni = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(genericsQuery.getAllRegions());
+            while (rs.next()) {
+                regioni.add(rs.getString(1));
+            }
+        } catch (SQLException e) {
+        }
+
+        return regioni;
+    }
 }

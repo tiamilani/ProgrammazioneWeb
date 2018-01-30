@@ -37,6 +37,10 @@ public class ModelloOggetto {
      * Variabile utilizzata per la descrizione dell'oggetto da parte del venditore
      */
     private String descrizione;
+    
+    /**
+     * Variabile utilizzata per la valutazione dell'oggetto da parte degli utenti
+     */
     private double valutazione;
     /**
      * Variabile che indica o meno la presenza del ritiro in negozio

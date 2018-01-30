@@ -61,7 +61,7 @@
                     </span>
                 </li>
                 <li>
-                    <span class="a-list-item"><strong>DIRITTO DI RECESSO, ECCEZIONI E POLITICHE DI RESO AMAZON</strong>
+                    <span class="a-list-item"><strong>DIRITTO DI RECESSO, ECCEZIONI E POLITICHE DI RESO SHOPHERO</strong>
                         <p>Fatte salve le eccezioni indicate di seguito, hai il diritto di recedere dall&rsquo;ordine effettuato, senza dover fornire alcuna motivazione, 
                             entro 14 giorni dal giorno in cui hai ricevuto il prodotto ordinato (o l&rsquo;ultimo prodotto, lotto o pezzo in caso di beni, lotti o pezzi multipli consegnati separatamente) 
                             o dalla conclusione del contratto (inclusi a titolo esemplificativo e non esaustivo, i contratti per la fornitura di contenuti digitali non forniti su un supporto materiale, 

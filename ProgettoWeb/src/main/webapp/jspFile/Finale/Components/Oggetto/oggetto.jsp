@@ -120,10 +120,10 @@
 <c:url value="/objectSelectedController" var="objUrl" >
     <c:param name="idOggetto" value="${listaOggetti.get(iterator).getId()}" />
 </c:url>
-<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
     <div class="card card-present">    
         <a href="${objUrl}" style="box-shadow: none;">
-            <img class="card-img-top" src="${listaImmaginiOggetto.get(iterator).getSrc()}" alt="IMAGE NOT LOADED" style="height: 250px; object-fit: scale-down;"> <!--add object-fit: contain;-->
+            <img class="card-img-top" src="${listaImmaginiOggetto.get(iterator).getSrc()}" onerror="this.src = 'jspFile/Finale/Img/objectImage.png'" style="height: 250px; object-fit: scale-down;"> <!--add object-fit: contain;-->
         </a>
 
         <div class="card-block">
@@ -134,26 +134,28 @@
         </div>
 
         <div class="overlay">
-            <div class="row no-gutters">
-                <p class="card-text col-12"> <c:out value="${listaOggetti.get(iterator).getDescrizione()}" /> </p>
-            </div>
-            
-            <div class="valutazione row no-gutters justify-content-between">
-                <div class="user-votes col-9">
-                    <div class="stars-${listaOggetti.get(iterator).getId()}">
-                        <input class="star star-5" id="star-5-${listaOggetti.get(iterator).getId()}" type="radio" name="valutazioneReview-${listaOggetti.get(iterator).getId()}" value="5" disabled ${iterator == 5 ? 'checked' : ''}/>
-                        <label class="star star-5" for="star-5-${listaOggetti.get(iterator).getId()}"></label>
-                        <input class="star star-4" id="star-4-${listaOggetti.get(iterator).getId()}" type="radio" name="valutazioneReview-${listaOggetti.get(iterator).getId()}" value="4" disabled ${iterator == 4 ? 'checked' : ''}/>
-                        <label class="star star-4" for="star-4-${listaOggetti.get(iterator).getId()}"></label>
-                        <input class="star star-3" id="star-3-${listaOggetti.get(iterator).getId()}" type="radio" name="valutazioneReview-${listaOggetti.get(iterator).getId()}" value="3" disabled ${iterator == 3 ? 'checked' : ''}/>
-                        <label class="star star-3" for="star-3-${listaOggetti.get(iterator).getId()}"></label>
-                        <input class="star star-2" id="star-2-${listaOggetti.get(iterator).getId()}" type="radio" name="valutazioneReview-${listaOggetti.get(iterator).getId()}" value="2" disabled ${iterator == 2 ? 'checked' : ''}/>
-                        <label class="star star-2" for="star-2-${listaOggetti.get(iterator).getId()}"></label>
-                        <input class="star star-1" id="star-1-${listaOggetti.get(iterator).getId()}" type="radio" name="valutazioneReview-${listaOggetti.get(iterator).getId()}" value="1" disabled ${iterator == 1 ? 'checked' : ''}/>
-                        <label class="star star-1" for="star-1-${listaOggetti.get(iterator).getId()}"></label>
-                    </div>
+                <div class="row no-gutters">
+                    <p class="card-text col-12"> <c:out value="${listaOggetti.get(iterator).getDescrizione()}" /> </p>
                 </div>
-            </div>
+            
+                <div class="valutazione row no-gutters">
+                    <!--div class="col-2"> </div-->
+                    <div class="user-votes col-12 row no-gutters justify-content-center">
+                        <div class="stars-${listaOggetti.get(iterator).getId()}">
+                            <input class="star star-5" id="star-5-${listaOggetti.get(iterator).getId()}" type="radio" name="valutazioneReview-${listaOggetti.get(iterator).getId()}" value="5" disabled ${listaOggetti.get(iterator).getValutazione() == 5 ? 'checked' : ''}/>
+                            <label class="star star-5" for="star-5-${listaOggetti.get(iterator).getId()}"></label>
+                            <input class="star star-4" id="star-4-${listaOggetti.get(iterator).getId()}" type="radio" name="valutazioneReview-${listaOggetti.get(iterator).getId()}" value="4" disabled ${listaOggetti.get(iterator).getValutazione() >= 4 && listaOggetti.get(iterator).getValutazione() < 5 ? 'checked' : ''}/>
+                            <label class="star star-4" for="star-4-${listaOggetti.get(iterator).getId()}"></label>
+                            <input class="star star-3" id="star-3-${listaOggetti.get(iterator).getId()}" type="radio" name="valutazioneReview-${listaOggetti.get(iterator).getId()}" value="3" disabled ${listaOggetti.get(iterator).getValutazione() >= 3 && listaOggetti.get(iterator).getValutazione() < 4 ? 'checked' : ''}/>
+                            <label class="star star-3" for="star-3-${listaOggetti.get(iterator).getId()}"></label>
+                            <input class="star star-2" id="star-2-${listaOggetti.get(iterator).getId()}" type="radio" name="valutazioneReview-${listaOggetti.get(iterator).getId()}" value="2" disabled ${listaOggetti.get(iterator).getValutazione() >= 2 && listaOggetti.get(iterator).getValutazione() < 3 ? 'checked' : ''}/>
+                            <label class="star star-2" for="star-2-${listaOggetti.get(iterator).getId()}"></label>
+                            <input class="star star-1" id="star-1-${listaOggetti.get(iterator).getId()}" type="radio" name="valutazioneReview-${listaOggetti.get(iterator).getId()}" value="1" disabled ${listaOggetti.get(iterator).getValutazione() >= 1 && listaOggetti.get(iterator).getValutazione() < 2 ? 'checked' : ''}/>
+                            <label class="star star-1" for="star-1-${listaOggetti.get(iterator).getId()}"></label>
+                        </div>
+                    </div>
+                    <!--div class="col-2"> </div-->
+                </div>
         </div>
     </div>
 </div>
