@@ -135,9 +135,9 @@ public class InserisciRecensioneController extends HttpServlet {
                 }
             }
             
-            int numReviews = daoRecensioneOggetto.howManyReviewsO(idOggetto);
+            /*int numReviews = daoRecensioneOggetto.howManyReviewsO(idOggetto);
             double newMedia = ((daoOggetto.getObjectById(idOggetto).getValutazione() * numReviews + valutazioneRecensione) / (numReviews + valutazioneRecensione));
-            daoOggetto.updateObjectStars(idOggetto, newMedia);
+            daoOggetto.updateObjectStars(idOggetto, newMedia);*/
         }
         else if(action.equals("Negozio")) {
             int idUtente = Integer.parseInt(request.getParameter("utenteReview"));
@@ -155,9 +155,9 @@ public class InserisciRecensioneController extends HttpServlet {
             recensioneNegozio.setValutazione(valutazioneRecensione);
             daoRecensioneNegozio.addReviewToStore(recensioneNegozio);
             
-            int numReviews = daoRecensioneNegozio.howManyReviews(idNegozio);
+            /*int numReviews = daoRecensioneNegozio.howManyReviews(idNegozio);
             double newMedia = ((daoNegozio.getStoreById(idNegozio).getValutazione() * numReviews + valutazioneRecensione) / (numReviews + valutazioneRecensione));
-            daoNegozio.updateShopStars(idNegozio, newMedia);
+            daoNegozio.updateShopStars(idNegozio, newMedia);*/
         }
         else if(action.equals("Venditore")) {
             int idUtente = Integer.parseInt(request.getParameter("utenteReview"));
@@ -175,9 +175,9 @@ public class InserisciRecensioneController extends HttpServlet {
             recensioneVenditore.setValutazione(valutazioneRecensione);
             daoRecensioneVenditore.addReviewToSeller(recensioneVenditore);
             
-            int numReviews = daoRecensioneVenditore.howManyReviews(idVenditore);
+            /*int numReviews = daoRecensioneVenditore.howManyReviews(idVenditore);
             double newMedia = ((daoUtente.getUserById(idVenditore).getValutazione() * numReviews + valutazioneRecensione) / (numReviews + valutazioneRecensione));
-            daoUtente.updateUserStars(idVenditore, newMedia);
+            daoUtente.updateUserStars(idVenditore, newMedia);*/
         }
         
         response.sendRedirect(forward);

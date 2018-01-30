@@ -44,7 +44,7 @@
                                                 <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
                                             </div>
                                             <div class="col-8">
-                                                <p class="lead">${risposteOggetto.getL().get(i).getTesto()}</p>
+                                                <p class="lead">${risposteOggetto.getL().get(0).getTesto()}</p>
                                             </div>
                                         </div>
                                     </c:if>
@@ -73,7 +73,7 @@
                                                 <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
                                             </div>
                                             <div class="col-8">
-                                                <p class="lead">${risposteOggetto.getL().get(i+1).getTesto()}</p>
+                                                <p class="lead">${risposteOggetto.getL().get(0).getTesto()}</p>
                                             </div>
                                         </div>
                                     </c:if>
@@ -102,7 +102,7 @@
                                                 <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
                                             </div>
                                             <div class="col-8">
-                                                <p class="lead">${risposteOggetto.getL().get(i+2).getTesto()}</p>
+                                                <p class="lead">${risposteOggetto.getL().get(0).getTesto()}</p>
                                             </div>
                                         </div>
                                     </c:if>
@@ -136,7 +136,7 @@
                                                 <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
                                             </div>
                                             <div class="col-8">
-                                                <p class="lead">${risposteOggetto.getL().get(i).getTesto()}</p>
+                                                <p class="lead">${risposteOggetto.getL().get(0).getTesto()}</p>
                                             </div>
                                         </div>
                                     </c:if>
@@ -170,7 +170,7 @@
                                                 <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
                                             </div>
                                             <div class="col-8">
-                                                <p class="lead">${risposteOggetto.getL().get(i).getTesto()}</p>
+                                                <p class="lead">${risposteOggetto.getL().get(0).getTesto()}</p>
                                             </div>
                                         </div>
                                     </c:if>
@@ -199,7 +199,7 @@
                                                 <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
                                             </div>
                                             <div class="col-8">
-                                                <p class="lead">${risposteOggetto.getL().get(i+1).getTesto()}</p>
+                                                <p class="lead">${risposteOggetto.getL().get(0).getTesto()}</p>
                                             </div>
                                         </div>
                                     </c:if>
@@ -234,7 +234,7 @@
                                             <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
                                         </div>
                                         <div class="col-8">
-                                            <p class="lead">${risposteOggetto.getL().get(i).getTesto()}</p>
+                                            <p class="lead">${risposteOggetto.getL().get(0).getTesto()}</p>
                                         </div>
                                     </div>
                                 </c:if>
@@ -263,7 +263,7 @@
                                             <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
                                         </div>
                                         <div class="col-8">
-                                            <p class="lead">${risposteOggetto.getL().get(i+1).getTesto()}</p>
+                                            <p class="lead">${risposteOggetto.getL().get(0).getTesto()}</p>
                                         </div>
                                     </div>
                                 </c:if>
@@ -292,7 +292,7 @@
                                             <i class="fa fa-chevron-right" aria-hidden="true" style="display: inline-block;"></i>
                                         </div>
                                         <div class="col-8">
-                                            <p class="lead">${risposteOggetto.getL().get(i+2).getTesto()}</p>
+                                            <p class="lead">${risposteOggetto.getL().get(0).getTesto()}</p>
                                         </div>
                                     </div>
                                 </c:if>
