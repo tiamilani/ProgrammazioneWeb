@@ -71,7 +71,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                    <p><b>Citta':</b></p>
+                                    <p><b>Citt&agrave;:</b></p>
                                 </div>
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <p><c:out value="${address.getCitta()}"/></p>

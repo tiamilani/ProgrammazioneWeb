@@ -17,6 +17,20 @@
     
     <script src="${pageContext.request.contextPath}/jspFile/Finale/JS/Assistances.js"></script>
     <script src="${pageContext.request.contextPath}/jspFile/Finale/JS/fixFooter.js"></script>
+    <script>
+        $(document).ready(function() {
+                $('#tabellaAssistenzeAperte').DataTable({
+                    responsive: true,
+                    colReorder: true
+                });
+            } );
+        $(document).ready(function() {
+                $('#tabellaAssistenzeChiuse').DataTable({
+                    responsive: true,
+                    colReorder: true
+                });
+            } );
+    </script>
     
     <body>
         <div class="container">
@@ -35,33 +49,32 @@
                 </c:if>
                     
                 <c:if test="${assistenzeAperte.size() > 0}">
-                    <div class="row">
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            <p><b>Data apertura</b></p>
-                        </div>
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            <p><b>Richiedente</b></p>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                            <p><b>Anteprima richiesta</b></p>
-                        </div>
-                    </div>
-                    <c:forEach items="${assistenzeAperte}" var="assAperta">
-                        <div class="row">
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                <p><c:out value="${assAperta.getL().getDataApertura()}"/></p>
-                            </div>
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                <p><c:out value="${assAperta.getR()}"/></p>
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <p><c:out value="${fn:substring(assAperta.getL().getRichiesta(), 0, 200)}"/> ...</p>
-                            </div>
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                <button class="btn btn-outline-primary buttonSpace" type="button" data-idA="${assAperta.getL().getId()}" onclick="openAssistance(this)">RISOLVI</button>
-                            </div>
-                        </div>
-                    </c:forEach>
+                    
+                    <table id="tabellaAssistenzeAperte" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                            <tr><b>Data apertura</b></tr>
+                            <tr><b>Richiedente</b></tr>
+                            <tr><b>Anteprima richiesta</b></tr>
+                            <td><b>Risolvi</b></td>
+                        </thead>
+                        <tfoot>
+                            <tr><b>Data apertura</b></tr>
+                            <tr><b>Richiedente</b></tr>
+                            <tr><b>Anteprima richiesta</b></tr>
+                            <td><b>Risolvi</b></td>
+                        </tfoot>
+                        
+                        <tbody>
+                            <c:forEach items="${assistenzeAperte}" var="assAperta">
+                                <tr>
+                                    <td><p><c:out value="${assAperta.getL().getDataApertura()}"/></p></td>
+                                    <td><p><c:out value="${assAperta.getR()}"/></p></td>
+                                    <td><p><c:out value="${fn:substring(assAperta.getL().getRichiesta(), 0, 200)}"/> ...</p></td>
+                                    <td><button class="btn btn-outline-primary buttonSpace" type="button" data-idA="${assAperta.getL().getId()}" onclick="openAssistance(this)">RISOLVI</button></td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
                 </c:if>
                 
                 <hr/>
@@ -71,47 +84,44 @@
                 <c:if test="${assistenzeChiuse.size() == 0}">
                     <p><b>Nessun assistenza conclusa.</b></p>
                 </c:if>
-                
-                <c:if test="${assistenzeChiuse.size() > 0}">                    
-                    <div class="row">
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            <p><b>Data apertura</b></p>
-                        </div>
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            <p><b>Data chiusura</b></p>
-                        </div>
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            <p><b>Richiedente</b></p>
-                        </div>
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            <p><b>Anteprima richiesta</b></p>
-                        </div>
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            <p><b>Anteprima soluzione</b></p>
-                        </div>
-                    </div>
-                    <c:forEach items="${assistenzeChiuse}" var="assChiusa">
-                        <div class="row">
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                <p><c:out value="${assChiusa.getL().getDataApertura()}"/></p>
-                            </div>
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                <p><c:out value="${assChiusa.getL().getDataChiusura()}"/></p>
-                            </div>
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                <p><c:out value="${assChiusa.getR()}"/></p>
-                            </div>
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                <p><c:out value="${fn:substring(assChiusa.getL().getRichiesta(), 0, 20)}"/> ...</p>
-                            </div>
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                <p><c:out value="${fn:substring(assChiusa.getL().getSoluzione(), 0, 20)}"/> ...</p>
-                            </div>
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                <button class="btn btn-outline-primary buttonSpace" type="button" data-idA="${assChiusa.getL().getId()}" onclick="openAssistance(this)">VISUALIZZA</button>
-                            </div>
-                        </div>
-                    </c:forEach>
+                    
+                    
+                <c:if test="${assistenzeChiuse.size() > 0}">  
+                    <table id="tabellaAssistenzeChiuse" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <td><b>Data apertura</b></td>
+                                <td><b>Data chiusura</b></td>
+                                <td><b>Richiedente</b></td>
+                                <td><b>Anteprima richiesta</b></td>
+                                <td><b>Anteprima soluzione</b></td>
+                                <td><b>Visualizza</b></td>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <td><b>Data apertura</b></td>
+                                <td><b>Data chiusura</b></td>
+                                <td><b>Richiedente</b></td>
+                                <td><b>Anteprima richiesta</b></td>
+                                <td><b>Anteprima soluzione</b></td>
+                                <td><b>Visualizza</b></td>
+                            </tr>
+                        </tfoot>
+                    
+                        <tbody>
+                            <c:forEach items="${assistenzeChiuse}" var="assChiusa">
+                                <tr>
+                                    <td><p><c:out value="${assChiusa.getL().getDataApertura()}"/></p></td>
+                                    <td><p><c:out value="${assChiusa.getL().getDataChiusura()}"/></p></td>
+                                    <td><p><c:out value="${assChiusa.getR()}"/></p></td>
+                                    <td><p><c:out value="${fn:substring(assChiusa.getL().getRichiesta(), 0, 20)}"/> ...</p></td>
+                                    <td><p><c:out value="${fn:substring(assChiusa.getL().getSoluzione(), 0, 20)}"/> ...</p></td>
+                                    <td><button class="btn btn-outline-primary buttonSpace" type="button" data-idA="${assChiusa.getL().getId()}" onclick="openAssistance(this)">VISUALIZZA</button></td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
                 </c:if>
             </div>
         </div>

@@ -66,8 +66,8 @@
 
                                     <hr size="3" width="100%" align="left"/>
                                     <!-- Immagine prodotto -->
-                                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                        <img style="width: 100px; height: 100px; object-fit: cover;" src="<c:out value="${object.getR().getSrc()}"/>" alt="img">
+                                    <div class="col-xs-2 col-sm-4 col-md-2 col-lg-2">
+                                        <img style="width: 100px; height: 100px; object-fit: scale-down;" src="<c:out value="${object.getR().getSrc()}"/>" alt="img">
                                     </div>
 
                                     <!-- Descrizione prodotto -->
@@ -87,7 +87,7 @@
                                                 <p><c:out value="${disp}"/> disponibili</p>
                                             </c:if>
                                             <c:if test="${disp > 10}">
-                                                <p>Disponibilita' immediata</p>
+                                                <p>Disponibilit&agrave; immediata</p>
                                             </c:if>
                                         </div>
                                     </div>
@@ -112,7 +112,7 @@
                                     <!-- Quantita' prodotto nel carrello -->
                                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                                         <div class="row">
-                                            <p style="text-align: left">Quantita': 
+                                            <p style="text-align: left">Quantit&agrave;: 
                                                 <input id="${iterator}" type="number" min="1" max="${disp}" style="width: 3em; text-align: right" data-oldvalueQuantita="${quantita}"  value="${quantita}" onkeypress="checkInputText(event, this)" onchange="changeQuantity(this)" />
                                             </p>
                                         </div>
