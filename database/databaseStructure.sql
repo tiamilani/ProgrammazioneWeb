@@ -7,64 +7,67 @@
 -- Versione del server: 5.6.35
 -- Versione PHP: 7.1.8
 
+drop database progettoweb;
+create database progettweb;
+use progettoweb;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Database: `progettoweb`
+-- Database: progettoweb
 --
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `assistenza`
+-- Struttura della tabella assistenza
 --
 
-CREATE TABLE `assistenza` (
-  `id` int(11) NOT NULL,
-  `idUtente` int(11) NOT NULL,
-  `idVenditore` int(11) DEFAULT NULL,
-  `idAmministratore` int(11) NOT NULL,
-  `idOrdine` int(11) DEFAULT NULL,
-  `idOggetto` varchar(32) DEFAULT NULL,
-  `stato` int(11) DEFAULT '0',
-  `richiesta` varchar(2500) NOT NULL,
-  `soluzione` varchar(2500) DEFAULT NULL,
-  `dataApertura` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `dataChiusura` datetime DEFAULT NULL
+CREATE TABLE assistenza (
+  id int(11) NOT NULL,
+  idUtente int(11) NOT NULL,
+  idVenditore int(11) DEFAULT NULL,
+  idAmministratore int(11) NOT NULL,
+  idOrdine int(11) DEFAULT NULL,
+  idOggetto varchar(32) DEFAULT NULL,
+  stato int(11) DEFAULT '0',
+  richiesta varchar(2500) NOT NULL,
+  soluzione varchar(2500) DEFAULT NULL,
+  dataApertura datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  dataChiusura datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `carrello`
+-- Struttura della tabella carrello
 --
 
-CREATE TABLE `carrello` (
-  `idUtente` int(11) NOT NULL,
-  `idOrdine` int(11) NOT NULL,
-  `subTotal` double NOT NULL DEFAULT '0'
+CREATE TABLE carrello (
+  idUtente int(11) NOT NULL,
+  idOrdine int(11) NOT NULL,
+  subTotal double NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `categoria`
+-- Struttura della tabella categoria
 --
 
-CREATE TABLE `categoria` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(50) NOT NULL,
-  `sottoCategoria` varchar(50) DEFAULT NULL,
-  `descrizione` varchar(500) NOT NULL,
-  `oggettiPresenti` int(11) NOT NULL DEFAULT '0'
+CREATE TABLE categoria (
+  id int(11) NOT NULL,
+  nome varchar(50) NOT NULL,
+  sottoCategoria varchar(50) DEFAULT NULL,
+  descrizione varchar(500) NOT NULL,
+  oggettiPresenti int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dump dei dati per la tabella `categoria`
+-- Dump dei dati per la tabella categoria
 --
 
-INSERT INTO `categoria` (`id`, `nome`, `sottoCategoria`, `descrizione`, `oggettiPresenti`) VALUES
+INSERT INTO categoria (id, nome, sottoCategoria, descrizione, oggettiPresenti) VALUES
 (1, 'Elettronica', NULL, 'Materiale Elettronico', 8),
 (2, 'Casa', NULL, 'Materiale per Casa e Cucina', 2),
 (3, 'Abbigliamento', NULL, 'il mondo dei vestiti', 1),
@@ -95,19 +98,19 @@ INSERT INTO `categoria` (`id`, `nome`, `sottoCategoria`, `descrizione`, `oggetti
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `imagenegozio`
+-- Struttura della tabella imagenegozio
 --
 
-CREATE TABLE `imagenegozio` (
-  `src` varchar(150) NOT NULL,
-  `idN` int(11) NOT NULL DEFAULT '0'
+CREATE TABLE imagenegozio (
+  src varchar(150) NOT NULL,
+  idN int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dump dei dati per la tabella `imagenegozio`
+-- Dump dei dati per la tabella imagenegozio
 --
 
-INSERT INTO `imagenegozio` (`src`, `idN`) VALUES
+INSERT INTO imagenegozio (src, idN) VALUES
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Stores/gino01.jpg', 1),
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Stores/gino02.jpg', 1),
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Stores/gino03.jpg', 1),
@@ -731,7 +734,7 @@ INSERT INTO `imagenegozio` (`src`, `idN`) VALUES
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Stores/notshop01.jpg', 125),
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Stores/notshop02.jpg', 125),
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Stores/notshop03.jpg', 125);
-INSERT INTO `imagenegozio` (`src`, `idN`) VALUES
+INSERT INTO imagenegozio (src, idN) VALUES
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Stores/notshop04.jpg', 125),
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Stores/notshop05.jpg', 125),
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Stores/ziotom01.jpg', 126),
@@ -1085,19 +1088,19 @@ INSERT INTO `imagenegozio` (`src`, `idN`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `imageoggetto`
+-- Struttura della tabella imageoggetto
 --
 
-CREATE TABLE `imageoggetto` (
-  `src` varchar(150) NOT NULL,
-  `idO` varchar(32) NOT NULL DEFAULT '0'
+CREATE TABLE imageoggetto (
+  src varchar(150) NOT NULL,
+  idO varchar(32) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dump dei dati per la tabella `imageoggetto`
+-- Dump dei dati per la tabella imageoggetto
 --
 
-INSERT INTO `imageoggetto` (`src`, `idO`) VALUES
+INSERT INTO imageoggetto (src, idO) VALUES
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Objects/zampone.jpg', '0012762bee20aa03e6509761a5957d53'),
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Objects/usb500.jpg', '0055a9973ce01c016885fece02f1997c'),
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Objects/office.jpg', '00584535e60c11a98dd3dc1f284cb1bf'),
@@ -1538,7 +1541,7 @@ INSERT INTO `imageoggetto` (`src`, `idO`) VALUES
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Objects/windowsXP.jpg', '5b68aaf67a3f0a5ec862dec853b3546e'),
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Objects/swatchNero.jpg', '5bcd76b15eb418ab1857a8c7ee82a925'),
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Objects/zampone.jpg', '5c041d864a50e6057c345ef0a984dce0');
-INSERT INTO `imageoggetto` (`src`, `idO`) VALUES
+INSERT INTO imageoggetto (src, idO) VALUES
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Objects/risoScotti.jpg', '5c1a5807a0b39c09c81f5fd547123f2c'),
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Objects/laurearsi.jpg', '5c274be01b7a5a92759ebdea291ad331'),
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Objects/iphone9s.jpg', '5c2bb0b75e9e5caeff9ef201e4b5d575'),
@@ -1979,7 +1982,7 @@ INSERT INTO `imageoggetto` (`src`, `idO`) VALUES
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Objects/filoInterdentale.jpg', 'b9296360013d85ffb552f2014505beb6'),
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Objects/giochiAnni90.jpg', 'b95b748ed68ec9a2cf3497a150bd2313'),
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Objects/risoScotti.jpg', 'b9d058faa76f784f13b8783f18e6f674');
-INSERT INTO `imageoggetto` (`src`, `idO`) VALUES
+INSERT INTO imageoggetto (src, idO) VALUES
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Objects/office.jpg', 'b9d7e5dd8ed409a5f6492ba1c38bf24a'),
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Objects/cacciavite.jpg', 'ba0abafff9f4a1ba78de786c8dfaefef'),
 ('http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/Objects/cacciavite.jpg', 'ba0f4683fd8719f281ef7a729a63607d'),
@@ -2326,49 +2329,49 @@ INSERT INTO `imageoggetto` (`src`, `idO`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `imagerecensione`
+-- Struttura della tabella imagerecensione
 --
 
-CREATE TABLE `imagerecensione` (
-  `src` varchar(150) NOT NULL,
-  `idR` int(11) NOT NULL DEFAULT '0'
+CREATE TABLE imagerecensione (
+  src varchar(150) NOT NULL,
+  idR int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `imageutente`
+-- Struttura della tabella imageutente
 --
 
-CREATE TABLE `imageutente` (
-  `src` varchar(150) NOT NULL DEFAULT '',
-  `idU` int(11) NOT NULL DEFAULT '0'
+CREATE TABLE imageutente (
+  src varchar(150) NOT NULL DEFAULT '',
+  idU int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `indirizzo`
+-- Struttura della tabella indirizzo
 --
 
-CREATE TABLE `indirizzo` (
-  `idI` int(11) NOT NULL,
-  `stato` varchar(255) NOT NULL,
-  `regione` varchar(255) NOT NULL,
-  `provincia` varchar(255) NOT NULL,
-  `citta` varchar(255) NOT NULL,
-  `via` varchar(255) NOT NULL,
-  `nCivico` int(11) NOT NULL,
-  `interno` int(11) DEFAULT NULL,
-  `latitudine` double DEFAULT NULL,
-  `longitudine` double DEFAULT NULL
+CREATE TABLE indirizzo (
+  idI int(11) NOT NULL,
+  stato varchar(255) NOT NULL,
+  regione varchar(255) NOT NULL,
+  provincia varchar(255) NOT NULL,
+  citta varchar(255) NOT NULL,
+  via varchar(255) NOT NULL,
+  nCivico int(11) NOT NULL,
+  interno int(11) DEFAULT NULL,
+  latitudine double DEFAULT NULL,
+  longitudine double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dump dei dati per la tabella `indirizzo`
+-- Dump dei dati per la tabella indirizzo
 --
 
-INSERT INTO `indirizzo` (`idI`, `stato`, `regione`, `provincia`, `citta`, `via`, `nCivico`, `interno`, `latitudine`, `longitudine`) VALUES
+INSERT INTO indirizzo (idI, stato, regione, provincia, citta, via, nCivico, interno, latitudine, longitudine) VALUES
 (1, 'Italia', 'Veneto', 'VR', 'Oppeano', 'Via del Lupo', 37, 0, 45.306299, 11.127449),
 (2, 'Italia', 'Trentino Alto Adige', 'TN', 'Comunità delle Giudicarie', 'Strada forestale San Rocco', 48, 0, 46.046964, 10.673698),
 (3, 'Italia', 'Veneto', 'TV', 'Cornuda', '77 - Strada forestale Val de San Lorenzo', 93, 0, 45.83324, 11.991001),
@@ -2803,19 +2806,19 @@ INSERT INTO `indirizzo` (`idI`, `stato`, `regione`, `provincia`, `citta`, `via`,
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `indirizzoutente`
+-- Struttura della tabella indirizzoutente
 --
 
-CREATE TABLE `indirizzoutente` (
-  `idI` int(11) NOT NULL,
-  `idU` int(11) NOT NULL
+CREATE TABLE indirizzoutente (
+  idI int(11) NOT NULL,
+  idU int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dump dei dati per la tabella `indirizzoutente`
+-- Dump dei dati per la tabella indirizzoutente
 --
 
-INSERT INTO `indirizzoutente` (`idI`, `idU`) VALUES
+INSERT INTO indirizzoutente (idI, idU) VALUES
 (1, 1),
 (2, 2),
 (3, 3),
@@ -3050,26 +3053,26 @@ INSERT INTO `indirizzoutente` (`idI`, `idU`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `negozio`
+-- Struttura della tabella negozio
 --
 
-CREATE TABLE `negozio` (
-  `id` int(11) NOT NULL,
-  `idVenditore` int(11) NOT NULL,
-  `nomeNegozio` varchar(255) NOT NULL,
-  `valutazione` double DEFAULT '0',
-  `attivo` tinyint(1) NOT NULL DEFAULT '1',
-  `idI` int(11) NOT NULL,
-  `dataApertura` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `linkSito` varchar(150) DEFAULT NULL,
-  `orarioNegozio` varchar(400) DEFAULT NULL
+CREATE TABLE negozio (
+  id int(11) NOT NULL,
+  idVenditore int(11) NOT NULL,
+  nomeNegozio varchar(255) NOT NULL,
+  valutazione double DEFAULT '0',
+  attivo tinyint(1) NOT NULL DEFAULT '1',
+  idI int(11) NOT NULL,
+  dataApertura datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  linkSito varchar(150) DEFAULT NULL,
+  orarioNegozio varchar(400) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dump dei dati per la tabella `negozio`
+-- Dump dei dati per la tabella negozio
 --
 
-INSERT INTO `negozio` (`id`, `idVenditore`, `nomeNegozio`, `valutazione`, `attivo`, `idI`, `dataApertura`, `linkSito`, `orarioNegozio`) VALUES
+INSERT INTO negozio (id, idVenditore, nomeNegozio, valutazione, attivo, idI, dataApertura, linkSito, orarioNegozio) VALUES
 (1, 21, 'Gino Chainsaws', 5, 1, 231, '2002-12-12 23:00:00', 'www.ginoisthebest.com', 'Lunedi: 8:00 - 19:00, Martedi: 8:00 - 19:00, Mercoledi: 8:00 - 19:00, Giovedi: 8:00 - 19:00, Venerdi: 8:00 - 19:00, Sabato: 8:00 - 19:00, Domenica: Chiuso'),
 (2, 22, 'Despar', 0, 1, 232, '2010-01-01 00:00:01', 'www.despar.it', 'Lunedi: 8:00 - 19:00, Martedi: 8:00 - 19:00, Mercoledi: 8:00 - 19:00, Giovedi: 8:00 - 19:00, Venerdi: 8:00 - 19:00, Sabato: 8:00 - 19:00, Domenica: Chiuso'),
 (3, 23, 'Ikea', 3, 1, 233, '2014-07-13 22:00:00', 'www.ikea.com', 'Lunedi: 8:00 - 19:00, Martedi: 8:00 - 19:00, Mercoledi: 8:00 - 19:00, Giovedi: 8:00 - 19:00, Venerdi: 8:00 - 19:00, Sabato: 8:00 - 19:00, Domenica: Chiuso'),
@@ -3274,30 +3277,30 @@ INSERT INTO `negozio` (`id`, `idVenditore`, `nomeNegozio`, `valutazione`, `attiv
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `oggetto`
+-- Struttura della tabella oggetto
 --
 
-CREATE TABLE `oggetto` (
-  `id` varchar(32) NOT NULL,
-  `idNegozio` int(11) NOT NULL,
-  `nome` varchar(500) NOT NULL,
-  `nomeDownCase` varchar(500) NOT NULL,
-  `prezzo` double NOT NULL,
-  `descrizione` varchar(2500) NOT NULL,
-  `valutazione` double DEFAULT '0',
-  `ritiroInNegozio` tinyint(1) DEFAULT '0',
-  `disponibilita` int(11) NOT NULL,
-  `statoDisponibilita` int(11) NOT NULL DEFAULT '0',
-  `sconto` double DEFAULT '0',
-  `dataFineSconto` date DEFAULT NULL,
-  `categoria` int(11) NOT NULL
+CREATE TABLE oggetto (
+  id varchar(32) NOT NULL,
+  idNegozio int(11) NOT NULL,
+  nome varchar(500) NOT NULL,
+  nomeDownCase varchar(500) NOT NULL,
+  prezzo double NOT NULL,
+  descrizione varchar(2500) NOT NULL,
+  valutazione double DEFAULT '0',
+  ritiroInNegozio tinyint(1) DEFAULT '0',
+  disponibilita int(11) NOT NULL,
+  statoDisponibilita int(11) NOT NULL DEFAULT '0',
+  sconto double DEFAULT '0',
+  dataFineSconto date DEFAULT NULL,
+  categoria int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dump dei dati per la tabella `oggetto`
+-- Dump dei dati per la tabella oggetto
 --
 
-INSERT INTO `oggetto` (`id`, `idNegozio`, `nome`, `nomeDownCase`, `prezzo`, `descrizione`, `valutazione`, `ritiroInNegozio`, `disponibilita`, `statoDisponibilita`, `sconto`, `dataFineSconto`, `categoria`) VALUES
+INSERT INTO oggetto (id, idNegozio, nome, nomeDownCase, prezzo, descrizione, valutazione, ritiroInNegozio, disponibilita, statoDisponibilita, sconto, dataFineSconto, categoria) VALUES
 ('0012762bee20aa03e6509761a5957d53', 101, 'Zampone romagnolo', 'zampone romagnolo', 15.42, 'Zampone originario della Romagna', 0, 1, 42, 0, 10, '2018-06-06', 4),
 ('0055a9973ce01c016885fece02f1997c', 117, 'Penna USB 500 MB', 'penna usb 500 mb', 1.23, 'Penna USB 500 MB a forma di pinguino', 0, 1, 56, 0, 0, NULL, 17),
 ('00584535e60c11a98dd3dc1f284cb1bf', 99, 'Windows Office', 'windows office', 6.95, 'Abbonamento mensile a Windows Office 2016', 0, 1, 77, 0, 0, NULL, 25),
@@ -3591,7 +3594,7 @@ INSERT INTO `oggetto` (`id`, `idNegozio`, `nome`, `nomeDownCase`, `prezzo`, `des
 ('3cadef57ed4eaf612e311a03c22e2ce7', 159, 'Martello multiuso', 'martello multiuso', 14, 'Martello multiuso - fa da martello e da cacciavite', 0, 1, 95, 0, 5, '2018-06-06', 9),
 ('3ce4452d830b56f6521a44cd075070d6', 132, 'Linux tutorial', 'linux tutorial', 45, 'Tutorial per principianti su Linux Ubuntu', 0, 1, 87, 0, 10, '2018-06-06', 25),
 ('3cf159d260c8bbb8a50f99f7510d23de', 3, 'Vaso Ming 1405', 'vaso ming 1405', 5200, 'Vaso della dinastia Ming del 1405', 0, 0, 21, 0, 0, NULL, 14);
-INSERT INTO `oggetto` (`id`, `idNegozio`, `nome`, `nomeDownCase`, `prezzo`, `descrizione`, `valutazione`, `ritiroInNegozio`, `disponibilita`, `statoDisponibilita`, `sconto`, `dataFineSconto`, `categoria`) VALUES
+INSERT INTO oggetto (id, idNegozio, nome, nomeDownCase, prezzo, descrizione, valutazione, ritiroInNegozio, disponibilita, statoDisponibilita, sconto, dataFineSconto, categoria) VALUES
 ('3d25e5cbb7b9dd7b2d78a0a4928dd38b', 188, 'Windows Office', 'windows office', 6.95, 'Abbonamento mensile a Windows Office 2016', 0, 1, 69, 0, 0, NULL, 25),
 ('3d33a3215ec8f951ffda23c261cfdc9a', 120, 'Martello multiuso', 'martello multiuso', 14, 'Martello multiuso - fa da martello e da cacciavite', 3, 1, 7, 0, 5, '2018-06-06', 9),
 ('3dfb71f9874cc936be6087999e84a401', 27, 'JAVA tutorial', 'java tutorial', 42.1, 'Libro + CD - JAVA tutorial per principianti', 3, 1, 52, 0, 0, NULL, 17),
@@ -3881,7 +3884,7 @@ INSERT INTO `oggetto` (`id`, `idNegozio`, `nome`, `nomeDownCase`, `prezzo`, `des
 ('77d33a5ebadf94bdab21e2d659a59030', 102, 'Linux tutorial', 'linux tutorial', 45, 'Tutorial per principianti su Linux Ubuntu', 4, 1, 52, 0, 10, '2018-06-06', 25),
 ('7825becb9c4ff2d5a921dbd16e42ba6d', 144, 'Cotechino di Montebelluno', 'cotechino di montebelluno', 12.2, 'Cotechino di Montebelluno - squisito', 0, 0, 64, 0, 0, NULL, 4),
 ('78791cb0f97ef792ddaa10d99e995ddc', 182, 'Martello multiuso', 'martello multiuso', 14, 'Martello multiuso - fa da martello e da cacciavite', 0, 0, 76, 0, 5, '2018-06-06', 9);
-INSERT INTO `oggetto` (`id`, `idNegozio`, `nome`, `nomeDownCase`, `prezzo`, `descrizione`, `valutazione`, `ritiroInNegozio`, `disponibilita`, `statoDisponibilita`, `sconto`, `dataFineSconto`, `categoria`) VALUES
+INSERT INTO oggetto (id, idNegozio, nome, nomeDownCase, prezzo, descrizione, valutazione, ritiroInNegozio, disponibilita, statoDisponibilita, sconto, dataFineSconto, categoria) VALUES
 ('78818825281057648174a43a3269e84b', 111, 'Windows XP CD di installazione', 'windows xp cd di installazione', 7.2, 'CD di installazione di Windows XP', 3, 1, 17, 0, 0, NULL, 25),
 ('78bca2c75a4e2e010512c5e92c346aea', 122, 'Penna USB 500 MB', 'penna usb 500 mb', 1.23, 'Penna USB 500 MB a forma di pinguino', 0, 0, 14, 0, 0, NULL, 17),
 ('78c0f8492b2ccaf69f133f87eb24793b', 193, 'Cacciavite a croce', 'cacciavite a croce', 5, 'Cacciavite a croce con manico di plastica', 0, 1, 55, 0, 0, NULL, 9),
@@ -4176,7 +4179,7 @@ INSERT INTO `oggetto` (`id`, `idNegozio`, `nome`, `nomeDownCase`, `prezzo`, `des
 ('b895c5a49e088424fae08eb33c91365f', 22, 'Samsung Galaxy A78', 'samsung galaxy a78', 320, 'Samsung Galaxy A78 con 45 megapixel di fotocamera frontale - 10GB di memoria - 2MB di RAM', 0, 1, 17, 0, 0, NULL, 1),
 ('b8b2c2942ea4443165486f64ea8456e8', 22, 'Rolex 24 carati', 'rolex 24 carati', 5200, 'Orologio Rolex da 24 carati - segna anche le ore', 0, 0, 93, 0, 0, NULL, 20),
 ('b8d550eda8d8c756d7ca8295a3a981ff', 39, 'Penna USB 500 MB', 'penna usb 500 mb', 1.23, 'Penna USB 500 MB a forma di pinguino', 4, 0, 30, 0, 0, NULL, 17);
-INSERT INTO `oggetto` (`id`, `idNegozio`, `nome`, `nomeDownCase`, `prezzo`, `descrizione`, `valutazione`, `ritiroInNegozio`, `disponibilita`, `statoDisponibilita`, `sconto`, `dataFineSconto`, `categoria`) VALUES
+INSERT INTO oggetto (id, idNegozio, nome, nomeDownCase, prezzo, descrizione, valutazione, ritiroInNegozio, disponibilita, statoDisponibilita, sconto, dataFineSconto, categoria) VALUES
 ('b920986f24b99c59b67983582c245141', 11, 'Riso Scotti scotto', 'riso scotti scotto', 2.01, 'Riso Scotti gia cucinato e ormai scotto', 0, 1, 92, 0, 0, NULL, 4),
 ('b9296360013d85ffb552f2014505beb6', 196, 'Filo interdentale 4m', 'filo interdentale 4m', 2.3, '4m di filo interdentale', 5, 1, 42, 0, 0, NULL, 23),
 ('b95b748ed68ec9a2cf3497a150bd2313', 187, 'Set 5 videogame anni 90', 'set 5 videogame anni 90', 5.2, 'Set dei 5 migliori videogame degli anni 80', 0, 0, 53, 0, 0, NULL, 12),
@@ -4470,7 +4473,7 @@ INSERT INTO `oggetto` (`id`, `idNegozio`, `nome`, `nomeDownCase`, `prezzo`, `des
 ('f42bea9b6b9962daac9ccc152d4db135', 113, 'Cotechino di Montebelluno', 'cotechino di montebelluno', 12.2, 'Cotechino di Montebelluno - squisito', 0, 0, 72, 0, 0, NULL, 4),
 ('f4913a03168aaaeed21cec95e7deca31', 99, 'JAVA tutorial', 'java tutorial', 42.1, 'Libro + CD - JAVA tutorial per principianti', 0, 1, 43, 0, 0, NULL, 17),
 ('f4b232833aa57841527ecfd09c708285', 167, 'Pialla in acciaio', 'pialla in acciaio', 15, 'Pialla in acciaio con manico in legno di salice', 0, 1, 94, 0, 0, NULL, 9);
-INSERT INTO `oggetto` (`id`, `idNegozio`, `nome`, `nomeDownCase`, `prezzo`, `descrizione`, `valutazione`, `ritiroInNegozio`, `disponibilita`, `statoDisponibilita`, `sconto`, `dataFineSconto`, `categoria`) VALUES
+INSERT INTO oggetto (id, idNegozio, nome, nomeDownCase, prezzo, descrizione, valutazione, ritiroInNegozio, disponibilita, statoDisponibilita, sconto, dataFineSconto, categoria) VALUES
 ('f4bcf5486c44a501e8f7141d4648321f', 138, 'Action Man', 'action man', 6.3, 'Action Man - Mission rescue everyone', 0, 1, 99, 0, 0, NULL, 12),
 ('f519003f82a95cba93caed77824da11d', 121, 'Orologio Swatch nero', 'orologio swatch nero', 35, 'Orologio Swatch nero - altimetro - barometro - ora minuti secondi - giorno', 0, 1, 88, 0, 0, NULL, 20),
 ('f5ad287f101d6ec28f69ebc30874dcac', 168, 'Quaderno a quadretti', 'quaderno a quadretti', 0.5, 'Quaderno a quadretti 5mm', 0, 1, 17, 0, 0, NULL, 7),
@@ -4526,10 +4529,10 @@ INSERT INTO `oggetto` (`id`, `idNegozio`, `nome`, `nomeDownCase`, `prezzo`, `des
 ('ffe33870b713c7880522d572ba4f2007', 108, 'iPhone 9S', 'iphone 9s', 2499.99, 'iPhone 9S da 8GB di memoria', 5, 0, 15, 0, 0, NULL, 1);
 
 --
--- Trigger `oggetto`
+-- Trigger oggetto
 --
 DELIMITER $$
-CREATE TRIGGER `AggiornamentoOrdiniSeVieneModificatoIlPrezzo` AFTER UPDATE ON `oggetto` FOR EACH ROW BEGIN
+CREATE TRIGGER AggiornamentoOrdiniSeVieneModificatoIlPrezzo AFTER UPDATE ON oggetto FOR EACH ROW BEGIN
 
 DECLARE curDate DATETIME DEFAULT NOW();
 
@@ -4553,42 +4556,42 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `ordine`
+-- Struttura della tabella ordine
 --
 
-CREATE TABLE `ordine` (
-  `idOrdine` int(11) NOT NULL,
-  `idOggetto` varchar(32) NOT NULL,
-  `idNegozio` int(11) NOT NULL,
-  `idUtente` int(11) NOT NULL,
-  `stato` int(11) NOT NULL DEFAULT '0',
-  `quantita` int(11) NOT NULL DEFAULT '1',
-  `codiceTracking` varchar(40) DEFAULT NULL,
-  `dataArrivoPresunta` date DEFAULT NULL,
-  `dataOrdine` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `prezzoDiAcquisto` double DEFAULT NULL,
-  `idS` int(11) DEFAULT NULL,
-  `idI` int(11) NOT NULL DEFAULT '1'
+CREATE TABLE ordine (
+  idOrdine int(11) NOT NULL,
+  idOggetto varchar(32) NOT NULL,
+  idNegozio int(11) NOT NULL,
+  idUtente int(11) NOT NULL,
+  stato int(11) NOT NULL DEFAULT '0',
+  quantita int(11) NOT NULL DEFAULT '1',
+  codiceTracking varchar(40) DEFAULT NULL,
+  dataArrivoPresunta date DEFAULT NULL,
+  dataOrdine timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  prezzoDiAcquisto double DEFAULT NULL,
+  idS int(11) DEFAULT NULL,
+  idI int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dump dei dati per la tabella `ordine`
+-- Dump dei dati per la tabella ordine
 --
 
-INSERT INTO `ordine` (`idOrdine`, `idOggetto`, `idNegozio`, `idUtente`, `stato`, `quantita`, `codiceTracking`, `dataArrivoPresunta`, `dataOrdine`, `prezzoDiAcquisto`, `idS`, `idI`) VALUES
+INSERT INTO ordine (idOrdine, idOggetto, idNegozio, idUtente, stato, quantita, codiceTracking, dataArrivoPresunta, dataOrdine, prezzoDiAcquisto, idS, idI) VALUES
 (1, '054e508f4d9999d6efdf4df9b8074668', 1, 1, 3, 1, NULL, NULL, '2018-01-30 14:35:31', 107.99, 3558, 1);
 
 --
--- Trigger `ordine`
+-- Trigger ordine
 --
 DELIMITER $$
-CREATE TRIGGER `AggiornamentoCarrelloAggiuntaElemento` AFTER INSERT ON `ordine` FOR EACH ROW UPDATE carrello c
+CREATE TRIGGER AggiornamentoCarrelloAggiuntaElemento AFTER INSERT ON ordine FOR EACH ROW UPDATE carrello c
 	SET c.subTotal = c.subTotal + (new.prezzoDiAcquisto * new.quantita)
     WHERE c.idUtente = new.idUtente AND new.stato = 0
 $$
 DELIMITER ;
 DELIMITER $$
-CREATE TRIGGER `AggiornamentoCarrelloModificaPrezzoElemento` AFTER UPDATE ON `ordine` FOR EACH ROW BEGIN
+CREATE TRIGGER AggiornamentoCarrelloModificaPrezzoElemento AFTER UPDATE ON ordine FOR EACH ROW BEGIN
 IF new.stato = 0
 THEN
     UPDATE carrello c
@@ -4611,13 +4614,13 @@ END
 $$
 DELIMITER ;
 DELIMITER $$
-CREATE TRIGGER `AggiornamentoCarrelloRimozioneElemento` AFTER DELETE ON `ordine` FOR EACH ROW UPDATE carrello c
+CREATE TRIGGER AggiornamentoCarrelloRimozioneElemento AFTER DELETE ON ordine FOR EACH ROW UPDATE carrello c
 	SET c.subTotal = c.subTotal - (old.prezzoDiAcquisto * old.quantita)
     WHERE c.idUtente = old.idUtente AND old.stato = 0
 $$
 DELIMITER ;
 DELIMITER $$
-CREATE TRIGGER `CreoElementoCarrello` BEFORE INSERT ON `ordine` FOR EACH ROW BEGIN
+CREATE TRIGGER CreoElementoCarrello BEFORE INSERT ON ordine FOR EACH ROW BEGIN
 declare x int default 0;
 SET x = (SELECT COUNT(idUtente)
          FROM carrello
@@ -4638,43 +4641,43 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `ordiniricevuti`
+-- Struttura della tabella ordiniricevuti
 --
 
-CREATE TABLE `ordiniricevuti` (
-  `idO` int(11) NOT NULL,
-  `idV` int(11) NOT NULL,
-  `data` datetime NOT NULL
+CREATE TABLE ordiniricevuti (
+  idO int(11) NOT NULL,
+  idV int(11) NOT NULL,
+  data datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dump dei dati per la tabella `ordiniricevuti`
+-- Dump dei dati per la tabella ordiniricevuti
 --
 
-INSERT INTO `ordiniricevuti` (`idO`, `idV`, `data`) VALUES
+INSERT INTO ordiniricevuti (idO, idV, data) VALUES
 (1, 21, '2018-01-30 15:35:48');
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `recensionenegozio`
+-- Struttura della tabella recensionenegozio
 --
 
-CREATE TABLE `recensionenegozio` (
-  `id` int(11) NOT NULL,
-  `idNegozio` int(11) NOT NULL,
-  `idUtente` int(11) NOT NULL,
-  `testo` varchar(2500) DEFAULT NULL,
-  `valutazione` int(11) NOT NULL,
-  `data` datetime NOT NULL,
-  `utilita` int(11) DEFAULT NULL
+CREATE TABLE recensionenegozio (
+  id int(11) NOT NULL,
+  idNegozio int(11) NOT NULL,
+  idUtente int(11) NOT NULL,
+  testo varchar(2500) DEFAULT NULL,
+  valutazione int(11) NOT NULL,
+  data datetime NOT NULL,
+  utilita int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Trigger `recensionenegozio`
+-- Trigger recensionenegozio
 --
 DELIMITER $$
-CREATE TRIGGER `recensionenegozio_AFTER_INSERT` AFTER INSERT ON `recensionenegozio` FOR EACH ROW BEGIN
+CREATE TRIGGER recensionenegozio_AFTER_INSERT AFTER INSERT ON recensionenegozio FOR EACH ROW BEGIN
   declare numRecensioni int default 0;
      declare sommatoria int default 0;
      declare media int default 0;
@@ -4699,24 +4702,24 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `recensioneoggetto`
+-- Struttura della tabella recensioneoggetto
 --
 
-CREATE TABLE `recensioneoggetto` (
-  `id` int(11) NOT NULL,
-  `idOggetto` varchar(32) NOT NULL,
-  `idUtente` int(11) NOT NULL,
-  `testo` varchar(5000) DEFAULT NULL,
-  `valutazione` int(11) NOT NULL,
-  `data` datetime NOT NULL,
-  `utilita` int(11) DEFAULT NULL
+CREATE TABLE recensioneoggetto (
+  id int(11) NOT NULL,
+  idOggetto varchar(32) NOT NULL,
+  idUtente int(11) NOT NULL,
+  testo varchar(5000) DEFAULT NULL,
+  valutazione int(11) NOT NULL,
+  data datetime NOT NULL,
+  utilita int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dump dei dati per la tabella `recensioneoggetto`
+-- Dump dei dati per la tabella recensioneoggetto
 --
 
-INSERT INTO `recensioneoggetto` (`id`, `idOggetto`, `idUtente`, `testo`, `valutazione`, `data`, `utilita`) VALUES
+INSERT INTO recensioneoggetto (id, idOggetto, idUtente, testo, valutazione, data, utilita) VALUES
 (1, '55af1208f171b67d24e7115424a31fa6', 4, 'USB compatta, bella linea, veloce nel trasferimento dati ma, a mio modo di vedere, con un cappuccio terribilmente scomodo da togliere. La superfice liscia e l aderenza dello stesso al corpo della penna, infatti, nel rendono difficoltosa l apertura.Vedremo se con l uso migliorerà.', 4, '2018-01-26 00:00:00', 4),
 (2, 'a285dd5b023509bdd43e1f1dc94bb69e', 8, 'USB compatta, bella linea, veloce nel trasferimento dati ma, a mio modo di vedere, con un cappuccio terribilmente scomodo da togliere. La superfice liscia e l aderenza dello stesso al corpo della penna, infatti, nel rendono difficoltosa l apertura.Vedremo se con l uso migliorerà.', 4, '2018-01-26 00:00:00', 4),
 (3, 'dcc8b360aea4dcd6d402320d0e5f61b5', 8, 'l’ho acquistata per portare documenti da casa al lavoro e viceversa. la velocità di trasferimento dei dati è abbastanza veloce e la qualità generale sembra essere robusta quanto basta per questo genere di articolo. consiglio l’acquisto', 5, '2018-01-26 00:00:00', 5),
@@ -4811,7 +4814,7 @@ INSERT INTO `recensioneoggetto` (`id`, `idOggetto`, `idUtente`, `testo`, `valuta
 (92, '3e14a004a8dbe3d434360f6d478d5c66', 8, 'I bought this exact model (except my dial has Roman numerals) Rolex 116233, 36MM, Champagne dial, two tone 18K solid gold/stainless steel in May 2012 as a present to myself when I retired.  The Amazon price is very good.  The last time I checked in a jewelry store (about a year ago) this watch was selling for $11,100 so with tax it is going to be about $12,000 out the door.  I bought my watch through a grey dealer for a few hundred dollars less than the Amazon price.I absolutely love the watch, it keeps perfect time and is so beautiful, it still glitters like the day I got it.  I have had a lot of cheap watches that looked nice and shiny when they were new but in just a few months the shiny look wore off and they became dull like all the rest.  This watch will never do that because the gold parts are made of solid 18K gold and the stainless steel is a special blend forged in Rolex s own foundry.One of the fun things about owning a Rolex is the reaction from people when I tell them my watch is a Rolex LOL.  They automatically assume I am very rich (not even close).  Or they act like I just created a new life form or something.  I can t count the number of times strangers (usually happens in check-out lines for some reason) have said \"excuse me but what kind of watch is that, it is really beautiful\"?  When I tell them it is a Rolex Datejust, they get a \"OH MY\" look on their face that is quite amusing.  One woman said she was thinking she would like to get one for her husband but after I told her it was a Rolex she said \"thats not going to happen now\"!  People don t realize that Rolex is actually a entry level watch in the luxury watch market, but it has an aggressive marketing program. There are much more expensive watches being made, but only people who are collectors or into horology are aware of them.Note, a Rolex watch will last a lifetime but they do require maintenance.  They should be sent to Rolex about every 10 years because the movement is like the motor in your car, it is a mechanical device made of gears, bearings and lubricants.  The service currently costs $750 if no parts are required.  That might seem expensive but Rolex will completely dis-assenble, clean and rebuild the movement, replace the mainspring and re-polish the entire watch with their special buffing machines.  You will essentially receive a new watch and it will have a two year unconditional warranty.  The service will take two to four months because Rolex will do extensive testing on the watch to ensure that its accuracy is within Rolex chronographer specs.The history of Rolex and its operating philosophy is very interesting.  The best website to learn about Rolex is \"THE ROLEX FORUM\".It is the best gift I have ever given myself!Rick', 5, '2018-01-26 00:00:00', 5),
 (93, '114ac4d8dae27299c79a62d96c9ea1d9', 8, 'I bought this exact model (except my dial has Roman numerals) Rolex 116233, 36MM, Champagne dial, two tone 18K solid gold/stainless steel in May 2012 as a present to myself when I retired.  The Amazon price is very good.  The last time I checked in a jewelry store (about a year ago) this watch was selling for $11,100 so with tax it is going to be about $12,000 out the door.  I bought my watch through a grey dealer for a few hundred dollars less than the Amazon price.I absolutely love the watch, it keeps perfect time and is so beautiful, it still glitters like the day I got it.  I have had a lot of cheap watches that looked nice and shiny when they were new but in just a few months the shiny look wore off and they became dull like all the rest.  This watch will never do that because the gold parts are made of solid 18K gold and the stainless steel is a special blend forged in Rolex s own foundry.One of the fun things about owning a Rolex is the reaction from people when I tell them my watch is a Rolex LOL.  They automatically assume I am very rich (not even close).  Or they act like I just created a new life form or something.  I can t count the number of times strangers (usually happens in check-out lines for some reason) have said \"excuse me but what kind of watch is that, it is really beautiful\"?  When I tell them it is a Rolex Datejust, they get a \"OH MY\" look on their face that is quite amusing.  One woman said she was thinking she would like to get one for her husband but after I told her it was a Rolex she said \"thats not going to happen now\"!  People don t realize that Rolex is actually a entry level watch in the luxury watch market, but it has an aggressive marketing program. There are much more expensive watches being made, but only people who are collectors or into horology are aware of them.Note, a Rolex watch will last a lifetime but they do require maintenance.  They should be sent to Rolex about every 10 years because the movement is like the motor in your car, it is a mechanical device made of gears, bearings and lubricants.  The service currently costs $750 if no parts are required.  That might seem expensive but Rolex will completely dis-assenble, clean and rebuild the movement, replace the mainspring and re-polish the entire watch with their special buffing machines.  You will essentially receive a new watch and it will have a two year unconditional warranty.  The service will take two to four months because Rolex will do extensive testing on the watch to ensure that its accuracy is within Rolex chronographer specs.The history of Rolex and its operating philosophy is very interesting.  The best website to learn about Rolex is \"THE ROLEX FORUM\".It is the best gift I have ever given myself!Rick', 5, '2018-01-26 00:00:00', 5),
 (94, '114ac4d8dae27299c79a62d96c9ea1d9', 4, 'It s no SWATCH!!', 3, '2018-01-26 00:00:00', 3);
-INSERT INTO `recensioneoggetto` (`id`, `idOggetto`, `idUtente`, `testo`, `valutazione`, `data`, `utilita`) VALUES
+INSERT INTO recensioneoggetto (id, idOggetto, idUtente, testo, valutazione, data, utilita) VALUES
 (95, '43a1391ab46f8cae3dadb6ffb67cea7a', 4, 'I bought this exact model (except my dial has Roman numerals) Rolex 116233, 36MM, Champagne dial, two tone 18K solid gold/stainless steel in May 2012 as a present to myself when I retired.  The Amazon price is very good.  The last time I checked in a jewelry store (about a year ago) this watch was selling for $11,100 so with tax it is going to be about $12,000 out the door.  I bought my watch through a grey dealer for a few hundred dollars less than the Amazon price.I absolutely love the watch, it keeps perfect time and is so beautiful, it still glitters like the day I got it.  I have had a lot of cheap watches that looked nice and shiny when they were new but in just a few months the shiny look wore off and they became dull like all the rest.  This watch will never do that because the gold parts are made of solid 18K gold and the stainless steel is a special blend forged in Rolex s own foundry.One of the fun things about owning a Rolex is the reaction from people when I tell them my watch is a Rolex LOL.  They automatically assume I am very rich (not even close).  Or they act like I just created a new life form or something.  I can t count the number of times strangers (usually happens in check-out lines for some reason) have said \"excuse me but what kind of watch is that, it is really beautiful\"?  When I tell them it is a Rolex Datejust, they get a \"OH MY\" look on their face that is quite amusing.  One woman said she was thinking she would like to get one for her husband but after I told her it was a Rolex she said \"thats not going to happen now\"!  People don t realize that Rolex is actually a entry level watch in the luxury watch market, but it has an aggressive marketing program. There are much more expensive watches being made, but only people who are collectors or into horology are aware of them.Note, a Rolex watch will last a lifetime but they do require maintenance.  They should be sent to Rolex about every 10 years because the movement is like the motor in your car, it is a mechanical device made of gears, bearings and lubricants.  The service currently costs $750 if no parts are required.  That might seem expensive but Rolex will completely dis-assenble, clean and rebuild the movement, replace the mainspring and re-polish the entire watch with their special buffing machines.  You will essentially receive a new watch and it will have a two year unconditional warranty.  The service will take two to four months because Rolex will do extensive testing on the watch to ensure that its accuracy is within Rolex chronographer specs.The history of Rolex and its operating philosophy is very interesting.  The best website to learn about Rolex is \"THE ROLEX FORUM\".It is the best gift I have ever given myself!Rick', 5, '2018-01-26 00:00:00', 5),
 (96, '860a062d4a3e13870185385cdceccef3', 2, 'It s no SWATCH!!', 3, '2018-01-26 00:00:00', 3),
 (97, '5000daa048b68ed2f0492690c5657c85', 2, 'I bought this exact model (except my dial has Roman numerals) Rolex 116233, 36MM, Champagne dial, two tone 18K solid gold/stainless steel in May 2012 as a present to myself when I retired.  The Amazon price is very good.  The last time I checked in a jewelry store (about a year ago) this watch was selling for $11,100 so with tax it is going to be about $12,000 out the door.  I bought my watch through a grey dealer for a few hundred dollars less than the Amazon price.I absolutely love the watch, it keeps perfect time and is so beautiful, it still glitters like the day I got it.  I have had a lot of cheap watches that looked nice and shiny when they were new but in just a few months the shiny look wore off and they became dull like all the rest.  This watch will never do that because the gold parts are made of solid 18K gold and the stainless steel is a special blend forged in Rolex s own foundry.One of the fun things about owning a Rolex is the reaction from people when I tell them my watch is a Rolex LOL.  They automatically assume I am very rich (not even close).  Or they act like I just created a new life form or something.  I can t count the number of times strangers (usually happens in check-out lines for some reason) have said \"excuse me but what kind of watch is that, it is really beautiful\"?  When I tell them it is a Rolex Datejust, they get a \"OH MY\" look on their face that is quite amusing.  One woman said she was thinking she would like to get one for her husband but after I told her it was a Rolex she said \"thats not going to happen now\"!  People don t realize that Rolex is actually a entry level watch in the luxury watch market, but it has an aggressive marketing program. There are much more expensive watches being made, but only people who are collectors or into horology are aware of them.Note, a Rolex watch will last a lifetime but they do require maintenance.  They should be sent to Rolex about every 10 years because the movement is like the motor in your car, it is a mechanical device made of gears, bearings and lubricants.  The service currently costs $750 if no parts are required.  That might seem expensive but Rolex will completely dis-assenble, clean and rebuild the movement, replace the mainspring and re-polish the entire watch with their special buffing machines.  You will essentially receive a new watch and it will have a two year unconditional warranty.  The service will take two to four months because Rolex will do extensive testing on the watch to ensure that its accuracy is within Rolex chronographer specs.The history of Rolex and its operating philosophy is very interesting.  The best website to learn about Rolex is \"THE ROLEX FORUM\".It is the best gift I have ever given myself!Rick', 5, '2018-01-26 00:00:00', 5),
@@ -4943,7 +4946,7 @@ INSERT INTO `recensioneoggetto` (`id`, `idOggetto`, `idUtente`, `testo`, `valuta
 (223, '72fa9de9bf0ebe1d66a0e26303e548b7', 12, 'Bel giubbino, ma le taglie non corrispondono, una M equivale ad una 50, e non sono previste taglie piu piccole per questo modello. mi è davvero dispiaciuto doverlo dare indietro e orientarmi su un altro articolo.', 2, '2018-01-26 00:00:00', 2),
 (224, '99b5b33d37f67aaf28e3ff8fac9f7c1e', 17, 'Si tratta di un libro DAVVERO splendido. Voglio dire grazie agli autori per questa perla di dritte, suggerimenti, consigli e strategie VALIDISSIME.', 5, '2018-01-26 00:00:00', 5),
 (225, 'e0512e71585da25d7a4636262461be4f', 13, 'Per gli appasionati del video gioco che ha dato una grossa mano a \"lanciare\" il LIVE dell xbox. Con Halo combat evolved ha inizio la prima trilogia di Halo.In questo libro si parla dell inizio del progetto Spartan II e le origini dello Spartan 117 John chiamato anche Master Chief. Un libro da avere  nella libreria.', 5, '2018-01-26 00:00:00', 5);
-INSERT INTO `recensioneoggetto` (`id`, `idOggetto`, `idUtente`, `testo`, `valutazione`, `data`, `utilita`) VALUES
+INSERT INTO recensioneoggetto (id, idOggetto, idUtente, testo, valutazione, data, utilita) VALUES
 (226, '94640cff2a131623eb434169f2698574', 16, 'Per gli amanti della saga, nulla di meglio per approfondire la serie videoludica di Halo. Adatto anche a chi si vuole avvicinare al mondo di Halo, senza aver mai giocato ad un videogioco.Libro scritto bene, scorrevole e di facile lettura. Ti catapulta con l immaginazione all interno di questo mondo!', 5, '2018-01-26 00:00:00', 5),
 (227, '2ce3819539d29ca7f1b1e86d44a0b37b', 15, 'Bellissimo libro, scritto davvero bene. Spiega bene senza annoiare le vicende che hanno dato vita agli Spartan e alla guerra UNSC/Covenant, con molti parti avvincenti e mozzafiato. Inoltre il racconto riesce a trasmettere quella tristezza - malinconia - paura che provarono i protagonisti nell affrontare la razza Covenant, tentando invano di salvare Reach dalla vetrificazione.\"Straconsigliato\"', 5, '2018-01-26 00:00:00', 5),
 (228, '7e01a33d07b7a92ee2f9210d328f96ea', 11, 'Sono un grande Fan della space opera di Halo e leggere questo libro mi ha chiarito numerosi punti oscuri sugli Spartan. Se siete curiosi e vi avvicinate oggi alla saga di Halo vi consiglio di Leggervi questo bellissimo libro e subito dopo giocare Halo Reach con il Team Noble Spartan I coinvolto nell operazione di recupero di un oggetto molto prezioso ;-)Dopo comincia la storia di Halo vera e propria e potreste giocare a Halo CE versione Anniversary (nel pacchetto Master Chief Collection).Il gioco è vecchio ma è invecchiato benissimo.Tornando al libro io l ho letteralmente divorato. La traduzione è dignitosa e lo stile dell autore è un buon equilibrio tra scene di azione e introspezione psicologica dei personaggi. Tutto ben bilanciato senza mai essere pesante o ripetitivo.Da leggere.', 4, '2018-01-26 00:00:00', 4),
@@ -4986,10 +4989,10 @@ INSERT INTO `recensioneoggetto` (`id`, `idOggetto`, `idUtente`, `testo`, `valuta
 (265, '054e508f4d9999d6efdf4df9b8074668', 1, 'Bel prodotto, la consiglio per tutti i guardiaboschi trentini', 5, '2018-01-30 15:36:44', 0);
 
 --
--- Trigger `recensioneoggetto`
+-- Trigger recensioneoggetto
 --
 DELIMITER $$
-CREATE TRIGGER `recensioneoggetto_AFTER_INSERT` AFTER INSERT ON `recensioneoggetto` FOR EACH ROW BEGIN
+CREATE TRIGGER recensioneoggetto_AFTER_INSERT AFTER INSERT ON recensioneoggetto FOR EACH ROW BEGIN
    declare numRecensioni int default 0;
      declare sommatoria int default 0;
      declare media int default 0;
@@ -5015,24 +5018,24 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `recensionevenditore`
+-- Struttura della tabella recensionevenditore
 --
 
-CREATE TABLE `recensionevenditore` (
-  `id` int(11) NOT NULL,
-  `idVenditore` int(11) NOT NULL,
-  `idUtente` int(11) NOT NULL,
-  `testo` varchar(2500) DEFAULT NULL,
-  `valutazione` int(11) NOT NULL,
-  `data` datetime NOT NULL,
-  `utilita` int(11) DEFAULT NULL
+CREATE TABLE recensionevenditore (
+  id int(11) NOT NULL,
+  idVenditore int(11) NOT NULL,
+  idUtente int(11) NOT NULL,
+  testo varchar(2500) DEFAULT NULL,
+  valutazione int(11) NOT NULL,
+  data datetime NOT NULL,
+  utilita int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dump dei dati per la tabella `recensionevenditore`
+-- Dump dei dati per la tabella recensionevenditore
 --
 
-INSERT INTO `recensionevenditore` (`id`, `idVenditore`, `idUtente`, `testo`, `valutazione`, `data`, `utilita`) VALUES
+INSERT INTO recensionevenditore (id, idVenditore, idUtente, testo, valutazione, data, utilita) VALUES
 (1, 65, 19, 'Molto bene perfetti ottima comunicazione +++++', 0, '2018-01-26 00:00:00', 0),
 (2, 101, 16, 'Venditore disponibile .oggetto come da annuncio...perffetto', 1, '2018-01-26 00:00:00', 1),
 (3, 52, 16, 'bauletto ottimo, spedizione veloce, negozio Ebayer da consigliare++', 4, '2018-01-26 00:00:00', 4),
@@ -5634,7 +5637,7 @@ INSERT INTO `recensionevenditore` (`id`, `idVenditore`, `idUtente`, `testo`, `va
 (599, 184, 14, 'Very, very happy, thank you!!!!!', 5, '2018-01-26 00:00:00', 5),
 (600, 103, 11, 'Buon prodotto', 4, '2018-01-26 00:00:00', 4),
 (601, 177, 7, 'Tutto ok.', 1, '2018-01-26 00:00:00', 1);
-INSERT INTO `recensionevenditore` (`id`, `idVenditore`, `idUtente`, `testo`, `valutazione`, `data`, `utilita`) VALUES
+INSERT INTO recensionevenditore (id, idVenditore, idUtente, testo, valutazione, data, utilita) VALUES
 (602, 49, 3, 'Ottimo venditore...tutto ok', 4, '2018-01-26 00:00:00', 4),
 (603, 128, 12, 'Qualità prezzo elevatissima...davvero bello e funzionale...contentissimo!!!', 1, '2018-01-26 00:00:00', 1),
 (604, 24, 18, 'ottimo!!!!venditore velocissimo nel rispondere e nello spedire!!consigliatissimo', 2, '2018-01-26 00:00:00', 2),
@@ -6035,10 +6038,10 @@ INSERT INTO `recensionevenditore` (`id`, `idVenditore`, `idUtente`, `testo`, `va
 (999, 207, 13, 'Tutto ok, perfetto, grazie!', 0, '2018-01-26 00:00:00', 0);
 
 --
--- Trigger `recensionevenditore`
+-- Trigger recensionevenditore
 --
 DELIMITER $$
-CREATE TRIGGER `recensionevenditore_AFTER_INSERT` AFTER INSERT ON `recensionevenditore` FOR EACH ROW BEGIN
+CREATE TRIGGER recensionevenditore_AFTER_INSERT AFTER INSERT ON recensionevenditore FOR EACH ROW BEGIN
    declare numRecensioni int default 0;
      declare sommatoria int default 0;
      declare media int default 0;
@@ -6064,73 +6067,73 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `recuperopassword`
+-- Struttura della tabella recuperopassword
 --
 
-CREATE TABLE `recuperopassword` (
-  `token` varchar(512) NOT NULL,
-  `chiave` varchar(512) NOT NULL
+CREATE TABLE recuperopassword (
+  token varchar(512) NOT NULL,
+  chiave varchar(512) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `rispostanegozio`
+-- Struttura della tabella rispostanegozio
 --
 
-CREATE TABLE `rispostanegozio` (
-  `idRecensione` int(11) NOT NULL,
-  `testo` varchar(2500) NOT NULL,
-  `data` datetime NOT NULL
+CREATE TABLE rispostanegozio (
+  idRecensione int(11) NOT NULL,
+  testo varchar(2500) NOT NULL,
+  data datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `rispostaoggetto`
+-- Struttura della tabella rispostaoggetto
 --
 
-CREATE TABLE `rispostaoggetto` (
-  `idRecensione` int(11) NOT NULL,
-  `testo` varchar(2500) NOT NULL,
-  `data` datetime NOT NULL
+CREATE TABLE rispostaoggetto (
+  idRecensione int(11) NOT NULL,
+  testo varchar(2500) NOT NULL,
+  data datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dump dei dati per la tabella `rispostaoggetto`
+-- Dump dei dati per la tabella rispostaoggetto
 --
 
-INSERT INTO `rispostaoggetto` (`idRecensione`, `testo`, `data`) VALUES
+INSERT INTO rispostaoggetto (idRecensione, testo, data) VALUES
 (265, 'Grazie mille, sono felice che apprezzi', '2018-01-30 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `rispostavenditore`
+-- Struttura della tabella rispostavenditore
 --
 
-CREATE TABLE `rispostavenditore` (
-  `idRecensione` int(11) NOT NULL,
-  `testo` varchar(2500) NOT NULL,
-  `data` datetime NOT NULL
+CREATE TABLE rispostavenditore (
+  idRecensione int(11) NOT NULL,
+  testo varchar(2500) NOT NULL,
+  data datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `spedizioneoggetto`
+-- Struttura della tabella spedizioneoggetto
 --
 
-CREATE TABLE `spedizioneoggetto` (
-  `idS` int(11) NOT NULL,
-  `idO` varchar(32) NOT NULL
+CREATE TABLE spedizioneoggetto (
+  idS int(11) NOT NULL,
+  idO varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dump dei dati per la tabella `spedizioneoggetto`
+-- Dump dei dati per la tabella spedizioneoggetto
 --
 
-INSERT INTO `spedizioneoggetto` (`idS`, `idO`) VALUES
+INSERT INTO spedizioneoggetto (idS, idO) VALUES
 (2541, '0012762bee20aa03e6509761a5957d53'),
 (4340, '0055a9973ce01c016885fece02f1997c'),
 (889, '00584535e60c11a98dd3dc1f284cb1bf'),
@@ -7323,7 +7326,7 @@ INSERT INTO `spedizioneoggetto` (`idS`, `idO`) VALUES
 (6711, 'fa9e116c584391496594aa87aa1586d6'),
 (1861, 'fac7e5be0994446af54445d49887c277'),
 (1960, 'faf203ce2f2bfcf5a89c1e3f7a60cb04');
-INSERT INTO `spedizioneoggetto` (`idS`, `idO`) VALUES
+INSERT INTO spedizioneoggetto (idS, idO) VALUES
 (7194, 'fb3149574a69c15bc4f95ff458f797e6'),
 (7533, 'fbb3a4e11809bea8b54a05f469f04455'),
 (7406, 'fbdb4311e26237bc135ad4deb0de8c9c'),
@@ -7356,24 +7359,24 @@ INSERT INTO `spedizioneoggetto` (`idS`, `idO`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `tipospedizione`
+-- Struttura della tabella tipospedizione
 --
 
-CREATE TABLE `tipospedizione` (
-  `idS` int(11) NOT NULL,
-  `idN` int(11) NOT NULL,
-  `Nome` varchar(50) NOT NULL,
-  `Prezzo` double NOT NULL,
-  `Corriere` varchar(50) NOT NULL,
-  `tempoRichiesto` int(11) NOT NULL,
-  `numeroMassimo` int(11) NOT NULL DEFAULT '5'
+CREATE TABLE tipospedizione (
+  idS int(11) NOT NULL,
+  idN int(11) NOT NULL,
+  Nome varchar(50) NOT NULL,
+  Prezzo double NOT NULL,
+  Corriere varchar(50) NOT NULL,
+  tempoRichiesto int(11) NOT NULL,
+  numeroMassimo int(11) NOT NULL DEFAULT '5'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dump dei dati per la tabella `tipospedizione`
+-- Dump dei dati per la tabella tipospedizione
 --
 
-INSERT INTO `tipospedizione` (`idS`, `idN`, `Nome`, `Prezzo`, `Corriere`, `tempoRichiesto`, `numeroMassimo`) VALUES
+INSERT INTO tipospedizione (idS, idN, Nome, Prezzo, Corriere, tempoRichiesto, numeroMassimo) VALUES
 (1, 1, 'Spedizione su Appuntamento', 19, 'DHL', 3, 10),
 (2, 1, 'Spedizione su Appuntamento', 23, 'SGA', 1, 6),
 (3, 1, 'Spedizione su Appuntamento', 34, 'DHL', 3, 10),
@@ -8330,7 +8333,7 @@ INSERT INTO `tipospedizione` (`idS`, `idN`, `Nome`, `Prezzo`, `Corriere`, `tempo
 (954, 24, 'Spedizione su Appuntamento', 9, 'Non specificato', 1, 7),
 (955, 24, 'Spedizione su Appuntamento', 24, 'SGA', 5, 6),
 (956, 24, 'Spedizione economica', 7, 'DHL', 2, 7);
-INSERT INTO `tipospedizione` (`idS`, `idN`, `Nome`, `Prezzo`, `Corriere`, `tempoRichiesto`, `numeroMassimo`) VALUES
+INSERT INTO tipospedizione (idS, idN, Nome, Prezzo, Corriere, tempoRichiesto, numeroMassimo) VALUES
 (957, 24, 'Spedizione economica', 33, 'SGA', 4, 10),
 (958, 24, 'Spedizione economica', 44, 'DHL', 4, 10),
 (959, 24, 'Spedizione economica', 5, 'Non specificato', 5, 8),
@@ -9261,7 +9264,7 @@ INSERT INTO `tipospedizione` (`idS`, `idN`, `Nome`, `Prezzo`, `Corriere`, `tempo
 (1884, 48, 'Spedizione su Appuntamento', 26, 'Non specificato', 5, 10),
 (1885, 48, 'Spedizione su Appuntamento', 13, 'SGA', 4, 7),
 (1886, 48, 'Spedizione Standard', 50, 'DHL', 4, 6);
-INSERT INTO `tipospedizione` (`idS`, `idN`, `Nome`, `Prezzo`, `Corriere`, `tempoRichiesto`, `numeroMassimo`) VALUES
+INSERT INTO tipospedizione (idS, idN, Nome, Prezzo, Corriere, tempoRichiesto, numeroMassimo) VALUES
 (1887, 48, 'Spedizione Standard', 8, 'SGA', 3, 9),
 (1888, 48, 'Spedizione Standard', 32, 'DHL', 5, 8),
 (1889, 48, 'Spedizione Standard', 32, 'Non specificato', 1, 8),
@@ -10192,7 +10195,7 @@ INSERT INTO `tipospedizione` (`idS`, `idN`, `Nome`, `Prezzo`, `Corriere`, `tempo
 (2814, 71, 'Spedizione Veloce', 49, 'Non specificato', 1, 10),
 (2815, 71, 'Spedizione Veloce', 32, 'SGA', 1, 6),
 (2816, 71, 'Spedizione Standard', 17, 'DHL', 2, 9);
-INSERT INTO `tipospedizione` (`idS`, `idN`, `Nome`, `Prezzo`, `Corriere`, `tempoRichiesto`, `numeroMassimo`) VALUES
+INSERT INTO tipospedizione (idS, idN, Nome, Prezzo, Corriere, tempoRichiesto, numeroMassimo) VALUES
 (2817, 71, 'Spedizione Standard', 46, 'SGA', 5, 10),
 (2818, 71, 'Spedizione Standard', 15, 'DHL', 3, 5),
 (2819, 71, 'Spedizione Standard', 33, 'Non specificato', 1, 9),
@@ -11123,7 +11126,7 @@ INSERT INTO `tipospedizione` (`idS`, `idN`, `Nome`, `Prezzo`, `Corriere`, `tempo
 (3744, 94, 'Spedizione Veloce', 30, 'Non specificato', 4, 9),
 (3745, 94, 'Spedizione Veloce', 26, 'SGA', 5, 8),
 (3746, 94, 'Spedizione Express', 44, 'DHL', 4, 5);
-INSERT INTO `tipospedizione` (`idS`, `idN`, `Nome`, `Prezzo`, `Corriere`, `tempoRichiesto`, `numeroMassimo`) VALUES
+INSERT INTO tipospedizione (idS, idN, Nome, Prezzo, Corriere, tempoRichiesto, numeroMassimo) VALUES
 (3747, 94, 'Spedizione Express', 8, 'SGA', 1, 8),
 (3748, 94, 'Spedizione Express', 19, 'DHL', 3, 8),
 (3749, 94, 'Spedizione Express', 4, 'Non specificato', 1, 7),
@@ -12040,7 +12043,7 @@ INSERT INTO `tipospedizione` (`idS`, `idN`, `Nome`, `Prezzo`, `Corriere`, `tempo
 (4660, 117, 'Spedizione Standard', 20, 'SGA', 5, 10),
 (4661, 117, 'Spedizione Veloce', 27, 'DHL', 4, 5),
 (4662, 117, 'Spedizione Veloce', 47, 'SGA', 5, 9);
-INSERT INTO `tipospedizione` (`idS`, `idN`, `Nome`, `Prezzo`, `Corriere`, `tempoRichiesto`, `numeroMassimo`) VALUES
+INSERT INTO tipospedizione (idS, idN, Nome, Prezzo, Corriere, tempoRichiesto, numeroMassimo) VALUES
 (4663, 117, 'Spedizione Veloce', 29, 'DHL', 5, 10),
 (4664, 117, 'Spedizione Veloce', 31, 'Non specificato', 3, 5),
 (4665, 117, 'Spedizione Veloce', 26, 'SGA', 1, 8),
@@ -12953,7 +12956,7 @@ INSERT INTO `tipospedizione` (`idS`, `idN`, `Nome`, `Prezzo`, `Corriere`, `tempo
 (5572, 140, 'Spedizione Veloce', 35, 'SGA', 5, 6),
 (5573, 140, 'Spedizione Veloce', 46, 'DHL', 5, 6),
 (5574, 140, 'Spedizione Veloce', 33, 'Non specificato', 4, 10);
-INSERT INTO `tipospedizione` (`idS`, `idN`, `Nome`, `Prezzo`, `Corriere`, `tempoRichiesto`, `numeroMassimo`) VALUES
+INSERT INTO tipospedizione (idS, idN, Nome, Prezzo, Corriere, tempoRichiesto, numeroMassimo) VALUES
 (5575, 140, 'Spedizione Veloce', 8, 'SGA', 4, 10),
 (5576, 140, 'Spedizione Standard', 37, 'DHL', 5, 10),
 (5577, 140, 'Spedizione Standard', 39, 'SGA', 5, 10),
@@ -13867,7 +13870,7 @@ INSERT INTO `tipospedizione` (`idS`, `idN`, `Nome`, `Prezzo`, `Corriere`, `tempo
 (6485, 163, 'Spedizione su Appuntamento', 5, 'SGA', 3, 6),
 (6486, 163, 'Spedizione Standard', 21, 'DHL', 2, 5),
 (6487, 163, 'Spedizione Standard', 48, 'SGA', 1, 9);
-INSERT INTO `tipospedizione` (`idS`, `idN`, `Nome`, `Prezzo`, `Corriere`, `tempoRichiesto`, `numeroMassimo`) VALUES
+INSERT INTO tipospedizione (idS, idN, Nome, Prezzo, Corriere, tempoRichiesto, numeroMassimo) VALUES
 (6488, 163, 'Spedizione Standard', 6, 'DHL', 3, 7),
 (6489, 163, 'Spedizione Standard', 19, 'Non specificato', 4, 6),
 (6490, 163, 'Spedizione Standard', 41, 'SGA', 3, 7),
@@ -14780,7 +14783,7 @@ INSERT INTO `tipospedizione` (`idS`, `idN`, `Nome`, `Prezzo`, `Corriere`, `tempo
 (7397, 185, 'Spedizione economica', 28, 'SGA', 4, 6),
 (7398, 185, 'Spedizione economica', 22, 'DHL', 2, 7),
 (7399, 185, 'Spedizione economica', 19, 'Non specificato', 3, 9);
-INSERT INTO `tipospedizione` (`idS`, `idN`, `Nome`, `Prezzo`, `Corriere`, `tempoRichiesto`, `numeroMassimo`) VALUES
+INSERT INTO tipospedizione (idS, idN, Nome, Prezzo, Corriere, tempoRichiesto, numeroMassimo) VALUES
 (7400, 185, 'Spedizione economica', 5, 'SGA', 5, 6),
 (7401, 186, 'Spedizione su Appuntamento', 1, 'DHL', 5, 6),
 (7402, 186, 'Spedizione su Appuntamento', 2, 'SGA', 5, 7),
@@ -15386,26 +15389,26 @@ INSERT INTO `tipospedizione` (`idS`, `idN`, `Nome`, `Prezzo`, `Corriere`, `tempo
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `utente`
+-- Struttura della tabella utente
 --
 
-CREATE TABLE `utente` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(255) NOT NULL,
-  `cognome` varchar(255) NOT NULL,
-  `mail` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `avatar` varchar(255) DEFAULT NULL,
-  `valutazione` double DEFAULT '0',
-  `UtenteType` int(11) NOT NULL DEFAULT '0',
-  `emailConfermata` bit(1) NOT NULL DEFAULT b'0'
+CREATE TABLE utente (
+  id int(11) NOT NULL,
+  nome varchar(255) NOT NULL,
+  cognome varchar(255) NOT NULL,
+  mail varchar(255) NOT NULL,
+  password varchar(255) NOT NULL,
+  avatar varchar(255) DEFAULT NULL,
+  valutazione double DEFAULT '0',
+  UtenteType int(11) NOT NULL DEFAULT '0',
+  emailConfermata bit(1) NOT NULL DEFAULT b'0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dump dei dati per la tabella `utente`
+-- Dump dei dati per la tabella utente
 --
 
-INSERT INTO `utente` (`id`, `nome`, `cognome`, `mail`, `password`, `avatar`, `valutazione`, `UtenteType`, `emailConfermata`) VALUES
+INSERT INTO utente (id, nome, cognome, mail, password, avatar, valutazione, UtenteType, emailConfermata) VALUES
 (1, 'Ada', 'Buccho', 'AdaBuccho@dayrep.com', '6e6bc4e49dd477ebc98ef4046c067b5f', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 0, b'1'),
 (2, 'Albertino', 'Iadanza', 'AlbertinoIadanza@dayrep.com', 'f94f364c716e32eec69c14b729a3f5c8', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 0, b'1'),
 (3, 'Dionisia', 'Udinesi', 'DionisiaUdinesi@armyspy.com', '9e0639132728ff77f67fbb3ff6c69416', 'http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png', 0, 0, b'1'),
@@ -15642,358 +15645,358 @@ INSERT INTO `utente` (`id`, `nome`, `cognome`, `mail`, `password`, `avatar`, `va
 --
 
 --
--- Indici per le tabelle `assistenza`
+-- Indici per le tabelle assistenza
 --
-ALTER TABLE `assistenza`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idUtente` (`idUtente`),
-  ADD KEY `idVenditore` (`idVenditore`),
-  ADD KEY `idAmministratore` (`idAmministratore`),
-  ADD KEY `idOrdine` (`idOrdine`),
-  ADD KEY `idOggetto` (`idOggetto`);
+ALTER TABLE assistenza
+  ADD PRIMARY KEY (id),
+  ADD KEY idUtente (idUtente),
+  ADD KEY idVenditore (idVenditore),
+  ADD KEY idAmministratore (idAmministratore),
+  ADD KEY idOrdine (idOrdine),
+  ADD KEY idOggetto (idOggetto);
 
 --
--- Indici per le tabelle `carrello`
+-- Indici per le tabelle carrello
 --
-ALTER TABLE `carrello`
-  ADD PRIMARY KEY (`idUtente`),
-  ADD KEY `idOrdine` (`idOrdine`);
+ALTER TABLE carrello
+  ADD PRIMARY KEY (idUtente),
+  ADD KEY idOrdine (idOrdine);
 
 --
--- Indici per le tabelle `categoria`
+-- Indici per le tabelle categoria
 --
-ALTER TABLE `categoria`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE categoria
+  ADD PRIMARY KEY (id);
 
 --
--- Indici per le tabelle `imagenegozio`
+-- Indici per le tabelle imagenegozio
 --
-ALTER TABLE `imagenegozio`
-  ADD PRIMARY KEY (`src`,`idN`),
-  ADD KEY `idN` (`idN`);
+ALTER TABLE imagenegozio
+  ADD PRIMARY KEY (src,idN),
+  ADD KEY idN (idN);
 
 --
--- Indici per le tabelle `imageoggetto`
+-- Indici per le tabelle imageoggetto
 --
-ALTER TABLE `imageoggetto`
-  ADD PRIMARY KEY (`src`,`idO`),
-  ADD KEY `idO` (`idO`);
+ALTER TABLE imageoggetto
+  ADD PRIMARY KEY (src,idO),
+  ADD KEY idO (idO);
 
 --
--- Indici per le tabelle `imagerecensione`
+-- Indici per le tabelle imagerecensione
 --
-ALTER TABLE `imagerecensione`
-  ADD PRIMARY KEY (`src`,`idR`),
-  ADD KEY `idR` (`idR`);
+ALTER TABLE imagerecensione
+  ADD PRIMARY KEY (src,idR),
+  ADD KEY idR (idR);
 
 --
--- Indici per le tabelle `imageutente`
+-- Indici per le tabelle imageutente
 --
-ALTER TABLE `imageutente`
-  ADD PRIMARY KEY (`src`,`idU`),
-  ADD KEY `idI` (`src`),
-  ADD KEY `idU` (`idU`);
+ALTER TABLE imageutente
+  ADD PRIMARY KEY (src,idU),
+  ADD KEY idI (src),
+  ADD KEY idU (idU);
 
 --
--- Indici per le tabelle `indirizzo`
+-- Indici per le tabelle indirizzo
 --
-ALTER TABLE `indirizzo`
-  ADD PRIMARY KEY (`idI`);
+ALTER TABLE indirizzo
+  ADD PRIMARY KEY (idI);
 
 --
--- Indici per le tabelle `indirizzoutente`
+-- Indici per le tabelle indirizzoutente
 --
-ALTER TABLE `indirizzoutente`
-  ADD PRIMARY KEY (`idI`,`idU`),
-  ADD KEY `idU` (`idU`);
+ALTER TABLE indirizzoutente
+  ADD PRIMARY KEY (idI,idU),
+  ADD KEY idU (idU);
 
 --
--- Indici per le tabelle `negozio`
+-- Indici per le tabelle negozio
 --
-ALTER TABLE `negozio`
-  ADD PRIMARY KEY (`id`,`idI`),
-  ADD KEY `idI` (`idI`),
-  ADD KEY `idNegozioIndex` (`idVenditore`) USING HASH;
+ALTER TABLE negozio
+  ADD PRIMARY KEY (id,idI),
+  ADD KEY idI (idI),
+  ADD KEY idNegozioIndex (idVenditore) USING HASH;
 
 --
--- Indici per le tabelle `oggetto`
+-- Indici per le tabelle oggetto
 --
-ALTER TABLE `oggetto`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idNegozio` (`idNegozio`),
-  ADD KEY `idOggettoIndex` (`categoria`) USING HASH;
+ALTER TABLE oggetto
+  ADD PRIMARY KEY (id),
+  ADD KEY idNegozio (idNegozio),
+  ADD KEY idOggettoIndex (categoria) USING HASH;
 
 --
--- Indici per le tabelle `ordine`
+-- Indici per le tabelle ordine
 --
-ALTER TABLE `ordine`
-  ADD PRIMARY KEY (`idOrdine`,`idOggetto`,`idUtente`),
-  ADD KEY `idOggetto` (`idOggetto`),
-  ADD KEY `idNegozio` (`idNegozio`),
-  ADD KEY `idUtente` (`idUtente`),
-  ADD KEY `idS` (`idS`);
+ALTER TABLE ordine
+  ADD PRIMARY KEY (idOrdine,idOggetto,idUtente),
+  ADD KEY idOggetto (idOggetto),
+  ADD KEY idNegozio (idNegozio),
+  ADD KEY idUtente (idUtente),
+  ADD KEY idS (idS);
 
 --
--- Indici per le tabelle `ordiniricevuti`
+-- Indici per le tabelle ordiniricevuti
 --
-ALTER TABLE `ordiniricevuti`
-  ADD PRIMARY KEY (`idO`,`idV`),
-  ADD KEY `idV` (`idV`);
+ALTER TABLE ordiniricevuti
+  ADD PRIMARY KEY (idO,idV),
+  ADD KEY idV (idV);
 
 --
--- Indici per le tabelle `recensionenegozio`
+-- Indici per le tabelle recensionenegozio
 --
-ALTER TABLE `recensionenegozio`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idUtente` (`idUtente`),
-  ADD KEY `idRecNegIndex` (`idNegozio`) USING HASH;
+ALTER TABLE recensionenegozio
+  ADD PRIMARY KEY (id),
+  ADD KEY idUtente (idUtente),
+  ADD KEY idRecNegIndex (idNegozio) USING HASH;
 
 --
--- Indici per le tabelle `recensioneoggetto`
+-- Indici per le tabelle recensioneoggetto
 --
-ALTER TABLE `recensioneoggetto`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idUtente` (`idUtente`),
-  ADD KEY `idRecOggIndex` (`idOggetto`) USING HASH;
+ALTER TABLE recensioneoggetto
+  ADD PRIMARY KEY (id),
+  ADD KEY idUtente (idUtente),
+  ADD KEY idRecOggIndex (idOggetto) USING HASH;
 
 --
--- Indici per le tabelle `recensionevenditore`
+-- Indici per le tabelle recensionevenditore
 --
-ALTER TABLE `recensionevenditore`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idUtente` (`idUtente`),
-  ADD KEY `idRecVenIndex` (`idVenditore`) USING HASH;
+ALTER TABLE recensionevenditore
+  ADD PRIMARY KEY (id),
+  ADD KEY idUtente (idUtente),
+  ADD KEY idRecVenIndex (idVenditore) USING HASH;
 
 --
--- Indici per le tabelle `rispostanegozio`
+-- Indici per le tabelle rispostanegozio
 --
-ALTER TABLE `rispostanegozio`
-  ADD PRIMARY KEY (`idRecensione`);
+ALTER TABLE rispostanegozio
+  ADD PRIMARY KEY (idRecensione);
 
 --
--- Indici per le tabelle `rispostaoggetto`
+-- Indici per le tabelle rispostaoggetto
 --
-ALTER TABLE `rispostaoggetto`
-  ADD PRIMARY KEY (`idRecensione`);
+ALTER TABLE rispostaoggetto
+  ADD PRIMARY KEY (idRecensione);
 
 --
--- Indici per le tabelle `rispostavenditore`
+-- Indici per le tabelle rispostavenditore
 --
-ALTER TABLE `rispostavenditore`
-  ADD PRIMARY KEY (`idRecensione`);
+ALTER TABLE rispostavenditore
+  ADD PRIMARY KEY (idRecensione);
 
 --
--- Indici per le tabelle `spedizioneoggetto`
+-- Indici per le tabelle spedizioneoggetto
 --
-ALTER TABLE `spedizioneoggetto`
-  ADD PRIMARY KEY (`idS`,`idO`),
-  ADD KEY `nomeSensato` (`idO`);
+ALTER TABLE spedizioneoggetto
+  ADD PRIMARY KEY (idS,idO),
+  ADD KEY nomeSensato (idO);
 
 --
--- Indici per le tabelle `tipospedizione`
+-- Indici per le tabelle tipospedizione
 --
-ALTER TABLE `tipospedizione`
-  ADD PRIMARY KEY (`idS`,`idN`),
-  ADD KEY `negozioSpedizione` (`idN`);
+ALTER TABLE tipospedizione
+  ADD PRIMARY KEY (idS,idN),
+  ADD KEY negozioSpedizione (idN);
 
 --
--- Indici per le tabelle `utente`
+-- Indici per le tabelle utente
 --
-ALTER TABLE `utente`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idUtenteIndex` (`id`,`UtenteType`) USING HASH;
+ALTER TABLE utente
+  ADD PRIMARY KEY (id),
+  ADD KEY idUtenteIndex (id,UtenteType) USING HASH;
 
 --
 -- AUTO_INCREMENT per le tabelle scaricate
 --
 
 --
--- AUTO_INCREMENT per la tabella `assistenza`
+-- AUTO_INCREMENT per la tabella assistenza
 --
-ALTER TABLE `assistenza`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE assistenza
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT per la tabella `categoria`
+-- AUTO_INCREMENT per la tabella categoria
 --
-ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+ALTER TABLE categoria
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
--- AUTO_INCREMENT per la tabella `indirizzo`
+-- AUTO_INCREMENT per la tabella indirizzo
 --
-ALTER TABLE `indirizzo`
-  MODIFY `idI` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=431;
+ALTER TABLE indirizzo
+  MODIFY idI int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=431;
 --
--- AUTO_INCREMENT per la tabella `negozio`
+-- AUTO_INCREMENT per la tabella negozio
 --
-ALTER TABLE `negozio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
+ALTER TABLE negozio
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
 --
--- AUTO_INCREMENT per la tabella `ordine`
+-- AUTO_INCREMENT per la tabella ordine
 --
-ALTER TABLE `ordine`
-  MODIFY `idOrdine` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE ordine
+  MODIFY idOrdine int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT per la tabella `recensionenegozio`
+-- AUTO_INCREMENT per la tabella recensionenegozio
 --
-ALTER TABLE `recensionenegozio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE recensionenegozio
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT per la tabella `recensioneoggetto`
+-- AUTO_INCREMENT per la tabella recensioneoggetto
 --
-ALTER TABLE `recensioneoggetto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=268;
+ALTER TABLE recensioneoggetto
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=268;
 --
--- AUTO_INCREMENT per la tabella `recensionevenditore`
+-- AUTO_INCREMENT per la tabella recensionevenditore
 --
-ALTER TABLE `recensionevenditore`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000;
+ALTER TABLE recensionevenditore
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000;
 --
--- AUTO_INCREMENT per la tabella `tipospedizione`
+-- AUTO_INCREMENT per la tabella tipospedizione
 --
-ALTER TABLE `tipospedizione`
-  MODIFY `idS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8001;
+ALTER TABLE tipospedizione
+  MODIFY idS int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8001;
 --
--- AUTO_INCREMENT per la tabella `utente`
+-- AUTO_INCREMENT per la tabella utente
 --
-ALTER TABLE `utente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
+ALTER TABLE utente
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
 --
 -- Limiti per le tabelle scaricate
 --
 
 --
--- Limiti per la tabella `assistenza`
+-- Limiti per la tabella assistenza
 --
-ALTER TABLE `assistenza`
-  ADD CONSTRAINT `Assistenza_ibfk_1` FOREIGN KEY (`idUtente`) REFERENCES `utente` (`id`) ON DELETE NO ACTION,
-  ADD CONSTRAINT `Assistenza_ibfk_2` FOREIGN KEY (`idVenditore`) REFERENCES `utente` (`id`) ON DELETE NO ACTION,
-  ADD CONSTRAINT `Assistenza_ibfk_3` FOREIGN KEY (`idAmministratore`) REFERENCES `utente` (`id`) ON DELETE NO ACTION,
-  ADD CONSTRAINT `Assistenza_ibfk_4` FOREIGN KEY (`idOrdine`) REFERENCES `ordine` (`idOrdine`) ON DELETE SET NULL,
-  ADD CONSTRAINT `Assistenza_ibfk_5` FOREIGN KEY (`idOggetto`) REFERENCES `oggetto` (`id`) ON DELETE NO ACTION;
+ALTER TABLE assistenza
+  ADD CONSTRAINT Assistenza_ibfk_1 FOREIGN KEY (idUtente) REFERENCES utente (id) ON DELETE NO ACTION,
+  ADD CONSTRAINT Assistenza_ibfk_2 FOREIGN KEY (idVenditore) REFERENCES utente (id) ON DELETE NO ACTION,
+  ADD CONSTRAINT Assistenza_ibfk_3 FOREIGN KEY (idAmministratore) REFERENCES utente (id) ON DELETE NO ACTION,
+  ADD CONSTRAINT Assistenza_ibfk_4 FOREIGN KEY (idOrdine) REFERENCES ordine (idOrdine) ON DELETE SET NULL,
+  ADD CONSTRAINT Assistenza_ibfk_5 FOREIGN KEY (idOggetto) REFERENCES oggetto (id) ON DELETE NO ACTION;
 
 --
--- Limiti per la tabella `carrello`
+-- Limiti per la tabella carrello
 --
-ALTER TABLE `carrello`
-  ADD CONSTRAINT `Carrello_ibfk_1` FOREIGN KEY (`idUtente`) REFERENCES `utente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE carrello
+  ADD CONSTRAINT Carrello_ibfk_1 FOREIGN KEY (idUtente) REFERENCES utente (id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `imagenegozio`
+-- Limiti per la tabella imagenegozio
 --
-ALTER TABLE `imagenegozio`
-  ADD CONSTRAINT `imageNegozio_ibfk_2` FOREIGN KEY (`idN`) REFERENCES `negozio` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE imagenegozio
+  ADD CONSTRAINT imageNegozio_ibfk_2 FOREIGN KEY (idN) REFERENCES negozio (id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `imageoggetto`
+-- Limiti per la tabella imageoggetto
 --
-ALTER TABLE `imageoggetto`
-  ADD CONSTRAINT `imageOggetto_ibfk_2` FOREIGN KEY (`idO`) REFERENCES `oggetto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE imageoggetto
+  ADD CONSTRAINT imageOggetto_ibfk_2 FOREIGN KEY (idO) REFERENCES oggetto (id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `imagerecensione`
+-- Limiti per la tabella imagerecensione
 --
-ALTER TABLE `imagerecensione`
-  ADD CONSTRAINT `imageRecensione_ibfk_2` FOREIGN KEY (`idR`) REFERENCES `recensioneoggetto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE imagerecensione
+  ADD CONSTRAINT imageRecensione_ibfk_2 FOREIGN KEY (idR) REFERENCES recensioneoggetto (id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `imageutente`
+-- Limiti per la tabella imageutente
 --
-ALTER TABLE `imageutente`
-  ADD CONSTRAINT `imageUtente_ibfk_2` FOREIGN KEY (`idU`) REFERENCES `utente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE imageutente
+  ADD CONSTRAINT imageUtente_ibfk_2 FOREIGN KEY (idU) REFERENCES utente (id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `indirizzoutente`
+-- Limiti per la tabella indirizzoutente
 --
-ALTER TABLE `indirizzoutente`
-  ADD CONSTRAINT `IndirizzoUtente_ibfk_1` FOREIGN KEY (`idU`) REFERENCES `utente` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `IndirizzoUtente_ibfk_2` FOREIGN KEY (`idI`) REFERENCES `indirizzo` (`idI`) ON DELETE CASCADE;
+ALTER TABLE indirizzoutente
+  ADD CONSTRAINT IndirizzoUtente_ibfk_1 FOREIGN KEY (idU) REFERENCES utente (id) ON DELETE CASCADE,
+  ADD CONSTRAINT IndirizzoUtente_ibfk_2 FOREIGN KEY (idI) REFERENCES indirizzo (idI) ON DELETE CASCADE;
 
 --
--- Limiti per la tabella `negozio`
+-- Limiti per la tabella negozio
 --
-ALTER TABLE `negozio`
-  ADD CONSTRAINT `Negozio_ibfk_1` FOREIGN KEY (`idVenditore`) REFERENCES `utente` (`id`) ON DELETE NO ACTION,
-  ADD CONSTRAINT `Negozio_ibfk_2` FOREIGN KEY (`idI`) REFERENCES `indirizzo` (`idI`) ON DELETE NO ACTION;
+ALTER TABLE negozio
+  ADD CONSTRAINT Negozio_ibfk_1 FOREIGN KEY (idVenditore) REFERENCES utente (id) ON DELETE NO ACTION,
+  ADD CONSTRAINT Negozio_ibfk_2 FOREIGN KEY (idI) REFERENCES indirizzo (idI) ON DELETE NO ACTION;
 
 --
--- Limiti per la tabella `oggetto`
+-- Limiti per la tabella oggetto
 --
-ALTER TABLE `oggetto`
-  ADD CONSTRAINT `Oggetto_ibfk_1` FOREIGN KEY (`idNegozio`) REFERENCES `negozio` (`id`) ON DELETE NO ACTION,
-  ADD CONSTRAINT `Oggetto_ibfk_2` FOREIGN KEY (`categoria`) REFERENCES `categoria` (`id`) ON DELETE NO ACTION;
+ALTER TABLE oggetto
+  ADD CONSTRAINT Oggetto_ibfk_1 FOREIGN KEY (idNegozio) REFERENCES negozio (id) ON DELETE NO ACTION,
+  ADD CONSTRAINT Oggetto_ibfk_2 FOREIGN KEY (categoria) REFERENCES categoria (id) ON DELETE NO ACTION;
 
 --
--- Limiti per la tabella `ordine`
+-- Limiti per la tabella ordine
 --
-ALTER TABLE `ordine`
-  ADD CONSTRAINT `Ordine_ibfk_1` FOREIGN KEY (`idOggetto`) REFERENCES `oggetto` (`id`) ON DELETE NO ACTION,
-  ADD CONSTRAINT `Ordine_ibfk_2` FOREIGN KEY (`idNegozio`) REFERENCES `negozio` (`id`) ON DELETE NO ACTION,
-  ADD CONSTRAINT `Ordine_ibfk_3` FOREIGN KEY (`idUtente`) REFERENCES `utente` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `nomeSensato3` FOREIGN KEY (`idS`) REFERENCES `tipospedizione` (`idS`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE ordine
+  ADD CONSTRAINT Ordine_ibfk_1 FOREIGN KEY (idOggetto) REFERENCES oggetto (id) ON DELETE NO ACTION,
+  ADD CONSTRAINT Ordine_ibfk_2 FOREIGN KEY (idNegozio) REFERENCES negozio (id) ON DELETE NO ACTION,
+  ADD CONSTRAINT Ordine_ibfk_3 FOREIGN KEY (idUtente) REFERENCES utente (id) ON DELETE CASCADE,
+  ADD CONSTRAINT nomeSensato3 FOREIGN KEY (idS) REFERENCES tipospedizione (idS) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `ordiniricevuti`
+-- Limiti per la tabella ordiniricevuti
 --
-ALTER TABLE `ordiniricevuti`
-  ADD CONSTRAINT `ordiniRicevuti_ibfk_1` FOREIGN KEY (`idO`) REFERENCES `ordine` (`idOrdine`),
-  ADD CONSTRAINT `ordiniRicevuti_ibfk_2` FOREIGN KEY (`idV`) REFERENCES `utente` (`id`);
+ALTER TABLE ordiniricevuti
+  ADD CONSTRAINT ordiniRicevuti_ibfk_1 FOREIGN KEY (idO) REFERENCES ordine (idOrdine),
+  ADD CONSTRAINT ordiniRicevuti_ibfk_2 FOREIGN KEY (idV) REFERENCES utente (id);
 
 --
--- Limiti per la tabella `recensionenegozio`
+-- Limiti per la tabella recensionenegozio
 --
-ALTER TABLE `recensionenegozio`
-  ADD CONSTRAINT `RecensioneNegozio_ibfk_1` FOREIGN KEY (`idNegozio`) REFERENCES `negozio` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `RecensioneNegozio_ibfk_2` FOREIGN KEY (`idUtente`) REFERENCES `utente` (`id`) ON DELETE NO ACTION;
+ALTER TABLE recensionenegozio
+  ADD CONSTRAINT RecensioneNegozio_ibfk_1 FOREIGN KEY (idNegozio) REFERENCES negozio (id) ON DELETE CASCADE,
+  ADD CONSTRAINT RecensioneNegozio_ibfk_2 FOREIGN KEY (idUtente) REFERENCES utente (id) ON DELETE NO ACTION;
 
 --
--- Limiti per la tabella `recensioneoggetto`
+-- Limiti per la tabella recensioneoggetto
 --
-ALTER TABLE `recensioneoggetto`
-  ADD CONSTRAINT `RecensioneOggetto_ibfk_1` FOREIGN KEY (`idOggetto`) REFERENCES `oggetto` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `RecensioneOggetto_ibfk_2` FOREIGN KEY (`idUtente`) REFERENCES `utente` (`id`) ON DELETE NO ACTION;
+ALTER TABLE recensioneoggetto
+  ADD CONSTRAINT RecensioneOggetto_ibfk_1 FOREIGN KEY (idOggetto) REFERENCES oggetto (id) ON DELETE CASCADE,
+  ADD CONSTRAINT RecensioneOggetto_ibfk_2 FOREIGN KEY (idUtente) REFERENCES utente (id) ON DELETE NO ACTION;
 
 --
--- Limiti per la tabella `recensionevenditore`
+-- Limiti per la tabella recensionevenditore
 --
-ALTER TABLE `recensionevenditore`
-  ADD CONSTRAINT `RecensioneVenditore_ibfk_1` FOREIGN KEY (`idVenditore`) REFERENCES `utente` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `RecensioneVenditore_ibfk_2` FOREIGN KEY (`idUtente`) REFERENCES `utente` (`id`) ON DELETE NO ACTION;
+ALTER TABLE recensionevenditore
+  ADD CONSTRAINT RecensioneVenditore_ibfk_1 FOREIGN KEY (idVenditore) REFERENCES utente (id) ON DELETE CASCADE,
+  ADD CONSTRAINT RecensioneVenditore_ibfk_2 FOREIGN KEY (idUtente) REFERENCES utente (id) ON DELETE NO ACTION;
 
 --
--- Limiti per la tabella `rispostanegozio`
+-- Limiti per la tabella rispostanegozio
 --
-ALTER TABLE `rispostanegozio`
-  ADD CONSTRAINT `RispostaNegozio_ibfk_1` FOREIGN KEY (`idRecensione`) REFERENCES `recensionenegozio` (`id`) ON DELETE CASCADE;
+ALTER TABLE rispostanegozio
+  ADD CONSTRAINT RispostaNegozio_ibfk_1 FOREIGN KEY (idRecensione) REFERENCES recensionenegozio (id) ON DELETE CASCADE;
 
 --
--- Limiti per la tabella `rispostaoggetto`
+-- Limiti per la tabella rispostaoggetto
 --
-ALTER TABLE `rispostaoggetto`
-  ADD CONSTRAINT `RispostaOggetto_ibfk_1` FOREIGN KEY (`idRecensione`) REFERENCES `recensioneoggetto` (`id`) ON DELETE CASCADE;
+ALTER TABLE rispostaoggetto
+  ADD CONSTRAINT RispostaOggetto_ibfk_1 FOREIGN KEY (idRecensione) REFERENCES recensioneoggetto (id) ON DELETE CASCADE;
 
 --
--- Limiti per la tabella `rispostavenditore`
+-- Limiti per la tabella rispostavenditore
 --
-ALTER TABLE `rispostavenditore`
-  ADD CONSTRAINT `RispostaVenditore_ibfk_1` FOREIGN KEY (`idRecensione`) REFERENCES `recensionevenditore` (`id`) ON DELETE CASCADE;
+ALTER TABLE rispostavenditore
+  ADD CONSTRAINT RispostaVenditore_ibfk_1 FOREIGN KEY (idRecensione) REFERENCES recensionevenditore (id) ON DELETE CASCADE;
 
 --
--- Limiti per la tabella `spedizioneoggetto`
+-- Limiti per la tabella spedizioneoggetto
 --
-ALTER TABLE `spedizioneoggetto`
-  ADD CONSTRAINT `nomeSensato` FOREIGN KEY (`idO`) REFERENCES `oggetto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `nomeSensatoAgain` FOREIGN KEY (`idS`) REFERENCES `tipospedizione` (`idS`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE spedizioneoggetto
+  ADD CONSTRAINT nomeSensato FOREIGN KEY (idO) REFERENCES oggetto (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT nomeSensatoAgain FOREIGN KEY (idS) REFERENCES tipospedizione (idS) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `tipospedizione`
+-- Limiti per la tabella tipospedizione
 --
-ALTER TABLE `tipospedizione`
-  ADD CONSTRAINT `negozioSpedizione` FOREIGN KEY (`idN`) REFERENCES `negozio` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE tipospedizione
+  ADD CONSTRAINT negozioSpedizione FOREIGN KEY (idN) REFERENCES negozio (id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 DELIMITER $$
 --
 -- Eventi
 --
-CREATE DEFINER=`root`@`localhost` EVENT `ControlloScontiAttivi` ON SCHEDULE EVERY 1 DAY STARTS '2017-07-22 00:01:00' ENDS '2018-07-22 00:01:00' ON COMPLETION PRESERVE ENABLE COMMENT 'Evento utilizzato per eliminare gli sconti terminati' DO UPDATE oggetto SET oggetto.sconto = 0, oggetto.dataFineSconto = IF(oggetto.dataFineSconto<CURDATE(), NULL,oggetto.dataFineSconto)$$
+CREATE DEFINER=root@localhost EVENT ControlloScontiAttivi ON SCHEDULE EVERY 1 DAY STARTS '2017-07-22 00:01:00' ENDS '2018-07-22 00:01:00' ON COMPLETION PRESERVE ENABLE COMMENT 'Evento utilizzato per eliminare gli sconti terminati' DO UPDATE oggetto SET oggetto.sconto = 0, oggetto.dataFineSconto = IF(oggetto.dataFineSconto<CURDATE(), NULL,oggetto.dataFineSconto)$$
 
 DELIMITER ;
