@@ -8,7 +8,7 @@
 -- Versione PHP: 7.1.8
 
 drop database progettoweb;
-create database progettweb;
+create database progettoweb;
 use progettoweb;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
