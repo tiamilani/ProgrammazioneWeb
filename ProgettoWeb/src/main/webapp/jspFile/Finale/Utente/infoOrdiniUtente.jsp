@@ -113,7 +113,7 @@
                                         </div>
                                         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                                             <p>Prezzo:</p>
-                                            <h2><c:out value="${ordine.getPrezzoDiAcquistoRounded()}" /> &euro;</h2>
+                                            <h6><c:out value="${ordine.getPrezzoDiAcquistoRounded()}" /> &euro;</h6>
                                         </div>
                                         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                                             <p>Stato attuale:</p>
@@ -235,7 +235,7 @@
                                             </div>
                                             <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                                                 <p>Prezzo:</p>
-                                                <h2><c:out value="${ordine.getPrezzoDiAcquistoRounded()}" /> &euro;</h2>
+                                                <h6><c:out value="${ordine.getPrezzoDiAcquistoRounded()}" /> &euro;</h6>
                                             </div>
                                             <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                                                 <p>Stato attuale:</p>
@@ -333,7 +333,8 @@
                                                 <p><c:out value="${ordine.getDataOrdine()}" /></p>
                                             </div>
                                             <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
-                                                <h2><c:out value="${ordine.getPrezzoDiAcquistoRounded()}" /> &euro;</h2>
+                                                <p>Prezzo:</p>
+                                                <h6><c:out value="${ordine.getPrezzoDiAcquistoRounded()}" /> &euro;</h6>
                                             </div>
                                             <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                                                 <p>Stato attuale:</p>
@@ -431,7 +432,8 @@
                                                 <p><c:out value="${ordine.getDataOrdine()}" /></p>
                                             </div>
                                             <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
-                                                <h2><c:out value="${ordine.getPrezzoDiAcquisto()}" /> &euro;</h2>
+                                                <p>Prezzo:</p>
+                                                <h6><c:out value="${ordine.getPrezzoDiAcquisto()}" /> &euro;</h6>
                                             </div>
                                             <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                                                 <p>Stato attuale:</p>

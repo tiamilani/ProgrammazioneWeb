@@ -214,7 +214,7 @@ public class UserController extends HttpServlet {
         }
         else if(action.equals("updateMail")){
             ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
-            String newEmail = (String)request.getParameter("changeEmail");
+            String newEmail = (String)request.getParameter("changeEmail").replace("\'", " ");
 
             if(utente.getMail().equalsIgnoreCase(newEmail)){
                 request.setAttribute("aggiornamentoEmail", 1);
@@ -456,6 +456,7 @@ public class UserController extends HttpServlet {
         if (action.equalsIgnoreCase("selectUser")){
             log("SELECT USER");
             String email = request.getParameter("email");
+            email = email.replace("\'", " ");
             String password = request.getParameter("password");
             ModelloUtente utente = daoUtente.selectUserByEmailAndPassword(email, password);
             log("Utente trovato: " + utente.getId());
@@ -563,9 +564,9 @@ public class UserController extends HttpServlet {
 
             if (VerifyRecaptcha.verify(gRecaptchaResponse)) {
                 ModelloUtente utente = new ModelloUtente();
-                utente.setNome(request.getParameter("nome"));
-                utente.setCognome(request.getParameter("cognome"));
-                utente.setMail(request.getParameter("email"));
+                utente.setNome(request.getParameter("nome").replace("\'", " "));
+                utente.setCognome(request.getParameter("cognome").replace("\'", " "));
+                utente.setMail(request.getParameter("email").replace("\'", " "));
                 utente.setPassword(request.getParameter("password"));
                 utente.setAvatar("http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/userImage.png");
                 String confirmPassword = request.getParameter("confirmPassword");

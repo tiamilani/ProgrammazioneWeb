@@ -144,7 +144,7 @@ public class NegozioController extends HttpServlet {
             object = daoOggetto.getObjectById(object.getId());
             log("Id dell'oggetto selezionato: " + object.getId() + " Nome dell'oggetto selezionato: " + object.getNome());
 
-            String nomeScritto = request.getParameter("modifyDelete");
+            String nomeScritto = request.getParameter("modifyDelete").replace("\'", " ");
             if(!nomeScritto.isEmpty()){
                 if(nomeScritto.equals(object.getNome())){
                     daoOggetto.deleteObjectImage(object.getId(), "http://localhost:8080/ProgettoWeb/jspFile/Finale/Img/objectImage.png");
@@ -187,7 +187,7 @@ public class NegozioController extends HttpServlet {
             if(numeroSpedizioniRimaste > 1){
                 spedizione = daoTipoSpedizione.selectDeliveryTypesByIdS(spedizione.getIdS()).get(0);
 
-                String nomeScritto = request.getParameter("modifyDelete");
+                String nomeScritto = request.getParameter("modifyDelete").replace("\'", " ");
                 if(!nomeScritto.isEmpty()){
                     if(nomeScritto.equals(spedizione.getNome())){
                         boolean oggettoSpedizioneAssegnata = daoSpedizioneOggetto.exist(spedizione.getIdS(),idNegozio);
@@ -316,7 +316,7 @@ public class NegozioController extends HttpServlet {
             daoOrdine.changeOrderStatus(ordine, ordine.getStato(), 3);
             ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
             
-            String tracking = request.getParameter("codiceTracking");
+            String tracking = request.getParameter("codiceTracking").replace("\'", " ");
             if(!tracking.isEmpty()){
                 daoOrdine.updateOrderTracking(ordine, tracking);
             }
@@ -386,10 +386,10 @@ public class NegozioController extends HttpServlet {
             ModelloIndirizzo indirizzo = new ModelloIndirizzo();
             
             indirizzo.setStato("Italia");
-            indirizzo.setRegione(request.getParameter("regione"));
-            indirizzo.setProvincia(request.getParameter("provincia"));
-            indirizzo.setCitta(request.getParameter("citta"));
-            indirizzo.setVia(request.getParameter("via"));
+            indirizzo.setRegione(request.getParameter("regione").replace("\'", " "));
+            indirizzo.setProvincia(request.getParameter("provincia").replace("\'", " "));
+            indirizzo.setCitta(request.getParameter("citta").replace("\'", " "));
+            indirizzo.setVia(request.getParameter("via").replace("\'", " "));
             indirizzo.setnCivico(Integer.parseInt(request.getParameter("nCivico")));
             indirizzo.setInterno(Integer.parseInt(request.getParameter("interno")));
 
@@ -412,13 +412,13 @@ public class NegozioController extends HttpServlet {
                 log("ENCODING: "+ request.getCharacterEncoding());
                 ModelloNegozio negozio = new ModelloNegozio();
                 negozio.setIdVenditore(utente.getId());
-                negozio.setNomeNegozio(request.getParameter("nomeNegozio"));
+                negozio.setNomeNegozio(request.getParameter("nomeNegozio").replace("\'", " "));
                 log("IL NOME DEL NEGOZIO È: " + negozio.getNomeNegozio() );
                 negozio.setAttivo(1);
                 negozio.setIdI(indirizzo.getIdI());
                 Timestamp timestampNow = new Timestamp(System.currentTimeMillis());
                 negozio.setDataApertura(timestampNow);
-                negozio.setLinkSito(request.getParameter("linkNegozio"));
+                negozio.setLinkSito(request.getParameter("linkNegozio").replace("\'", " "));
 
                 String orario = "";
                 
@@ -479,21 +479,21 @@ public class NegozioController extends HttpServlet {
 
                     String nome = request.getParameter("nomeSpedizione");
                     if(!nome.isEmpty()){
-                        spedizione.setNome(request.getParameter("nomeSpedizione"));
+                        spedizione.setNome(request.getParameter("nomeSpedizione").replace("\'", " "));
                     } else {
                         request.setAttribute("aggiungiSepdizione", 1);
                     }
 
                     String prezzo = request.getParameter("prezzoSpedizione");
                     if(!prezzo.isEmpty()){
-                        spedizione.setPrezzo(Double.parseDouble(request.getParameter("prezzoSpedizione")));
+                        spedizione.setPrezzo(Double.parseDouble(request.getParameter("prezzoSpedizione").replace("\'", " ")));
                     } else {
                         request.setAttribute("aggiungiSepdizione", 1);
                     }
 
                     String corriere = request.getParameter("corriereSpedizione");
                     if(!corriere.isEmpty()){
-                        spedizione.setCorriere(request.getParameter("corriereSpedizione"));
+                        spedizione.setCorriere(request.getParameter("corriereSpedizione").replace("\'", " "));
                     } else {
                         request.setAttribute("aggiungiSepdizione", 1);
                     }
@@ -596,9 +596,9 @@ public class NegozioController extends HttpServlet {
             newObject.setCategoria(Integer.parseInt(request.getParameter("selectCategoria")));
             newObject.setDisponibilita(Integer.parseInt(request.getParameter("disponibilita")));
             newObject.setStatoDisponibilita(Integer.parseInt(request.getParameter("selectDisponibilita")));
-            newObject.setDescrizione(request.getParameter("descrizione"));
+            newObject.setDescrizione(request.getParameter("descrizione").replace("\'", " "));
             newObject.setIdNegozio(Integer.parseInt(request.getParameter("idNegozio")));
-            newObject.setNome(request.getParameter("nomeOggetto"));
+            newObject.setNome(request.getParameter("nomeOggetto").replace("\'", " "));
             newObject.setNomeDownCase(newObject.getNome().toLowerCase());
             newObject.setPrezzo(Double.parseDouble(request.getParameter("prezzo")));
             newObject.setRitiroInNegozio((request.getParameter("ritironegozio") == null) ? 0 : 1);
@@ -715,12 +715,12 @@ public class NegozioController extends HttpServlet {
                 
                 String descrizione = request.getParameter("modifyDescrizione");
                 if(!descrizione.isEmpty()){
-                    object.setDescrizione(request.getParameter("modifyDescrizione"));
+                    object.setDescrizione(request.getParameter("modifyDescrizione").replace("\'", " "));
                 }
                 
                 String nome = request.getParameter("mdifynomeOggetto");
                 if(!nome.isEmpty()){
-                    object.setNome(request.getParameter("mdifynomeOggetto"));
+                    object.setNome(request.getParameter("mdifynomeOggetto").replace("\'", " "));
                     object.setNomeDownCase(object.getNome().toLowerCase());
                 }
                 
@@ -833,7 +833,7 @@ public class NegozioController extends HttpServlet {
             
             String nome = request.getParameter("mdifyNomeSpedizione");
             if(!nome.isEmpty()){
-                spedizione.setNome(request.getParameter("mdifyNomeSpedizione"));
+                spedizione.setNome(request.getParameter("mdifyNomeSpedizione").replace("\'", " "));
             }
             
             String prezzo = request.getParameter("mdifyPrezzoSpedizione");
@@ -843,7 +843,7 @@ public class NegozioController extends HttpServlet {
             
             String corriere = request.getParameter("mdifyCorriereSpedizione");
             if(!corriere.isEmpty()){
-                spedizione.setCorriere(request.getParameter("mdifyCorriereSpedizione"));
+                spedizione.setCorriere(request.getParameter("mdifyCorriereSpedizione").replace("\'", " "));
             }
             
             int tempoRichiesto = (Integer.parseInt(request.getParameter("modifyGiorniConsegna")));
@@ -889,7 +889,7 @@ public class NegozioController extends HttpServlet {
             
             String nome = request.getParameter("nomeSpedizione");
             if(!nome.isEmpty()){
-                spedizione.setNome(request.getParameter("nomeSpedizione"));
+                spedizione.setNome(request.getParameter("nomeSpedizione").replace("\'", " "));
             } else {
                 request.setAttribute("aggiungiSepdizione", 1);
             }
@@ -903,7 +903,7 @@ public class NegozioController extends HttpServlet {
             
             String corriere = request.getParameter("corriereSpedizione");
             if(!corriere.isEmpty()){
-                spedizione.setCorriere(request.getParameter("corriereSpedizione"));
+                spedizione.setCorriere(request.getParameter("corriereSpedizione").replace("\'", " "));
             } else {
                 request.setAttribute("aggiungiSepdizione", 1);
             }

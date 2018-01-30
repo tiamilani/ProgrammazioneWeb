@@ -123,10 +123,10 @@ public class IndirizzoController extends HttpServlet {
             ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
 
             indirizzo.setStato("Italia");
-            indirizzo.setRegione(request.getParameter("regione"));
-            indirizzo.setProvincia(request.getParameter("provincia"));
-            indirizzo.setCitta(request.getParameter("citta"));
-            indirizzo.setVia(request.getParameter("via"));
+            indirizzo.setRegione(request.getParameter("regione").replace("\'", " "));
+            indirizzo.setProvincia(request.getParameter("provincia").replace("\'", " "));
+            indirizzo.setCitta(request.getParameter("citta").replace("\'", " "));
+            indirizzo.setVia(request.getParameter("via").replace("\'", " "));
             indirizzo.setnCivico(Integer.parseInt(request.getParameter("nCivico")));
             indirizzo.setInterno(Integer.parseInt(request.getParameter("interno")));
 

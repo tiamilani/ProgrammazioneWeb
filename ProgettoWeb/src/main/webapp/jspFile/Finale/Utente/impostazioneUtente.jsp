@@ -262,12 +262,12 @@
                     <div>
                         <p>N. Civico</p>
                         <i class="large material-icons">person_outline</i>
-                        <input class="col-10 modal-input" type="number" min="1" id="nCivico" name="nCivico" required>
+                        <input class="col-10 modal-input" type="number" min="1" id="nCivico" name="nCivico" value="1" required>
                     </div>
                     <div>
                         <p>Interno</p>
                         <i class="large material-icons">person_outline</i>
-                        <input class="col-10 modal-input" type="number" min="1" id="interno" name="interno" required>
+                        <input class="col-10 modal-input" type="number" min="1" id="interno" name="interno" value="1" required>
                     </div>
                     <div style="display: none;">
                         <input class="col-10 modal-input" type="text" id="latitudine" name="latitudine" required>
