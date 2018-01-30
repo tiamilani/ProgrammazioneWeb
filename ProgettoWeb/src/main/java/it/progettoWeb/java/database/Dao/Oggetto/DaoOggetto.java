@@ -8507,7 +8507,7 @@ public class DaoOggetto {
                 }
             }
 
-            query = query + " ORDER BY Oggetto.prezzo";
+            query = query + " GROUP BY Oggetto.id ORDER BY Oggetto.prezzo";
             
             if(limitResult){
                 query = query + " LIMIT 200";
