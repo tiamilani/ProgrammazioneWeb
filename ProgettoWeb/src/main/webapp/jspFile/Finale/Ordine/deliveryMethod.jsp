@@ -59,34 +59,50 @@
             </c:if>
             
             <c:if test="${addrs.getList().size() > 0}">
-                <!--<table width="100%" cellpadding="5">-->
                 <table id="tabellaIndirizzi" class="table table-striped table-bordered" width="100%" cellspacing="0">
                     <!-- Elenco indirizzi - si seleziona tramite un radio button -->
-                    <tr>
-                        <td></td>
-                        <td>Nome e Cognome</td>
-                        <td>Via</td>
-                        <td>Numero Civico</td>
-                        <td>Citta'</td>
-                        <td>Provincia</td>
-                        <td>Stato</td>
-                    </tr>
-
-                    <c:forEach items="${addrs.getList()}" var="address">
+                    <thead>
                         <tr>
-                            <td><input type="radio" id="rbtnAddress${iterator}" name="rbtnAddress" value="${address.getIdI()}" onchange="setAddress(this)"></td>
-
-
-                            <td><c:out value="${utenteSessione.getNome()}"/> <c:out value="${utenteSessione.getCognome()}"/></td>
-                            <td><c:out value="${address.getVia()}"/></td>
-                            <td><c:out value="${address.getnCivico()}"/></td>
-                            <td><c:out value="${address.getCitta()}"/></td>
-                            <td><c:out value="${address.getProvincia()}"/></td>
-                            <td><c:out value="${address.getStato()}"/></td>
-                            <td><a href="${pageContext.request.contextPath}/UserController?action=infoCurrentUser" class="btn btn-outline-primary buttonSpace">Modifica</a></td>
+                            <td></td>
+                            <td>Nome e Cognome</td>
+                            <td>Via</td>
+                            <td>Numero Civico</td>
+                            <td>Citt&agrave;</td>
+                            <td>Provincia</td>
+                            <td>Stato</td>
+                            <td>Modifica</td>
                         </tr>
-                        <c:set var="iterator" value="${iterator + 1}"/>
-                    </c:forEach>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td>Nome e Cognome</td>
+                            <td>Via</td>
+                            <td>Numero Civico</td>
+                            <td>Citt&agrave;</td>
+                            <td>Provincia</td>
+                            <td>Stato</td>
+                            <td>Modifica</td>
+                        </tr>
+                    </tfoot>
+
+                    <tbody>
+                        <c:forEach items="${addrs.getList()}" var="address">
+                            <tr>
+                                <td><input type="radio" id="rbtnAddress${iterator}" name="rbtnAddress" value="${address.getIdI()}" onchange="setAddress(this)"></td>
+
+
+                                <td><c:out value="${utenteSessione.getNome()}"/> <c:out value="${utenteSessione.getCognome()}"/></td>
+                                <td><c:out value="${address.getVia()}"/></td>
+                                <td><c:out value="${address.getnCivico()}"/></td>
+                                <td><c:out value="${address.getCitta()}"/></td>
+                                <td><c:out value="${address.getProvincia()}"/></td>
+                                <td><c:out value="${address.getStato()}"/></td>
+                                <td><a href="${pageContext.request.contextPath}/UserController?action=infoCurrentUser" class="btn btn-outline-primary buttonSpace">Modifica</a></td>
+                            </tr>
+                            <c:set var="iterator" value="${iterator + 1}"/>
+                        </c:forEach>
+                    </tbody>
                 </table>
             </c:if>
             
@@ -137,8 +153,8 @@
                                     <div class="col-12">
                                         <div class="row">
                                             <!-- Immagine prodotto -->
-                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                                <img style="width: 100px; height: 100px; object-fit: cover;" src="<c:out value="${object.getR().getSrc()}"/>" alt="img">
+                                            <div class="col-xs-2 col-sm-4 col-md-2 col-lg-2">
+                                                <img style="width: 100px; height: 100px; object-fit: scale-down;" src="<c:out value="${object.getR().getSrc()}"/>" alt="img">
                                             </div>
 
                                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -152,9 +168,9 @@
                                                 <div class="row">
                                                     <p>&euro; <fmt:formatNumber groupingUsed = "false" type = "number"  minFractionDigits="2"  maxFractionDigits = "2" value = "${prezzoScontato}" /></p>
                                                 </div>
-                                                <!-- Quantita' prodotto nel carrello -->
+                                                <!-- Quantita'; prodotto nel carrello -->
                                                 <div class="row">
-                                                    <p>Quantita': <c:out value="${quantita}"/></p>
+                                                    <p>Quantit&agrave;: <c:out value="${quantita}"/></p>
                                                 </div>
                                                 <div class="row">
                                                     <button class="btn btn-outline-primary buttonSpace" type="button" onclick="removeObject(this)" data-idInput="${iterator}" data-pageId="01">Rimuovi</button>

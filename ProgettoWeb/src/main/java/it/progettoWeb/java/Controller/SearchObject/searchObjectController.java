@@ -122,6 +122,10 @@ public class searchObjectController extends HttpServlet {
                 int limitPrice = (int)request.getSession().getAttribute("massimoPrezzoAttuale");
                 pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectObjectByQuery("", categoria, nomeVenditore, nomeNegozio, minPrice, maxPrice, checkProdottiScontati, checkRitiroInNegozio, valutazioneMinima, limitPrice, regione, true);
                 ModelloListeOggetto listaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
+                for(ModelloOggetto x : listaOggetti.getList()){
+                    if(x.getDescrizione().length() > 100)
+                        x.setDescrizione(x.getDescrizione().substring(0, 80) + " ...");
+                }
                 ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
 
                 request.setAttribute("listaOggetti", listaOggetti);
@@ -136,6 +140,10 @@ public class searchObjectController extends HttpServlet {
             int limitPrice = (int)request.getSession().getAttribute("massimoPrezzoAttuale");
             pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectObjectByQuery(search.toLowerCase(), categoria, nomeVenditore, nomeNegozio, minPrice, maxPrice, checkProdottiScontati, checkRitiroInNegozio, valutazioneMinima, limitPrice, regione, false);
             ModelloListeOggetto listaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
+            for(ModelloOggetto x : listaOggetti.getList()){
+                    if(x.getDescrizione().length() > 100)
+                        x.setDescrizione(x.getDescrizione().substring(0, 80) + " ...");
+            }
             ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
 
             request.setAttribute("listaOggetti", listaOggetti);

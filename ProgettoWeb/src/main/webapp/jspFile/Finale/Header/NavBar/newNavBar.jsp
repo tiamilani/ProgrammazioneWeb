@@ -38,7 +38,7 @@
     </button>
 
     <div class="collapse navbar-collapse row no-gutters" id="collapse-menu">
-        <div class="dropdown col-xl-1 col-lg-2 col-md-12 col-sm-12">
+        <div class="dropdown col-xl-1 col-lg-2 d-none d-sm-none d-md-none d-lg-block">
             <button class="btn nav-button dropdown-toggle" id="category" type="button" data-toggle="dropdown">Categorie</button>
             <div class="dropdown-menu">
                 <div class="jumbotron">
