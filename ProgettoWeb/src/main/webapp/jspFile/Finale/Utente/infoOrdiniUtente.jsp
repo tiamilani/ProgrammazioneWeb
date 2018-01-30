@@ -86,7 +86,7 @@
                                     <c:if test="${ordine.getStato() != 0 && ordine.getStato() != 5}">
                                     <div class="row">
                                         <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3">
-                                            <img src="${listaImmagini.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: 50px; height: 50px; object-fit: cover;">
+                                            <img src="${listaImmagini.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: 50px; height: 50px; object-fit: scale-down;">
                                         </div>
                                         <div class="col-lg-3 col-md-6 col-sm-10 col-xs-9">
                                             <c:url value="/objectSelectedController" var="objUrl" >
@@ -208,7 +208,7 @@
                                         </c:choose>
                                         <div class="row">
                                             <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3">
-                                                <img src="${listaImmagini.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: 50px; height: 50px; object-fit: cover;">
+                                                <img src="${listaImmagini.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: 50px; height: 50px; object-fit: scale-down;">
                                             </div>
                                             <div class="col-lg-3 col-md-6 col-sm-10 col-xs-9">
                                                 <c:url value="/objectSelectedController" var="objUrl" >
@@ -307,7 +307,7 @@
                                     <c:if test="${ordine.getStato() != 0 && ordine.getStato() != 5}">
                                         <div class="row">
                                             <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3">
-                                                <img src="${listaImmagini.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: 50px; height: 50px; object-fit: cover;">
+                                                <img src="${listaImmagini.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: 50px; height: 50px; object-fit: scale-down;">
                                             </div>
                                             <div class="col-lg-3 col-md-6 col-sm-10 col-xs-9">
                                                 <c:url value="/objectSelectedController" var="objUrl" >
@@ -406,7 +406,7 @@
                                     <c:if test="${ordine.getStato() != 0 && ordine.getStato() != 5}">
                                         <div class="row">
                                             <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3">
-                                                <img src="${listaImmagini.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: 50px; height: 50px; object-fit: cover;">
+                                                <img src="${listaImmagini.get(i).getSrc()}" alt="IMAGE NOT LOADED" style="width: 50px; height: 50px; object-fit: scale-down;">
                                             </div>
                                             <div class="col-lg-3 col-md-6 col-sm-10 col-xs-9">
                                                 <c:url value="/objectSelectedController" var="objUrl" >
