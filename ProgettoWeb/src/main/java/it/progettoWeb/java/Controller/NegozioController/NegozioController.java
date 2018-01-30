@@ -376,9 +376,10 @@ public class NegozioController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        request.setCharacterEncoding("UTF-8");
         String forward="";
         String action = request.getParameter("action");
-        request.setCharacterEncoding("UTF-8");
         
         if (action.equalsIgnoreCase("addNegozio")) {
             ModelloUtente utente = (ModelloUtente)request.getSession().getAttribute("utenteSessione");
@@ -408,9 +409,11 @@ public class NegozioController extends HttpServlet {
                     log("IdI possibile: " + tuttiNegozi.get(i).getIdI());
                 }
 
+                log("ENCODING: "+ request.getCharacterEncoding());
                 ModelloNegozio negozio = new ModelloNegozio();
                 negozio.setIdVenditore(utente.getId());
                 negozio.setNomeNegozio(request.getParameter("nomeNegozio"));
+                log("IL NOME DEL NEGOZIO È: " + negozio.getNomeNegozio() );
                 negozio.setAttivo(1);
                 negozio.setIdI(indirizzo.getIdI());
                 Timestamp timestampNow = new Timestamp(System.currentTimeMillis());
@@ -652,7 +655,7 @@ public class NegozioController extends HttpServlet {
                     daoSpedizioneOggetto.addSpedizioneOggetto(listaTipiSpedizione.get(0).getIdS(),newObject.getId());
                 }
                 
-                double limitPrice = (double)request.getSession().getAttribute("massimoPrezzoAttuale");
+                int limitPrice = (int)request.getSession().getAttribute("massimoPrezzoAttuale");
                 if(limitPrice < Double.parseDouble(request.getParameter("prezzo"))){
                     request.getSession().setAttribute("massimoPrezzoAttuale", daoOggetto.getMaxPrice());
                     request.getSession().setAttribute("massimoRangeAttuale", "0," + (int)(daoOggetto.getMaxPrice()) + "");

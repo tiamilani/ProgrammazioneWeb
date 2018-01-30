@@ -7,7 +7,6 @@ import it.progettoWeb.java.database.Dao.Utente.DaoUtente;
 import it.progettoWeb.java.database.Dao.immagineOggetto.DaoImmagineOggetto;
 import it.progettoWeb.java.database.Dao.indirizzo.DaoIndirizzo;
 import it.progettoWeb.java.database.Dao.recensioneOggetto.DaoRecensioneOggetto;
-import it.progettoWeb.java.database.Dao.rispostaOggetto.DaoRispostaOggetto;
 import it.progettoWeb.java.database.Dao.tipoSpedizione.DaoTipoSpedizione;
 import it.progettoWeb.java.database.Model.Negozio.ModelloNegozio;
 import it.progettoWeb.java.database.Model.Oggetto.ModelloListeOggetto;
@@ -78,7 +77,7 @@ public class objectSelectedController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        request.setCharacterEncoding("UTF-8");
         String forward = HOME_PAGE;
         String idOggetto = request.getParameter("idOggetto");
         
@@ -156,7 +155,7 @@ public class objectSelectedController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        request.setCharacterEncoding("UTF-8");
         String forward = "/ProgettoWeb/objectSelectedController?idOggetto=";
         
         try

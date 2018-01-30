@@ -48,6 +48,7 @@ public class searchObjectController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String forward = SEARCH_PAGE;
         String error = "";
 

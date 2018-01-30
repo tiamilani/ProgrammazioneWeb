@@ -39,13 +39,13 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-8 col-sm-12 col-xs-12">
-                            <input type="text" class="form-control" id="nomeOggetto" name="nomeOggetto" maxlength="500" placeholder="Nome" required>
+                            <input type="text" class="form-control" id="nomeOggetto" name="nomeOggetto" maxlength="500" placeholder="Nome" style="margin-top: 5px;" required>
                         </div>
                         <div class="col-sm-12 col-xs-12 d-block d-sm-block d-md-block d-lg-none">
                             <p>Seleziona la categoria a cui appartiene</p>
                         </div>
                         <div class="col-lg-4 col-sm-12 col-xs-12">
-                            <select class="form-control" id="selectCategoria" name="selectCategoria" required>
+                            <select class="form-control" id="selectCategoria" name="selectCategoria" required style="margin-top: 5px;">
                                 <c:forEach items="${categorie.getList()}" var="categoria" >
                                     <option value="${categoria.getId()}">${categoria.getNome()}</option>
                                 </c:forEach>
