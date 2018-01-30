@@ -67,7 +67,7 @@
                                     <hr size="3" width="100%" align="left"/>
                                     <!-- Immagine prodotto -->
                                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                        <img style="width: 100px; height: 100px; object-fit: cover;" src="<c:out value="${object.getR().getSrc()}"/>" alt="img">
+                                        <img style="width: 100px; height: 100px; object-fit: scale-down;" src="<c:out value="${object.getR().getSrc()}"/>" alt="img">
                                     </div>
 
                                     <!-- Descrizione prodotto -->

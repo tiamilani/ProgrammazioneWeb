@@ -106,19 +106,20 @@ public class searchObjectController extends HttpServlet {
         //System.out.println(nomeVenditore);
 
         if(search.length() < 1) {
-            if(categoria.equals("Categoria") || categoria.length() == 0 && nomeNegozio.length() == 0 && nomeVenditore.length() == 0 &&
-                    checkProdottiScontati == false && checkRitiroInNegozio == false && regione.equals("Regione") || regione.length() == 0 &&
+            if((categoria.equals("Categoria") || categoria.length() == 0) && nomeNegozio.length() == 0 && nomeVenditore.length() == 0 &&
+                    checkProdottiScontati == false && checkRitiroInNegozio == false && (regione.equals("Regione") || regione.length() == 0) &&
                     valutazioneMinima == 0 && minPrice == 0 && maxPrice == (int)daoOggetto.getMaxPrice()){
+                
                 
             forward = ERROR_PAGE;
 
-            String errore = "Nome elemento da cercare troppo corto";
+            String errore = "Non possiamo effettuare una ricerca con così pochi parametri.\nChe ne dici di aggiungerne qualcuno?";
             request.setAttribute("errore", errore);
             RequestDispatcher view = request.getRequestDispatcher(forward);
             view.forward(request, response);
             }else{
                 int limitPrice = (int)request.getSession().getAttribute("massimoPrezzoAttuale");
-                pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectObjectByQuery("", categoria, nomeVenditore, nomeNegozio, minPrice, maxPrice, checkProdottiScontati, checkRitiroInNegozio, valutazioneMinima, limitPrice, regione);
+                pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectObjectByQuery("", categoria, nomeVenditore, nomeNegozio, minPrice, maxPrice, checkProdottiScontati, checkRitiroInNegozio, valutazioneMinima, limitPrice, regione, true);
                 ModelloListeOggetto listaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
                 ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
 
@@ -132,7 +133,7 @@ public class searchObjectController extends HttpServlet {
         }else{
         
             int limitPrice = (int)request.getSession().getAttribute("massimoPrezzoAttuale");
-            pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectObjectByQuery(search.toLowerCase(), categoria, nomeVenditore, nomeNegozio, minPrice, maxPrice, checkProdottiScontati, checkRitiroInNegozio, valutazioneMinima, limitPrice, regione);
+            pair<List<ModelloOggetto>, List<ModelloImmagineOggetto>> listaOggettiImmagini = daoOggetto.selectObjectByQuery(search.toLowerCase(), categoria, nomeVenditore, nomeNegozio, minPrice, maxPrice, checkProdottiScontati, checkRitiroInNegozio, valutazioneMinima, limitPrice, regione, false);
             ModelloListeOggetto listaOggetti = new ModelloListeOggetto(listaOggettiImmagini.getL());
             ModelloListeImmagineOggetto listaImmaginiOggetto = new ModelloListeImmagineOggetto(listaOggettiImmagini.getR());
 

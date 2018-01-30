@@ -22,36 +22,38 @@
             <%@include file="../Header/NavBar/newNavBar.jsp" %>
         </div>
         
-        <div>
-            <h1>
-                Recupero Password
-            </h1>
-            <p>
-                Gentile utente, abbiamo ricevuto la tua richiesta per il recupero della password.
-                Inserisci la password nel form sottostante!
-            </p>
-            <center>
-                
-            <form action="${pageContext.request.contextPath}/PasswordReset?action=confirm" method="POST" id="resetForm">
-                <div>
-                    <i class="large material-icons">email</i>
-                    <input class="col-8 change-input" type="email" value="${resetEmail}" name="changed-email" required readonly="readonly">
-                </div>
-                <div>
-                    <i class="large material-icons">lock_outline</i>
-                    <input class="col-8 change-input" type="password" id="customerPassword" name="changed-password" required placeholder="Inserire la password">
-                </div>
-                <div>
-                    <i class="large material-icons">lock_outline</i>
-                    <input class="col-8 change-input" type="password" id="customerConfirmPassword" name="changed-confirmPassword" required placeholder="Ripetere la password">
-                </div>
-                    
-                <div class="reset-footer">
-                  <button type="submit" class="col-10 btn btn-outline-primary my-2 my-sm-0">Modifica password</button>
-                </div>
-            </form>
-                    
-            </center>
+        <div class="container-fluid">
+            <div>
+                <h1>
+                    Recupero Password
+                </h1>
+                <p>
+                    Gentile utente, abbiamo ricevuto la tua richiesta per il recupero della password.
+                    Inserisci la password nel form sottostante!
+                </p>
+                <center>
+
+                <form action="${pageContext.request.contextPath}/PasswordReset?action=confirm" method="POST" id="resetForm">
+                    <div>
+                        <i class="large material-icons">email</i>
+                        <input class="col-8 change-input" type="email" value="${resetEmail}" name="changed-email" required readonly="readonly">
+                    </div>
+                    <div>
+                        <i class="large material-icons">lock_outline</i>
+                        <input class="col-8 change-input" type="password" id="customerPassword" name="changed-password" required placeholder="Inserire la password">
+                    </div>
+                    <div>
+                        <i class="large material-icons">lock_outline</i>
+                        <input class="col-8 change-input" type="password" id="customerConfirmPassword" name="changed-confirmPassword" required placeholder="Ripetere la password">
+                    </div>
+
+                    <div class="reset-footer">
+                      <button type="submit" class="col-10 btn btn-outline-primary my-2 my-sm-0">Modifica password</button>
+                    </div>
+                </form>
+
+                </center>
+            </div>
         </div>
         
         <div class="container">

@@ -283,13 +283,13 @@
         });
 
         $(window).resize(function(){
-            console.log("you are scrolling");
+            //console.log("you are scrolling");
             // $('.autocomplete-suggestions').css('display', 'none');
 
             $("#visible").attr("aria-expanded", "false");
             $("#visible").addClass("collapsed");
             $("#collapse-menu").removeClass("show");
-            console.log("resizing");
+            //console.log("resizing");
             if(typeof $('#expand').autocomplete() !== 'undefined'){
                 $('#expand').autocomplete().hide();
             }
@@ -315,6 +315,8 @@
         document.getElementById("double-slider").setAttribute("data-value", rangeValue);
         //$('#double-slider').attr('value');
         document.getElementById("regionFilter").value = 'Regione';
+        
+        $('input[name=valutazioneReview]').prop('checked', false);
 
     }
     
