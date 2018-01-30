@@ -76,6 +76,7 @@ public class AssistenzaController extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        request.setCharacterEncoding("UTF-8");
         String forward;
         forward = ERROR_PAGE; request.setAttribute("errore", "404 Pagina non trovata");
         
@@ -221,6 +222,7 @@ public class AssistenzaController extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        request.setCharacterEncoding("UTF-8");
         String forward;
         forward = ERROR_PAGE; request.setAttribute("errore", "404 Pagina non trovata");
         try

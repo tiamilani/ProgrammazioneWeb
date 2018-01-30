@@ -92,7 +92,7 @@
                         <span class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 item-left">Quantità: (Max ${oggetto.getDisponibilita()})</span>
                         <c:choose>
                             <c:when test="${(oggetto.getDisponibilita() > 0) and (negozio.getAttivo() == 1)}">
-                                <input type="number" id="numNow" name="numNow" style="font-size: 20px; height: auto;" class="item-right col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 form-control" min="1" max="${oggetto.getDisponibilita()}" value="1"/>
+                                <input type="number" id="numNow" name="numNow" style="font-size: 20px; height: 50px;" class="item-right col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 form-control" min="1" max="${oggetto.getDisponibilita()}" value="1"/>
                             </c:when>
                             <c:otherwise>
                                 <span class="col-8 item-right text-danger" id="numNow" name="numNow">ESAURITO<br/>NON DISPONIBILE</span>

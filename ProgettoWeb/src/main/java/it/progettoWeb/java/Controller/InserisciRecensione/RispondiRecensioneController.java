@@ -60,6 +60,7 @@ public class RispondiRecensioneController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         processRequest(request, response);
     }
 
@@ -73,6 +74,7 @@ public class RispondiRecensioneController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String forward = "/jspFile/Finale/Utente/utente.jsp";
         String action = request.getParameter("action");
         
