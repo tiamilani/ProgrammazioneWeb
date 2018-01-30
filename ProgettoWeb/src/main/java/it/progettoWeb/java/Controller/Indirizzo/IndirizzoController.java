@@ -16,9 +16,6 @@ import it.progettoWeb.java.database.Dao.indirizzoUtente.DaoIndirizzoUtente;
 import it.progettoWeb.java.database.Model.Utente.ModelloUtente;
 import it.progettoWeb.java.database.Model.indirizzo.ModelloIndirizzo;
 import it.progettoWeb.java.database.Model.indirizzo.ModelloListeIndirizzo;
-import it.progettoWeb.java.database.query.users.usersQuery;
-import java.io.InputStream;
-import java.net.URL;
 import javax.servlet.RequestDispatcher;
 
 /**
@@ -69,6 +66,7 @@ public class IndirizzoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String forward="";
         String action = request.getParameter("action");
 
@@ -116,7 +114,7 @@ public class IndirizzoController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        request.setCharacterEncoding("UTF-8");
         String forward="";
         String action = request.getParameter("action");
 

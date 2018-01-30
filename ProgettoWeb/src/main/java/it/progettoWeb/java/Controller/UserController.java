@@ -126,6 +126,7 @@ public class UserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String forward="";
         String action = request.getParameter("action");
 
@@ -447,7 +448,7 @@ public class UserController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
+        request.setCharacterEncoding("UTF-8");
         String forward = HOME_PAGE;
         boolean redirect = false;
         String action = request.getParameter("action");

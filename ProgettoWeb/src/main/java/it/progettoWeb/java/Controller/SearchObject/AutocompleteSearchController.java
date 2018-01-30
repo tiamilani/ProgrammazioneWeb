@@ -42,6 +42,7 @@ public class AutocompleteSearchController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
         
         /*System.out.println(request.getParameter("research"));
